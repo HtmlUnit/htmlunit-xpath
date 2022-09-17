@@ -145,7 +145,7 @@ public class FunctionTable
 
   /** Table of function name to function ID associations. */
   private static HashMap m_functionID = new HashMap();
-    
+
   /**
    * The function table contains customized functions
    */
@@ -155,7 +155,7 @@ public class FunctionTable
    * Table of function name to function ID associations for customized functions
    */
   private HashMap m_functionID_customer = new HashMap();
-  
+
   /**
    * Number of built in functions.  Be sure to update this as
    * built-in functions are added.
@@ -171,7 +171,7 @@ public class FunctionTable
    * The index to the next free function index.
    */
   private int m_funcNextFreeIndex = NUM_BUILT_IN_FUNCS;
-  
+
   static
   {
     m_functions = new Class[NUM_BUILT_IN_FUNCS];
@@ -180,14 +180,14 @@ public class FunctionTable
     m_functions[FUNC_POSITION] = org.apache.xpath.functions.FuncPosition.class;
     m_functions[FUNC_COUNT] = org.apache.xpath.functions.FuncCount.class;
     m_functions[FUNC_ID] = org.apache.xpath.functions.FuncId.class;
-    m_functions[FUNC_KEY] =
-      org.apache.xalan.templates.FuncKey.class;
-    m_functions[FUNC_LOCAL_PART] = 
+//    m_functions[FUNC_KEY] =
+//      org.apache.xalan.templates.FuncKey.class;
+    m_functions[FUNC_LOCAL_PART] =
       org.apache.xpath.functions.FuncLocalPart.class;
-    m_functions[FUNC_NAMESPACE] = 
+    m_functions[FUNC_NAMESPACE] =
       org.apache.xpath.functions.FuncNamespace.class;
     m_functions[FUNC_QNAME] = org.apache.xpath.functions.FuncQname.class;
-    m_functions[FUNC_GENERATE_ID] = 
+    m_functions[FUNC_GENERATE_ID] =
       org.apache.xpath.functions.FuncGenerateId.class;
     m_functions[FUNC_NOT] = org.apache.xpath.functions.FuncNot.class;
     m_functions[FUNC_TRUE] = org.apache.xpath.functions.FuncTrue.class;
@@ -200,29 +200,29 @@ public class FunctionTable
     m_functions[FUNC_ROUND] = org.apache.xpath.functions.FuncRound.class;
     m_functions[FUNC_SUM] = org.apache.xpath.functions.FuncSum.class;
     m_functions[FUNC_STRING] = org.apache.xpath.functions.FuncString.class;
-    m_functions[FUNC_STARTS_WITH] = 
+    m_functions[FUNC_STARTS_WITH] =
       org.apache.xpath.functions.FuncStartsWith.class;
     m_functions[FUNC_CONTAINS] = org.apache.xpath.functions.FuncContains.class;
-    m_functions[FUNC_SUBSTRING_BEFORE] = 
+    m_functions[FUNC_SUBSTRING_BEFORE] =
       org.apache.xpath.functions.FuncSubstringBefore.class;
-    m_functions[FUNC_SUBSTRING_AFTER] = 
+    m_functions[FUNC_SUBSTRING_AFTER] =
       org.apache.xpath.functions.FuncSubstringAfter.class;
-    m_functions[FUNC_NORMALIZE_SPACE] = 
+    m_functions[FUNC_NORMALIZE_SPACE] =
       org.apache.xpath.functions.FuncNormalizeSpace.class;
-    m_functions[FUNC_TRANSLATE] = 
+    m_functions[FUNC_TRANSLATE] =
       org.apache.xpath.functions.FuncTranslate.class;
     m_functions[FUNC_CONCAT] = org.apache.xpath.functions.FuncConcat.class;
-    m_functions[FUNC_SYSTEM_PROPERTY] = 
+    m_functions[FUNC_SYSTEM_PROPERTY] =
       org.apache.xpath.functions.FuncSystemProperty.class;
-    m_functions[FUNC_EXT_FUNCTION_AVAILABLE] =
-      org.apache.xpath.functions.FuncExtFunctionAvailable.class;
-    m_functions[FUNC_EXT_ELEM_AVAILABLE] =
-      org.apache.xpath.functions.FuncExtElementAvailable.class;
-    m_functions[FUNC_SUBSTRING] = 
+//    m_functions[FUNC_EXT_FUNCTION_AVAILABLE] =
+//      org.apache.xpath.functions.FuncExtFunctionAvailable.class;
+//    m_functions[FUNC_EXT_ELEM_AVAILABLE] =
+//      org.apache.xpath.functions.FuncExtElementAvailable.class;
+    m_functions[FUNC_SUBSTRING] =
       org.apache.xpath.functions.FuncSubstring.class;
-    m_functions[FUNC_STRING_LENGTH] = 
+    m_functions[FUNC_STRING_LENGTH] =
       org.apache.xpath.functions.FuncStringLength.class;
-    m_functions[FUNC_DOCLOCATION] = 
+    m_functions[FUNC_DOCLOCATION] =
       org.apache.xpath.functions.FuncDoclocation.class;
     m_functions[FUNC_UNPARSED_ENTITY_URI] =
       org.apache.xpath.functions.FuncUnparsedEntityURI.class;
@@ -298,12 +298,12 @@ public class FunctionTable
           m_functionID.put(Keywords.FUNC_UNPARSED_ENTITY_URI_STRING,
                           new Integer(FunctionTable.FUNC_UNPARSED_ENTITY_URI));
           m_functionID.put(Keywords.FUNC_DOCLOCATION_STRING,
-                          new Integer(FunctionTable.FUNC_DOCLOCATION));          
+                          new Integer(FunctionTable.FUNC_DOCLOCATION));
   }
-  
+
   public FunctionTable(){
   }
-  
+
   /**
    * Return the name of the a function in the static table. Needed to avoid
    * making the table publicly available.
@@ -316,36 +316,36 @@ public class FunctionTable
   /**
    * Obtain a new Function object from a function ID.
    *
-   * @param which  The function ID, which may correspond to one of the FUNC_XXX 
-   *    values found in {@link org.apache.xpath.compiler.FunctionTable}, but may 
-   *    be a value installed by an external module. 
+   * @param which  The function ID, which may correspond to one of the FUNC_XXX
+   *    values found in {@link org.apache.xpath.compiler.FunctionTable}, but may
+   *    be a value installed by an external module.
    *
    * @return a a new Function instance.
    *
-   * @throws javax.xml.transform.TransformerException if ClassNotFoundException, 
+   * @throws javax.xml.transform.TransformerException if ClassNotFoundException,
    *    IllegalAccessException, or InstantiationException is thrown.
    */
   Function getFunction(int which)
           throws javax.xml.transform.TransformerException
   {
           try{
-              if (which < NUM_BUILT_IN_FUNCS) 
+              if (which < NUM_BUILT_IN_FUNCS)
                   return (Function) m_functions[which].newInstance();
-              else 
+              else
                   return (Function) m_functions_customer[
-                      which-NUM_BUILT_IN_FUNCS].newInstance();                  
+                      which-NUM_BUILT_IN_FUNCS].newInstance();
           }catch (IllegalAccessException ex){
                   throw new TransformerException(ex.getMessage());
           }catch (InstantiationException ex){
                   throw new TransformerException(ex.getMessage());
           }
   }
-  
+
   /**
    * Obtain a function ID from a given function name
    * @param key the function name in a java.lang.String format.
    * @return a function ID, which may correspond to one of the FUNC_XXX values
-   * found in {@link org.apache.xpath.compiler.FunctionTable}, but may be a 
+   * found in {@link org.apache.xpath.compiler.FunctionTable}, but may be a
    * value installed by an external module.
    */
   Object getFunctionID(String key){
@@ -353,7 +353,7 @@ public class FunctionTable
           if (null == id) id = m_functionID.get(key);
           return id;
   }
-  
+
   /**
    * Install a built-in function.
    * @param name The unqualified name of the function, must not be null
@@ -369,21 +369,21 @@ public class FunctionTable
     if (null != funcIndexObj)
     {
       funcIndex = ((Integer) funcIndexObj).intValue();
-      
+
       if (funcIndex < NUM_BUILT_IN_FUNCS){
               funcIndex = m_funcNextFreeIndex++;
-              m_functionID_customer.put(name, new Integer(funcIndex)); 
+              m_functionID_customer.put(name, new Integer(funcIndex));
       }
-      m_functions_customer[funcIndex - NUM_BUILT_IN_FUNCS] = func;          
+      m_functions_customer[funcIndex - NUM_BUILT_IN_FUNCS] = func;
     }
     else
     {
             funcIndex = m_funcNextFreeIndex++;
-                          
+
             m_functions_customer[funcIndex-NUM_BUILT_IN_FUNCS] = func;
-                    
-            m_functionID_customer.put(name, 
-                new Integer(funcIndex));   
+
+            m_functionID_customer.put(name,
+                new Integer(funcIndex));
     }
     return funcIndex;
   }

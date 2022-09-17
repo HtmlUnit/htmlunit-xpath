@@ -59,10 +59,10 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
      */
     protected XPathExpressionImpl() { };
 
-    protected XPathExpressionImpl(org.apache.xpath.XPath xpath, 
-            JAXPPrefixResolver prefixResolver, 
+    protected XPathExpressionImpl(org.apache.xpath.XPath xpath,
+            JAXPPrefixResolver prefixResolver,
             XPathFunctionResolver functionResolver,
-            XPathVariableResolver variableResolver ) { 
+            XPathVariableResolver variableResolver ) {
         this.xpath = xpath;
         this.prefixResolver = prefixResolver;
         this.functionResolver = functionResolver;
@@ -74,7 +74,7 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
             JAXPPrefixResolver prefixResolver,
             XPathFunctionResolver functionResolver,
             XPathVariableResolver variableResolver,
-            boolean featureSecureProcessing ) { 
+            boolean featureSecureProcessing ) {
         this.xpath = xpath;
         this.prefixResolver = prefixResolver;
         this.functionResolver = functionResolver;
@@ -84,14 +84,14 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
 
     public void setXPath (org.apache.xpath.XPath xpath ) {
         this.xpath = xpath;
-    }  
+    }
 
     public Object eval(Object item, QName returnType)
             throws javax.xml.transform.TransformerException {
         XObject resultObject = eval ( item );
         return getResultAsType( resultObject, returnType );
     }
-    
+
     private XObject eval ( Object contextItem )
             throws javax.xml.transform.TransformerException {
         org.apache.xpath.XPathContext xpathSupport = null;
@@ -99,24 +99,24 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
         // Create an XPathContext that doesn't support pushing and popping of
         // variable resolution scopes.  Sufficient for simple XPath 1.0
         // expressions.
-        if ( functionResolver != null ) {
-            JAXPExtensionsProvider jep = new JAXPExtensionsProvider(
-                    functionResolver, featureSecureProcessing );
-            xpathSupport = new org.apache.xpath.XPathContext(jep, false);
-        } else {
+//        if ( functionResolver != null ) {
+//            JAXPExtensionsProvider jep = new JAXPExtensionsProvider(
+//                    functionResolver, featureSecureProcessing );
+//            xpathSupport = new org.apache.xpath.XPathContext(jep, false);
+//        } else {
             xpathSupport = new org.apache.xpath.XPathContext(false);
-        }
+//        }
 
         xpathSupport.setVarStack(new JAXPVariableStack(variableResolver));
         XObject xobj = null;
-          
+
         Node contextNode = (Node)contextItem;
         // We always need to have a ContextNode with Xalan XPath implementation
-        // To allow simple expression evaluation like 1+1 we are setting 
+        // To allow simple expression evaluation like 1+1 we are setting
         // dummy Document as Context Node
         if ( contextNode == null ) {
               contextNode = getDummyDocument();
-        } 
+        }
 
         xobj = xpath.execute(xpathSupport, contextNode, prefixResolver );
         return xobj;
@@ -131,14 +131,14 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
      * for context item evaluation,
      * variable, function and QName resolution and return type conversion.</p>
      *
-     * <p>If <code>returnType</code> is not one of the types defined 
+     * <p>If <code>returnType</code> is not one of the types defined
      * in {@link XPathConstants},
      * then an <code>IllegalArgumentException</code> is thrown.</p>
      *
      * <p>If a <code>null</code> value is provided for
      * <code>item</code>, an empty document will be used for the
      * context.
-     * If <code>returnType</code> is <code>null</code>, then a 
+     * If <code>returnType</code> is <code>null</code>, then a
      * <code>NullPointerException</code> is thrown.</p>
      *
      * @param item The starting context (node or node list, for example).
@@ -159,23 +159,23 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
         //Validating parameters to enforce constraints defined by JAXP spec
         if ( returnType == null ) {
            //Throwing NullPointerException as defined in spec
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ARG_CANNOT_BE_NULL,
                     new Object[] {"returnType"} );
             throw new NullPointerException( fmsg );
         }
         // Checking if requested returnType is supported. returnType need to be
-        // defined in XPathConstants 
+        // defined in XPathConstants
         if ( !isSupported ( returnType ) ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_UNSUPPORTED_RETURN_TYPE,
                     new Object[] { returnType.toString() } );
             throw new IllegalArgumentException ( fmsg );
         }
-        try { 
+        try {
             return eval( item, returnType);
         } catch ( java.lang.NullPointerException npe ) {
-            // If VariableResolver returns null Or if we get 
+            // If VariableResolver returns null Or if we get
             // NullPointerException at this stage for some other reason
             // then we have to reurn XPathException
             throw new XPathExpressionException ( npe );
@@ -191,7 +191,7 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
         }
 
     }
-    
+
     /**
      * <p>Evaluate the compiled XPath expression in the specified context and
      * return the result as a <code>String</code>.</p>
@@ -216,7 +216,7 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
      *
      * @throws XPathExpressionException If the expression cannot be evaluated.
      */
-    public String evaluate(Object item) 
+    public String evaluate(Object item)
         throws XPathExpressionException {
         return (String)this.evaluate( item, XPathConstants.STRING );
     }
@@ -228,19 +228,19 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
     static Document d = null;
 
     /**
-     * <p>Evaluate the compiled XPath expression in the context of the 
+     * <p>Evaluate the compiled XPath expression in the context of the
      * specified <code>InputSource</code> and return the result as the
      *  specified type.</p>
      *
      * <p>This method builds a data model for the {@link InputSource} and calls
-     * {@link #evaluate(Object item, QName returnType)} on the resulting 
+     * {@link #evaluate(Object item, QName returnType)} on the resulting
      * document object.</p>
      *
      * <p>See "Evaluation of XPath Expressions" section of JAXP 1.3 spec
      *  for context item evaluation,
      * variable, function and QName resolution and return type conversion.</p>
      *
-     * <p>If <code>returnType</code> is not one of the types defined in 
+     * <p>If <code>returnType</code> is not one of the types defined in
      * {@link XPathConstants},
      * then an <code>IllegalArgumentException</code> is thrown.</p>
      *
@@ -258,21 +258,21 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
      * @throws XPathExpressionException If the expression cannot be evaluated.
      * @throws IllegalArgumentException If <code>returnType</code> is not one
      * of the types defined in {@link XPathConstants}.
-     * @throws NullPointerException If  <code>source</code> or 
+     * @throws NullPointerException If  <code>source</code> or
      * <code>returnType</code> is <code>null</code>.
      */
     public Object evaluate(InputSource source, QName returnType)
         throws XPathExpressionException {
         if ( ( source == null ) || ( returnType == null ) ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL,
                     null );
             throw new NullPointerException ( fmsg );
         }
         // Checking if requested returnType is supported. returnType need to be
-        // defined in XPathConstants 
+        // defined in XPathConstants
         if ( !isSupported ( returnType ) ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_UNSUPPORTED_RETURN_TYPE,
                     new Object[] { returnType.toString() } );
             throw new IllegalArgumentException ( fmsg );
@@ -324,7 +324,7 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
              ( returnType.equals( XPathConstants.BOOLEAN ) ) ||
              ( returnType.equals( XPathConstants.NODE ) ) ||
              ( returnType.equals( XPathConstants.NODESET ) )  ) {
-    
+
             return true;
         }
         return false;
@@ -354,9 +354,9 @@ public class XPathExpressionImpl  implements javax.xml.xpath.XPathExpression{
             //Return the first node, or null
             return ni.nextNode();
         }
-        // If isSupported check is already done then the execution path 
+        // If isSupported check is already done then the execution path
         // shouldn't come here. Being defensive
-        String fmsg = XSLMessages.createXPATHMessage( 
+        String fmsg = XSLMessages.createXPATHMessage(
                 XPATHErrorResources.ER_UNSUPPORTED_RETURN_TYPE,
                 new Object[] { returnType.toString()});
         throw new IllegalArgumentException ( fmsg );

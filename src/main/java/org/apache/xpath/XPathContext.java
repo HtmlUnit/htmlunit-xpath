@@ -31,7 +31,7 @@ import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 
-import org.apache.xalan.extensions.ExpressionContext;
+//import org.apache.xalan.extensions.ExpressionContext;
 import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.dtm.Axis;
 import org.apache.xml.dtm.DTM;
@@ -56,18 +56,18 @@ import org.xml.sax.XMLReader;
 
 /**
  * Default class for the runtime execution context for XPath.
- * 
+ *
  * <p>This class extends DTMManager but does not directly implement it.</p>
  * @xsl.usage advanced
  */
 public class XPathContext extends DTMManager // implements ExpressionContext
 {
-	IntStack m_last_pushed_rtfdtm=new IntStack();	
+	IntStack m_last_pushed_rtfdtm=new IntStack();
   /**
    * Stack of cached "reusable" DTMs for Result Tree Fragments.
    * This is a kluge to handle the problem of starting an RTF before
    * the old one is complete.
-   * 
+   *
    * %REVIEW% I'm using a Vector rather than Stack so we can reuse
    * the DTMs if the problem occurs multiple times. I'm not sure that's
    * really a net win versus discarding the DTM and starting a new one...
@@ -76,43 +76,43 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   private Vector m_rtfdtm_stack=null;
   /** Index of currently active RTF DTM in m_rtfdtm_stack */
   private int m_which_rtfdtm=-1;
-  
+
  /**
    * Most recent "reusable" DTM for Global Result Tree Fragments. No stack is
    * required since we're never going to pop these.
    */
   private SAX2RTFDTM m_global_rtfdtm=null;
-  
+
   /**
    * HashMap of cached the DTMXRTreeFrag objects, which are identified by DTM IDs.
    * The object are just wrappers for DTMs which are used in  XRTreeFrag.
    */
   private HashMap m_DTMXRTreeFrags = null;
-  
+
   /**
    * state of the secure processing feature.
    */
   private boolean m_isSecureProcessing = false;
-	
+
   /**
-   * Though XPathContext context extends 
-   * the DTMManager, it really is a proxy for this object, which 
+   * Though XPathContext context extends
+   * the DTMManager, it really is a proxy for this object, which
    * is the real DTMManager.
    */
   protected DTMManager m_dtmManager = DTMManager.newInstance(
                    org.apache.xpath.objects.XMLStringFactoryImpl.getFactory());
-  
+
   /**
-   * Return the DTMManager object.  Though XPathContext context extends 
-   * the DTMManager, it really is a proxy for the real DTMManager.  If a 
-   * caller needs to make a lot of calls to the DTMManager, it is faster 
+   * Return the DTMManager object.  Though XPathContext context extends
+   * the DTMManager, it really is a proxy for the real DTMManager.  If a
+   * caller needs to make a lot of calls to the DTMManager, it is faster
    * if it gets the real one from this function.
    */
    public DTMManager getDTMManager()
    {
      return m_dtmManager;
    }
-  
+
   /**
    * Set the state of the secure processing feature
    */
@@ -120,7 +120,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     m_isSecureProcessing = flag;
   }
-  
+
   /**
    * Return the state of the secure processing feature
    */
@@ -128,7 +128,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     return m_isSecureProcessing;
   }
-  
+
   /**
    * Get an instance of a DTM, loaded with the content from the
    * specified source.  If the unique flag is true, a new instance will
@@ -138,29 +138,29 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * (I think more parameters will need to be added for error handling, and entity
    * resolution).
    *
-   * @param source the specification of the source object, which may be null, 
-   *               in which case it is assumed that node construction will take 
+   * @param source the specification of the source object, which may be null,
+   *               in which case it is assumed that node construction will take
    *               by some other means.
    * @param unique true if the returned DTM must be unique, probably because it
    * is going to be mutated.
    * @param wsfilter Enables filtering of whitespace nodes, and may be null.
    * @param incremental true if the construction should try and be incremental.
-   * @param doIndexing true if the caller considers it worth it to use 
+   * @param doIndexing true if the caller considers it worth it to use
    *                   indexing schemes.
    *
    * @return a non-null DTM reference.
    */
-  public DTM getDTM(javax.xml.transform.Source source, boolean unique, 
+  public DTM getDTM(javax.xml.transform.Source source, boolean unique,
                     DTMWSFilter wsfilter,
                     boolean incremental,
                     boolean doIndexing)
   {
-    return m_dtmManager.getDTM(source, unique, wsfilter, 
+    return m_dtmManager.getDTM(source, unique, wsfilter,
                                incremental, doIndexing);
   }
-                             
+
   /**
-   * Get an instance of a DTM that "owns" a node handle. 
+   * Get an instance of a DTM that "owns" a node handle.
    *
    * @param nodeHandle the nodeHandle.
    *
@@ -174,9 +174,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Given a W3C DOM node, try and return a DTM handle.
    * Note: calling this may be non-optimal.
-   * 
+   *
    * @param node Non-null reference to a DOM node.
-   * 
+   *
    * @return a valid DTM handle.
    */
   public int getDTMHandleFromNode(org.w3c.dom.Node node)
@@ -184,7 +184,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     return m_dtmManager.getDTMHandleFromNode(node);
   }
 //
-//  
+//
   /**
    * %TBD% Doc
    */
@@ -192,21 +192,21 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     return m_dtmManager.getDTMIdentity(dtm);
   }
-//  
+//
   /**
-   * Creates an empty <code>DocumentFragment</code> object. 
+   * Creates an empty <code>DocumentFragment</code> object.
    * @return A new <code>DocumentFragment handle</code>.
    */
   public DTM createDocumentFragment()
   {
     return m_dtmManager.createDocumentFragment();
   }
-//  
+//
   /**
    * Release a DTM either to a lru pool, or completely remove reference.
    * DTMs without system IDs are always hard deleted.
    * State: experimental.
-   * 
+   *
    * @param dtm The DTM to be released.
    * @param shouldHardDelete True if the DTM should be removed no matter what.
    * @return true if the DTM was removed, false if it was put back in a lru pool.
@@ -222,7 +222,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     {
       return false;
     }
-  	
+
     return m_dtmManager.release(dtm, shouldHardDelete);
   }
 
@@ -284,7 +284,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     return m_dtmManager.createDTMIterator(whatToShow, filter, entityReferenceExpansion);
   }
-  
+
   /**
    * Create a new <code>DTMIterator</code> that holds exactly one node.
    *
@@ -362,21 +362,21 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     releaseDTMXRTreeFrags();
   	// These couldn't be disposed of earlier (see comments in release()); zap them now.
   	if(m_rtfdtm_stack!=null)
-  		 for (java.util.Enumeration e = m_rtfdtm_stack.elements() ; e.hasMoreElements() ;) 
+  		 for (java.util.Enumeration e = m_rtfdtm_stack.elements() ; e.hasMoreElements() ;)
   		 	m_dtmManager.release((DTM)e.nextElement(), true);
 
     m_rtfdtm_stack=null; // drop our references too
     m_which_rtfdtm=-1;
-    
+
     if(m_global_rtfdtm!=null)
   		 	m_dtmManager.release(m_global_rtfdtm,true);
     m_global_rtfdtm=null;
-    
-  	
+
+
     m_dtmManager = DTMManager.newInstance(
                    org.apache.xpath.objects.XMLStringFactoryImpl.getFactory());
-                   
-    m_saxLocations.removeAllElements();   
+
+    m_saxLocations.removeAllElements();
 	m_axesIteratorStack.removeAllElements();
 	m_contextNodeLists.removeAllElements();
 	m_currentExpressionNodes.removeAllElements();
@@ -385,7 +385,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 	m_predicatePos.removeAllElements();
 	m_predicateRoots.RemoveAllNoClear();
 	m_prefixResolvers.removeAllElements();
-	
+
 	m_prefixResolvers.push(null);
     m_currentNodes.push(DTM.NULL);
     m_currentExpressionNodes.push(DTM.NULL);
@@ -404,7 +404,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     m_saxLocations.setTop(location);
   }
-  
+
   /**
    * Set the current locater in the stylesheet.
    *
@@ -414,9 +414,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     m_saxLocations.push(location);
   }
-  
+
   /**
-   * Push a slot on the locations stack so that setSAXLocator can be 
+   * Push a slot on the locations stack so that setSAXLocator can be
    * repeatedly called.
    *
    */
@@ -484,7 +484,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     return m_variableStacks;
   }
 
-  /** 
+  /**
    * Get the variable stack, which is in charge of variables and
    * parameters.
    *
@@ -497,7 +497,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   // ================ SourceTreeManager ===================
 
-  /** The source tree manager, which associates Source objects to source 
+  /** The source tree manager, which associates Source objects to source
    *  tree nodes. */
   private SourceTreeManager m_sourceTreeManager = new SourceTreeManager();
 
@@ -514,14 +514,14 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the SourceTreeManager associated with this execution context.
    *
-   * @param mgr the SourceTreeManager to be associated with this 
+   * @param mgr the SourceTreeManager to be associated with this
    *        execution context.
    */
   public void setSourceTreeManager(SourceTreeManager mgr)
   {
     m_sourceTreeManager = mgr;
   }
-  
+
   // =================================================
 
   /** The ErrorListener where errors and warnings are to be reported.   */
@@ -553,7 +553,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
     if (null == retval)
     {
-      if (null == m_defaultErrorListener) 
+      if (null == m_defaultErrorListener)
         m_defaultErrorListener = new org.apache.xml.utils.DefaultErrorHandler();
       retval = m_defaultErrorListener;
     }
@@ -568,7 +568,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    */
   public void setErrorListener(ErrorListener listener) throws IllegalArgumentException
   {
-    if (listener == null) 
+    if (listener == null)
       throw new IllegalArgumentException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_NULL_ERROR_HANDLER, null)); //"Null error handler");
     m_errorListener = listener;
   }
@@ -593,7 +593,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Set the URIResolver associated with this execution context.
    *
-   * @param resolver the URIResolver to be associated with this 
+   * @param resolver the URIResolver to be associated with this
    *        execution context, may be null to clear an already set resolver.
    */
   public void setURIResolver(URIResolver resolver)
@@ -638,12 +638,12 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    *
    * @param b  If false, a TransformerException will be thrown.
    * @param msg The assertion message, which should be informative.
-   * 
+   *
    * @throws javax.xml.transform.TransformerException if b is false.
    */
   private void assertion(boolean b, String msg) throws javax.xml.transform.TransformerException
   {
-    if (!b) 
+    if (!b)
     {
       ErrorListener errorHandler = getErrorListener();
 
@@ -661,12 +661,12 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   //==========================================================
   // SECTION: Execution context state tracking
   //==========================================================
-  
+
   /**
    * The current context node list.
    */
   private Stack m_contextNodeLists = new Stack();
-  
+
   public Stack getContextNodeListsStack() { return m_contextNodeLists; }
   public void setContextNodeListsStack(Stack s) { m_contextNodeLists = s; }
 
@@ -710,19 +710,19 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   }
 
   /**
-   * The ammount to use for stacks that record information during the 
+   * The ammount to use for stacks that record information during the
    * recursive execution.
    */
   public static final int RECURSIONLIMIT = (1024*4);
 
   /** The stack of <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a> objects.
-   *  Not to be confused with the current node list.  %REVIEW% Note that there 
-   *  are no bounds check and resize for this stack, so if it is blown, it's all 
+   *  Not to be confused with the current node list.  %REVIEW% Note that there
+   *  are no bounds check and resize for this stack, so if it is blown, it's all
    *  over.  */
   private IntStack m_currentNodes = new IntStack(RECURSIONLIMIT);
-   
+
 //  private NodeVector m_currentNodes = new NodeVector();
-  
+
   public IntStack getCurrentNodeStack() {return m_currentNodes; }
   public void setCurrentNodeStack(IntStack nv) { m_currentNodes = nv; }
 
@@ -735,7 +735,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     return m_currentNodes.peek();
   }
-  
+
   /**
    * Set the current context node and expression node.
    *
@@ -756,7 +756,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     m_currentNodes.quickPop(1);
     m_currentExpressionNodes.quickPop(1);
   }
-  
+
   /**
    * Push the current context node, expression node, and prefix resolver.
    *
@@ -770,7 +770,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     m_currentExpressionNodes.push(cn);
     m_prefixResolvers.push(nc);
   }
-  
+
   /**
    * Pop the current context node, expression node, and prefix resolver.
    */
@@ -792,7 +792,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     m_currentNodes.push(n);
   }
-  
+
   /**
    * Pop the current context node.
    */
@@ -800,7 +800,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     m_currentNodes.quickPop(1);
   }
-  
+
   /**
    * Set the current predicate root.
    */
@@ -824,7 +824,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     return m_predicateRoots.peepOrNull();
   }
-  
+
   /**
    * Set the current location path iterator root.
    */
@@ -848,7 +848,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   {
     return m_iteratorRoots.peepOrNull();
   }
-  
+
   /** A stack of the current sub-expression nodes.  */
   private NodeVector m_iteratorRoots = new NodeVector();
 
@@ -857,13 +857,13 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /** A stack of the current sub-expression nodes.  */
   private IntStack m_currentExpressionNodes = new IntStack(RECURSIONLIMIT);
-  
-     
+
+
   public IntStack getCurrentExpressionNodeStack() { return m_currentExpressionNodes; }
   public void setCurrentExpressionNodeStack(IntStack nv) { m_currentExpressionNodes = nv; }
-  
+
   private IntStack m_predicatePos = new IntStack();
-  
+
   public final int getPredicatePos()
   {
     return m_predicatePos.peek();
@@ -900,21 +900,21 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   }
 
   /**
-   * Pop the current node that is the expression's context 
+   * Pop the current node that is the expression's context
    * (i.e. for current() support).
    */
   public final void popCurrentExpressionNode()
   {
     m_currentExpressionNodes.quickPop(1);
   }
-  
-  private ObjectStack m_prefixResolvers 
+
+  private ObjectStack m_prefixResolvers
                                    = new ObjectStack(RECURSIONLIMIT);
 
   /**
    * Get the current namespace context for the xpath.
    *
-   * @return the current prefix resolver for resolving prefixes to 
+   * @return the current prefix resolver for resolving prefixes to
    *         namespace URLs.
    */
   public final PrefixResolver getNamespaceContext()
@@ -925,7 +925,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Get the current namespace context for the xpath.
    *
-   * @param pr the prefix resolver to be used for resolving prefixes to 
+   * @param pr the prefix resolver to be used for resolving prefixes to
    *         namespace URLs.
    */
   public final void setNamespaceContext(PrefixResolver pr)
@@ -936,14 +936,14 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Push a current namespace context for the xpath.
    *
-   * @param pr the prefix resolver to be used for resolving prefixes to 
+   * @param pr the prefix resolver to be used for resolving prefixes to
    *         namespace URLs.
    */
   public final void pushNamespaceContext(PrefixResolver pr)
   {
     m_prefixResolvers.push(pr);
   }
-  
+
   /**
    * Just increment the namespace contest stack, so that setNamespaceContext
    * can be used on the slot.
@@ -969,7 +969,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Stack of AxesIterators.
    */
   private Stack m_axesIteratorStack = new Stack();
-  
+
   public Stack getAxesIteratorStackStacks() { return m_axesIteratorStack; }
   public void setAxesIteratorStackStacks(Stack s) { m_axesIteratorStack = s; }
 
@@ -1004,9 +1004,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     return m_axesIteratorStack.isEmpty()
            ? null : (SubContextList) m_axesIteratorStack.peek();
   }
-  
+
   /**
-   * Get the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a> 
+   * Get the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>
    * as defined by the XSLT spec.
    *
    * @return the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>.
@@ -1053,20 +1053,20 @@ public class XPathContext extends DTMManager // implements ExpressionContext
       return null;  // error reporting?
     }
   }
-  
+
   XPathExpressionContext expressionContext = new XPathExpressionContext();
-  
-  /**
-   * The the expression context for extensions for this context.
-   * 
-   * @return An object that implements the ExpressionContext.
-   */
-  public ExpressionContext getExpressionContext()
-  {
-    return expressionContext;
-  }
-  
-  public class XPathExpressionContext implements ExpressionContext
+
+//  /**
+//   * The the expression context for extensions for this context.
+//   *
+//   * @return An object that implements the ExpressionContext.
+//   */
+//  public ExpressionContext getExpressionContext()
+//  {
+//    return expressionContext;
+//  }
+
+  public class XPathExpressionContext // implements ExpressionContext
   {
     /**
      * Return the XPathContext associated with this XPathExpressionContext.
@@ -1081,16 +1081,16 @@ public class XPathContext extends DTMManager // implements ExpressionContext
      }
 
     /**
-     * Return the DTMManager object.  Though XPathContext context extends 
-     * the DTMManager, it really is a proxy for the real DTMManager.  If a 
-     * caller needs to make a lot of calls to the DTMManager, it is faster 
+     * Return the DTMManager object.  Though XPathContext context extends
+     * the DTMManager, it really is a proxy for the real DTMManager.  If a
+     * caller needs to make a lot of calls to the DTMManager, it is faster
      * if it gets the real one from this function.
      */
      public DTMManager getDTMManager()
      {
        return m_dtmManager;
      }
-    
+
     /**
      * Get the current context node.
      * @return The current context node.
@@ -1098,10 +1098,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     public org.w3c.dom.Node getContextNode()
     {
       int context = getCurrentNode();
-      
+
       return getDTM(context).getNode(context);
     }
-  
+
     /**
      * Get the current context node list.
      * @return An iterator for the current context list, as
@@ -1120,7 +1120,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     {
       return XPathContext.this.getErrorListener();
     }
-  
+
     /**
      * Get the value of a node as a number.
      * @param n Node to be converted to a number.  May be null.
@@ -1134,7 +1134,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
       XString xobj = (XString)dtm.getStringValue(nodeHandle);
       return xobj.num();
     }
-  
+
     /**
      * Get the value of a node as a string.
      * @param n Node to be converted to a string.  May be null.
@@ -1149,35 +1149,35 @@ public class XPathContext extends DTMManager // implements ExpressionContext
       return strVal.toString();
     }
 
-    /**
-     * Get a variable based on it's qualified name.
-     * @param qname The qualified name of the variable.
-     * @return The evaluated value of the variable.
-     * @throws javax.xml.transform.TransformerException
-     */
-
-    public final XObject getVariableOrParam(org.apache.xml.utils.QName qname)
-              throws javax.xml.transform.TransformerException
-    {
-      return m_variableStacks.getVariableOrParam(XPathContext.this, qname);
-    }
+//    /**
+//     * Get a variable based on it's qualified name.
+//     * @param qname The qualified name of the variable.
+//     * @return The evaluated value of the variable.
+//     * @throws javax.xml.transform.TransformerException
+//     */
+//
+//    public final XObject getVariableOrParam(org.apache.xml.utils.QName qname)
+//              throws javax.xml.transform.TransformerException
+//    {
+//      return m_variableStacks.getVariableOrParam(XPathContext.this, qname);
+//    }
 
   }
 
  /**
    * Get a DTM to be used as a container for a global Result Tree
-   * Fragment. This will always be an instance of (derived from? equivalent to?) 
-   * SAX2DTM, since each RTF is constructed by temporarily redirecting our SAX 
-   * output to it. It may be a single DTM containing for multiple fragments, 
+   * Fragment. This will always be an instance of (derived from? equivalent to?)
+   * SAX2DTM, since each RTF is constructed by temporarily redirecting our SAX
+   * output to it. It may be a single DTM containing for multiple fragments,
    * if the implementation supports that.
-   * 
+   *
    * Note: The distinction between this method and getRTFDTM() is that the latter
    * allocates space from the dynamic variable stack (m_rtfdtm_stack), which may
    * be pruned away again as the templates which defined those variables are exited.
    * Global variables may be bound late (see XUnresolvedVariable), and never want to
    * be discarded, hence we need to allocate them separately and don't actually need
    * a stack to track them.
-   * 
+   *
    * @return a non-null DTM reference.
    */
   public DTM getGlobalRTFDTM()
@@ -1187,7 +1187,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   	// Some magic has been applied in DTMManagerDefault to recognize this set of options
   	// and generate an instance of DTM which can contain multiple documents
   	// (SAX2RTFDTM). Perhaps not the optimal way of achieving that result, but
-  	// I didn't want to change the manager API at this time, or expose 
+  	// I didn't want to change the manager API at this time, or expose
   	// too many dependencies on its internals. (Ideally, I'd like to move
   	// isTreeIncomplete all the way up to DTM, so we wouldn't need to explicitly
   	// specify the subclass here.)
@@ -1201,17 +1201,17 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 	}
     return m_global_rtfdtm;
   }
-  
+
 
 
 
   /**
    * Get a DTM to be used as a container for a dynamic Result Tree
-   * Fragment. This will always be an instance of (derived from? equivalent to?) 
-   * SAX2DTM, since each RTF is constructed by temporarily redirecting our SAX 
-   * output to it. It may be a single DTM containing for multiple fragments, 
+   * Fragment. This will always be an instance of (derived from? equivalent to?)
+   * SAX2DTM, since each RTF is constructed by temporarily redirecting our SAX
+   * output to it. It may be a single DTM containing for multiple fragments,
    * if the implementation supports that.
-   * 
+   *
    * @return a non-null DTM reference.
    */
   public DTM getRTFDTM()
@@ -1223,7 +1223,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   	// Some magic has been applied in DTMManagerDefault to recognize this set of options
   	// and generate an instance of DTM which can contain multiple documents
   	// (SAX2RTFDTM). Perhaps not the optimal way of achieving that result, but
-  	// I didn't want to change the manager API at this time, or expose 
+  	// I didn't want to change the manager API at this time, or expose
   	// too many dependencies on its internals. (Ideally, I'd like to move
   	// isTreeIncomplete all the way up to DTM, so we wouldn't need to explicitly
   	// specify the subclass here.)
@@ -1242,7 +1242,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 	else
 	{
 		rtfdtm=(SAX2RTFDTM)m_rtfdtm_stack.elementAt(m_which_rtfdtm);
-  		
+
 	  	// It might already be under construction -- the classic example would be
  	 	// an xsl:variable which uses xsl:call-template as part of its value. To
   		// handle this recursion, we have to start a new RTF DTM, pushing the old
@@ -1256,16 +1256,16 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 	  		else
 	  		{
 		  		rtfdtm=(SAX2RTFDTM)m_dtmManager.getDTM(null,true,null,false,false);
-          m_rtfdtm_stack.addElement(rtfdtm); 	
+          m_rtfdtm_stack.addElement(rtfdtm);
 	  		}
  	 	}
 	}
-		
+
     return rtfdtm;
   }
-  
+
   /** Push the RTFDTM's context mark, to allows discarding RTFs added after this
-   * point. (If it doesn't exist we don't push, since we might still be able to 
+   * point. (If it doesn't exist we don't push, since we might still be able to
    * get away with not creating it. That requires that excessive pops be harmless.)
    * */
   public void pushRTFContext()
@@ -1274,15 +1274,15 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   	if(null!=m_rtfdtm_stack)
 	  	((SAX2RTFDTM)(getRTFDTM())).pushRewindMark();
   }
-  
+
   /** Pop the RTFDTM's context mark. This discards any RTFs added after the last
-   * mark was set. 
-   * 
+   * mark was set.
+   *
    * If there is no RTF DTM, there's nothing to pop so this
    * becomes a no-op. If pushes were issued before this was called, we count on
    * the fact that popRewindMark is defined such that overpopping just resets
    * to empty.
-   * 
+   *
    * Complicating factor: We need to handle the case of popping back to a previous
    * RTF DTM, if one of the weird produce-an-RTF-to-build-an-RTF cases arose.
    * Basically: If pop says this DTM is now empty, then return to the previous
@@ -1294,7 +1294,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   	int previous=m_last_pushed_rtfdtm.pop();
   	if(null==m_rtfdtm_stack)
   		return;
-  
+
   	if(m_which_rtfdtm==previous)
   	{
   		if(previous>=0) // guard against none-active
@@ -1308,34 +1308,34 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   		// _DON'T_ pop the previous, since it's still open (which is why we
   		// stacked up more of these) and did not receive a mark.
   		boolean isEmpty=((SAX2RTFDTM)(m_rtfdtm_stack.elementAt(m_which_rtfdtm))).popRewindMark();
-  		--m_which_rtfdtm; 
+  		--m_which_rtfdtm;
   	}
   }
-  
+
   /**
    * Gets DTMXRTreeFrag object if one has already been created.
    * Creates new DTMXRTreeFrag object and adds to m_DTMXRTreeFrags  HashMap,
-   * otherwise.  
+   * otherwise.
    * @param dtmIdentity
    * @return DTMXRTreeFrag
    */
   public DTMXRTreeFrag getDTMXRTreeFrag(int dtmIdentity){
     if(m_DTMXRTreeFrags == null){
-      m_DTMXRTreeFrags = new HashMap();     
+      m_DTMXRTreeFrags = new HashMap();
     }
-    
+
     if(m_DTMXRTreeFrags.containsKey(new Integer(dtmIdentity))){
        return (DTMXRTreeFrag)m_DTMXRTreeFrags.get(new Integer(dtmIdentity));
     }else{
       final DTMXRTreeFrag frag = new DTMXRTreeFrag(dtmIdentity,this);
       m_DTMXRTreeFrags.put(new Integer(dtmIdentity),frag);
       return frag ;
-    }   
+    }
   }
- 
+
   /**
-   * Cleans DTMXRTreeFrag objects by removing references 
-   * to DTM and XPathContext objects.   
+   * Cleans DTMXRTreeFrag objects by removing references
+   * to DTM and XPathContext objects.
    */
   private final void releaseDTMXRTreeFrags(){
     if(m_DTMXRTreeFrags == null){

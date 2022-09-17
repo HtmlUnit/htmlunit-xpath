@@ -33,18 +33,18 @@ import org.apache.xpath.operations.Mod;
 import org.apache.xpath.operations.Mult;
 import org.apache.xpath.operations.Plus;
 import org.apache.xpath.operations.Quo;
-import org.apache.xpath.operations.Variable;
+//import org.apache.xpath.operations.Variable;
 
 public class HasPositionalPredChecker extends XPathVisitor
 {
 	private boolean m_hasPositionalPred = false;
 	private int m_predDepth = 0;
-	
+
 	/**
-	 * Process the LocPathIterator to see if it contains variables 
+	 * Process the LocPathIterator to see if it contains variables
 	 * or functions that may make it context dependent.
 	 * @param path LocPathIterator that is assumed to be absolute, but needs checking.
-	 * @return true if the path is confirmed to be absolute, false if it 
+	 * @return true if the path is confirmed to be absolute, false if it
 	 * may contain context dependencies.
 	 */
 	public static boolean check(LocPathIterator path)
@@ -53,10 +53,10 @@ public class HasPositionalPredChecker extends XPathVisitor
 		path.callVisitors(null, hppc);
 		return hppc.m_hasPositionalPred;
 	}
-	
+
 	/**
 	 * Visit a function.
-	 * @param owner The owner of the expression, to which the expression can 
+	 * @param owner The owner of the expression, to which the expression can
 	 *              be reset if rewriting takes place.
 	 * @param func The function reference object.
 	 * @return true if the sub expressions should be traversed.
@@ -68,10 +68,10 @@ public class HasPositionalPredChecker extends XPathVisitor
 			m_hasPositionalPred = true;
 		return true;
 	}
-	
+
 //	/**
 //	 * Visit a variable reference.
-//	 * @param owner The owner of the expression, to which the expression can 
+//	 * @param owner The owner of the expression, to which the expression can
 //	 *              be reset if rewriting takes place.
 //	 * @param var The variable reference object.
 //	 * @return true if the sub expressions should be traversed.
@@ -81,13 +81,13 @@ public class HasPositionalPredChecker extends XPathVisitor
 //		m_hasPositionalPred = true;
 //		return true;
 //	}
-	
+
   /**
-   * Visit a predicate within a location path.  Note that there isn't a 
-   * proper unique component for predicates, and that the expression will 
+   * Visit a predicate within a location path.  Note that there isn't a
+   * proper unique component for predicates, and that the expression will
    * be called also for whatever type Expression is.
-   * 
-   * @param owner The owner of the expression, to which the expression can 
+   *
+   * @param owner The owner of the expression, to which the expression can
    *              be reset if rewriting takes place.
    * @param pred The predicate object.
    * @return true if the sub expressions should be traversed.
@@ -98,7 +98,7 @@ public class HasPositionalPredChecker extends XPathVisitor
 
     if(m_predDepth == 1)
     {
-      if((pred instanceof Variable) || 
+      if(// (pred instanceof Variable) ||
          (pred instanceof XNumber) ||
          (pred instanceof Div) ||
          (pred instanceof Plus) ||

@@ -63,17 +63,17 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     private XPathFunctionResolver origFunctionResolver;
     private NamespaceContext namespaceContext=null;
     private JAXPPrefixResolver prefixResolver;
-    // By default Extension Functions are allowed in XPath Expressions. If 
+    // By default Extension Functions are allowed in XPath Expressions. If
     // Secure Processing Feature is set on XPathFactory then the invocation of
     // extensions function need to throw XPathFunctionException
-    private boolean featureSecureProcessing = false; 
+    private boolean featureSecureProcessing = false;
 
     XPathImpl( XPathVariableResolver vr, XPathFunctionResolver fr ) {
         this.origVariableResolver = this.variableResolver = vr;
         this.origFunctionResolver = this.functionResolver = fr;
     }
 
-    XPathImpl( XPathVariableResolver vr, XPathFunctionResolver fr, 
+    XPathImpl( XPathVariableResolver vr, XPathFunctionResolver fr,
             boolean featureSecureProcessing ) {
         this.origVariableResolver = this.variableResolver = vr;
         this.origFunctionResolver = this.functionResolver = fr;
@@ -87,7 +87,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      */
     public void setXPathVariableResolver(XPathVariableResolver resolver) {
         if ( resolver == null ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ARG_CANNOT_BE_NULL,
                     new Object[] {"XPathVariableResolver"} );
             throw new NullPointerException( fmsg );
@@ -111,7 +111,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      */
     public void setXPathFunctionResolver(XPathFunctionResolver resolver) {
         if ( resolver == null ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ARG_CANNOT_BE_NULL,
                     new Object[] {"XPathFunctionResolver"} );
             throw new NullPointerException( fmsg );
@@ -135,10 +135,10 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      */
     public void setNamespaceContext(NamespaceContext nsContext) {
         if ( nsContext == null ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ARG_CANNOT_BE_NULL,
                     new Object[] {"NamespaceContext"} );
-            throw new NullPointerException( fmsg ); 
+            throw new NullPointerException( fmsg );
         }
         this.namespaceContext = nsContext;
         this.prefixResolver = new JAXPPrefixResolver ( nsContext );
@@ -154,7 +154,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     }
 
     private static Document d = null;
-    
+
     private static DocumentBuilder getParser() {
         try {
             // we'd really like to cache those DocumentBuilders, but we can't because:
@@ -173,7 +173,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
             dbf.setValidating( false );
             return dbf.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            // this should never happen with a well-behaving JAXP implementation. 
+            // this should never happen with a well-behaving JAXP implementation.
             throw new Error(e.toString());
         }
     }
@@ -189,28 +189,28 @@ public class XPathImpl implements javax.xml.xpath.XPath {
         return d;
     }
 
-    
+
     private XObject eval(String expression, Object contextItem)
         throws javax.xml.transform.TransformerException {
         org.apache.xpath.XPath xpath = new org.apache.xpath.XPath( expression,
-            null, prefixResolver, org.apache.xpath.XPath.SELECT ); 
+            null, prefixResolver, org.apache.xpath.XPath.SELECT );
         org.apache.xpath.XPathContext xpathSupport = null;
 
         // Create an XPathContext that doesn't support pushing and popping of
         // variable resolution scopes.  Sufficient for simple XPath 1.0
         // expressions.
-        if ( functionResolver != null ) {
-            JAXPExtensionsProvider jep = new JAXPExtensionsProvider(
-                    functionResolver, featureSecureProcessing );
-            xpathSupport = new org.apache.xpath.XPathContext(jep, false);
-        } else { 
+//        if ( functionResolver != null ) {
+//            JAXPExtensionsProvider jep = new JAXPExtensionsProvider(
+//                    functionResolver, featureSecureProcessing );
+//            xpathSupport = new org.apache.xpath.XPathContext(jep, false);
+//        } else {
             xpathSupport = new org.apache.xpath.XPathContext(false);
-        }
+//        }
 
         XObject xobj = null;
-        
+
         xpathSupport.setVarStack(new JAXPVariableStack(variableResolver));
-        
+
         // If item is null, then we will create a a Dummy contextNode
         if ( contextItem instanceof Node ) {
             xobj = xpath.execute (xpathSupport, (Node)contextItem,
@@ -218,10 +218,10 @@ public class XPathImpl implements javax.xml.xpath.XPath {
         } else {
             xobj = xpath.execute ( xpathSupport, DTM.NULL, prefixResolver );
         }
- 
+
         return xobj;
     }
-        
+
     /**
      * <p>Evaluate an <code>XPath</code> expression in the specified context and return the result as the specified type.</p>
      *
@@ -256,13 +256,13 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     public Object evaluate(String expression, Object item, QName returnType)
             throws XPathExpressionException {
         if ( expression == null ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ARG_CANNOT_BE_NULL,
                     new Object[] {"XPath expression"} );
             throw new NullPointerException ( fmsg );
         }
         if ( returnType == null ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ARG_CANNOT_BE_NULL,
                     new Object[] {"returnType"} );
             throw new NullPointerException ( fmsg );
@@ -277,25 +277,25 @@ public class XPathImpl implements javax.xml.xpath.XPath {
         }
 
         try {
- 
+
             XObject resultObject = eval( expression, item );
             return getResultAsType( resultObject, returnType );
         } catch ( java.lang.NullPointerException npe ) {
-            // If VariableResolver returns null Or if we get 
+            // If VariableResolver returns null Or if we get
             // NullPointerException at this stage for some other reason
-            // then we have to reurn XPathException 
+            // then we have to reurn XPathException
             throw new XPathExpressionException ( npe );
         } catch ( javax.xml.transform.TransformerException te ) {
             Throwable nestedException = te.getException();
             if ( nestedException instanceof javax.xml.xpath.XPathFunctionException ) {
                 throw (javax.xml.xpath.XPathFunctionException)nestedException;
             } else {
-                // For any other exceptions we need to throw 
+                // For any other exceptions we need to throw
                 // XPathExpressionException ( as per spec )
                 throw new XPathExpressionException ( te );
             }
-        } 
-        
+        }
+
     }
 
     private boolean isSupported( QName returnType ) {
@@ -304,7 +304,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
              ( returnType.equals( XPathConstants.BOOLEAN ) ) ||
              ( returnType.equals( XPathConstants.NODE ) ) ||
              ( returnType.equals( XPathConstants.NODESET ) )  ) {
-  
+
             return true;
         }
         return false;
@@ -313,24 +313,24 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     private Object getResultAsType( XObject resultObject, QName returnType )
         throws javax.xml.transform.TransformerException {
         // XPathConstants.STRING
-        if ( returnType.equals( XPathConstants.STRING ) ) { 
+        if ( returnType.equals( XPathConstants.STRING ) ) {
             return resultObject.str();
         }
         // XPathConstants.NUMBER
-        if ( returnType.equals( XPathConstants.NUMBER ) ) { 
+        if ( returnType.equals( XPathConstants.NUMBER ) ) {
             return new Double ( resultObject.num());
         }
         // XPathConstants.BOOLEAN
-        if ( returnType.equals( XPathConstants.BOOLEAN ) ) { 
+        if ( returnType.equals( XPathConstants.BOOLEAN ) ) {
             return resultObject.bool() ? Boolean.TRUE : Boolean.FALSE;
         }
         // XPathConstants.NODESET ---ORdered, UNOrdered???
-        if ( returnType.equals( XPathConstants.NODESET ) ) { 
+        if ( returnType.equals( XPathConstants.NODESET ) ) {
             return resultObject.nodelist();
         }
         // XPathConstants.NODE
-        if ( returnType.equals( XPathConstants.NODE ) ) { 
-            NodeIterator ni = resultObject.nodeset(); 
+        if ( returnType.equals( XPathConstants.NODE ) ) {
+            NodeIterator ni = resultObject.nodeset();
             //Return the first node, or null
             return ni.nextNode();
         }
@@ -339,16 +339,16 @@ public class XPathImpl implements javax.xml.xpath.XPath {
                 new Object[] { returnType.toString()});
         throw new IllegalArgumentException( fmsg );
     }
-         
-            
-        
+
+
+
     /**
      * <p>Evaluate an XPath expression in the specified context and return the result as a <code>String</code>.</p>
      *
      * <p>This method calls {@link #evaluate(String expression, Object item, QName returnType)} with a <code>returnType</code> of
      * {@link XPathConstants#STRING}.</p>
      *
-     * <p>See "Evaluation of XPath Expressions" of JAXP 1.3 spec 
+     * <p>See "Evaluation of XPath Expressions" of JAXP 1.3 spec
      * for context item evaluation,
      * variable, function and QName resolution and return type conversion.</p>
      *
@@ -378,7 +378,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      * they must be available via the {@link XPathFunctionResolver}.
      * An {@link XPathExpressionException} will be thrown if the <code>XPathFunction</code>
      * cannot be resovled with the <code>XPathFunctionResolver</code>.</p>
-     * 
+     *
      * <p>If <code>expression</code> is <code>null</code>, a <code>NullPointerException</code> is thrown.</p>
      *
      * @param expression The XPath expression.
@@ -391,7 +391,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
     public XPathExpression compile(String expression)
         throws XPathExpressionException {
         if ( expression == null ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ARG_CANNOT_BE_NULL,
                     new Object[] {"XPath expression"} );
             throw new NullPointerException ( fmsg );
@@ -417,7 +417,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      * <p>This method builds a data model for the {@link InputSource} and calls
      * {@link #evaluate(String expression, Object item, QName returnType)} on the resulting document object.</p>
      *
-     * <p>See "Evaluation of XPath Expressions" section of JAXP 1.3 spec 
+     * <p>See "Evaluation of XPath Expressions" section of JAXP 1.3 spec
      * for context item evaluation,
      * variable, function and QName resolution and return type conversion.</p>
      *
@@ -438,29 +438,29 @@ public class XPathImpl implements javax.xml.xpath.XPath {
      * @throws NullPointerException If <code>expression</code>, <code>source</code> or <code>returnType</code>
      *   is <code>null</code>.
      */
-    public Object evaluate(String expression, InputSource source, 
+    public Object evaluate(String expression, InputSource source,
             QName returnType) throws XPathExpressionException {
         // Checking validity of different parameters
         if( source== null ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ARG_CANNOT_BE_NULL,
                     new Object[] {"source"} );
             throw new NullPointerException ( fmsg );
         }
         if ( expression == null ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ARG_CANNOT_BE_NULL,
                     new Object[] {"XPath expression"} );
             throw new NullPointerException ( fmsg );
         }
         if ( returnType == null ) {
-            String fmsg = XSLMessages.createXPATHMessage( 
+            String fmsg = XSLMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ARG_CANNOT_BE_NULL,
                     new Object[] {"returnType"} );
             throw new NullPointerException ( fmsg );
         }
 
-        //Checking if requested returnType is supported. 
+        //Checking if requested returnType is supported.
         //returnType need to be defined in XPathConstants
         if ( !isSupported ( returnType ) ) {
             String fmsg = XSLMessages.createXPATHMessage(
@@ -468,7 +468,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
                     new Object[] { returnType.toString() } );
             throw new IllegalArgumentException ( fmsg );
         }
-        
+
         try {
 
             Document document = getParser().parse( source );
@@ -478,7 +478,7 @@ public class XPathImpl implements javax.xml.xpath.XPath {
         } catch ( SAXException e ) {
             throw new XPathExpressionException ( e );
         } catch( IOException e ) {
-            throw new XPathExpressionException ( e );            
+            throw new XPathExpressionException ( e );
         } catch ( javax.xml.transform.TransformerException te ) {
             Throwable nestedException = te.getException();
             if ( nestedException instanceof javax.xml.xpath.XPathFunctionException ) {
@@ -488,8 +488,8 @@ public class XPathImpl implements javax.xml.xpath.XPath {
             }
         }
 
-    } 
- 
+    }
+
 
 
 
@@ -541,5 +541,5 @@ public class XPathImpl implements javax.xml.xpath.XPath {
         this.functionResolver = this.origFunctionResolver;
         this.namespaceContext = null;
     }
- 
+
 }
