@@ -21,10 +21,10 @@
 package org.apache.xpath;
 
 import java.lang.reflect.Method;
-import java.util.Stack;
-import java.util.Vector;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Stack;
+import java.util.Vector;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
@@ -47,11 +47,9 @@ import org.apache.xml.utils.PrefixResolver;
 import org.apache.xml.utils.SAXSourceLocator;
 import org.apache.xml.utils.XMLString;
 import org.apache.xpath.axes.SubContextList;
-import org.apache.xpath.objects.XObject;
 import org.apache.xpath.objects.DTMXRTreeFrag;
 import org.apache.xpath.objects.XString;
 import org.apache.xpath.res.XPATHErrorResources;
-
 import org.xml.sax.XMLReader;
 
 /**

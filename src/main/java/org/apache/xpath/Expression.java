@@ -30,7 +30,6 @@ import org.apache.xml.utils.XMLString;
 import org.apache.xpath.objects.XNodeSet;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.res.XPATHErrorResources;
-
 import org.xml.sax.ContentHandler;
 
 /**

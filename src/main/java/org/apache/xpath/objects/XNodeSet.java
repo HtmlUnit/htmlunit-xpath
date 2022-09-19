@@ -26,7 +26,6 @@ import org.apache.xml.dtm.DTMManager;
 import org.apache.xml.utils.XMLString;
 import org.apache.xpath.NodeSetDTM;
 import org.apache.xpath.axes.NodeSequence;
-
 import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.NodeIterator;
 

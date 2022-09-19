@@ -20,10 +20,11 @@
  */
 package org.apache.xpath.compiler;
 
-import org.apache.xpath.Expression;
-import org.apache.xpath.functions.Function;
 import java.util.HashMap;
+
 import javax.xml.transform.TransformerException;
+
+import org.apache.xpath.functions.Function;
 
 /**
  * The function table for XPath.

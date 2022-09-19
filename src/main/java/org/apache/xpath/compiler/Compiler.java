@@ -29,7 +29,6 @@ import org.apache.xml.dtm.Axis;
 import org.apache.xml.dtm.DTMFilter;
 import org.apache.xml.dtm.DTMIterator;
 import org.apache.xml.utils.PrefixResolver;
-import org.apache.xml.utils.QName;
 import org.apache.xml.utils.SAXSourceLocator;
 import org.apache.xpath.Expression;
 import org.apache.xpath.axes.UnionPathIterator;
