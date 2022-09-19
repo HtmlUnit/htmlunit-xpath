@@ -18,7 +18,7 @@
 /*
  * $Id$
  */
-package org.apache.xalan.res;
+package org.apache.xpath.res;
 
 import java.util.ListResourceBundle;
 import java.util.Locale;

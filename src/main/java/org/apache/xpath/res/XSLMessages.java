@@ -18,11 +18,9 @@
 /*
  * $Id$
  */
-package org.apache.xalan.res;
+package org.apache.xpath.res;
 
 import java.util.ListResourceBundle;
-
-import org.apache.xpath.res.XPATHMessages;
 
 /**
  * Sets things up for issuing error messages.  This class is misnamed, and
@@ -37,7 +35,7 @@ public class XSLMessages extends XPATHMessages
 
   /** The class name of the Xalan error message string table.    */
   private static final String XSLT_ERROR_RESOURCES =
-    "org.apache.xalan.res.XSLTErrorResources";
+    "org.apache.xpath.res.XSLTErrorResources";
 
   /**
    * Creates a message from the specified key and replacement
@@ -53,7 +51,7 @@ public class XSLMessages extends XPATHMessages
   {
     if (XSLTBundle == null)
       XSLTBundle = loadResourceBundle(XSLT_ERROR_RESOURCES);
-    
+
     if (XSLTBundle != null)
     {
       return createMsg(XSLTBundle, msgKey, args);
@@ -61,7 +59,7 @@ public class XSLMessages extends XPATHMessages
     else
       return "Could not load any resource bundles.";
   }
-  
+
   /**
    * Creates a message from the specified key and replacement
    * arguments, localized to the given locale.
