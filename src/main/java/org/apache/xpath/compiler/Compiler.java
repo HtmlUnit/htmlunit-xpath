@@ -24,7 +24,6 @@ import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.dtm.Axis;
 import org.apache.xml.dtm.DTMFilter;
 import org.apache.xml.dtm.DTMIterator;
@@ -61,6 +60,7 @@ import org.apache.xpath.patterns.NodeTest;
 import org.apache.xpath.patterns.StepPattern;
 import org.apache.xpath.patterns.UnionPattern;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * An instance of this class compiles an XPath string expression into

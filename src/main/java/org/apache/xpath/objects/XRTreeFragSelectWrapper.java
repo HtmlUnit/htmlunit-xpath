@@ -20,12 +20,12 @@
  */
 package org.apache.xpath.objects;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.dtm.DTMIterator;
 import org.apache.xml.utils.XMLString;
 import org.apache.xpath.Expression;
 import org.apache.xpath.XPathContext;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * This class makes an select statement act like an result tree fragment.

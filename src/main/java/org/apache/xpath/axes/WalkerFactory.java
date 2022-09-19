@@ -20,7 +20,6 @@
  */
 package org.apache.xpath.axes;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.dtm.Axis;
 import org.apache.xml.dtm.DTMFilter;
 import org.apache.xml.dtm.DTMIterator;
@@ -35,6 +34,7 @@ import org.apache.xpath.patterns.FunctionPattern;
 import org.apache.xpath.patterns.NodeTest;
 import org.apache.xpath.patterns.StepPattern;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * This class is both a factory for XPath location path expressions,

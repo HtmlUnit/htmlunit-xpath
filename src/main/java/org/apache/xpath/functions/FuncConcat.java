@@ -20,10 +20,10 @@
  */
 package org.apache.xpath.functions;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xpath.XPathContext;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.objects.XString;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * Execute the Concat() function.

@@ -20,11 +20,11 @@
  */
 package org.apache.xpath.functions;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xpath.Expression;
 import org.apache.xpath.ExpressionOwner;
 import org.apache.xpath.XPathVisitor;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * Base class for functions that accept an undetermined number of multiple

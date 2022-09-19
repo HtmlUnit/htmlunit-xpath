@@ -20,10 +20,10 @@
  */
 package org.apache.xpath;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.utils.DOM2Helper;
 import org.apache.xpath.axes.ContextNodeList;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

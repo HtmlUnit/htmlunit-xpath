@@ -20,13 +20,13 @@
  */
 package org.apache.xpath.functions;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xpath.Expression;
 import org.apache.xpath.ExpressionOwner;
 import org.apache.xpath.XPathContext;
 import org.apache.xpath.XPathVisitor;
 import org.apache.xpath.compiler.Compiler;
 import org.apache.xpath.objects.XObject;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * This is a superclass of all XPath functions.  This allows two

@@ -31,8 +31,6 @@ import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 
-//import org.apache.xalan.extensions.ExpressionContext;
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.dtm.Axis;
 import org.apache.xml.dtm.DTM;
 import org.apache.xml.dtm.DTMFilter;
@@ -50,6 +48,7 @@ import org.apache.xpath.axes.SubContextList;
 import org.apache.xpath.objects.DTMXRTreeFrag;
 import org.apache.xpath.objects.XString;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 import org.xml.sax.XMLReader;
 
 /**

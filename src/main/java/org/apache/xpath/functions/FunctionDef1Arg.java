@@ -20,12 +20,12 @@
  */
 package org.apache.xpath.functions;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.dtm.DTM;
 import org.apache.xml.utils.XMLString;
 import org.apache.xpath.XPathContext;
 import org.apache.xpath.objects.XString;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * Base class for functions that accept one argument that can be defaulted if

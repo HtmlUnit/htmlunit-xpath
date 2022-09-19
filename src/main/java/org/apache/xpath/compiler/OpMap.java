@@ -22,10 +22,10 @@ package org.apache.xpath.compiler;
 
 import javax.xml.transform.TransformerException;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.utils.ObjectVector;
 import org.apache.xpath.patterns.NodeTest;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * This class represents the data structure basics of the XPath
@@ -316,7 +316,7 @@ public class OpMap
   public void error(String msg, Object[] args) throws javax.xml.transform.TransformerException
   {
 
-    java.lang.String fmsg = org.apache.xalan.res.XSLMessages.createXPATHMessage(msg, args);
+    java.lang.String fmsg = org.apache.xpath.res.XSLMessages.createXPATHMessage(msg, args);
     
 
     throw new javax.xml.transform.TransformerException(fmsg);

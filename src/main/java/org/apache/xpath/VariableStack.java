@@ -22,9 +22,9 @@ package org.apache.xpath;
 
 import javax.xml.transform.TransformerException;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * Defines a class to keep track of a stack for

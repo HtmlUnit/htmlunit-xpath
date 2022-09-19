@@ -26,7 +26,6 @@ import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.dtm.DTM;
 import org.apache.xml.utils.PrefixResolver;
 import org.apache.xml.utils.SAXSourceLocator;
@@ -35,6 +34,7 @@ import org.apache.xpath.compiler.FunctionTable;
 import org.apache.xpath.compiler.XPathParser;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * The XPath class wraps an expression object and provides general services 

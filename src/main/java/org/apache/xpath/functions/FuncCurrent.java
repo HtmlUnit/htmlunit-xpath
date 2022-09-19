@@ -20,8 +20,6 @@
  */
 package org.apache.xpath.functions;
 
-import org.apache.xalan.res.XSLMessages;
-import org.apache.xalan.res.XSLTErrorResources;
 import org.apache.xml.dtm.DTM;
 import org.apache.xpath.XPathContext;
 import org.apache.xpath.axes.LocPathIterator;
@@ -30,6 +28,8 @@ import org.apache.xpath.axes.SubContextList;
 import org.apache.xpath.objects.XNodeSet;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.patterns.StepPattern;
+import org.apache.xpath.res.XSLMessages;
+import org.apache.xpath.res.XSLTErrorResources;
 
 
 /**

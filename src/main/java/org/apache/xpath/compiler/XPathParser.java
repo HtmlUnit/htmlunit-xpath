@@ -23,13 +23,13 @@ package org.apache.xpath.compiler;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.utils.PrefixResolver;
 import org.apache.xpath.XPathProcessorException;
 import org.apache.xpath.domapi.XPathStylesheetDOM3Exception;
 import org.apache.xpath.objects.XNumber;
 import org.apache.xpath.objects.XString;
 import org.apache.xpath.res.XPATHErrorResources;
+import org.apache.xpath.res.XSLMessages;
 
 /**
  * Tokenizes and parses XPath expressions. This should really be named
