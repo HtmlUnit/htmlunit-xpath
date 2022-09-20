@@ -28,15 +28,15 @@ package net.sourceforge.htmlunit.xpath;
  */
 public interface XPathVisitable
 {
-	/**
-	 * This will traverse the heararchy, calling the visitor for 
-	 * each member.  If the called visitor method returns 
-	 * false, the subtree should not be called.
-	 * 
-	 * @param owner The owner of the visitor, where that path may be 
-	 *              rewritten if needed.
-	 * @param visitor The visitor whose appropriate method will be called.
-	 */
-	public void callVisitors(ExpressionOwner owner, XPathVisitor visitor);
+  /**
+   * This will traverse the heararchy, calling the visitor for 
+   * each member.  If the called visitor method returns 
+   * false, the subtree should not be called.
+   * 
+   * @param owner The owner of the visitor, where that path may be 
+   *              rewritten if needed.
+   * @param visitor The visitor whose appropriate method will be called.
+   */
+  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor);
 }
 

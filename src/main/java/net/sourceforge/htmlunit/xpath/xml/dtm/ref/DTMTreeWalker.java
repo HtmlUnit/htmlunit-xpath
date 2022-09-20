@@ -109,7 +109,7 @@ public class DTMTreeWalker
   {
     // %REVIEW% Why isn't this just traverse(pos,pos)?
 
-    int top = pos;		// Remember the root of this subtree
+    int top = pos;    // Remember the root of this subtree
 
     while (DTM.NULL != pos)
     {
@@ -160,7 +160,7 @@ public class DTMTreeWalker
   public void traverse(int pos, int top) throws org.xml.sax.SAXException
   {
     // %OPT% Can we simplify the loop conditionals by adding:
-    //		if(top==DTM.NULL) top=0
+    //    if(top==DTM.NULL) top=0
     // -- or by simply ignoring this case and relying on the fact that
     // pos will never equal DTM.NULL until we're ready to exit?
 

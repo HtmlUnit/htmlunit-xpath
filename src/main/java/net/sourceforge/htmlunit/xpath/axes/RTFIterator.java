@@ -33,11 +33,11 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 public class RTFIterator extends NodeSetDTM {
     static final long serialVersionUID = 7658117366258528996L;
 
-	/**
-	 * Constructor for RTFIterator
-	 */	
-	public RTFIterator(int root, DTMManager manager) {
-		super(root, manager);
-	}
+  /**
+   * Constructor for RTFIterator
+   */  
+  public RTFIterator(int root, DTMManager manager) {
+    super(root, manager);
+  }
 }
 

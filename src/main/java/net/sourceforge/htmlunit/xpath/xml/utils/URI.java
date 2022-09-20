@@ -400,7 +400,7 @@ public class URI implements Serializable
       uriSpec = uriSpec.substring(colonIndex+1);
       // This is a fix for XALANJ-2059.
       if(m_scheme != null && p_base != null)
-      {	  	
+      {      
         // a) If <uriSpec> starts with a slash (/), it means <uriSpec> is absolute 
         //    and p_base can be ignored.
         //    For example,

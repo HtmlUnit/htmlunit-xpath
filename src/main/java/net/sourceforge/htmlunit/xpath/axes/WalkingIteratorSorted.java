@@ -200,13 +200,13 @@ public class WalkingIteratorSorted extends WalkingIterator
     int analysis = getAnalysisBits();
     if(WalkerFactory.isNaturalDocOrder(analysis))
     {
-    	m_inNaturalOrderStatic = true;
+      m_inNaturalOrderStatic = true;
     }
     else
     {
-    	m_inNaturalOrderStatic = false;
-    	// System.out.println("Setting natural doc order to false: "+
-    	//    WalkerFactory.getAnalysisString(analysis));
+      m_inNaturalOrderStatic = false;
+      // System.out.println("Setting natural doc order to false: "+
+      //    WalkerFactory.getAnalysisString(analysis));
     }
     
   }

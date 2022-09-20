@@ -56,43 +56,43 @@ public class FastStringBuffer
   // If nonzero, forces the inial chunk size.
   /**/static final int DEBUG_FORCE_INIT_BITS=0;
   
-  	// %BUG% %REVIEW% *****PROBLEM SUSPECTED: If data from an FSB is being copied
-  	// back into the same FSB (variable set from previous variable, for example) 
-  	// and blocksize changes in mid-copy... there's risk of severe malfunction in 
-  	// the read process, due to how the resizing code re-jiggers storage. Arggh. 
-  	// If we want to retain the variable-size-block feature, we need to reconsider 
-  	// that issue. For now, I have forced us into fixed-size mode.
+    // %BUG% %REVIEW% *****PROBLEM SUSPECTED: If data from an FSB is being copied
+    // back into the same FSB (variable set from previous variable, for example) 
+    // and blocksize changes in mid-copy... there's risk of severe malfunction in 
+    // the read process, due to how the resizing code re-jiggers storage. Arggh. 
+    // If we want to retain the variable-size-block feature, we need to reconsider 
+    // that issue. For now, I have forced us into fixed-size mode.
     static final boolean DEBUG_FORCE_FIXED_CHUNKSIZE=true;
 
-	/** Manifest constant: Suppress leading whitespace.
-	 * This should be used when normalize-to-SAX is called for the first chunk of a
-	 * multi-chunk output, or one following unsuppressed whitespace in a previous
-	 * chunk.
-	 * @see #sendNormalizedSAXcharacters(org.xml.sax.ContentHandler,int,int)
-	 */
-	public static final int SUPPRESS_LEADING_WS=0x01;
-	
-	/** Manifest constant: Suppress trailing whitespace.
-	 * This should be used when normalize-to-SAX is called for the last chunk of a
-	 * multi-chunk output; it may have to be or'ed with SUPPRESS_LEADING_WS.
-	 */
-	public static final int SUPPRESS_TRAILING_WS=0x02;
-	
-	/** Manifest constant: Suppress both leading and trailing whitespace.
-	 * This should be used when normalize-to-SAX is called for a complete string.
-	 * (I'm not wild about the name of this one. Ideas welcome.)
-	 * @see #sendNormalizedSAXcharacters(org.xml.sax.ContentHandler,int,int)
-	 */
-	public static final int SUPPRESS_BOTH
-		= SUPPRESS_LEADING_WS | SUPPRESS_TRAILING_WS;
+  /** Manifest constant: Suppress leading whitespace.
+   * This should be used when normalize-to-SAX is called for the first chunk of a
+   * multi-chunk output, or one following unsuppressed whitespace in a previous
+   * chunk.
+   * @see #sendNormalizedSAXcharacters(org.xml.sax.ContentHandler,int,int)
+   */
+  public static final int SUPPRESS_LEADING_WS=0x01;
+  
+  /** Manifest constant: Suppress trailing whitespace.
+   * This should be used when normalize-to-SAX is called for the last chunk of a
+   * multi-chunk output; it may have to be or'ed with SUPPRESS_LEADING_WS.
+   */
+  public static final int SUPPRESS_TRAILING_WS=0x02;
+  
+  /** Manifest constant: Suppress both leading and trailing whitespace.
+   * This should be used when normalize-to-SAX is called for a complete string.
+   * (I'm not wild about the name of this one. Ideas welcome.)
+   * @see #sendNormalizedSAXcharacters(org.xml.sax.ContentHandler,int,int)
+   */
+  public static final int SUPPRESS_BOTH
+    = SUPPRESS_LEADING_WS | SUPPRESS_TRAILING_WS;
 
-	/** Manifest constant: Carry trailing whitespace of one chunk as leading 
-	 * whitespace of the next chunk. Used internally; I don't see any reason
-	 * to make it public right now.
-	 */
-	private static final int CARRY_WS=0x04;
+  /** Manifest constant: Carry trailing whitespace of one chunk as leading 
+   * whitespace of the next chunk. Used internally; I don't see any reason
+   * to make it public right now.
+   */
+  private static final int CARRY_WS=0x04;
 
-	/**
+  /**
    * Field m_chunkBits sets our chunking strategy, by saying how many
    * bits of index can be used within a single chunk before flowing over
    * to the next chunk. For example, if m_chunkbits is set to 15, each
@@ -334,15 +334,15 @@ public class FastStringBuffer
     {
       m_firstFree = l & m_chunkMask;
       
-	  // There's an edge case if l is an exact multiple of m_chunkBits, which risks leaving
-	  // us pointing at the start of a chunk which has not yet been allocated. Rather than 
-	  // pay the cost of dealing with that in the append loops (more scattered and more
-	  // inner-loop), we correct it here by moving to the safe side of that
-	  // line -- as we would have left the indexes had we appended up to that point.
+    // There's an edge case if l is an exact multiple of m_chunkBits, which risks leaving
+    // us pointing at the start of a chunk which has not yet been allocated. Rather than 
+    // pay the cost of dealing with that in the append loops (more scattered and more
+    // inner-loop), we correct it here by moving to the safe side of that
+    // line -- as we would have left the indexes had we appended up to that point.
       if(m_firstFree==0 && m_lastChunk>0)
       {
-      	--m_lastChunk;
-      	m_firstFree=m_chunkSize;
+        --m_lastChunk;
+        m_firstFree=m_chunkSize;
       }
     }
   }
@@ -1038,11 +1038,11 @@ public class FastStringBuffer
           org.xml.sax.ContentHandler ch, int start, int length)
             throws org.xml.sax.SAXException
   {
-	// This call always starts at the beginning of the 
+  // This call always starts at the beginning of the 
     // string being written out, either because it was called directly or
     // because it was an m_innerFSB recursion. This is important since
-	// it gives us a well-known initial state for this flag:
-	int stateForNextChunk=SUPPRESS_LEADING_WS;
+  // it gives us a well-known initial state for this flag:
+  int stateForNextChunk=SUPPRESS_LEADING_WS;
 
     int stop = start + length;
     int startChunk = start >>> m_chunkBits;
@@ -1053,34 +1053,34 @@ public class FastStringBuffer
     for (int i = startChunk; i < stopChunk; ++i)
     {
       if (i == 0 && m_innerFSB != null)
-				stateForNextChunk=
+        stateForNextChunk=
         m_innerFSB.sendNormalizedSAXcharacters(ch, startColumn,
                                      m_chunkSize - startColumn);
       else
-				stateForNextChunk=
+        stateForNextChunk=
         sendNormalizedSAXcharacters(m_array[i], startColumn, 
                                     m_chunkSize - startColumn, 
-																		ch,stateForNextChunk);
+                                    ch,stateForNextChunk);
 
       startColumn = 0;  // after first chunk
     }
 
     // Last, or only, chunk
     if (stopChunk == 0 && m_innerFSB != null)
-			stateForNextChunk= // %REVIEW% Is this update really needed?
+      stateForNextChunk= // %REVIEW% Is this update really needed?
       m_innerFSB.sendNormalizedSAXcharacters(ch, startColumn, stopColumn - startColumn);
     else if (stopColumn > startColumn)
     {
-			stateForNextChunk= // %REVIEW% Is this update really needed?
+      stateForNextChunk= // %REVIEW% Is this update really needed?
       sendNormalizedSAXcharacters(m_array[stopChunk], 
-																	startColumn, stopColumn - startColumn,
-																	ch, stateForNextChunk | SUPPRESS_TRAILING_WS);
+                                  startColumn, stopColumn - startColumn,
+                                  ch, stateForNextChunk | SUPPRESS_TRAILING_WS);
     }
-		return stateForNextChunk;
+    return stateForNextChunk;
   }
   
   static final char[] SINGLE_SPACE = {' '};
-	  
+    
   /**
    * Internal method to directly normalize and dispatch the character array.
    * This version is aware of the fact that it may be called several times
@@ -1127,7 +1127,7 @@ public class FastStringBuffer
   static int sendNormalizedSAXcharacters(char ch[], 
              int start, int length, 
              org.xml.sax.ContentHandler handler,
-						 int edgeTreatmentFlags)
+             int edgeTreatmentFlags)
           throws org.xml.sax.SAXException
   {
      boolean processingLeadingWhitespace =
@@ -1200,11 +1200,11 @@ public class FastStringBuffer
              org.xml.sax.ContentHandler handler)
           throws org.xml.sax.SAXException
   {
-		sendNormalizedSAXcharacters(ch, start, length, 
+    sendNormalizedSAXcharacters(ch, start, length, 
              handler, SUPPRESS_BOTH);
-	}
-		
-	/**
+  }
+    
+  /**
    * Sends the specified range of characters as sax Comment.
    * <p>
    * Note that, unlike sendSAXcharacters, this has to be done as a single 

@@ -94,12 +94,12 @@ public class XPathException extends TransformerException
    */
   public org.w3c.dom.Node getStylesheetNode(ExpressionNode ex)
   {
-  	
+    
     ExpressionNode owner = getExpressionOwner(ex);
 
     if (null != owner && owner instanceof org.w3c.dom.Node)
     {
-		return ((org.w3c.dom.Node)owner);
+    return ((org.w3c.dom.Node)owner);
     }
     return null;
 
@@ -111,10 +111,10 @@ public class XPathException extends TransformerException
    */
   protected ExpressionNode getExpressionOwner(ExpressionNode ex)
   {
-  	ExpressionNode parent = ex.exprGetParent();
-  	while((null != parent) && (parent instanceof Expression))
-  		parent = parent.exprGetParent();
-  	return parent;
+    ExpressionNode parent = ex.exprGetParent();
+    while((null != parent) && (parent instanceof Expression))
+      parent = parent.exprGetParent();
+    return parent;
   }
 
 
@@ -277,7 +277,7 @@ public class XPathException extends TransformerException
     // and higher will include the cause when printing the backtrace.
     // The following code is only required when using jdk 1.3 or lower               
     if (!isJdk14OrHigher) {
-    	        
+              
       Throwable exception = m_exception;
 
       for (int i = 0; (i < 10) && (null != exception); i++)

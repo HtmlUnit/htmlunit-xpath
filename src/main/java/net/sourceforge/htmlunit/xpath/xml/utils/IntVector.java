@@ -90,11 +90,11 @@ public class IntVector implements Cloneable
    */
   public IntVector(IntVector v)
   {
-  	m_map = new int[v.m_mapSize];
+    m_map = new int[v.m_mapSize];
     m_mapSize = v.m_mapSize;
     m_firstFree = v.m_firstFree;
-  	m_blocksize = v.m_blocksize;
-  	System.arraycopy(v.m_map, 0, m_map, 0, m_firstFree);
+    m_blocksize = v.m_blocksize;
+    System.arraycopy(v.m_map, 0, m_map, 0, m_firstFree);
   }
 
   /**
@@ -413,7 +413,7 @@ public class IntVector implements Cloneable
   public Object clone()
     throws CloneNotSupportedException
   {
-  	return new IntVector(this);
+    return new IntVector(this);
   }
   
 }

@@ -336,7 +336,7 @@ public class XStringForFSB extends XString
       return true;
     }
     if(obj2.getType() == XObject.CLASS_NUMBER)
-    	return obj2.equals(this);
+      return obj2.equals(this);
 
     String str = obj2.str();
     int n = m_length;
@@ -422,7 +422,7 @@ public class XStringForFSB extends XString
       return false;
       
     if(obj2 instanceof XNumber)
-    	return obj2.equals(this);
+      return obj2.equals(this);
 
       // In order to handle the 'all' semantics of 
       // nodeset comparisons, we always call the 
@@ -969,13 +969,13 @@ public class XStringForFSB extends XString
       c = valueString.charAt(i);
       if (c != '.' && (c < '0' || c > '9'))
         break;
-    }   	    	
+    }           
     for (;i<m_length;i++)
       if (!XMLCharacterRecognizer.isWhiteSpace(valueString.charAt(i)))
         break;
     if (i != m_length)
       return Double.NaN;
-    	
+      
     try {
       return new Double(valueString).doubleValue();
     } catch (NumberFormatException nfe) {

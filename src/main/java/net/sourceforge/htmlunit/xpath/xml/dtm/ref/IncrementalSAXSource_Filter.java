@@ -403,13 +403,13 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
 
   public void notationDecl(String a, String b, String c) throws SAXException
   {
-  	if(null!=clientDTDHandler)
-	  	clientDTDHandler.notationDecl(a,b,c);
+    if(null!=clientDTDHandler)
+      clientDTDHandler.notationDecl(a,b,c);
   }
   public void unparsedEntityDecl(String a, String b, String c, String d)  throws SAXException
   {
-  	if(null!=clientDTDHandler)
-	  	clientDTDHandler.unparsedEntityDecl(a,b,c,d);
+    if(null!=clientDTDHandler)
+      clientDTDHandler.unparsedEntityDecl(a,b,c,d);
   }
 
   //

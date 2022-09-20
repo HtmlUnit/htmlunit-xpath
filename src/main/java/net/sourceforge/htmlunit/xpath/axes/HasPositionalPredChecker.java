@@ -36,50 +36,50 @@ import net.sourceforge.htmlunit.xpath.operations.Quo;
 
 public class HasPositionalPredChecker extends XPathVisitor
 {
-	private boolean m_hasPositionalPred = false;
-	private int m_predDepth = 0;
+  private boolean m_hasPositionalPred = false;
+  private int m_predDepth = 0;
 
-	/**
-	 * Process the LocPathIterator to see if it contains variables
-	 * or functions that may make it context dependent.
-	 * @param path LocPathIterator that is assumed to be absolute, but needs checking.
-	 * @return true if the path is confirmed to be absolute, false if it
-	 * may contain context dependencies.
-	 */
-	public static boolean check(LocPathIterator path)
-	{
-		HasPositionalPredChecker hppc = new HasPositionalPredChecker();
-		path.callVisitors(null, hppc);
-		return hppc.m_hasPositionalPred;
-	}
+  /**
+   * Process the LocPathIterator to see if it contains variables
+   * or functions that may make it context dependent.
+   * @param path LocPathIterator that is assumed to be absolute, but needs checking.
+   * @return true if the path is confirmed to be absolute, false if it
+   * may contain context dependencies.
+   */
+  public static boolean check(LocPathIterator path)
+  {
+    HasPositionalPredChecker hppc = new HasPositionalPredChecker();
+    path.callVisitors(null, hppc);
+    return hppc.m_hasPositionalPred;
+  }
 
-	/**
-	 * Visit a function.
-	 * @param owner The owner of the expression, to which the expression can
-	 *              be reset if rewriting takes place.
-	 * @param func The function reference object.
-	 * @return true if the sub expressions should be traversed.
-	 */
-	public boolean visitFunction(ExpressionOwner owner, Function func)
-	{
-		if((func instanceof FuncPosition) ||
-		   (func instanceof FuncLast))
-			m_hasPositionalPred = true;
-		return true;
-	}
+  /**
+   * Visit a function.
+   * @param owner The owner of the expression, to which the expression can
+   *              be reset if rewriting takes place.
+   * @param func The function reference object.
+   * @return true if the sub expressions should be traversed.
+   */
+  public boolean visitFunction(ExpressionOwner owner, Function func)
+  {
+    if((func instanceof FuncPosition) ||
+       (func instanceof FuncLast))
+      m_hasPositionalPred = true;
+    return true;
+  }
 
-//	/**
-//	 * Visit a variable reference.
-//	 * @param owner The owner of the expression, to which the expression can
-//	 *              be reset if rewriting takes place.
-//	 * @param var The variable reference object.
-//	 * @return true if the sub expressions should be traversed.
-//	 */
-//	public boolean visitVariableRef(ExpressionOwner owner, Variable var)
-//	{
-//		m_hasPositionalPred = true;
-//		return true;
-//	}
+//  /**
+//   * Visit a variable reference.
+//   * @param owner The owner of the expression, to which the expression can
+//   *              be reset if rewriting takes place.
+//   * @param var The variable reference object.
+//   * @return true if the sub expressions should be traversed.
+//   */
+//  public boolean visitVariableRef(ExpressionOwner owner, Variable var)
+//  {
+//    m_hasPositionalPred = true;
+//    return true;
+//  }
 
   /**
    * Visit a predicate within a location path.  Note that there isn't a
@@ -109,7 +109,7 @@ public class HasPositionalPredChecker extends XPathVisitor
          (pred instanceof Function))
           m_hasPositionalPred = true;
       else
-      	pred.callVisitors(owner, this);
+        pred.callVisitors(owner, this);
     }
 
     m_predDepth--;

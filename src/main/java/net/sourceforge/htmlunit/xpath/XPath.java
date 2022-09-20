@@ -58,7 +58,7 @@ public class XPath implements Serializable, ExpressionOwner
    * initial the function table
    */
   private void initFunctionTable(){
-  	      m_funcTable = new FunctionTable();
+          m_funcTable = new FunctionTable();
   }
 
   /**
@@ -95,8 +95,8 @@ public class XPath implements Serializable, ExpressionOwner
    */
   public void setExpression(Expression exp)
   {
-  	if(null != m_mainExp)
-    	exp.exprSetParent(m_mainExp.exprGetParent()); // a bit bogus
+    if(null != m_mainExp)
+      exp.exprSetParent(m_mainExp.exprGetParent()); // a bit bogus
     m_mainExp = exp;
   }
 
@@ -188,7 +188,7 @@ public class XPath implements Serializable, ExpressionOwner
     
     if((null != locator) && locator instanceof ExpressionNode)
     {
-    	expr.exprSetParent((ExpressionNode)locator);
+      expr.exprSetParent((ExpressionNode)locator);
     }
 
   }
@@ -240,7 +240,7 @@ public class XPath implements Serializable, ExpressionOwner
     
     if((null != locator) && locator instanceof ExpressionNode)
     {
-    	expr.exprSetParent((ExpressionNode)locator);
+      expr.exprSetParent((ExpressionNode)locator);
     }
 
   }
@@ -605,7 +605,7 @@ public class XPath implements Serializable, ExpressionOwner
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
-  	m_mainExp.callVisitors(this, visitor);
+    m_mainExp.callVisitors(this, visitor);
   }
 
   /**

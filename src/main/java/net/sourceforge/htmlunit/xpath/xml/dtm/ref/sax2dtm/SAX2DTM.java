@@ -305,7 +305,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     // m_useSourceLocationProperty=org.apache.xalan.processor.TransformerFactoryImpl.m_source_location;
     m_useSourceLocationProperty = mgr.getSource_location();
     m_sourceSystemId = (m_useSourceLocationProperty) ? new StringVector() : null;
- 	m_sourceLine = (m_useSourceLocationProperty) ?  new IntVector() : null;
+   m_sourceLine = (m_useSourceLocationProperty) ?  new IntVector() : null;
     m_sourceColumn = (m_useSourceLocationProperty) ?  new IntVector() : null; 
   }
 
@@ -1452,14 +1452,14 @@ public class SAX2DTM extends DTMDefaultBaseIterators
         if (qname.startsWith("xmlns:"))
           prefix = qname.substring(indexOfNSSep + 1);
         else
-          prefix = qname.substring(0, indexOfNSSep);	
+          prefix = qname.substring(0, indexOfNSSep);  
       }
       else
       {
-      	if (qname.equals("xmlns"))
-      	  prefix = "";
-      	else
-      	  prefix = null;
+        if (qname.equals("xmlns"))
+          prefix = "";
+        else
+          prefix = null;
       }
     }
     else
@@ -1708,7 +1708,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     if (DEBUG)
       System.out.println("startDocument");
 
-		
+    
     int doc = addNode(DTM.DOCUMENT_NODE,
                       m_expandedNameTable.getExpandedTypeID(DTM.DOCUMENT_NODE),
                       DTM.NULL, DTM.NULL, 0, true);
@@ -1731,7 +1731,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     if (DEBUG)
       System.out.println("endDocument");
 
-		charactersFlush();
+    charactersFlush();
 
     m_nextsib.setElementAt(NULL,0);
 
@@ -1844,7 +1844,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     return false;
   }
 
-	boolean m_pastFirstElement=false;
+  boolean m_pastFirstElement=false;
 
   /**
    * Receive notification of the start of an element.
@@ -1872,26 +1872,26 @@ public class SAX2DTM extends DTMDefaultBaseIterators
             throws SAXException
   {
    if (DEBUG)
-	 {
+   {
       System.out.println("startElement: uri: " + uri + ", localname: "
-												 + localName + ", qname: "+qName+", atts: " + attributes);
+                         + localName + ", qname: "+qName+", atts: " + attributes);
 
-			boolean DEBUG_ATTRS=true;
-			if(DEBUG_ATTRS & attributes!=null)
-			{
-				int n = attributes.getLength();
-				if(n==0)
-					System.out.println("\tempty attribute list");
-				else for (int i = 0; i < n; i++)
-					System.out.println("\t attr: uri: " + attributes.getURI(i) +
-														 ", localname: " + attributes.getLocalName(i) +
-														 ", qname: " + attributes.getQName(i) +
-														 ", type: " + attributes.getType(i) +
-														 ", value: " + attributes.getValue(i)
-														 );
-			}
-	 }
-		
+      boolean DEBUG_ATTRS=true;
+      if(DEBUG_ATTRS & attributes!=null)
+      {
+        int n = attributes.getLength();
+        if(n==0)
+          System.out.println("\tempty attribute list");
+        else for (int i = 0; i < n; i++)
+          System.out.println("\t attr: uri: " + attributes.getURI(i) +
+                             ", localname: " + attributes.getLocalName(i) +
+                             ", qname: " + attributes.getQName(i) +
+                             ", type: " + attributes.getType(i) +
+                             ", value: " + attributes.getValue(i)
+                             );
+      }
+   }
+    
     charactersFlush();
 
     int exName = m_expandedNameTable.getExpandedTypeID(uri, localName, DTM.ELEMENT_NODE);
@@ -2041,7 +2041,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   {
    if (DEBUG)
       System.out.println("endElement: uri: " + uri + ", localname: "
-												 + localName + ", qname: "+qName);
+                         + localName + ", qname: "+qName);
 
     charactersFlush();
 
@@ -2147,7 +2147,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
           throws SAXException
   {
     if (DEBUG)
-		 System.out.println("processingInstruction: target: " + target +", data: "+data);
+     System.out.println("processingInstruction: target: " + target +", data: "+data);
 
     charactersFlush();
 
@@ -2517,11 +2517,11 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     }
     else if(m_locator!=null)
     {
-    	return new NodeLocator(null,m_locator.getSystemId(),-1,-1);
+      return new NodeLocator(null,m_locator.getSystemId(),-1,-1);
     }
     else if(m_systemId!=null)
     {
-    	return new NodeLocator(null,m_systemId,-1,-1);
+      return new NodeLocator(null,m_systemId,-1,-1);
     }
     return null;
   }

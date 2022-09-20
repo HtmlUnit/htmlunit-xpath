@@ -87,7 +87,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
   {
     int bits = 0;
     if (null != m_firstWalker)
-    {    	
+    {      
       AxesWalker walker = m_firstWalker;
 
       while (null != walker)
@@ -168,8 +168,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
    */
   public int nextNode()
   {
-  	if(m_foundLast)
-  		return DTM.NULL;
+    if(m_foundLast)
+      return DTM.NULL;
 
     // If the variable stack position is not -1, we'll have to 
     // set our position in the variable stack, so our variable access 
@@ -259,17 +259,17 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
   {   
     if(m_allowDetach)
     {
-	  	AxesWalker walker = m_firstWalker; 
-	    while (null != walker)
-	    {
-	      walker.detach();
-	      walker = walker.getNextWalker();
-	    }
-	
-	    m_lastUsedWalker = null;
-	    
-	    // Always call the superclass detach last!
-	    super.detach();
+      AxesWalker walker = m_firstWalker; 
+      while (null != walker)
+      {
+        walker.detach();
+        walker = walker.getNextWalker();
+      }
+  
+      m_lastUsedWalker = null;
+      
+      // Always call the superclass detach last!
+      super.detach();
     }
   }
   
@@ -301,13 +301,13 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
-  	 	if(visitor.visitLocationPath(owner, this))
-  	 	{
-  	 		if(null != m_firstWalker)
-  	 		{
-  	 			m_firstWalker.callVisitors(this, visitor);
-  	 		}
-  	 	}
+       if(visitor.visitLocationPath(owner, this))
+       {
+         if(null != m_firstWalker)
+         {
+           m_firstWalker.callVisitors(this, visitor);
+         }
+       }
   }
 
   
@@ -332,8 +332,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
    */
   public void setExpression(Expression exp)
   {
-  	exp.exprSetParent(this);
-  	m_firstWalker = (AxesWalker)exp;
+    exp.exprSetParent(this);
+    m_firstWalker = (AxesWalker)exp;
   }
   
     /**
@@ -349,13 +349,13 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
       while ((null != walker1) && (null != walker2))
       {
         if(!walker1.deepEquals(walker2))
-        	return false;
+          return false;
         walker1 = walker1.getNextWalker();
         walker2 = walker2.getNextWalker();
       }
       
       if((null != walker1) || (null != walker2))
-      	return false;
+        return false;
 
       return true;
     }

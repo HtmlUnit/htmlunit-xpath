@@ -181,7 +181,7 @@ public interface DTMFilter
    * @param expandedName a value defining the exanded name as defined in 
    *                     the DTM interface.  Wild cards will be defined 
    *                     by 0xFFFF in the namespace and/or localname
-   *			 portion of the expandedName.
+   *       portion of the expandedName.
    * @return one of FILTER_ACCEPT, FILTER_REJECT, or FILTER_SKIP.  */
   public short acceptNode(int nodeHandle, int whatToShow, int expandedName);
  

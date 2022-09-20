@@ -161,13 +161,13 @@ public class FunctionMultiArgs extends Function3Args
   
   class ArgMultiOwner implements ExpressionOwner
   {
-  	int m_argIndex;
-  	
-  	ArgMultiOwner(int index)
-  	{
-  		m_argIndex = index;
-  	}
-  	
+    int m_argIndex;
+    
+    ArgMultiOwner(int index)
+    {
+      m_argIndex = index;
+    }
+    
     /**
      * @see ExpressionOwner#getExpression()
      */
@@ -182,8 +182,8 @@ public class FunctionMultiArgs extends Function3Args
      */
     public void setExpression(Expression exp)
     {
-    	exp.exprSetParent(FunctionMultiArgs.this);
-    	m_args[m_argIndex] = exp;
+      exp.exprSetParent(FunctionMultiArgs.this);
+      m_args[m_argIndex] = exp;
     }
   }
 

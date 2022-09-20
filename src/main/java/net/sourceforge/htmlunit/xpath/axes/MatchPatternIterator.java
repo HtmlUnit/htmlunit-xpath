@@ -202,8 +202,8 @@ public class MatchPatternIterator extends LocPathIterator
    */
   public int nextNode()
   {      
-  	if(m_foundLast)
-  		return DTM.NULL;
+    if(m_foundLast)
+      return DTM.NULL;
 
     int next;
     

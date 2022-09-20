@@ -79,7 +79,7 @@ public class DTMStringPool
   
   public DTMStringPool()
     {
-      this(512);	
+      this(512);  
     }
     
   public void removeAllElements()
@@ -125,7 +125,7 @@ public class DTMStringPool
       int newIndex=m_intToString.size();
       m_intToString.addElement(s);
 
-      m_hashChain.addElement(NULL);	// Initialize to no-following-same-hash
+      m_hashChain.addElement(NULL);  // Initialize to no-following-same-hash
       if(hashlast==NULL)  // First for this hash
         m_hashStart[hashslot]=newIndex;
       else // Link from previous with same hash

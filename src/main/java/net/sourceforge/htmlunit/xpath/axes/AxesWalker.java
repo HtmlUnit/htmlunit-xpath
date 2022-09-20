@@ -176,11 +176,11 @@ public class AxesWalker extends PredicatedNodeTest
    */
   public void detach()
   { 
-  	m_currentNode = DTM.NULL;
-  	m_dtm = null;
-  	m_traverser = null;
-  	m_isFresh = true;
-  	m_root = DTM.NULL;
+    m_currentNode = DTM.NULL;
+    m_dtm = null;
+    m_traverser = null;
+    m_isFresh = true;
+    m_root = DTM.NULL;
   }
   
   //=============== TreeWalker Implementation ===============
@@ -202,9 +202,9 @@ public class AxesWalker extends PredicatedNodeTest
    */
   public int getAnalysisBits()
   {
-  	int axis = getAxis();
-  	int bit = WalkerFactory.getAnalysisBitFromAxes(axis);
-  	return bit;
+    int axis = getAxis();
+    int bit = WalkerFactory.getAnalysisBitFromAxes(axis);
+    return bit;
   }
 
   /**
@@ -519,14 +519,14 @@ public class AxesWalker extends PredicatedNodeTest
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
-  	if(visitor.visitStep(owner, this))
-  	{
-  		callPredicateVisitors(visitor);
-  		if(null != m_nextWalker)
-  		{
-  			m_nextWalker.callVisitors(this, visitor);
-  		}
-  	}
+    if(visitor.visitStep(owner, this))
+    {
+      callPredicateVisitors(visitor);
+      if(null != m_nextWalker)
+      {
+        m_nextWalker.callVisitors(this, visitor);
+      }
+    }
   }
   
   /**
@@ -542,8 +542,8 @@ public class AxesWalker extends PredicatedNodeTest
    */
   public void setExpression(Expression exp)
   {
-  	exp.exprSetParent(this);
-  	m_nextWalker = (AxesWalker)exp;
+    exp.exprSetParent(this);
+    m_nextWalker = (AxesWalker)exp;
   }
   
     /**
@@ -556,7 +556,7 @@ public class AxesWalker extends PredicatedNodeTest
 
       AxesWalker walker = (AxesWalker)expr;
       if(this.m_axis != walker.m_axis)
-      	return false;
+        return false;
 
       return true;
     }

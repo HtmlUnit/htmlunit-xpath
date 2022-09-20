@@ -206,8 +206,8 @@ public class AttList implements Attributes
    */
   public String getValue(String uri, String localName)
   {
-		Node a=m_attrs.getNamedItemNS(uri,localName);
-		return (a==null) ? null : a.getNodeValue();
+    Node a=m_attrs.getNamedItemNS(uri,localName);
+    return (a==null) ? null : a.getNodeValue();
   }
 
   /**
@@ -226,9 +226,9 @@ public class AttList implements Attributes
       Node a=m_attrs.item(i);
       String u=a.getNamespaceURI();
       if( (u==null ? uri==null : u.equals(uri))
-	  &&
-	  a.getLocalName().equals(localPart) )
-	return i;
+    &&
+    a.getLocalName().equals(localPart) )
+  return i;
     }
     return -1;
   }
@@ -246,7 +246,7 @@ public class AttList implements Attributes
     {
       Node a=m_attrs.item(i);
       if(a.getNodeName().equals(qName) )
-	return i;
+  return i;
     }
     return -1;
   }

@@ -76,7 +76,7 @@ public final class BoolStack implements Cloneable
    */
   public final void clear()
   {
-  	m_index = -1;
+    m_index = -1;
   }
 
   /**

@@ -231,8 +231,8 @@ public class FunctionPattern extends StepPattern
      */
     public void setExpression(Expression exp)
     {
-    	exp.exprSetParent(FunctionPattern.this);
-    	m_functionExpr = exp;
+      exp.exprSetParent(FunctionPattern.this);
+      m_functionExpr = exp;
     }
   }
   

@@ -60,7 +60,7 @@ public class ObjectStack extends ObjectVector
    */
   public ObjectStack (ObjectStack v)
   {
-  	super(v);
+    super(v);
   }
   
   /**
@@ -209,7 +209,7 @@ public class ObjectStack extends ObjectVector
   public Object clone()
     throws CloneNotSupportedException
   {
-  	return (ObjectStack) super.clone();
+    return (ObjectStack) super.clone();
   }  
   
 }

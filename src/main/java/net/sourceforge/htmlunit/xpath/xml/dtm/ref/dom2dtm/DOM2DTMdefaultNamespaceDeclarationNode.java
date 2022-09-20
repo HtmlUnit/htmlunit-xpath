@@ -96,13 +96,13 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
   public Node removeChild(Node a) {throw new DTMException(NOT_SUPPORTED_ERR);}
   public Document getOwnerDocument() {return pseudoparent.getOwnerDocument();}
   public Node cloneNode(boolean deep) {throw new DTMException(NOT_SUPPORTED_ERR);}
-	
+  
     /** Non-DOM method, part of the temporary kluge
      * %REVIEW% This would be a pruning problem, but since it will always be
      * added to the root element and we prune on elements, we shouldn't have 
      * to worry.
      */
-    public int getHandleOfNode()		
+    public int getHandleOfNode()    
     {
         return handle;
     }
@@ -346,12 +346,12 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
                         }
                     }
                 }
-		/*
+    /*
                 NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
                 if (ancestor != null) {
                     return ancestor.lookupNamespaceURI(specifiedPrefix);
                 }
-		*/
+    */
 
                 return null;
 
@@ -376,7 +376,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
                 return null;
             }
         default:{
-	   /*
+     /*
                 NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
                 if (ancestor != null) {
                     return ancestor.lookupNamespaceURI(specifiedPrefix);

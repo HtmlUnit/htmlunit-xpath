@@ -399,12 +399,12 @@ public class XNumber extends XObject
     int t = obj2.getType();
     try
     {
-	    if (t == XObject.CLASS_NODESET)
-	      return obj2.equals(this);
-	    else if(t == XObject.CLASS_BOOLEAN)
-	      return obj2.bool() == bool();
-		else
-	       return m_val == obj2.num();
+      if (t == XObject.CLASS_NODESET)
+        return obj2.equals(this);
+      else if(t == XObject.CLASS_BOOLEAN)
+        return obj2.bool() == bool();
+    else
+         return m_val == obj2.num();
     }
     catch(javax.xml.transform.TransformerException te)
     {
@@ -430,7 +430,7 @@ public class XNumber extends XObject
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
-  	visitor.visitNumberLiteral(owner, this);
+    visitor.visitNumberLiteral(owner, this);
   }
 
 

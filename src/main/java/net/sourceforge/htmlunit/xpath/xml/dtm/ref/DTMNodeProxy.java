@@ -300,7 +300,7 @@ public class DTMNodeProxy
    */
   public final String getStringValue() throws DOMException
   {
-  	return dtm.getStringValue(node).toString();
+    return dtm.getStringValue(node).toString();
   }
 
   /**
@@ -473,8 +473,8 @@ public class DTMNodeProxy
    */
   public final Document getOwnerDocument()
   {
-  	// Note that this uses the DOM-compatable version of the call
-	return (Document)(dtm.getNode(dtm.getOwnerDocument(node)));
+    // Note that this uses the DOM-compatable version of the call
+  return (Document)(dtm.getNode(dtm.getOwnerDocument(node)));
   }
 
   /**
@@ -588,40 +588,40 @@ public class DTMNodeProxy
    */
   public final Element getDocumentElement()
   {
-		int dochandle=dtm.getDocument();
-		int elementhandle=DTM.NULL;
-		for(int kidhandle=dtm.getFirstChild(dochandle);
-				kidhandle!=DTM.NULL;
-				kidhandle=dtm.getNextSibling(kidhandle))
-		{
-			switch(dtm.getNodeType(kidhandle))
-			{
-			case Node.ELEMENT_NODE:
-				if(elementhandle!=DTM.NULL) 
-				{
-					elementhandle=DTM.NULL; // More than one; ill-formed.
-					kidhandle=dtm.getLastChild(dochandle); // End loop
-				}
-				else
-					elementhandle=kidhandle;
-				break;
-				
-			// These are harmless; document is still wellformed
-			case Node.COMMENT_NODE:
-			case Node.PROCESSING_INSTRUCTION_NODE:
-			case Node.DOCUMENT_TYPE_NODE:
-				break;
-					
-			default:
-				elementhandle=DTM.NULL; // ill-formed
-				kidhandle=dtm.getLastChild(dochandle); // End loop
-				break;
-			}
-		}
-		if(elementhandle==DTM.NULL)
-			throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
-		else
-			return (Element)(dtm.getNode(elementhandle));
+    int dochandle=dtm.getDocument();
+    int elementhandle=DTM.NULL;
+    for(int kidhandle=dtm.getFirstChild(dochandle);
+        kidhandle!=DTM.NULL;
+        kidhandle=dtm.getNextSibling(kidhandle))
+    {
+      switch(dtm.getNodeType(kidhandle))
+      {
+      case Node.ELEMENT_NODE:
+        if(elementhandle!=DTM.NULL) 
+        {
+          elementhandle=DTM.NULL; // More than one; ill-formed.
+          kidhandle=dtm.getLastChild(dochandle); // End loop
+        }
+        else
+          elementhandle=kidhandle;
+        break;
+        
+      // These are harmless; document is still wellformed
+      case Node.COMMENT_NODE:
+      case Node.PROCESSING_INSTRUCTION_NODE:
+      case Node.DOCUMENT_TYPE_NODE:
+        break;
+          
+      default:
+        elementhandle=DTM.NULL; // ill-formed
+        kidhandle=dtm.getLastChild(dochandle); // End loop
+        break;
+      }
+    }
+    if(elementhandle==DTM.NULL)
+      throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    else
+      return (Element)(dtm.getNode(elementhandle));
   }
 
   /**
@@ -1417,7 +1417,7 @@ public class DTMNodeProxy
     public boolean hasFeature(String feature,String version)
     {
       if( ("CORE".equals(feature.toUpperCase()) || "XML".equals(feature.toUpperCase())) 
-					&& 
+          && 
           ("1.0".equals(version) || "2.0".equals(version))
           )
         return true;
@@ -1659,12 +1659,12 @@ public class DTMNodeProxy
                         }
                     }
                 }
-		/*
+    /*
                 NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
                 if (ancestor != null) {
                     return ancestor.lookupNamespaceURI(specifiedPrefix);
                 }
-		*/
+    */
                 return null;
             }
 /*
@@ -1685,7 +1685,7 @@ public class DTMNodeProxy
                 return null;
             }
         default:{
-	   /*
+     /*
                 NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
                 if (ancestor != null) {
                     return ancestor.lookupNamespaceURI(specifiedPrefix);

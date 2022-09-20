@@ -173,8 +173,8 @@ public class DescendantIterator extends LocPathIterator
    */
   public int nextNode()
   {
-   	if(m_foundLast)
-  		return DTM.NULL;
+     if(m_foundLast)
+      return DTM.NULL;
 
     if(DTM.NULL == m_lastFetched)
     {
@@ -233,7 +233,7 @@ public class DescendantIterator extends LocPathIterator
   
       if (DTM.NULL != next)
       {
-      	m_pos++;
+        m_pos++;
         return next;
       }
       else
@@ -369,13 +369,13 @@ public class DescendantIterator extends LocPathIterator
    */
   public boolean deepEquals(Expression expr)
   {
-  	if(!super.deepEquals(expr))
-  		return false;
-  		
-  	if(m_axis != ((DescendantIterator)expr).m_axis)
-  		return false;
-  		
-  	return true;
+    if(!super.deepEquals(expr))
+      return false;
+      
+    if(m_axis != ((DescendantIterator)expr).m_axis)
+      return false;
+      
+    return true;
   }
 
   

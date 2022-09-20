@@ -70,7 +70,7 @@ public class FilterExprWalker extends AxesWalker
     {
     case OpCodes.OP_FUNCTION :
     case OpCodes.OP_EXTFUNCTION :
-    	m_mustHardReset = true;
+      m_mustHardReset = true;
     case OpCodes.OP_GROUP :
     case OpCodes.OP_VARIABLE :
       m_expr = compiler.compile(opPos);
@@ -78,8 +78,8 @@ public class FilterExprWalker extends AxesWalker
       //if((OpCodes.OP_FUNCTION == stepType) && (m_expr instanceof org.apache.xalan.templates.FuncKey))
 //      if(m_expr instanceof org.apache.xpath.operations.Variable)
 //      {
-//      	// hack/temp workaround
-//      	m_canDetachNodeset = false;
+//        // hack/temp workaround
+//        m_canDetachNodeset = false;
 //      }
       break;
     default :
@@ -91,12 +91,12 @@ public class FilterExprWalker extends AxesWalker
 //      WalkingIterator wi = (WalkingIterator)m_expr;
 //      if(wi.getFirstWalker() instanceof FilterExprWalker)
 //      {
-//      	FilterExprWalker fw = (FilterExprWalker)wi.getFirstWalker();
-//      	if(null == fw.getNextWalker())
-//      	{
-//      		m_expr = fw.m_expr;
-//      		m_expr.exprSetParent(this);
-//      	}
+//        FilterExprWalker fw = (FilterExprWalker)wi.getFirstWalker();
+//        if(null == fw.getNextWalker())
+//        {
+//          m_expr = fw.m_expr;
+//          m_expr.exprSetParent(this);
+//        }
 //      }
 //
 //    }
@@ -109,12 +109,12 @@ public class FilterExprWalker extends AxesWalker
    */
   public void detach()
   {
-  	super.detach();
-  	if (m_canDetachNodeset)
-  	{
-  	  m_exprObj.detach();
-  	}
-  	m_exprObj = null;
+    super.detach();
+    if (m_canDetachNodeset)
+    {
+      m_exprObj.detach();
+    }
+    m_exprObj = null;
   }
 
   /**
@@ -128,9 +128,9 @@ public class FilterExprWalker extends AxesWalker
 
     super.setRoot(root);
 
-  	m_exprObj = FilterExprIteratorSimple.executeFilterExpr(root,
-  	                  m_lpi.getXPathContext(), m_lpi.getPrefixResolver(),
-  	                  m_lpi.getIsTopLevel(), m_lpi.m_stackFrame, m_expr);
+    m_exprObj = FilterExprIteratorSimple.executeFilterExpr(root,
+                      m_lpi.getXPathContext(), m_lpi.getPrefixResolver(),
+                      m_lpi.getIsTopLevel(), m_lpi.m_stackFrame, m_expr);
 
   }
 
@@ -245,7 +245,7 @@ public class FilterExprWalker extends AxesWalker
    */
   public Expression getInnerExpression()
   {
-  	return m_expr;
+    return m_expr;
   }
 
   /**
@@ -253,8 +253,8 @@ public class FilterExprWalker extends AxesWalker
    */
   public void setInnerExpression(Expression expr)
   {
-  	expr.exprSetParent(this);
-  	m_expr = expr;
+    expr.exprSetParent(this);
+    m_expr = expr;
   }
 
 
@@ -309,24 +309,24 @@ public class FilterExprWalker extends AxesWalker
      */
     public void setExpression(Expression exp)
     {
-    	exp.exprSetParent(FilterExprWalker.this);
-    	m_expr = exp;
+      exp.exprSetParent(FilterExprWalker.this);
+      m_expr = exp;
     }
   }
 
-	/**
-	 * This will traverse the heararchy, calling the visitor for
-	 * each member.  If the called visitor method returns
-	 * false, the subtree should not be called.
-	 *
-	 * @param visitor The visitor whose appropriate method will be called.
-	 */
-	public void callPredicateVisitors(XPathVisitor visitor)
-	{
-	  m_expr.callVisitors(new filterExprOwner(), visitor);
+  /**
+   * This will traverse the heararchy, calling the visitor for
+   * each member.  If the called visitor method returns
+   * false, the subtree should not be called.
+   *
+   * @param visitor The visitor whose appropriate method will be called.
+   */
+  public void callPredicateVisitors(XPathVisitor visitor)
+  {
+    m_expr.callVisitors(new filterExprOwner(), visitor);
 
-	  super.callPredicateVisitors(visitor);
-	}
+    super.callPredicateVisitors(visitor);
+  }
 
 
     /**
@@ -339,7 +339,7 @@ public class FilterExprWalker extends AxesWalker
 
       FilterExprWalker walker = (FilterExprWalker)expr;
       if(!m_expr.deepEquals(walker.m_expr))
-      	return false;
+        return false;
 
       return true;
     }

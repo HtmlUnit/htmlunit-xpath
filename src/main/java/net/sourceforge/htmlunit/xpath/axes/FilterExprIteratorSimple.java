@@ -75,9 +75,9 @@ public class FilterExprIteratorSimple extends LocPathIterator
    */
   public void setRoot(int context, Object environment)
   {
-  	super.setRoot(context, environment);
-  	m_exprObj = executeFilterExpr(context, m_execContext, getPrefixResolver(), 
-  	                  getIsTopLevel(), m_stackFrame, m_expr);
+    super.setRoot(context, environment);
+    m_exprObj = executeFilterExpr(context, m_execContext, getPrefixResolver(), 
+                      getIsTopLevel(), m_stackFrame, m_expr);
   }
 
   /**
@@ -85,10 +85,10 @@ public class FilterExprIteratorSimple extends LocPathIterator
    * that are not derived from this object.
    */
   public static XNodeSet executeFilterExpr(int context, XPathContext xctxt, 
-  												PrefixResolver prefixResolver,
-  												boolean isTopLevel,
-  												int stackFrame,
-  												Expression expr )
+                          PrefixResolver prefixResolver,
+                          boolean isTopLevel,
+                          int stackFrame,
+                          Expression expr )
     throws net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException
   {
     PrefixResolver savedResolver = xctxt.getNamespaceContext();
@@ -147,8 +147,8 @@ public class FilterExprIteratorSimple extends LocPathIterator
    */
   public int nextNode()
   {
-  	if(m_foundLast)
-  		return DTM.NULL;
+    if(m_foundLast)
+      return DTM.NULL;
 
     int next;
 
@@ -182,9 +182,9 @@ public class FilterExprIteratorSimple extends LocPathIterator
   {  
     if(m_allowDetach)
     {
-  		super.detach();
-  		m_exprObj.detach();
-  		m_exprObj = null;
+      super.detach();
+      m_exprObj.detach();
+      m_exprObj = null;
     }
   }
 
@@ -304,10 +304,10 @@ public class FilterExprIteratorSimple extends LocPathIterator
    */
   public int getAxis()
   {
-  	if(null != m_exprObj)
-    	return m_exprObj.getAxis();
+    if(null != m_exprObj)
+      return m_exprObj.getAxis();
     else
-    	return Axis.FILTEREDLIST;
+      return Axis.FILTEREDLIST;
   }
 
 

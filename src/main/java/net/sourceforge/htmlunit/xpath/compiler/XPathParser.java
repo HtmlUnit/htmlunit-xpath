@@ -38,10 +38,10 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  */
 public class XPathParser
 {
-	// %REVIEW% Is there a better way of doing this?
-	// Upside is minimum object churn. Downside is that we don't have a useful
-	// backtrace in the exception itself -- but we don't expect to need one.
-	static public final String CONTINUE_AFTER_FATAL_ERROR="CONTINUE_AFTER_FATAL_ERROR";
+  // %REVIEW% Is there a better way of doing this?
+  // Upside is minimum object churn. Downside is that we don't have a useful
+  // backtrace in the exception itself -- but we don't expect to need one.
+  static public final String CONTINUE_AFTER_FATAL_ERROR="CONTINUE_AFTER_FATAL_ERROR";
 
   /**
    * The XPath to be processed.
@@ -115,15 +115,15 @@ public class XPathParser
     m_ops.setOp(OpMap.MAPINDEX_LENGTH,2);
     
     
-	// Patch for Christine's gripe. She wants her errorHandler to return from
-	// a fatal error and continue trying to parse, rather than throwing an exception.
-	// Without the patch, that put us into an endless loop.
-	//
-	// %REVIEW% Is there a better way of doing this?
-	// %REVIEW% Are there any other cases which need the safety net?
-	// 	(and if so do we care right now, or should we rewrite the XPath
-	//	grammar engine and can fix it at that time?)
-	try {
+  // Patch for Christine's gripe. She wants her errorHandler to return from
+  // a fatal error and continue trying to parse, rather than throwing an exception.
+  // Without the patch, that put us into an endless loop.
+  //
+  // %REVIEW% Is there a better way of doing this?
+  // %REVIEW% Are there any other cases which need the safety net?
+  //   (and if so do we care right now, or should we rewrite the XPath
+  //  grammar engine and can fix it at that time?)
+  try {
 
       nextToken();
       Expr();
@@ -149,15 +149,15 @@ public class XPathParser
     } 
     catch (net.sourceforge.htmlunit.xpath.XPathProcessorException e)
     {
-	  if(CONTINUE_AFTER_FATAL_ERROR.equals(e.getMessage()))
-	  {
-		// What I _want_ to do is null out this XPath.
-		// I doubt this has the desired effect, but I'm not sure what else to do.
-		// %REVIEW%!!!
-		initXPath(compiler, "/..",  namespaceContext);
-	  }
-	  else
-		throw e;
+    if(CONTINUE_AFTER_FATAL_ERROR.equals(e.getMessage()))
+    {
+    // What I _want_ to do is null out this XPath.
+    // I doubt this has the desired effect, but I'm not sure what else to do.
+    // %REVIEW%!!!
+    initXPath(compiler, "/..",  namespaceContext);
+    }
+    else
+    throw e;
     }
 
     compiler.shrink();
@@ -500,11 +500,11 @@ public class XPathParser
       error(XPATHErrorResources.ER_EXPECTED_BUT_FOUND, new Object[]{ expected,
                                                                      m_token });  //"Expected "+expected+", but found: "+m_token);
 
-	  // Patch for Christina's gripe. She wants her errorHandler to return from
-	  // this error and continue trying to parse, rather than throwing an exception.
-	  // Without the patch, that put us into an endless loop.
-		throw new XPathProcessorException(CONTINUE_AFTER_FATAL_ERROR);
-	}
+    // Patch for Christina's gripe. She wants her errorHandler to return from
+    // this error and continue trying to parse, rather than throwing an exception.
+    // Without the patch, that put us into an endless loop.
+    throw new XPathProcessorException(CONTINUE_AFTER_FATAL_ERROR);
+  }
   }
 
   /**
@@ -529,10 +529,10 @@ public class XPathParser
             new Object[]{ String.valueOf(expected),
                           m_token });  //"Expected "+expected+", but found: "+m_token);
 
-	  // Patch for Christina's gripe. She wants her errorHandler to return from
-	  // this error and continue trying to parse, rather than throwing an exception.
-	  // Without the patch, that put us into an endless loop.
-		throw new XPathProcessorException(CONTINUE_AFTER_FATAL_ERROR);
+    // Patch for Christina's gripe. She wants her errorHandler to return from
+    // this error and continue trying to parse, rather than throwing an exception.
+    // Without the patch, that put us into an endless loop.
+    throw new XPathProcessorException(CONTINUE_AFTER_FATAL_ERROR);
     }
   }
 
@@ -649,20 +649,20 @@ public class XPathParser
   void errorForDOM3(String msg, Object[] args) throws TransformerException
   {
 
-	String fmsg = XSLMessages.createXPATHMessage(msg, args);
-	ErrorListener ehandler = this.getErrorListener();
+  String fmsg = XSLMessages.createXPATHMessage(msg, args);
+  ErrorListener ehandler = this.getErrorListener();
 
-	TransformerException te = new XPathStylesheetDOM3Exception(fmsg, m_sourceLocator);
-	if (null != ehandler)
-	{
-	  // TO DO: Need to get stylesheet Locator from here.
-	  ehandler.fatalError(te);
-	}
-	else
-	{
-	  // System.err.println(fmsg);
-	  throw te;
-	}
+  TransformerException te = new XPathStylesheetDOM3Exception(fmsg, m_sourceLocator);
+  if (null != ehandler)
+  {
+    // TO DO: Need to get stylesheet Locator from here.
+    ehandler.fatalError(te);
+  }
+  else
+  {
+    // System.err.println(fmsg);
+    throw te;
+  }
   }
   /**
    * Dump the remaining token queue.
@@ -2066,9 +2066,9 @@ public class XPathParser
 
       try
       {
-      	// XPath 1.0 does not support number in exp notation
-      	if ((m_token.indexOf('e') > -1)||(m_token.indexOf('E') > -1))
-      		throw new NumberFormatException();
+        // XPath 1.0 does not support number in exp notation
+        if ((m_token.indexOf('e') > -1)||(m_token.indexOf('E') > -1))
+          throw new NumberFormatException();
         num = Double.valueOf(m_token).doubleValue();
       }
       catch (NumberFormatException nfe)

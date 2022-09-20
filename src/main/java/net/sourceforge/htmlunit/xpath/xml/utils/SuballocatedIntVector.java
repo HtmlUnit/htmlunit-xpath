@@ -97,14 +97,14 @@ public class SuballocatedIntVector
     m_blocksize=1<<m_SHIFT;
     m_MASK=m_blocksize-1;
     m_numblocks = numblocks;
-    	
+      
     m_map0=new int[m_blocksize];
     m_map = new int[numblocks][];
     m_map[0]=m_map0;
     m_buildCache = m_map0;
     m_buildCacheStartIndex = 0;
   }
-	
+  
   /** Construct a IntVector, using the given block size and
    * the default number of blocks (32).
    *
@@ -163,14 +163,14 @@ public class SuballocatedIntVector
 
       if(index>=m_map.length)
       {
-	int newsize=index+m_numblocks;
-	int[][] newMap=new int[newsize][];
-	System.arraycopy(m_map, 0, newMap, 0, m_map.length);
-	m_map=newMap;
+  int newsize=index+m_numblocks;
+  int[][] newMap=new int[newsize][];
+  System.arraycopy(m_map, 0, newMap, 0, m_map.length);
+  m_map=newMap;
       }
       int[] block=m_map[index];
       if(null==block)
-	block=m_map[index]=new int[m_blocksize];
+  block=m_map[index]=new int[m_blocksize];
       block[offset]=value;
 
       // Cache the current row of m_map.  Next m_blocksize-1
@@ -395,15 +395,15 @@ public class SuballocatedIntVector
         
       if(index>=m_map.length)
       {
-	int newsize=index+m_numblocks;
-	int[][] newMap=new int[newsize][];
-	System.arraycopy(m_map, 0, newMap, 0, m_map.length);
-	m_map=newMap;
+  int newsize=index+m_numblocks;
+  int[][] newMap=new int[newsize][];
+  System.arraycopy(m_map, 0, newMap, 0, m_map.length);
+  m_map=newMap;
       }
 
       int[] block=m_map[index];
       if(null==block)
-	block=m_map[index]=new int[m_blocksize];
+  block=m_map[index]=new int[m_blocksize];
       block[offset]=value;
     }
 

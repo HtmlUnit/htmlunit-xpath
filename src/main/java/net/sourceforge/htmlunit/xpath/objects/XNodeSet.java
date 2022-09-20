@@ -52,23 +52,23 @@ public class XNodeSet extends NodeSequence
    */
   public XNodeSet(DTMIterator val)
   {
-  	super();
-  	if(val instanceof XNodeSet)
-  	{
+    super();
+    if(val instanceof XNodeSet)
+    {
         final XNodeSet nodeSet = (XNodeSet) val;
-	    setIter(nodeSet.m_iter);
-	    m_dtmMgr = nodeSet.m_dtmMgr;
-	    m_last = nodeSet.m_last;
+      setIter(nodeSet.m_iter);
+      m_dtmMgr = nodeSet.m_dtmMgr;
+      m_last = nodeSet.m_last;
         // First make sure the DTMIterator val has a cache,
         // so if it doesn't have one, make one.
-	    if(!nodeSet.hasCache())
-	        nodeSet.setShouldCacheNodes(true);
+      if(!nodeSet.hasCache())
+          nodeSet.setShouldCacheNodes(true);
         
         // Get the cache from val and use it ourselves (we share it).
-	    setObject(nodeSet.getIteratorCache());
-  	}
-  	else
-    	setIter(val);
+      setObject(nodeSet.getIteratorCache());
+    }
+    else
+      setIter(val);
   }
   
   /**
@@ -78,12 +78,12 @@ public class XNodeSet extends NodeSequence
    */
   public XNodeSet(XNodeSet val)
   {
-  	super();
+    super();
     setIter(val.m_iter);
     m_dtmMgr = val.m_dtmMgr;
     m_last = val.m_last;
     if(!val.hasCache())
-    	val.setShouldCacheNodes(true);
+      val.setShouldCacheNodes(true);
     setObject(val.m_obj);
   }
 
@@ -114,7 +114,7 @@ public class XNodeSet extends NodeSequence
       m_last = 1;
     }
     else
-    	m_last = 0;
+      m_last = 0;
   }
 
   /**
@@ -237,7 +237,7 @@ public class XNodeSet extends NodeSequence
           throws org.xml.sax.SAXException
   {
     int node = item(0);
-	
+  
     if(node != DTM.NULL)
     {
       m_dtmMgr.getDTM(node).dispatchCharactersEvents(node, ch, false);
@@ -289,9 +289,9 @@ public class XNodeSet extends NodeSequence
   public Object object()
   {
     if(null == m_obj)
-    	return this;
+      return this;
     else
-    	return m_obj;
+      return m_obj;
   }
 
   // %REVIEW%
@@ -386,10 +386,10 @@ public class XNodeSet extends NodeSequence
   {
     try
     {
-    	if(hasCache())
-      		return cloneWithReset();
-      	else
-      		return this; // don't bother to clone... won't do any good!
+      if(hasCache())
+          return cloneWithReset();
+        else
+          return this; // don't bother to clone... won't do any good!
     }
     catch (CloneNotSupportedException cnse)
     {
@@ -406,10 +406,10 @@ public class XNodeSet extends NodeSequence
   {
     try
     {
-    	if(hasCache())
-      		return (XObject)cloneWithReset();
-      	else
-      		return this; // don't bother to clone... won't do any good!
+      if(hasCache())
+          return (XObject)cloneWithReset();
+        else
+          return this; // don't bother to clone... won't do any good!
     }
     catch (CloneNotSupportedException cnse)
     {

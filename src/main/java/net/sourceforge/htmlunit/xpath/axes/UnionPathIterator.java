@@ -118,7 +118,7 @@ public class UnionPathIterator extends LocPathIterator
     }
     expr.nextNode();
     if(expr instanceof Expression)
-    	((Expression)expr).exprSetParent(this);
+      ((Expression)expr).exprSetParent(this);
   }
   
   /**
@@ -179,49 +179,49 @@ public class UnionPathIterator extends LocPathIterator
   public static LocPathIterator createUnionIterator(Compiler compiler, int opPos)
           throws javax.xml.transform.TransformerException
   {
-  	// For the moment, I'm going to first create a full UnionPathIterator, and 
-  	// then see if I can reduce it to a UnionChildIterator.  It would obviously 
-  	// be more effecient to just test for the conditions for a UnionChildIterator, 
-  	// and then create that directly.
-  	UnionPathIterator upi = new UnionPathIterator(compiler, opPos);
-  	int nPaths = upi.m_exprs.length;
-  	boolean isAllChildIterators = true;
-  	for(int i = 0; i < nPaths; i++)
-  	{
-  		LocPathIterator lpi = upi.m_exprs[i];
-  		
-  		if(lpi.getAxis() != Axis.CHILD)
-  		{
-  			isAllChildIterators = false;
-  			break;
-  		}
-  		else
-  		{
-  			// check for positional predicates or position function, which won't work.
-  			if(HasPositionalPredChecker.check(lpi))
-  			{
-  				isAllChildIterators = false;
-  				break;
-  			}
-  		}
-  	}
-  	if(isAllChildIterators)
-  	{
-  		UnionChildIterator uci = new UnionChildIterator();
-  		
-	  	for(int i = 0; i < nPaths; i++)
-	  	{
-	  		PredicatedNodeTest lpi = upi.m_exprs[i];
-	  		// I could strip the lpi down to a pure PredicatedNodeTest, but 
-	  		// I don't think it's worth it.  Note that the test can be used 
-	  		// as a static object... so it doesn't have to be cloned.
-	  		uci.addNodeTest(lpi);
-	  	}
-	  	return uci;
-  		
-  	}
-  	else
-  		return upi;
+    // For the moment, I'm going to first create a full UnionPathIterator, and 
+    // then see if I can reduce it to a UnionChildIterator.  It would obviously 
+    // be more effecient to just test for the conditions for a UnionChildIterator, 
+    // and then create that directly.
+    UnionPathIterator upi = new UnionPathIterator(compiler, opPos);
+    int nPaths = upi.m_exprs.length;
+    boolean isAllChildIterators = true;
+    for(int i = 0; i < nPaths; i++)
+    {
+      LocPathIterator lpi = upi.m_exprs[i];
+      
+      if(lpi.getAxis() != Axis.CHILD)
+      {
+        isAllChildIterators = false;
+        break;
+      }
+      else
+      {
+        // check for positional predicates or position function, which won't work.
+        if(HasPositionalPredChecker.check(lpi))
+        {
+          isAllChildIterators = false;
+          break;
+        }
+      }
+    }
+    if(isAllChildIterators)
+    {
+      UnionChildIterator uci = new UnionChildIterator();
+      
+      for(int i = 0; i < nPaths; i++)
+      {
+        PredicatedNodeTest lpi = upi.m_exprs[i];
+        // I could strip the lpi down to a pure PredicatedNodeTest, but 
+        // I don't think it's worth it.  Note that the test can be used 
+        // as a static object... so it doesn't have to be cloned.
+        uci.addNodeTest(lpi);
+      }
+      return uci;
+      
+    }
+    else
+      return upi;
   }
   
   /** 
@@ -238,7 +238,7 @@ public class UnionPathIterator extends LocPathIterator
 
       for (int i = 0; i < n; i++)
       {
-      	int bit = m_exprs[i].getAnalysisBits();
+        int bit = m_exprs[i].getAnalysisBits();
         bits |= bit;
       }
     }
@@ -381,8 +381,8 @@ public class UnionPathIterator extends LocPathIterator
    */
   public int nextNode()
   {
-  	if(m_foundLast)
-  		return DTM.NULL;
+    if(m_foundLast)
+      return DTM.NULL;
 
     // Loop through the iterators getting the current fetched 
     // node, and get the earliest occuring in document order
@@ -490,13 +490,13 @@ public class UnionPathIterator extends LocPathIterator
   
   class iterOwner implements ExpressionOwner
   {
-  	int m_index;
-  	
-  	iterOwner(int index)
-  	{
-  		m_index = index;
-  	}
-  	
+    int m_index;
+    
+    iterOwner(int index)
+    {
+      m_index = index;
+    }
+    
     /**
      * @see ExpressionOwner#getExpression()
      */
@@ -510,23 +510,23 @@ public class UnionPathIterator extends LocPathIterator
      */
     public void setExpression(Expression exp)
     {
-    	
-    	if(!(exp instanceof LocPathIterator))
-    	{
-    		// Yuck.  Need FilterExprIter.  Or make it so m_exprs can be just 
-    		// plain expressions?
-    		WalkingIterator wi = new WalkingIterator(getPrefixResolver());
-    		FilterExprWalker few = new FilterExprWalker(wi);
-    		wi.setFirstWalker(few);
-    		few.setInnerExpression(exp);
-    		wi.exprSetParent(UnionPathIterator.this);
-    		few.exprSetParent(wi);
-    		exp.exprSetParent(few);
-    		exp = wi;
-    	}
-    	else
-    		exp.exprSetParent(UnionPathIterator.this);
-    	m_exprs[m_index] = (LocPathIterator)exp;
+      
+      if(!(exp instanceof LocPathIterator))
+      {
+        // Yuck.  Need FilterExprIter.  Or make it so m_exprs can be just 
+        // plain expressions?
+        WalkingIterator wi = new WalkingIterator(getPrefixResolver());
+        FilterExprWalker few = new FilterExprWalker(wi);
+        wi.setFirstWalker(few);
+        few.setInnerExpression(exp);
+        wi.exprSetParent(UnionPathIterator.this);
+        few.exprSetParent(wi);
+        exp.exprSetParent(few);
+        exp = wi;
+      }
+      else
+        exp.exprSetParent(UnionPathIterator.this);
+      m_exprs[m_index] = (LocPathIterator)exp;
     }
 
   }
@@ -536,17 +536,17 @@ public class UnionPathIterator extends LocPathIterator
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
-  	 	if(visitor.visitUnionPath(owner, this))
-  	 	{
-  	 		if(null != m_exprs)
-  	 		{
-  	 			int n = m_exprs.length;
-  	 			for(int i = 0; i < n; i++)
-  	 			{
-  	 				m_exprs[i].callVisitors(new iterOwner(i), visitor);
-  	 			}
-  	 		}
-  	 	}
+       if(visitor.visitUnionPath(owner, this))
+       {
+         if(null != m_exprs)
+         {
+           int n = m_exprs.length;
+           for(int i = 0; i < n; i++)
+           {
+             m_exprs[i].callVisitors(new iterOwner(i), visitor);
+           }
+         }
+       }
   }
   
     /**
@@ -564,12 +564,12 @@ public class UnionPathIterator extends LocPathIterator
         int n = m_exprs.length;
         
         if((null == upi.m_exprs) || (upi.m_exprs.length != n))
-        	return false;
+          return false;
         
         for (int i = 0; i < n; i++)
         {
           if(!m_exprs[i].deepEquals(upi.m_exprs[i]))
-          	return false;
+            return false;
         }
       }
       else if (null != upi.m_exprs)

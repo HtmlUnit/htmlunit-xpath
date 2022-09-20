@@ -60,7 +60,7 @@ public class IntStack extends IntVector
    */
   public IntStack (IntStack v)
   {
-  	super(v);
+    super(v);
   }
 
   /**
@@ -206,6 +206,6 @@ public class IntStack extends IntVector
   public Object clone()
     throws CloneNotSupportedException
   {
-  	return (IntStack) super.clone();
+    return (IntStack) super.clone();
   }
 }

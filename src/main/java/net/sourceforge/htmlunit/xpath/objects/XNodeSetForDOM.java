@@ -53,9 +53,9 @@ public class XNodeSetForDOM extends XNodeSet
    */
   public XNodeSetForDOM(XNodeSet val)
   {
-  	super(val);
-  	if(val instanceof XNodeSetForDOM)
-    	m_origObj = ((XNodeSetForDOM)val).m_origObj;
+    super(val);
+    if(val instanceof XNodeSetForDOM)
+      m_origObj = ((XNodeSetForDOM)val).m_origObj;
   }
   
   public XNodeSetForDOM(NodeList nodeList, XPathContext xctxt)

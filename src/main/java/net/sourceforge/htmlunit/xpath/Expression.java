@@ -152,7 +152,7 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
   public XObject execute(XPathContext xctxt, boolean destructiveOK)
     throws javax.xml.transform.TransformerException
   {
-  	return execute(xctxt);
+    return execute(xctxt);
   }
 
 
@@ -222,7 +222,7 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
   public int asNode(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
-  	DTMIterator iter = execute(xctxt).iter();
+    DTMIterator iter = execute(xctxt).iter();
     return iter.nextNode();
   }
 
@@ -364,10 +364,10 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    */
   protected final boolean isSameClass(Expression expr)
   {
-  	if(null == expr)
-  	  return false;
-  	  
-  	return (getClass() == expr.getClass());
+    if(null == expr)
+      return false;
+      
+    return (getClass() == expr.getClass());
   }
 
   /**
@@ -461,10 +461,10 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    */
   public ExpressionNode getExpressionOwner()
   {
-  	ExpressionNode parent = exprGetParent();
-  	while((null != parent) && (parent instanceof Expression))
-  		parent = parent.exprGetParent();
-  	return parent;
+    ExpressionNode parent = exprGetParent();
+    while((null != parent) && (parent instanceof Expression))
+      parent = parent.exprGetParent();
+    return parent;
   }
   
   //=============== ExpressionNode methods ================
@@ -473,33 +473,33 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
     parent. */
   public void exprSetParent(ExpressionNode n)
   {
-  	assertion(n != this, "Can not parent an expression to itself!");
-  	m_parent = n;
+    assertion(n != this, "Can not parent an expression to itself!");
+    m_parent = n;
   }
   
   public ExpressionNode exprGetParent()
   {
-  	return m_parent;
+    return m_parent;
   }
 
   /** This method tells the node to add its argument to the node's
     list of children.  */
   public void exprAddChild(ExpressionNode n, int i)
   {
-  	assertion(false, "exprAddChild method not implemented!");
+    assertion(false, "exprAddChild method not implemented!");
   }
 
   /** This method returns a child node.  The children are numbered
      from zero, left to right. */
   public ExpressionNode exprGetChild(int i)
   {
-  	return null;
+    return null;
   }
 
   /** Return the number of children the node has. */
   public int exprGetNumChildren()
   {
-  	return 0;
+    return 0;
   }
   
   //=============== SourceLocator methods ================
@@ -517,9 +517,9 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    */
   public String getPublicId()
   {
-  	if(null == m_parent)
-  	  return null;
-  	return m_parent.getPublicId();
+    if(null == m_parent)
+      return null;
+    return m_parent.getPublicId();
   }
 
   /**
@@ -538,9 +538,9 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    */
   public String getSystemId()
   {
-  	if(null == m_parent)
-  	  return null;
-  	return m_parent.getSystemId();
+    if(null == m_parent)
+      return null;
+    return m_parent.getSystemId();
   }
 
   /**
@@ -560,9 +560,9 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    */
   public int getLineNumber()
   {
-  	if(null == m_parent)
-  	  return 0;
-  	return m_parent.getLineNumber();
+    if(null == m_parent)
+      return 0;
+    return m_parent.getLineNumber();
   }
 
   /**
@@ -582,8 +582,8 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    */
   public int getColumnNumber()
   {
-  	if(null == m_parent)
-  	  return 0;
-  	return m_parent.getColumnNumber();
+    if(null == m_parent)
+      return 0;
+    return m_parent.getColumnNumber();
   }
 }

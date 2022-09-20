@@ -46,9 +46,9 @@ public class Constants
    * stylesheet.</li>
    * </ul> */
   public static final String 
-	S_XMLNAMESPACEURI = "http://www.w3.org/XML/1998/namespace", 
-	S_XSLNAMESPACEURL = "http://www.w3.org/1999/XSL/Transform", 
-	S_OLDXSLNAMESPACEURL = "http://www.w3.org/XSL/Transform/1.0";
+  S_XMLNAMESPACEURI = "http://www.w3.org/XML/1998/namespace", 
+  S_XSLNAMESPACEURL = "http://www.w3.org/1999/XSL/Transform", 
+  S_OLDXSLNAMESPACEURL = "http://www.w3.org/XSL/Transform/1.0";
 
   /** Authorship mnemonics, as Java Strings. Not standardized, 
    * as far as I know.
@@ -60,8 +60,8 @@ public class Constants
    * </ul>
    */
   public static final String 
-	S_VENDOR = "Apache Software Foundation", 
-	S_VENDORURL = "http://xml.apache.org";
+  S_VENDOR = "Apache Software Foundation", 
+  S_VENDORURL = "http://xml.apache.org";
 
   /** S_BUILTIN_EXTENSIONS_URL is a mnemonic for the XML Namespace 
    *(http://xml.apache.org/xalan) predefined to signify Xalan's

@@ -167,10 +167,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
       m_predicates = compiler.getCompiledPredicates(pos);
       if(null != m_predicates)
       {
-      	for(int i = 0; i < m_predicates.length; i++)
-      	{
-      		m_predicates[i].exprSetParent(this);
-      	}
+        for(int i = 0; i < m_predicates.length; i++)
+        {
+          m_predicates[i].exprSetParent(this);
+        }
       }
     }
   }
@@ -281,9 +281,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    */
   protected void countProximityPosition(int i)
   {
-  	// Note that in the case of a UnionChildIterator, this may be a 
-  	// static object and so m_proximityPositions may indeed be null!
-  	int[] pp = m_proximityPositions;
+    // Note that in the case of a UnionChildIterator, this may be a 
+    // static object and so m_proximityPositions may indeed be null!
+    int[] pp = m_proximityPositions;
     if ((null != pp) && (i < pp.length))
       pp[i]++;
   }
@@ -538,30 +538,30 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     return false;
    }
    
-	/**
-	 * This will traverse the heararchy, calling the visitor for 
-	 * each member.  If the called visitor method returns 
-	 * false, the subtree should not be called.
-	 * 
-	 * @param visitor The visitor whose appropriate method will be called.
-	 */
-	public void callPredicateVisitors(XPathVisitor visitor)
-	{
-	  if (null != m_predicates)
-	    {
-	    int n = m_predicates.length;
-	    for (int i = 0; i < n; i++)
-	      {
-	      ExpressionOwner predOwner = new PredOwner(i);
-	      if (visitor.visitPredicate(predOwner, m_predicates[i]))
-	        {
-	        m_predicates[i].callVisitors(predOwner, visitor);
-	      }
-	
-	    }
-	  }
-	} 
-	
+  /**
+   * This will traverse the heararchy, calling the visitor for 
+   * each member.  If the called visitor method returns 
+   * false, the subtree should not be called.
+   * 
+   * @param visitor The visitor whose appropriate method will be called.
+   */
+  public void callPredicateVisitors(XPathVisitor visitor)
+  {
+    if (null != m_predicates)
+      {
+      int n = m_predicates.length;
+      for (int i = 0; i < n; i++)
+        {
+        ExpressionOwner predOwner = new PredOwner(i);
+        if (visitor.visitPredicate(predOwner, m_predicates[i]))
+          {
+          m_predicates[i].callVisitors(predOwner, visitor);
+        }
+  
+      }
+    }
+  } 
+  
     /**
      * @see Expression#deepEquals(Expression)
      */
@@ -580,7 +580,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
         for (int i = 0; i < n; i++)
         {
           if (!m_predicates[i].deepEquals(pnt.m_predicates[i]))
-          	return false; 
+            return false; 
         }
       }
       else if (null != pnt.m_predicates)
@@ -618,13 +618,13 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   
   class PredOwner implements ExpressionOwner
   {
-  	int m_index;
-  	
-  	PredOwner(int index)
-  	{
-  		m_index = index;
-  	}
-  	
+    int m_index;
+    
+    PredOwner(int index)
+    {
+      m_index = index;
+    }
+    
     /**
      * @see ExpressionOwner#getExpression()
      */
@@ -639,8 +639,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
      */
     public void setExpression(Expression exp)
     {
-    	exp.exprSetParent(PredicatedNodeTest.this);
-    	m_predicates[m_index] = exp;
+      exp.exprSetParent(PredicatedNodeTest.this);
+      m_predicates[m_index] = exp;
     }
   }
     

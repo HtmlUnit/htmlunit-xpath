@@ -90,11 +90,11 @@ public class ObjectVector implements Cloneable
    */
   public ObjectVector(ObjectVector v)
   {
-  	m_map = new Object[v.m_mapSize];
+    m_map = new Object[v.m_mapSize];
     m_mapSize = v.m_mapSize;
     m_firstFree = v.m_firstFree;
-  	m_blocksize = v.m_blocksize;
-  	System.arraycopy(v.m_map, 0, m_map, 0, m_firstFree);
+    m_blocksize = v.m_blocksize;
+    System.arraycopy(v.m_map, 0, m_map, 0, m_firstFree);
   }
 
   /**
@@ -426,6 +426,6 @@ public class ObjectVector implements Cloneable
   public Object clone()
     throws CloneNotSupportedException
   {
-  	return new ObjectVector(this);
+    return new ObjectVector(this);
   }
 }

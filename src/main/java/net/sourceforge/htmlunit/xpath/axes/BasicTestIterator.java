@@ -115,7 +115,7 @@ public abstract class BasicTestIterator extends LocPathIterator
     super(compiler, opPos, analysis, shouldLoadWalkers);
   }
 
-	
+  
   /**
    * Get the next node via getNextXXX.  Bottlenecked for derived class override.
    * @return The next node on the axis, or DTM.NULL.
@@ -132,12 +132,12 @@ public abstract class BasicTestIterator extends LocPathIterator
    */
   public int nextNode()
   {      
-  	if(m_foundLast)
-  	{
-  		m_lastFetched = DTM.NULL;
-  		return DTM.NULL;
-  	}
-  		
+    if(m_foundLast)
+    {
+      m_lastFetched = DTM.NULL;
+      return DTM.NULL;
+    }
+      
     if(DTM.NULL == m_lastFetched)
     {
       resetProximityPositions();
@@ -183,7 +183,7 @@ public abstract class BasicTestIterator extends LocPathIterator
   
       if (DTM.NULL != next)
       {
-      	m_pos++;
+        m_pos++;
         return next;
       }
       else

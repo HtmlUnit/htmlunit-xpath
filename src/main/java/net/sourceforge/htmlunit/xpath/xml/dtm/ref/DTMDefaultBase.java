@@ -56,7 +56,7 @@ public abstract class DTMDefaultBase implements DTM
   // node of a DTM.
   /** The identity of the root node. */
   public static final int ROOTNODE = 0;
-	
+  
   /**
    * The number of nodes, which is also used to determine the next
    *  node index.
@@ -171,8 +171,8 @@ public abstract class DTMDefaultBase implements DTM
    *                   indexing schemes.
    */
   public DTMDefaultBase(DTMManager mgr, Source source, int dtmIdentity,
-  			DTMWSFilter whiteSpaceFilter,
-  			XMLStringFactory xstringfactory, boolean doIndexing)
+        DTMWSFilter whiteSpaceFilter,
+        XMLStringFactory xstringfactory, boolean doIndexing)
   {
     this(mgr, source, dtmIdentity, whiteSpaceFilter, xstringfactory,
          doIndexing, DEFAULT_BLOCKSIZE, true, false);
@@ -482,8 +482,8 @@ public abstract class DTMDefaultBase implements DTM
    */
   protected int _exptype(int identity)
   {
-  	if (identity == DTM.NULL)
-  	return NULL;
+    if (identity == DTM.NULL)
+    return NULL;
     // Reorganized test and loop into single flow
     // Tiny performance improvement, saves a few bytes of code, clearer.
     // %OPT% Other internal getters could be treated simliarly
@@ -646,9 +646,9 @@ public abstract class DTMDefaultBase implements DTM
     {
       if(os==null)
       {
-	      File f = new File("DTMDump"+((Object)this).hashCode()+".txt");
- 	      System.err.println("Dumping... "+f.getAbsolutePath());
- 	      os=new FileOutputStream(f);
+        File f = new File("DTMDump"+((Object)this).hashCode()+".txt");
+         System.err.println("Dumping... "+f.getAbsolutePath());
+         os=new FileOutputStream(f);
       }
       PrintStream ps = new PrintStream(os);
 
@@ -660,7 +660,7 @@ public abstract class DTMDefaultBase implements DTM
 
       for (int index = 0; index < nRecords; ++index)
       {
-      	int i=makeNodeHandle(index);
+        int i=makeNodeHandle(index);
         ps.println("=========== index=" + index + " handle=" + i + " ===========");
         ps.println("NodeName: " + getNodeName(i));
         ps.println("NodeNameX: " + getNodeNameX(i));
@@ -794,10 +794,10 @@ public abstract class DTMDefaultBase implements DTM
    * APIs.
    */
   public String dumpNode(int nodeHandle)
-  {	  
-	  if(nodeHandle==DTM.NULL)
-		  return "[null]";
-		  
+  {    
+    if(nodeHandle==DTM.NULL)
+      return "[null]";
+      
         String typestring;
         switch (getNodeType(nodeHandle))
         {
@@ -849,11 +849,11 @@ public abstract class DTMDefaultBase implements DTM
         }
 
       StringBuffer sb=new StringBuffer();
-	  sb.append("["+nodeHandle+": "+typestring+
-				"(0x"+Integer.toHexString(getExpandedTypeID(nodeHandle))+") "+
-				getNodeNameX(nodeHandle)+" {"+getNamespaceURI(nodeHandle)+"}"+
-				"=\""+ getNodeValue(nodeHandle)+"\"]");
-	  return sb.toString();
+    sb.append("["+nodeHandle+": "+typestring+
+        "(0x"+Integer.toHexString(getExpandedTypeID(nodeHandle))+") "+
+        getNodeNameX(nodeHandle)+" {"+getNamespaceURI(nodeHandle)+"}"+
+        "=\""+ getNodeValue(nodeHandle)+"\"]");
+    return sb.toString();
   }
 
   // ========= DTM Implementation Control Functions. ==============
@@ -890,7 +890,7 @@ public abstract class DTMDefaultBase implements DTM
 
     return firstChild != DTM.NULL;
   }
-	
+  
   /** Given a node identity, return a node handle. If extended addressing
    * has been used (multiple DTM IDs), we need to map the high bits of the
    * identity into the proper DTM ID.
@@ -908,14 +908,14 @@ public abstract class DTMDefaultBase implements DTM
   final public int makeNodeHandle(int nodeIdentity)
   {
     if(NULL==nodeIdentity) return NULL;
-		
+    
     if(JJK_DEBUG && nodeIdentity>DTMManager.IDENT_NODE_DEFAULT)
       System.err.println("GONK! (only useful in limited situations)");
 
     return m_dtmIdent.elementAt(nodeIdentity >>> DTMManager.IDENT_DTM_NODE_BITS)
-      + (nodeIdentity & DTMManager.IDENT_NODE_DEFAULT) ;											
+      + (nodeIdentity & DTMManager.IDENT_NODE_DEFAULT) ;                      
   }
-	
+  
   /** Given a node handle, return a node identity. If extended addressing
    * has been used (multiple DTM IDs), we need to map the high bits of the
    * identity into the proper DTM ID and thence find the proper offset
@@ -949,13 +949,13 @@ public abstract class DTMDefaultBase implements DTM
       // which really don't belong to them. That's probably a bug
       // which should be fixed, but until it is:
       if(m_mgrDefault.m_dtms[whichDTMindex]!=this)
-	return NULL;
+  return NULL;
       else
-	return
-	  m_mgrDefault.m_dtm_offsets[whichDTMindex]
-	  | (nodeHandle & DTMManager.IDENT_NODE_DEFAULT);
+  return
+    m_mgrDefault.m_dtm_offsets[whichDTMindex]
+    | (nodeHandle & DTMManager.IDENT_NODE_DEFAULT);
     }
-	  
+    
     int whichDTMid=m_dtmIdent.indexOf(nodeHandle & DTMManager.IDENT_DTM_DEFAULT);
     return (whichDTMid==NULL) 
       ? NULL
@@ -1143,8 +1143,8 @@ public abstract class DTMDefaultBase implements DTM
    */
   public int getNextSibling(int nodeHandle)
   {
-  	if (nodeHandle == DTM.NULL)
-  	return DTM.NULL;
+    if (nodeHandle == DTM.NULL)
+    return DTM.NULL;
     return makeNodeHandle(_nextsib(makeNodeIdentity(nodeHandle)));
   }
   
@@ -1158,14 +1158,14 @@ public abstract class DTMDefaultBase implements DTM
    */
   public int getTypedNextSibling(int nodeHandle, int nodeType)
   {
-  	if (nodeHandle == DTM.NULL)
-  	return DTM.NULL;
-  	int node = makeNodeIdentity(nodeHandle);
-  	int eType;
-  	while ((node = _nextsib(node)) != DTM.NULL && 
-  	((eType = _exptype(node)) != nodeType && 
-  	m_expandedNameTable.getType(eType)!= nodeType)); 
-  	//_type(node) != nodeType));
+    if (nodeHandle == DTM.NULL)
+    return DTM.NULL;
+    int node = makeNodeIdentity(nodeHandle);
+    int eType;
+    while ((node = _nextsib(node)) != DTM.NULL && 
+    ((eType = _exptype(node)) != nodeType && 
+    m_expandedNameTable.getType(eType)!= nodeType)); 
+    //_type(node) != nodeType));
         
     return (node == DTM.NULL ? DTM.NULL : makeNodeHandle(node));
   }
@@ -1283,7 +1283,7 @@ public abstract class DTMDefaultBase implements DTM
         // Most recent. May be -1 (none) if DTM was pruned.
         // %OPT% Is there a lastElement() method? Should there be?
         int last=m_namespaceDeclSetElements.size()-1;
-	        
+          
         if(last>=0 && elementNodeIndex==m_namespaceDeclSetElements.elementAt(last))
           {
             nsList=(SuballocatedIntVector)m_namespaceDeclSets.elementAt(last);
@@ -1398,7 +1398,7 @@ public abstract class DTMDefaultBase implements DTM
               candidate=m_namespaceDeclSetElements.elementAt(--wouldBeAt);
             }
             else
-            	break;
+              break;
           }
       }
 
@@ -1601,7 +1601,7 @@ public abstract class DTMDefaultBase implements DTM
   {
 
     if (DTM.DOCUMENT_NODE == getNodeType(nodeHandle))
-  	    return DTM.NULL;
+        return DTM.NULL;
 
     return getDocumentRoot(nodeHandle);
   }
@@ -1839,8 +1839,8 @@ public abstract class DTMDefaultBase implements DTM
    */
   public short getNodeType(int nodeHandle)
   {
-  	if (nodeHandle == DTM.NULL)
-  	return DTM.NULL;
+    if (nodeHandle == DTM.NULL)
+    return DTM.NULL;
     return m_expandedNameTable.getType(_exptype(makeNodeIdentity(nodeHandle)));
   }
 
@@ -2118,7 +2118,7 @@ public abstract class DTMDefaultBase implements DTM
    */
   public boolean isNodeAfter(int nodeHandle1, int nodeHandle2)
   {
-		// These return NULL if the node doesn't belong to this document.
+    // These return NULL if the node doesn't belong to this document.
     int index1 = makeNodeIdentity(nodeHandle1);
     int index2 = makeNodeIdentity(nodeHandle2);
 
@@ -2352,26 +2352,26 @@ public abstract class DTMDefaultBase implements DTM
        m_mgrDefault=(DTMManagerDefault)mgr;     
    }      
 
-	 /** Query which DTMManager this DTM is currently being handled by.
-	  * 
-	  * %REVEW% Should this become part of the base DTM API?
-	  * 
-	  * @return a DTMManager, or null if this is a "stand-alone" DTM.
-	  */
-	 public DTMManager getManager()
-	 {
-		 return m_mgr;
-	 }
+   /** Query which DTMManager this DTM is currently being handled by.
+    * 
+    * %REVEW% Should this become part of the base DTM API?
+    * 
+    * @return a DTMManager, or null if this is a "stand-alone" DTM.
+    */
+   public DTMManager getManager()
+   {
+     return m_mgr;
+   }
 
-	 /** Query which DTMIDs this DTM is currently using within the DTMManager.
-	  * 
-	  * %REVEW% Should this become part of the base DTM API?
-	  * 
-	  * @return an IntVector, or null if this is a "stand-alone" DTM.
-	  */
-	 public SuballocatedIntVector getDTMIDs()
-	 {
-		 if(m_mgr==null) return null;
-		 return m_dtmIdent;
-	 }
+   /** Query which DTMIDs this DTM is currently using within the DTMManager.
+    * 
+    * %REVEW% Should this become part of the base DTM API?
+    * 
+    * @return an IntVector, or null if this is a "stand-alone" DTM.
+    */
+   public SuballocatedIntVector getDTMIDs()
+   {
+     if(m_mgr==null) return null;
+     return m_dtmIdent;
+   }
 }

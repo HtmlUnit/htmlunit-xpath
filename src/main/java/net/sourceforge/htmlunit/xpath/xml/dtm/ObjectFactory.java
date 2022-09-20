@@ -318,13 +318,13 @@ final class ObjectFactory {
                         fis = SecuritySupport.getFileInputStream(propertiesFile);
                         fXalanProperties.load(fis);
                     }
-	        } catch (Exception x) {
-	            fXalanProperties = null;
-	            fLastModified = -1;
+          } catch (Exception x) {
+              fXalanProperties = null;
+              fLastModified = -1;
                     // assert(x instanceof FileNotFoundException
-	            //        || x instanceof SecurityException)
-	            // In both cases, ignore and continue w/ next location
-	        }
+              //        || x instanceof SecurityException)
+              // In both cases, ignore and continue w/ next location
+          }
                 finally {
                     // try to close the input stream if one was opened.
                     if (fis != null) {
@@ -334,7 +334,7 @@ final class ObjectFactory {
                         // Ignore the exception.
                         catch (IOException exc) {}
                     }
-                }	            
+                }              
             }
             if(fXalanProperties != null) {
                 factoryClassName = fXalanProperties.getProperty(factoryId);

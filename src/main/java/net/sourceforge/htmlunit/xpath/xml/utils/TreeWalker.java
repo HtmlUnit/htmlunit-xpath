@@ -224,8 +224,8 @@ public class TreeWalker
   public void traverse(Node pos, Node top) throws org.xml.sax.SAXException
   {
 
-	this.m_contentHandler.startDocument();
-	
+  this.m_contentHandler.startDocument();
+  
     while (null != pos)
     {
       startNode(pos);

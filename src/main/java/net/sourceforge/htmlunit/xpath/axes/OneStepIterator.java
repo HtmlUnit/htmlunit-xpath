@@ -332,13 +332,13 @@ public class OneStepIterator extends ChildTestIterator
    */
   public boolean deepEquals(Expression expr)
   {
-  	if(!super.deepEquals(expr))
-  		return false;
-  		
-  	if(m_axis != ((OneStepIterator)expr).m_axis)
-  		return false;
-  		
-  	return true;
+    if(!super.deepEquals(expr))
+      return false;
+      
+    if(m_axis != ((OneStepIterator)expr).m_axis)
+      return false;
+      
+    return true;
   }
 
   

@@ -65,7 +65,7 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
   public XObject execute(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
-	 XObject m_selected;
+   XObject m_selected;
      m_selected = ((Expression)m_obj).execute(xctxt);
      m_selected.allowDetachToRelease(m_allowRelease);
      if (m_selected.getType() == CLASS_STRING)
@@ -85,7 +85,7 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    */
   public void detach()
   {
-	throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_DETACH_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"detach() not supported by XRTreeFragSelectWrapper!");
+  throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_DETACH_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"detach() not supported by XRTreeFragSelectWrapper!");
   }
   
   /**
@@ -97,7 +97,7 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
     throws javax.xml.transform.TransformerException
   {
 
-	throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_NUM_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"num() not supported by XRTreeFragSelectWrapper!");
+  throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_NUM_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"num() not supported by XRTreeFragSelectWrapper!");
   }
 
   
@@ -108,7 +108,7 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    */
   public XMLString xstr()
   {
-	throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_XSTR_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"xstr() not supported by XRTreeFragSelectWrapper!");
+  throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_XSTR_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"xstr() not supported by XRTreeFragSelectWrapper!");
   }
 
   /**
@@ -118,7 +118,7 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    */
   public String str()
   {
-	throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_STR_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"str() not supported by XRTreeFragSelectWrapper!");
+  throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_STR_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"str() not supported by XRTreeFragSelectWrapper!");
   }
   
   /**

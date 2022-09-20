@@ -82,10 +82,10 @@ public class UnionPattern extends Expression
     m_patterns = patterns;
     if(null != patterns)
     {
-    	for(int i = 0; i < patterns.length; i++)
-    	{
-    		patterns[i].exprSetParent(this);
-    	}
+      for(int i = 0; i < patterns.length; i++)
+      {
+        patterns[i].exprSetParent(this);
+      }
     }
     
   }
@@ -143,13 +143,13 @@ public class UnionPattern extends Expression
   
   class UnionPathPartOwner implements ExpressionOwner
   {
-  	int m_index;
-  	
-  	UnionPathPartOwner(int index)
-  	{
-  		m_index = index;
-  	}
-  	
+    int m_index;
+    
+    UnionPathPartOwner(int index)
+    {
+      m_index = index;
+    }
+    
     /**
      * @see ExpressionOwner#getExpression()
      */
@@ -164,8 +164,8 @@ public class UnionPattern extends Expression
      */
     public void setExpression(Expression exp)
     {
-    	exp.exprSetParent(UnionPattern.this);
-    	m_patterns[m_index] = (StepPattern)exp;
+      exp.exprSetParent(UnionPattern.this);
+      m_patterns[m_index] = (StepPattern)exp;
     }
   }
   
@@ -174,15 +174,15 @@ public class UnionPattern extends Expression
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
-  	visitor.visitUnionPattern(owner, this);
-  	if(null != m_patterns)
-  	{
-  		int n = m_patterns.length;
-  		for(int i = 0; i < n; i++)
-  		{
-  			m_patterns[i].callVisitors(new UnionPathPartOwner(i), visitor);
-  		}
-  	}
+    visitor.visitUnionPattern(owner, this);
+    if(null != m_patterns)
+    {
+      int n = m_patterns.length;
+      for(int i = 0; i < n; i++)
+      {
+        m_patterns[i].callVisitors(new UnionPathPartOwner(i), visitor);
+      }
+    }
   }
   
   /**
@@ -190,28 +190,28 @@ public class UnionPattern extends Expression
    */
   public boolean deepEquals(Expression expr)
   {
-  	if(!isSameClass(expr))
-  		return false;
-  		
-  	UnionPattern up = (UnionPattern)expr;
-  		
-  	if(null != m_patterns)
-  	{
-  		int n = m_patterns.length;
-  		if((null == up.m_patterns) || (up.m_patterns.length != n))
-  			return false;
-  			
-  		for(int i = 0; i < n; i++)
-  		{
-  			if(!m_patterns[i].deepEquals(up.m_patterns[i]))
-  				return false;
-  		}
-  	}
-  	else if(up.m_patterns != null)
-  		return false;
-  		
-  	return true;
-  	
+    if(!isSameClass(expr))
+      return false;
+      
+    UnionPattern up = (UnionPattern)expr;
+      
+    if(null != m_patterns)
+    {
+      int n = m_patterns.length;
+      if((null == up.m_patterns) || (up.m_patterns.length != n))
+        return false;
+        
+      for(int i = 0; i < n; i++)
+      {
+        if(!m_patterns[i].deepEquals(up.m_patterns[i]))
+          return false;
+      }
+    }
+    else if(up.m_patterns != null)
+      return false;
+      
+    return true;
+    
   }
 
 

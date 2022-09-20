@@ -67,11 +67,11 @@ public class FilterExprIterator extends BasicTestIterator
    */
   public void setRoot(int context, Object environment)
   {
-  	super.setRoot(context, environment);
- 	
-  	m_exprObj = FilterExprIteratorSimple.executeFilterExpr(context, 
-  	                  m_execContext, getPrefixResolver(), 
-  	                  getIsTopLevel(), m_stackFrame, m_expr);
+    super.setRoot(context, environment);
+   
+    m_exprObj = FilterExprIteratorSimple.executeFilterExpr(context, 
+                      m_execContext, getPrefixResolver(), 
+                      getIsTopLevel(), m_stackFrame, m_expr);
    }
 
 
@@ -98,9 +98,9 @@ public class FilterExprIterator extends BasicTestIterator
    */
   public void detach()
   {  
-  	super.detach();
-  	m_exprObj.detach();
-  	m_exprObj = null;
+    super.detach();
+    m_exprObj.detach();
+    m_exprObj = null;
   }
 
   /**

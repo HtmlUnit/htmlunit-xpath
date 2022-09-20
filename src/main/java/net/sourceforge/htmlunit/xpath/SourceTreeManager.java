@@ -151,8 +151,8 @@ public class SourceTreeManager
       SourceTree st=(SourceTree)m_sourceTree.elementAt(i);
       if(st!=null && st.m_root==n)
       {
-	m_sourceTree.removeElementAt(i);
-	return;
+  m_sourceTree.removeElementAt(i);
+  return;
       }
     }
   }

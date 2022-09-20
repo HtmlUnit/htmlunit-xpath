@@ -66,8 +66,8 @@ public class Equals extends Operation
     XObject right = m_right.execute(xctxt, true);
 
     boolean result = left.equals(right) ? true : false;
-	left.detach();
-	right.detach();
+  left.detach();
+  right.detach();
     return result;
   }
 

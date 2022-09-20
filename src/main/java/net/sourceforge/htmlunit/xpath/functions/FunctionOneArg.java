@@ -126,8 +126,8 @@ public class FunctionOneArg extends Function implements ExpressionOwner
    */
   public void callArgVisitors(XPathVisitor visitor)
   {
-  	if(null != m_arg0)
-  		m_arg0.callVisitors(this, visitor);
+    if(null != m_arg0)
+      m_arg0.callVisitors(this, visitor);
   }
 
 
@@ -144,8 +144,8 @@ public class FunctionOneArg extends Function implements ExpressionOwner
    */
   public void setExpression(Expression exp)
   {
-  	exp.exprSetParent(this);
-  	m_arg0 = exp;
+    exp.exprSetParent(this);
+    m_arg0 = exp;
   }
   
   /**
@@ -153,21 +153,21 @@ public class FunctionOneArg extends Function implements ExpressionOwner
    */
   public boolean deepEquals(Expression expr)
   {
-  	if(!super.deepEquals(expr))
-  		return false;
-  		
-  	if(null != m_arg0)
-  	{
-  		if(null == ((FunctionOneArg)expr).m_arg0)
-  			return false;
-  			
-  		if(!m_arg0.deepEquals(((FunctionOneArg)expr).m_arg0))
-  			return false;
-  	}
-  	else if(null != ((FunctionOneArg)expr).m_arg0)
-  		return false;
+    if(!super.deepEquals(expr))
+      return false;
+      
+    if(null != m_arg0)
+    {
+      if(null == ((FunctionOneArg)expr).m_arg0)
+        return false;
+        
+      if(!m_arg0.deepEquals(((FunctionOneArg)expr).m_arg0))
+        return false;
+    }
+    else if(null != ((FunctionOneArg)expr).m_arg0)
+      return false;
 
-  	return true;
+    return true;
   }
 
 

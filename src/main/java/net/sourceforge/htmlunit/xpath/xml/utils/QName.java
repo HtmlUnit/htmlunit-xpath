@@ -427,7 +427,7 @@ public class QName implements java.io.Serializable
   public QName(String qname, PrefixResolver resolver, boolean validate)
   {
 
-	String prefix = null;
+  String prefix = null;
     _namespaceURI = null;
 
     int indexOfNSSep = qname.indexOf(':');

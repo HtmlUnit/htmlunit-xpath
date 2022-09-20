@@ -55,7 +55,7 @@ public abstract class Function extends Expression
   public void setArg(Expression arg, int argNum)
           throws WrongNumberArgsException
   {
-			// throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("zero", null));
+      // throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("zero", null));
       reportWrongNumberArgs();
   }
 
@@ -116,10 +116,10 @@ public abstract class Function extends Expression
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
-  	if(visitor.visitFunction(owner, this))
-  	{
-  		callArgVisitors(visitor);
-  	}
+    if(visitor.visitFunction(owner, this))
+    {
+      callArgVisitors(visitor);
+    }
   }
   
   /**
@@ -127,10 +127,10 @@ public abstract class Function extends Expression
    */
   public boolean deepEquals(Expression expr)
   {
-  	if(!isSameClass(expr))
-  		return false;
-  		
-  	return true;
+    if(!isSameClass(expr))
+      return false;
+      
+    return true;
   }
 
   /**

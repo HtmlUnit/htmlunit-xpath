@@ -117,7 +117,7 @@ public class XRTreeFrag extends XObject implements Cloneable
    */
   public void detach(){
     if(m_allowRelease){
-    	m_DTMXRTreeFrag.destruct();
+      m_DTMXRTreeFrag.destruct();
       setObject(null);
     }
   }

@@ -210,11 +210,11 @@ public final class Axis
   }
     
     public static String getNames(int index){
-    	return names[index];    
+      return names[index];    
     }
     
     public static int getNamesLength(){
-    	return names.length;
+      return names.length;
     }
 
 }

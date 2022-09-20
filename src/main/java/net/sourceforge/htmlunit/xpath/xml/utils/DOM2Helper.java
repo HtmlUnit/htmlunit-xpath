@@ -87,7 +87,7 @@ public class DOM2Helper extends DOMHelper
 
   /**
    * Specify which document this helper is currently operating on.
-   * 	
+   *   
    * @param doc The DOM Document node for this document.
    * @see #getDocument
    */
@@ -98,7 +98,7 @@ public class DOM2Helper extends DOMHelper
 
   /**
    * Query which document this helper is currently operating on.
-   * 	
+   *   
    * @return The DOM Document node for this document.
    * @see #setDocument
    */

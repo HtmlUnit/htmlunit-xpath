@@ -126,7 +126,7 @@ public class DTMManagerDefault extends DTMManager
    * @param dtm Should be a valid reference to a DTM.
    * @param id Integer DTM ID to be bound to this DTM
    */
-  synchronized public void addDTM(DTM dtm, int id) {	addDTM(dtm,id,0); }
+  synchronized public void addDTM(DTM dtm, int id) {  addDTM(dtm,id,0); }
 
 
   /**
@@ -141,40 +141,40 @@ public class DTMManagerDefault extends DTMManager
    */
   synchronized public void addDTM(DTM dtm, int id, int offset)
   {
-		if(id>=IDENT_MAX_DTMS)
-		{
-			// TODO: %REVIEW% Not really the right error message.
-	    throw new DTMException(XMLMessages.createXMLMessage(XMLErrorResources.ER_NO_DTMIDS_AVAIL, null)); //"No more DTM IDs are available!");
-		}
+    if(id>=IDENT_MAX_DTMS)
+    {
+      // TODO: %REVIEW% Not really the right error message.
+      throw new DTMException(XMLMessages.createXMLMessage(XMLErrorResources.ER_NO_DTMIDS_AVAIL, null)); //"No more DTM IDs are available!");
+    }
 
-		// We used to just allocate the array size to IDENT_MAX_DTMS.
-		// But we expect to increase that to 16 bits, and I'm not willing
-		// to allocate that much space unless needed. We could use one of our
-		// handy-dandy Fast*Vectors, but this will do for now.
-		// %REVIEW%
-		int oldlen=m_dtms.length;
-		if(oldlen<=id)
-		{
-			// Various growth strategies are possible. I think we don't want
-			// to over-allocate excessively, and I'm willing to reallocate
-			// more often to get that. See also Fast*Vector classes.
-			//
-			// %REVIEW% Should throw a more diagnostic error if we go over the max...
-			int newlen=Math.min((id+256),IDENT_MAX_DTMS);
+    // We used to just allocate the array size to IDENT_MAX_DTMS.
+    // But we expect to increase that to 16 bits, and I'm not willing
+    // to allocate that much space unless needed. We could use one of our
+    // handy-dandy Fast*Vectors, but this will do for now.
+    // %REVIEW%
+    int oldlen=m_dtms.length;
+    if(oldlen<=id)
+    {
+      // Various growth strategies are possible. I think we don't want
+      // to over-allocate excessively, and I'm willing to reallocate
+      // more often to get that. See also Fast*Vector classes.
+      //
+      // %REVIEW% Should throw a more diagnostic error if we go over the max...
+      int newlen=Math.min((id+256),IDENT_MAX_DTMS);
 
-			DTM new_m_dtms[] = new DTM[newlen];
-			System.arraycopy(m_dtms,0,new_m_dtms,0,oldlen);
-			m_dtms=new_m_dtms;
-			int new_m_dtm_offsets[] = new int[newlen];
-			System.arraycopy(m_dtm_offsets,0,new_m_dtm_offsets,0,oldlen);
-			m_dtm_offsets=new_m_dtm_offsets;
-		}
+      DTM new_m_dtms[] = new DTM[newlen];
+      System.arraycopy(m_dtms,0,new_m_dtms,0,oldlen);
+      m_dtms=new_m_dtms;
+      int new_m_dtm_offsets[] = new int[newlen];
+      System.arraycopy(m_dtm_offsets,0,new_m_dtm_offsets,0,oldlen);
+      m_dtm_offsets=new_m_dtm_offsets;
+    }
 
     m_dtms[id] = dtm;
-		m_dtm_offsets[id]=offset;
+    m_dtm_offsets[id]=offset;
     dtm.documentRegistration();
-		// The DTM should have been told who its manager was when we created it.
-		// Do we need to allow for adopting DTMs _not_ created by this manager?
+    // The DTM should have been told who its manager was when we created it.
+    // Do we need to allow for adopting DTMs _not_ created by this manager?
   }
 
   /**
@@ -190,7 +190,7 @@ public class DTMManagerDefault extends DTMManager
         return i;
       }
     }
-		return n; // count on addDTM() to throw exception if out of range
+    return n; // count on addDTM() to throw exception if out of range
   }
 
   /**
@@ -490,14 +490,14 @@ public class DTMManagerDefault extends DTMManager
       // subtree, but that's going to entail additional work
       // checking more DTMs... and getHandleOfNode is not a
       // cheap operation in most implementations.
-			//
-			// TODO: %REVIEW% If overflow addressing, we may recheck a DTM
-			// already examined. Ouch. But with the increased number of DTMs,
-			// scanning back to check this is painful.
-			// POSSIBLE SOLUTIONS:
-			//   Generate a list of _unique_ DTM objects?
-			//   Have each DTM cache last DOM node search?
-			int max = m_dtms.length;
+      //
+      // TODO: %REVIEW% If overflow addressing, we may recheck a DTM
+      // already examined. Ouch. But with the increased number of DTMs,
+      // scanning back to check this is painful.
+      // POSSIBLE SOLUTIONS:
+      //   Generate a list of _unique_ DTM objects?
+      //   Have each DTM cache last DOM node search?
+      int max = m_dtms.length;
       for(int i = 0; i < max; i++)
         {
           DTM thisDTM=m_dtms[i];
@@ -508,23 +508,23 @@ public class DTMManagerDefault extends DTMManager
           }
          }
 
-			// Not found; generate a new DTM.
-			//
-			// %REVIEW% Is this really desirable, or should we return null
-			// and make folks explicitly instantiate from a DOMSource? The
-			// latter is more work but gives the caller the opportunity to
-			// explicitly add the DTM to a DTMManager... and thus to know when
-			// it can be discarded again, which is something we need to pay much
-			// more attention to. (Especially since only DTMs which are assigned
-			// to a manager can use the overflow addressing scheme.)
-			//
-			// %BUG% If the source node was a DOM2DTM$defaultNamespaceDeclarationNode
-			// and the DTM wasn't registered with this DTMManager, we will create
-			// a new DTM and _still_ not be able to find the node (since it will
-			// be resynthesized). Another reason to push hard on making all DTMs
-			// be managed DTMs.
+      // Not found; generate a new DTM.
+      //
+      // %REVIEW% Is this really desirable, or should we return null
+      // and make folks explicitly instantiate from a DOMSource? The
+      // latter is more work but gives the caller the opportunity to
+      // explicitly add the DTM to a DTMManager... and thus to know when
+      // it can be discarded again, which is something we need to pay much
+      // more attention to. (Especially since only DTMs which are assigned
+      // to a manager can use the overflow addressing scheme.)
+      //
+      // %BUG% If the source node was a DOM2DTM$defaultNamespaceDeclarationNode
+      // and the DTM wasn't registered with this DTMManager, we will create
+      // a new DTM and _still_ not be able to find the node (since it will
+      // be resynthesized). Another reason to push hard on making all DTMs
+      // be managed DTMs.
 
-			// Since the real root of our tree may be a DocumentFragment, we need to
+      // Since the real root of our tree may be a DocumentFragment, we need to
       // use getParent to find the root, instead of getOwnerDocument.  Otherwise
       // DOM2DTM#getHandleOfNode will be very unhappy.
       Node root = node;
@@ -535,20 +535,20 @@ public class DTMManagerDefault extends DTMManager
       }
 
       DOM2DTM dtm = (DOM2DTM) getDTM(new javax.xml.transform.dom.DOMSource(root),
-																		 false, null, true, true);
+                                     false, null, true, true);
 
       int handle;
 
       if(node instanceof net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm.DOM2DTMdefaultNamespaceDeclarationNode)
       {
-				// Can't return the same node since it's unique to a specific DTM,
-				// but can return the equivalent node -- find the corresponding
-				// Document Element, then ask it for the xml: namespace decl.
-				handle=dtm.getHandleOfNode(((org.w3c.dom.Attr)node).getOwnerElement());
-				handle=dtm.getAttributeNode(handle,node.getNamespaceURI(),node.getLocalName());
+        // Can't return the same node since it's unique to a specific DTM,
+        // but can return the equivalent node -- find the corresponding
+        // Document Element, then ask it for the xml: namespace decl.
+        handle=dtm.getHandleOfNode(((org.w3c.dom.Attr)node).getOwnerElement());
+        handle=dtm.getAttributeNode(handle,node.getNamespaceURI(),node.getLocalName());
       }
       else
-				handle = ((DOM2DTM)dtm).getHandleOfNode(node);
+        handle = ((DOM2DTM)dtm).getHandleOfNode(node);
 
       if(DTM.NULL == handle)
         throw new RuntimeException(XMLMessages.createXMLMessage(XMLErrorResources.ER_COULD_NOT_RESOLVE_NODE, null)); //"Could not resolve the node to a handle!");
@@ -628,9 +628,9 @@ public class DTMManagerDefault extends DTMManager
     catch(java.lang.ArrayIndexOutOfBoundsException e)
     {
       if(nodeHandle==DTM.NULL)
-				return null;		// Accept as a special case.
+        return null;    // Accept as a special case.
       else
-				throw e;		// Programming error; want to know about it.
+        throw e;    // Programming error; want to know about it.
     }
   }
 
@@ -646,16 +646,16 @@ public class DTMManagerDefault extends DTMManager
    */
   synchronized public int getDTMIdentity(DTM dtm)
   {
-	// Shortcut using DTMDefaultBase's extension hooks
-	// %REVIEW% Should the lookup be part of the basic DTM API?
-	if(dtm instanceof DTMDefaultBase)
-	{
-		DTMDefaultBase dtmdb=(DTMDefaultBase)dtm;
-		if(dtmdb.getManager()==this)
-			return dtmdb.getDTMIDs().elementAt(0);
-		else
-			return -1;
-	}
+  // Shortcut using DTMDefaultBase's extension hooks
+  // %REVIEW% Should the lookup be part of the basic DTM API?
+  if(dtm instanceof DTMDefaultBase)
+  {
+    DTMDefaultBase dtmdb=(DTMDefaultBase)dtm;
+    if(dtmdb.getManager()==this)
+      return dtmdb.getDTMIDs().elementAt(0);
+    else
+      return -1;
+  }
 
     int n = m_dtms.length;
 
@@ -690,12 +690,12 @@ public class DTMManagerDefault extends DTMManager
     if(DEBUG)
     {
       System.out.println("Releasing "+
-			 (shouldHardDelete ? "HARD" : "soft")+
-			 " dtm="+
-			 // Following shouldn't need a nodeHandle, but does...
-			 // and doesn't seem to report the intended value
-			 dtm.getDocumentBaseURI()
-			 );
+       (shouldHardDelete ? "HARD" : "soft")+
+       " dtm="+
+       // Following shouldn't need a nodeHandle, but does...
+       // and doesn't seem to report the intended value
+       dtm.getDocumentBaseURI()
+       );
     }
 
     if (dtm instanceof SAX2DTM)
@@ -703,28 +703,28 @@ public class DTMManagerDefault extends DTMManager
       ((SAX2DTM) dtm).clearCoRoutine();
     }
 
-		// Multiple DTM IDs may be assigned to a single DTM.
-		// The Right Answer is to ask which (if it supports
-		// extension, the DTM will need a list anyway). The
-		// Wrong Answer, applied if the DTM can't help us,
-		// is to linearly search them all; this may be very
-		// painful.
-		//
-		// %REVIEW% Should the lookup move up into the basic DTM API?
-		if(dtm instanceof DTMDefaultBase)
-		{
-			net.sourceforge.htmlunit.xpath.xml.utils.SuballocatedIntVector ids=((DTMDefaultBase)dtm).getDTMIDs();
-			for(int i=ids.size()-1;i>=0;--i)
-				m_dtms[ids.elementAt(i)>>>DTMManager.IDENT_DTM_NODE_BITS]=null;
-		}
-		else
-		{
-			int i = getDTMIdentity(dtm);
-		    if (i >= 0)
-			{
-				m_dtms[i >>> DTMManager.IDENT_DTM_NODE_BITS] = null;
-			}
-		}
+    // Multiple DTM IDs may be assigned to a single DTM.
+    // The Right Answer is to ask which (if it supports
+    // extension, the DTM will need a list anyway). The
+    // Wrong Answer, applied if the DTM can't help us,
+    // is to linearly search them all; this may be very
+    // painful.
+    //
+    // %REVIEW% Should the lookup move up into the basic DTM API?
+    if(dtm instanceof DTMDefaultBase)
+    {
+      net.sourceforge.htmlunit.xpath.xml.utils.SuballocatedIntVector ids=((DTMDefaultBase)dtm).getDTMIDs();
+      for(int i=ids.size()-1;i>=0;--i)
+        m_dtms[ids.elementAt(i)>>>DTMManager.IDENT_DTM_NODE_BITS]=null;
+    }
+    else
+    {
+      int i = getDTMIdentity(dtm);
+        if (i >= 0)
+      {
+        m_dtms[i >>> DTMManager.IDENT_DTM_NODE_BITS] = null;
+      }
+    }
 
     dtm.documentRelease();
     return true;

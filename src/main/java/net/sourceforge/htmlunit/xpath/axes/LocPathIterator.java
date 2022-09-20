@@ -121,9 +121,9 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public int getAnalysisBits()
   {
-  	int axis = getAxis();
-  	int bit = WalkerFactory.getAnalysisBitFromAxes(axis);
-  	return bit;
+    int axis = getAxis();
+    int bit = WalkerFactory.getAnalysisBitFromAxes(axis);
+    return bit;
   }
 
   /**
@@ -369,7 +369,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
     // Yech, shouldn't have to do this.  -sb
     if(null == m_prefixResolver)
-    	m_prefixResolver = xctxt.getNamespaceContext();
+      m_prefixResolver = xctxt.getNamespaceContext();
 
     m_lastFetched = DTM.NULL;
     m_foundLast = false;
@@ -439,7 +439,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public void setCurrentPos(int i)
   {
-  	assertion(false, "setCurrentPos not supported by this iterator!");
+    assertion(false, "setCurrentPos not supported by this iterator!");
   }
 
   /**
@@ -447,7 +447,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public void incrementCurrentPos()
   {
-  	m_pos++;
+    m_pos++;
   }
 
 
@@ -463,8 +463,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public int size()
   {
-	assertion(false, "size() not supported by this iterator!");
-	return 0;
+  assertion(false, "size() not supported by this iterator!");
+  return 0;
   }
 
   /**
@@ -478,8 +478,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public int item(int index)
   {
-	assertion(false, "item(int index) not supported by this iterator!");
-	return 0;
+  assertion(false, "item(int index) not supported by this iterator!");
+  return 0;
   }
 
   /**
@@ -497,7 +497,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public void setItem(int node, int index)
   {
-	assertion(false, "setItem not supported by this iterator!");
+  assertion(false, "setItem not supported by this iterator!");
   }
 
   /**
@@ -509,21 +509,21 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   public int getLength()
   {
     // Tell if this is being called from within a predicate.
-  	boolean isPredicateTest = (this == m_execContext.getSubContextList());
+    boolean isPredicateTest = (this == m_execContext.getSubContextList());
 
     // And get how many total predicates are part of this step.
-  	int predCount = getPredicateCount();
+    int predCount = getPredicateCount();
 
     // If we have already calculated the length, and the current predicate
     // is the first predicate, then return the length.  We don't cache
     // the anything but the length of the list to the first predicate.
     if (-1 != m_length && isPredicateTest && m_predicateIndex < 1)
-  		return m_length;
+      return m_length;
 
     // I'm a bit worried about this one, since it doesn't have the
     // checks found above.  I suspect it's fine.  -sb
     if (m_foundLast)
-  		return m_pos;
+      return m_pos;
 
     // Create a clone, and count from the current position to the end
     // of the list, not taking into account the current predicate and
@@ -699,7 +699,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public void reset()
   {
-  	assertion(false, "This iterator can not reset!");
+    assertion(false, "This iterator can not reset!");
   }
 
   /**
@@ -888,10 +888,10 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public final PrefixResolver getPrefixResolver()
   {
-  	if(null == m_prefixResolver)
-  	{
-    	m_prefixResolver = (PrefixResolver)getExpressionOwner();
-  	}
+    if(null == m_prefixResolver)
+    {
+      m_prefixResolver = (PrefixResolver)getExpressionOwner();
+    }
 
     return m_prefixResolver;
   }
@@ -921,11 +921,11 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
-  	 	if(visitor.visitLocationPath(owner, this))
-  	 	{
-  	 		visitor.visitStep(owner, this);
-  	 		callPredicateVisitors(visitor);
-  	 	}
+       if(visitor.visitLocationPath(owner, this))
+       {
+         visitor.visitStep(owner, this);
+         callPredicateVisitors(visitor);
+       }
   }
 
 

@@ -122,7 +122,7 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator
   public int getLast()
   {
 
-    if (_last == -1)		// Not previously established
+    if (_last == -1)    // Not previously established
     {
       // Note that we're doing both setMark() -- which saves _currentChild
       // -- and explicitly saving our position counter (number of nodes
@@ -134,14 +134,14 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator
       final int temp = _position; // Save state
       setMark();
 
-      reset();			// Count the nodes found by this iterator
+      reset();      // Count the nodes found by this iterator
       do
       {
         _last++;
       }
       while (next() != END);
 
-      gotoMark();		// Restore saved state
+      gotoMark();    // Restore saved state
       _position = temp;
     }
 

@@ -217,38 +217,38 @@ public class NodeTest extends Expression
    */
   public boolean deepEquals(Expression expr)
   {
-  	if(!isSameClass(expr))
-  		return false;
-  		
-  	NodeTest nt = (NodeTest)expr;
+    if(!isSameClass(expr))
+      return false;
+      
+    NodeTest nt = (NodeTest)expr;
 
-  	if(null != nt.m_name)
-  	{
-  		if(null == m_name)
-  			return false;
-  		else if(!nt.m_name.equals(m_name))
-  			return false;
-  	}
-  	else if(null != m_name)
-  		return false;
+    if(null != nt.m_name)
+    {
+      if(null == m_name)
+        return false;
+      else if(!nt.m_name.equals(m_name))
+        return false;
+    }
+    else if(null != m_name)
+      return false;
 
-  	if(null != nt.m_namespace)
-  	{
-  		if(null == m_namespace)
-  			return false;
-  		else if(!nt.m_namespace.equals(m_namespace))
-  			return false;
-  	}
-  	else if(null != m_namespace)
-  		return false;
-  		  		
-  	if(m_whatToShow != nt.m_whatToShow)
-  		return false;
-  		
-  	if(m_isTotallyWild != nt.m_isTotallyWild)
-  		return false;
+    if(null != nt.m_namespace)
+    {
+      if(null == m_namespace)
+        return false;
+      else if(!nt.m_namespace.equals(m_namespace))
+        return false;
+    }
+    else if(null != m_namespace)
+      return false;
+            
+    if(m_whatToShow != nt.m_whatToShow)
+      return false;
+      
+    if(m_isTotallyWild != nt.m_isTotallyWild)
+      return false;
 
-	return true;
+  return true;
   }
 
   /**
@@ -686,7 +686,7 @@ public class NodeTest extends Expression
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
-  	assertion(false, "callVisitors should not be called for this object!!!");  	
+    assertion(false, "callVisitors should not be called for this object!!!");    
   }
 
 }

@@ -138,9 +138,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators
     // (If it's an EntityReference node, we're probably in 
     // seriously bad trouble. For now
     // I'm just hoping nobody is ever quite that foolish... %REVIEW%)
-		//
-		// %ISSUE% What about inherited namespaces in this case?
-		// Do we need to special-case initialize them into the DTM model?
+    //
+    // %ISSUE% What about inherited namespaces in this case?
+    // Do we need to special-case initialize them into the DTM model?
     if(ELEMENT_NODE == m_root.getNodeType())
     {
       NamedNodeMap attrs=m_root.getAttributes();
@@ -175,8 +175,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @param parentIndex The current parent index.
    * @param previousSibling The previous sibling index.
    * @param forceNodeType If not DTM.NULL, overrides the DOM node type.
-   *	Used to force nodes to Text rather than CDATASection when their
-   *	coalesced value includes ordinary Text nodes (current DTM behavior).
+   *  Used to force nodes to Text rather than CDATASection when their
+   *  coalesced value includes ordinary Text nodes (current DTM behavior).
    *
    * @return The index identity of the node that was added.
    */
@@ -522,8 +522,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
         // coalesced Text, this records CDATASections adjacent to
         // ordinary Text as Text.
         int nextindex=addNode(next,m_last_parent,m_last_kid,
-			      nexttype);
-	
+            nexttype);
+  
         m_last_kid=nextindex;
 
         if(ELEMENT_NODE == nexttype)
@@ -546,13 +546,13 @@ public class DOM2DTM extends DTMDefaultBaseIterators
 
                     // If the xml: prefix is explicitly declared
                     // we don't need to synthesize one.
-		    //
-		    // NOTE that XML Namespaces were not originally
-		    // defined as being namespace-aware (grrr), and
-		    // while the W3C is planning to fix this it's
-		    // safer for now to test the QName and trust the
-		    // parsers to prevent anyone from redefining the
-		    // reserved xmlns: prefix
+        //
+        // NOTE that XML Namespaces were not originally
+        // defined as being namespace-aware (grrr), and
+        // while the W3C is planning to fix this it's
+        // safer for now to test the QName and trust the
+        // parsers to prevent anyone from redefining the
+        // reserved xmlns: prefix
                     if(!m_processedFirstElement
                        && "xmlns:xml".equals(attrs.item(i).getNodeName()))
                       m_processedFirstElement=true; 
@@ -569,9 +569,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators
               // being a default attribute defined by the XML
               // Namespaces spec rather than by the DTD.
               attrIndex=addNode(new DOM2DTMdefaultNamespaceDeclarationNode(
-																	(Element)next,"xml",NAMESPACE_DECL_NS,
-																	makeNodeHandle(((attrIndex==NULL)?nextindex:attrIndex)+1)
-																	),
+                                  (Element)next,"xml",NAMESPACE_DECL_NS,
+                                  makeNodeHandle(((attrIndex==NULL)?nextindex:attrIndex)+1)
+                                  ),
                                 nextindex,attrIndex,NULL);      
               m_firstch.setElementAt(DTM.NULL,attrIndex);
               m_processedFirstElement=true;
@@ -770,13 +770,13 @@ public class DOM2DTM extends DTMDefaultBaseIterators
         // Assume this can not be null.
         type = _type(identity);
 
-				// %REVIEW%
-				// Should namespace nodes be retrievable DOM-style as attrs?
-				// If not we need a separate function... which may be desirable
-				// architecturally, but which is ugly from a code point of view.
-				// (If we REALLY insist on it, this code should become a subroutine
-				// of both -- retrieve the node, then test if the type matches
-				// what you're looking for.)
+        // %REVIEW%
+        // Should namespace nodes be retrievable DOM-style as attrs?
+        // If not we need a separate function... which may be desirable
+        // architecturally, but which is ugly from a code point of view.
+        // (If we REALLY insist on it, this code should become a subroutine
+        // of both -- retrieve the node, then test if the type matches
+        // what you're looking for.)
         if (type == DTM.ATTRIBUTE_NODE || type==DTM.NAMESPACE_NODE)
         {
           Node node = lookupNode(identity);
@@ -790,7 +790,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators
           if (nodeuri.equals(namespaceURI) && name.equals(nodelocalname))
             return makeNodeHandle(identity);
         }
-				
+        
         else // if (DTM.NAMESPACE_NODE != type)
         {
           break;
@@ -868,9 +868,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    */
   public boolean isWhitespace(int nodeHandle)
   {
-  	int type = getNodeType(nodeHandle);
+    int type = getNodeType(nodeHandle);
     Node node = getNode(nodeHandle);
-  	if(TEXT_NODE == type || CDATA_SECTION_NODE == type)
+    if(TEXT_NODE == type || CDATA_SECTION_NODE == type)
     {
       // If this is a DTM text node, it may be made of multiple DOM text
       // nodes -- including navigating into Entity References. DOM2DTM
@@ -932,7 +932,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators
     break;
     case Node.TEXT_NODE :
     case Node.CDATA_SECTION_NODE :
-    case Node.ATTRIBUTE_NODE :	// Never a child but might be our starting node
+    case Node.ATTRIBUTE_NODE :  // Never a child but might be our starting node
       buf.append(node.getNodeValue());
       break;
     case Node.PROCESSING_INSTRUCTION_NODE :
@@ -1030,19 +1030,19 @@ public class DOM2DTM extends DTMDefaultBaseIterators
       String newname=newnode.getLocalName();
       if (null == newname)
       {
-	// XSLT treats PIs, and possibly other things, as having QNames.
-	String qname = newnode.getNodeName();
-	if('#'==qname.charAt(0))
-	{
-	  //  Match old default for this function
-	  // This conversion may or may not be necessary
-	  newname="";
-	}
-	else
-	{
-	  int index = qname.indexOf(':');
-	  newname = (index < 0) ? qname : qname.substring(index + 1);
-	}
+  // XSLT treats PIs, and possibly other things, as having QNames.
+  String qname = newnode.getNodeName();
+  if('#'==qname.charAt(0))
+  {
+    //  Match old default for this function
+    // This conversion may or may not be necessary
+    newname="";
+  }
+  else
+  {
+    int index = qname.indexOf(':');
+    newname = (index < 0) ? qname : qname.substring(index + 1);
+  }
       }
       return newname;
     }
@@ -1057,23 +1057,23 @@ public class DOM2DTM extends DTMDefaultBaseIterators
       case DTM.ENTITY_REFERENCE_NODE :
       case DTM.NAMESPACE_NODE :
       case DTM.PROCESSING_INSTRUCTION_NODE :
-	{
-	  Node node = getNode(nodeHandle);
-	  
-	  // assume not null.
-	  name = node.getLocalName();
-	  
-	  if (null == name)
-	  {
-	    String qname = node.getNodeName();
-	    int index = qname.indexOf(':');
-	    
-	    name = (index < 0) ? qname : qname.substring(index + 1);
-	  }
-	}
-	break;
+  {
+    Node node = getNode(nodeHandle);
+    
+    // assume not null.
+    name = node.getLocalName();
+    
+    if (null == name)
+    {
+      String qname = node.getNodeName();
+      int index = qname.indexOf(':');
+      
+      name = (index < 0) ? qname : qname.substring(index + 1);
+    }
+  }
+  break;
       default :
-	name = "";
+  name = "";
       }
       return name;
     }
@@ -1161,17 +1161,17 @@ public class DOM2DTM extends DTMDefaultBaseIterators
       case DTM.ENTITY_REFERENCE_NODE :
       case DTM.NAMESPACE_NODE :
       case DTM.PROCESSING_INSTRUCTION_NODE :
-	{
-	  Node node = getNode(nodeHandle);
-	  
-	  // assume not null.
-	  nsuri = node.getNamespaceURI();
-	  
-	  // %TBD% Handle DOM1?
-	}
-	break;
+  {
+    Node node = getNode(nodeHandle);
+    
+    // assume not null.
+    nsuri = node.getNamespaceURI();
+    
+    // %TBD% Handle DOM1?
+  }
+  break;
       default :
-	nsuri = null;
+  nsuri = null;
       }
 
       return nsuri;

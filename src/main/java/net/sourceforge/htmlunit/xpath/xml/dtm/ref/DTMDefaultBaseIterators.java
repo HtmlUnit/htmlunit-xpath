@@ -667,7 +667,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      */
     public int next()
     {
-    	int node;
+      int node;
 
       for (node = _currentNode;
            node != END;
@@ -768,7 +768,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      */
     public int next()
     {
-    	if(_startNode == _currentNode)
+      if(_startNode == _currentNode)
         return NULL;
 
       int nodeType = _nodeType;
@@ -1321,19 +1321,19 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
 
 
 
-		parent=node;
-		while ((parent = _parent(parent)) != NULL)
-		{
-			if (++index == _stack.length)
-			{
-				final int[] stack = new int[index + 4];
-				System.arraycopy(_stack, 0, stack, 0, index);
-				_stack = stack;
-			}
-			_stack[index] = parent;
+    parent=node;
+    while ((parent = _parent(parent)) != NULL)
+    {
+      if (++index == _stack.length)
+      {
+        final int[] stack = new int[index + 4];
+        System.arraycopy(_stack, 0, stack, 0, index);
+        _stack = stack;
+      }
+      _stack[index] = parent;
         }
         if(index>0)
-	        --index; // Pop actual root node (if not start) back off the stack
+          --index; // Pop actual root node (if not start) back off the stack
 
         _currentNode=_stack[index]; // Last parent before root node
 
@@ -1352,23 +1352,23 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      */
     public int next()
     {
-    	// Bugzilla 8324: We were forgetting to skip Attrs and NS nodes.
-    	// Also recoded the loop controls for clarity and to flatten out
-    	// the tail-recursion.
-   		for(++_currentNode;
-   			_sp>=0;
-   			++_currentNode)
-   		{
-   			if(_currentNode < _stack[_sp])
-   			{
-   				if(_type(_currentNode) != ATTRIBUTE_NODE &&
-   					_type(_currentNode) != NAMESPACE_NODE)
-   					return returnNode(makeNodeHandle(_currentNode));
-   			}
-   			else
-   				--_sp;
-   		}
-   		return NULL;
+      // Bugzilla 8324: We were forgetting to skip Attrs and NS nodes.
+      // Also recoded the loop controls for clarity and to flatten out
+      // the tail-recursion.
+       for(++_currentNode;
+         _sp>=0;
+         ++_currentNode)
+       {
+         if(_currentNode < _stack[_sp])
+         {
+           if(_type(_currentNode) != ATTRIBUTE_NODE &&
+             _type(_currentNode) != NAMESPACE_NODE)
+             return returnNode(makeNodeHandle(_currentNode));
+         }
+         else
+           --_sp;
+       }
+       return NULL;
     }
 
     // redefine DTMAxisIteratorBase's reset

@@ -213,7 +213,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current)
     {
-			return getParent(current);
+      return getParent(current);
     }
 
     /**
@@ -228,7 +228,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current, int expandedTypeID)
     {
-			// Process using identities
+      // Process using identities
       current = makeNodeIdentity(current);
 
       while (DTM.NULL != (current = m_parent.elementAt(current)))
@@ -275,7 +275,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int first(int context, int expandedTypeID)
     {
-			return (getExpandedTypeID(context) == expandedTypeID)
+      return (getExpandedTypeID(context) == expandedTypeID)
              ? context : next(context, context, expandedTypeID);
     }
   }
@@ -440,7 +440,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
       }
       else
       {
-				// %REVIEW% Dead code. Eliminate?
+        // %REVIEW% Dead code. Eliminate?
         for (int current = _firstch(makeNodeIdentity(context));
              DTM.NULL != current;
              current = _nextsib(current))
@@ -477,7 +477,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current, int expandedTypeID)
     {
-			// Process in Identifier space
+      // Process in Identifier space
       for (current = _nextsib(makeNodeIdentity(current));
            DTM.NULL != current;
            current = _nextsib(current))
@@ -652,8 +652,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     protected boolean isAfterAxis(int axisRoot, int identity)
     {
       // %REVIEW% Is there *any* cheaper way to do this?
-			// Yes. In ID space, compare to axisRoot's successor
-			// (next-sib or ancestor's-next-sib). Probably shallower search.
+      // Yes. In ID space, compare to axisRoot's successor
+      // (next-sib or ancestor's-next-sib). Probably shallower search.
       do
       {
         if(identity == axisRoot)
@@ -842,8 +842,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int first(int context)
     {
-			// Compute in ID space
-			context=makeNodeIdentity(context);
+      // Compute in ID space
+      context=makeNodeIdentity(context);
 
       int first;
       int type = _type(context);
@@ -880,8 +880,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int first(int context, int expandedTypeID)
     {
-			// %REVIEW% This looks like it might want shift into identity space
-			// to avoid repeated conversion in the individual functions
+      // %REVIEW% This looks like it might want shift into identity space
+      // to avoid repeated conversion in the individual functions
       int first;
       int type = getNodeType(context);
 
@@ -928,14 +928,14 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current)
     {
-			// Compute in identity space
-			current=makeNodeIdentity(current);
+      // Compute in identity space
+      current=makeNodeIdentity(current);
 
       while (true)
       {
         current++; // Only works on IDs, not handles.
 
-				// %REVIEW% Are we using handles or indexes?
+        // %REVIEW% Are we using handles or indexes?
         int type = _type(current);  // may call nextNode()
 
         if (NULL == type)
@@ -960,8 +960,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current, int expandedTypeID)
     {
-			// Compute in ID space
-			current=makeNodeIdentity(current);
+      // Compute in ID space
+      current=makeNodeIdentity(current);
 
       while (true)
       {
@@ -1162,7 +1162,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int first(int current, int expandedTypeID)
     {
-			// Compute in ID space
+      // Compute in ID space
       current = makeNodeIdentity(current);
 
       while (NULL != (current = m_parent.elementAt(current)))
@@ -1225,8 +1225,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     protected boolean isAncestor(int contextIdent, int currentIdent)
     {
-			// %REVIEW% See comments in IsAfterAxis; using the "successor" of
-			// contextIdent is probably more efficient.
+      // %REVIEW% See comments in IsAfterAxis; using the "successor" of
+      // contextIdent is probably more efficient.
       for (contextIdent = m_parent.elementAt(contextIdent); DTM.NULL != contextIdent;
               contextIdent = m_parent.elementAt(contextIdent))
       {
@@ -1247,7 +1247,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current)
     {
-			// compute in ID space
+      // compute in ID space
       int subtreeRootIdent = makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--)
@@ -1276,7 +1276,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current, int expandedTypeID)
     {
-			// Compute in ID space
+      // Compute in ID space
       int subtreeRootIdent = makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--)
@@ -1311,7 +1311,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current)
     {
-			// Compute in ID space
+      // Compute in ID space
       int subtreeRootIdent = makeNodeIdentity(context );
 
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--)
@@ -1339,7 +1339,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current, int expandedTypeID)
     {
-			// Compute in ID space
+      // Compute in ID space
       int subtreeRootIdent = makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--)
@@ -1506,12 +1506,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current)
     {
-			// Compute in ID space
+      // Compute in ID space
       int subtreeRootIdent = makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) + 1; ; current++)
       {
-				// Kluge test: Just make sure +1 yielded a real node
+        // Kluge test: Just make sure +1 yielded a real node
         int type = _type(current);  // may call nextNode()
         if (type == NULL)
           return NULL;
@@ -1532,7 +1532,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     public int next(int context, int current, int expandedTypeID)
     {
-			// Compute in ID space
+      // Compute in ID space
       int subtreeRootIdent = makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) + 1; ; current++)
@@ -1568,7 +1568,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
     {
       int root=getDocumentRoot(context);
       return (getExpandedTypeID(root) == expandedTypeID)
-	? root : NULL;
+  ? root : NULL;
     }
 
     /**
@@ -1627,7 +1627,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     protected int getSubtreeRoot(int handle)
     {
-			// %REVIEW% Shouldn't this always be 0?
+      // %REVIEW% Shouldn't this always be 0?
       return makeNodeIdentity(getDocument());
     }
 
