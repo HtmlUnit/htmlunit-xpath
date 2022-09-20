@@ -33,10 +33,6 @@ public class XSLMessages extends XPATHMessages
   /** The language specific resource object for Xalan messages.  */
   private static ListResourceBundle XSLTBundle = null;
 
-  /** The class name of the Xalan error message string table.    */
-  private static final String XSLT_ERROR_RESOURCES =
-    "net.sourceforge.htmlunit.xpath.res.XSLTErrorResources";
-
   /**
    * Creates a message from the specified key and replacement
    * arguments, localized to the given locale.
@@ -50,7 +46,7 @@ public class XSLMessages extends XPATHMessages
   public static final String createMessage(String msgKey, Object args[])  //throws Exception
   {
     if (XSLTBundle == null)
-      XSLTBundle = loadResourceBundle(XSLT_ERROR_RESOURCES);
+      XSLTBundle = new XSLTErrorResources();
 
     if (XSLTBundle != null)
     {
@@ -73,7 +69,7 @@ public class XSLMessages extends XPATHMessages
   public static final String createWarning(String msgKey, Object args[])  //throws Exception
   {
     if (XSLTBundle == null)
-      XSLTBundle = loadResourceBundle(XSLT_ERROR_RESOURCES);
+      XSLTBundle = new XSLTErrorResources();
 
     if (XSLTBundle != null)
     {

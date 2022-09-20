@@ -33,10 +33,6 @@ public class XPATHMessages extends XMLMessages
   /** The language specific resource object for XPath messages.  */
   private static ListResourceBundle XPATHBundle = null;
 
-  /** The class name of the XPath error message string table.     */
-  private static final String XPATH_ERROR_RESOURCES =
-    "net.sourceforge.htmlunit.xpath.res.XPATHErrorResources";
-
   /**
    * Creates a message from the specified key and replacement
    * arguments, localized to the given locale.
@@ -50,7 +46,7 @@ public class XPATHMessages extends XMLMessages
   public static final String createXPATHMessage(String msgKey, Object args[])  //throws Exception
   {
     if (XPATHBundle == null)
-      XPATHBundle = loadResourceBundle(XPATH_ERROR_RESOURCES);
+      XPATHBundle = new XPATHErrorResources();
 
     if (XPATHBundle != null)
     {
@@ -73,7 +69,7 @@ public class XPATHMessages extends XMLMessages
   public static final String createXPATHWarning(String msgKey, Object args[])  //throws Exception
   {
     if (XPATHBundle == null)
-      XPATHBundle = loadResourceBundle(XPATH_ERROR_RESOURCES);
+      XPATHBundle = new XPATHErrorResources();
 
     if (XPATHBundle != null)
     {
