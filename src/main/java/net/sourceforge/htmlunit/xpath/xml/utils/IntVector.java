@@ -69,7 +69,7 @@ public class IntVector implements Cloneable
     m_mapSize = blocksize;
     m_map = new int[blocksize];
   }
-  
+
   /**
    * Construct a IntVector, using the given block size.
    *
@@ -85,7 +85,7 @@ public class IntVector implements Cloneable
 
   /**
    * Copy constructor for IntVector
-   * 
+   *
    * @param v Existing IntVector to copy
    */
   public IntVector(IntVector v)
@@ -106,7 +106,7 @@ public class IntVector implements Cloneable
   {
     return m_firstFree;
   }
-  
+
   /**
    * Get the length of the list.
    *
@@ -121,7 +121,7 @@ public class IntVector implements Cloneable
   /**
    * Append a int onto the vector.
    *
-   * @param value Int to add to the list 
+   * @param value Int to add to the list
    */
   public final void addElement(int value)
   {
@@ -141,18 +141,18 @@ public class IntVector implements Cloneable
 
     m_firstFree++;
   }
-  
+
   /**
    * Append several int values onto the vector.
    *
-   * @param value Int to add to the list 
+   * @param value Int to add to the list
    */
   public final void addElements(int value, int numberOfElements)
   {
 
     if ((m_firstFree + numberOfElements) >= m_mapSize)
     {
-      m_mapSize += (m_blocksize+numberOfElements);
+      m_mapSize += m_blocksize+numberOfElements;
 
       int newMap[] = new int[m_mapSize];
 
@@ -161,24 +161,24 @@ public class IntVector implements Cloneable
       m_map = newMap;
     }
 
-    for (int i = 0; i < numberOfElements; i++) 
+    for (int i = 0; i < numberOfElements; i++)
     {
       m_map[m_firstFree] = value;
       m_firstFree++;
     }
   }
-  
+
   /**
    * Append several slots onto the vector, but do not set the values.
    *
-   * @param numberOfElements Int to add to the list 
+   * @param numberOfElements Int to add to the list
    */
   public final void addElements(int numberOfElements)
   {
 
     if ((m_firstFree + numberOfElements) >= m_mapSize)
     {
-      m_mapSize += (m_blocksize+numberOfElements);
+      m_mapSize += m_blocksize+numberOfElements;
 
       int newMap[] = new int[m_mapSize];
 
@@ -186,10 +186,10 @@ public class IntVector implements Cloneable
 
       m_map = newMap;
     }
-    
+
     m_firstFree += numberOfElements;
   }
-  
+
 
   /**
    * Inserts the specified node in this vector at the specified index.
@@ -198,7 +198,7 @@ public class IntVector implements Cloneable
    * than the value it had previously.
    *
    * @param value Int to insert
-   * @param at Index of where to insert 
+   * @param at Index of where to insert
    */
   public final void insertElementAt(int value, int at)
   {
@@ -396,7 +396,7 @@ public class IntVector implements Cloneable
   public final int lastIndexOf(int elem)
   {
 
-    for (int i = (m_firstFree - 1); i >= 0; i--)
+    for (int i = m_firstFree - 1; i >= 0; i--)
     {
       if (m_map[i] == elem)
         return i;
@@ -404,10 +404,10 @@ public class IntVector implements Cloneable
 
     return java.lang.Integer.MIN_VALUE;
   }
-  
+
   /**
    * Returns clone of current IntVector
-   * 
+   *
    * @return clone of current IntVector
    */
   public Object clone()
@@ -415,5 +415,5 @@ public class IntVector implements Cloneable
   {
     return new IntVector(this);
   }
-  
+
 }

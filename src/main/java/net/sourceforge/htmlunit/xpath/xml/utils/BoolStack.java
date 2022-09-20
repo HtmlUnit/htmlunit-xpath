@@ -92,7 +92,7 @@ public final class BoolStack implements Cloneable
     if (m_index == m_allocatedSize - 1)
       grow();
 
-    return (m_values[++m_index] = val);
+    return m_values[++m_index] = val;
   }
 
   /**
@@ -123,7 +123,7 @@ public final class BoolStack implements Cloneable
   }
 
   /**
-   * Set the item at the top of this stack  
+   * Set the item at the top of this stack
    *
    *
    * @param b Object to set at the top of this stack
@@ -175,7 +175,7 @@ public final class BoolStack implements Cloneable
    */
   public boolean isEmpty()
   {
-    return (m_index == -1);
+    return m_index == -1;
   }
 
   /**
@@ -193,8 +193,8 @@ public final class BoolStack implements Cloneable
 
     m_values = newVector;
   }
-  
-  public Object clone() 
+
+  public Object clone()
     throws CloneNotSupportedException
   {
     return super.clone();

@@ -319,7 +319,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   public boolean bool(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
-    return (asNode(xctxt) != DTM.NULL);
+    return asNode(xctxt) != DTM.NULL;
   }
 
 
@@ -509,7 +509,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   public int getLength()
   {
     // Tell if this is being called from within a predicate.
-    boolean isPredicateTest = (this == m_execContext.getSubContextList());
+    boolean isPredicateTest = this == m_execContext.getSubContextList();
 
     // And get how many total predicates are part of this step.
     int predCount = getPredicateCount();
@@ -553,9 +553,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
       // ...which looks like a dumb bug to me. -sb
     }
 
-    int next;
-
-    while (DTM.NULL != (next = clone.nextNode()))
+    while (DTM.NULL != clone.nextNode())
     {
       pos++;
     }
@@ -575,7 +573,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public boolean isFresh()
   {
-    return (m_pos == 0);
+    return m_pos == 0;
   }
 
   /**
@@ -801,15 +799,13 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     if (m_foundLast || ((index >= 0) && (index <= getCurrentPos())))
       return;
 
-    int n;
-
     if (-1 == index)
     {
-      while (DTM.NULL != (n = nextNode()));
+      while (DTM.NULL != nextNode());
     }
     else
     {
-      while (DTM.NULL != (n = nextNode()))
+      while (DTM.NULL != nextNode())
       {
         if (getCurrentPos() >= index)
           break;

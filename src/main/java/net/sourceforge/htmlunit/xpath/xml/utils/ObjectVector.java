@@ -27,7 +27,7 @@ package net.sourceforge.htmlunit.xpath.xml.utils;
  * used, and when more storage is needed, a larger array is obtained
  * and all existing data is recopied into it. As a result, read/write
  * access to existing nodes is O(1) fast but appending may be O(N**2)
- * slow. 
+ * slow.
  * @xsl.usage internal
  */
 public class ObjectVector implements Cloneable
@@ -37,7 +37,7 @@ public class ObjectVector implements Cloneable
   protected int m_blocksize;
 
   /** Array of objects          */
-  protected Object m_map[]; 
+  protected Object m_map[];
 
   /** Number of ints in array          */
   protected int m_firstFree = 0;
@@ -69,7 +69,7 @@ public class ObjectVector implements Cloneable
     m_mapSize = blocksize;
     m_map = new Object[blocksize];
   }
-  
+
   /**
    * Construct a IntVector, using the given block size.
    *
@@ -85,7 +85,7 @@ public class ObjectVector implements Cloneable
 
   /**
    * Copy constructor for ObjectVector
-   * 
+   *
    * @param v Existing ObjectVector to copy
    */
   public ObjectVector(ObjectVector v)
@@ -106,7 +106,7 @@ public class ObjectVector implements Cloneable
   {
     return m_firstFree;
   }
-  
+
   /**
    * Get the length of the list.
    *
@@ -121,7 +121,7 @@ public class ObjectVector implements Cloneable
   /**
    * Append an object onto the vector.
    *
-   * @param value Object to add to the list 
+   * @param value Object to add to the list
    */
   public final void addElement(Object value)
   {
@@ -141,18 +141,18 @@ public class ObjectVector implements Cloneable
 
     m_firstFree++;
   }
-  
+
   /**
    * Append several Object values onto the vector.
    *
-   * @param value Object to add to the list 
+   * @param value Object to add to the list
    */
   public final void addElements(Object value, int numberOfElements)
   {
 
     if ((m_firstFree + numberOfElements) >= m_mapSize)
     {
-      m_mapSize += (m_blocksize+numberOfElements);
+      m_mapSize += m_blocksize+numberOfElements;
 
       Object newMap[] = new Object[m_mapSize];
 
@@ -161,13 +161,13 @@ public class ObjectVector implements Cloneable
       m_map = newMap;
     }
 
-    for (int i = 0; i < numberOfElements; i++) 
+    for (int i = 0; i < numberOfElements; i++)
     {
       m_map[m_firstFree] = value;
       m_firstFree++;
     }
   }
-  
+
   /**
    * Append several slots onto the vector, but do not set the values.
    *
@@ -178,7 +178,7 @@ public class ObjectVector implements Cloneable
 
     if ((m_firstFree + numberOfElements) >= m_mapSize)
     {
-      m_mapSize += (m_blocksize+numberOfElements);
+      m_mapSize += m_blocksize+numberOfElements;
 
       Object newMap[] = new Object[m_mapSize];
 
@@ -186,10 +186,10 @@ public class ObjectVector implements Cloneable
 
       m_map = newMap;
     }
-    
+
     m_firstFree += numberOfElements;
   }
-  
+
 
   /**
    * Inserts the specified object in this vector at the specified index.
@@ -198,7 +198,7 @@ public class ObjectVector implements Cloneable
    * than the value it had previously.
    *
    * @param value Object to insert
-   * @param at Index of where to insert 
+   * @param at Index of where to insert
    */
   public final void insertElementAt(Object value, int at)
   {
@@ -225,7 +225,7 @@ public class ObjectVector implements Cloneable
   }
 
   /**
-   * Remove all elements objects from the list. 
+   * Remove all elements objects from the list.
    */
   public final void removeAllElements()
   {
@@ -393,7 +393,7 @@ public class ObjectVector implements Cloneable
   public final int lastIndexOf(Object elem)
   {
 
-    for (int i = (m_firstFree - 1); i >= 0; i--)
+    for (int i = m_firstFree - 1; i >= 0; i--)
     {
       if (m_map[i] == elem)
         return i;
@@ -401,26 +401,26 @@ public class ObjectVector implements Cloneable
 
     return java.lang.Integer.MIN_VALUE;
   }
-  
+
   /*
-   * Reset the array to the supplied size.  
-   * 
-   * @param size 
+   * Reset the array to the supplied size.
+   *
+   * @param size
    */
   public final void setToSize(int size) {
-    
+
     Object newMap[] = new Object[size];
-    
+
     System.arraycopy(m_map, 0, newMap, 0, m_firstFree);
     m_mapSize = size;
 
     m_map = newMap;
-    
-  }  
-  
+
+  }
+
   /**
    * Returns clone of current ObjectVector
-   * 
+   *
    * @return clone of current ObjectVector
    */
   public Object clone()

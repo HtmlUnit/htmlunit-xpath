@@ -94,7 +94,7 @@ public class XMLReaderManager {
         // If the cached reader for this thread is in use, construct a new
         // one; otherwise, return the cached reader.
         reader = (XMLReader) m_readers.get();
-        boolean threadHasReader = (reader != null);
+        boolean threadHasReader = reader != null;
         if (!threadHasReader || m_inUse.get(reader) == Boolean.TRUE) {
             try {
                 try {

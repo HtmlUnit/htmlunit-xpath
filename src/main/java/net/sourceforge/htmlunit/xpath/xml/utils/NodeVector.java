@@ -34,25 +34,25 @@ public class NodeVector implements Serializable, Cloneable
 
   /**
    * Size of blocks to allocate.
-   *  @serial          
+   *  @serial
    */
   private int m_blocksize;
 
   /**
    * Array of nodes this points to.
-   *  @serial          
+   *  @serial
    */
   private int m_map[];
 
   /**
    * Number of nodes in this NodeVector.
-   *  @serial          
+   *  @serial
    */
   protected int m_firstFree = 0;
 
   /**
    * Size of the array this points to.
-   *  @serial           
+   *  @serial
    */
   private int m_mapSize;  // lazy initialization
 
@@ -405,7 +405,7 @@ public class NodeVector implements Serializable, Cloneable
     }
     else if ((m_firstFree + nNodes) >= m_mapSize)
     {
-      m_mapSize += (nNodes + m_blocksize);
+      m_mapSize += nNodes + m_blocksize;
 
       int newMap[] = new int[m_mapSize];
 
@@ -438,7 +438,7 @@ public class NodeVector implements Serializable, Cloneable
 
     m_firstFree = 0;
   }
-  
+
   /**
    * Set the length to zero, but don't clear the array.
    */
@@ -526,7 +526,7 @@ public class NodeVector implements Serializable, Cloneable
       m_map = new int[m_blocksize];
       m_mapSize = m_blocksize;
     }
-    
+
     if(index == -1)
       addElement(node);
 

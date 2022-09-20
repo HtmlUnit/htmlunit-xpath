@@ -26,7 +26,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
  * This is a default implementation of a table that manages mappings from
  * expanded names to expandedNameIDs.
  *
- * %OPT% The performance of the getExpandedTypeID() method is very important 
+ * %OPT% The performance of the getExpandedTypeID() method is very important
  * to DTM building. To get the best performance out of this class, we implement
  * a simple hash algorithm directly into this class, instead of using the
  * inefficient java.util.Hashtable. The code for the get and put operations
@@ -42,26 +42,26 @@ public class ExpandedNameTable
 
   /** The initial size of the m_extendedTypes array */
   private static int m_initialSize = 128;
-  
+
   /** Next available extended type   */
-  // %REVIEW% Since this is (should be) always equal 
-  // to the length of m_extendedTypes, do we need this? 
+  // %REVIEW% Since this is (should be) always equal
+  // to the length of m_extendedTypes, do we need this?
   private int m_nextType;
 
   // These are all the types prerotated, for caller convenience.
-  public static final int ELEMENT = ((int)DTM.ELEMENT_NODE) ;
-  public static final int ATTRIBUTE = ((int)DTM.ATTRIBUTE_NODE) ;
-  public static final int TEXT = ((int)DTM.TEXT_NODE) ;
-  public static final int CDATA_SECTION = ((int)DTM.CDATA_SECTION_NODE) ;
-  public static final int ENTITY_REFERENCE = ((int)DTM.ENTITY_REFERENCE_NODE) ;
-  public static final int ENTITY = ((int)DTM.ENTITY_NODE) ;
-  public static final int PROCESSING_INSTRUCTION = ((int)DTM.PROCESSING_INSTRUCTION_NODE) ;
-  public static final int COMMENT = ((int)DTM.COMMENT_NODE) ;
-  public static final int DOCUMENT = ((int)DTM.DOCUMENT_NODE) ;
-  public static final int DOCUMENT_TYPE = ((int)DTM.DOCUMENT_TYPE_NODE) ;
-  public static final int DOCUMENT_FRAGMENT =((int)DTM.DOCUMENT_FRAGMENT_NODE) ;
-  public static final int NOTATION = ((int)DTM.NOTATION_NODE) ;
-  public static final int NAMESPACE = ((int)DTM.NAMESPACE_NODE) ;
+  public static final int ELEMENT = (int)DTM.ELEMENT_NODE;
+  public static final int ATTRIBUTE = (int)DTM.ATTRIBUTE_NODE;
+  public static final int TEXT = (int)DTM.TEXT_NODE;
+  public static final int CDATA_SECTION = (int)DTM.CDATA_SECTION_NODE;
+  public static final int ENTITY_REFERENCE = (int)DTM.ENTITY_REFERENCE_NODE;
+  public static final int ENTITY = (int)DTM.ENTITY_NODE;
+  public static final int PROCESSING_INSTRUCTION = (int)DTM.PROCESSING_INSTRUCTION_NODE;
+  public static final int COMMENT = (int)DTM.COMMENT_NODE;
+  public static final int DOCUMENT = (int)DTM.DOCUMENT_NODE;
+  public static final int DOCUMENT_TYPE = (int)DTM.DOCUMENT_TYPE_NODE;
+  public static final int DOCUMENT_FRAGMENT = (int)DTM.DOCUMENT_FRAGMENT_NODE;
+  public static final int NOTATION = (int)DTM.NOTATION_NODE;
+  public static final int NAMESPACE = (int)DTM.NAMESPACE_NODE;
 
   /** Workspace for lookup. NOT THREAD SAFE!
    * */
@@ -75,26 +75,26 @@ public class ExpandedNameTable
    * This is used to calcualte the threshold.
    */
   private static float m_loadFactor = 0.75f;
-    
+
   /**
    * The initial capacity of the hash table. Use a bigger number
    * to avoid the cost of expanding the table.
-   */ 
+   */
   private static int m_initialCapacity = 203;
-  
+
   /**
    * The capacity of the hash table, i.e. the size of the
    * internal HashEntry array.
-   */ 
+   */
   private int m_capacity;
-  
-  /** 
+
+  /**
    * The threshold of the hash table, which is equal to capacity * loadFactor.
    * If the number of entries in the hash table is bigger than the threshold,
    * the hash table needs to be expanded.
    */
   private int m_threshold;
-  
+
   /**
    * The internal array to store the hash entries.
    * Each array member is a slot for a hash bucket.
@@ -121,7 +121,7 @@ public class ExpandedNameTable
     m_capacity = m_initialCapacity;
     m_threshold = (int)(m_capacity * m_loadFactor);
     m_table = new HashEntry[m_capacity];
-    
+
     initExtendedTypes();
   }
 
@@ -131,20 +131,20 @@ public class ExpandedNameTable
    *  basic DOM node types.
    */
   private void initExtendedTypes()
-  {    
+  {
     m_extendedTypes = new ExtendedType[m_initialSize];
     for (int i = 0; i < DTM.NTYPES; i++) {
         m_extendedTypes[i] = m_defaultExtendedTypes[i];
         m_table[i] = new HashEntry(m_defaultExtendedTypes[i], i, i, null);
     }
-    
+
     m_nextType = DTM.NTYPES;
   }
 
   /**
    * Given an expanded name represented by namespace, local name and node type,
    * return an ID.  If the expanded-name does not exist in the internal tables,
-   * the entry will be created, and the ID will be returned.  Any additional 
+   * the entry will be created, and the ID will be returned.  Any additional
    * nodes that are created that have this expanded name will use this ID.
    *
    * @param namespace The namespace
@@ -157,14 +157,14 @@ public class ExpandedNameTable
   {
     return getExpandedTypeID(namespace, localName, type, false);
   }
-  
+
   /**
    * Given an expanded name represented by namespace, local name and node type,
    * return an ID.  If the expanded-name does not exist in the internal tables,
-   * the entry will be created, and the ID will be returned.  Any additional 
+   * the entry will be created, and the ID will be returned.  Any additional
    * nodes that are created that have this expanded name will use this ID.
    * <p>
-   * If searchOnly is true, we will return -1 if the name is not found in the 
+   * If searchOnly is true, we will return -1 if the name is not found in the
    * table, otherwise the name is added to the table and the expanded name id
    * of the new entry is returned.
    *
@@ -182,13 +182,13 @@ public class ExpandedNameTable
       namespace = "";
     if (null == localName)
       localName = "";
-    
+
     // Calculate the hash code
     int hash = type + namespace.hashCode() + localName.hashCode();
-    
+
     // Redefine the hashET object to represent the new expanded name.
     hashET.redefine(type, namespace, localName, hash);
-    
+
     // Calculate the index into the HashEntry table.
     int index = hash % m_capacity;
     if (index < 0)
@@ -201,7 +201,7 @@ public class ExpandedNameTable
       if (e.hash == hash && e.key.equals(hashET))
         return e.value;
     }
-    
+
     if (searchOnly)
     {
       return DTM.NULL;
@@ -214,10 +214,10 @@ public class ExpandedNameTable
       if (index < 0)
         index = -index;
     }
-    
+
     // Create a new ExtendedType object
     ExtendedType newET = new ExtendedType(type, namespace, localName, hash);
-    
+
     // Expand the m_extendedTypes array if necessary.
     if (m_extendedTypes.length == m_nextType) {
         ExtendedType[] newArray = new ExtendedType[m_extendedTypes.length * 2];
@@ -225,10 +225,10 @@ public class ExpandedNameTable
                          m_extendedTypes.length);
         m_extendedTypes = newArray;
     }
-    
+
     m_extendedTypes[m_nextType] = newET;
-    
-    // Create a new hash entry for the new ExtendedType and put it into 
+
+    // Create a new hash entry for the new ExtendedType and put it into
     // the table.
     HashEntry entry = new HashEntry(newET, m_nextType, hash, m_table[index]);
     m_table[index] = entry;
@@ -237,8 +237,8 @@ public class ExpandedNameTable
   }
 
   /**
-   * Increases the capacity of and internally reorganizes the hashtable, 
-   * in order to accommodate and access its entries more efficiently. 
+   * Increases the capacity of and internally reorganizes the hashtable,
+   * in order to accommodate and access its entries more efficiently.
    * This method is called when the number of keys in the hashtable exceeds
    * this hashtable's capacity and load factor.
    */
@@ -246,11 +246,11 @@ public class ExpandedNameTable
   {
     int oldCapacity = m_capacity;
     HashEntry[] oldTable = m_table;
-      
+
     int newCapacity = 2 * oldCapacity + 1;
     m_capacity = newCapacity;
     m_threshold = (int)(newCapacity * m_loadFactor);
-      
+
     m_table = new HashEntry[newCapacity];
     for (int i = oldCapacity-1; i >=0 ; i--)
     {
@@ -258,11 +258,11 @@ public class ExpandedNameTable
       {
         HashEntry e = old;
         old = old.next;
-          
+
         int newIndex = e.hash % newCapacity;
         if (newIndex < 0)
           newIndex = -newIndex;
-          
+
         e.next = m_table[newIndex];
         m_table[newIndex] = e;
       }
@@ -317,7 +317,7 @@ public class ExpandedNameTable
   public String getNamespace(int ExpandedNameID)
   {
     String namespace = m_extendedTypes[ExpandedNameID].getNamespace();
-    return (namespace.length() == 0 ? null : namespace);
+    return namespace.length() == 0 ? null : namespace;
   }
 
   /**
@@ -346,7 +346,7 @@ public class ExpandedNameTable
     //ExtendedType etype = m_extendedTypes[ExpandedNameID];
     return (short)m_extendedTypes[ExpandedNameID].getNodeType();
   }
-  
+
   /**
    * Return the size of the ExpandedNameTable
    *
@@ -356,7 +356,7 @@ public class ExpandedNameTable
   {
     return m_nextType;
   }
-  
+
   /**
    * Return the array of extended types
    *
@@ -378,7 +378,7 @@ public class ExpandedNameTable
     int value;
     int hash;
     HashEntry next;
-      
+
     protected HashEntry(ExtendedType key, int value, int hash, HashEntry next)
     {
       this.key = key;
@@ -387,5 +387,5 @@ public class ExpandedNameTable
       this.next = next;
     }
   }
-  
+
 }
