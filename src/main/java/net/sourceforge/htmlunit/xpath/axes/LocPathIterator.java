@@ -376,9 +376,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     m_pos = 0;
     m_length = -1;
 
-    if (m_isTopLevel)
-      this.m_stackFrame = xctxt.getVarStack().getStackFrame();
-
     // reset();
   }
 

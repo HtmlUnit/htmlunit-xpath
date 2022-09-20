@@ -319,8 +319,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     m_currentNodes.push(DTM.NULL);
     m_currentExpressionNodes.push(DTM.NULL);
     m_saxLocations.push(null);
-    m_variableStacks = recursiveVarContext ? new VariableStack()
-                                           : new VariableStack(1);
   }
 
   /**
@@ -461,36 +459,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   public Object getOwnerObject()
   {
     return m_owner;
-  }
-
-  // ================ VarStack ===================
-
-  /**
-   * The stack of Variable stacks.  A VariableStack will be
-   * pushed onto this stack for each template invocation.
-   */
-  private VariableStack m_variableStacks;
-
-  /**
-   * Get the variable stack, which is in charge of variables and
-   * parameters.
-   *
-   * @return the variable stack, which should not be null.
-   */
-  public final VariableStack getVarStack()
-  {
-    return m_variableStacks;
-  }
-
-  /**
-   * Get the variable stack, which is in charge of variables and
-   * parameters.
-   *
-   * @param varStack non-null reference to the variable stack.
-   */
-  public final void setVarStack(VariableStack varStack)
-  {
-    m_variableStacks = varStack;
   }
 
   // ================ SourceTreeManager ===================

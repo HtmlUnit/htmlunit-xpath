@@ -183,24 +183,6 @@ public class DescendantIterator extends LocPathIterator
 
     int next;
 
-    net.sourceforge.htmlunit.xpath.VariableStack vars;
-    int savedStart;
-    if (-1 != m_stackFrame)
-    {
-      vars = m_execContext.getVarStack();
-
-      // These three statements need to be combined into one operation.
-      savedStart = vars.getStackFrame();
-
-      vars.setStackFrame(m_stackFrame);
-    }
-    else
-    {
-      // Yuck.  Just to shut up the compiler!
-      vars = null;
-      savedStart = 0;
-    }
-
     try
     {
       do
@@ -245,11 +227,6 @@ public class DescendantIterator extends LocPathIterator
     }
     finally
     {
-      if (-1 != m_stackFrame)
-      {
-        // These two statements need to be combined into one operation.
-        vars.setStackFrame(savedStart);
-      }
     }
   }
 
