@@ -711,7 +711,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * The ammount to use for stacks that record information during the
    * recursive execution.
    */
-  public static final int RECURSIONLIMIT = (1024*4);
+  public static final int RECURSIONLIMIT = 1024*4;
 
   /** The stack of <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a> objects.
    *  Not to be confused with the current node list.  %REVIEW% Note that there

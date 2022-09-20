@@ -316,7 +316,7 @@ public class VariableStack implements Cloneable
 
     // Lazy execution of variables.
     if (val.getType() == XObject.CLASS_UNRESOLVEDVARIABLE)
-      return (_stackFrames[index] = val.execute(xctxt));
+      return _stackFrames[index] = val.execute(xctxt);
 
     return val;
   }
@@ -373,7 +373,7 @@ public class VariableStack implements Cloneable
 
     // Lazy execution of variables.
     if (val.getType() == XObject.CLASS_UNRESOLVEDVARIABLE)
-      return (_stackFrames[index] = val.execute(xctxt));
+      return _stackFrames[index] = val.execute(xctxt);
 
     return destructiveOK ? val : val.getFresh();
   }
@@ -390,7 +390,7 @@ public class VariableStack implements Cloneable
    */
   public boolean isLocalSet(int index) throws TransformerException
   {
-    return (_stackFrames[index + _currentFrameBottom] != null);
+    return _stackFrames[index + _currentFrameBottom] != null;
   }
 
   /** NEEDSDOC Field m_nulls          */
@@ -449,7 +449,7 @@ public class VariableStack implements Cloneable
 
     // Lazy execution of variables.
     if (val.getType() == XObject.CLASS_UNRESOLVEDVARIABLE)
-      return (_stackFrames[index] = val.execute(xctxt));
+      return _stackFrames[index] = val.execute(xctxt);
 
     return val;
   }
@@ -476,7 +476,7 @@ public class VariableStack implements Cloneable
 
     // Lazy execution of variables.
     if (val.getType() == XObject.CLASS_UNRESOLVEDVARIABLE)
-      return (_stackFrames[index] = val.execute(xctxt));
+      return _stackFrames[index] = val.execute(xctxt);
 
     return destructiveOK ? val : val.getFresh();
   }

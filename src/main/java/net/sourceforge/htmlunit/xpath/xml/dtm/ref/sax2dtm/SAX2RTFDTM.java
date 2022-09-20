@@ -43,7 +43,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
  * has been provided.
  *
  * 2) A stack of these documents is maintained, allowing us to "tail-prune" the
- * most recently added trees off the end of the DTM as stylesheet elements 
+ * most recently added trees off the end of the DTM as stylesheet elements
  * (and thus variable contexts) are exited.
  *
  * PLEASE NOTE that this class may be _heavily_ dependent upon the
@@ -54,7 +54,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
  * the superclass and which is the subclass; the current arrangement
  * is as much about preserving stability of existing code during
  * development as anything else.)
- * 
+ *
  * %REVIEW% In fact, since the differences are so minor, I think it
  * may be possible/practical to fold them back into the base
  * SAX2DTM. Consider that as a future code-size optimization.
@@ -63,10 +63,10 @@ public class SAX2RTFDTM extends SAX2DTM
 {
   /** Set true to monitor SAX events and similar diagnostic info. */
   private static final boolean DEBUG = false;
-  
+
   /** Most recently started Document, or null if the DTM is empty.  */
   private int m_currentDocumentNode=NULL;
-  
+
   /** Tail-pruning mark: Number of nodes in use */
   IntStack mark_size=new IntStack();
   /** Tail-pruning mark: Number of data items in use */
@@ -117,23 +117,23 @@ public class SAX2RTFDTM extends SAX2DTM
    * Tail-pruning mark:  default initial number of dataOrQName slots in use
    */
   int m_emptyDataQNCount;
-  
+
   public SAX2RTFDTM(DTMManager mgr, Source source, int dtmIdentity,
                  DTMWSFilter whiteSpaceFilter,
                  XMLStringFactory xstringfactory,
                  boolean doIndexing)
   {
-    super(mgr, source, dtmIdentity, whiteSpaceFilter, 
+    super(mgr, source, dtmIdentity, whiteSpaceFilter,
           xstringfactory, doIndexing);
-          
+
     // NEVER track source locators for RTFs; they aren't meaningful. I think.
     // (If we did track them, we'd need to tail-prune these too.)
     //org.apache.xalan.processor.TransformerFactoryImpl.m_source_location;
     m_useSourceLocationProperty=false;
-    m_sourceSystemId = (m_useSourceLocationProperty) ? new StringVector()
+    m_sourceSystemId = m_useSourceLocationProperty ? new StringVector()
                                                      : null;
-    m_sourceLine = (m_useSourceLocationProperty) ? new IntVector() : null;
-    m_sourceColumn = (m_useSourceLocationProperty) ? new IntVector() : null;
+    m_sourceLine = m_useSourceLocationProperty ? new IntVector() : null;
+    m_sourceColumn = m_useSourceLocationProperty ? new IntVector() : null;
 
     // Record initial sizes of fields that are pushed and restored
     // for RTF tail-pruning.  More entries can be popped than pushed, so
@@ -147,7 +147,7 @@ public class SAX2RTFDTM extends SAX2DTM
     m_emptyCharsCount = m_chars.size();
     m_emptyDataQNCount = m_dataOrQName.size();
   }
-  
+
   /**
    * Given a DTM, find the owning document node. In the case of
    * SAX2RTFDTM, which may contain multiple documents, this returns
@@ -187,7 +187,7 @@ public class SAX2RTFDTM extends SAX2DTM
 
     return DTM.NULL; // Safety net; should never happen
   }
-  
+
   /**
    * Given a node identifier, find the owning document node.  Unlike the DOM,
    * this considers the owningDocument of a Document to be itself. Note that
@@ -204,7 +204,7 @@ public class SAX2RTFDTM extends SAX2DTM
          parent!=NULL;
          nodeIdentifier=parent,parent=_parent(nodeIdentifier))
       ;
-   
+
     return nodeIdentifier;
   }
 
@@ -227,11 +227,11 @@ public class SAX2RTFDTM extends SAX2DTM
     m_prefixMappings = new java.util.Vector();
     m_contextIndexes = new IntStack();
     m_parents = new IntStack();
-   
+
     m_currentDocumentNode=m_size;
     super.startDocument();
   }
- 
+
   /**
    * Receive notification of the end of the document.
    *
@@ -263,7 +263,7 @@ public class SAX2RTFDTM extends SAX2DTM
     m_currentDocumentNode= NULL; // no longer open
     m_endDocumentOccured = true;
   }
- 
+
 
   /** "Tail-pruning" support for RTFs.
    *
@@ -289,13 +289,13 @@ public class SAX2RTFDTM extends SAX2DTM
     mark_nsdeclelem_size.push((m_namespaceDeclSetElements==null)
                                    ? 0
                                    : m_namespaceDeclSetElements.size());
-   
+
     // Values from SAX2DTM
     mark_data_size.push(m_data.size());
     mark_char_size.push(m_chars.size());
     mark_doq_size.push(m_dataOrQName.size());
   }
- 
+
   /** "Tail-pruning" support for RTFs.
    *
    * This function pops the information previously saved by
@@ -324,7 +324,7 @@ public class SAX2RTFDTM extends SAX2DTM
   public boolean popRewindMark()
   {
     boolean top=mark_size.empty();
-   
+
     m_size=top ? m_emptyNodeCount : mark_size.pop();
     m_exptype.setSize(m_size);
     m_firstch.setSize(m_size);
@@ -343,7 +343,7 @@ public class SAX2RTFDTM extends SAX2DTM
     if (m_namespaceDeclSetElements!=null) {
       m_namespaceDeclSetElements.setSize(ds1);
     }
- 
+
     // Values from SAX2DTM - m_data always has a reserved entry
     m_data.setSize(top ? m_emptyDataCount : mark_data_size.pop());
     m_chars.setLength(top ? m_emptyCharsCount : mark_char_size.pop());
@@ -352,7 +352,7 @@ public class SAX2RTFDTM extends SAX2DTM
     // Return true iff DTM now empty
     return m_size==0;
   }
- 
+
   /** @return true if a DTM tree is currently under construction.
    * */
   public boolean isTreeIncomplete()

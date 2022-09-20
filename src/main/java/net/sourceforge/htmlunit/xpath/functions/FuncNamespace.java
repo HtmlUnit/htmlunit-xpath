@@ -45,7 +45,7 @@ public class FuncNamespace extends FunctionDef1Arg
   {
 
     int context = getArg0AsNode(xctxt);
-    
+
     String s;
     if(context != DTM.NULL)
     {
@@ -70,9 +70,9 @@ public class FuncNamespace extends FunctionDef1Arg
       else
         return XString.EMPTYSTRING;
     }
-    else 
+    else
       return XString.EMPTYSTRING;
-    
-    return ((null == s) ? XString.EMPTYSTRING : new XString(s));
+
+    return (null == s) ? XString.EMPTYSTRING : new XString(s);
   }
 }

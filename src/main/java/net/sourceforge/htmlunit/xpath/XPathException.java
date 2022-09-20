@@ -49,7 +49,7 @@ public class XPathException extends TransformerException
   {
     return m_styleNode;
   }
-  
+
   /**
    * Set the stylesheet node from where this error originated.
    * @param styleNode The stylesheet node from where this error originated, or null.
@@ -75,7 +75,7 @@ public class XPathException extends TransformerException
     this.setLocator(ex);
     setStylesheetNode(getStylesheetNode(ex));
   }
-  
+
   /**
    * Create an XPathException object that holds
    * an error message.
@@ -86,25 +86,25 @@ public class XPathException extends TransformerException
     super(message);
   }
 
-  
+
   /**
-   * Get the XSLT ElemVariable that this sub-expression references.  In order for 
+   * Get the XSLT ElemVariable that this sub-expression references.  In order for
    * this to work, the SourceLocator must be the owning ElemTemplateElement.
    * @return The dereference to the ElemVariable, or null if not found.
    */
   public org.w3c.dom.Node getStylesheetNode(ExpressionNode ex)
   {
-    
+
     ExpressionNode owner = getExpressionOwner(ex);
 
     if (null != owner && owner instanceof org.w3c.dom.Node)
     {
-    return ((org.w3c.dom.Node)owner);
+    return (org.w3c.dom.Node)owner;
     }
     return null;
 
   }
-  
+
   /**
    * Get the first non-Expression parent of this node.
    * @return null or first ancestor that is not an Expression.
@@ -257,14 +257,14 @@ public class XPathException extends TransformerException
 
     if (s == null)
       s = new java.io.PrintWriter(System.err);
-        
+
     try
     {
       super.printStackTrace(s);
     }
     catch (Exception e){}
-    
-    
+
+
     boolean isJdk14OrHigher = false;
     try {
         Throwable.class.getMethod("getCause",null);
@@ -272,12 +272,12 @@ public class XPathException extends TransformerException
     } catch (NoSuchMethodException nsme) {
         // do nothing
     }
-        
-    // The printStackTrace method of the Throwable class in jdk 1.4 
+
+    // The printStackTrace method of the Throwable class in jdk 1.4
     // and higher will include the cause when printing the backtrace.
-    // The following code is only required when using jdk 1.3 or lower               
+    // The following code is only required when using jdk 1.3 or lower
     if (!isJdk14OrHigher) {
-              
+
       Throwable exception = m_exception;
 
       for (int i = 0; (i < 10) && (null != exception); i++)
@@ -318,7 +318,7 @@ public class XPathException extends TransformerException
   /**
    *  Return the embedded exception, if any.
    *  Overrides javax.xml.transform.TransformerException.getException().
-   * 
+   *
    *  @return The embedded exception, or null if there is none.
    */
   public Throwable getException()

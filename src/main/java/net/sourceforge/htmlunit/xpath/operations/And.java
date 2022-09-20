@@ -37,7 +37,7 @@ public class And extends Operation
    *
    * @param xctxt The runtime execution context.
    *
-   * @return {@link net.sourceforge.htmlunit.xpath.objects.XBoolean#S_TRUE} or 
+   * @return {@link net.sourceforge.htmlunit.xpath.objects.XBoolean#S_TRUE} or
    * {@link net.sourceforge.htmlunit.xpath.objects.XBoolean#S_FALSE}.
    *
    * @throws javax.xml.transform.TransformerException
@@ -56,7 +56,7 @@ public class And extends Operation
     else
       return XBoolean.S_FALSE;
   }
-  
+
   /**
    * Evaluate this operation directly to a boolean.
    *
@@ -69,7 +69,7 @@ public class And extends Operation
   public boolean bool(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
-    return (m_left.bool(xctxt) && m_right.bool(xctxt));
+    return m_left.bool(xctxt) && m_right.bool(xctxt);
   }
 
 }

@@ -36,7 +36,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
  * @xsl.usage general
  */
 public class XNodeSet extends NodeSequence
-{  
+{
     static final long serialVersionUID = 1916026368035639667L;
   /**
    * Default constructor for derived objects.
@@ -63,14 +63,14 @@ public class XNodeSet extends NodeSequence
         // so if it doesn't have one, make one.
       if(!nodeSet.hasCache())
           nodeSet.setShouldCacheNodes(true);
-        
+
         // Get the cache from val and use it ourselves (we share it).
       setObject(nodeSet.getIteratorCache());
     }
     else
       setIter(val);
   }
-  
+
   /**
    * Construct a XNodeSet object.
    *
@@ -89,10 +89,10 @@ public class XNodeSet extends NodeSequence
 
 
   /**
-   * Construct an empty XNodeSet object.  This is used to create a mutable 
+   * Construct an empty XNodeSet object.  This is used to create a mutable
    * nodeset to which random nodes may be added.
    */
-  public XNodeSet(DTMManager dtmMgr) 
+  public XNodeSet(DTMManager dtmMgr)
   {
      this(DTM.NULL,dtmMgr);
   }
@@ -154,7 +154,7 @@ public class XNodeSet extends NodeSequence
   /**
    * Cast result object to a number.
    *
-   * @return numeric value of the string conversion from the 
+   * @return numeric value of the string conversion from the
    * next node in the NodeSetDTM, or NAN if no node was found
    */
   public double num()
@@ -163,12 +163,12 @@ public class XNodeSet extends NodeSequence
     int node = item(0);
     return (node != DTM.NULL) ? getNumberFromNode(node) : Double.NaN;
   }
-  
+
   /**
-   * Cast result object to a number, but allow side effects, such as the 
+   * Cast result object to a number, but allow side effects, such as the
    * incrementing of an iterator.
    *
-   * @return numeric value of the string conversion from the 
+   * @return numeric value of the string conversion from the
    * next node in the NodeSetDTM, or NAN if no node was found
    */
   public double numWithSideEffects()
@@ -186,21 +186,21 @@ public class XNodeSet extends NodeSequence
    */
   public boolean bool()
   {
-    return (item(0) != DTM.NULL);
+    return item(0) != DTM.NULL;
   }
-  
+
   /**
-   * Cast result object to a boolean, but allow side effects, such as the 
+   * Cast result object to a boolean, but allow side effects, such as the
    * incrementing of an iterator.
    *
    * @return True if there is a next node in the nodeset
    */
   public boolean boolWithSideEffects()
   {
-    return (nextNode() != DTM.NULL);
+    return nextNode() != DTM.NULL;
   }
 
-  
+
   /**
    * Get the string conversion from a single node.
    *
@@ -221,7 +221,7 @@ public class XNodeSet extends NodeSequence
       return net.sourceforge.htmlunit.xpath.objects.XString.EMPTYSTRING;
     }
   }
-  
+
   /**
    * Directly call the
    * characters method on the passed ContentHandler for the
@@ -237,25 +237,25 @@ public class XNodeSet extends NodeSequence
           throws org.xml.sax.SAXException
   {
     int node = item(0);
-  
+
     if(node != DTM.NULL)
     {
       m_dtmMgr.getDTM(node).dispatchCharactersEvents(node, ch, false);
     }
-    
+
   }
-  
+
   /**
    * Cast result object to an XMLString.
    *
-   * @return The document fragment node data or the empty string. 
+   * @return The document fragment node data or the empty string.
    */
   public XMLString xstr()
   {
     int node = item(0);
     return (node != DTM.NULL) ? getStringFromNode(node) : XString.EMPTYSTRING;
   }
-  
+
   /**
    * Cast result object to a string.
    *
@@ -266,7 +266,7 @@ public class XNodeSet extends NodeSequence
     XString xstring = (XString)xstr();
     xstring.appendToFsb(fsb);
   }
-  
+
 
   /**
    * Cast result object to a string.
@@ -277,9 +277,9 @@ public class XNodeSet extends NodeSequence
   public String str()
   {
     int node = item(0);
-    return (node != DTM.NULL) ? getStringFromNode(node).toString() : "";   
+    return (node != DTM.NULL) ? getStringFromNode(node).toString() : "";
   }
-  
+
   /**
    * Return a java object that's closest to the representation
    * that should be handed to an extension.
@@ -299,7 +299,7 @@ public class XNodeSet extends NodeSequence
 //  /**
 //   * Cast result object to a result tree fragment.
 //   *
-//   * @param support The XPath context to use for the conversion 
+//   * @param support The XPath context to use for the conversion
 //   *
 //   * @return the nodeset as a result tree fragment.
 //   */
@@ -308,7 +308,7 @@ public class XNodeSet extends NodeSequence
 //    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 //    DocumentBuilder db = dbf.newDocumentBuilder();
 //    Document myDoc = db.newDocument();
-//    
+//
 //    DocumentFragment docFrag = myDoc.createDocumentFragment();
 //
 //    DTMIterator nl = iter();
@@ -333,7 +333,7 @@ public class XNodeSet extends NodeSequence
   {
     return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeIterator(iter());
   }
-  
+
   /**
    * Cast result object to a nodelist.
    *
@@ -346,14 +346,14 @@ public class XNodeSet extends NodeSequence
     net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList nodelist = new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList(this);
     // Creating a DTMNodeList has the side-effect that it will create a clone
     // XNodeSet with cache and run m_iter to the end. You cannot get any node
-    // from m_iter after this call. As a fix, we call SetVector() on the clone's 
+    // from m_iter after this call. As a fix, we call SetVector() on the clone's
     // cache. See Bugzilla 14406.
     XNodeSet clone = (XNodeSet)nodelist.getDTMIterator();
     SetVector(clone.getVector());
     return nodelist;
   }
 
-  
+
 //  /**
 //   * Return a java object that's closest to the representation
 //   * that should be handed to an extension.
@@ -372,11 +372,11 @@ public class XNodeSet extends NodeSequence
   {
     return this;
   }
-  
+
   public void release(DTMIterator iter)
   {
   }
-  
+
   /**
    * Cast result object to a nodelist.
    *
@@ -396,7 +396,7 @@ public class XNodeSet extends NodeSequence
       throw new RuntimeException(cnse.getMessage());
     }
   }
-  
+
   /**
    * Get a fresh copy of the object.  For use with variables.
    *
@@ -465,7 +465,7 @@ public class XNodeSet extends NodeSequence
    * @param obj2 Object to compare this nodeset to
    * @param comparator Comparator to use
    *
-   * @return See the comments below for each object type comparison 
+   * @return See the comments below for each object type comparison
    *
    * @throws javax.xml.transform.TransformerException
    */
@@ -480,16 +480,16 @@ public class XNodeSet extends NodeSequence
     {
       // %OPT% This should be XMLString based instead of string based...
 
-      // From http://www.w3.org/TR/xpath: 
-      // If both objects to be compared are node-sets, then the comparison 
-      // will be true if and only if there is a node in the first node-set 
-      // and a node in the second node-set such that the result of performing 
+      // From http://www.w3.org/TR/xpath:
+      // If both objects to be compared are node-sets, then the comparison
+      // will be true if and only if there is a node in the first node-set
+      // and a node in the second node-set such that the result of performing
       // the comparison on the string-values of the two nodes is true.
       // Note this little gem from the draft:
-      // NOTE: If $x is bound to a node-set, then $x="foo" 
-      // does not mean the same as not($x!="foo"): the former 
-      // is true if and only if some node in $x has the string-value 
-      // foo; the latter is true if and only if all nodes in $x have 
+      // NOTE: If $x is bound to a node-set, then $x="foo"
+      // does not mean the same as not($x!="foo"): the former
+      // is true if and only if some node in $x has the string-value
+      // foo; the latter is true if and only if all nodes in $x have
       // the string-value foo.
       DTMIterator list1 = iterRaw();
       DTMIterator list2 = ((XNodeSet) obj2).iterRaw();
@@ -542,11 +542,11 @@ public class XNodeSet extends NodeSequence
     else if (XObject.CLASS_BOOLEAN == type)
     {
 
-      // From http://www.w3.org/TR/xpath: 
-      // If one object to be compared is a node-set and the other is a boolean, 
-      // then the comparison will be true if and only if the result of 
-      // performing the comparison on the boolean and on the result of 
-      // converting the node-set to a boolean using the boolean function 
+      // From http://www.w3.org/TR/xpath:
+      // If one object to be compared is a node-set and the other is a boolean,
+      // then the comparison will be true if and only if the result of
+      // performing the comparison on the boolean and on the result of
+      // converting the node-set to a boolean using the boolean function
       // is true.
       double num1 = bool() ? 1.0 : 0.0;
       double num2 = obj2.num();
@@ -556,13 +556,13 @@ public class XNodeSet extends NodeSequence
     else if (XObject.CLASS_NUMBER == type)
     {
 
-      // From http://www.w3.org/TR/xpath: 
-      // If one object to be compared is a node-set and the other is a number, 
-      // then the comparison will be true if and only if there is a 
-      // node in the node-set such that the result of performing the 
-      // comparison on the number to be compared and on the result of 
-      // converting the string-value of that node to a number using 
-      // the number function is true. 
+      // From http://www.w3.org/TR/xpath:
+      // If one object to be compared is a node-set and the other is a number,
+      // then the comparison will be true if and only if there is a
+      // node in the node-set such that the result of performing the
+      // comparison on the number to be compared and on the result of
+      // converting the string-value of that node to a number using
+      // the number function is true.
       DTMIterator list1 = iterRaw();
       double num2 = obj2.num();
       int node;
@@ -602,12 +602,12 @@ public class XNodeSet extends NodeSequence
     else if (XObject.CLASS_STRING == type)
     {
 
-      // From http://www.w3.org/TR/xpath: 
-      // If one object to be compared is a node-set and the other is a 
-      // string, then the comparison will be true if and only if there 
-      // is a node in the node-set such that the result of performing 
-      // the comparison on the string-value of the node and the other 
-      // string is true. 
+      // From http://www.w3.org/TR/xpath:
+      // If one object to be compared is a node-set and the other is a
+      // string, then the comparison will be true if and only if there
+      // is a node in the node-set such that the result of performing
+      // the comparison on the string-value of the node and the other
+      // string is true.
       XMLString s2 = obj2.xstr();
       DTMIterator list1 = iterRaw();
       int node;
@@ -637,7 +637,7 @@ public class XNodeSet extends NodeSequence
    *
    * @param obj2 object to compare this nodeset to
    *
-   * @return see this.compare(...) 
+   * @return see this.compare(...)
    *
    * @throws javax.xml.transform.TransformerException
    */
@@ -651,7 +651,7 @@ public class XNodeSet extends NodeSequence
    *
    * @param obj2 object to compare this nodeset to
    *
-   * @return see this.compare(...) 
+   * @return see this.compare(...)
    *
    * @throws javax.xml.transform.TransformerException
    */
@@ -665,7 +665,7 @@ public class XNodeSet extends NodeSequence
    *
    * @param obj2 object to compare this nodeset to
    *
-   * @return see this.compare(...) 
+   * @return see this.compare(...)
    *
    * @throws javax.xml.transform.TransformerException
    */
@@ -679,7 +679,7 @@ public class XNodeSet extends NodeSequence
    *
    * @param obj2 object to compare this nodeset to
    *
-   * @return see this.compare(...) 
+   * @return see this.compare(...)
    *
    * @throws javax.xml.transform.TransformerException
    */
@@ -694,7 +694,7 @@ public class XNodeSet extends NodeSequence
    *
    * @param obj2 object to compare this nodeset to
    *
-   * @return see this.compare(...) 
+   * @return see this.compare(...)
    *
    * @throws javax.xml.transform.TransformerException
    */
@@ -715,7 +715,7 @@ public class XNodeSet extends NodeSequence
    *
    * @param obj2 object to compare this nodeset to
    *
-   * @return see this.compare(...) 
+   * @return see this.compare(...)
    *
    * @throws javax.xml.transform.TransformerException
    */
@@ -736,7 +736,7 @@ abstract class Comparator
    *
    *
    * @param s1 First string to compare
-   * @param s2 Second String to compare 
+   * @param s2 Second String to compare
    *
    * @return Whether the strings are equal or not
    */
@@ -765,13 +765,13 @@ class LessThanComparator extends Comparator
    *
    *
    * @param s1 First string to compare
-   * @param s2 Second String to compare 
+   * @param s2 Second String to compare
    *
    * @return True if s1 is less than s2
    */
   boolean compareStrings(XMLString s1, XMLString s2)
   {
-    return (s1.toDouble() < s2.toDouble());
+    return s1.toDouble() < s2.toDouble();
     // return s1.compareTo(s2) < 0;
   }
 
@@ -807,7 +807,7 @@ class LessThanOrEqualComparator extends Comparator
    */
   boolean compareStrings(XMLString s1, XMLString s2)
   {
-    return (s1.toDouble() <= s2.toDouble());
+    return s1.toDouble() <= s2.toDouble();
     // return s1.compareTo(s2) <= 0;
   }
 
@@ -843,7 +843,7 @@ class GreaterThanComparator extends Comparator
    */
   boolean compareStrings(XMLString s1, XMLString s2)
   {
-    return (s1.toDouble() > s2.toDouble());
+    return s1.toDouble() > s2.toDouble();
     // return s1.compareTo(s2) > 0;
   }
 
@@ -879,7 +879,7 @@ class GreaterThanOrEqualComparator extends Comparator
    */
   boolean compareStrings(XMLString s1, XMLString s2)
   {
-    return (s1.toDouble() >= s2.toDouble());
+    return s1.toDouble() >= s2.toDouble();
     // return s1.compareTo(s2) >= 0;
   }
 

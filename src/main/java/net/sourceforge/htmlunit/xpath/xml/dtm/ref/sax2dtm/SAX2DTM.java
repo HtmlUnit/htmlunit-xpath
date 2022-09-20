@@ -167,7 +167,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * fixed dom-style names.
    */
-  private static final String[] m_fixednames = { null, 
+  private static final String[] m_fixednames = { null,
                     null,  // nothing, Element
                     null, "#text",  // Attr, Text
                     "#cdata_section", null,  // CDATA, EntityReference
@@ -207,7 +207,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /**
    * Describes whether information about document source location
    * should be maintained or not.
-   * 
+   *
    * Made protected for access by SAX2RTFDTM.
    */
   protected boolean m_useSourceLocationProperty = false;
@@ -221,7 +221,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    /** Made protected for access by SAX2RTFDTM.
    */
   protected IntVector m_sourceColumn;
-  
+
   /**
    * Construct a SAX2DTM object using the default block size.
    *
@@ -243,7 +243,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     this(mgr, source, dtmIdentity, whiteSpaceFilter,
           xstringfactory, doIndexing, DEFAULT_BLOCKSIZE, true, false);
   }
-  
+
   /**
    * Construct a SAX2DTM object ready to be constructed from SAX2
    * ContentHandler events.
@@ -274,7 +274,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
     // %OPT% Use smaller sizes for all internal storage units when
     // the blocksize is small. This reduces the cost of creating an RTF.
-    if (blocksize <= 64) 
+    if (blocksize <= 64)
     {
       m_data = new SuballocatedIntVector(blocksize, DEFAULT_NUMBLOCKS_SMALL);
       m_dataOrQName = new SuballocatedIntVector(blocksize, DEFAULT_NUMBLOCKS_SMALL);
@@ -292,7 +292,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
       m_contextIndexes = new IntStack();
       m_parents = new IntStack();
     }
-         
+
     // %REVIEW%  Initial size pushed way down to reduce weight of RTFs
     // (I'm not entirely sure 0 would work, so I'm playing it safe for now.)
     //m_data = new SuballocatedIntVector(doIndexing ? (1024*2) : 512, 1024);
@@ -301,17 +301,17 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     m_data.addElement(0);   // Need placeholder in case index into here must be <0.
 
     //m_dataOrQName = new SuballocatedIntVector(blocksize);
-    
+
     // m_useSourceLocationProperty=org.apache.xalan.processor.TransformerFactoryImpl.m_source_location;
     m_useSourceLocationProperty = mgr.getSource_location();
-    m_sourceSystemId = (m_useSourceLocationProperty) ? new StringVector() : null;
-   m_sourceLine = (m_useSourceLocationProperty) ?  new IntVector() : null;
-    m_sourceColumn = (m_useSourceLocationProperty) ?  new IntVector() : null; 
+    m_sourceSystemId = m_useSourceLocationProperty ? new StringVector() : null;
+    m_sourceLine = m_useSourceLocationProperty ?  new IntVector() : null;
+    m_sourceColumn = m_useSourceLocationProperty ?  new IntVector() : null;
   }
 
   /**
    * Set whether information about document source location
-   * should be maintained or not. 
+   * should be maintained or not.
    */
   public void setUseSourceLocation(boolean useSourceLocation)
   {
@@ -521,10 +521,10 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   {
 
     int identity = makeNodeIdentity(nodeHandle);
-    
+
     if (identity == DTM.NULL)
       return;
-    
+
     int type = _type(identity);
 
     if (isTextType(type))
@@ -612,7 +612,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
     int expandedTypeID = getExpandedTypeID(nodeHandle);
     // If just testing nonzero, no need to shift...
-    int namespaceID = m_expandedNameTable.getNamespaceID(expandedTypeID);                     
+    int namespaceID = m_expandedNameTable.getNamespaceID(expandedTypeID);
 
     if (0 == namespaceID)
     {
@@ -659,8 +659,8 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   public String getNodeNameX(int nodeHandle)
   {
 
-    int expandedTypeID = getExpandedTypeID(nodeHandle);    
-    int namespaceID = m_expandedNameTable.getNamespaceID(expandedTypeID);                      
+    int expandedTypeID = getExpandedTypeID(nodeHandle);
+    int namespaceID = m_expandedNameTable.getNamespaceID(expandedTypeID);
 
     if (0 == namespaceID)
     {
@@ -851,7 +851,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    */
   private final boolean isTextType(int type)
   {
-    return (DTM.TEXT_NODE == type || DTM.CDATA_SECTION_NODE == type);
+    return DTM.TEXT_NODE == type || DTM.CDATA_SECTION_NODE == type;
   }
 
 //    /**
@@ -945,7 +945,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     {
       if(m_mgr==null)
         throw new ClassCastException();
-                              
+
                               // Handle as Extended Addressing
       DTMManagerDefault mgrD=(DTMManagerDefault)m_mgr;
       int id=mgrD.getFirstFreeDTMID();
@@ -970,18 +970,18 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     */
   public void migrateTo(DTMManager manager) {
     super.migrateTo(manager);
-    
+
     // We have to reset the information in m_dtmIdent and
-    // register the DTM with the new manager. 
+    // register the DTM with the new manager.
     int numDTMs = m_dtmIdent.size();
     int dtmId = m_mgrDefault.getFirstFreeDTMID();
     int nodeIndex = 0;
     for (int i = 0; i < numDTMs; i++)
-    {     
+    {
       m_dtmIdent.setElementAt(dtmId << DTMManager.IDENT_DTM_NODE_BITS, i);
       m_mgrDefault.addDTM(this, dtmId, nodeIndex);
       dtmId++;
-      nodeIndex += (1 << DTMManager.IDENT_DTM_NODE_BITS);
+      nodeIndex += 1 << DTMManager.IDENT_DTM_NODE_BITS;
     }
   }
 
@@ -1331,7 +1331,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
     return m_xstrf.emptystr();
   }
-  
+
   /**
    * Determine if the string-value of a node is whitespace
    *
@@ -1452,7 +1452,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
         if (qname.startsWith("xmlns:"))
           prefix = qname.substring(indexOfNSSep + 1);
         else
-          prefix = qname.substring(0, indexOfNSSep);  
+          prefix = qname.substring(0, indexOfNSSep);
       }
       else
       {
@@ -1469,7 +1469,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
     return prefix;
   }
-  
+
   /**
    * Get a prefix either from the uri mapping, or just make
    * one up!
@@ -1482,7 +1482,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   {
 
      return m_valuesOrPrefixes.stringToIndex(uri);
-    
+
   }
 
     /**
@@ -1708,7 +1708,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     if (DEBUG)
       System.out.println("startDocument");
 
-    
+
     int doc = addNode(DTM.DOCUMENT_NODE,
                       m_expandedNameTable.getExpandedTypeID(DTM.DOCUMENT_NODE),
                       DTM.NULL, DTM.NULL, 0, true);
@@ -1746,7 +1746,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     m_contextIndexes = null;
 
     m_endDocumentOccured = true;
-    
+
     // Bugzilla 4858: throw away m_locator. we cache m_systemId
     m_locator = null;
   }
@@ -1891,7 +1891,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
                              );
       }
    }
-    
+
     charactersFlush();
 
     int exName = m_expandedNameTable.getExpandedTypeID(uri, localName, DTM.ELEMENT_NODE);
@@ -1904,7 +1904,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
     if(m_indexing)
       indexNode(exName, elemNode);
-    
+
 
     m_parents.push(elemNode);
 
@@ -1952,7 +1952,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
       prefix = getPrefix(attrQName, attrUri);
 
       int nodeType;
-      
+
        String attrLocalName = attributes.getLocalName(i);
 
       if ((null != attrQName)
@@ -2123,7 +2123,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
           throws SAXException
   {
 
-    // %OPT% We can probably take advantage of the fact that we know this 
+    // %OPT% We can probably take advantage of the fact that we know this
     // is whitespace.
     characters(ch, start, length);
   }
@@ -2483,7 +2483,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
   /**
    * Set a run time property for this DTM instance.
-   * 
+   *
    * %REVIEW% Now that we no longer use this method to support
    * getSourceLocatorFor, can we remove it?
    *
@@ -2497,9 +2497,9 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /** Retrieve the SourceLocator associated with a specific node.
    * This is only meaningful if the XalanProperties.SOURCE_LOCATION flag was
    * set True using setProperty; if it was never set, or was set false, we
-   * will return null. 
-   * 
-   * (We _could_ return a locator with the document's base URI and bogus 
+   * will return null.
+   *
+   * (We _could_ return a locator with the document's base URI and bogus
    * line/column information. Trying that; see the else clause.)
    * */
   public SourceLocator getSourceLocatorFor(int node)
@@ -2508,7 +2508,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     {
 
       node = makeNodeIdentity(node);
-      
+
 
       return new NodeLocator(null,
                              m_sourceSystemId.elementAt(node),
@@ -2525,7 +2525,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
     }
     return null;
   }
-  
+
   public String getFixedNames(int type){
     return m_fixednames[type];
   }

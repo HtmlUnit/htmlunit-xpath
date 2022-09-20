@@ -38,7 +38,7 @@ public class Minus extends Operation
    * @param left non-null reference to the evaluated left operand.
    * @param right non-null reference to the evaluated right operand.
    *
-   * @return non-null reference to the XObject that represents the 
+   * @return non-null reference to the XObject that represents the
    *         result of the operation.
    *
    * @throws javax.xml.transform.TransformerException
@@ -48,7 +48,7 @@ public class Minus extends Operation
   {
     return new XNumber(left.num() - right.num());
   }
-  
+
   /**
    * Evaluate this operation directly to a double.
    *
@@ -62,7 +62,7 @@ public class Minus extends Operation
           throws javax.xml.transform.TransformerException
   {
 
-    return (m_left.num(xctxt) - m_right.num(xctxt));
+    return m_left.num(xctxt) - m_right.num(xctxt);
   }
 
 }

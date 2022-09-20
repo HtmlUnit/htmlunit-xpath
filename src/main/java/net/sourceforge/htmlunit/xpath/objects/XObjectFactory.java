@@ -30,10 +30,10 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 public class XObjectFactory
 {
-  
+
   /**
-   * Create the right XObject based on the type of the object passed.  This 
-   * function can not make an XObject that exposes DOM Nodes, NodeLists, and 
+   * Create the right XObject based on the type of the object passed.  This
+   * function can not make an XObject that exposes DOM Nodes, NodeLists, and
    * NodeIterators to the XSLT stylesheet as node-sets.
    *
    * @param val The java object which this object will wrap.
@@ -59,7 +59,7 @@ public class XObjectFactory
     }
     else if (val instanceof Double)
     {
-      result = new XNumber(((Double) val));
+      result = new XNumber((Double) val);
     }
     else
     {
@@ -68,10 +68,10 @@ public class XObjectFactory
 
     return result;
   }
-  
+
   /**
    * Create the right XObject based on the type of the object passed.
-   * This function <emph>can</emph> make an XObject that exposes DOM Nodes, NodeLists, and 
+   * This function <emph>can</emph> make an XObject that exposes DOM Nodes, NodeLists, and
    * NodeIterators to the XSLT stylesheet as node-sets.
    *
    * @param val The java object which this object will wrap.
@@ -98,7 +98,7 @@ public class XObjectFactory
     }
     else if (val instanceof Number)
     {
-      result = new XNumber(((Number) val));
+      result = new XNumber((Number) val);
     }
     else if (val instanceof DTM)
     {
@@ -135,13 +135,13 @@ public class XObjectFactory
     {
       result = new XNodeSet((DTMIterator) val);
     }
-    // This next three instanceofs are a little worrysome, since a NodeList 
+    // This next three instanceofs are a little worrysome, since a NodeList
     // might also implement a Node!
     else if (val instanceof org.w3c.dom.Node)
     {
       result = new XNodeSetForDOM((org.w3c.dom.Node)val, xctxt);
     }
-    // This must come after org.w3c.dom.Node, since many Node implementations 
+    // This must come after org.w3c.dom.Node, since many Node implementations
     // also implement NodeList.
     else if (val instanceof org.w3c.dom.NodeList)
     {

@@ -47,7 +47,7 @@ public class Mod extends Operation
   {
     return new XNumber(left.num() % right.num());
   }
-  
+
   /**
    * Evaluate this operation directly to a double.
    *
@@ -61,7 +61,7 @@ public class Mod extends Operation
           throws javax.xml.transform.TransformerException
   {
 
-    return (m_left.num(xctxt) % m_right.num(xctxt));
+    return m_left.num(xctxt) % m_right.num(xctxt);
   }
 
 }

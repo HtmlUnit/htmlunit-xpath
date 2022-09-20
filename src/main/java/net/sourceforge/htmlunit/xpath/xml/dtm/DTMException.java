@@ -82,9 +82,9 @@ public class DTMException extends RuntimeException {
      */
     public Throwable getCause() {
 
-        return ((containedException == this)
+        return (containedException == this)
                 ? null
-                : containedException);
+                : containedException;
     }
 
     /**
@@ -327,43 +327,43 @@ public class DTMException extends RuntimeException {
             isJdk14OrHigher = true;
         } catch (NoSuchMethodException nsme) {
             // do nothing
-        }        
+        }
 
-        // The printStackTrace method of the Throwable class in jdk 1.4 
+        // The printStackTrace method of the Throwable class in jdk 1.4
         // and higher will include the cause when printing the backtrace.
-        // The following code is only required when using jdk 1.3 or lower                
+        // The following code is only required when using jdk 1.3 or lower
         if (!isJdk14OrHigher) {
             Throwable exception = getException();
-    
+
             for (int i = 0; (i < 10) && (null != exception); i++) {
                 s.println("---------");
-    
+
                 try {
                     if (exception instanceof DTMException) {
                         String locInfo =
                             ((DTMException) exception)
                                 .getLocationAsString();
-    
+
                         if (null != locInfo) {
                             s.println(locInfo);
                         }
                     }
-    
+
                     exception.printStackTrace(s);
                 } catch (Throwable e) {
                     s.println("Could not print stack trace...");
                 }
-    
+
                 try {
                     Method meth =
                         ((Object) exception).getClass().getMethod("getException",
                             null);
-    
+
                     if (null != meth) {
                         Throwable prev = exception;
-    
+
                         exception = (Throwable) meth.invoke(exception, null);
-    
+
                         if (prev == exception) {
                             break;
                         }

@@ -47,7 +47,7 @@ public class Mult extends Operation
   {
     return new XNumber(left.num() * right.num());
   }
-  
+
   /**
    * Evaluate this operation directly to a double.
    *
@@ -60,7 +60,7 @@ public class Mult extends Operation
   public double num(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
-    return (m_left.num(xctxt) * m_right.num(xctxt));
+    return m_left.num(xctxt) * m_right.num(xctxt);
   }
 
 }

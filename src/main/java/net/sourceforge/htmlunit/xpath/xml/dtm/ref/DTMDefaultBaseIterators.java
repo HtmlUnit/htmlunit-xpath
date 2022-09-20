@@ -128,13 +128,13 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
         iterator = new TypedChildrenIterator(type);
         break;
       case Axis.PARENT :
-        return (new ParentIterator().setNodeType(type));
+        return new ParentIterator().setNodeType(type);
       case Axis.ANCESTOR :
-        return (new TypedAncestorIterator(type));
+        return new TypedAncestorIterator(type);
       case Axis.ANCESTORORSELF :
-        return ((new TypedAncestorIterator(type)).includeSelf());
+        return (new TypedAncestorIterator(type)).includeSelf();
       case Axis.ATTRIBUTE :
-        return (new TypedAttributeIterator(type));
+        return new TypedAttributeIterator(type);
       case Axis.DESCENDANT :
         iterator = new TypedDescendantIterator(type);
         break;
@@ -168,7 +168,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
       }
     }
 
-    return (iterator);
+    return iterator;
   }
 
   /**
@@ -195,13 +195,13 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
       iterator = new ChildrenIterator();
       break;
     case Axis.PARENT :
-      return (new ParentIterator());
+      return new ParentIterator();
     case Axis.ANCESTOR :
-      return (new AncestorIterator());
+      return new AncestorIterator();
     case Axis.ANCESTORORSELF :
-      return ((new AncestorIterator()).includeSelf());
+      return (new AncestorIterator()).includeSelf();
     case Axis.ATTRIBUTE :
-      return (new AttributeIterator());
+      return new AttributeIterator();
     case Axis.DESCENDANT :
       iterator = new DescendantIterator();
       break;
@@ -234,7 +234,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
                              //+ "' not implemented");
     }
 
-    return (iterator);
+    return iterator;
   }
 
   /**
@@ -681,7 +681,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
         }
       }
 
-      return (_currentNode =END);
+      return _currentNode =END;
     }
   }  // end of TypedNamespaceIterator
 
@@ -1580,7 +1580,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
       while (node != DTM.NULL
              && (getExpandedTypeID(node) != _nodeType && getNodeType(node) != _nodeType));
 
-      return (node == DTM.NULL ? DTM.NULL :returnNode(node));
+      return node == DTM.NULL ? DTM.NULL : returnNode(node);
     }
   }  // end of TypedFollowingIterator
 
@@ -2026,7 +2026,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
           return node;
       }
 
-      return (END);
+      return END;
     }
   }  // end of NthDescendantIterator
 
