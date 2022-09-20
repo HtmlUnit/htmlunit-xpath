@@ -461,33 +461,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     return m_owner;
   }
 
-  // ================ SourceTreeManager ===================
-
-  /** The source tree manager, which associates Source objects to source
-   *  tree nodes. */
-  private SourceTreeManager m_sourceTreeManager = new SourceTreeManager();
-
-  /**
-   * Get the SourceTreeManager associated with this execution context.
-   *
-   * @return the SourceTreeManager associated with this execution context.
-   */
-  public final SourceTreeManager getSourceTreeManager()
-  {
-    return m_sourceTreeManager;
-  }
-
-  /**
-   * Set the SourceTreeManager associated with this execution context.
-   *
-   * @param mgr the SourceTreeManager to be associated with this
-   *        execution context.
-   */
-  public void setSourceTreeManager(SourceTreeManager mgr)
-  {
-    m_sourceTreeManager = mgr;
-  }
-
   // =================================================
 
   /** The ErrorListener where errors and warnings are to be reported.   */
