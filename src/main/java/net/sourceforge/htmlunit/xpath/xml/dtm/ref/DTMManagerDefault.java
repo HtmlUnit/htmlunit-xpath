@@ -160,7 +160,7 @@ public class DTMManagerDefault extends DTMManager
       // more often to get that. See also Fast*Vector classes.
       //
       // %REVIEW% Should throw a more diagnostic error if we go over the max...
-      int newlen=Math.min((id+256),IDENT_MAX_DTMS);
+      int newlen=Math.min(id+256,IDENT_MAX_DTMS);
 
       DTM new_m_dtms[] = new DTM[newlen];
       System.arraycopy(m_dtms,0,new_m_dtms,0,oldlen);

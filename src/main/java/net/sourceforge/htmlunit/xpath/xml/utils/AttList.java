@@ -63,7 +63,7 @@ public class AttList implements Attributes
    *
    *
    * @param attrs List of attributes this will contain
-   * @param dh DOMHelper 
+   * @param dh DOMHelper
    */
   public AttList(NamedNodeMap attrs, DOMHelper dh)
   {
@@ -74,7 +74,7 @@ public class AttList implements Attributes
   }
 
   /**
-   * Get the number of attribute nodes in the list 
+   * Get the number of attribute nodes in the list
    *
    *
    * @return number of attribute nodes
@@ -94,7 +94,7 @@ public class AttList implements Attributes
    */
   public String getURI(int index)
   {
-    String ns = m_dh.getNamespaceOfNode(((Attr) m_attrs.item(index)));
+    String ns = m_dh.getNamespaceOfNode((Attr) m_attrs.item(index));
     if(null == ns)
       ns = "";
     return ns;
@@ -110,7 +110,7 @@ public class AttList implements Attributes
    */
   public String getLocalName(int index)
   {
-    return m_dh.getLocalNameOfNode(((Attr) m_attrs.item(index)));
+    return m_dh.getLocalNameOfNode((Attr) m_attrs.item(index));
   }
 
   /**
@@ -190,8 +190,8 @@ public class AttList implements Attributes
    */
   public String getValue(String name)
   {
-    Attr attr = ((Attr) m_attrs.getNamedItem(name));
-    return (null != attr) 
+    Attr attr = (Attr) m_attrs.getNamedItem(name);
+    return (null != attr)
           ? attr.getValue() : null;
   }
 

@@ -312,7 +312,7 @@ public class OpCodes
    */
   public static final int OP_LITERAL = 21;
 
-  /** The low opcode for nodesets, needed by getFirstPredicateOpPos and 
+  /** The low opcode for nodesets, needed by getFirstPredicateOpPos and
    *  getNextStepPos.          */
   static final int FIRST_NODESET_OP = 22;
 
@@ -626,7 +626,4 @@ public class OpCodes
 
   /** The end of the axes types.    */
   public static final int AXES_END_TYPES = 53;
-
-  /** The next free ID.  Please keep this up to date.  */
-  private static final int NEXT_FREE_ID = 99;
 }

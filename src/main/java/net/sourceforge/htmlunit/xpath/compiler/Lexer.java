@@ -73,7 +73,7 @@ class Lexer
    * Create a Lexer object.
    *
    * @param compiler The owning compiler for this lexer.
-   * @param resolver The prefix resolver for mapping qualified name prefixes 
+   * @param resolver The prefix resolver for mapping qualified name prefixes
    *                 to namespace URIs.
    * @param xpathProcessor The parser that is processing strings to opcodes.
    */
@@ -111,7 +111,7 @@ class Lexer
   {
 
     m_compiler.m_currentPattern = pat;
-    m_patternMapSize = 0; 
+    m_patternMapSize = 0;
 
     // This needs to grow too.  Use a conservative estimate that the OpMapVector
     // needs about five time the length of the input path expression - to a
@@ -124,7 +124,7 @@ class Lexer
                                          OpMap.MAPINDEX_LENGTH);
 
     int nChars = pat.length();
-    int startSubstring = -1; 
+    int startSubstring = -1;
     int posOfNSSep = -1;
     boolean isStartOfPat = true;
     boolean isAttrName = false;
@@ -359,7 +359,7 @@ class Lexer
       isNum = false;
       isStartOfPat = mapPatternElemPos(nesting, isStartOfPat, isAttrName);
 
-      if ((-1 != posOfNSSep) || 
+      if ((-1 != posOfNSSep) ||
          ((m_namespaceContext != null) && (m_namespaceContext.handlesNullPrefixes())))
       {
         posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, nChars);
@@ -405,7 +405,7 @@ class Lexer
         int len = m_patternMap.length;
         m_patternMap = new int[m_patternMapSize + 100];
         System.arraycopy(patternMap, 0, m_patternMap, 0, len);
-      } 
+      }
       if (!isStart)
       {
         m_patternMap[m_patternMapSize - 1] -= TARGETEXTRA;
@@ -580,7 +580,7 @@ class Lexer
  {
 
     String prefix = "";
-    
+
     if ((startSubstring >= 0) && (posOfNSSep >= 0))
     {
        prefix = pat.substring(startSubstring, posOfNSSep);

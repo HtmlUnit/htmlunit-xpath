@@ -34,7 +34,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
  * interface as it goes. As such, it's more like the Visitor design pattern
  * than like the DOM's TreeWalker.
  *
- * I think normally this class should not be needed, because 
+ * I think normally this class should not be needed, because
  * of DTM#dispatchToEvents.
  * @xsl.usage advanced
  */
@@ -46,10 +46,10 @@ public class DTMTreeWalker
 
   /** DomHelper for this TreeWalker          */
   protected DTM m_dtm;
-  
+
   /**
    * Set the DTM to be traversed.
-   * 
+   *
    * @param dtm The Document Table Model to be used.
    */
   public void setDTM(DTM dtm)
@@ -66,7 +66,7 @@ public class DTMTreeWalker
   {
     return m_contentHandler;
   }
-  
+
   /**
    * Set the ContentHandler used for the tree walk.
    *
@@ -77,14 +77,14 @@ public class DTMTreeWalker
     m_contentHandler = ch;
   }
 
-  
+
   /**
    * Constructor.
    */
   public DTMTreeWalker()
   {
   }
-  
+
   /**
    * Constructor.
    * @param   contentHandler The implemention of the
@@ -95,7 +95,7 @@ public class DTMTreeWalker
     this.m_contentHandler = contentHandler;
     m_dtm = dtm;
   }
-  
+
   /** Perform a non-recursive pre-order/post-order traversal,
    * operating as a Visitor. startNode (preorder) and endNode
    * (postorder) are invoked for each node as we traverse over them,
@@ -196,7 +196,7 @@ public class DTMTreeWalker
 
   /** Flag indicating whether following text to be processed is raw text          */
   boolean nextIsRaw = false;
-  
+
   /**
    * Optimized dispatch of characters.
    */
@@ -231,7 +231,7 @@ public class DTMTreeWalker
 
       if (m_contentHandler instanceof LexicalHandler)
       {
-        LexicalHandler lh = ((LexicalHandler) this.m_contentHandler);
+        LexicalHandler lh = (LexicalHandler) this.m_contentHandler;
         data.dispatchAsComment(lh);
       }
     }
@@ -244,7 +244,7 @@ public class DTMTreeWalker
       this.m_contentHandler.startDocument();
       break;
     case DTM.ELEMENT_NODE :
-      DTM dtm = m_dtm;           
+      DTM dtm = m_dtm;
 
       for (int nsn = dtm.getFirstNamespaceNode(node, true); DTM.NULL != nsn;
            nsn = dtm.getNextNamespaceNode(node, nsn, true))
@@ -253,7 +253,7 @@ public class DTMTreeWalker
         String prefix = dtm.getNodeNameX(nsn);
 
         this.m_contentHandler.startPrefixMapping(prefix, dtm.getNodeValue(nsn));
-        
+
       }
 
       // System.out.println("m_dh.getNamespaceOfNode(node): "+m_dh.getNamespaceOfNode(node));
@@ -261,23 +261,23 @@ public class DTMTreeWalker
       String ns = dtm.getNamespaceURI(node);
       if(null == ns)
         ns = "";
-        
+
       // %OPT% !!
-      org.xml.sax.helpers.AttributesImpl attrs = 
+      org.xml.sax.helpers.AttributesImpl attrs =
                             new org.xml.sax.helpers.AttributesImpl();
-              
-      for (int i = dtm.getFirstAttribute(node); 
-           i != DTM.NULL; 
-           i = dtm.getNextAttribute(i)) 
+
+      for (int i = dtm.getFirstAttribute(node);
+           i != DTM.NULL;
+           i = dtm.getNextAttribute(i))
       {
-        attrs.addAttribute(dtm.getNamespaceURI(i), 
-                           dtm.getLocalName(i), 
-                           dtm.getNodeName(i), 
-                           "CDATA", 
+        attrs.addAttribute(dtm.getNamespaceURI(i),
+                           dtm.getLocalName(i),
+                           dtm.getNodeName(i),
+                           "CDATA",
                            dtm.getNodeValue(i));
       }
-      
-        
+
+
       this.m_contentHandler.startElement(ns,
                                          m_dtm.getLocalName(node),
                                          m_dtm.getNodeName(node),
@@ -301,7 +301,7 @@ public class DTMTreeWalker
     break;
     case DTM.CDATA_SECTION_NODE :
     {
-      boolean isLexH = (m_contentHandler instanceof LexicalHandler);
+      boolean isLexH = m_contentHandler instanceof LexicalHandler;
       LexicalHandler lh = isLexH
                           ? ((LexicalHandler) this.m_contentHandler) : null;
 
@@ -309,7 +309,7 @@ public class DTMTreeWalker
       {
         lh.startCDATA();
       }
-      
+
       dispatachChars(node);
 
       {
@@ -355,7 +355,7 @@ public class DTMTreeWalker
   }
 
   /**
-   * End processing of given node 
+   * End processing of given node
    *
    *
    * @param node Node we just finished processing
@@ -393,7 +393,7 @@ public class DTMTreeWalker
     {
       if (m_contentHandler instanceof LexicalHandler)
       {
-        LexicalHandler lh = ((LexicalHandler) this.m_contentHandler);
+        LexicalHandler lh = (LexicalHandler) this.m_contentHandler;
 
         lh.endEntity(m_dtm.getNodeName(node));
       }

@@ -190,7 +190,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param featureId A feature URL.
          * @param state true if this feature should be on, false otherwise.
          */
-        public void setFeature(String featureId, boolean state) {};
+        public void setFeature(String featureId, boolean state) {}
 
         /**
          * Set a reference pointer to the element name symbol table.
@@ -951,7 +951,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return int true if the given node has child nodes.
          */
         public boolean hasChildNodes(int nodeHandle) {
-                return(getFirstChild(nodeHandle) != NULL);
+                return getFirstChild(nodeHandle) != NULL;
         }
 
         /**
@@ -1129,14 +1129,14 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
                         if (nextSib == NULL)
                                 return NULL;
                         if (nextSib != 0)
-                                return (m_docHandle | nextSib);
+                                return m_docHandle | nextSib;
                         // ###shs should cycle/wait if nextSib is 0? Working on threading next
                 }
                 // Next Sibling is in the next position if it shares the same parent
                 int thisParent = nodes.readEntry(nodeHandle, 1);
 
                 if (nodes.readEntry(++nodeHandle, 1) == thisParent)
-                        return (m_docHandle | nodeHandle);
+                        return m_docHandle | nodeHandle;
 
                 return NULL;
         }
@@ -1188,7 +1188,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
                         return getFirstAttribute(nodeHandle);
                 } else if (type == ATTRIBUTE_NODE) {
                         if (gotslot[2] != NULL)
-                                return (m_docHandle | gotslot[2]);
+                                return m_docHandle | gotslot[2];
                 }
                 return NULL;
         }
@@ -1237,7 +1237,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
                                         } else {
                                                 int nextParentPos = gotslot[1];
                                                 if (nextParentPos >= subtreeRootHandle)
-                                                        return (m_docHandle | (nodeHandle+1));
+                                                        return m_docHandle | (nodeHandle+1);
                                                 else
                                                         break;
                                         }
@@ -1290,7 +1290,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
                         // purpose of the while loop -- does this
                         // logic make any sense?
 
-                        return (m_docHandle | nodes.specialFind(axisContextHandle, nodeHandle));
+                        return m_docHandle | nodes.specialFind(axisContextHandle, nodeHandle);
                 }
                 return NULL;
         }
@@ -1306,7 +1306,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
                 // Should check to see within range?
 
                 // Document Root should not have to be handled differently
-                return (m_docHandle | nodes.readEntry(nodeHandle, 1));
+                return m_docHandle | nodes.readEntry(nodeHandle, 1);
         }
 
         /**
@@ -1314,7 +1314,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return nodeHandle to the Document Root.
          */
         public int getDocumentRoot() {
-                return (m_docHandle | m_docElement);
+                return m_docHandle | m_docElement;
         }
 
         /**
@@ -1343,7 +1343,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
                 // Assumption that Document Node is always in 0 slot
                 if ((nodeHandle & NODEHANDLE_MASK) == 0)
                         return NULL;
-                return (nodeHandle & DOCHANDLE_MASK);
+                return nodeHandle & DOCHANDLE_MASK;
         }
 
         /**
@@ -1362,7 +1362,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
                 // Assumption that Document Node is always in 0 slot
                 if ((nodeHandle & NODEHANDLE_MASK) == 0)
                         return NULL;
-                return (nodeHandle & DOCHANDLE_MASK);
+                return nodeHandle & DOCHANDLE_MASK;
         }
 
         /**
@@ -2008,7 +2008,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *                   clone should include all it's children.
          */
         public void appendChild(int newChild, boolean clone, boolean cloneDepth) {
-                boolean sameDoc = ((newChild & DOCHANDLE_MASK) == m_docHandle);
+                boolean sameDoc = (newChild & DOCHANDLE_MASK) == m_docHandle;
                 if (clone || !sameDoc) {
 
                 } else {

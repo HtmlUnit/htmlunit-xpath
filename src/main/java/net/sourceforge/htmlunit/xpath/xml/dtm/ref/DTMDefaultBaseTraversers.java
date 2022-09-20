@@ -509,9 +509,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      */
     protected final boolean isIndexed(int expandedTypeID)
     {
-      return (m_indexing
+      return m_indexing
               && ExpandedNameTable.ELEMENT
-                 == m_expandedNameTable.getType(expandedTypeID));
+                 == m_expandedNameTable.getType(expandedTypeID);
     }
 
     /**

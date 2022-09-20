@@ -639,7 +639,7 @@ public class Compiler extends OpMap
     locPathDepth++;
     try
     {
-      DTMIterator iter = WalkerFactory.newDTMIterator(this, opPos, (locPathDepth == 0));
+      DTMIterator iter = WalkerFactory.newDTMIterator(this, opPos, locPathDepth == 0);
       return (Expression)iter; // cast OK, I guess.
     }
     finally
@@ -827,8 +827,6 @@ private static final boolean DEBUG = false;
       return null;
     }
 
-    boolean addMagicSelf = true;
-
     int endStep = getNextOpPos(opPos);
 
     // int nextStepType = getOpMap()[endStep];
@@ -842,14 +840,12 @@ private static final boolean DEBUG = false;
     case OpCodes.OP_FUNCTION :
       if(DEBUG)
         System.out.println("MATCH_FUNCTION: "+m_currentPattern);
-      addMagicSelf = false;
       argLen = getOp(opPos + OpMap.MAPINDEX_LENGTH);
       pattern = new FunctionPattern(compileFunction(opPos), Axis.PARENT, Axis.CHILD);
       break;
     case OpCodes.FROM_ROOT :
       if(DEBUG)
         System.out.println("FROM_ROOT, "+m_currentPattern);
-      addMagicSelf = false;
       argLen = getArgLengthOfStep(opPos);
       opPos = getFirstChildPosOfStep(opPos);
       pattern = new StepPattern(DTMFilter.SHOW_DOCUMENT |
@@ -871,10 +867,7 @@ private static final boolean DEBUG = false;
         System.out.println("MATCH_ANY_ANCESTOR: "+getStepLocalName(startOpPos)+", "+m_currentPattern);
       argLen = getArgLengthOfStep(opPos);
       opPos = getFirstChildPosOfStep(opPos);
-      int what = getWhatToShow(startOpPos);
       // bit-o-hackery, but this code is due for the morgue anyway...
-      if(0x00000500 == what)
-        addMagicSelf = false;
       pattern = new StepPattern(getWhatToShow(startOpPos),
                                         getStepNS(startOpPos),
                                         getStepLocalName(startOpPos),
@@ -1069,75 +1062,6 @@ private static final boolean DEBUG = false;
       return null;
     }
   }
-
-  // The current id for extension functions.
-  private static long s_nextMethodId = 0;
-
-  /**
-   * Get the next available method id
-   */
-  synchronized private long getNextMethodId()
-  {
-    if (s_nextMethodId == Long.MAX_VALUE)
-      s_nextMethodId = 0;
-
-    return s_nextMethodId++;
-  }
-
-//  /**
-//   * Compile an extension function.
-//   *
-//   * @param opPos The current position in the m_opMap array.
-//   *
-//   * @return reference to {@link net.sourceforge.htmlunit.xpath.functions.FuncExtFunction} instance.
-//   *
-//   * @throws TransformerException if a error occurs creating the Expression.
-//   */
-//  private Expression compileExtension(int opPos)
-//          throws TransformerException
-//  {
-//
-//    int endExtFunc = opPos + getOp(opPos + 1) - 1;
-//
-//    opPos = getFirstChildPos(opPos);
-//
-//    java.lang.String ns = (java.lang.String) getTokenQueue().elementAt(getOp(opPos));
-//
-//    opPos++;
-//
-//    java.lang.String funcName =
-//      (java.lang.String) getTokenQueue().elementAt(getOp(opPos));
-//
-//    opPos++;
-//
-//    // We create a method key to uniquely identify this function so that we
-//    // can cache the object needed to invoke it.  This way, we only pay the
-//    // reflection overhead on the first call.
-//
-//    Function extension = new FuncExtFunction(ns, funcName, String.valueOf(getNextMethodId()));
-//
-//    try
-//    {
-//      int i = 0;
-//
-//      while (opPos < endExtFunc)
-//      {
-//        int nextOpPos = getNextOpPos(opPos);
-//
-//        extension.setArg(this.compile(opPos), i);
-//
-//        opPos = nextOpPos;
-//
-//        i++;
-//      }
-//    }
-//    catch (WrongNumberArgsException wnae)
-//    {
-//      ;  // should never happen
-//    }
-//
-//    return extension;
-//  }
 
   /**
    * Warn the user of an problem.
