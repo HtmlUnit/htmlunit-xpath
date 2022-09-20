@@ -325,32 +325,11 @@ public class DTMManagerDefault extends DTMManager
           addDTM(dtm, dtmPos, 0);
 
 
-          boolean haveXercesParser =
-                     (null != reader)
-                     && (reader.getClass()
-                               .getName()
-                               .equals("org.apache.xerces.parsers.SAXParser") );
-
-          if (haveXercesParser) {
-            incremental = true;  // No matter what.  %REVIEW%
-          }
-
           // If the reader is null, but they still requested an incremental
           // build, then we still want to set up the IncrementalSAXSource stuff.
           if (m_incremental && incremental
                /* || ((null == reader) && incremental) */) {
             IncrementalSAXSource coParser=null;
-
-            if (haveXercesParser) {
-              // IncrementalSAXSource_Xerces to avoid threading.
-              try {
-                coParser =(IncrementalSAXSource)
-                  Class.forName("net.sourceforge.htmlunit.xpath.xml.dtm.ref.IncrementalSAXSource_Xerces").newInstance();
-              }  catch( Exception ex ) {
-                ex.printStackTrace();
-                coParser=null;
-              }
-            }
 
             if (coParser==null ) {
               // Create a IncrementalSAXSource to run on the secondary thread.

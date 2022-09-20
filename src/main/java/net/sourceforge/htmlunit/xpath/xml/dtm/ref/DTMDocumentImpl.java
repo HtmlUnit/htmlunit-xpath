@@ -23,7 +23,6 @@ package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 import javax.xml.transform.SourceLocator;
 
 import org.xml.sax.Attributes;
-import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.ext.LexicalHandler;
 
@@ -109,8 +108,6 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    *
    * @see setIncrementalSAXSource
    */
-  private IncrementalSAXSource m_incrSAXSource=null;
-
 
         // ========= DTM data structure declarations. ==============
 
@@ -136,15 +133,6 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
         private DTMStringPool m_nsNames = new DTMStringPool();
         private DTMStringPool m_prefixNames = new DTMStringPool();
 
-        // %TBD% If we use the current ExpandedNameTable mapper, it
-        // needs to be bound to the NS and local name pools. Which
-        // means it needs to attach to them AFTER we've resolved their
-        // startup. Or it needs to attach to this document and
-        // retrieve them each time. Or this needs to be
-        // an interface _implemented_ by this class... which might be simplest!
-        private ExpandedNameTable m_expandedNames=
-                new ExpandedNameTable();
-
         private XMLStringFactory m_xsf;
 
 
@@ -164,32 +152,6 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
                 initDocument(documentNumber);	 // clear nodes and document handle
                 m_xsf = xstringfactory;
         }
-
-  /** Bind a IncrementalSAXSource to this DTM. If we discover we need nodes
-   * that have not yet been built, we will ask this object to send us more
-   * events, and it will manage interactions with its data sources.
-   *
-   * Note that we do not actually build the IncrementalSAXSource, since we don't
-   * know what source it's reading from, what thread that source will run in,
-   * or when it will run.
-   *
-   * @param source The IncrementalSAXSource that we want to recieve events from
-   * on demand.
-   */
-  public void setIncrementalSAXSource(IncrementalSAXSource source)
-  {
-    m_incrSAXSource=source;
-
-    // Establish SAX-stream link so we can receive the requested data
-    source.setContentHandler(this);
-    source.setLexicalHandler(this);
-
-    // Are the following really needed? IncrementalSAXSource doesn't yet
-    // support them, and they're mostly no-ops here...
-    //source.setErrorHandler(this);
-    //source.setDTDHandler(this);
-    //source.setDeclHandler(this);
-  }
 
         /**
          * Wrapper for ChunkedIntArray.append, to automatically update the
@@ -320,10 +282,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    * */
   public org.xml.sax.ContentHandler getContentHandler()
   {
-    if (m_incrSAXSource instanceof IncrementalSAXSource_Filter)
-      return (ContentHandler) m_incrSAXSource;
-    else
-      return this;
+    return this;
   }
 
   /**
@@ -338,11 +297,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    */
   public LexicalHandler getLexicalHandler()
   {
-
-    if (m_incrSAXSource instanceof IncrementalSAXSource_Filter)
-      return (LexicalHandler) m_incrSAXSource;
-    else
-      return this;
+    return this;
   }
 
   /**
@@ -396,7 +351,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    * */
   public boolean needsTwoThreads()
   {
-    return null!=m_incrSAXSource;
+    return true;
   }
 
   //================================================================
@@ -2184,18 +2139,6 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
   void appendNSDeclaration(int prefixIndex, int namespaceIndex,
                            boolean isID)
   {
-    // %REVIEW% I'm assigning this node the "namespace for namespaces"
-    // which the DOM defined. It is expected that the Namespace spec will
-    // adopt this as official. It isn't strictly needed since it's implied
-    // by the nodetype, but for now...
-
-    // %REVIEW% Prefix need not be recorded; it's implied too. But
-    // recording it might simplify the design.
-
-    // %TBD% isID is not currently honored.
-
-    final int namespaceForNamespaces=m_nsNames.stringToIndex("http://www.w3.org/2000/xmlns/");
-
     // W0  High:  Namespace  Low:  Node Type
     int w0 = NAMESPACE_NODE | (m_nsNames.stringToIndex("http://www.w3.org/2000/xmlns/")<<16);
 

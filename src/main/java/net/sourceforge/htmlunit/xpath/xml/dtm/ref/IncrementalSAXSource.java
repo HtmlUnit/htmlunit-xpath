@@ -27,9 +27,8 @@ import org.xml.sax.SAXException;
 
 /** <p>IncrementalSAXSource is an API that delivers a small number of
  * SAX events each time a request is made from a "controller"
- * coroutine.  See IncrementalSAXFilter and IncrementalSAXFilter_Xerces
- * for examples.
- * 
+ * coroutine.  See IncrementalSAXFilter for examples.
+ *
  * Note that interaction is via the deliverMoreNodes
  * method, and therefore coroutine support is not exposed
  * here.</p>
@@ -85,5 +84,5 @@ public interface IncrementalSAXSource
    * or parsing can not be started.
    * */
   public void startParse(InputSource source) throws SAXException;
-    
+
 } // class IncrementalSAXSource
