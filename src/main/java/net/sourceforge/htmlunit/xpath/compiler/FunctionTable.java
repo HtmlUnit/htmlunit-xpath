@@ -176,7 +176,7 @@ public class FunctionTable
   static
   {
     m_functions = new Class[NUM_BUILT_IN_FUNCS];
-    m_functions[FUNC_CURRENT] = net.sourceforge.htmlunit.xpath.functions.FuncCurrent.class;
+//    m_functions[FUNC_CURRENT] = net.sourceforge.htmlunit.xpath.functions.FuncCurrent.class;
     m_functions[FUNC_LAST] = net.sourceforge.htmlunit.xpath.functions.FuncLast.class;
     m_functions[FUNC_POSITION] = net.sourceforge.htmlunit.xpath.functions.FuncPosition.class;
     m_functions[FUNC_COUNT] = net.sourceforge.htmlunit.xpath.functions.FuncCount.class;
@@ -188,8 +188,8 @@ public class FunctionTable
     m_functions[FUNC_NAMESPACE] =
       net.sourceforge.htmlunit.xpath.functions.FuncNamespace.class;
     m_functions[FUNC_QNAME] = net.sourceforge.htmlunit.xpath.functions.FuncQname.class;
-    m_functions[FUNC_GENERATE_ID] =
-      net.sourceforge.htmlunit.xpath.functions.FuncGenerateId.class;
+//    m_functions[FUNC_GENERATE_ID] =
+//      net.sourceforge.htmlunit.xpath.functions.FuncGenerateId.class;
     m_functions[FUNC_NOT] = net.sourceforge.htmlunit.xpath.functions.FuncNot.class;
     m_functions[FUNC_TRUE] = net.sourceforge.htmlunit.xpath.functions.FuncTrue.class;
     m_functions[FUNC_FALSE] = net.sourceforge.htmlunit.xpath.functions.FuncFalse.class;
@@ -223,10 +223,10 @@ public class FunctionTable
       net.sourceforge.htmlunit.xpath.functions.FuncSubstring.class;
     m_functions[FUNC_STRING_LENGTH] =
       net.sourceforge.htmlunit.xpath.functions.FuncStringLength.class;
-    m_functions[FUNC_DOCLOCATION] =
-      net.sourceforge.htmlunit.xpath.functions.FuncDoclocation.class;
-    m_functions[FUNC_UNPARSED_ENTITY_URI] =
-      net.sourceforge.htmlunit.xpath.functions.FuncUnparsedEntityURI.class;
+//    m_functions[FUNC_DOCLOCATION] =
+//      net.sourceforge.htmlunit.xpath.functions.FuncDoclocation.class;
+//    m_functions[FUNC_UNPARSED_ENTITY_URI] =
+//      net.sourceforge.htmlunit.xpath.functions.FuncUnparsedEntityURI.class;
   }
 
   static{
