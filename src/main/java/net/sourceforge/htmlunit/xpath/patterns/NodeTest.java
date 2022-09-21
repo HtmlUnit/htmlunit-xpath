@@ -20,6 +20,9 @@
  */
 package net.sourceforge.htmlunit.xpath.patterns;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPath;
@@ -414,46 +417,46 @@ public boolean deepEquals(Expression expr)
   public static void debugWhatToShow(int whatToShow)
   {
 
-    java.util.Vector<String> v = new java.util.Vector<>();
+    List<String> v = new ArrayList<>();
 
     if (0 != (whatToShow & DTMFilter.SHOW_ATTRIBUTE))
-      v.addElement("SHOW_ATTRIBUTE");
+      v.add("SHOW_ATTRIBUTE");
 
     if (0 != (whatToShow & DTMFilter.SHOW_NAMESPACE))
-      v.addElement("SHOW_NAMESPACE");
+      v.add("SHOW_NAMESPACE");
 
     if (0 != (whatToShow & DTMFilter.SHOW_CDATA_SECTION))
-      v.addElement("SHOW_CDATA_SECTION");
+      v.add("SHOW_CDATA_SECTION");
 
     if (0 != (whatToShow & DTMFilter.SHOW_COMMENT))
-      v.addElement("SHOW_COMMENT");
+      v.add("SHOW_COMMENT");
 
     if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT))
-      v.addElement("SHOW_DOCUMENT");
+      v.add("SHOW_DOCUMENT");
 
     if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT_FRAGMENT))
-      v.addElement("SHOW_DOCUMENT_FRAGMENT");
+      v.add("SHOW_DOCUMENT_FRAGMENT");
 
     if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT_TYPE))
-      v.addElement("SHOW_DOCUMENT_TYPE");
+      v.add("SHOW_DOCUMENT_TYPE");
 
     if (0 != (whatToShow & DTMFilter.SHOW_ELEMENT))
-      v.addElement("SHOW_ELEMENT");
+      v.add("SHOW_ELEMENT");
 
     if (0 != (whatToShow & DTMFilter.SHOW_ENTITY))
-      v.addElement("SHOW_ENTITY");
+      v.add("SHOW_ENTITY");
 
     if (0 != (whatToShow & DTMFilter.SHOW_ENTITY_REFERENCE))
-      v.addElement("SHOW_ENTITY_REFERENCE");
+      v.add("SHOW_ENTITY_REFERENCE");
 
     if (0 != (whatToShow & DTMFilter.SHOW_NOTATION))
-      v.addElement("SHOW_NOTATION");
+      v.add("SHOW_NOTATION");
 
     if (0 != (whatToShow & DTMFilter.SHOW_PROCESSING_INSTRUCTION))
-      v.addElement("SHOW_PROCESSING_INSTRUCTION");
+      v.add("SHOW_PROCESSING_INSTRUCTION");
 
     if (0 != (whatToShow & DTMFilter.SHOW_TEXT))
-      v.addElement("SHOW_TEXT");
+      v.add("SHOW_TEXT");
 
     int n = v.size();
 
@@ -462,7 +465,7 @@ public boolean deepEquals(Expression expr)
       if (i > 0)
         System.out.print(" | ");
 
-      System.out.print(v.elementAt(i));
+      System.out.print(v.get(i));
     }
 
     if (0 == n)

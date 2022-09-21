@@ -20,6 +20,9 @@
  */
 package net.sourceforge.htmlunit.xpath.objects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.NodeIterator;
 
@@ -482,7 +485,7 @@ public NodeSetDTM mutableNodeset()
       DTMIterator list1 = iterRaw();
       DTMIterator list2 = ((XNodeSet) obj2).iterRaw();
       int node1;
-      java.util.Vector<XMLString> node2Strings = null;
+      List<XMLString> node2Strings = null;
 
       while (DTM.NULL != (node1 = list1.nextNode()))
       {
@@ -504,9 +507,9 @@ public NodeSetDTM mutableNodeset()
             }
 
             if (null == node2Strings)
-              node2Strings = new java.util.Vector<>();
+              node2Strings = new ArrayList<>();
 
-            node2Strings.addElement(s2);
+            node2Strings.add(s2);
           }
         }
         else
@@ -515,7 +518,7 @@ public NodeSetDTM mutableNodeset()
 
           for (int i = 0; i < n; i++)
           {
-            if (comparator.compareStrings(s1, (XMLString)node2Strings.elementAt(i)))
+            if (comparator.compareStrings(s1, node2Strings.get(i)))
             {
               result = true;
 

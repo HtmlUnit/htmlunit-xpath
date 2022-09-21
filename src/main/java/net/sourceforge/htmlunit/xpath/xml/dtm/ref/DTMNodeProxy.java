@@ -20,7 +20,8 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -780,7 +781,7 @@ public final EntityReference createEntityReference(String name)
   @Override
 public final NodeList getElementsByTagName(String tagname)
   {
-       Vector<Node> listVector = new Vector<>();
+       List<Node> listVector = new ArrayList<>();
        Node retNode = dtm.getNode(node);
        if (retNode != null)
        {
@@ -802,7 +803,7 @@ public final NodeList getElementsByTagName(String tagname)
        NodeSet nodeSet = new NodeSet(size);
        for (int i = 0; i < size; i++)
        {
-         nodeSet.addNode((Node) listVector.elementAt(i));
+         nodeSet.addNode((Node) listVector.get(i));
        }
        return (NodeList) nodeSet;
   }
@@ -818,7 +819,7 @@ public final NodeList getElementsByTagName(String tagname)
    */
   private final void traverseChildren
   (
-    Vector<Node> listVector,
+    List<Node> listVector,
     Node tempNode,
     String tagname,
     boolean isTagNameWildCard) {
@@ -908,7 +909,7 @@ public final Attr createAttributeNS(
 public final NodeList getElementsByTagNameNS(String namespaceURI,
                                                String localName)
   {
-    Vector<Node> listVector = new Vector<>();
+    List<Node> listVector = new ArrayList<>();
     Node retNode = dtm.getNode(node);
     if (retNode != null)
     {
@@ -931,7 +932,7 @@ public final NodeList getElementsByTagNameNS(String namespaceURI,
     NodeSet nodeSet = new NodeSet(size);
     for (int i = 0; i < size; i++)
     {
-      nodeSet.addNode((Node)listVector.elementAt(i));
+      nodeSet.addNode((Node)listVector.get(i));
     }
     return (NodeList) nodeSet;
   }
@@ -949,7 +950,7 @@ public final NodeList getElementsByTagNameNS(String namespaceURI,
    */
   private final void traverseChildren
   (
-   Vector<Node> listVector,
+   List<Node> listVector,
    Node tempNode,
    String namespaceURI,
    String localname,
