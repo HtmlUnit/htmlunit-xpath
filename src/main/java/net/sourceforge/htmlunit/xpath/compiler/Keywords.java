@@ -30,16 +30,16 @@ public class Keywords
 {
 
   /** Table of keywords to opcode associations. */
-  private static Hashtable m_keywords = new Hashtable();
+  private static Hashtable<String, Integer> m_keywords = new Hashtable<>();
 
   /** Table of axes names to opcode associations. */
-  private static Hashtable m_axisnames = new Hashtable();
+  private static Hashtable<String, Integer> m_axisnames = new Hashtable<>();
 
   /** Table of function name to function ID associations. */
-  private static Hashtable m_nodetests = new Hashtable();
+  private static Hashtable<String, Integer> m_nodetests = new Hashtable<>();
 
   /** Table of node type strings to opcode associations. */
-  private static Hashtable m_nodetypes = new Hashtable();
+  private static Hashtable<String, Integer> m_nodetypes = new Hashtable<>();
 
   /** ancestor axes string. */
   private static final String FROM_ANCESTORS_STRING = "ancestor";
@@ -267,20 +267,20 @@ public class Keywords
     m_nodetests.put(NODETYPE_NODE_STRING,
                     new Integer(OpCodes.NODETYPE_NODE));
   }
-  
+
   static Object getAxisName(String key){
           return m_axisnames.get(key);
   }
-  
+
   static Object lookupNodeTest(String key){
           return m_nodetests.get(key);
   }
-  
+
   static Object getKeyWord(String key){
           return m_keywords.get(key);
   }
-  
+
   static Object getNodeType(String key){
           return m_nodetypes.get(key);
-  }      
+  }
 }

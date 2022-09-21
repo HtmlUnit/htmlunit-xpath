@@ -142,20 +142,20 @@ public class FunctionTable
   /**
    * The function table.
    */
-  private static Class m_functions[];
+  private static Class<?> m_functions[];
 
   /** Table of function name to function ID associations. */
-  private static HashMap m_functionID = new HashMap();
+  private static HashMap<String, Integer> m_functionID = new HashMap<>();
 
   /**
    * The function table contains customized functions
    */
-  private Class m_functions_customer[] = new Class[NUM_ALLOWABLE_ADDINS];
+  private Class<?> m_functions_customer[] = new Class[NUM_ALLOWABLE_ADDINS];
 
   /**
    * Table of function name to function ID associations for customized functions
    */
-  private HashMap m_functionID_customer = new HashMap();
+  private HashMap<String, Integer> m_functionID_customer = new HashMap<>();
 
   /**
    * Number of built in functions.  Be sure to update this as
@@ -361,7 +361,7 @@ public class FunctionTable
    * @param func A Implementation of an XPath Function object.
    * @return the position of the function in the internal index.
    */
-  public int installFunction(String name, Class func)
+  public int installFunction(String name, Class<?> func)
   {
 
     int funcIndex;

@@ -79,7 +79,6 @@ public class XMLReaderManager {
      */
     public synchronized XMLReader getXMLReader() throws SAXException {
         XMLReader reader;
-        boolean readerInUse;
 
         if (m_readers == null) {
             // When the m_readers.get() method is called for the first time

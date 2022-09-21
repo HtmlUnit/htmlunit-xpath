@@ -85,7 +85,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * HashMap of cached the DTMXRTreeFrag objects, which are identified by DTM IDs.
    * The object are just wrappers for DTMs which are used in  XRTreeFrag.
    */
-  private HashMap m_DTMXRTreeFrags = null;
+  private HashMap<Integer, DTMXRTreeFrag> m_DTMXRTreeFrags = null;
 
   /**
    * state of the secure processing feature.
@@ -604,10 +604,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * The current context node list.
    */
-  private Stack m_contextNodeLists = new Stack();
+  private Stack<DTMIterator> m_contextNodeLists = new Stack<>();
 
-  public Stack getContextNodeListsStack() { return m_contextNodeLists; }
-  public void setContextNodeListsStack(Stack s) { m_contextNodeLists = s; }
+  public Stack<DTMIterator> getContextNodeListsStack() { return m_contextNodeLists; }
+  public void setContextNodeListsStack(Stack<DTMIterator> s) { m_contextNodeLists = s; }
 
   /**
    * Get the current context node list.
@@ -907,10 +907,10 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * Stack of AxesIterators.
    */
-  private Stack m_axesIteratorStack = new Stack();
+  private Stack<SubContextList> m_axesIteratorStack = new Stack<>();
 
-  public Stack getAxesIteratorStackStacks() { return m_axesIteratorStack; }
-  public void setAxesIteratorStackStacks(Stack s) { m_axesIteratorStack = s; }
+  public Stack<SubContextList> getAxesIteratorStackStacks() { return m_axesIteratorStack; }
+  public void setAxesIteratorStackStacks(Stack<SubContextList> s) { m_axesIteratorStack = s; }
 
   /**
    * Push a TreeWalker on the stack.
@@ -1214,7 +1214,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     {
       if(previous>=0) // guard against none-active
       {
-        boolean isEmpty=((SAX2RTFDTM)(m_rtfdtm_stack.elementAt(previous))).popRewindMark();
+        ((SAX2RTFDTM)(m_rtfdtm_stack.elementAt(previous))).popRewindMark();
       }
     }
     else while(m_which_rtfdtm!=previous)
@@ -1222,7 +1222,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
       // Empty each DTM before popping, so it's ready for reuse
       // _DON'T_ pop the previous, since it's still open (which is why we
       // stacked up more of these) and did not receive a mark.
-      boolean isEmpty=((SAX2RTFDTM)(m_rtfdtm_stack.elementAt(m_which_rtfdtm))).popRewindMark();
+      ((SAX2RTFDTM)(m_rtfdtm_stack.elementAt(m_which_rtfdtm))).popRewindMark();
       --m_which_rtfdtm;
     }
   }
@@ -1236,7 +1236,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    */
   public DTMXRTreeFrag getDTMXRTreeFrag(int dtmIdentity){
     if(m_DTMXRTreeFrags == null){
-      m_DTMXRTreeFrags = new HashMap();
+      m_DTMXRTreeFrags = new HashMap<>();
     }
 
     if(m_DTMXRTreeFrags.containsKey(new Integer(dtmIdentity))){

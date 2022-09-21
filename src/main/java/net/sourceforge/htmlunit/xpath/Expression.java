@@ -330,19 +330,6 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
   }
 
   /**
-   * This function is used to fixup variables from QNames to stack frame
-   * indexes at stylesheet build time.
-   * @param vars List of QNames that correspond to variables.  This list
-   * should be searched backwards for the first qualified name that
-   * corresponds to the variable reference qname.  The position of the
-   * QName in the vector from the start of the vector will be its position
-   * in the stack frame (but variables above the globalsTop value will need
-   * to be offset to the current stack frame).
-   * NEEDSDOC @param globalsSize
-   */
-  public abstract void fixupVariables(java.util.Vector vars, int globalsSize);
-
-  /**
    * Compare this object with another object and see
    * if they are equal, include the sub heararchy.
    *

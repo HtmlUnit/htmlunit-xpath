@@ -39,21 +39,6 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
   }
   
   /**
-   * This function is used to fixup variables from QNames to stack frame 
-   * indexes at stylesheet build time.
-   * @param vars List of QNames that correspond to variables.  This list 
-   * should be searched backwards for the first qualified name that 
-   * corresponds to the variable reference qname.  The position of the 
-   * QName in the vector from the start of the vector will be its position 
-   * in the stack frame (but variables above the globalsTop value will need 
-   * to be offset to the current stack frame).
-   */
-  public void fixupVariables(java.util.Vector vars, int globalsSize)
-  {
-    ((Expression)m_obj).fixupVariables(vars, globalsSize);
-  }
-  
-  /**
    * For support of literal objects in xpaths.
    *
    * @param xctxt The XPath execution context.
