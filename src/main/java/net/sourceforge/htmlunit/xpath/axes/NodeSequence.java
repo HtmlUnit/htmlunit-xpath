@@ -20,8 +20,6 @@
  */
 package net.sourceforge.htmlunit.xpath.axes;
 
-import java.util.Vector;
-
 import net.sourceforge.htmlunit.xpath.NodeSetDTM;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
@@ -157,21 +155,6 @@ public class NodeSequence extends XObject
   /**
    * Create a new NodeSequence from a (already cloned) iterator.
    *
-   * @param iter Cloned (not static) DTMIterator.
-   * @param context The initial context node.
-   * @param xctxt The execution context.
-   * @param shouldCacheNodes True if this sequence can random access.
-   */
-  private NodeSequence(DTMIterator iter, int context, XPathContext xctxt, boolean shouldCacheNodes)
-  {
-    setIter(iter);
-    setRoot(context, xctxt);
-    setShouldCacheNodes(shouldCacheNodes);
-  }
-
-  /**
-   * Create a new NodeSequence from a (already cloned) iterator.
-   *
    * @param nodeVector
    */
   public NodeSequence(Object nodeVector)
@@ -192,18 +175,6 @@ public class NodeSequence extends XObject
 
     }
   }
-
-  /**
-   * Construct an empty XNodeSet object.  This is used to create a mutable
-   * nodeset to which random nodes may be added.
-   */
-  private NodeSequence(DTMManager dtmMgr)
-  {
-    super(new NodeVector());
-    m_last = 0;
-    m_dtmMgr = dtmMgr;
-  }
-
 
   /**
    * Create a new NodeSequence in an invalid (null) state.
@@ -392,7 +363,7 @@ public int previousNode()
     }
     else
     {
-      int n = m_iter.previousNode();
+      m_iter.previousNode();
       m_next = m_iter.getCurrentPos();
       return m_next;
     }
@@ -503,12 +474,10 @@ public int getCurrentPos()
   @Override
 public void runTo(int index)
   {
-    int n;
-
     if (-1 == index)
     {
       int pos = m_next;
-      while (DTM.NULL != (n = nextNode()));
+      while (DTM.NULL != nextNode());
       m_next = pos;
     }
     else if(m_next == index)
@@ -521,11 +490,11 @@ public void runTo(int index)
     }
     else if((null == getVector()) && (index < m_next))
     {
-      while ((m_next >= index) && DTM.NULL != (n = previousNode()));
+      while ((m_next >= index) && DTM.NULL != previousNode());
     }
     else
     {
-      while ((m_next < index) && DTM.NULL != (n = nextNode()));
+      while ((m_next < index) && DTM.NULL != nextNode());
     }
 
   }
@@ -726,15 +695,6 @@ public int getAnalysisBits()
       return ((PathComponent)m_iter).getAnalysisBits();
     else
       return 0;
-  }
-
-  /**
-   * @see net.sourceforge.htmlunit.xpath.Expression#fixupVariables(Vector, int)
-   */
-  @Override
-public void fixupVariables(Vector vars, int globalsSize)
-  {
-    super.fixupVariables(vars, globalsSize);
   }
 
   /**

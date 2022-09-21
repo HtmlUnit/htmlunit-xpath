@@ -26,17 +26,17 @@ import net.sourceforge.htmlunit.xpath.patterns.NodeTest;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /**
- * This class defines a simplified type of union iterator that only 
- * tests along the child axes.  If the conditions are right, it is 
+ * This class defines a simplified type of union iterator that only
+ * tests along the child axes.  If the conditions are right, it is
  * much faster than using a UnionPathIterator.
  */
 public class UnionChildIterator extends ChildTestIterator
 {
     static final long serialVersionUID = 3500298482193003495L;
   /**
-   * Even though these may hold full LocPathIterators, this array does 
-   * not have to be cloned, since only the node test and predicate 
-   * portion are used, and these only need static information.  However, 
+   * Even though these may hold full LocPathIterators, this array does
+   * not have to be cloned, since only the node test and predicate
+   * portion are used, and these only need static information.  However,
    * also note that index predicates can not be used!
    */
   private PredicatedNodeTest[] m_nodeTests = null;
@@ -52,9 +52,9 @@ public class UnionChildIterator extends ChildTestIterator
   /**
    * Add a node test to the union list.
    *
-   * @param test reference to a NodeTest, which will be added 
-   * directly to the list of node tests (in other words, it will 
-   * not be cloned).  The parent of this test will be set to 
+   * @param test reference to a NodeTest, which will be added
+   * directly to the list of node tests (in other words, it will
+   * not be cloned).  The parent of this test will be set to
    * this object.
    */
   public void addNodeTest(PredicatedNodeTest test)
@@ -79,27 +79,6 @@ public class UnionChildIterator extends ChildTestIterator
       m_nodeTests[len] = test;
     }
     test.exprSetParent(this);
-  }
-
-  /**
-   * This function is used to fixup variables from QNames to stack frame 
-   * indexes at stylesheet build time.
-   * @param vars List of QNames that correspond to variables.  This list 
-   * should be searched backwards for the first qualified name that 
-   * corresponds to the variable reference qname.  The position of the 
-   * QName in the vector from the start of the vector will be its position 
-   * in the stack frame (but variables above the globalsTop value will need 
-   * to be offset to the current stack frame).
-   */
-  @Override
-public void fixupVariables(java.util.Vector vars, int globalsSize)
-  {
-    super.fixupVariables(vars, globalsSize);
-    if (m_nodeTests != null) {
-      for (int i = 0; i < m_nodeTests.length; i++) {
-        m_nodeTests[i].fixupVariables(vars, globalsSize);
-      }
-    }
   }
 
   /**

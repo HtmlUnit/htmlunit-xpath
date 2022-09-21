@@ -47,9 +47,6 @@ public class FunctionTable
   /** The 'id()' id. */
   public static final int FUNC_ID = 4;
 
-  /** The 'key()' id (XSLT). */
-  public static final int FUNC_KEY = 5;
-
   /** The 'local-name()' id. */
   public static final int FUNC_LOCAL_PART = 7;
 
@@ -58,9 +55,6 @@ public class FunctionTable
 
   /** The 'name()' id. */
   public static final int FUNC_QNAME = 9;
-
-  /** The 'generate-id()' id. */
-  public static final int FUNC_GENERATE_ID = 10;
 
   /** The 'not()' id. */
   public static final int FUNC_NOT = 11;
@@ -119,25 +113,8 @@ public class FunctionTable
   /** The 'string-length()' id. */
   public static final int FUNC_STRING_LENGTH = 30;
 
-  /** The 'system-property()' id. */
-  public static final int FUNC_SYSTEM_PROPERTY = 31;
-
   /** The 'lang()' id. */
   public static final int FUNC_LANG = 32;
-
-  /** The 'function-available()' id (XSLT). */
-  public static final int FUNC_EXT_FUNCTION_AVAILABLE = 33;
-
-  /** The 'element-available()' id (XSLT). */
-  public static final int FUNC_EXT_ELEM_AVAILABLE = 34;
-
-  /** The 'unparsed-entity-uri()' id (XSLT). */
-  public static final int FUNC_UNPARSED_ENTITY_URI = 36;
-
-  // Proprietary
-
-  /** The 'document-location()' id (Proprietary). */
-  public static final int FUNC_DOCLOCATION = 35;
 
   /**
    * The function table.
@@ -188,8 +165,6 @@ public class FunctionTable
     m_functions[FUNC_NAMESPACE] =
       net.sourceforge.htmlunit.xpath.functions.FuncNamespace.class;
     m_functions[FUNC_QNAME] = net.sourceforge.htmlunit.xpath.functions.FuncQname.class;
-//    m_functions[FUNC_GENERATE_ID] =
-//      net.sourceforge.htmlunit.xpath.functions.FuncGenerateId.class;
     m_functions[FUNC_NOT] = net.sourceforge.htmlunit.xpath.functions.FuncNot.class;
     m_functions[FUNC_TRUE] = net.sourceforge.htmlunit.xpath.functions.FuncTrue.class;
     m_functions[FUNC_FALSE] = net.sourceforge.htmlunit.xpath.functions.FuncFalse.class;
@@ -213,20 +188,10 @@ public class FunctionTable
     m_functions[FUNC_TRANSLATE] =
       net.sourceforge.htmlunit.xpath.functions.FuncTranslate.class;
     m_functions[FUNC_CONCAT] = net.sourceforge.htmlunit.xpath.functions.FuncConcat.class;
-//    m_functions[FUNC_SYSTEM_PROPERTY] =
-//      net.sourceforge.htmlunit.xpath.functions.FuncSystemProperty.class;
-//    m_functions[FUNC_EXT_FUNCTION_AVAILABLE] =
-//      org.apache.xpath.functions.FuncExtFunctionAvailable.class;
-//    m_functions[FUNC_EXT_ELEM_AVAILABLE] =
-//      org.apache.xpath.functions.FuncExtElementAvailable.class;
     m_functions[FUNC_SUBSTRING] =
       net.sourceforge.htmlunit.xpath.functions.FuncSubstring.class;
     m_functions[FUNC_STRING_LENGTH] =
       net.sourceforge.htmlunit.xpath.functions.FuncStringLength.class;
-//    m_functions[FUNC_DOCLOCATION] =
-//      net.sourceforge.htmlunit.xpath.functions.FuncDoclocation.class;
-//    m_functions[FUNC_UNPARSED_ENTITY_URI] =
-//      net.sourceforge.htmlunit.xpath.functions.FuncUnparsedEntityURI.class;
   }
 
   static{
@@ -240,16 +205,12 @@ public class FunctionTable
                           new Integer(FunctionTable.FUNC_COUNT));
           m_functionID.put(Keywords.FUNC_ID_STRING,
                           new Integer(FunctionTable.FUNC_ID));
-          m_functionID.put(Keywords.FUNC_KEY_STRING,
-                          new Integer(FunctionTable.FUNC_KEY));
           m_functionID.put(Keywords.FUNC_LOCAL_PART_STRING,
                           new Integer(FunctionTable.FUNC_LOCAL_PART));
           m_functionID.put(Keywords.FUNC_NAMESPACE_STRING,
                           new Integer(FunctionTable.FUNC_NAMESPACE));
           m_functionID.put(Keywords.FUNC_NAME_STRING,
                           new Integer(FunctionTable.FUNC_QNAME));
-          m_functionID.put(Keywords.FUNC_GENERATE_ID_STRING,
-                          new Integer(FunctionTable.FUNC_GENERATE_ID));
           m_functionID.put(Keywords.FUNC_NOT_STRING,
                           new Integer(FunctionTable.FUNC_NOT));
           m_functionID.put(Keywords.FUNC_TRUE_STRING,
@@ -286,20 +247,10 @@ public class FunctionTable
                           new Integer(FunctionTable.FUNC_TRANSLATE));
           m_functionID.put(Keywords.FUNC_CONCAT_STRING,
                           new Integer(FunctionTable.FUNC_CONCAT));
-          m_functionID.put(Keywords.FUNC_SYSTEM_PROPERTY_STRING,
-                          new Integer(FunctionTable.FUNC_SYSTEM_PROPERTY));
-          m_functionID.put(Keywords.FUNC_EXT_FUNCTION_AVAILABLE_STRING,
-                        new Integer(FunctionTable.FUNC_EXT_FUNCTION_AVAILABLE));
-          m_functionID.put(Keywords.FUNC_EXT_ELEM_AVAILABLE_STRING,
-                          new Integer(FunctionTable.FUNC_EXT_ELEM_AVAILABLE));
           m_functionID.put(Keywords.FUNC_SUBSTRING_STRING,
                           new Integer(FunctionTable.FUNC_SUBSTRING));
           m_functionID.put(Keywords.FUNC_STRING_LENGTH_STRING,
                           new Integer(FunctionTable.FUNC_STRING_LENGTH));
-          m_functionID.put(Keywords.FUNC_UNPARSED_ENTITY_URI_STRING,
-                          new Integer(FunctionTable.FUNC_UNPARSED_ENTITY_URI));
-          m_functionID.put(Keywords.FUNC_DOCLOCATION_STRING,
-                          new Integer(FunctionTable.FUNC_DOCLOCATION));
   }
 
   public FunctionTable(){

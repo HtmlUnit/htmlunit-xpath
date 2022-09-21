@@ -268,30 +268,6 @@ public void detach()
   }
 
   /**
-   * This function is used to fixup variables from QNames to stack frame
-   * indexes at stylesheet build time.
-   * @param vars List of QNames that correspond to variables.  This list
-   * should be searched backwards for the first qualified name that
-   * corresponds to the variable reference qname.  The position of the
-   * QName in the vector from the start of the vector will be its position
-   * in the stack frame (but variables above the globalsTop value will need
-   * to be offset to the current stack frame).
-   */
-  @Override
-public void fixupVariables(java.util.Vector vars, int globalsSize)
-  {
-    m_predicateIndex = -1;
-
-    AxesWalker walker = m_firstWalker;
-
-    while (null != walker)
-    {
-      walker.fixupVariables(vars, globalsSize);
-      walker = walker.getNextWalker();
-    }
-  }
-
-  /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   @Override

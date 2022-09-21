@@ -41,17 +41,8 @@ public class FuncFalse extends Function
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
     return XBoolean.S_FALSE;
   }
-  
-  /**
-   * No arguments to process, so this does nothing.
-   */
-  public void fixupVariables(java.util.Vector vars, int globalsSize)
-  {
-    // no-op
-  }
-
 }

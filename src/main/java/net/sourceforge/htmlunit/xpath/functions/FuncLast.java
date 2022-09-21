@@ -35,12 +35,12 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 public class FuncLast extends Function
 {
     static final long serialVersionUID = 9205812403085432943L;
-  
+
   private boolean m_isTopLevel;
-  
+
   /**
    * Figure out if we're executing a toplevel expression.
-   * If so, we can't be inside of a predicate. 
+   * If so, we can't be inside of a predicate.
    */
   @Override
 public void postCompileStep(Compiler compiler)
@@ -74,10 +74,10 @@ public void postCompileStep(Compiler compiler)
     if(null != cnl)
     {
       count = cnl.getLength();
-      // System.out.println("count: "+count); 
+      // System.out.println("count: "+count);
     }
     else
-      count = 0;   
+      count = 0;
     return count;
   }
 
@@ -90,19 +90,10 @@ public void postCompileStep(Compiler compiler)
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
     XNumber xnum = new XNumber((double) getCountOfContextNodeList(xctxt));
     // System.out.println("last: "+xnum.num());
     return xnum;
   }
-  
-  /**
-   * No arguments to process, so this does nothing.
-   */
-  public void fixupVariables(java.util.Vector vars, int globalsSize)
-  {
-    // no-op
-  }
-
 }

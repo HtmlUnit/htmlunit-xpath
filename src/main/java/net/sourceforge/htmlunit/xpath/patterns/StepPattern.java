@@ -25,7 +25,7 @@ import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
-import net.sourceforge.htmlunit.xpath.compiler.PsuedoNames;
+import net.sourceforge.htmlunit.xpath.compiler.PseudoNames;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
@@ -88,7 +88,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Calculate the local name or psuedo name of the node that this pattern will test,
    * for hash table lookup optimization.
    *
-   * @see net.sourceforge.htmlunit.xpath.compiler.PsuedoNames
+   * @see net.sourceforge.htmlunit.xpath.compiler.PseudoNames
    */
   public void calcTargetString()
   {
@@ -98,28 +98,28 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     switch (whatToShow)
     {
     case DTMFilter.SHOW_COMMENT :
-      m_targetString = PsuedoNames.PSEUDONAME_COMMENT;
+      m_targetString = PseudoNames.PSEUDONAME_COMMENT;
       break;
     case DTMFilter.SHOW_TEXT :
     case DTMFilter.SHOW_CDATA_SECTION :
     case DTMFilter.SHOW_TEXT | DTMFilter.SHOW_CDATA_SECTION :
-      m_targetString = PsuedoNames.PSEUDONAME_TEXT;
+      m_targetString = PseudoNames.PSEUDONAME_TEXT;
       break;
     case DTMFilter.SHOW_ALL :
-      m_targetString = PsuedoNames.PSEUDONAME_ANY;
+      m_targetString = PseudoNames.PSEUDONAME_ANY;
       break;
     case DTMFilter.SHOW_DOCUMENT :
     case DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT :
-      m_targetString = PsuedoNames.PSEUDONAME_ROOT;
+      m_targetString = PseudoNames.PSEUDONAME_ROOT;
       break;
     case DTMFilter.SHOW_ELEMENT :
       if (WILD == m_name)
-        m_targetString = PsuedoNames.PSEUDONAME_ANY;
+        m_targetString = PseudoNames.PSEUDONAME_ANY;
       else
         m_targetString = m_name;
       break;
     default :
-      m_targetString = PsuedoNames.PSEUDONAME_ANY;
+      m_targetString = PseudoNames.PSEUDONAME_ANY;
       break;
     }
   }
@@ -130,7 +130,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    *
    *
    * @return local name or psuedo name of the node.
-   * @see net.sourceforge.htmlunit.xpath.compiler.PsuedoNames
+   * @see net.sourceforge.htmlunit.xpath.compiler.PseudoNames
    */
   public String getTargetString()
   {

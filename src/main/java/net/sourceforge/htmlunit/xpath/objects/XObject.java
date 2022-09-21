@@ -51,7 +51,7 @@ public class XObject extends Expression implements Serializable, Cloneable
 
   /**
    * The java object which this object wraps.
-   *  @serial  
+   *  @serial
    */
   protected Object m_obj;  // This may be NULL!!!
 
@@ -70,7 +70,7 @@ public class XObject extends Expression implements Serializable, Cloneable
   {
     setObject(obj);
   }
-  
+
   protected void setObject(Object obj) {
       m_obj = obj;
   }
@@ -93,9 +93,9 @@ public XObject execute(XPathContext xctxt)
 
   /**
    * Specify if it's OK for detach to release the iterator for reuse.
-   * This function should be called with a value of false for objects that are 
+   * This function should be called with a value of false for objects that are
    * stored in variables.
-   * Calling this with a value of false on a XNodeSet will cause the nodeset 
+   * Calling this with a value of false on a XNodeSet will cause the nodeset
    * to be cached.
    *
    * @param allowRelease true if it is OK for detach to release this iterator
@@ -127,7 +127,7 @@ public XObject execute(XPathContext xctxt)
       setObject(null);
     }
   }
-  
+
   /**
    * Reset for fresh reuse.
    */
@@ -153,8 +153,8 @@ public XObject execute(XPathContext xctxt)
   }
 
   /**
-   * Create the right XObject based on the type of the object passed.  This 
-   * function can not make an XObject that exposes DOM Nodes, NodeLists, and 
+   * Create the right XObject based on the type of the object passed.  This
+   * function can not make an XObject that exposes DOM Nodes, NodeLists, and
    * NodeIterators to the XSLT stylesheet as node-sets.
    *
    * @param val The java object which this object will wrap.
@@ -165,10 +165,10 @@ public XObject execute(XPathContext xctxt)
   {
     return XObjectFactory.create(val);
   }
-  
+
   /**
    * Create the right XObject based on the type of the object passed.
-   * This function <emph>can</emph> make an XObject that exposes DOM Nodes, NodeLists, and 
+   * This function <emph>can</emph> make an XObject that exposes DOM Nodes, NodeLists, and
    * NodeIterators to the XSLT stylesheet as node-sets.
    *
    * @param val The java object which this object will wrap.
@@ -241,12 +241,12 @@ public XObject execute(XPathContext xctxt)
 
     return 0.0;
   }
-  
+
   /**
-   * Cast result object to a number, but allow side effects, such as the 
+   * Cast result object to a number, but allow side effects, such as the
    * incrementing of an iterator.
    *
-   * @return numeric value of the string conversion from the 
+   * @return numeric value of the string conversion from the
    * next node in the NodeSetDTM, or NAN if no node was found
    */
   public double numWithSideEffects()  throws javax.xml.transform.TransformerException
@@ -269,9 +269,9 @@ public XObject execute(XPathContext xctxt)
 
     return false;
   }
-  
+
   /**
-   * Cast result object to a boolean, but allow side effects, such as the 
+   * Cast result object to a boolean, but allow side effects, such as the
    * incrementing of an iterator.
    *
    * @return True if there is a next node in the nodeset
@@ -338,7 +338,7 @@ public String toString()
 
     return result;
   }
-  
+
   /**
    * Cast result object to a result tree fragment.
    *
@@ -368,8 +368,8 @@ public String toString()
 
     return docFrag;
   }
-  
-  
+
+
   /**
    * For functions to override.
    *
@@ -416,7 +416,7 @@ public String toString()
 
     return null;
   }
-  
+
   /**
    * Get a fresh copy of the object.  For use with variables.
    *
@@ -427,7 +427,7 @@ public String toString()
     return this;
   }
 
-  
+
   /**
    * Cast result object to a nodelist. Always issues an error.
    *
@@ -443,7 +443,7 @@ public String toString()
 
     return null;
   }
-  
+
   /**
    * Cast result object to a nodelist. Always issues an error.
    *
@@ -540,9 +540,9 @@ public String toString()
           throws javax.xml.transform.TransformerException
   {
 
-    // In order to handle the 'all' semantics of 
-    // nodeset comparisons, we always call the 
-    // nodeset function.  Because the arguments 
+    // In order to handle the 'all' semantics of
+    // nodeset comparisons, we always call the
+    // nodeset function.  Because the arguments
     // are backwards, we call the opposite comparison
     // function.
     if (obj2.getType() == XObject.CLASS_NODESET)
@@ -564,9 +564,9 @@ public String toString()
           throws javax.xml.transform.TransformerException
   {
 
-    // In order to handle the 'all' semantics of 
-    // nodeset comparisons, we always call the 
-    // nodeset function.  Because the arguments 
+    // In order to handle the 'all' semantics of
+    // nodeset comparisons, we always call the
+    // nodeset function.  Because the arguments
     // are backwards, we call the opposite comparison
     // function.
     if (obj2.getType() == XObject.CLASS_NODESET)
@@ -588,9 +588,9 @@ public String toString()
           throws javax.xml.transform.TransformerException
   {
 
-    // In order to handle the 'all' semantics of 
-    // nodeset comparisons, we always call the 
-    // nodeset function.  Because the arguments 
+    // In order to handle the 'all' semantics of
+    // nodeset comparisons, we always call the
+    // nodeset function.  Because the arguments
     // are backwards, we call the opposite comparison
     // function.
     if (obj2.getType() == XObject.CLASS_NODESET)
@@ -612,9 +612,9 @@ public String toString()
           throws javax.xml.transform.TransformerException
   {
 
-    // In order to handle the 'all' semantics of 
-    // nodeset comparisons, we always call the 
-    // nodeset function.  Because the arguments 
+    // In order to handle the 'all' semantics of
+    // nodeset comparisons, we always call the
+    // nodeset function.  Because the arguments
     // are backwards, we call the opposite comparison
     // function.
     if (obj2.getType() == XObject.CLASS_NODESET)
@@ -635,8 +635,8 @@ public String toString()
   public boolean equals(XObject obj2)
   {
 
-    // In order to handle the 'all' semantics of 
-    // nodeset comparisons, we always call the 
+    // In order to handle the 'all' semantics of
+    // nodeset comparisons, we always call the
     // nodeset function.
     if (obj2.getType() == XObject.CLASS_NODESET)
       return obj2.equals(this);
@@ -664,8 +664,8 @@ public String toString()
           throws javax.xml.transform.TransformerException
   {
 
-    // In order to handle the 'all' semantics of 
-    // nodeset comparisons, we always call the 
+    // In order to handle the 'all' semantics of
+    // nodeset comparisons, we always call the
     // nodeset function.
     if (obj2.getType() == XObject.CLASS_NODESET)
       return obj2.notEquals(this);
@@ -702,23 +702,14 @@ public String toString()
 
     String fmsg = XSLMessages.createXPATHMessage(msg, args);
 
-    // boolean shouldThrow = support.problem(m_support.XPATHPROCESSOR, 
+    // boolean shouldThrow = support.problem(m_support.XPATHPROCESSOR,
     //                                      m_support.ERROR,
-    //                                      null, 
+    //                                      null,
     //                                      null, fmsg, 0, 0);
     // if(shouldThrow)
     {
       throw new XPathException(fmsg, this);
     }
-  }
-  
-  
-  /**
-   * XObjects should not normally need to fix up variables.
-   */
-  public void fixupVariables(java.util.Vector vars, int globalsSize)
-  {
-    // no-op
   }
 
 
@@ -733,7 +724,7 @@ public String toString()
   {
     fsb.append(str());
   }
-  
+
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
@@ -750,13 +741,13 @@ public boolean deepEquals(Expression expr)
   {
     if(!isSameClass(expr))
       return false;
-      
-    // If equals at the expression level calls deepEquals, I think we're 
-    // still safe from infinite recursion since this object overrides 
+
+    // If equals at the expression level calls deepEquals, I think we're
+    // still safe from infinite recursion since this object overrides
     // equals.  I hope.
     if(!this.equals((XObject)expr))
       return false;
-      
+
     return true;
   }
 

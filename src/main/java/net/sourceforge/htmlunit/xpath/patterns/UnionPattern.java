@@ -27,7 +27,7 @@ import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /**
- * This class represents a union pattern, which can have multiple individual 
+ * This class represents a union pattern, which can have multiple individual
  * StepPattern patterns.
  * @xsl.usage advanced
  */
@@ -38,23 +38,12 @@ public class UnionPattern extends Expression
   /** Array of the contained step patterns to be tested.
    *  @serial  */
   private StepPattern[] m_patterns;
-  
-  /**
-   * No arguments to process, so this does nothing.
-   */
-  public void fixupVariables(java.util.Vector vars, int globalsSize)
-  {
-    for (int i = 0; i < m_patterns.length; i++) 
-    {
-      m_patterns[i].fixupVariables(vars, globalsSize);
-    }
-  }
 
-  
+
   /**
-   * Tell if this expression or it's subexpressions can traverse outside 
+   * Tell if this expression or it's subexpressions can traverse outside
    * the current subtree.
-   * 
+   *
    * @return true if traversal outside the context node's subtree can occur.
    */
    @Override
@@ -63,7 +52,7 @@ public boolean canTraverseOutsideSubtree()
      if(null != m_patterns)
      {
       int n = m_patterns.length;
-      for (int i = 0; i < n; i++) 
+      for (int i = 0; i < n; i++)
       {
         if(m_patterns[i].canTraverseOutsideSubtree())
           return true;
@@ -73,10 +62,10 @@ public boolean canTraverseOutsideSubtree()
    }
 
   /**
-   * Set the contained step patterns to be tested. 
+   * Set the contained step patterns to be tested.
    *
    *
-   * @param patterns the contained step patterns to be tested. 
+   * @param patterns the contained step patterns to be tested.
    */
   public void setPatterns(StepPattern[] patterns)
   {
@@ -88,14 +77,14 @@ public boolean canTraverseOutsideSubtree()
         patterns[i].exprSetParent(this);
       }
     }
-    
+
   }
 
   /**
-   * Get the contained step patterns to be tested. 
+   * Get the contained step patterns to be tested.
    *
    *
-   * @return an array of the contained step patterns to be tested. 
+   * @return an array of the contained step patterns to be tested.
    */
   public StepPattern[] getPatterns()
   {
@@ -142,16 +131,16 @@ public XObject execute(XPathContext xctxt) throws javax.xml.transform.Transforme
 
     return bestScore;
   }
-  
+
   class UnionPathPartOwner implements ExpressionOwner
   {
     int m_index;
-    
+
     UnionPathPartOwner(int index)
     {
       m_index = index;
     }
-    
+
     /**
      * @see ExpressionOwner#getExpression()
      */
@@ -172,7 +161,7 @@ public XObject execute(XPathContext xctxt) throws javax.xml.transform.Transforme
       m_patterns[m_index] = (StepPattern)exp;
     }
   }
-  
+
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
@@ -189,7 +178,7 @@ public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
       }
     }
   }
-  
+
   /**
    * @see Expression#deepEquals(Expression)
    */
@@ -198,15 +187,15 @@ public boolean deepEquals(Expression expr)
   {
     if(!isSameClass(expr))
       return false;
-      
+
     UnionPattern up = (UnionPattern)expr;
-      
+
     if(null != m_patterns)
     {
       int n = m_patterns.length;
       if((null == up.m_patterns) || (up.m_patterns.length != n))
         return false;
-        
+
       for(int i = 0; i < n; i++)
       {
         if(!m_patterns[i].deepEquals(up.m_patterns[i]))
@@ -215,9 +204,9 @@ public boolean deepEquals(Expression expr)
     }
     else if(up.m_patterns != null)
       return false;
-      
+
     return true;
-    
+
   }
 
 

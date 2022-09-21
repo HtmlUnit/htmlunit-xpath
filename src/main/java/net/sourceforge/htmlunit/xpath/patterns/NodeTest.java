@@ -670,25 +670,17 @@ public XObject execute(XPathContext xctxt, int context,
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public XObject execute(XPathContext xctxt)
+  public XObject execute(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
     return execute(xctxt, xctxt.getCurrentNode());
   }
 
   /**
-   * Node tests by themselves do not need to fix up variables.
-   */
-  public void fixupVariables(java.util.Vector vars, int globalsSize)
-  {
-    // no-op
-  }
-
-  /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   @Override
-public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
     assertion(false, "callVisitors should not be called for this object!!!");
   }

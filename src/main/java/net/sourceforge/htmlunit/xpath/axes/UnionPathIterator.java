@@ -446,26 +446,6 @@ public int nextNode()
   }
 
   /**
-   * This function is used to fixup variables from QNames to stack frame
-   * indexes at stylesheet build time.
-   * @param vars List of QNames that correspond to variables.  This list
-   * should be searched backwards for the first qualified name that
-   * corresponds to the variable reference qname.  The position of the
-   * QName in the vector from the start of the vector will be its position
-   * in the stack frame (but variables above the globalsTop value will need
-   * to be offset to the current stack frame).
-   */
-  @Override
-public void fixupVariables(java.util.Vector vars, int globalsSize)
-  {
-    for (int i = 0; i < m_exprs.length; i++)
-    {
-      m_exprs[i].fixupVariables(vars, globalsSize);
-    }
-
-  }
-
-  /**
    * The location path iterators, one for each
    * <a href="http://www.w3.org/TR/xpath#NT-LocationPath">location
    * path</a> contained in the union expression.

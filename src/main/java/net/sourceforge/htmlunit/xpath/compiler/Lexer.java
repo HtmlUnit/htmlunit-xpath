@@ -511,25 +511,25 @@ class Lexer
       switch (tok)
       {
       case OpCodes.NODETYPE_COMMENT :
-        targetStrings.add(PsuedoNames.PSEUDONAME_COMMENT);
+        targetStrings.add(PseudoNames.PSEUDONAME_COMMENT);
         break;
       case OpCodes.NODETYPE_TEXT :
-        targetStrings.add(PsuedoNames.PSEUDONAME_TEXT);
+        targetStrings.add(PseudoNames.PSEUDONAME_TEXT);
         break;
       case OpCodes.NODETYPE_NODE :
-        targetStrings.add(PsuedoNames.PSEUDONAME_ANY);
+        targetStrings.add(PseudoNames.PSEUDONAME_ANY);
         break;
       case OpCodes.NODETYPE_ROOT :
-        targetStrings.add(PsuedoNames.PSEUDONAME_ROOT);
+        targetStrings.add(PseudoNames.PSEUDONAME_ROOT);
         break;
       case OpCodes.NODETYPE_ANYELEMENT :
-        targetStrings.add(PsuedoNames.PSEUDONAME_ANY);
+        targetStrings.add(PseudoNames.PSEUDONAME_ANY);
         break;
       case OpCodes.NODETYPE_PI :
-        targetStrings.add(PsuedoNames.PSEUDONAME_ANY);
+        targetStrings.add(PseudoNames.PSEUDONAME_ANY);
         break;
       default :
-        targetStrings.add(PsuedoNames.PSEUDONAME_ANY);
+        targetStrings.add(PseudoNames.PSEUDONAME_ANY);
       }
     }
     else

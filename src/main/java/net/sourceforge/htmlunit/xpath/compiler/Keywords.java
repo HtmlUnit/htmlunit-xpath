@@ -117,9 +117,6 @@ public class Keywords
   /** id function string. */
   static final String FUNC_ID_STRING = "id";
 
-  /** key function string (XSLT). */
-  public static final String FUNC_KEY_STRING = "key";
-
   /** local-name function string. */
   public static final String FUNC_LOCAL_PART_STRING = "local-name";
 
@@ -128,9 +125,6 @@ public class Keywords
 
   /** name function string. */
   public static final String FUNC_NAME_STRING = "name";
-
-  /** generate-id function string (XSLT). */
-  public static final String FUNC_GENERATE_ID_STRING = "generate-id";
 
   /** not function string. */
   public static final String FUNC_NOT_STRING = "not";
@@ -187,31 +181,11 @@ public class Keywords
   /** concat function string. */
   public static final String FUNC_CONCAT_STRING = "concat";
 
-  /** system-property function string. */
-  public static final String FUNC_SYSTEM_PROPERTY_STRING = "system-property";
-
-  /** function-available function string (XSLT). */
-  public static final String FUNC_EXT_FUNCTION_AVAILABLE_STRING =
-    "function-available";
-
-  /** element-available function string (XSLT). */
-  public static final String FUNC_EXT_ELEM_AVAILABLE_STRING =
-    "element-available";
-
   /** substring function string. */
   public static final String FUNC_SUBSTRING_STRING = "substring";
 
   /** string-length function string. */
   public static final String FUNC_STRING_LENGTH_STRING = "string-length";
-
-  /** unparsed-entity-uri function string (XSLT). */
-  public static final String FUNC_UNPARSED_ENTITY_URI_STRING =
-    "unparsed-entity-uri";
-
-  // Proprietary, built in functions
-
-  /** current function string (Proprietary). */
-  public static final String FUNC_DOCLOCATION_STRING = "document-location";
 
   static
   {
@@ -255,8 +229,6 @@ public class Keywords
                    new Integer(OpCodes.FROM_SELF));
     m_keywords.put(FUNC_ID_STRING,
                    new Integer(FunctionTable.FUNC_ID));
-    m_keywords.put(FUNC_KEY_STRING,
-                   new Integer(FunctionTable.FUNC_KEY));
 
     m_nodetests.put(NODETYPE_COMMENT_STRING,
                     new Integer(OpCodes.NODETYPE_COMMENT));

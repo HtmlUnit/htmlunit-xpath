@@ -1921,9 +1921,7 @@ public class XPathParser
 
     appendOp(2, OpCodes.OP_LOCATIONPATHPATTERN);
 
-    if (lookahead('(', 1)
-            && (tokenIs(Keywords.FUNC_ID_STRING)
-                || tokenIs(Keywords.FUNC_KEY_STRING)))
+    if (lookahead('(', 1) && tokenIs(Keywords.FUNC_ID_STRING))
     {
       IdKeyPattern();
 
