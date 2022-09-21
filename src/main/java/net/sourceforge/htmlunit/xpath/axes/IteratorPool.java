@@ -33,15 +33,15 @@ public final class IteratorPool implements java.io.Serializable
 {
     static final long serialVersionUID = -460927331149566998L;
 
-  /** 
+  /**
    * Type of objects in this pool.
    */
   private final DTMIterator m_orig;
 
-  /** 
+  /**
    * Stack of given objects this points to.
    */
-  private final ArrayList m_freeStack;
+  private final ArrayList<DTMIterator> m_freeStack;
 
   /**
    * Constructor IteratorPool
@@ -51,11 +51,11 @@ public final class IteratorPool implements java.io.Serializable
   public IteratorPool(DTMIterator original)
   {
     m_orig = original;
-    m_freeStack = new ArrayList();
+    m_freeStack = new ArrayList<>();
   }
-  
+
   /**
-   * Get an instance of the given object in this pool 
+   * Get an instance of the given object in this pool
    *
    * @return An instance of the given object
    */
@@ -76,9 +76,9 @@ public final class IteratorPool implements java.io.Serializable
       return result;
     }
   }
-  
+
   /**
-   * Get an instance of the given object in this pool 
+   * Get an instance of the given object in this pool
    *
    * @return An instance of the given object
    */
@@ -107,7 +107,7 @@ public final class IteratorPool implements java.io.Serializable
   }
 
   /**
-   * Add an instance of the given object to the pool  
+   * Add an instance of the given object to the pool
    *
    *
    * @param obj Object to add.

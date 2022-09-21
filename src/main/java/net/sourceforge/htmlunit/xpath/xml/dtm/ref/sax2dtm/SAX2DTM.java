@@ -119,10 +119,9 @@ public class SAX2DTM extends DTMDefaultBaseIterators
   /** Namespace support, only relevent at construction time.
    * Made protected rather than private so SAX2RTFDTM can access it.
    */
-  transient protected java.util.Vector m_prefixMappings =
-    new java.util.Vector();
+  transient protected Vector<String> m_prefixMappings = new Vector<>();
 
-  /** Namespace support, only relevent at construction time.
+  /** Namespace support, only relevant at construction time.
    * Made protected rather than private so SAX2RTFDTM can access it.
    */
   transient protected IntStack m_contextIndexes;
@@ -163,7 +162,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * This table holds the ID string to node associations, for
    * XML IDs.
    */
-  protected Hashtable m_idAttributes = new Hashtable();
+  protected Hashtable<String, Integer> m_idAttributes = new Hashtable<>();
 
   /**
    * fixed dom-style names.
@@ -181,7 +180,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * Vector of entities.  Each record is composed of four Strings:
    *  publicId, systemID, notationName, and name.
    */
-  private Vector m_entities = null;
+  private Vector<String> m_entities = null;
 
   /** m_entities public ID offset. */
   private static final int ENTITY_FIELD_PUBLICID = 0;
@@ -1679,7 +1678,7 @@ public void unparsedEntityDecl(
 
     if (null == m_entities)
     {
-      m_entities = new Vector();
+      m_entities = new Vector<>();
     }
 
     try
@@ -1862,7 +1861,7 @@ public void endPrefixMapping(String prefix) throws SAXException
   {
 
     int startDecls = m_contextIndexes.peek();
-    java.util.Vector prefixMappings = m_prefixMappings;
+    Vector<String> prefixMappings = m_prefixMappings;
     int nDecls = prefixMappings.size();
 
     for (int i = startDecls; i < nDecls; i += 2)

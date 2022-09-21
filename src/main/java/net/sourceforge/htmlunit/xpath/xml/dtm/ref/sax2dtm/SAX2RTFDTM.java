@@ -21,6 +21,7 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref.sax2dtm;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.xml.transform.Source;
 
@@ -227,7 +228,7 @@ public void startDocument() throws SAXException
   {
     // Re-initialize the tree append process
     m_endDocumentOccured = false;
-    m_prefixMappings = new java.util.Vector();
+    m_prefixMappings = new Vector<>();
     m_contextIndexes = new IntStack();
     m_parents = new IntStack();
 
