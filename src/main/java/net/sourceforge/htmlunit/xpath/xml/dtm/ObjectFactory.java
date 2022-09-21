@@ -36,12 +36,12 @@ import java.util.Properties;
  * <p>
  * This code is designed to implement the JAXP 1.1 spec pluggability
  * feature and is designed to run on JDK version 1.1 and
- * later, and to compile on JDK 1.2 and onward.  
+ * later, and to compile on JDK 1.2 and onward.
  * The code also runs both as part of an unbundled jar file and
  * when bundled as part of the JDK.
  * <p>
  * This class was moved from the <code>javax.xml.parsers.ObjectFactory</code>
- * class and modified to be used as a general utility for creating objects 
+ * class and modified to be used as a general utility for creating objects
  * dynamically.
  *
  * @version $Id$
@@ -124,12 +124,12 @@ final class ObjectFactory {
      *
      * @exception ObjectFactory.ConfigurationError
      */
-    static Object createObject(String factoryId, 
+    static Object createObject(String factoryId,
                                       String propertiesFilename,
                                       String fallbackClassName)
         throws ConfigurationError
     {
-        Class factoryClass = lookUpFactoryClass(factoryId,
+        Class<?> factoryClass = lookUpFactoryClass(factoryId,
                                                 propertiesFilename,
                                                 fallbackClassName);
 
@@ -171,7 +171,7 @@ final class ObjectFactory {
      *
      * @exception ObjectFactory.ConfigurationError
      */
-    static Class lookUpFactoryClass(String factoryId) 
+    static Class<?> lookUpFactoryClass(String factoryId)
         throws ConfigurationError
     {
         return lookUpFactoryClass(factoryId, null, null);
@@ -199,7 +199,7 @@ final class ObjectFactory {
      *
      * @exception ObjectFactory.ConfigurationError
      */
-    static Class lookUpFactoryClass(String factoryId,
+    static Class<?> lookUpFactoryClass(String factoryId,
                                            String propertiesFilename,
                                            String fallbackClassName)
         throws ConfigurationError
@@ -215,7 +215,7 @@ final class ObjectFactory {
 
         // assert(className != null);
         try{
-            Class providerClass = findProviderClass(factoryClassName,
+            Class<?> providerClass = findProviderClass(factoryClassName,
                                                     cl,
                                                     true);
             debugPrintln("created new instance of " + providerClass +
@@ -334,7 +334,7 @@ final class ObjectFactory {
                         // Ignore the exception.
                         catch (IOException exc) {}
                     }
-                }              
+                }
             }
             if(fXalanProperties != null) {
                 factoryClassName = fXalanProperties.getProperty(factoryId);
@@ -360,7 +360,7 @@ final class ObjectFactory {
                     // Ignore the exception.
                     catch (IOException exc) {}
                 }
-            }               
+            }
         }
         if (factoryClassName != null) {
             debugPrintln("found in " + propertiesFilename + ", value="
@@ -389,7 +389,7 @@ final class ObjectFactory {
      */
     static ClassLoader findClassLoader()
         throws ConfigurationError
-    { 
+    {
         // Figure out which ClassLoader to use for loading the provider
         // class.  If there is a Context ClassLoader then use it.
         ClassLoader context = SecuritySupport.getContextClassLoader();
@@ -443,14 +443,14 @@ final class ObjectFactory {
 
     /**
      * Create an instance of a class using the specified ClassLoader
-     */ 
+     */
     static Object newInstance(String className, ClassLoader cl,
                                       boolean doFallback)
         throws ConfigurationError
     {
         // assert(className != null);
         try{
-            Class providerClass = findProviderClass(className, cl, doFallback);
+            Class<?> providerClass = findProviderClass(className, cl, doFallback);
             Object instance = providerClass.newInstance();
             debugPrintln("created new instance of " + providerClass +
                    " using ClassLoader: " + cl);
@@ -467,11 +467,11 @@ final class ObjectFactory {
 
     /**
      * Find a Class using the specified ClassLoader
-     */ 
-    static Class findProviderClass(String className, ClassLoader cl,
+     */
+    static Class<?> findProviderClass(String className, ClassLoader cl,
                                            boolean doFallback)
         throws ClassNotFoundException, ConfigurationError
-    {   
+    {
         //throw security exception if the calling thread is not allowed to access the
         //class. Restrict the access to the package classes as specified in java.security policy.
         SecurityManager security = System.getSecurityManager();
@@ -481,12 +481,12 @@ final class ObjectFactory {
                     String packageName = className;
                     if (lastDot != -1) packageName = className.substring(0, lastDot);
                     security.checkPackageAccess(packageName);
-                 }   
+                 }
         }catch(SecurityException e){
             throw e;
         }
-        
-        Class providerClass;
+
+        Class<?> providerClass;
         if (cl == null) {
             // XXX Use the bootstrap ClassLoader.  There is no way to
             // load a class using the bootstrap ClassLoader that works
@@ -576,7 +576,7 @@ final class ObjectFactory {
         } catch (java.io.UnsupportedEncodingException e) {
             rd = new BufferedReader(new InputStreamReader(is));
         }
-        
+
         String factoryClassName = null;
         try {
             // XXX Does not handle all possible input as specified by the
@@ -593,7 +593,7 @@ final class ObjectFactory {
             }
             // Ignore the exception.
             catch (IOException exc) {}
-        }          
+        }
 
         if (factoryClassName != null &&
             ! "".equals(factoryClassName)) {
@@ -618,7 +618,7 @@ final class ObjectFactory {
     /**
      * A configuration error.
      */
-    static class ConfigurationError 
+    static class ConfigurationError
         extends Error {
                 static final long serialVersionUID = 5122054096615067992L;
         //

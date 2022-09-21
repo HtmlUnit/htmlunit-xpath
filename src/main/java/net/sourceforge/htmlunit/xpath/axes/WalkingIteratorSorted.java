@@ -97,8 +97,6 @@ public boolean isDocOrdered()
     if (null != m_firstWalker)
     {
       AxesWalker walker = m_firstWalker;
-      int prevAxis = -1;
-      boolean prevIsSimpleDownAxis = true;
 
       for(int i = 0; null != walker; i++)
       {
