@@ -20,7 +20,7 @@
  */
 package net.sourceforge.htmlunit.xpath.compiler;
 
-import java.util.Vector;
+import java.util.List;
 
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
@@ -106,7 +106,7 @@ class Lexer
    *
    * @throws javax.xml.transform.TransformerException
    */
-  void tokenize(String pat, Vector targetStrings)
+  void tokenize(String pat, List<String> targetStrings)
           throws javax.xml.transform.TransformerException
   {
 
@@ -497,7 +497,7 @@ class Lexer
    *
    * @param targetStrings Vector of string.
    */
-  private void recordTokenString(Vector targetStrings)
+  private void recordTokenString(List<String> targetStrings)
   {
 
     int tokPos = getTokenQueuePosFromMap(m_patternMapSize - 1);
@@ -511,25 +511,25 @@ class Lexer
       switch (tok)
       {
       case OpCodes.NODETYPE_COMMENT :
-        targetStrings.addElement(PsuedoNames.PSEUDONAME_COMMENT);
+        targetStrings.add(PsuedoNames.PSEUDONAME_COMMENT);
         break;
       case OpCodes.NODETYPE_TEXT :
-        targetStrings.addElement(PsuedoNames.PSEUDONAME_TEXT);
+        targetStrings.add(PsuedoNames.PSEUDONAME_TEXT);
         break;
       case OpCodes.NODETYPE_NODE :
-        targetStrings.addElement(PsuedoNames.PSEUDONAME_ANY);
+        targetStrings.add(PsuedoNames.PSEUDONAME_ANY);
         break;
       case OpCodes.NODETYPE_ROOT :
-        targetStrings.addElement(PsuedoNames.PSEUDONAME_ROOT);
+        targetStrings.add(PsuedoNames.PSEUDONAME_ROOT);
         break;
       case OpCodes.NODETYPE_ANYELEMENT :
-        targetStrings.addElement(PsuedoNames.PSEUDONAME_ANY);
+        targetStrings.add(PsuedoNames.PSEUDONAME_ANY);
         break;
       case OpCodes.NODETYPE_PI :
-        targetStrings.addElement(PsuedoNames.PSEUDONAME_ANY);
+        targetStrings.add(PsuedoNames.PSEUDONAME_ANY);
         break;
       default :
-        targetStrings.addElement(PsuedoNames.PSEUDONAME_ANY);
+        targetStrings.add(PsuedoNames.PSEUDONAME_ANY);
       }
     }
     else
@@ -546,7 +546,7 @@ class Lexer
         tokPos += 2;
       }
 
-      targetStrings.addElement(m_compiler.getTokenQueue().elementAt(tokPos));
+      targetStrings.add((String) m_compiler.getTokenQueue().elementAt(tokPos));
     }
   }
 
