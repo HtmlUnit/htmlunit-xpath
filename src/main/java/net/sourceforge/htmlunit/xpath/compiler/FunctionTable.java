@@ -213,8 +213,8 @@ public class FunctionTable
     m_functions[FUNC_TRANSLATE] =
       net.sourceforge.htmlunit.xpath.functions.FuncTranslate.class;
     m_functions[FUNC_CONCAT] = net.sourceforge.htmlunit.xpath.functions.FuncConcat.class;
-    m_functions[FUNC_SYSTEM_PROPERTY] =
-      net.sourceforge.htmlunit.xpath.functions.FuncSystemProperty.class;
+//    m_functions[FUNC_SYSTEM_PROPERTY] =
+//      net.sourceforge.htmlunit.xpath.functions.FuncSystemProperty.class;
 //    m_functions[FUNC_EXT_FUNCTION_AVAILABLE] =
 //      org.apache.xpath.functions.FuncExtFunctionAvailable.class;
 //    m_functions[FUNC_EXT_ELEM_AVAILABLE] =
