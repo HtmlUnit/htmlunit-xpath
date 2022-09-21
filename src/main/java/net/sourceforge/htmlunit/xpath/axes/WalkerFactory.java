@@ -413,11 +413,9 @@ public class WalkerFactory
         return true;
       default:
         opPos++;
-        int i = 0;
-        for (int p = opPos; p < endFunc; p = compiler.getNextOpPos(p), i++)
+        for (int p = opPos; p < endFunc; p = compiler.getNextOpPos(p))
         {
           int innerExprOpPos = p+2;
-          int argOp = compiler.getOp(innerExprOpPos);
           boolean prox = isProximateInnerExpr(compiler, innerExprOpPos);
           if(prox)
             return true;
@@ -1089,7 +1087,7 @@ public class WalkerFactory
       System.out.print(", predAxis: " + Axis.getNames(ai.getAxis()));
       System.out.print(", what: ");
       System.out.print("    ");
-      ai.debugWhatToShow(ai.getWhatToShow());
+      NodeTest.debugWhatToShow(ai.getWhatToShow());
     }
 
     int argLen = compiler.getFirstPredicateOpPos(opPos);
@@ -1620,18 +1618,15 @@ public class WalkerFactory
     // Unfortunately, we can't do this just via the analysis bits.
 
     int stepType;
-    int stepCount = 0;
     boolean foundWildAttribute = false;
 
     // Steps that can traverse anything other than down a
     // subtree or that can produce duplicates when used in
-    // combonation are counted with this variable.
+    // combination are counted with this variable.
     int potentialDuplicateMakingStepCount = 0;
 
     while (OpCodes.ENDOP != (stepType = compiler.getOp(stepOpCodePos)))
     {
-      stepCount++;
-
       switch (stepType)
       {
       case OpCodes.FROM_ATTRIBUTES :

@@ -79,7 +79,7 @@ public abstract class DTMDefaultBase implements DTM
   protected SuballocatedIntVector m_parent;
 
   /** Vector of SuballocatedIntVectors of NS decl sets */
-  protected Vector m_namespaceDeclSets = null;
+  protected Vector<SuballocatedIntVector> m_namespaceDeclSets = null;
 
   /** SuballocatedIntVector  of elements at which corresponding
    * namespaceDeclSets were defined */
@@ -911,9 +911,6 @@ public boolean hasChildNodes(int nodeHandle)
   {
     if(NULL==nodeIdentity) return NULL;
 
-    if(JJK_DEBUG && nodeIdentity>DTMManager.IDENT_NODE_DEFAULT)
-      System.err.println("GONK! (only useful in limited situations)");
-
     return m_dtmIdent.elementAt(nodeIdentity >>> DTMManager.IDENT_DTM_NODE_BITS)
       + (nodeIdentity & DTMManager.IDENT_NODE_DEFAULT) ;
   }
@@ -1280,7 +1277,7 @@ public int getNextAttribute(int nodeHandle) {
         // First
         m_namespaceDeclSetElements=new SuballocatedIntVector(32);
         m_namespaceDeclSetElements.addElement(elementNodeIndex);
-        m_namespaceDeclSets=new Vector();
+        m_namespaceDeclSets=new Vector<>();
         nsList=new SuballocatedIntVector(32);
         m_namespaceDeclSets.addElement(nsList);
       }

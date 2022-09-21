@@ -102,7 +102,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * Text/CDATASection nodes in the DOM have been coalesced into a
    * single DTM Text node); this table points only to the first in
    * that sequence. */
-  protected Vector m_nodes = new Vector();
+  protected Vector<Node> m_nodes = new Vector<>();
 
   /**
    * Construct a DOM2DTM object from a DOM node.

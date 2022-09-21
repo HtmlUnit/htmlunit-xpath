@@ -41,7 +41,7 @@ public class ReverseAxesWalker extends AxesWalker
   {
     super(locPathIterator, axis);
   }
-  
+
   /**
    * Set the root node of the TreeWalker.
    * (Not part of the DOM2 TreeWalker interface).
@@ -67,7 +67,7 @@ public void detach()
     m_iterator = null;
     super.detach();
   }
-  
+
   /**
    * Get the next node in document order on the axes.
    *
@@ -80,7 +80,7 @@ protected int getNextNode()
       return DTM.NULL;
 
     int next = m_iterator.next();
-    
+
     if (m_isFresh)
       m_isFresh = false;
 
@@ -131,9 +131,9 @@ protected int getProximityPosition(int predicateIndex)
     // -sb
     if(predicateIndex < 0)
       return -1;
-      
+
     int count = m_proximityPositions[predicateIndex];
-      
+
     if (count <= 0)
     {
       AxesWalker savedWalker = wi().getLastUsedWalker();
@@ -152,9 +152,7 @@ protected int getProximityPosition(int predicateIndex)
 
         // Count 'em all
         count++;
-        int next;
-
-        while (DTM.NULL != (next = clone.nextNode()))
+        while (DTM.NULL != clone.nextNode())
         {
           count++;
         }
@@ -171,7 +169,7 @@ protected int getProximityPosition(int predicateIndex)
         wi().setLastUsedWalker(savedWalker);
       }
     }
-    
+
     return count;
   }
 
@@ -215,11 +213,7 @@ public int getLastPos(XPathContext xctxt)
       clone.setNextWalker(null);
       wi().setLastUsedWalker(clone);
 
-      // Count 'em all
-      // count = 1;
-      int next;
-
-      while (DTM.NULL != (next = clone.nextNode()))
+      while (DTM.NULL != clone.nextNode())
       {
         count++;
       }
@@ -236,12 +230,12 @@ public int getLastPos(XPathContext xctxt)
 
     return count;
   }
-  
+
   /**
-   * Returns true if all the nodes in the iteration well be returned in document 
+   * Returns true if all the nodes in the iteration well be returned in document
    * order.
    * Warning: This can only be called after setRoot has been called!
-   * 
+   *
    * @return false.
    */
   @Override
@@ -249,7 +243,7 @@ public boolean isDocOrdered()
   {
     return false;  // I think.
   }
-  
+
   /** The DTM inner traversal class, that corresponds to the super axis. */
   protected DTMAxisIterator m_iterator;
 }

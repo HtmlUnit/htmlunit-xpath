@@ -27,7 +27,6 @@ import java.util.Stack;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 
 import org.xml.sax.XMLReader;
@@ -47,7 +46,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.IntStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.ObjectStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import net.sourceforge.htmlunit.xpath.xml.utils.SAXSourceLocator;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 
 /**
@@ -540,31 +538,7 @@ public DTMIterator createDTMIterator(int node)
   /** Misnamed string manager for XPath messages.  */
   // private static XSLMessages m_XSLMessages = new XSLMessages();
 
-  /**
-   * Tell the user of an assertion error, and probably throw an
-   * exception.
-   *
-   * @param b  If false, a TransformerException will be thrown.
-   * @param msg The assertion message, which should be informative.
-   *
-   * @throws javax.xml.transform.TransformerException if b is false.
-   */
-  private void assertion(boolean b, String msg) throws javax.xml.transform.TransformerException
-  {
-    if (!b)
-    {
-      ErrorListener errorHandler = getErrorListener();
 
-      if (errorHandler != null)
-      {
-        errorHandler.fatalError(
-          new TransformerException(
-            XSLMessages.createMessage(
-              XPATHErrorResources.ER_INCORRECT_PROGRAMMER_ASSERTION,
-              new Object[]{ msg }), (SAXSourceLocator)this.getSAXLocator()));
-      }
-    }
-  }
 
   //==========================================================
   // SECTION: Execution context state tracking
@@ -1077,7 +1051,7 @@ public DTMIterator createDTMIterator(int node)
     if(m_DTMXRTreeFrags == null){
       return;
     }
-    final Iterator iter = (m_DTMXRTreeFrags.values()).iterator();
+    final Iterator<DTMXRTreeFrag> iter = (m_DTMXRTreeFrags.values()).iterator();
     while(iter.hasNext()){
       DTMXRTreeFrag frag = (DTMXRTreeFrag)iter.next();
       frag.destruct();

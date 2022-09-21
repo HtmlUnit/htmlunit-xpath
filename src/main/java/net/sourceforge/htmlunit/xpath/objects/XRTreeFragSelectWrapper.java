@@ -123,17 +123,6 @@ public int getType()
   }
 
   /**
-   * Cast result object to a result tree fragment.
-   *
-   * @return The document fragment this wraps
-   */
-  @Override
-public int rtf()
-  {
-    throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_RTF_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"rtf() not supported by XRTreeFragSelectWrapper!");
-  }
-
-  /**
    * Cast result object to a DTMIterator.
    *
    * @return The document fragment as a DTMIterator

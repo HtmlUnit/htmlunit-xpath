@@ -56,7 +56,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.IntVector;
  * */
 public class DTMStringPool
 {
-  Vector m_intToString;
+  Vector<String> m_intToString;
   static final int HASHPRIME=101;
   int[] m_hashStart=new int[HASHPRIME];
   IntVector m_hashChain;
@@ -64,24 +64,24 @@ public class DTMStringPool
 
   /**
    * Create a DTMStringPool using the given chain size
-   * 
+   *
    * @param chainSize The size of the hash chain vector
    */
   public DTMStringPool(int chainSize)
     {
-      m_intToString=new Vector();
+      m_intToString=new Vector<>();
       m_hashChain=new IntVector(chainSize);
       removeAllElements();
-      
+
       // -sb Add this to force empty strings to be index 0.
       stringToIndex("");
     }
-  
+
   public DTMStringPool()
     {
-      this(512);  
+      this(512);
     }
-    
+
   public void removeAllElements()
     {
       m_intToString.removeAllElements();
@@ -93,7 +93,7 @@ public class DTMStringPool
   /** @return string whose value is uniquely identified by this integer index.
    * @throws java.lang.ArrayIndexOutOfBoundsException
    *  if index doesn't map to a string.
-   * */ 
+   * */
   public String indexToString(int i)
     throws java.lang.ArrayIndexOutOfBoundsException
     {
@@ -101,11 +101,11 @@ public class DTMStringPool
       return (String) m_intToString.elementAt(i);
     }
 
-  /** @return integer index uniquely identifying the value of this string. */ 
+  /** @return integer index uniquely identifying the value of this string. */
   public int stringToIndex(String s)
     {
       if(s==null) return NULL;
-      
+
       int hashslot=s.hashCode()%HASHPRIME;
       if(hashslot<0) hashslot=-hashslot;
 
@@ -120,7 +120,7 @@ public class DTMStringPool
           hashlast=hashcandidate;
           hashcandidate=m_hashChain.elementAt(hashcandidate);
         }
-      
+
       // New value. Add to tables.
       int newIndex=m_intToString.size();
       m_intToString.addElement(s);
@@ -182,9 +182,9 @@ public class DTMStringPool
               System.out.println("\tMismatch in indexToString: returned"+
                                  w+" for lookup "+i);
           }
-        
+
         pool.removeAllElements();
-        
+
         System.out.println("\nPass "+pass+" complete\n");
       } // end pass loop
   }

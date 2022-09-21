@@ -305,34 +305,6 @@ public Object object()
       return m_obj;
   }
 
-  // %REVIEW%
-  // hmmm...
-//  /**
-//   * Cast result object to a result tree fragment.
-//   *
-//   * @param support The XPath context to use for the conversion
-//   *
-//   * @return the nodeset as a result tree fragment.
-//   */
-//  public DocumentFragment rtree(XPathContext support)
-//  {
-//    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//    DocumentBuilder db = dbf.newDocumentBuilder();
-//    Document myDoc = db.newDocument();
-//
-//    DocumentFragment docFrag = myDoc.createDocumentFragment();
-//
-//    DTMIterator nl = iter();
-//    int node;
-//
-//    while (DTM.NULL != (node = nl.nextNode()))
-//    {
-//      frag.appendChild(node, true, true);
-//    }
-//
-//    return frag.getDocument();
-//  }
-
   /**
    * Cast result object to a nodelist.
    *
@@ -510,7 +482,7 @@ public NodeSetDTM mutableNodeset()
       DTMIterator list1 = iterRaw();
       DTMIterator list2 = ((XNodeSet) obj2).iterRaw();
       int node1;
-      java.util.Vector node2Strings = null;
+      java.util.Vector<XMLString> node2Strings = null;
 
       while (DTM.NULL != (node1 = list1.nextNode()))
       {
@@ -532,7 +504,7 @@ public NodeSetDTM mutableNodeset()
             }
 
             if (null == node2Strings)
-              node2Strings = new java.util.Vector();
+              node2Strings = new java.util.Vector<>();
 
             node2Strings.addElement(s2);
           }

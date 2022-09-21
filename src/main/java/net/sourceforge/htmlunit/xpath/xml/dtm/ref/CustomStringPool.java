@@ -36,7 +36,7 @@ import java.util.Hashtable;
  * DTMStringPool, since it is both much more memory-hungry and probably slower
  * -- especially in JDK 1.1.x, where Hashtable is synchronized. We need to
  * either justify this implementation or discard it.
- * 
+ *
  * %REVIEW% Xalan-J has dropped support for 1.1.x and we can now use
  * the colletion classes in 1.2, such as java.util.HashMap which is
  * similar to java.util.Hashtable but not synchronized. For performance reasons
@@ -49,14 +49,14 @@ public class CustomStringPool extends DTMStringPool {
         //final Vector m_intToString;
         //static final int HASHPRIME=101;
         //int[] m_hashStart=new int[HASHPRIME];
-        final Hashtable m_stringToInt = new Hashtable(); // can this be a HashMap instead?
+        final Hashtable<String, Integer> m_stringToInt = new Hashtable<>(); // can this be a HashMap instead?
         public static final int NULL=-1;
 
         public CustomStringPool()
         {
                 super();
                 /*m_intToString=new Vector();
-                System.out.println("In constructor m_intToString is " + 
+                System.out.println("In constructor m_intToString is " +
                                                                                          ((null == m_intToString) ? "null" : "not null"));*/
                 //m_stringToInt=new Hashtable();
                 //removeAllElements();
@@ -66,7 +66,7 @@ public class CustomStringPool extends DTMStringPool {
         public void removeAllElements()
         {
                 m_intToString.removeAllElements();
-                if (m_stringToInt != null) 
+                if (m_stringToInt != null)
                         m_stringToInt.clear();
         }
 

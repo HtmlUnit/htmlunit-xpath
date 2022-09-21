@@ -22,7 +22,6 @@ package net.sourceforge.htmlunit.xpath.objects;
 
 import java.io.Serializable;
 
-import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.NodeIterator;
 
@@ -34,7 +33,6 @@ import net.sourceforge.htmlunit.xpath.XPathException;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 
@@ -315,82 +313,6 @@ public String toString()
   }
 
   /**
-   * Cast result object to a result tree fragment.
-   *
-   * @param support XPath context to use for the conversion
-   *
-   * @return the objec as a result tree fragment.
-   */
-  public int rtf(XPathContext support)
-  {
-
-    int result = rtf();
-
-    if (DTM.NULL == result)
-    {
-      DTM frag = support.createDocumentFragment();
-
-      // %OPT%
-      frag.appendTextChild(str());
-
-      result = frag.getDocument();
-    }
-
-    return result;
-  }
-
-  /**
-   * Cast result object to a result tree fragment.
-   *
-   * @param support XPath context to use for the conversion
-   *
-   * @return the objec as a result tree fragment.
-   */
-  public DocumentFragment rtree(XPathContext support)
-  {
-    DocumentFragment docFrag = null;
-    int result = rtf();
-
-    if (DTM.NULL == result)
-    {
-      DTM frag = support.createDocumentFragment();
-
-      // %OPT%
-      frag.appendTextChild(str());
-
-      docFrag = (DocumentFragment)frag.getNode(frag.getDocument());
-    }
-    else
-    {
-      DTM frag = support.getDTM(result);
-      docFrag = (DocumentFragment)frag.getNode(frag.getDocument());
-    }
-
-    return docFrag;
-  }
-
-
-  /**
-   * For functions to override.
-   *
-   * @return null
-   */
-  public DocumentFragment rtree()
-  {
-    return null;
-  }
-
-  /**
-   * For functions to override.
-   *
-   * @return null
-   */
-  public int rtf()
-  {
-    return DTM.NULL;
-  }
-
-  /**
    * Return a java object that's closest to the representation
    * that should be handed to an extension.
    *
@@ -512,10 +434,6 @@ public String toString()
       result = m_obj;
       break;
 
-    // %TBD%  What to do here?
-    //    case CLASS_RTREEFRAG :
-    //      result = rtree(support);
-    //      break;
     default :
       error(XPATHErrorResources.ER_CANT_CONVERT_TO_TYPE,
             new Object[]{ getTypeString(),

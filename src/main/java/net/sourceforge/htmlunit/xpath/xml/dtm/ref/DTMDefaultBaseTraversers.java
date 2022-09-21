@@ -438,27 +438,12 @@ public DTMAxisTraverser getAxisTraverser(final int axis)
     @Override
     public int first(int context, int expandedTypeID)
     {
-      if(true)
-      {
         int identity = makeNodeIdentity(context);
 
         int firstMatch = getNextIndexed(identity, _firstch(identity),
                                  expandedTypeID);
 
         return makeNodeHandle(firstMatch);
-      }
-      else
-      {
-        // %REVIEW% Dead code. Eliminate?
-        for (int current = _firstch(makeNodeIdentity(context));
-             DTM.NULL != current;
-             current = _nextsib(current))
-        {
-          if (m_exptype.elementAt(current) == expandedTypeID)
-              return makeNodeHandle(current);
-        }
-        return NULL;
-      }
     }
 
     /**
@@ -1348,7 +1333,7 @@ public DTMAxisTraverser getAxisTraverser(final int axis)
     public int next(int context, int current)
     {
       // Compute in ID space
-      int subtreeRootIdent = makeNodeIdentity(context );
+      makeNodeIdentity(context );
 
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--)
       {
@@ -1377,7 +1362,7 @@ public DTMAxisTraverser getAxisTraverser(final int axis)
     public int next(int context, int current, int expandedTypeID)
     {
       // Compute in ID space
-      int subtreeRootIdent = makeNodeIdentity(context);
+      makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--)
       {
@@ -1553,7 +1538,7 @@ public DTMAxisTraverser getAxisTraverser(final int axis)
     public int next(int context, int current)
     {
       // Compute in ID space
-      int subtreeRootIdent = makeNodeIdentity(context);
+      makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) + 1; ; current++)
       {
@@ -1580,7 +1565,7 @@ public DTMAxisTraverser getAxisTraverser(final int axis)
     public int next(int context, int current, int expandedTypeID)
     {
       // Compute in ID space
-      int subtreeRootIdent = makeNodeIdentity(context);
+      makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) + 1; ; current++)
       {

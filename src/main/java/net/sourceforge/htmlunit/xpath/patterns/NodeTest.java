@@ -414,7 +414,7 @@ public boolean deepEquals(Expression expr)
   public static void debugWhatToShow(int whatToShow)
   {
 
-    java.util.Vector v = new java.util.Vector();
+    java.util.Vector<String> v = new java.util.Vector<>();
 
     if (0 != (whatToShow & DTMFilter.SHOW_ATTRIBUTE))
       v.addElement("SHOW_ATTRIBUTE");

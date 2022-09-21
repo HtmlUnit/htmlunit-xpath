@@ -23,9 +23,7 @@ package net.sourceforge.htmlunit.xpath.objects;
 import java.util.Locale;
 
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
-import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
@@ -118,7 +116,7 @@ public double num()
   @Override
 public double toDouble()
   {
-    /* XMLCharacterRecognizer.isWhiteSpace(char c) methods treats the following 
+    /* XMLCharacterRecognizer.isWhiteSpace(char c) methods treats the following
      * characters as white space characters.
      * ht - horizontal tab, nl - newline , cr - carriage return and sp - space
      * trim() methods by default also takes care of these white space characters
@@ -175,24 +173,6 @@ public XMLString xstr()
 public String str()
   {
     return (null != m_obj) ? ((String) m_obj) : "";
-  }
-
-  /**
-   * Cast result object to a result tree fragment.
-   *
-   * @param support Xpath context to use for the conversion
-   *
-   * @return A document fragment with this string as a child node
-   */
-  @Override
-public int rtf(XPathContext support)
-  {
-
-    DTM frag = support.createDocumentFragment();
-
-    frag.appendTextChild(str());
-
-    return frag.getDocument();
   }
 
   /**
@@ -306,21 +286,21 @@ public void getChars(int srcBegin, int srcEnd, char dst[], int dstBegin)
 public boolean equals(XObject obj2)
   {
 
-    // In order to handle the 'all' semantics of 
-    // nodeset comparisons, we always call the 
+    // In order to handle the 'all' semantics of
+    // nodeset comparisons, we always call the
     // nodeset function.
     int t = obj2.getType();
     try
     {
       if (XObject.CLASS_NODESET == t)
         return obj2.equals(this);
-      // If at least one object to be compared is a boolean, then each object 
-      // to be compared is converted to a boolean as if by applying the 
-      // boolean function. 
+      // If at least one object to be compared is a boolean, then each object
+      // to be compared is converted to a boolean as if by applying the
+      // boolean function.
       else if(XObject.CLASS_BOOLEAN == t)
         return obj2.bool() == bool();
-      // Otherwise, if at least one object to be compared is a number, then each object 
-      // to be compared is converted to a number as if by applying the number function. 
+      // Otherwise, if at least one object to be compared is a number, then each object
+      // to be compared is converted to a number as if by applying the number function.
       else if(XObject.CLASS_NUMBER == t)
         return obj2.num() == num();
     }
@@ -329,8 +309,8 @@ public boolean equals(XObject obj2)
       throw new net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
     }
 
-    // Otherwise, both objects to be compared are converted to strings as 
-    // if by applying the string function. 
+    // Otherwise, both objects to be compared are converted to strings as
+    // if by applying the string function.
     return xstr().equals(obj2.xstr());
   }
 
@@ -397,8 +377,8 @@ public boolean equals(Object obj2)
     if (null == obj2)
       return false;
 
-      // In order to handle the 'all' semantics of 
-      // nodeset comparisons, we always call the 
+      // In order to handle the 'all' semantics of
+      // nodeset comparisons, we always call the
       // nodeset function.
     else if (obj2 instanceof XNodeSet)
       return obj2.equals(this);
@@ -494,10 +474,10 @@ public int compareToIgnoreCase(XMLString str)
     // versions of Java, hence we can't yet shell out to it. We can implement
     // it as character-by-character compare, but doing so efficiently
     // is likely to be (ahem) interesting.
-    //  
+    //
     // However, since nobody is actually _using_ this method yet:
     //    return str().compareToIgnoreCase(str.toString());
-    
+
     throw new net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException(
       new java.lang.NoSuchMethodException(
         "Java 1.2 method, not yet implemented"));
@@ -1155,7 +1135,7 @@ public XMLString fixWhiteSpace(boolean trimHead, boolean trimTail,
 
     return edit ? xsf.newstr(new String(buf, start, d - start)) : this;
   }
-  
+
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */

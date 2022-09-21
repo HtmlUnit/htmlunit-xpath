@@ -20,9 +20,6 @@
  */
 package net.sourceforge.htmlunit.xpath.objects;
 
-import net.sourceforge.htmlunit.xpath.XPathContext;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
-
 /**
  * This class represents an XPath null object, and is capable of
  * converting the null to other types, such as a string.
@@ -65,7 +62,7 @@ public String getTypeString()
 
   /**
    * Cast result object to a number.
-   * 
+   *
    * @return 0.0
    */
 
@@ -97,20 +94,7 @@ public String str()
     return "";
   }
 
-  /**
-   * Cast result object to a result tree fragment.
-   *
-   * @param support XPath context to use for the conversion
-   *
-   * @return The object as a result tree fragment.
-   */
-  @Override
-public int rtf(XPathContext support)
-  {
-    // DTM frag = support.createDocumentFragment();
-    // %REVIEW%
-    return DTM.NULL;
-  }
+
 
 //  /**
 //   * Cast result object to a nodelist.

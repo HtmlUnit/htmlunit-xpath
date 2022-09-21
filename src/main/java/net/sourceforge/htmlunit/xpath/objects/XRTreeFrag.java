@@ -51,19 +51,19 @@ public class XRTreeFrag extends XObject implements Cloneable
   {
     super(null);
     exprSetParent(parent);
-    initDTM(root, xctxt);    
+    initDTM(root, xctxt);
   }
-  
+
   /**
    * Create an XRTreeFrag Object.
    *
    */
   public XRTreeFrag(int root, XPathContext xctxt)
   {
-    super(null); 
-   initDTM(root, xctxt); 
+    super(null);
+   initDTM(root, xctxt);
   }
-  
+
   private final void initDTM(int root, XPathContext xctxt){
     m_dtmRoot = root;
     final DTM dtm = xctxt.getDTM(root);
@@ -71,7 +71,7 @@ public class XRTreeFrag extends XObject implements Cloneable
       m_DTMXRTreeFrag = xctxt.getDTMXRTreeFrag(xctxt.getDTMIdentity(dtm));
     }
   }
-  
+
   /**
    * Return a java object that's closest to the representation
    * that should be handed to an extension.
@@ -86,7 +86,7 @@ public Object object()
     else
       return super.object();
   }
-  
+
   /**
    * Create an XRTreeFrag Object.
    *
@@ -95,11 +95,11 @@ public Object object()
   {
     super(expr);
   }
-    
+
   /**
    * Specify if it's OK for detach to release the iterator for reuse.
-   * 
-   * @param allowRelease true if it is OK for detach to release this iterator 
+   *
+   * @param allowRelease true if it is OK for detach to release this iterator
    * for pooling.
    */
   @Override
@@ -114,7 +114,7 @@ public void allowDetachToRelease(boolean allowRelease)
    * in the INVALID state. After <code>detach</code> has been invoked,
    * calls to <code>nextNode</code> or <code>previousNode</code> will
    * raise a runtime exception.
-   * 
+   *
    * In general, detach should only be called once on the object.
    */
   @Override
@@ -124,11 +124,11 @@ public void detach(){
       setObject(null);
     }
   }
-  
+
   /**
    * Tell what kind of class this is.
    *
-   * @return type CLASS_RTREEFRAG 
+   * @return type CLASS_RTREEFRAG
    */
   @Override
 public int getType()
@@ -174,23 +174,23 @@ public boolean bool()
   {
     return true;
   }
-  
+
   private XMLString m_xmlStr = null;
-  
+
   /**
    * Cast result object to an XMLString.
    *
-   * @return The document fragment node data or the empty string. 
+   * @return The document fragment node data or the empty string.
    */
   @Override
 public XMLString xstr()
   {
     if(null == m_xmlStr)
       m_xmlStr = m_DTMXRTreeFrag.getDTM().getStringValue(m_dtmRoot);
-    
+
     return m_xmlStr;
   }
-  
+
   /**
    * Cast result object to a string.
    *
@@ -207,7 +207,7 @@ public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffe
   /**
    * Cast result object to a string.
    *
-   * @return The document fragment node data or the empty string. 
+   * @return The document fragment node data or the empty string.
    */
   @Override
 public String str()
@@ -218,20 +218,9 @@ public String str()
   }
 
   /**
-   * Cast result object to a result tree fragment.
-   *
-   * @return The document fragment this wraps
-   */
-  @Override
-public int rtf()
-  {
-    return m_dtmRoot;
-  }
-
-  /**
    * Cast result object to a DTMIterator.
    * dml - modified to return an RTFIterator for
-   * benefit of EXSLT object-type function in 
+   * benefit of EXSLT object-type function in
    * {@link org.apache.xalan.lib.ExsltCommon}.
    * @return The document fragment as a DTMIterator
    */
@@ -271,9 +260,9 @@ public boolean equals(XObject obj2)
     {
       if (XObject.CLASS_NODESET == obj2.getType())
       {
-  
-        // In order to handle the 'all' semantics of 
-        // nodeset comparisons, we always call the 
+
+        // In order to handle the 'all' semantics of
+        // nodeset comparisons, we always call the
         // nodeset function.
         return obj2.equals(this);
       }
@@ -295,7 +284,7 @@ public boolean equals(XObject obj2)
       }
       else if (XObject.CLASS_RTREEFRAG == obj2.getType())
       {
-  
+
         // Probably not so good.  Think about this.
         return xstr().equals(obj2.xstr());
       }

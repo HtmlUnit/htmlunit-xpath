@@ -193,46 +193,6 @@ public class SuballocatedIntVector
   }
 
   /**
-   * Deletes the component at the specified index. Each component in
-   * this vector with an index greater or equal to the specified
-   * index is shifted downward to have an index one smaller than
-   * the value it had previously.
-   *
-   * @param i index of where to remove and int
-   */
-  private  void removeElementAt(int at)
-  {
-        // No point in removing elements that "don't exist"...
-    if(at<m_firstFree)
-    {
-      int index=at>>>m_SHIFT;
-      int maxindex=m_firstFree>>>m_SHIFT;
-      int offset=at&m_MASK;
-
-      while(index<=maxindex)
-      {
-        int copylen=m_blocksize-offset-1;
-        int[] block=m_map[index];
-        if(null==block)
-          block=m_map[index]=new int[m_blocksize];
-        else
-          System.arraycopy(block, offset+1, block, offset, copylen);
-        if(index<maxindex)
-        {
-          int[] next=m_map[index+1];
-          if(next!=null)
-            block[m_blocksize-1]=(next!=null) ? next[0] : 0;
-        }
-        else
-          block[m_blocksize-1]=0;
-        offset=0;
-        ++index;
-      }
-    }
-    --m_firstFree;
-  }
-
-  /**
    * Sets the component at the specified index of this vector to be the
    * specified object. The previous component at that position is discarded.
    *

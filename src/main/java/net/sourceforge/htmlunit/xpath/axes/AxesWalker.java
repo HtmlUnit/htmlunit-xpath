@@ -41,7 +41,7 @@ public class AxesWalker extends PredicatedNodeTest
         implements Cloneable, PathComponent, ExpressionOwner
 {
     static final long serialVersionUID = -2966031951306601247L;
-  
+
   /**
    * Construct an AxesWalker using a LocPathIterator.
    *
@@ -52,7 +52,7 @@ public class AxesWalker extends PredicatedNodeTest
     super( locPathIterator );
     m_axis = axis;
   }
-  
+
   public final WalkingIterator wi()
   {
     return (WalkingIterator)m_lpi;
@@ -61,7 +61,7 @@ public class AxesWalker extends PredicatedNodeTest
   /**
    * Initialize an AxesWalker during the parse of the XPath expression.
    *
-   * @param compiler The Compiler object that has information about this 
+   * @param compiler The Compiler object that has information about this
    *                 walker in the op map.
    * @param opPos The op code position of this location step.
    * @param stepType  The type of location step.
@@ -88,7 +88,7 @@ public class AxesWalker extends PredicatedNodeTest
 public Object clone() throws CloneNotSupportedException
   {
     // Do not access the location path itterator during this operation!
-    
+
     AxesWalker clone = (AxesWalker) super.clone();
 
     //clone.setCurrentNode(clone.m_root);
@@ -97,21 +97,21 @@ public Object clone() throws CloneNotSupportedException
 
     return clone;
   }
-  
+
   /**
    * Do a deep clone of this walker, including next and previous walkers.
-   * If the this AxesWalker is on the clone list, don't clone but 
+   * If the this AxesWalker is on the clone list, don't clone but
    * return the already cloned version.
-   * 
-   * @param cloneOwner non-null reference to the cloned location path 
+   *
+   * @param cloneOwner non-null reference to the cloned location path
    *                   iterator to which this clone will be added.
-   * @param cloneList non-null vector of sources in odd elements, and the 
+   * @param cloneList non-null vector of sources in odd elements, and the
    *                  corresponding clones in even vectors.
-   * 
-   * @return non-null clone, which may be a new clone, or may be a clone 
+   *
+   * @return non-null clone, which may be a new clone, or may be a clone
    *         contained on the cloneList.
    */
-  AxesWalker cloneDeep(WalkingIterator cloneOwner, Vector cloneList)
+  AxesWalker cloneDeep(WalkingIterator cloneOwner, Vector<AxesWalker> cloneList)
      throws CloneNotSupportedException
   {
     AxesWalker clone = findClone(this, cloneList);
@@ -124,15 +124,15 @@ public Object clone() throws CloneNotSupportedException
       cloneList.addElement(this);
       cloneList.addElement(clone);
     }
-    
+
     if(wi().m_lastUsedWalker == this)
       cloneOwner.m_lastUsedWalker = clone;
-      
+
     if(null != m_nextWalker)
       clone.m_nextWalker = m_nextWalker.cloneDeep(cloneOwner, cloneList);
-      
-    // If you don't check for the cloneList here, you'll go into an 
-    // recursive infinate loop.  
+
+    // If you don't check for the cloneList here, you'll go into an
+    // recursive infinate loop.
     if(null != cloneList)
     {
       if(null != m_prevWalker)
@@ -145,45 +145,45 @@ public Object clone() throws CloneNotSupportedException
     }
     return clone;
   }
-  
+
   /**
    * Find a clone that corresponds to the key argument.
-   * 
+   *
    * @param key The original AxesWalker for which there may be a clone.
-   * @param cloneList vector of sources in odd elements, and the 
+   * @param cloneList vector of sources in odd elements, and the
    *                  corresponding clones in even vectors, may be null.
-   * 
+   *
    * @return A clone that corresponds to the key, or null if key not found.
    */
-  static AxesWalker findClone(AxesWalker key, Vector cloneList)
+  static AxesWalker findClone(AxesWalker key, Vector<AxesWalker> cloneList)
   {
     if(null != cloneList)
     {
       // First, look for clone on list.
       int n = cloneList.size();
-      for (int i = 0; i < n; i+=2) 
+      for (int i = 0; i < n; i+=2)
       {
         if(key == cloneList.elementAt(i))
           return (AxesWalker)cloneList.elementAt(i+1);
       }
     }
-    return null;    
+    return null;
   }
-  
+
   /**
    * Detaches the walker from the set which it iterated over, releasing
    * any computational resources and placing the iterator in the INVALID
    * state.
    */
   public void detach()
-  { 
+  {
     m_currentNode = DTM.NULL;
     m_dtm = null;
     m_traverser = null;
     m_isFresh = true;
     m_root = DTM.NULL;
   }
-  
+
   //=============== TreeWalker Implementation ===============
 
   /**
@@ -196,8 +196,8 @@ public Object clone() throws CloneNotSupportedException
   {
     return m_root;
   }
-  
-  /** 
+
+  /**
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
@@ -246,7 +246,7 @@ public int getAnalysisBits()
    * current view by applying the filters in the requested direction (not
    * changing currentNode where no traversal is possible).
    *
-   * @return The node at which the TreeWalker is currently positioned, only null 
+   * @return The node at which the TreeWalker is currently positioned, only null
    * if setRoot has not yet been called.
    */
   public final int getCurrentNode()
@@ -280,7 +280,7 @@ public int getAnalysisBits()
    * Set or clear the previous walker reference in the location step chain.
    *
    *
-   * @param walker Reference to previous walker reference in the location 
+   * @param walker Reference to previous walker reference in the location
    *               step chain, or null.
    */
   public void setPrevWalker(AxesWalker walker)
@@ -292,26 +292,12 @@ public int getAnalysisBits()
    * Get the previous walker reference in the location step chain.
    *
    *
-   * @return Reference to previous walker reference in the location 
+   * @return Reference to previous walker reference in the location
    *               step chain, or null.
    */
   public AxesWalker getPrevWalker()
   {
     return m_prevWalker;
-  }
-
-  /**
-   * This is simply a way to bottle-neck the return of the next node, for 
-   * diagnostic purposes.
-   *
-   * @param n Node to return, or null.
-   *
-   * @return The argument.
-   */
-  private int returnNextNode(int n)
-  {
-
-    return n;
   }
 
   /**
@@ -330,9 +316,9 @@ public int getAnalysisBits()
       m_isFresh = false;
     }
     // I shouldn't have to do this the check for current node, I think.
-    // numbering\numbering24.xsl fails if I don't do this.  I think 
+    // numbering\numbering24.xsl fails if I don't do this.  I think
     // it occurs as the walkers are backing up. -sb
-    else if(DTM.NULL != m_currentNode) 
+    else if(DTM.NULL != m_currentNode)
     {
       m_currentNode = m_traverser.next(m_root, m_currentNode);
     }
@@ -416,7 +402,7 @@ public int getLastPos(XPathContext xctxt)
   {
 
     int pos = getProximityPosition();
-    
+
     AxesWalker walker;
 
     try
@@ -439,9 +425,7 @@ public int getLastPos(XPathContext xctxt)
     {
       lpi.setLastUsedWalker(walker);
 
-      int next;
-
-      while (DTM.NULL != (next = walker.nextNode()))
+      while (DTM.NULL != walker.nextNode())
       {
         pos++;
       }
@@ -456,30 +440,30 @@ public int getLastPos(XPathContext xctxt)
     // System.out.println("pos: "+pos);
     return pos;
   }
-  
+
   //============= State Data =============
-  
+
   /**
-   * The DTM for the root.  This can not be used, or must be changed, 
-   * for the filter walker, or any walker that can have nodes 
+   * The DTM for the root.  This can not be used, or must be changed,
+   * for the filter walker, or any walker that can have nodes
    * from multiple documents.
    * Never, ever, access this value without going through getDTM(int node).
    */
   private DTM m_dtm;
-  
+
   /**
    * Set the DTM for this walker.
-   * 
+   *
    * @param dtm Non-null reference to a DTM.
    */
   public void setDefaultDTM(DTM dtm)
   {
     m_dtm = dtm;
   }
-  
+
   /**
    * Get the DTM for this walker.
-   * 
+   *
    * @return Non-null reference to a DTM.
    */
   public DTM getDTM(int node)
@@ -487,36 +471,36 @@ public int getLastPos(XPathContext xctxt)
     //
     return wi().getXPathContext().getDTM(node);
   }
-  
+
   /**
-   * Returns true if all the nodes in the iteration well be returned in document 
+   * Returns true if all the nodes in the iteration well be returned in document
    * order.
    * Warning: This can only be called after setRoot has been called!
-   * 
+   *
    * @return true as a default.
    */
   public boolean isDocOrdered()
   {
     return true;
   }
-  
+
   /**
    * Returns the axis being iterated, if it is known.
-   * 
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple 
+   *
+   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
   public int getAxis()
   {
     return m_axis;
   }
-  
+
   /**
-   * This will traverse the heararchy, calling the visitor for 
-   * each member.  If the called visitor method returns 
+   * This will traverse the heararchy, calling the visitor for
+   * each member.  If the called visitor method returns
    * false, the subtree should not be called.
-   * 
-   * @param owner The owner of the visitor, where that path may be 
+   *
+   * @param owner The owner of the visitor, where that path may be
    *              rewritten if needed.
    * @param visitor The visitor whose appropriate method will be called.
    */
@@ -532,7 +516,7 @@ public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
       }
     }
   }
-  
+
   /**
    * @see ExpressionOwner#getExpression()
    */
@@ -551,7 +535,7 @@ public void setExpression(Expression exp)
     exp.exprSetParent(this);
     m_nextWalker = (AxesWalker)exp;
   }
-  
+
     /**
      * @see Expression#deepEquals(Expression)
      */
@@ -577,21 +561,21 @@ public void setExpression(Expression exp)
    *  The node at which the TreeWalker is currently positioned.
    */
   private transient int m_currentNode = DTM.NULL;
-  
+
   /** True if an itteration has not begun.  */
   transient boolean m_isFresh;
 
   /** The next walker in the location step chain.
    *  @serial  */
   protected AxesWalker m_nextWalker;
-  
+
   /** The previous walker in the location step chain, or null.
    *  @serial   */
   AxesWalker m_prevWalker;
-  
+
   /** The traversal axis from where the nodes will be filtered. */
   protected int m_axis = -1;
 
   /** The DTM inner traversal class, that corresponds to the super axis. */
-  protected DTMAxisTraverser m_traverser; 
+  protected DTMAxisTraverser m_traverser;
 }

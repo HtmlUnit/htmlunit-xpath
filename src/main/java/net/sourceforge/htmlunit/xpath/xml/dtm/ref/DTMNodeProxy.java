@@ -780,7 +780,7 @@ public final EntityReference createEntityReference(String name)
   @Override
 public final NodeList getElementsByTagName(String tagname)
   {
-       Vector listVector = new Vector();
+       Vector<Node> listVector = new Vector<>();
        Node retNode = dtm.getNode(node);
        if (retNode != null)
        {
@@ -818,7 +818,7 @@ public final NodeList getElementsByTagName(String tagname)
    */
   private final void traverseChildren
   (
-    Vector listVector,
+    Vector<Node> listVector,
     Node tempNode,
     String tagname,
     boolean isTagNameWildCard) {
@@ -908,7 +908,7 @@ public final Attr createAttributeNS(
 public final NodeList getElementsByTagNameNS(String namespaceURI,
                                                String localName)
   {
-    Vector listVector = new Vector();
+    Vector<Node> listVector = new Vector<>();
     Node retNode = dtm.getNode(node);
     if (retNode != null)
     {
@@ -949,7 +949,7 @@ public final NodeList getElementsByTagNameNS(String namespaceURI,
    */
   private final void traverseChildren
   (
-   Vector listVector,
+   Vector<Node> listVector,
    Node tempNode,
    String namespaceURI,
    String localname,
