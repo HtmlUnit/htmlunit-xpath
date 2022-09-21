@@ -52,25 +52,6 @@ public class ObjectPool implements java.io.Serializable
     objectType = type;
     freeStack = new ArrayList();
   }
-  
-  /**
-   * Constructor ObjectPool
-   *
-   * @param className Fully qualified name of the type of objects for this pool.
-   */
-  public ObjectPool(String className)
-  {
-    try
-    {
-      objectType = ObjectFactory.findProviderClass(
-        className, ObjectFactory.findClassLoader(), true);
-    }
-    catch(ClassNotFoundException cnfe)
-    {
-      throw new WrappedRuntimeException(cnfe);
-    }
-    freeStack = new ArrayList();
-  }
 
 
   /**
@@ -118,7 +99,7 @@ public class ObjectPool implements java.io.Serializable
   }
 
   /**
-   * Get an instance of the given object in this pool 
+   * Get an instance of the given object in this pool
    *
    *
    * @return An instance of the given object
@@ -152,7 +133,7 @@ public class ObjectPool implements java.io.Serializable
   }
 
   /**
-   * Add an instance of the given object to the pool  
+   * Add an instance of the given object to the pool
    *
    *
    * @param obj Object to add.
