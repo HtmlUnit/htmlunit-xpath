@@ -169,4 +169,20 @@ public class XPathTest
         List<?> hits = XPathHelper.getByXPath(doc, "//p[position()!=2]", null, false);
         assertEquals(3, hits.size());
     }
+
+
+    /**
+     * @throws Exception in case of problems
+     */
+    @Test
+    public void attributeSearch() throws Exception {
+        final String input = "<root><p/><p name='test'/><p/><p/></root>";
+
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        final DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
+
+        List<?> hits = XPathHelper.getByXPath(doc, "//p[@name='test']", null, false);
+        assertEquals(1, hits.size());
+    }
 }

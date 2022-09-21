@@ -121,7 +121,9 @@ public abstract class DTMManager
   public static DTMManager newInstance(XMLStringFactory xsf)
            throws DTMConfigurationException
   {
-    return new DTMManagerDefault();
+    DTMManager factoryImpl = new DTMManagerDefault();
+    factoryImpl.setXMLStringFactory(xsf);
+    return factoryImpl;
   }
 
   /**
