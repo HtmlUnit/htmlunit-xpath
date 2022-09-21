@@ -20,9 +20,6 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.utils;
 
-import java.util.Hashtable;
-import java.util.Vector;
-
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -43,6 +40,10 @@ import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
  */
 public class DOMHelper
 {
+    /**
+     * Construct an instance.
+     */
+    public DOMHelper(){}
 
   /**
    * Figure out whether node2 should be considered as being later
@@ -331,269 +332,45 @@ public class DOMHelper
   //==========================================================
 
   /**
-   * An experiment for the moment.
-   */
-  Hashtable m_NSInfos = new Hashtable();
-
-  /** Object to put into the m_NSInfos table that tells that a node has not been
-   *  processed, but has xmlns namespace decls.  */
-  protected static final NSInfo m_NSInfoUnProcWithXMLNS = new NSInfo(false,
-                                                            true);
-
-  /** Object to put into the m_NSInfos table that tells that a node has not been
-   *  processed, but has no xmlns namespace decls.  */
-  protected static final NSInfo m_NSInfoUnProcWithoutXMLNS = new NSInfo(false,
-                                                               false);
-
-  /** Object to put into the m_NSInfos table that tells that a node has not been
-   *  processed, and has no xmlns namespace decls, and has no ancestor decls.  */
-  protected static final NSInfo m_NSInfoUnProcNoAncestorXMLNS =
-    new NSInfo(false, false, NSInfo.ANCESTORNOXMLNS);
-
-  /** Object to put into the m_NSInfos table that tells that a node has been
-   *  processed, and has xmlns namespace decls.  */
-  protected static final NSInfo m_NSInfoNullWithXMLNS = new NSInfo(true,
-                                                          true);
-
-  /** Object to put into the m_NSInfos table that tells that a node has been
-   *  processed, and has no xmlns namespace decls.  */
-  protected static final NSInfo m_NSInfoNullWithoutXMLNS = new NSInfo(true,
-                                                             false);
-
-  /** Object to put into the m_NSInfos table that tells that a node has been
-   *  processed, and has no xmlns namespace decls. and has no ancestor decls.  */
-  protected static final NSInfo m_NSInfoNullNoAncestorXMLNS =
-    new NSInfo(true, false, NSInfo.ANCESTORNOXMLNS);
-
-  /** Vector of node (odd indexes) and NSInfos (even indexes) that tell if
-   *  the given node is a candidate for ancestor namespace processing.  */
-  protected Vector m_candidateNoAncestorXMLNS = new Vector();
-
-  /**
-   * Returns the namespace of the given node. Differs from simply getting
-   * the node's prefix and using getNamespaceForPrefix in that it attempts
-   * to cache some of the data in NSINFO objects, to avoid repeated lookup.
-   * TODO: Should we consider moving that logic into getNamespaceForPrefix?
+   * Returns the Namespace Name (Namespace URI) for the given node.
+   * In a Level 2 DOM, you can ask the node itself. Note, however, that
+   * doing so conflicts with our decision in getLocalNameOfNode not
+   * to trust the that the DOM was indeed created using the Level 2
+   * methods. If Level 1 methods were used, these two functions will
+   * disagree with each other.
+   * <p>
+   * TODO: Reconcile with getLocalNameOfNode.
    *
-   * @param n Node to be examined.
+   * @param n Node to be examined
    *
-   * @return String containing the Namespace Name (uri) for this node.
-   * Note that this is undefined for any nodes other than Elements and
-   * Attributes.
+   * @return String containing the Namespace URI bound to this DOM node
+   * at the time the Node was created.
    */
   public String getNamespaceOfNode(Node n)
   {
-
-    String namespaceOfPrefix;
-    boolean hasProcessedNS;
-    NSInfo nsInfo;
-    short ntype = n.getNodeType();
-
-    if (Node.ATTRIBUTE_NODE != ntype)
-    {
-      Object nsObj = m_NSInfos.get(n);  // return value
-
-      nsInfo = (nsObj == null) ? null : (NSInfo) nsObj;
-      hasProcessedNS = (nsInfo == null) ? false : nsInfo.m_hasProcessedNS;
-    }
-    else
-    {
-      hasProcessedNS = false;
-      nsInfo = null;
-    }
-
-    if (hasProcessedNS)
-    {
-      namespaceOfPrefix = nsInfo.m_namespace;
-    }
-    else
-    {
-      namespaceOfPrefix = null;
-
-      String nodeName = n.getNodeName();
-      int indexOfNSSep = nodeName.indexOf(':');
-      String prefix;
-
-      if (Node.ATTRIBUTE_NODE == ntype)
-      {
-        if (indexOfNSSep > 0)
-        {
-          prefix = nodeName.substring(0, indexOfNSSep);
-        }
-        else
-        {
-
-          // Attributes don't use the default namespace, so if
-          // there isn't a prefix, we're done.
-          return namespaceOfPrefix;
-        }
-      }
-      else
-      {
-        prefix = (indexOfNSSep >= 0)
-                 ? nodeName.substring(0, indexOfNSSep) : "";
-      }
-
-      boolean ancestorsHaveXMLNS = false;
-      boolean nHasXMLNS = false;
-
-      if (prefix.equals("xml"))
-      {
-        namespaceOfPrefix = QName.S_XMLNAMESPACEURI;
-      }
-      else
-      {
-        int parentType;
-        Node parent = n;
-
-        while ((null != parent) && (null == namespaceOfPrefix))
-        {
-          if ((null != nsInfo)
-                  && (nsInfo.m_ancestorHasXMLNSAttrs
-                      == NSInfo.ANCESTORNOXMLNS))
-          {
-            break;
-          }
-
-          parentType = parent.getNodeType();
-
-          if ((null == nsInfo) || nsInfo.m_hasXMLNSAttrs)
-          {
-            boolean elementHasXMLNS = false;
-
-            if (parentType == Node.ELEMENT_NODE)
-            {
-              NamedNodeMap nnm = parent.getAttributes();
-
-              for (int i = 0; i < nnm.getLength(); i++)
-              {
-                Node attr = nnm.item(i);
-                String aname = attr.getNodeName();
-
-                if (aname.charAt(0) == 'x')
-                {
-                  boolean isPrefix = aname.startsWith("xmlns:");
-
-                  if (aname.equals("xmlns") || isPrefix)
-                  {
-                    if (n == parent)
-                      nHasXMLNS = true;
-
-                    elementHasXMLNS = true;
-                    ancestorsHaveXMLNS = true;
-
-                    String p = isPrefix ? aname.substring(6) : "";
-
-                    if (p.equals(prefix))
-                    {
-                      namespaceOfPrefix = attr.getNodeValue();
-
-                      break;
-                    }
-                  }
-                }
-              }
-            }
-
-            if ((Node.ATTRIBUTE_NODE != parentType) && (null == nsInfo)
-                    && (n != parent))
-            {
-              nsInfo = elementHasXMLNS
-                       ? m_NSInfoUnProcWithXMLNS : m_NSInfoUnProcWithoutXMLNS;
-
-              m_NSInfos.put(parent, nsInfo);
-            }
-          }
-
-          if (Node.ATTRIBUTE_NODE == parentType)
-          {
-            parent = getParentOfNode(parent);
-          }
-          else
-          {
-            m_candidateNoAncestorXMLNS.addElement(parent);
-            m_candidateNoAncestorXMLNS.addElement(nsInfo);
-
-            parent = parent.getParentNode();
-          }
-
-          if (null != parent)
-          {
-            Object nsObj = m_NSInfos.get(parent);  // return value
-
-            nsInfo = (nsObj == null) ? null : (NSInfo) nsObj;
-          }
-        }
-
-        int nCandidates = m_candidateNoAncestorXMLNS.size();
-
-        if (nCandidates > 0)
-        {
-          if ((false == ancestorsHaveXMLNS) && (null == parent))
-          {
-            for (int i = 0; i < nCandidates; i += 2)
-            {
-              Object candidateInfo = m_candidateNoAncestorXMLNS.elementAt(i
-                                       + 1);
-
-              if (candidateInfo == m_NSInfoUnProcWithoutXMLNS)
-              {
-                m_NSInfos.put(m_candidateNoAncestorXMLNS.elementAt(i),
-                              m_NSInfoUnProcNoAncestorXMLNS);
-              }
-              else if (candidateInfo == m_NSInfoNullWithoutXMLNS)
-              {
-                m_NSInfos.put(m_candidateNoAncestorXMLNS.elementAt(i),
-                              m_NSInfoNullNoAncestorXMLNS);
-              }
-            }
-          }
-
-          m_candidateNoAncestorXMLNS.removeAllElements();
-        }
-      }
-
-      if (Node.ATTRIBUTE_NODE != ntype)
-      {
-        if (null == namespaceOfPrefix)
-        {
-          if (ancestorsHaveXMLNS)
-          {
-            if (nHasXMLNS)
-              m_NSInfos.put(n, m_NSInfoNullWithXMLNS);
-            else
-              m_NSInfos.put(n, m_NSInfoNullWithoutXMLNS);
-          }
-          else
-          {
-            m_NSInfos.put(n, m_NSInfoNullNoAncestorXMLNS);
-          }
-        }
-        else
-        {
-          m_NSInfos.put(n, new NSInfo(namespaceOfPrefix, nHasXMLNS));
-        }
-      }
-    }
-
-    return namespaceOfPrefix;
+    return n.getNamespaceURI();
   }
 
   /**
-   * Returns the local name of the given node. If the node's name begins
-   * with a namespace prefix, this is the part after the colon; otherwise
-   * it's the full node name.
+   * Returns the local name of the given node, as defined by the
+   * XML Namespaces specification. This is prepared to handle documents
+   * built using DOM Level 1 methods by falling back upon explicitly
+   * parsing the node name.
    *
-   * @param n the node to be examined.
+   * @param n Node to be examined
    *
-   * @return String containing the Local Name
+   * @return String containing the local name, or null if the node
+   * was not assigned a Namespace.
    */
   public String getLocalNameOfNode(Node n)
   {
 
+    String name = n.getLocalName();
+
+    if (null != name) return name;
+
     String qname = n.getNodeName();
     int index = qname.indexOf(':');
-
     return (index < 0) ? qname : qname.substring(index + 1);
   }
 
@@ -741,10 +518,4 @@ public class DOMHelper
 
     return parent;
   }
-
-  /**
-   * The factory object used for creating nodes
-   * in the result tree.
-   */
-  protected Document m_DOMFactory = null;
 }

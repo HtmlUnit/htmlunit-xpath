@@ -48,14 +48,11 @@ public class TreeWalker
   /** Local reference to a ContentHandler          */
   private ContentHandler m_contentHandler = null;
 
-  // ARGHH!!  JAXP Uses Xerces without setting the namespace processing to ON!
-  // DOM2Helper m_dh = new DOM2Helper();
-
   /** DomHelper for this TreeWalker          */
   protected DOMHelper m_dh;
 
-        /** Locator object for this TreeWalker          */
-        private LocatorImpl m_locator = new LocatorImpl();
+  /** Locator object for this TreeWalker          */
+  private LocatorImpl m_locator = new LocatorImpl();
 
   /**
    * Get the ContentHandler used for the tree walk.
@@ -135,7 +132,7 @@ public class TreeWalker
                 catch (SecurityException se){// user.dir not accessible from applet
 
     }
-    m_dh = new DOM2Helper();
+    m_dh = new DOMHelper();
   }
 
   /**

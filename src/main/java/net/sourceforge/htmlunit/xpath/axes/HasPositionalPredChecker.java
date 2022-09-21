@@ -32,7 +32,6 @@ import net.sourceforge.htmlunit.xpath.operations.Minus;
 import net.sourceforge.htmlunit.xpath.operations.Mod;
 import net.sourceforge.htmlunit.xpath.operations.Mult;
 import net.sourceforge.htmlunit.xpath.operations.Plus;
-import net.sourceforge.htmlunit.xpath.operations.Quo;
 
 public class HasPositionalPredChecker extends XPathVisitor
 {
@@ -99,13 +98,11 @@ public boolean visitPredicate(ExpressionOwner owner, Expression pred)
 
     if(m_predDepth == 1)
     {
-      if(// (pred instanceof Variable) ||
-         (pred instanceof XNumber) ||
+      if((pred instanceof XNumber) ||
          (pred instanceof Div) ||
          (pred instanceof Plus) ||
          (pred instanceof Minus) ||
          (pred instanceof Mod) ||
-         (pred instanceof Quo) ||
          (pred instanceof Mult) ||
          (pred instanceof net.sourceforge.htmlunit.xpath.operations.Number) ||
          (pred instanceof Function))
