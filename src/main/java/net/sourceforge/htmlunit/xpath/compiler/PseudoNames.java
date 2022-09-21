@@ -21,7 +21,7 @@
 package net.sourceforge.htmlunit.xpath.compiler;
 
 /**
- * This is used to represent names of nodes that may not be named, like a 
+ * This is used to represent names of nodes that may not be named, like a
  * comment node.
  */
 public class PseudoNames
@@ -46,14 +46,4 @@ public class PseudoNames
    * Psuedo name for a comment node.
    */
   public static final String PSEUDONAME_COMMENT = "#comment";
-
-  /**
-   * Psuedo name for a processing instruction node.
-   */
-  public static final String PSEUDONAME_PI = "#pi";
-
-  /**
-   * Psuedo name for an unknown type value.
-   */
-  public static final String PSEUDONAME_OTHER = "*";
 }

@@ -20,8 +20,7 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm;
 
-import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
+import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
 
@@ -47,15 +46,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
  */
 public abstract class DTMManager
 {
-
-  /** The default property name to load the manager. */
-  private static final String defaultPropName =
-    "net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager";
-
-  /** The default class name to use as the manager. */
-  private static String defaultClassName =
-    "net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault";
-
   /**
    * Factory for creating XMLString objects.
    *  %TBD% Make this set by the caller.
@@ -131,29 +121,7 @@ public abstract class DTMManager
   public static DTMManager newInstance(XMLStringFactory xsf)
            throws DTMConfigurationException
   {
-    DTMManager factoryImpl = null;
-    try
-    {
-      factoryImpl = (DTMManager) ObjectFactory
-        .createObject(defaultPropName, defaultClassName);
-    }
-    catch (ObjectFactory.ConfigurationError e)
-    {
-      throw new DTMConfigurationException(XMLMessages.createXMLMessage(
-        XMLErrorResources.ER_NO_DEFAULT_IMPL, null), e.getException());
-        //"No default implementation found");
-    }
-
-    if (factoryImpl == null)
-    {
-      throw new DTMConfigurationException(XMLMessages.createXMLMessage(
-        XMLErrorResources.ER_NO_DEFAULT_IMPL, null));
-        //"No default implementation found");
-    }
-
-    factoryImpl.setXMLStringFactory(xsf);
-
-    return factoryImpl;
+    return new DTMManagerDefault();
   }
 
   /**
