@@ -84,7 +84,7 @@ public String getNamespaceForPrefix(String prefix,
 
     if (prefix.equals("xml"))
     {
-      namespace = Constants.S_XMLNAMESPACEURI;
+      namespace = "http://www.w3.org/XML/1998/namespace";
     }
     else
     {
@@ -96,8 +96,8 @@ public String getNamespaceForPrefix(String prefix,
       {
         if (type == Node.ELEMENT_NODE)
         {
-                if (parent.getNodeName().indexOf(prefix+":") == 0) 
-                        return parent.getNamespaceURI();                
+                if (parent.getNodeName().indexOf(prefix+":") == 0)
+                        return parent.getNamespaceURI();
           NamedNodeMap nnm = parent.getAttributes();
 
           for (int i = 0; i < nnm.getLength(); i++)

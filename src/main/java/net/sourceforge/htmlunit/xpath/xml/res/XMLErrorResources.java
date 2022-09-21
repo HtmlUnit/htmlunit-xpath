@@ -22,9 +22,6 @@ package net.sourceforge.htmlunit.xpath.xml.res;
 
 
 import java.util.ListResourceBundle;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 
 /**
  * Set up error messages.
@@ -77,7 +74,7 @@ public class XMLErrorResources extends ListResourceBundle
  *
  */
 
-  /* 
+  /*
    * Message keys
    */
   public static final String ER_FUNCTION_NOT_SUPPORTED = "ER_FUNCTION_NOT_SUPPORTED";
@@ -133,14 +130,14 @@ public class XMLErrorResources extends ListResourceBundle
   public static final String ER_SYSTEMID_UNKNOWN = "ER_SYSTEMID_UNKNOWN";
   public static final String ER_LOCATION_UNKNOWN = "ER_LOCATION_UNKNOWN";
   public static final String ER_PREFIX_MUST_RESOLVE = "ER_PREFIX_MUST_RESOLVE";
-  public static final String ER_CREATEDOCUMENT_NOT_SUPPORTED = "ER_CREATEDOCUMENT_NOT_SUPPORTED";  
+  public static final String ER_CREATEDOCUMENT_NOT_SUPPORTED = "ER_CREATEDOCUMENT_NOT_SUPPORTED";
   public static final String ER_CHILD_HAS_NO_OWNER_DOCUMENT = "ER_CHILD_HAS_NO_OWNER_DOCUMENT";
-  public static final String ER_CHILD_HAS_NO_OWNER_DOCUMENT_ELEMENT = "ER_CHILD_HAS_NO_OWNER_DOCUMENT_ELEMENT";  
-  public static final String ER_CANT_OUTPUT_TEXT_BEFORE_DOC = "ER_CANT_OUTPUT_TEXT_BEFORE_DOC";  
-  public static final String ER_CANT_HAVE_MORE_THAN_ONE_ROOT = "ER_CANT_HAVE_MORE_THAN_ONE_ROOT";  
-  public static final String ER_ARG_LOCALNAME_NULL = "ER_ARG_LOCALNAME_NULL";  
-  public static final String ER_ARG_LOCALNAME_INVALID = "ER_ARG_LOCALNAME_INVALID";  
-  public static final String ER_ARG_PREFIX_INVALID = "ER_ARG_PREFIX_INVALID";  
+  public static final String ER_CHILD_HAS_NO_OWNER_DOCUMENT_ELEMENT = "ER_CHILD_HAS_NO_OWNER_DOCUMENT_ELEMENT";
+  public static final String ER_CANT_OUTPUT_TEXT_BEFORE_DOC = "ER_CANT_OUTPUT_TEXT_BEFORE_DOC";
+  public static final String ER_CANT_HAVE_MORE_THAN_ONE_ROOT = "ER_CANT_HAVE_MORE_THAN_ONE_ROOT";
+  public static final String ER_ARG_LOCALNAME_NULL = "ER_ARG_LOCALNAME_NULL";
+  public static final String ER_ARG_LOCALNAME_INVALID = "ER_ARG_LOCALNAME_INVALID";
+  public static final String ER_ARG_PREFIX_INVALID = "ER_ARG_PREFIX_INVALID";
   public static final String ER_NAME_CANT_START_WITH_COLON = "ER_NAME_CANT_START_WITH_COLON";
 
   /*
@@ -163,8 +160,8 @@ public Object[][] getContents()
 
   /** Error message ID that has a null message, but takes in a single object.    */
     {"ER0000" , "{0}" },
- 
-    { ER_FUNCTION_NOT_SUPPORTED, 
+
+    { ER_FUNCTION_NOT_SUPPORTED,
       "Function not supported!"},
 
     { ER_CANNOT_OVERWRITE_CAUSE,
@@ -181,7 +178,7 @@ public Object[][] getContents()
 
     { ER_COROUTINE_NOT_AVAIL,
       "Coroutine not available, id={0}"},
-    
+
     { ER_COROUTINE_CO_EXIT,
       "CoroutineManager received co_exit() request"},
 
@@ -217,7 +214,7 @@ public Object[][] getContents()
 
     { ER_NOT_SUPPORTED,
       "Not supported: {0}"},
-    
+
     { ER_NODE_NON_NULL,
       "Node must be non-null for getDTMHandleFromNode"},
 
@@ -241,7 +238,7 @@ public Object[][] getContents()
 
     { ER_SCHEME_REQUIRED,
        "Scheme is required!"},
-    
+
     { ER_NO_SCHEME_IN_URI,
        "No scheme found in URI: {0}"},
 
@@ -280,7 +277,7 @@ public Object[][] getContents()
 
     { ER_CANNOT_CHANGE_WHILE_PARSING,
       "Cannot change {0} {1} while parsing"},
-   
+
     { ER_SELF_CAUSATION_NOT_PERMITTED,
       "Self-causation not permitted"},
 
@@ -290,18 +287,18 @@ public Object[][] getContents()
     { ER_NO_PORT_IF_NO_HOST,
       "Port may not be specified if host is not specified"},
 
-    { ER_NO_QUERY_STRING_IN_PATH, 
+    { ER_NO_QUERY_STRING_IN_PATH,
       "Query string cannot be specified in path and query string"},
 
     { ER_NO_FRAGMENT_STRING_IN_PATH,
       "Fragment cannot be specified in both the path and fragment"},
 
-    { ER_CANNOT_INIT_URI_EMPTY_PARMS, 
+    { ER_CANNOT_INIT_URI_EMPTY_PARMS,
       "Cannot initialize URI with empty parameters"},
 
     { ER_METHOD_NOT_SUPPORTED,
       "Method not yet supported "},
-    
+
     { ER_INCRSAXSRCFILTER_NOT_RESTARTABLE,
       "IncrementalSAXSource_Filter not currently restartable"},
 
@@ -340,7 +337,7 @@ public Object[][] getContents()
 
     { ER_ARG_LOCALNAME_NULL,
        "Argument 'localName' is null"},
- 
+
     // Note to translators:  A QNAME has the syntactic form [NCName:]NCName
     // The localname is the portion after the optional colon; the message indicates
     // that there is a problem with that part of the QNAME.
@@ -352,80 +349,17 @@ public Object[][] getContents()
     // that there is a problem with that part of the QNAME.
     { ER_ARG_PREFIX_INVALID,
        "Prefix in QNAME should be a valid NCName"},
-       
+
     { ER_NAME_CANT_START_WITH_COLON,
       "Name cannot start with a colon"},
-       
+
     { "BAD_CODE", "Parameter to createMessage was out of bounds"},
     { "FORMAT_FAILED", "Exception thrown during messageFormat call"},
     { "line", "Line #"},
     { "column","Column #"}
-  
-  
+
+
   };
   }
 
-  /**
-   *   Return a named ResourceBundle for a particular locale.  This method mimics the behavior
-   *   of ResourceBundle.getBundle().
-   *
-   *   @param className the name of the class that implements the resource bundle.
-   *   @return the ResourceBundle
-   *   @throws MissingResourceException
-   */
-  public static final XMLErrorResources loadResourceBundle(String className)
-          throws MissingResourceException
-  {
-
-    Locale locale = Locale.getDefault();
-    String suffix = getResourceSuffix(locale);
-
-    try
-    {
-
-      // first try with the given locale
-      return (XMLErrorResources) ResourceBundle.getBundle(className
-              + suffix, locale);
-    }
-    catch (MissingResourceException e)
-    {
-      try  // try to fall back to en_US if we can't load
-      {
-
-        // Since we can't find the localized property file,
-        // fall back to en_US.
-        return (XMLErrorResources) ResourceBundle.getBundle(className,
-                new Locale("en", "US"));
-      }
-      catch (MissingResourceException e2)
-      {
-
-        // Now we are really in trouble.
-        // very bad, definitely very bad...not going to get very far
-        throw new MissingResourceException(
-          "Could not load any resource bundles.", className, "");
-      }
-    }
-  }
-
-  /**
-   * Return the resource file suffic for the indicated locale
-   * For most locales, this will be based the language code.  However
-   * for Chinese, we do distinguish between Taiwan and PRC
-   *
-   * @param locale the locale
-   * @return an String suffix which canbe appended to a resource name
-   */
-  private static final String getResourceSuffix(Locale locale)
-  {
-
-    String suffix = "_" + locale.getLanguage();
-    String country = locale.getCountry();
-
-    if (country.equals("TW"))
-      suffix += "_" + country;
-
-    return suffix;
-  }
-  
 }
