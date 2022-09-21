@@ -95,7 +95,8 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator
    * releasing any computational resources and placing the iterator in
    * the INVALID state.
    * */
-  public void detach() 
+  @Override
+public void detach() 
     {
       // Theoretically, we could release dtm_iter at this point. But
       // some of the operations may still want to consult it even though
@@ -108,7 +109,8 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator
    *
    * @return false, always (the DTM model flattens entity references)
    * */
-  public boolean getExpandEntityReferences()
+  @Override
+public boolean getExpandEntityReferences()
     {
       return false;
     }
@@ -125,7 +127,8 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator
    * @throws DOMException -- NOT_SUPPORTED_ERROR because I can't think
    * of anything more useful to do in this case
    * */
-  public NodeFilter getFilter() 
+  @Override
+public NodeFilter getFilter() 
     {
       throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
     }
@@ -134,7 +137,8 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator
   /** @return The root node of the NodeIterator, as specified
    * when it was created.
    * */
-  public Node getRoot()
+  @Override
+public Node getRoot()
     {
       int handle=dtm_iter.getRoot();
       return dtm_iter.getDTM(handle).getNode(handle);
@@ -144,7 +148,8 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator
   /** Return a mask describing which node types are presented via the
    * iterator.
    **/
-  public int getWhatToShow()
+  @Override
+public int getWhatToShow()
     {
       return dtm_iter.getWhatToShow();
     }
@@ -155,7 +160,8 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator
    * @throws DOMException - INVALID_STATE_ERR Raised if this method is
    * called after the detach method was invoked.
    *  */
-  public Node nextNode() throws DOMException
+  @Override
+public Node nextNode() throws DOMException
     {
       if(!valid)
         throw new DTMDOMException(DOMException.INVALID_STATE_ERR);
@@ -173,7 +179,8 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator
    * @throws DOMException - INVALID_STATE_ERR Raised if this method is
    * called after the detach method was invoked.
    *  */
-  public Node previousNode() 
+  @Override
+public Node previousNode() 
     {
       if(!valid)
         throw new DTMDOMException(DOMException.INVALID_STATE_ERR);

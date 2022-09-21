@@ -93,6 +93,7 @@ public class DTMChildIterNodeList extends DTMNodeListBase {
      *   <code>NodeList</code>, or <code>null</code> if that is not a valid 
      *   index.
      */
+    @Override
     public Node item(int index) {
         int handle=m_firstChild;
         while(--index>=0 && handle!=DTM.NULL) {
@@ -108,6 +109,7 @@ public class DTMChildIterNodeList extends DTMNodeListBase {
      * The number of nodes in the list. The range of valid child node indices 
      * is 0 to <code>length-1</code> inclusive. 
      */
+    @Override
     public int getLength() {
         int count=0;
         for (int handle=m_firstChild;

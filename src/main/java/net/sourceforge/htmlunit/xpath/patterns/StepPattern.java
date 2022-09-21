@@ -205,7 +205,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    *
    * @return true if traversal outside the context node's subtree can occur.
    */
-  public boolean canTraverseOutsideSubtree()
+  @Override
+public boolean canTraverseOutsideSubtree()
   {
 
     int n = getPredicateCount();
@@ -268,7 +269,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   /**
    * Static calc of match score.
    */
-  public void calcScore()
+  @Override
+public void calcScore()
   {
 
     if ((getPredicateCount() > 0) || (null != m_relativePathPattern))
@@ -297,7 +299,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt, int currentNode)
+  @Override
+public XObject execute(XPathContext xctxt, int currentNode)
           throws javax.xml.transform.TransformerException
   {
 
@@ -327,7 +330,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt)
+  @Override
+public XObject execute(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
     return execute(xctxt, xctxt.getCurrentNode());
@@ -348,7 +352,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * @throws javax.xml.transform.TransformerException if a runtime exception
    *         occurs.
    */
-  public XObject execute(
+  @Override
+public XObject execute(
           XPathContext xctxt, int currentNode, DTM dtm, int expType)
             throws javax.xml.transform.TransformerException
   {
@@ -594,7 +599,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * @return the proximity position index of the current node based on the
    *         node test.
    */
-  public int getProximityPosition(XPathContext xctxt)
+  @Override
+public int getProximityPosition(XPathContext xctxt)
   {
     return getProximityPosition(xctxt, xctxt.getPredicatePos(), false);
   }
@@ -610,7 +616,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    *
    * @return the count of the nodes that match the test.
    */
-  public int getLastPos(XPathContext xctxt)
+  @Override
+public int getLastPos(XPathContext xctxt)
   {
     return getProximityPosition(xctxt, xctxt.getPredicatePos(), true);
   }
@@ -754,7 +761,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * @return A string representation of this step, built by reverse-engineering
    * the contained info.
    */
-  public String toString()
+  @Override
+public String toString()
   {
 
     StringBuffer buf = new StringBuffer();
@@ -912,6 +920,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     /**
      * @see ExpressionOwner#getExpression()
      */
+    @Override
     public Expression getExpression()
     {
       return m_predicates[m_index];
@@ -921,6 +930,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
       exp.exprSetParent(StepPattern.this);
@@ -931,7 +941,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
        if(visitor.visitMatchPattern(owner, this))
        {
@@ -967,7 +978,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   /**
    * @see ExpressionOwner#getExpression()
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return m_relativePathPattern;
   }
@@ -975,7 +987,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   /**
    * @see ExpressionOwner#setExpression(Expression)
    */
-  public void setExpression(Expression exp)
+  @Override
+public void setExpression(Expression exp)
   {
     exp.exprSetParent(this);
     m_relativePathPattern = (StepPattern)exp;
@@ -984,7 +997,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!super.deepEquals(expr))
       return false;

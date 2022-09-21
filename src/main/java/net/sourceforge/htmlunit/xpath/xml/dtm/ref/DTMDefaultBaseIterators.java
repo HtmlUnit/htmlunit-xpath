@@ -100,7 +100,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
    *
    * @return A DTMAxisIterator, or null if the given axis isn't supported.
    */
-  public DTMAxisIterator getTypedAxisIterator(int axis, int type)
+  @Override
+public DTMAxisIterator getTypedAxisIterator(int axis, int type)
   {
 
     DTMAxisIterator iterator = null;
@@ -181,7 +182,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
    *
    * @return A DTMAxisIterator, or null if the given axis isn't supported.
    */
-  public DTMAxisIterator getAxisIterator(final int axis)
+  @Override
+public DTMAxisIterator getAxisIterator(final int axis)
   {
 
     DTMAxisIterator iterator = null;
@@ -268,6 +270,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * %REVIEW% Should this save _position too?
      */
+    @Override
     public void setMark()
     {
       _markedNode = _currentNode;
@@ -278,6 +281,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * %REVEIW% Should this restore _position too?
      */
+    @Override
     public void gotoMark()
     {
       _currentNode = _markedNode;
@@ -303,6 +307,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -326,6 +331,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * @return The next node handle in the iteration, or END if no more
      * are available.
      */
+    @Override
     public int next()
     {
       if (_currentNode != NULL) {
@@ -357,6 +363,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -397,6 +404,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       int result = _currentNode;
@@ -448,6 +456,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -471,6 +480,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       int eType;
@@ -539,6 +549,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -560,6 +571,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       if (_currentNode != DTM.NULL) {
@@ -605,6 +617,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -626,6 +639,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 
@@ -665,6 +679,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       int node;
@@ -710,6 +725,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 
@@ -729,6 +745,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       if(_startNode == _currentNode)
@@ -766,6 +783,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       if(_startNode == _currentNode)
@@ -829,6 +847,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -850,6 +869,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 
@@ -876,6 +896,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -897,6 +918,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       _currentNode = (_currentNode == DTM.NULL) ? DTM.NULL
@@ -931,6 +953,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       if (_currentNode == DTM.NULL) {
@@ -982,6 +1005,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -1003,6 +1027,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 
@@ -1047,6 +1072,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
       if (_isRestartable)
@@ -1066,6 +1092,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 
@@ -1095,6 +1122,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return true.
      */
+    @Override
     public boolean isReverse()
     {
       return true;
@@ -1108,6 +1136,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -1151,6 +1180,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 
@@ -1195,6 +1225,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       int node = _currentNode;
@@ -1262,6 +1293,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return true since this iterator is a reversed axis.
      */
+    @Override
     public boolean isReverse()
     {
       return true;
@@ -1272,6 +1304,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return a deep copy of this iterator.
      */
+    @Override
     public DTMAxisIterator cloneIterator()
     {
       _isRestartable = false;
@@ -1301,6 +1334,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -1350,6 +1384,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       // Bugzilla 8324: We were forgetting to skip Attrs and NS nodes.
@@ -1379,6 +1414,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * @return A DTMAxisIterator, which may or may not be the same as this
      *         iterator.
      */
+    @Override
     public DTMAxisIterator reset()
     {
 
@@ -1387,12 +1423,14 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
       return resetPosition();
     }
 
+    @Override
     public void setMark() {
         _markedsp = _sp;
         _markedNode = _currentNode;
         _markedDescendant = _stack[0];
     }
 
+    @Override
     public void gotoMark() {
         _sp = _markedsp;
         _currentNode = _markedNode;
@@ -1426,6 +1464,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       int node = _currentNode;
@@ -1502,6 +1541,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -1530,6 +1570,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 
@@ -1566,6 +1607,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 
@@ -1606,6 +1648,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The root node of the iteration.
      */
+    @Override
     public int getStartNode()
     {
       return m_realStartNode;
@@ -1616,6 +1659,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return true since this iterator is a reversed axis.
      */
+    @Override
     public final boolean isReverse()
     {
       return true;
@@ -1626,6 +1670,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return a deep copy of this iterator.
      */
+    @Override
     public DTMAxisIterator cloneIterator()
     {
       _isRestartable = false;  // must set to false for any clone
@@ -1653,6 +1698,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -1694,6 +1740,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * @return A DTMAxisIterator, which may or may not be the same as this
      *         iterator.
      */
+    @Override
     public DTMAxisIterator reset()
     {
 
@@ -1710,6 +1757,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 
@@ -1723,10 +1771,12 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
       return returnNode(next);
     }
 
+    @Override
     public void setMark() {
         m_markedPos = m_ancestorsPos;
     }
 
+    @Override
     public void gotoMark() {
         m_ancestorsPos = m_markedPos;
         _currentNode = m_ancestorsPos>=0 ? m_ancestors.elementAt(m_ancestorsPos)
@@ -1762,6 +1812,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -1828,6 +1879,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -1873,6 +1925,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       if (_startNode == NULL) {
@@ -1904,7 +1957,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * Reset.
      *
      */
-  public DTMAxisIterator reset()
+  @Override
+public DTMAxisIterator reset()
   {
 
     final boolean temp = _isRestartable;
@@ -1945,6 +1999,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
       int node;
@@ -1999,6 +2054,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 
@@ -2080,6 +2136,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return A DTMAxisIterator set to the start of the iteration.
      */
+    @Override
     public DTMAxisIterator setStartNode(int node)
     {
 //%HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -2107,6 +2164,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      * @return A DTMAxisIterator, which may or may not be the same as this
      *         iterator.
      */
+    @Override
     public DTMAxisIterator reset()
     {
 
@@ -2135,6 +2193,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 
@@ -2171,6 +2230,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers
      *
      * @return The next node handle in the iteration, or END.
      */
+    @Override
     public int next()
     {
 

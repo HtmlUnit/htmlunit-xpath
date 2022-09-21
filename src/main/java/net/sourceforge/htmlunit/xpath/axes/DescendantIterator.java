@@ -148,7 +148,8 @@ public class DescendantIterator extends LocPathIterator
    *
    *  @throws CloneNotSupportedException
    */
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException
+  @Override
+public DTMIterator cloneWithReset() throws CloneNotSupportedException
   {
 
     DescendantIterator clone = (DescendantIterator) super.cloneWithReset();
@@ -171,7 +172,8 @@ public class DescendantIterator extends LocPathIterator
    *    INVALID_STATE_ERR: Raised if this method is called after the
    *   <code>detach</code> method was invoked.
    */
-  public int nextNode()
+  @Override
+public int nextNode()
   {
      if(m_foundLast)
       return DTM.NULL;
@@ -237,7 +239,8 @@ public class DescendantIterator extends LocPathIterator
    * @param context The XPath runtime context for this
    * transformation.
    */
-  public void setRoot(int context, Object environment)
+  @Override
+public void setRoot(int context, Object environment)
   {
     super.setRoot(context, environment);
     m_traverser = m_cdtm.getAxisTraverser(m_axis);
@@ -269,7 +272,8 @@ public class DescendantIterator extends LocPathIterator
    * @param xctxt The XPath runtime context.
    * @return the first node out of the nodeset, or DTM.NULL.
    */
-  public int asNode(XPathContext xctxt)
+  @Override
+public int asNode(XPathContext xctxt)
     throws javax.xml.transform.TransformerException
   {
     if(getPredicateCount() > 0)
@@ -309,7 +313,8 @@ public class DescendantIterator extends LocPathIterator
    * <code>nextNode</code> or<code>previousNode</code> will raise the
    * exception INVALID_STATE_ERR.
    */
-  public void detach()
+  @Override
+public void detach()
   {
     if (m_allowDetach) {
       m_traverser = null;
@@ -326,7 +331,8 @@ public class DescendantIterator extends LocPathIterator
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     return m_axis;
   }
@@ -344,7 +350,8 @@ public class DescendantIterator extends LocPathIterator
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!super.deepEquals(expr))
       return false;

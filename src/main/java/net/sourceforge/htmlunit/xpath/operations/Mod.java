@@ -42,7 +42,8 @@ public class Mod extends Operation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject operate(XObject left, XObject right)
+  @Override
+public XObject operate(XObject left, XObject right)
           throws javax.xml.transform.TransformerException
   {
     return new XNumber(left.num() % right.num());
@@ -57,7 +58,8 @@ public class Mod extends Operation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public double num(XPathContext xctxt)
+  @Override
+public double num(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
 

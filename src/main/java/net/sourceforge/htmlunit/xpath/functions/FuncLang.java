@@ -41,7 +41,8 @@ public class FuncLang extends FunctionOneArg
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
 
     String lang = m_arg0.execute(xctxt).str();

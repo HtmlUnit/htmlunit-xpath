@@ -83,7 +83,8 @@ public class NodeVector implements Serializable, Cloneable
    *
    * @throws CloneNotSupportedException
    */
-  public Object clone() throws CloneNotSupportedException
+  @Override
+public Object clone() throws CloneNotSupportedException
   {
 
     NodeVector clone = (NodeVector) super.clone();

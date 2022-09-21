@@ -130,7 +130,8 @@ public abstract class BasicTestIterator extends LocPathIterator
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    */
-  public int nextNode()
+  @Override
+public int nextNode()
   {
     if(m_foundLast)
     {
@@ -188,7 +189,8 @@ public abstract class BasicTestIterator extends LocPathIterator
    *
    *  @throws CloneNotSupportedException
    */
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException
+  @Override
+public DTMIterator cloneWithReset() throws CloneNotSupportedException
   {
 
     ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();

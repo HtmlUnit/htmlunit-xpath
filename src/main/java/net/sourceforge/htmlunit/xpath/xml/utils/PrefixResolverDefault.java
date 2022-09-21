@@ -58,7 +58,8 @@ public class PrefixResolverDefault implements PrefixResolver
    * @return Namespace that prefix resolves to, or null if prefix
    * is not bound.
    */
-  public String getNamespaceForPrefix(String prefix)
+  @Override
+public String getNamespaceForPrefix(String prefix)
   {
     return getNamespaceForPrefix(prefix, m_context);
   }
@@ -73,7 +74,8 @@ public class PrefixResolverDefault implements PrefixResolver
    * @return Namespace that prefix resolves to, or null if prefix
    * is not bound.
    */
-  public String getNamespaceForPrefix(String prefix,
+  @Override
+public String getNamespaceForPrefix(String prefix,
                                       org.w3c.dom.Node namespaceContext)
   {
 
@@ -131,14 +133,16 @@ public class PrefixResolverDefault implements PrefixResolver
    *
    * @return null
    */
-  public String getBaseIdentifier()
+  @Override
+public String getBaseIdentifier()
   {
     return null;
   }
   /**
    * @see PrefixResolver#handlesNullPrefixes()
    */
-  public boolean handlesNullPrefixes() {
+  @Override
+public boolean handlesNullPrefixes() {
     return false;
   }
 

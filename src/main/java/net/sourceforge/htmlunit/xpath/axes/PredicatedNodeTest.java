@@ -83,7 +83,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @throws CloneNotSupportedException
    */
-  public Object clone() throws CloneNotSupportedException
+  @Override
+public Object clone() throws CloneNotSupportedException
   {
     // Do not access the location path itterator during this operation!
     
@@ -207,7 +208,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @return The node position of this walker in the sub-context node list.
    */
-  public int getProximityPosition(XPathContext xctxt)
+  @Override
+public int getProximityPosition(XPathContext xctxt)
   {
     return getProximityPosition();
   }
@@ -220,7 +222,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @return the index of the last node that can be itterated to.
    */
-  public abstract int getLastPos(XPathContext xctxt);
+  @Override
+public abstract int getLastPos(XPathContext xctxt);
 
   /**
    * Get the current sub-context position.
@@ -504,7 +507,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * 
    * @return true if traversal outside the context node's subtree can occur.
    */
-   public boolean canTraverseOutsideSubtree()
+   @Override
+public boolean canTraverseOutsideSubtree()
    {
     int n = getPredicateCount();
     for (int i = 0; i < n; i++) 
@@ -542,6 +546,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     /**
      * @see Expression#deepEquals(Expression)
      */
+    @Override
     public boolean deepEquals(Expression expr)
     {
       if (!super.deepEquals(expr))
@@ -605,6 +610,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     /**
      * @see ExpressionOwner#getExpression()
      */
+    @Override
     public Expression getExpression()
     {
       return m_predicates[m_index];
@@ -614,6 +620,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
       exp.exprSetParent(PredicatedNodeTest.this);

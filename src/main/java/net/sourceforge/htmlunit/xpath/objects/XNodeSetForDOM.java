@@ -92,7 +92,8 @@ public class XNodeSetForDOM extends XNodeSet
    *
    * @return The object that this class wraps
    */
-  public Object object()
+  @Override
+public Object object()
   {
     return m_origObj;
   }
@@ -104,7 +105,8 @@ public class XNodeSetForDOM extends XNodeSet
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public NodeIterator nodeset() throws javax.xml.transform.TransformerException
+  @Override
+public NodeIterator nodeset() throws javax.xml.transform.TransformerException
   {
     return (m_origObj instanceof NodeIterator) 
                    ? (NodeIterator)m_origObj : super.nodeset();      
@@ -117,7 +119,8 @@ public class XNodeSetForDOM extends XNodeSet
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public NodeList nodelist() throws javax.xml.transform.TransformerException
+  @Override
+public NodeList nodelist() throws javax.xml.transform.TransformerException
   {
     return (m_origObj instanceof NodeList) 
                    ? (NodeList)m_origObj : super.nodelist();      

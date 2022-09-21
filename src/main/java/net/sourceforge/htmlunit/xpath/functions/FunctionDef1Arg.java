@@ -138,7 +138,8 @@ public class FunctionDef1Arg extends FunctionOneArg
    *
    * @throws WrongNumberArgsException if the number of arguments is not 0 or 1.
    */
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException
+  @Override
+public void checkNumberArgs(int argNum) throws WrongNumberArgsException
   {
     if (argNum > 1)
       reportWrongNumberArgs();
@@ -150,7 +151,8 @@ public class FunctionDef1Arg extends FunctionOneArg
    *
    * @throws WrongNumberArgsException
    */
-  protected void reportWrongNumberArgs() throws WrongNumberArgsException {
+  @Override
+protected void reportWrongNumberArgs() throws WrongNumberArgsException {
       throw new WrongNumberArgsException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_ZERO_OR_ONE, null)); //"0 or 1");
   }
 
@@ -160,7 +162,8 @@ public class FunctionDef1Arg extends FunctionOneArg
    *
    * @return true if traversal outside the context node's subtree can occur.
    */
-  public boolean canTraverseOutsideSubtree()
+  @Override
+public boolean canTraverseOutsideSubtree()
   {
     return (null == m_arg0) ? false : super.canTraverseOutsideSubtree();
   }

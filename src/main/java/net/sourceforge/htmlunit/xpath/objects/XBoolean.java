@@ -78,7 +78,8 @@ public class XBoolean extends XObject
    *
    * @return type of CLASS_BOOLEAN
    */
-  public int getType()
+  @Override
+public int getType()
   {
     return CLASS_BOOLEAN;
   }
@@ -89,7 +90,8 @@ public class XBoolean extends XObject
    *
    * @return type string "#BOOLEAN"
    */
-  public String getTypeString()
+  @Override
+public String getTypeString()
   {
     return "#BOOLEAN";
   }
@@ -99,7 +101,8 @@ public class XBoolean extends XObject
    *
    * @return numeric value of the object value
    */
-  public double num()
+  @Override
+public double num()
   {
     return m_val ? 1.0 : 0.0;
   }
@@ -109,7 +112,8 @@ public class XBoolean extends XObject
    *
    * @return The object value as a boolean
    */
-  public boolean bool()
+  @Override
+public boolean bool()
   {
     return m_val;
   }
@@ -119,7 +123,8 @@ public class XBoolean extends XObject
    *
    * @return The object's value as a string
    */
-  public String str()
+  @Override
+public String str()
   {
     return m_val ? "true" : "false";
   }
@@ -130,7 +135,8 @@ public class XBoolean extends XObject
    *
    * @return The object's value as a java object
    */
-  public Object object()
+  @Override
+public Object object()
   {
     if(null == m_obj)
       setObject(m_val ? Boolean.TRUE : Boolean.FALSE);
@@ -146,7 +152,8 @@ public class XBoolean extends XObject
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean equals(XObject obj2)
+  @Override
+public boolean equals(XObject obj2)
   {
 
     // In order to handle the 'all' semantics of 

@@ -67,7 +67,8 @@ public class XPath implements Serializable, ExpressionOwner
    *
    * @return the raw Expression object, which should not normally be null.
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return m_mainExp;
   }
@@ -78,7 +79,8 @@ public class XPath implements Serializable, ExpressionOwner
    *
    * @param exp the raw Expression object, which should not normally be null.
    */
-  public void setExpression(Expression exp)
+  @Override
+public void setExpression(Expression exp)
   {
     if(null != m_mainExp)
       exp.exprSetParent(m_mainExp.exprGetParent()); // a bit bogus

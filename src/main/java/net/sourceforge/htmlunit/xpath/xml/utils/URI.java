@@ -1338,7 +1338,8 @@ public class URI implements Serializable
    * @return true if p_test is a URI with all values equal to this
    *         URI, false otherwise
    */
-  public boolean equals(Object p_test)
+  @Override
+public boolean equals(Object p_test)
   {
 
     if (p_test instanceof URI)
@@ -1365,7 +1366,8 @@ public class URI implements Serializable
    *
    * @return the URI string specification
    */
-  public String toString()
+  @Override
+public String toString()
   {
 
     StringBuffer uriSpecString = new StringBuffer();

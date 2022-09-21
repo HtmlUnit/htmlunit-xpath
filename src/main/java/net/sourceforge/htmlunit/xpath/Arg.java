@@ -229,7 +229,8 @@ public class Arg
    * @return  <code>true</code> if this object is the same as the obj
    *          argument; <code>false</code> otherwise.
    */
-  public boolean equals(Object obj) 
+  @Override
+public boolean equals(Object obj) 
   {
     if(obj instanceof QName)
     {

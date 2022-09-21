@@ -203,7 +203,8 @@ public class IntStack extends IntVector
    * 
    * @return clone of current IntStack
    */
-  public Object clone()
+  @Override
+public Object clone()
     throws CloneNotSupportedException
   {
     return (IntStack) super.clone();

@@ -202,7 +202,8 @@ public class DOM2Helper extends DOMHelper
    * such an element or if the DOM can't answer the question for other
    * reasons.
    */
-  public Element getElementByID(String id, Document doc)
+  @Override
+public Element getElementByID(String id, Document doc)
   {
     return doc.getElementById(id);
   }
@@ -277,7 +278,8 @@ public class DOM2Helper extends DOMHelper
    * @return String containing the local name, or null if the node
    * was not assigned a Namespace.
    */
-  public String getLocalNameOfNode(Node n)
+  @Override
+public String getLocalNameOfNode(Node n)
   {
 
     String name = n.getLocalName();
@@ -300,7 +302,8 @@ public class DOM2Helper extends DOMHelper
    * @return String containing the Namespace URI bound to this DOM node
    * at the time the Node was created.
    */
-  public String getNamespaceOfNode(Node n)
+  @Override
+public String getNamespaceOfNode(Node n)
   {
     return n.getNamespaceURI();
   }

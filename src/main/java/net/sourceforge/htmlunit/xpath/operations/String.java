@@ -40,7 +40,8 @@ public class String extends UnaryOperation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject operate(XObject right) throws javax.xml.transform.TransformerException
+  @Override
+public XObject operate(XObject right) throws javax.xml.transform.TransformerException
   {
     return (XString)right.xstr(); // semi-safe cast.
   }

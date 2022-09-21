@@ -45,7 +45,8 @@ public class XNull extends XNodeSet
    *
    * @return type CLASS_NULL
    */
-  public int getType()
+  @Override
+public int getType()
   {
     return CLASS_NULL;
   }
@@ -56,7 +57,8 @@ public class XNull extends XNodeSet
    *
    * @return type string "#CLASS_NULL"
    */
-  public String getTypeString()
+  @Override
+public String getTypeString()
   {
     return "#CLASS_NULL";
   }
@@ -67,7 +69,8 @@ public class XNull extends XNodeSet
    * @return 0.0
    */
 
-  public double num()
+  @Override
+public double num()
   {
     return 0.0;
   }
@@ -77,7 +80,8 @@ public class XNull extends XNodeSet
    *
    * @return false
    */
-  public boolean bool()
+  @Override
+public boolean bool()
   {
     return false;
   }
@@ -87,7 +91,8 @@ public class XNull extends XNodeSet
    *
    * @return empty string ""
    */
-  public String str()
+  @Override
+public String str()
   {
     return "";
   }
@@ -99,7 +104,8 @@ public class XNull extends XNodeSet
    *
    * @return The object as a result tree fragment.
    */
-  public int rtf(XPathContext support)
+  @Override
+public int rtf(XPathContext support)
   {
     // DTM frag = support.createDocumentFragment();
     // %REVIEW%
@@ -123,7 +129,8 @@ public class XNull extends XNodeSet
    *
    * @return True if the given object is of type CLASS_NULL
    */
-  public boolean equals(XObject obj2)
+  @Override
+public boolean equals(XObject obj2)
   {
     return obj2.getType() == CLASS_NULL;
   }

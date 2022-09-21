@@ -167,12 +167,14 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
   }
 
   // Register a content handler for us to output to
-  public void setContentHandler(ContentHandler handler)
+  @Override
+public void setContentHandler(ContentHandler handler)
   {
     clientContentHandler=handler;
   }
   // Register a DTD handler for us to output to
-  public void setDTDHandler(DTDHandler handler)
+  @Override
+public void setDTDHandler(DTDHandler handler)
   {
     clientDTDHandler=handler;
   }
@@ -180,7 +182,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
   // Not all filters support this...
   // ??? Should we register directly on the filter?
   // NOTE NAME -- subclassing issue in the Xerces version
-  public void setLexicalHandler(LexicalHandler handler)
+  @Override
+public void setLexicalHandler(LexicalHandler handler)
   {
     clientLexicalHandler=handler;
   }
@@ -218,7 +221,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
   // text causing greater than usual readahead. (Unlikely? Consider the
   // possibility of a large base-64 block in a SOAP stream.)
   //
-  public void characters(char[] ch, int start, int length)
+  @Override
+public void characters(char[] ch, int start, int length)
        throws org.xml.sax.SAXException
   {
     if(--eventcounter<=0)
@@ -229,7 +233,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
     if(clientContentHandler!=null)
       clientContentHandler.characters(ch,start,length);
   }
-  public void endDocument()
+  @Override
+public void endDocument()
        throws org.xml.sax.SAXException
   {
     // EXCEPTION: In this case we need to run the event BEFORE we yield.
@@ -239,7 +244,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
     eventcounter=0;
     co_yield(false);
   }
-  public void endElement(java.lang.String namespaceURI, java.lang.String localName,
+  @Override
+public void endElement(java.lang.String namespaceURI, java.lang.String localName,
       java.lang.String qName)
        throws org.xml.sax.SAXException
   {
@@ -251,7 +257,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
     if(clientContentHandler!=null)
       clientContentHandler.endElement(namespaceURI,localName,qName);
   }
-  public void endPrefixMapping(java.lang.String prefix)
+  @Override
+public void endPrefixMapping(java.lang.String prefix)
        throws org.xml.sax.SAXException
   {
     if(--eventcounter<=0)
@@ -262,7 +269,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
     if(clientContentHandler!=null)
       clientContentHandler.endPrefixMapping(prefix);
   }
-  public void ignorableWhitespace(char[] ch, int start, int length)
+  @Override
+public void ignorableWhitespace(char[] ch, int start, int length)
        throws org.xml.sax.SAXException
   {
     if(--eventcounter<=0)
@@ -273,7 +281,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
     if(clientContentHandler!=null)
       clientContentHandler.ignorableWhitespace(ch,start,length);
   }
-  public void processingInstruction(java.lang.String target, java.lang.String data)
+  @Override
+public void processingInstruction(java.lang.String target, java.lang.String data)
        throws org.xml.sax.SAXException
   {
     if(--eventcounter<=0)
@@ -284,7 +293,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
     if(clientContentHandler!=null)
       clientContentHandler.processingInstruction(target,data);
   }
-  public void setDocumentLocator(Locator locator)
+  @Override
+public void setDocumentLocator(Locator locator)
   {
     if(--eventcounter<=0)
       {
@@ -295,7 +305,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
     if(clientContentHandler!=null)
       clientContentHandler.setDocumentLocator(locator);
   }
-  public void skippedEntity(java.lang.String name)
+  @Override
+public void skippedEntity(java.lang.String name)
        throws org.xml.sax.SAXException
   {
     if(--eventcounter<=0)
@@ -306,7 +317,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
     if(clientContentHandler!=null)
       clientContentHandler.skippedEntity(name);
   }
-  public void startDocument()
+  @Override
+public void startDocument()
        throws org.xml.sax.SAXException
   {
     co_entry_pause();
@@ -320,7 +332,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
     if(clientContentHandler!=null)
       clientContentHandler.startDocument();
   }
-  public void startElement(java.lang.String namespaceURI, java.lang.String localName,
+  @Override
+public void startElement(java.lang.String namespaceURI, java.lang.String localName,
       java.lang.String qName, Attributes atts)
        throws org.xml.sax.SAXException
   {
@@ -332,7 +345,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
     if(clientContentHandler!=null)
       clientContentHandler.startElement(namespaceURI, localName, qName, atts);
   }
-  public void startPrefixMapping(java.lang.String prefix, java.lang.String uri)
+  @Override
+public void startPrefixMapping(java.lang.String prefix, java.lang.String uri)
        throws org.xml.sax.SAXException
   {
     if(--eventcounter<=0)
@@ -354,44 +368,51 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
   // actually want to use them to register directly with the filter.
   // But I want 'em here for now, to remind us to recheck this assertion!
   //
-  public void comment(char[] ch, int start, int length)
+  @Override
+public void comment(char[] ch, int start, int length)
        throws org.xml.sax.SAXException
   {
     if(null!=clientLexicalHandler)
       clientLexicalHandler.comment(ch,start,length);
   }
-  public void endCDATA()
+  @Override
+public void endCDATA()
        throws org.xml.sax.SAXException
   {
     if(null!=clientLexicalHandler)
       clientLexicalHandler.endCDATA();
   }
-  public void endDTD()
+  @Override
+public void endDTD()
        throws org.xml.sax.SAXException
   {
     if(null!=clientLexicalHandler)
       clientLexicalHandler.endDTD();
   }
-  public void endEntity(java.lang.String name)
+  @Override
+public void endEntity(java.lang.String name)
        throws org.xml.sax.SAXException
   {
     if(null!=clientLexicalHandler)
       clientLexicalHandler.endEntity(name);
   }
-  public void startCDATA()
+  @Override
+public void startCDATA()
        throws org.xml.sax.SAXException
   {
     if(null!=clientLexicalHandler)
       clientLexicalHandler.startCDATA();
   }
-  public void startDTD(java.lang.String name, java.lang.String publicId,
+  @Override
+public void startDTD(java.lang.String name, java.lang.String publicId,
       java.lang.String systemId)
        throws org.xml.sax.SAXException
   {
     if(null!=clientLexicalHandler)
       clientLexicalHandler. startDTD(name, publicId, systemId);
   }
-  public void startEntity(java.lang.String name)
+  @Override
+public void startEntity(java.lang.String name)
        throws org.xml.sax.SAXException
   {
     if(null!=clientLexicalHandler)
@@ -401,12 +422,14 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
   //
   // DTDHandler support.
 
-  public void notationDecl(String a, String b, String c) throws SAXException
+  @Override
+public void notationDecl(String a, String b, String c) throws SAXException
   {
     if(null!=clientDTDHandler)
       clientDTDHandler.notationDecl(a,b,c);
   }
-  public void unparsedEntityDecl(String a, String b, String c, String d)  throws SAXException
+  @Override
+public void unparsedEntityDecl(String a, String b, String c, String d)  throws SAXException
   {
     if(null!=clientDTDHandler)
       clientDTDHandler.unparsedEntityDecl(a,b,c,d);
@@ -427,13 +450,15 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
   // us in the exception handling code because it won't be delivered as part
   // of the normal SAX ErrorHandler stream, that's fine; Not Our Problem.
   //
-  public void error(SAXParseException exception) throws SAXException
+  @Override
+public void error(SAXParseException exception) throws SAXException
   {
     if(null!=clientErrorHandler)
       clientErrorHandler.error(exception);
   }
 
-  public void fatalError(SAXParseException exception) throws SAXException
+  @Override
+public void fatalError(SAXParseException exception) throws SAXException
   {
     // EXCEPTION: In this case we need to run the event BEFORE we yield --
     // just as with endDocument, this terminates the event stream.
@@ -445,7 +470,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
 
   }
 
-  public void warning(SAXParseException exception) throws SAXException
+  @Override
+public void warning(SAXParseException exception) throws SAXException
   {
     if(null!=clientErrorHandler)
       clientErrorHandler.error(exception);
@@ -600,7 +626,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
    * @throws SAXException is parse thread is already in progress
    * or parsing can not be started.
    * */
-  public void startParse(InputSource source) throws SAXException
+  @Override
+public void startParse(InputSource source) throws SAXException
   {
     if(fNoMoreEvents)
       throw new SAXException(XMLMessages.createXMLMessage(XMLErrorResources.ER_INCRSAXSRCFILTER_NOT_RESTARTABLE, null)); //"IncrmentalSAXSource_Filter not currently restartable.");
@@ -616,7 +643,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
 
   /* Thread logic to support startParseThread()
    */
-  public void run()
+  @Override
+public void run()
   {
     // Guard against direct invocation of start().
     if(fXMLReader==null) return;
@@ -705,7 +733,8 @@ implements IncrementalSAXSource, ContentHandler, DTDHandler, LexicalHandler, Err
    * applications, exception will be simply be treated as "not TRUE" in
    * any case.
    * */
-  public Object deliverMoreNodes(boolean parsemore)
+  @Override
+public Object deliverMoreNodes(boolean parsemore)
   {
     // If parsing is already done, we can immediately say so
     if(fNoMoreEvents)

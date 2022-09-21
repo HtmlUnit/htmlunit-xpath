@@ -34,27 +34,39 @@ public final class EmptyIterator implements DTMAxisIterator
 
   private EmptyIterator(){}
 
-  public final  int  next(){ return END; }
+  @Override
+public final  int  next(){ return END; }
 
-  public final DTMAxisIterator reset(){ return this; }
+  @Override
+public final DTMAxisIterator reset(){ return this; }
 
-  public final int getLast(){ return 0; }
+  @Override
+public final int getLast(){ return 0; }
 
-  public final int getPosition(){ return 1; }
+  @Override
+public final int getPosition(){ return 1; }
 
-  public final void setMark(){}
+  @Override
+public final void setMark(){}
 
-  public final void gotoMark(){}
+  @Override
+public final void gotoMark(){}
 
-  public final DTMAxisIterator setStartNode(int node){ return this; }
+  @Override
+public final DTMAxisIterator setStartNode(int node){ return this; }
 
-  public final int getStartNode(){ return END; }
+  @Override
+public final int getStartNode(){ return END; }
 
-  public final boolean isReverse(){return false;}
+  @Override
+public final boolean isReverse(){return false;}
 
-  public final DTMAxisIterator cloneIterator(){ return this; }
+  @Override
+public final DTMAxisIterator cloneIterator(){ return this; }
 
-  public final void setRestartable(boolean isRestartable) {}
+  @Override
+public final void setRestartable(boolean isRestartable) {}
 
-  public final int getNodeByPosition(int position){ return END; }
+  @Override
+public final int getNodeByPosition(int position){ return END; }
 }

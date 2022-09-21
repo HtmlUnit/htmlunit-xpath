@@ -866,7 +866,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param featureId A feature URL.
    * @param state true if this feature should be on, false otherwise.
    */
-  public void setFeature(String featureId, boolean state){}
+  @Override
+public void setFeature(String featureId, boolean state){}
 
   // ========= Document Navigation Functions =========
 
@@ -882,7 +883,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param nodeHandle int Handle of the node.
    * @return int true if the given node has child nodes.
    */
-  public boolean hasChildNodes(int nodeHandle)
+  @Override
+public boolean hasChildNodes(int nodeHandle)
   {
 
     int identity = makeNodeIdentity(nodeHandle);
@@ -972,7 +974,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param nodeHandle int Handle of the node.
    * @return int DTM node-number of first child, or DTM.NULL to indicate none exists.
    */
-  public int getFirstChild(int nodeHandle)
+  @Override
+public int getFirstChild(int nodeHandle)
   {
 
     int identity = makeNodeIdentity(nodeHandle);
@@ -1025,7 +1028,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return int Node-number of last child,
    * or DTM.NULL to indicate none exists.
    */
-  public int getLastChild(int nodeHandle)
+  @Override
+public int getLastChild(int nodeHandle)
   {
 
     int identity = makeNodeIdentity(nodeHandle);
@@ -1053,7 +1057,8 @@ public abstract class DTMDefaultBase implements DTM
    *   <code>nodeName</code>) or <code>DTM.NULL</code> if there is no such
    *   attribute.
    */
-  public abstract int getAttributeNode(int nodeHandle, String namespaceURI,
+  @Override
+public abstract int getAttributeNode(int nodeHandle, String namespaceURI,
                                        String name);
 
   /**
@@ -1062,7 +1067,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param nodeHandle int Handle of the node.
    * @return Handle of first attribute, or DTM.NULL to indicate none exists.
    */
-  public int getFirstAttribute(int nodeHandle)
+  @Override
+public int getFirstAttribute(int nodeHandle)
   {
     int nodeID = makeNodeIdentity(nodeHandle);
 
@@ -1141,7 +1147,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return int Node-number of next sibling,
    * or DTM.NULL to indicate none exists.
    */
-  public int getNextSibling(int nodeHandle)
+  @Override
+public int getNextSibling(int nodeHandle)
   {
     if (nodeHandle == DTM.NULL)
     return DTM.NULL;
@@ -1179,7 +1186,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return int Node-number of the previous sib,
    * or DTM.NULL to indicate none exists.
    */
-  public int getPreviousSibling(int nodeHandle)
+  @Override
+public int getPreviousSibling(int nodeHandle)
   {
     if (nodeHandle == DTM.NULL)
       return DTM.NULL;
@@ -1213,7 +1221,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return int DTM node-number of the resolved attr,
    * or DTM.NULL to indicate none exists.
    */
-  public int getNextAttribute(int nodeHandle) {
+  @Override
+public int getNextAttribute(int nodeHandle) {
     int nodeID = makeNodeIdentity(nodeHandle);
 
     if (_type(nodeID) == DTM.ATTRIBUTE_NODE) {
@@ -1459,7 +1468,8 @@ public abstract class DTMDefaultBase implements DTM
    *                   returned.
    * @return handle of first namespace, or DTM.NULL to indicate none exists.
    */
-  public int getFirstNamespaceNode(int nodeHandle, boolean inScope)
+  @Override
+public int getFirstNamespaceNode(int nodeHandle, boolean inScope)
   {
         if(inScope)
         {
@@ -1511,7 +1521,8 @@ public abstract class DTMDefaultBase implements DTM
    * otherwise just process the nodes in the given element handle.
    * @return handle of next namespace, or DTM.NULL to indicate none exists.
    */
-  public int getNextNamespaceNode(int baseHandle, int nodeHandle,
+  @Override
+public int getNextNamespaceNode(int baseHandle, int nodeHandle,
                                   boolean inScope)
   {
         if(inScope)
@@ -1558,7 +1569,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return int Node-number of parent,
    * or DTM.NULL to indicate none exists.
    */
-  public int getParent(int nodeHandle)
+  @Override
+public int getParent(int nodeHandle)
   {
 
     int identity = makeNodeIdentity(nodeHandle);
@@ -1577,7 +1589,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    *  @return int Node handle of document, which should always be valid.
    */
-  public int getDocument()
+  @Override
+public int getDocument()
   {
     return m_dtmIdent.elementAt(0); // makeNodeHandle(0)
   }
@@ -1594,7 +1607,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param nodeHandle the id of the node.
    * @return int Node handle of owning document, or -1 if the node was a Docment
    */
-  public int getOwnerDocument(int nodeHandle)
+  @Override
+public int getOwnerDocument(int nodeHandle)
   {
 
     if (DTM.DOCUMENT_NODE == getNodeType(nodeHandle))
@@ -1611,7 +1625,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return int Node handle of owning document, or the nodeHandle if it is
    *             a Document.
    */
-  public int getDocumentRoot(int nodeHandle)
+  @Override
+public int getDocumentRoot(int nodeHandle)
   {
     return getManager().getDTM(nodeHandle).getDocument();
   }
@@ -1625,7 +1640,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @return A string object that represents the string-value of the given node.
    */
-  public abstract XMLString getStringValue(int nodeHandle);
+  @Override
+public abstract XMLString getStringValue(int nodeHandle);
 
   /**
    * Get number of character array chunks in
@@ -1639,7 +1655,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return number of character array chunks in
    *         the string-value of a node.
    */
-  public int getStringValueChunkCount(int nodeHandle)
+  @Override
+public int getStringValueChunkCount(int nodeHandle)
   {
 
     // %TBD%
@@ -1661,7 +1678,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @return The character array reference where the chunk occurs.
    */
-  public char[] getStringValueChunk(int nodeHandle, int chunkIndex,
+  @Override
+public char[] getStringValueChunk(int nodeHandle, int chunkIndex,
                                     int[] startAndLen)
   {
 
@@ -1678,7 +1696,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @return the expanded-name id of the node.
    */
-  public int getExpandedTypeID(int nodeHandle)
+  @Override
+public int getExpandedTypeID(int nodeHandle)
   {
     // %REVIEW% This _should_ only be null if someone asked the wrong DTM about the node...
     // which one would hope would never happen...
@@ -1704,7 +1723,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @return the expanded-name id of the node.
    */
-  public int getExpandedTypeID(String namespace, String localName, int type)
+  @Override
+public int getExpandedTypeID(String namespace, String localName, int type)
   {
 
     ExpandedNameTable ent = m_expandedNameTable;
@@ -1718,7 +1738,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param expandedNameID an ID that represents an expanded-name.
    * @return String Local name of this node.
    */
-  public String getLocalNameFromExpandedNameID(int expandedNameID)
+  @Override
+public String getLocalNameFromExpandedNameID(int expandedNameID)
   {
     return m_expandedNameTable.getLocalName(expandedNameID);
   }
@@ -1730,7 +1751,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return String URI value of this node's namespace, or null if no
    * namespace was resolved.
    */
-  public String getNamespaceFromExpandedNameID(int expandedNameID)
+  @Override
+public String getNamespaceFromExpandedNameID(int expandedNameID)
   {
     return m_expandedNameTable.getNamespace(expandedNameID);
   }
@@ -1758,7 +1780,8 @@ public abstract class DTMDefaultBase implements DTM
    * %REVIEW% Document when empty string is possible...
    * %REVIEW-COMMENT% It should never be empty, should it?
    */
-  public abstract String getNodeName(int nodeHandle);
+  @Override
+public abstract String getNodeName(int nodeHandle);
 
   /**
    * Given a node handle, return the XPath node name.  This should be
@@ -1768,7 +1791,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param nodeHandle the id of the node.
    * @return String Name of this node, which may be an empty string.
    */
-  public String getNodeNameX(int nodeHandle)
+  @Override
+public String getNodeNameX(int nodeHandle)
   {
 
     /** @todo: implement this org.apache.xml.dtm.DTMDefaultBase abstract method */
@@ -1785,7 +1809,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param nodeHandle the id of the node.
    * @return String Local name of this node.
    */
-  public abstract String getLocalName(int nodeHandle);
+  @Override
+public abstract String getLocalName(int nodeHandle);
 
   /**
    * Given a namespace handle, return the prefix that the namespace decl is
@@ -1799,7 +1824,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return String prefix of this node's name, or "" if no explicit
    * namespace prefix was given.
    */
-  public abstract String getPrefix(int nodeHandle);
+  @Override
+public abstract String getPrefix(int nodeHandle);
 
   /**
    * Given a node handle, return its DOM-style namespace URI
@@ -1812,7 +1838,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return String URI value of this node's namespace, or null if no
    * namespace was resolved.
    */
-  public abstract String getNamespaceURI(int nodeHandle);
+  @Override
+public abstract String getNamespaceURI(int nodeHandle);
 
   /**
    * Given a node handle, return its node value. This is mostly
@@ -1823,7 +1850,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return String Value of this node, or null if not
    * meaningful for this node type.
    */
-  public abstract String getNodeValue(int nodeHandle);
+  @Override
+public abstract String getNodeValue(int nodeHandle);
 
   /**
    * Given a node handle, return its DOM-style node type.
@@ -1834,7 +1862,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param nodeHandle The node id.
    * @return int Node type, as per the DOM's Node._NODE constants.
    */
-  public short getNodeType(int nodeHandle)
+  @Override
+public short getNodeType(int nodeHandle)
   {
     if (nodeHandle == DTM.NULL)
     return DTM.NULL;
@@ -1849,7 +1878,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return the number of ancestors, plus one
    * @xsl.usage internal
    */
-  public short getLevel(int nodeHandle)
+  @Override
+public short getLevel(int nodeHandle)
   {
     // Apparently, the axis walker stuff requires levels to count from 1.
     int identity = makeNodeIdentity(nodeHandle);
@@ -1904,7 +1934,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return Returns <code>true</code> if the specified feature is
    *   supported on this node, <code>false</code> otherwise.
    */
-  public boolean isSupported(String feature, String version)
+  @Override
+public boolean isSupported(String feature, String version)
   {
 
     // %TBD%
@@ -1918,7 +1949,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @return the document base URI String object or null if unknown.
    */
-  public String getDocumentBaseURI()
+  @Override
+public String getDocumentBaseURI()
   {
     return m_documentBaseURI;
   }
@@ -1928,7 +1960,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @param baseURI the document base URI String object or null if unknown.
    */
-  public void setDocumentBaseURI(String baseURI)
+  @Override
+public void setDocumentBaseURI(String baseURI)
   {
     m_documentBaseURI = baseURI;
   }
@@ -1940,7 +1973,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param nodeHandle The node id, which can be any valid node handle.
    * @return the system identifier String object or null if unknown.
    */
-  public String getDocumentSystemIdentifier(int nodeHandle)
+  @Override
+public String getDocumentSystemIdentifier(int nodeHandle)
   {
 
     // %REVIEW%  OK? -sb
@@ -1955,7 +1989,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return the document encoding String object.
    * @xsl.usage internal
    */
-  public String getDocumentEncoding(int nodeHandle)
+  @Override
+public String getDocumentEncoding(int nodeHandle)
   {
 
     // %REVIEW%  OK??  -sb
@@ -1972,7 +2007,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param nodeHandle The node id, which can be any valid node handle.
    * @return the document standalone String object, either "yes", "no", or null.
    */
-  public String getDocumentStandalone(int nodeHandle)
+  @Override
+public String getDocumentStandalone(int nodeHandle)
   {
     return null;
   }
@@ -1987,7 +2023,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @return the document version String object.
    */
-  public String getDocumentVersion(int documentHandle)
+  @Override
+public String getDocumentVersion(int documentHandle)
   {
     return null;
   }
@@ -2002,7 +2039,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return <code>true</code> if all declarations were processed;
    *         <code>false</code> otherwise.
    */
-  public boolean getDocumentAllDeclarationsProcessed()
+  @Override
+public boolean getDocumentAllDeclarationsProcessed()
   {
 
     // %REVIEW% OK?
@@ -2017,7 +2055,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @return the system identifier String object, or null if there is none.
    */
-  public abstract String getDocumentTypeDeclarationSystemIdentifier();
+  @Override
+public abstract String getDocumentTypeDeclarationSystemIdentifier();
 
   /**
    * Return the public identifier of the external subset,
@@ -2027,7 +2066,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @return the public identifier String object, or null if there is none.
    */
-  public abstract String getDocumentTypeDeclarationPublicIdentifier();
+  @Override
+public abstract String getDocumentTypeDeclarationPublicIdentifier();
 
   /**
    * Returns the <code>Element</code> whose <code>ID</code> is given by
@@ -2046,7 +2086,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param elementId The unique <code>id</code> value for an element.
    * @return The handle of the matching element.
    */
-  public abstract int getElementById(String elementId);
+  @Override
+public abstract int getElementById(String elementId);
 
   /**
    * The getUnparsedEntityURI function returns the URI of the unparsed
@@ -2082,7 +2123,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return String containing the URI of the Unparsed Entity, or an
    * empty string if no such entity exists.
    */
-  public abstract String getUnparsedEntityURI(String name);
+  @Override
+public abstract String getUnparsedEntityURI(String name);
 
   // ============== Boolean methods ================
 
@@ -2092,7 +2134,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @return true if this DTM supports prestripping.
    */
-  public boolean supportsPreStripping()
+  @Override
+public boolean supportsPreStripping()
   {
     return true;
   }
@@ -2113,7 +2156,8 @@ public abstract class DTMDefaultBase implements DTM
    * You can think of this as
    * <code>(node1.documentOrderPosition &lt;= node2.documentOrderPosition)</code>.
    */
-  public boolean isNodeAfter(int nodeHandle1, int nodeHandle2)
+  @Override
+public boolean isNodeAfter(int nodeHandle1, int nodeHandle2)
   {
     // These return NULL if the node doesn't belong to this document.
     int index1 = makeNodeIdentity(nodeHandle1);
@@ -2138,7 +2182,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return <code>true</code> if the character data is whitespace;
    *         <code>false</code> otherwise.
    */
-  public boolean isCharacterElementContentWhitespace(int nodeHandle)
+  @Override
+public boolean isCharacterElementContentWhitespace(int nodeHandle)
   {
 
     // %TBD%
@@ -2157,7 +2202,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return <code>true</code> if all declarations were processed;
    *         <code>false</code> otherwise.
    */
-  public boolean isDocumentAllDeclarationsProcessed(int documentHandle)
+  @Override
+public boolean isDocumentAllDeclarationsProcessed(int documentHandle)
   {
     return true;
   }
@@ -2172,7 +2218,8 @@ public abstract class DTMDefaultBase implements DTM
    * @return <code>true</code> if the attribute was specified;
    *         <code>false</code> if it was defaulted.
    */
-  public abstract boolean isAttributeSpecified(int attributeHandle);
+  @Override
+public abstract boolean isAttributeSpecified(int attributeHandle);
 
   // ========== Direct SAX Dispatch, for optimization purposes ========
 
@@ -2193,7 +2240,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @throws org.xml.sax.SAXException
    */
-  public abstract void dispatchCharactersEvents(
+  @Override
+public abstract void dispatchCharactersEvents(
     int nodeHandle, org.xml.sax.ContentHandler ch, boolean normalize)
       throws org.xml.sax.SAXException;
 
@@ -2205,7 +2253,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @throws org.xml.sax.SAXException
    */
-  public abstract void dispatchToEvents(
+  @Override
+public abstract void dispatchToEvents(
     int nodeHandle, org.xml.sax.ContentHandler ch)
       throws org.xml.sax.SAXException;
 
@@ -2216,7 +2265,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @return A node representation of the DTM node.
    */
-  public org.w3c.dom.Node getNode(int nodeHandle)
+  @Override
+public org.w3c.dom.Node getNode(int nodeHandle)
   {
     return new DTMNodeProxy(this, nodeHandle);
   }
@@ -2235,7 +2285,8 @@ public abstract class DTMDefaultBase implements DTM
    * @param cloneDepth if the clone argument is true, specifies that the
    *                   clone should include all it's children.
    */
-  public void appendChild(int newChild, boolean clone, boolean cloneDepth)
+  @Override
+public void appendChild(int newChild, boolean clone, boolean cloneDepth)
   {
     error(XMLMessages.createXMLMessage(XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null));//"appendChild not yet supported!");
   }
@@ -2249,7 +2300,8 @@ public abstract class DTMDefaultBase implements DTM
    *
    * @param str Non-null reverence to a string.
    */
-  public void appendTextChild(String str)
+  @Override
+public void appendTextChild(String str)
   {
     error(XMLMessages.createXMLMessage(XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null));//"appendTextChild not yet supported!");
   }
@@ -2322,7 +2374,8 @@ public abstract class DTMDefaultBase implements DTM
    * implememtation that extends the default base requires notification
    * of registration, they can override this method.
    */
-   public void documentRegistration()
+   @Override
+public void documentRegistration()
    {
    }
 
@@ -2331,7 +2384,8 @@ public abstract class DTMDefaultBase implements DTM
    * implememtation that extends the default base requires notification
    * when the document is being released, they can override this method
    */
-   public void documentRelease()
+   @Override
+public void documentRelease()
    {
    }
 
@@ -2342,7 +2396,8 @@ public abstract class DTMDefaultBase implements DTM
     * This is used to support DTM sharing between multiple transformations.
     * @param mgr the DTMManager
     */
-   public void migrateTo(DTMManager mgr)
+   @Override
+public void migrateTo(DTMManager mgr)
    {
      m_mgr = mgr;
      if(mgr instanceof DTMManagerDefault)

@@ -55,7 +55,8 @@ public class XBooleanStatic extends XBoolean
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean equals(XObject obj2)
+  @Override
+public boolean equals(XObject obj2)
   {
     try
     {

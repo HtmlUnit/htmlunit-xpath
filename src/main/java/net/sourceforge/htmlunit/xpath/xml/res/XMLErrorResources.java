@@ -156,7 +156,8 @@ public class XMLErrorResources extends ListResourceBundle
    *
    * @return The association list.
    */
-  public Object[][] getContents()
+  @Override
+public Object[][] getContents()
   {
     return new Object[][] {
 

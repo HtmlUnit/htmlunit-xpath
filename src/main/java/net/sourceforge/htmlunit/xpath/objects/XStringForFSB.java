@@ -95,7 +95,8 @@ public class XStringForFSB extends XString
    *
    * @return The string this wraps or the empty string if null
    */
-  public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb)
+  @Override
+public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb)
   {
     // %OPT% !!! FSB has to be updated to take partial fsb's for append.
     fsb.append(str());
@@ -106,7 +107,8 @@ public class XStringForFSB extends XString
    *
    * @return true if this XMLString can return a string without creating one.
    */
-  public boolean hasString()
+  @Override
+public boolean hasString()
   {
     return null != m_strCache;
   }
@@ -123,7 +125,8 @@ public class XStringForFSB extends XString
    *
    * @return The java String representation of this object.
    */
-  public Object object()
+  @Override
+public Object object()
   {
     return str();
   }
@@ -133,7 +136,8 @@ public class XStringForFSB extends XString
    *
    * @return The string this wraps or the empty string if null
    */
-  public String str()
+  @Override
+public String str()
   {
 
     if (null == m_strCache)
@@ -178,7 +182,8 @@ public class XStringForFSB extends XString
    *
    * @throws org.xml.sax.SAXException
    */
-  public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
+  @Override
+public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
           throws org.xml.sax.SAXException
   {
     fsb().sendSAXcharacters(ch, m_start, m_length);
@@ -193,7 +198,8 @@ public class XStringForFSB extends XString
    *
    * @throws org.xml.sax.SAXException
    */
-  public void dispatchAsComment(org.xml.sax.ext.LexicalHandler lh)
+  @Override
+public void dispatchAsComment(org.xml.sax.ext.LexicalHandler lh)
           throws org.xml.sax.SAXException
   {
     fsb().sendSAXComment(lh, m_start, m_length);
@@ -205,7 +211,8 @@ public class XStringForFSB extends XString
    * @return  the length of the sequence of characters represented by this
    *          object.
    */
-  public int length()
+  @Override
+public int length()
   {
     return m_length;
   }
@@ -223,7 +230,8 @@ public class XStringForFSB extends XString
    *             argument is negative or not less than the length of this
    *             string.
    */
-  public char charAt(int index)
+  @Override
+public char charAt(int index)
   {
     return fsb().charAt(m_start + index);
   }
@@ -249,7 +257,8 @@ public class XStringForFSB extends XString
    *                <code>dst.length</code></ul>
    * @exception NullPointerException if <code>dst</code> is <code>null</code>
    */
-  public void getChars(int srcBegin, int srcEnd, char dst[], int dstBegin)
+  @Override
+public void getChars(int srcBegin, int srcEnd, char dst[], int dstBegin)
   {
 
     // %OPT% Need to call this on FSB when it is implemented.
@@ -286,7 +295,8 @@ public class XStringForFSB extends XString
    * @see     java.lang.String#compareTo(java.lang.String)
    * @see     java.lang.String#equalsIgnoreCase(java.lang.String)
    */
-  public boolean equals(XMLString obj2)
+  @Override
+public boolean equals(XMLString obj2)
   {
 
     if (this == obj2)
@@ -328,7 +338,8 @@ public class XStringForFSB extends XString
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean equals(XObject obj2)
+  @Override
+public boolean equals(XObject obj2)
   {
 
     if (this == obj2)
@@ -373,7 +384,8 @@ public class XStringForFSB extends XString
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean equals(String anotherString)
+  @Override
+public boolean equals(String anotherString)
   {
 
     int n = m_length;
@@ -415,7 +427,8 @@ public class XStringForFSB extends XString
    * @see     java.lang.String#compareTo(java.lang.String)
    * @see     java.lang.String#equalsIgnoreCase(java.lang.String)
    */
-  public boolean equals(Object obj2)
+  @Override
+public boolean equals(Object obj2)
   {
 
     if (null == obj2)
@@ -450,7 +463,8 @@ public class XStringForFSB extends XString
    * @see     java.lang.Character#toLowerCase(char)
    * @see java.lang.Character#toUpperCase(char)
    */
-  public boolean equalsIgnoreCase(String anotherString)
+  @Override
+public boolean equalsIgnoreCase(String anotherString)
   {
     return (m_length == anotherString.length())
            ? str().equalsIgnoreCase(anotherString) : false;
@@ -469,7 +483,8 @@ public class XStringForFSB extends XString
    * @exception java.lang.NullPointerException if <code>anotherString</code>
    *          is <code>null</code>.
    */
-  public int compareTo(XMLString xstr)
+  @Override
+public int compareTo(XMLString xstr)
   {
 
     int len1 = m_length;
@@ -515,7 +530,8 @@ public class XStringForFSB extends XString
    * @see     java.text.Collator#compare(String, String)
    * @since   1.2
    */
-  public int compareToIgnoreCase(XMLString xstr)
+  @Override
+public int compareToIgnoreCase(XMLString xstr)
   {
 
     int len1 = m_length;
@@ -555,7 +571,8 @@ public class XStringForFSB extends XString
    *
    * @return  a hash code value for this object.
    */
-  public int hashCode()
+  @Override
+public int hashCode()
   {
     // Commenting this out because in JDK1.1.8 and VJ++
     // we don't match XMLStrings. Defaulting to the super
@@ -605,7 +622,8 @@ public class XStringForFSB extends XString
    * @exception java.lang.NullPointerException if <code>prefix</code> is
    *          <code>null</code>.
    */
-  public boolean startsWith(XMLString prefix, int toffset)
+  @Override
+public boolean startsWith(XMLString prefix, int toffset)
   {
 
     FastStringBuffer fsb = fsb();
@@ -649,7 +667,8 @@ public class XStringForFSB extends XString
    *          <code>null</code>.
    * @since   JDK1. 0
    */
-  public boolean startsWith(XMLString prefix)
+  @Override
+public boolean startsWith(XMLString prefix)
   {
     return startsWith(prefix, 0);
   }
@@ -671,7 +690,8 @@ public class XStringForFSB extends XString
    *          character sequence represented by this object, or
    *          <code>-1</code> if the character does not occur.
    */
-  public int indexOf(int ch)
+  @Override
+public int indexOf(int ch)
   {
     return indexOf(ch, 0);
   }
@@ -704,7 +724,8 @@ public class XStringForFSB extends XString
    *          than or equal to <code>fromIndex</code>, or <code>-1</code>
    *          if the character does not occur.
    */
-  public int indexOf(int ch, int fromIndex)
+  @Override
+public int indexOf(int ch, int fromIndex)
   {
 
     int max = m_start + m_length;
@@ -749,7 +770,8 @@ public class XStringForFSB extends XString
    *             <code>beginIndex</code> is negative or larger than the
    *             length of this <code>String</code> object.
    */
-  public XMLString substring(int beginIndex)
+  @Override
+public XMLString substring(int beginIndex)
   {
 
     int len = m_length - beginIndex;
@@ -780,7 +802,8 @@ public class XStringForFSB extends XString
    *             <code>beginIndex</code> is larger than
    *             <code>endIndex</code>.
    */
-  public XMLString substring(int beginIndex, int endIndex)
+  @Override
+public XMLString substring(int beginIndex, int endIndex)
   {
 
     int len = endIndex - beginIndex;
@@ -808,7 +831,8 @@ public class XStringForFSB extends XString
    * @exception java.lang.NullPointerException if <code>str</code> is
    *          <code>null</code>.
    */
-  public XMLString concat(String str)
+  @Override
+public XMLString concat(String str)
   {
 
     // %OPT% Make an FSB here?
@@ -820,7 +844,8 @@ public class XStringForFSB extends XString
    *
    * @return  this string, with white space removed from the front and end.
    */
-  public XMLString trim()
+  @Override
+public XMLString trim()
   {
     return fixWhiteSpace(true, true, false);
   }
@@ -851,7 +876,8 @@ public class XStringForFSB extends XString
    * @param   doublePunctuationSpaces    Use double spaces for punctuation?
    * @return              The trimmed string.
    */
-  public XMLString fixWhiteSpace(boolean trimHead, boolean trimTail,
+  @Override
+public XMLString fixWhiteSpace(boolean trimHead, boolean trimTail,
                                  boolean doublePunctuationSpaces)
   {
 
@@ -944,7 +970,8 @@ public class XStringForFSB extends XString
    *
    * @return A double value representation of the string, or return Double.NaN
    * if the string can not be converted.  */
-  public double toDouble()
+  @Override
+public double toDouble()
   {
     if(m_length == 0)
       return Double.NaN;

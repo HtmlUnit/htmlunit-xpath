@@ -53,7 +53,8 @@ public class XMLStringFactoryImpl extends XMLStringFactory
    *
    * @return An XMLString object that wraps the String reference.
    */
-  public XMLString newstr(String string)
+  @Override
+public XMLString newstr(String string)
   {
     return new XString(string);
   }
@@ -68,7 +69,8 @@ public class XMLStringFactoryImpl extends XMLStringFactory
    *
    * @return An XMLString object that wraps the FastStringBuffer reference.
    */
-  public XMLString newstr(FastStringBuffer fsb, int start, int length)
+  @Override
+public XMLString newstr(FastStringBuffer fsb, int start, int length)
   {
     return new XStringForFSB(fsb, start, length);
   }
@@ -83,7 +85,8 @@ public class XMLStringFactoryImpl extends XMLStringFactory
    *
    * @return An XMLString object that wraps the FastStringBuffer reference.
    */
-  public XMLString newstr(char[] string, int start, int length)
+  @Override
+public XMLString newstr(char[] string, int start, int length)
   {
     return new XStringForChars(string, start, length);
   }
@@ -93,7 +96,8 @@ public class XMLStringFactoryImpl extends XMLStringFactory
    * 
    * @return An non-null reference to an XMLString that represents "".
    */
-  public XMLString emptystr()
+  @Override
+public XMLString emptystr()
   {
     return XString.EMPTYSTRING;
   }

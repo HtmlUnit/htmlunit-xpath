@@ -57,7 +57,8 @@ public class ContextMatchStepPattern extends StepPattern
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt)
+  @Override
+public XObject execute(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
 

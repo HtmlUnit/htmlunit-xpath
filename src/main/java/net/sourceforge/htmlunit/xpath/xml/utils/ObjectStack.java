@@ -206,7 +206,8 @@ public class ObjectStack extends ObjectVector
    * 
    * @return clone of current ObjectStack
    */
-  public Object clone()
+  @Override
+public Object clone()
     throws CloneNotSupportedException
   {
     return (ObjectStack) super.clone();

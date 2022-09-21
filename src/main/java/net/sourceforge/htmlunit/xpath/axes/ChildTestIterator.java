@@ -76,7 +76,8 @@ public class ChildTestIterator extends BasicTestIterator
    * Get the next node via getNextXXX.  Bottlenecked for derived class override.
    * @return The next node on the axis, or DTM.NULL.
    */
-  protected int getNextNode()
+  @Override
+protected int getNextNode()
   {                     
     if(true /* 0 == m_extendedTypeID */)
     {
@@ -104,7 +105,8 @@ public class ChildTestIterator extends BasicTestIterator
    * 
    *  @throws CloneNotSupportedException
    */
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException
+  @Override
+public DTMIterator cloneWithReset() throws CloneNotSupportedException
   {
 
     ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();
@@ -121,7 +123,8 @@ public class ChildTestIterator extends BasicTestIterator
    * @param context The XPath runtime context for this
    * transformation.
    */
-  public void setRoot(int context, Object environment)
+  @Override
+public void setRoot(int context, Object environment)
   {
     super.setRoot(context, environment);
     m_traverser = m_cdtm.getAxisTraverser(Axis.CHILD);
@@ -152,7 +155,8 @@ public class ChildTestIterator extends BasicTestIterator
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple 
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     return net.sourceforge.htmlunit.xpath.xml.dtm.Axis.CHILD;
   }
@@ -164,7 +168,8 @@ public class ChildTestIterator extends BasicTestIterator
    * <code>nextNode</code> or<code>previousNode</code> will raise the
    * exception INVALID_STATE_ERR.
    */
-  public void detach()
+  @Override
+public void detach()
   {   
     if(m_allowDetach)
     {

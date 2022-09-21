@@ -91,7 +91,8 @@ public class UnionChildIterator extends ChildTestIterator
    * in the stack frame (but variables above the globalsTop value will need 
    * to be offset to the current stack frame).
    */
-  public void fixupVariables(java.util.Vector vars, int globalsSize)
+  @Override
+public void fixupVariables(java.util.Vector vars, int globalsSize)
   {
     super.fixupVariables(vars, globalsSize);
     if (m_nodeTests != null) {
@@ -110,7 +111,8 @@ public class UnionChildIterator extends ChildTestIterator
    * @return  a constant to determine whether the node is accepted,
    *   rejected, or skipped, as defined  above .
    */
-  public short acceptNode(int n)
+  @Override
+public short acceptNode(int n)
   {
     XPathContext xctxt = getXPathContext();
     try

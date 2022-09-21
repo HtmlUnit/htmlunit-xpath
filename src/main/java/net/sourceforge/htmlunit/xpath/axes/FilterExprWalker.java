@@ -59,7 +59,8 @@ public class FilterExprWalker extends AxesWalker
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public void init(Compiler compiler, int opPos, int stepType)
+  @Override
+public void init(Compiler compiler, int opPos, int stepType)
           throws javax.xml.transform.TransformerException
   {
 
@@ -107,7 +108,8 @@ public class FilterExprWalker extends AxesWalker
    * any computational resources and placing the iterator in the INVALID
    * state.
    */
-  public void detach()
+  @Override
+public void detach()
   {
     super.detach();
     if (m_canDetachNodeset)
@@ -123,7 +125,8 @@ public class FilterExprWalker extends AxesWalker
    * @param root non-null reference to the root, or starting point of
    *        the query.
    */
-  public void setRoot(int root)
+  @Override
+public void setRoot(int root)
   {
 
     super.setRoot(root);
@@ -141,7 +144,8 @@ public class FilterExprWalker extends AxesWalker
    *
    * @throws CloneNotSupportedException
    */
-  public Object clone() throws CloneNotSupportedException
+  @Override
+public Object clone() throws CloneNotSupportedException
   {
 
     FilterExprWalker clone = (FilterExprWalker) super.clone();
@@ -159,7 +163,8 @@ public class FilterExprWalker extends AxesWalker
    * @return  a constant to determine whether the node is accepted,
    *   rejected, or skipped, as defined  above .
    */
-  public short acceptNode(int n)
+  @Override
+public short acceptNode(int n)
   {
 
     try
@@ -189,7 +194,8 @@ public class FilterExprWalker extends AxesWalker
    * @return  The new node, or <code>null</code> if the current node has no
    *   next node  in the TreeWalker's logical view.
    */
-  public int getNextNode()
+  @Override
+public int getNextNode()
   {
 
     if (null != m_exprObj)
@@ -209,7 +215,8 @@ public class FilterExprWalker extends AxesWalker
    *
    * @return the index of the last node that can be itterated to.
    */
-  public int getLastPos(XPathContext xctxt)
+  @Override
+public int getLastPos(XPathContext xctxt)
   {
     return m_exprObj.getLength();
   }
@@ -246,7 +253,8 @@ public class FilterExprWalker extends AxesWalker
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
-  public int getAnalysisBits()
+  @Override
+public int getAnalysisBits()
   {
       if (null != m_expr && m_expr instanceof PathComponent)
       {
@@ -262,7 +270,8 @@ public class FilterExprWalker extends AxesWalker
    *
    * @return true as a default.
    */
-  public boolean isDocOrdered()
+  @Override
+public boolean isDocOrdered()
   {
     return m_exprObj.isDocOrdered();
   }
@@ -273,7 +282,8 @@ public class FilterExprWalker extends AxesWalker
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     return m_exprObj.getAxis();
   }
@@ -283,6 +293,7 @@ public class FilterExprWalker extends AxesWalker
       /**
      * @see ExpressionOwner#getExpression()
      */
+    @Override
     public Expression getExpression()
     {
       return m_expr;
@@ -291,6 +302,7 @@ public class FilterExprWalker extends AxesWalker
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
       exp.exprSetParent(FilterExprWalker.this);
@@ -305,7 +317,8 @@ public class FilterExprWalker extends AxesWalker
    *
    * @param visitor The visitor whose appropriate method will be called.
    */
-  public void callPredicateVisitors(XPathVisitor visitor)
+  @Override
+public void callPredicateVisitors(XPathVisitor visitor)
   {
     m_expr.callVisitors(new filterExprOwner(), visitor);
 
@@ -316,6 +329,7 @@ public class FilterExprWalker extends AxesWalker
     /**
      * @see Expression#deepEquals(Expression)
      */
+    @Override
     public boolean deepEquals(Expression expr)
     {
       if (!super.deepEquals(expr))

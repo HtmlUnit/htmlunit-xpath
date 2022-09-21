@@ -213,7 +213,8 @@ public class NodeSetDTM extends NodeVector
    * @return The root node of the Iterator, as specified when it was created.
    * For non-Iterator NodeSetDTMs, this will be null.
    */
-  public int getRoot()
+  @Override
+public int getRoot()
   {
     if(DTM.NULL == m_root)
     {
@@ -233,7 +234,8 @@ public class NodeSetDTM extends NodeVector
    * @param context The XPath runtime context for this
    * transformation.
    */
-  public void setRoot(int context, Object environment)
+  @Override
+public void setRoot(int context, Object environment)
   {
     // no-op, I guess...  (-sb)
   }
@@ -250,7 +252,8 @@ public class NodeSetDTM extends NodeVector
    * @throws CloneNotSupportedException if this subclass of NodeSetDTM
    * does not support the clone() operation.
    */
-  public Object clone() throws CloneNotSupportedException
+  @Override
+public Object clone() throws CloneNotSupportedException
   {
 
     NodeSetDTM clone = (NodeSetDTM) super.clone();
@@ -268,7 +271,8 @@ public class NodeSetDTM extends NodeVector
    * @throws CloneNotSupportedException if this subclass of NodeSetDTM
    * does not support the clone() operation.
    */
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException
+  @Override
+public DTMIterator cloneWithReset() throws CloneNotSupportedException
   {
 
     NodeSetDTM clone = (NodeSetDTM) clone();
@@ -281,7 +285,8 @@ public class NodeSetDTM extends NodeVector
   /**
    * Reset the iterator. May have no effect on non-iterator Nodesets.
    */
-  public void reset()
+  @Override
+public void reset()
   {
     m_next = 0;
   }
@@ -298,7 +303,8 @@ public class NodeSetDTM extends NodeVector
    * <code>SHOW_ALL & ~SHOW_ENTITY_REFERENCE</code>, meaning that
    * only entity references are suppressed.
    */
-  public int getWhatToShow()
+  @Override
+public int getWhatToShow()
   {
     return DTMFilter.SHOW_ALL & ~DTMFilter.SHOW_ENTITY_REFERENCE;
   }
@@ -337,7 +343,8 @@ public class NodeSetDTM extends NodeVector
    * contents of EntityRefrence nodes may be returned (though whatToShow
    * says that the EntityReferences themselves are not shown.)
    */
-  public boolean getExpandEntityReferences()
+  @Override
+public boolean getExpandEntityReferences()
   {
     return true;
   }
@@ -351,7 +358,8 @@ public class NodeSetDTM extends NodeVector
    *
    * @return a non-null DTM reference.
    */
-  public DTM getDTM(int nodeHandle)
+  @Override
+public DTM getDTM(int nodeHandle)
   {
 
     return m_manager.getDTM(nodeHandle);
@@ -367,7 +375,8 @@ public class NodeSetDTM extends NodeVector
    *
    * @return a non-null DTMManager reference.
    */
-  public DTMManager getDTMManager()
+  @Override
+public DTMManager getDTMManager()
   {
 
     return m_manager;
@@ -383,7 +392,8 @@ public class NodeSetDTM extends NodeVector
    *    INVALID_STATE_ERR: Raised if this method is called after the
    *   <code>detach</code> method was invoked.
    */
-  public int nextNode()
+  @Override
+public int nextNode()
   {
 
     if (m_next < this.size())
@@ -409,7 +419,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a cached type, and hence doesn't know what the previous node was.
    */
-  public int previousNode()
+  @Override
+public int previousNode()
   {
 
     if (!m_cacheNodes)
@@ -437,7 +448,8 @@ public class NodeSetDTM extends NodeVector
    * INVALID_STATE_ERR to be raised by later operations.
    * </p>
    */
-  public void detach(){}
+  @Override
+public void detach(){}
 
   /**
    * Specify if it's OK for detach to release the iterator for reuse.
@@ -445,7 +457,8 @@ public class NodeSetDTM extends NodeVector
    * @param allowRelease true if it is OK for detach to release this iterator
    * for pooling.
    */
-  public void allowDetachToRelease(boolean allowRelease)
+  @Override
+public void allowDetachToRelease(boolean allowRelease)
   {
     // no action for right now.
   }
@@ -459,7 +472,8 @@ public class NodeSetDTM extends NodeVector
    * @return true if nextNode() would return the first node in the set,
    * false if it would return a later one.
    */
-  public boolean isFresh()
+  @Override
+public boolean isFresh()
   {
     return m_next == 0;
   }
@@ -476,7 +490,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not
    * one of the types which supports indexing/counting.
    */
-  public void runTo(int index)
+  @Override
+public void runTo(int index)
   {
 
     if (!m_cacheNodes)
@@ -501,7 +516,8 @@ public class NodeSetDTM extends NodeVector
    *   <code>NodeList</code>, or <code>null</code> if that is not a valid
    *   index.
    */
-  public int item(int index)
+  @Override
+public int item(int index)
   {
 
     runTo(index);
@@ -517,7 +533,8 @@ public class NodeSetDTM extends NodeVector
    *
    * @return integer indicating how many nodes are represented by this list.
    */
-  public int getLength()
+  @Override
+public int getLength()
   {
 
     runTo(-1);
@@ -879,7 +896,8 @@ public class NodeSetDTM extends NodeVector
    *
    * @return The size of this node set.
    */
-  public int size()
+  @Override
+public int size()
   {
     return super.size();
   }
@@ -891,7 +909,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a mutable type.
    */
-  public void addElement(int value)
+  @Override
+public void addElement(int value)
   {
 
     if (!m_mutable)
@@ -911,7 +930,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a mutable type.
    */
-  public void insertElementAt(int value, int at)
+  @Override
+public void insertElementAt(int value, int at)
   {
 
     if (!m_mutable)
@@ -927,7 +947,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a mutable type.
    */
-  public void appendNodes(NodeVector nodes)
+  @Override
+public void appendNodes(NodeVector nodes)
   {
 
     if (!m_mutable)
@@ -944,7 +965,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a mutable type.
    */
-  public void removeAllElements()
+  @Override
+public void removeAllElements()
   {
 
     if (!m_mutable)
@@ -966,7 +988,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a mutable type.
    */
-  public boolean removeElement(int s)
+  @Override
+public boolean removeElement(int s)
   {
 
     if (!m_mutable)
@@ -985,7 +1008,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a mutable type.
    */
-  public void removeElementAt(int i)
+  @Override
+public void removeElementAt(int i)
   {
 
     if (!m_mutable)
@@ -1006,7 +1030,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a mutable type.
    */
-  public void setElementAt(int node, int index)
+  @Override
+public void setElementAt(int node, int index)
   {
 
     if (!m_mutable)
@@ -1023,7 +1048,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a mutable type.
    */
-  public void setItem(int node, int index)
+  @Override
+public void setItem(int node, int index)
   {
 
     if (!m_mutable)
@@ -1039,7 +1065,8 @@ public class NodeSetDTM extends NodeVector
    *
    * @return Node at specified index.
    */
-  public int elementAt(int i)
+  @Override
+public int elementAt(int i)
   {
 
     runTo(i);
@@ -1054,7 +1081,8 @@ public class NodeSetDTM extends NodeVector
    *
    * @return True if the given node was found.
    */
-  public boolean contains(int s)
+  @Override
+public boolean contains(int s)
   {
 
     runTo(-1);
@@ -1073,7 +1101,8 @@ public class NodeSetDTM extends NodeVector
    * argument in this vector at position index or later in the
    * vector; returns -1 if the object is not found.
    */
-  public int indexOf(int elem, int index)
+  @Override
+public int indexOf(int elem, int index)
   {
 
     runTo(-1);
@@ -1091,7 +1120,8 @@ public class NodeSetDTM extends NodeVector
    * argument in this vector at position index or later in the
    * vector; returns -1 if the object is not found.
    */
-  public int indexOf(int elem)
+  @Override
+public int indexOf(int elem)
   {
 
     runTo(-1);
@@ -1111,7 +1141,8 @@ public class NodeSetDTM extends NodeVector
    *
    * @return The the current position index.
    */
-  public int getCurrentPos()
+  @Override
+public int getCurrentPos()
   {
     return m_next;
   }
@@ -1122,7 +1153,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a cached type, and thus doesn't permit indexed access.
    */
-  public void setCurrentPos(int i)
+  @Override
+public void setCurrentPos(int i)
   {
 
     if (!m_cacheNodes)
@@ -1139,7 +1171,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of
    * a cached type, and thus doesn't permit indexed access.
    */
-  public int getCurrentNode()
+  @Override
+public int getCurrentNode()
   {
 
     if (!m_cacheNodes)
@@ -1188,7 +1221,8 @@ public class NodeSetDTM extends NodeVector
    * request caching after we've already begun stepping through the
    * nodes in this set.
   */
-  public void setShouldCacheNodes(boolean b)
+  @Override
+public void setShouldCacheNodes(boolean b)
   {
 
     if (!isFresh())
@@ -1205,7 +1239,8 @@ public class NodeSetDTM extends NodeVector
    *
    * @return True if the nodelist can be mutated.
    */
-  public boolean isMutable()
+  @Override
+public boolean isMutable()
   {
     return m_mutable;
   }
@@ -1228,7 +1263,8 @@ public class NodeSetDTM extends NodeVector
    *
    * @return true as a default.
    */
-  public boolean isDocOrdered()
+  @Override
+public boolean isDocOrdered()
   {
     return true;
   }
@@ -1239,7 +1275,8 @@ public class NodeSetDTM extends NodeVector
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     return -1;
   }

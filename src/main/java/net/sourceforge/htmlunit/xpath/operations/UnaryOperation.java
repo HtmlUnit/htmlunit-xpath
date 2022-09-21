@@ -43,7 +43,8 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
    *
    * @return true if traversal outside the context node's subtree can occur.
    */
-  public boolean canTraverseOutsideSubtree()
+  @Override
+public boolean canTraverseOutsideSubtree()
   {
 
     if (null != m_right && m_right.canTraverseOutsideSubtree())
@@ -76,7 +77,8 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
 
     return operate(m_right.execute(xctxt));
@@ -104,7 +106,8 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
     if(visitor.visitUnaryOperation(owner, this))
     {
@@ -116,7 +119,8 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
   /**
    * @see ExpressionOwner#getExpression()
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return m_right;
   }
@@ -124,7 +128,8 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
   /**
    * @see ExpressionOwner#setExpression(Expression)
    */
-  public void setExpression(Expression exp)
+  @Override
+public void setExpression(Expression exp)
   {
     exp.exprSetParent(this);
     m_right = exp;
@@ -133,7 +138,8 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!isSameClass(expr))
       return false;

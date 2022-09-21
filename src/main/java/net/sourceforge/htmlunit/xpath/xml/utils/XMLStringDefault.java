@@ -50,7 +50,8 @@ public class XMLStringDefault implements XMLString
    *
    * @throws org.xml.sax.SAXException
    */
-  public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
+  @Override
+public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
     throws org.xml.sax.SAXException
   {
   }
@@ -64,7 +65,8 @@ public class XMLStringDefault implements XMLString
    *
    * @throws org.xml.sax.SAXException
    */
-  public void dispatchAsComment(org.xml.sax.ext.LexicalHandler lh)
+  @Override
+public void dispatchAsComment(org.xml.sax.ext.LexicalHandler lh)
     throws org.xml.sax.SAXException
   {
   }
@@ -83,7 +85,8 @@ public class XMLStringDefault implements XMLString
    * @param   doublePunctuationSpaces    Use double spaces for punctuation?
    * @return              The trimmed string.
    */
-  public XMLString fixWhiteSpace(boolean trimHead,
+  @Override
+public XMLString fixWhiteSpace(boolean trimHead,
                                  boolean trimTail,
                                  boolean doublePunctuationSpaces)
   {
@@ -96,7 +99,8 @@ public class XMLStringDefault implements XMLString
    * @return  the length of the sequence of characters represented by this
    *          object.
    */
-  public int length()
+  @Override
+public int length()
   {
     return m_str.length();
   }
@@ -114,7 +118,8 @@ public class XMLStringDefault implements XMLString
    *             argument is negative or not less than the length of this
    *             string.
    */
-  public char charAt(int index)
+  @Override
+public char charAt(int index)
   {
     return m_str.charAt(index);
   }
@@ -140,7 +145,8 @@ public class XMLStringDefault implements XMLString
    *                <code>dst.length</code></ul>
    * @exception NullPointerException if <code>dst</code> is <code>null</code>
    */
-  public void getChars(int srcBegin, int srcEnd, char dst[],
+  @Override
+public void getChars(int srcBegin, int srcEnd, char dst[],
                                 int dstBegin)
   {
     int destIndex = dstBegin;
@@ -162,7 +168,8 @@ public class XMLStringDefault implements XMLString
    * @see     java.lang.String#compareTo(java.lang.String)
    * @see     java.lang.String#equalsIgnoreCase(java.lang.String)
    */
-  public boolean equals(String obj2) {
+  @Override
+public boolean equals(String obj2) {
       return m_str.equals(obj2);
   }
 
@@ -179,7 +186,8 @@ public class XMLStringDefault implements XMLString
    * @see     java.lang.String#compareTo(java.lang.String)
    * @see     java.lang.String#equalsIgnoreCase(java.lang.String)
    */
-  public boolean equals(XMLString anObject)
+  @Override
+public boolean equals(XMLString anObject)
   {
     return m_str.equals(anObject.toString());
   }
@@ -198,7 +206,8 @@ public class XMLStringDefault implements XMLString
    * @see     java.lang.String#compareTo(java.lang.String)
    * @see     java.lang.String#equalsIgnoreCase(java.lang.String)
    */
-  public boolean equals(Object anObject)
+  @Override
+public boolean equals(Object anObject)
   {
     return m_str.equals(anObject);
   }
@@ -218,7 +227,8 @@ public class XMLStringDefault implements XMLString
    * @see     java.lang.Character#toLowerCase(char)
    * @see java.lang.Character#toUpperCase(char)
    */
-  public boolean equalsIgnoreCase(String anotherString)
+  @Override
+public boolean equalsIgnoreCase(String anotherString)
   {
     return m_str.equalsIgnoreCase(anotherString);
   }
@@ -235,7 +245,8 @@ public class XMLStringDefault implements XMLString
    * @exception java.lang.NullPointerException if <code>anotherString</code>
    *          is <code>null</code>.
    */
-  public int compareTo(XMLString anotherString)
+  @Override
+public int compareTo(XMLString anotherString)
   {
     return m_str.compareTo(anotherString.toString());
   }
@@ -258,7 +269,8 @@ public class XMLStringDefault implements XMLString
    * @see     java.text.Collator#compare(String, String)
    * @since   1.2
    */
-  public int compareToIgnoreCase(XMLString str)
+  @Override
+public int compareToIgnoreCase(XMLString str)
   {
     return m_str.compareToIgnoreCase(str.toString());
   }
@@ -282,7 +294,8 @@ public class XMLStringDefault implements XMLString
    * @exception java.lang.NullPointerException if <code>prefix</code> is
    *          <code>null</code>.
    */
-  public boolean startsWith(String prefix, int toffset)
+  @Override
+public boolean startsWith(String prefix, int toffset)
   {
     return m_str.startsWith(prefix, toffset);
   }
@@ -306,7 +319,8 @@ public class XMLStringDefault implements XMLString
    * @exception java.lang.NullPointerException if <code>prefix</code> is
    *          <code>null</code>.
    */
-  public boolean startsWith(XMLString prefix, int toffset)
+  @Override
+public boolean startsWith(XMLString prefix, int toffset)
   {
     return m_str.startsWith(prefix.toString(), toffset);
   }
@@ -326,7 +340,8 @@ public class XMLStringDefault implements XMLString
    *          <code>null</code>.
    * @since   JDK1. 0
    */
-  public boolean startsWith(String prefix)
+  @Override
+public boolean startsWith(String prefix)
   {
     return m_str.startsWith(prefix);
   }
@@ -346,7 +361,8 @@ public class XMLStringDefault implements XMLString
    *          <code>null</code>.
    * @since   JDK1. 0
    */
-  public boolean startsWith(XMLString prefix)
+  @Override
+public boolean startsWith(XMLString prefix)
   {
     return m_str.startsWith(prefix.toString());
   }
@@ -364,7 +380,8 @@ public class XMLStringDefault implements XMLString
    * @exception java.lang.NullPointerException if <code>suffix</code> is
    *          <code>null</code>.
    */
-  public boolean endsWith(String suffix)
+  @Override
+public boolean endsWith(String suffix)
   {
     return m_str.endsWith(suffix);
   }
@@ -382,7 +399,8 @@ public class XMLStringDefault implements XMLString
    *
    * @return  a hash code value for this object.
    */
-  public int hashCode()
+  @Override
+public int hashCode()
   {
     return m_str.hashCode();
   }
@@ -404,7 +422,8 @@ public class XMLStringDefault implements XMLString
    *          character sequence represented by this object, or
    *          <code>-1</code> if the character does not occur.
    */
-  public int indexOf(int ch)
+  @Override
+public int indexOf(int ch)
   {
     return m_str.indexOf(ch);
   }
@@ -437,7 +456,8 @@ public class XMLStringDefault implements XMLString
    *          than or equal to <code>fromIndex</code>, or <code>-1</code>
    *          if the character does not occur.
    */
-  public int indexOf(int ch, int fromIndex)
+  @Override
+public int indexOf(int ch, int fromIndex)
   {
     return m_str.indexOf(ch, fromIndex);
   }
@@ -457,7 +477,8 @@ public class XMLStringDefault implements XMLString
    *          character sequence represented by this object, or
    *          <code>-1</code> if the character does not occur.
    */
-  public int lastIndexOf(int ch)
+  @Override
+public int lastIndexOf(int ch)
   {
     return m_str.lastIndexOf(ch);
   }
@@ -485,7 +506,8 @@ public class XMLStringDefault implements XMLString
    *          than or equal to <code>fromIndex</code>, or <code>-1</code>
    *          if the character does not occur before that point.
    */
-  public int lastIndexOf(int ch, int fromIndex)
+  @Override
+public int lastIndexOf(int ch, int fromIndex)
   {
     return m_str.lastIndexOf(ch, fromIndex);
   }
@@ -507,7 +529,8 @@ public class XMLStringDefault implements XMLString
    * @exception java.lang.NullPointerException if <code>str</code> is
    *          <code>null</code>.
    */
-  public int indexOf(String str)
+  @Override
+public int indexOf(String str)
   {
     return m_str.indexOf(str);
   }
@@ -529,7 +552,8 @@ public class XMLStringDefault implements XMLString
    * @exception java.lang.NullPointerException if <code>str</code> is
    *          <code>null</code>.
    */
-  public int indexOf(XMLString str)
+  @Override
+public int indexOf(XMLString str)
   {
     return m_str.indexOf(str.toString());
   }
@@ -560,7 +584,8 @@ public class XMLStringDefault implements XMLString
    * @exception java.lang.NullPointerException if <code>str</code> is
    *          <code>null</code>
    */
-  public int indexOf(String str, int fromIndex)
+  @Override
+public int indexOf(String str, int fromIndex)
   {
     return m_str.indexOf(str, fromIndex);
   }
@@ -583,7 +608,8 @@ public class XMLStringDefault implements XMLString
    * @exception java.lang.NullPointerException  if <code>str</code> is
    *          <code>null</code>.
    */
-  public int lastIndexOf(String str)
+  @Override
+public int lastIndexOf(String str)
   {
     return m_str.lastIndexOf(str);
   }
@@ -608,7 +634,8 @@ public class XMLStringDefault implements XMLString
    * @exception java.lang.NullPointerException if <code>str</code> is
    *          <code>null</code>.
    */
-  public int lastIndexOf(String str, int fromIndex)
+  @Override
+public int lastIndexOf(String str, int fromIndex)
   {
     return m_str.lastIndexOf(str, fromIndex);
   }
@@ -630,7 +657,8 @@ public class XMLStringDefault implements XMLString
    *             <code>beginIndex</code> is negative or larger than the
    *             length of this <code>String</code> object.
    */
-  public XMLString substring(int beginIndex)
+  @Override
+public XMLString substring(int beginIndex)
   {
     return new XMLStringDefault(m_str.substring(beginIndex));
   }
@@ -651,7 +679,8 @@ public class XMLStringDefault implements XMLString
    *             <code>beginIndex</code> is larger than
    *             <code>endIndex</code>.
    */
-  public XMLString substring(int beginIndex, int endIndex)
+  @Override
+public XMLString substring(int beginIndex, int endIndex)
   {
     return new XMLStringDefault(m_str.substring(beginIndex, endIndex));
   }
@@ -666,7 +695,8 @@ public class XMLStringDefault implements XMLString
    * @exception java.lang.NullPointerException if <code>str</code> is
    *          <code>null</code>.
    */
-  public XMLString concat(String str)
+  @Override
+public XMLString concat(String str)
   {
     return new XMLStringDefault(m_str.concat(str));
   }
@@ -680,7 +710,8 @@ public class XMLStringDefault implements XMLString
    * @see     java.lang.Character#toLowerCase(char)
    * @see     java.lang.String#toUpperCase(Locale)
    */
-  public XMLString toLowerCase(Locale locale)
+  @Override
+public XMLString toLowerCase(Locale locale)
   {
     return new XMLStringDefault(m_str.toLowerCase(locale));
   }
@@ -695,7 +726,8 @@ public class XMLStringDefault implements XMLString
    * @see     java.lang.Character#toLowerCase(char)
    * @see     java.lang.String#toLowerCase(Locale)
    */
-  public XMLString toLowerCase()
+  @Override
+public XMLString toLowerCase()
   {
     return new XMLStringDefault(m_str.toLowerCase());
   }
@@ -708,7 +740,8 @@ public class XMLStringDefault implements XMLString
    * @see     java.lang.Character#toUpperCase(char)
    * @see     java.lang.String#toLowerCase(Locale)
    */
-  public XMLString toUpperCase(Locale locale)
+  @Override
+public XMLString toUpperCase(Locale locale)
   {
     return new XMLStringDefault(m_str.toUpperCase(locale));
   }
@@ -739,7 +772,8 @@ public class XMLStringDefault implements XMLString
    * @see     java.lang.Character#toUpperCase(char)
    * @see     java.lang.String#toUpperCase(Locale)
    */
-  public XMLString toUpperCase()
+  @Override
+public XMLString toUpperCase()
   {
     return new XMLStringDefault(m_str.toUpperCase());
   }
@@ -773,7 +807,8 @@ public class XMLStringDefault implements XMLString
    *
    * @return  this string, with white space removed from the front and end.
    */
-  public XMLString trim()
+  @Override
+public XMLString trim()
   {
     return new XMLStringDefault(m_str.trim());
   }
@@ -783,7 +818,8 @@ public class XMLStringDefault implements XMLString
    *
    * @return  the string itself.
    */
-  public String toString()
+  @Override
+public String toString()
   {
     return m_str;
   }
@@ -793,7 +829,8 @@ public class XMLStringDefault implements XMLString
    * 
    * @return true if this XMLString can return a string without creating one.
    */
-  public boolean hasString()
+  @Override
+public boolean hasString()
   {
     return true;
   }
@@ -805,7 +842,8 @@ public class XMLStringDefault implements XMLString
    * @return A double value representation of the string, or return Double.NaN 
    * if the string can not be converted.
    */
-  public double toDouble()
+  @Override
+public double toDouble()
   {
     try {
       return Double.valueOf(m_str).doubleValue();

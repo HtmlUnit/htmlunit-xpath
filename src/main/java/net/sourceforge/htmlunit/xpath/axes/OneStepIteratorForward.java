@@ -85,7 +85,8 @@ public class OneStepIteratorForward extends ChildTestIterator
    * @param context The XPath runtime context for this
    * transformation.
    */
-  public void setRoot(int context, Object environment)
+  @Override
+public void setRoot(int context, Object environment)
   {
     super.setRoot(context, environment);
     m_traverser = m_cdtm.getAxisTraverser(m_axis);
@@ -135,7 +136,8 @@ public class OneStepIteratorForward extends ChildTestIterator
   /**
    * Get the next node via getFirstAttribute && getNextAttribute.
    */
-  protected int getNextNode()
+  @Override
+protected int getNextNode()
   {
     m_lastFetched = (DTM.NULL == m_lastFetched)
                      ? m_traverser.first(m_context)
@@ -149,7 +151,8 @@ public class OneStepIteratorForward extends ChildTestIterator
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple 
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     return m_axis;
   }
@@ -157,7 +160,8 @@ public class OneStepIteratorForward extends ChildTestIterator
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!super.deepEquals(expr))
       return false;

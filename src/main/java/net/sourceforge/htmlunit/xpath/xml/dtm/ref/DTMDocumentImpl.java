@@ -190,6 +190,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param featureId A feature URL.
          * @param state true if this feature should be on, false otherwise.
          */
+        @Override
         public void setFeature(String featureId, boolean state) {}
 
         /**
@@ -280,7 +281,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    * the IncrementalSAXSource if we're bound to one and should receive
    * the SAX stream via it for incremental build purposes...
    * */
-  public org.xml.sax.ContentHandler getContentHandler()
+  @Override
+public org.xml.sax.ContentHandler getContentHandler()
   {
     return this;
   }
@@ -295,7 +297,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    * the IncrementalSAXSource if we're bound to one and should receive
    * the SAX stream via it for incremental build purposes...
    */
-  public LexicalHandler getLexicalHandler()
+  @Override
+public LexicalHandler getLexicalHandler()
   {
     return this;
   }
@@ -305,7 +308,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    *
    * @return null if this model doesn't respond to SAX entity ref events.
    */
-  public org.xml.sax.EntityResolver getEntityResolver()
+  @Override
+public org.xml.sax.EntityResolver getEntityResolver()
   {
 
     return null;
@@ -316,7 +320,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    *
    * @return null if this model doesn't respond to SAX dtd events.
    */
-  public org.xml.sax.DTDHandler getDTDHandler()
+  @Override
+public org.xml.sax.DTDHandler getDTDHandler()
   {
 
     return null;
@@ -327,7 +332,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    *
    * @return null if this model doesn't respond to SAX error events.
    */
-  public org.xml.sax.ErrorHandler getErrorHandler()
+  @Override
+public org.xml.sax.ErrorHandler getErrorHandler()
   {
 
     return null;
@@ -338,7 +344,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    *
    * @return null if this model doesn't respond to SAX Decl events.
    */
-  public org.xml.sax.ext.DeclHandler getDeclHandler()
+  @Override
+public org.xml.sax.ext.DeclHandler getDeclHandler()
   {
 
     return null;
@@ -349,7 +356,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    * transformation and the parse run simultaneously. Guidance to the
    * DTMManager.
    * */
-  public boolean needsTwoThreads()
+  @Override
+public boolean needsTwoThreads()
   {
     return true;
   }
@@ -359,7 +367,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
   // Accept SAX events, use them to build/extend the DTM tree.
   // Replaces the deprecated DocumentHandler interface.
 
-  public void characters(char[] ch, int start, int length)
+  @Override
+public void characters(char[] ch, int start, int length)
        throws org.xml.sax.SAXException
   {
     // Actually creating the text node is handled by
@@ -379,14 +388,16 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
         m_char_current_start=len;
       }
   }
-  public void endDocument()
+  @Override
+public void endDocument()
        throws org.xml.sax.SAXException
   {
     // May need to tell the low-level builder code to pop up a level.
     // There _should't_ be any significant pending text at this point.
     appendEndDocument();
   }
-  public void endElement(java.lang.String namespaceURI, java.lang.String localName,
+  @Override
+public void endElement(java.lang.String namespaceURI, java.lang.String localName,
       java.lang.String qName)
        throws org.xml.sax.SAXException
   {
@@ -395,38 +406,45 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
     // pop up a level.
     appendEndElement();
   }
-  public void endPrefixMapping(java.lang.String prefix)
+  @Override
+public void endPrefixMapping(java.lang.String prefix)
        throws org.xml.sax.SAXException
   {
     // No-op
   }
-  public void ignorableWhitespace(char[] ch, int start, int length)
+  @Override
+public void ignorableWhitespace(char[] ch, int start, int length)
        throws org.xml.sax.SAXException
   {
     // %TBD% I believe ignorable text isn't part of the DTM model...?
   }
-  public void processingInstruction(java.lang.String target, java.lang.String data)
+  @Override
+public void processingInstruction(java.lang.String target, java.lang.String data)
        throws org.xml.sax.SAXException
   {
     processAccumulatedText();
     // %TBD% Which pools do target and data go into?
   }
-  public void setDocumentLocator(Locator locator)
+  @Override
+public void setDocumentLocator(Locator locator)
   {
     // No-op for DTM
   }
-  public void skippedEntity(java.lang.String name)
+  @Override
+public void skippedEntity(java.lang.String name)
        throws org.xml.sax.SAXException
   {
     processAccumulatedText();
     //%TBD%
   }
-  public void startDocument()
+  @Override
+public void startDocument()
        throws org.xml.sax.SAXException
   {
     appendStartDocument();
   }
-  public void startElement(java.lang.String namespaceURI, java.lang.String localName,
+  @Override
+public void startElement(java.lang.String namespaceURI, java.lang.String localName,
       java.lang.String qName, Attributes atts)
        throws org.xml.sax.SAXException
   {
@@ -509,7 +527,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
           }
       }
   }
-  public void startPrefixMapping(java.lang.String prefix, java.lang.String uri)
+  @Override
+public void startPrefixMapping(java.lang.String prefix, java.lang.String uri)
        throws org.xml.sax.SAXException
   {
     // No-op in DTM, handled during element/attr processing?
@@ -519,7 +538,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
   // LexicalHandler support. Not all SAX2 parsers support these events
   // but we may want to pass them through when they exist...
   //
-  public void comment(char[] ch, int start, int length)
+  @Override
+public void comment(char[] ch, int start, int length)
        throws org.xml.sax.SAXException
   {
     processAccumulatedText();
@@ -528,33 +548,39 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
     appendComment(m_char_current_start,length);
     m_char_current_start+=length;
   }
-  public void endCDATA()
+  @Override
+public void endCDATA()
        throws org.xml.sax.SAXException
   {
     // No-op in DTM
   }
-  public void endDTD()
+  @Override
+public void endDTD()
        throws org.xml.sax.SAXException
   {
     // No-op in DTM
   }
-  public void endEntity(java.lang.String name)
+  @Override
+public void endEntity(java.lang.String name)
        throws org.xml.sax.SAXException
   {
     // No-op in DTM
   }
-  public void startCDATA()
+  @Override
+public void startCDATA()
        throws org.xml.sax.SAXException
   {
     // No-op in DTM
   }
-  public void startDTD(java.lang.String name, java.lang.String publicId,
+  @Override
+public void startDTD(java.lang.String name, java.lang.String publicId,
       java.lang.String systemId)
        throws org.xml.sax.SAXException
   {
     // No-op in DTM
   }
-  public void startEntity(java.lang.String name)
+  @Override
+public void startEntity(java.lang.String name)
        throws org.xml.sax.SAXException
   {
     // No-op in DTM
@@ -950,6 +976,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param nodeHandle int Handle of the node.
          * @return int true if the given node has child nodes.
          */
+        @Override
         public boolean hasChildNodes(int nodeHandle) {
                 return getFirstChild(nodeHandle) != NULL;
         }
@@ -962,6 +989,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param nodeHandle int Handle of the node.
          * @return int DTM node-number of first child, or DTM.NULL to indicate none exists.
          */
+        @Override
         public int getFirstChild(int nodeHandle) {
 
                 // ###shs worry about tracing/debug later
@@ -1014,6 +1042,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
         * @return int Node-number of last child,
         * or DTM.NULL to indicate none exists.
         */
+        @Override
         public int getLastChild(int nodeHandle) {
                 // ###shs put trace/debug later
                 nodeHandle &= NODEHANDLE_MASK;
@@ -1038,6 +1067,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *   <code>nodeName</code>) or <code>DTM.NULL</code> if there is no such
          *   attribute.
          */
+        @Override
         public int getAttributeNode(int nodeHandle, String namespaceURI, String name) {
                 int nsIndex = m_nsNames.stringToIndex(namespaceURI),
                                                                         nameIndex = m_localNames.stringToIndex(name);
@@ -1064,6 +1094,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param nodeHandle int Handle of the Element node.
          * @return Handle of first attribute, or DTM.NULL to indicate none exists.
          */
+        @Override
         public int getFirstAttribute(int nodeHandle) {
                 nodeHandle &= NODEHANDLE_MASK;
 
@@ -1094,6 +1125,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *                   returned.
          * @return handle of first namespace, or DTM.NULL to indicate none exists.
          */
+        @Override
         public int getFirstNamespaceNode(int nodeHandle, boolean inScope) {
 
                 return NULL;
@@ -1116,6 +1148,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return int Node-number of next sibling,
          * or DTM.NULL to indicate none exists.
          * */
+        @Override
         public int getNextSibling(int nodeHandle) {
                 nodeHandle &= NODEHANDLE_MASK;
                 // Document root has no next sibling
@@ -1150,6 +1183,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return int Node-number of the previous sib,
          * or DTM.NULL to indicate none exists.
          */
+        @Override
         public int getPreviousSibling(int nodeHandle) {
                 nodeHandle &= NODEHANDLE_MASK;
                 // Document root has no previous sibling
@@ -1174,6 +1208,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return int DTM node-number of the resolved attr,
          * or DTM.NULL to indicate none exists.
          */
+        @Override
         public int getNextAttribute(int nodeHandle) {
                 nodeHandle &= NODEHANDLE_MASK;
                 nodes.readSlot(nodeHandle, gotslot);
@@ -1203,6 +1238,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param namespaceHandle handle to node which must be of type NAMESPACE_NODE.
          * @return handle of next namespace, or DTM.NULL to indicate none exists.
          */
+        @Override
         public int getNextNamespaceNode(int baseHandle,int namespaceHandle, boolean inScope) {
                 // ###shs need to work on namespace
                 return NULL;
@@ -1302,6 +1338,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return int Node-number of parent,
          * or DTM.NULL to indicate none exists.
          */
+        @Override
         public int getParent(int nodeHandle) {
                 // Should check to see within range?
 
@@ -1322,6 +1359,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @return int Node handle of document, which should always be valid.
          */
+        @Override
         public int getDocument() {
                 return m_docHandle;
         }
@@ -1339,6 +1377,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return int Node handle of owning document, or NULL if the nodeHandle is
          *             a document.
          */
+        @Override
         public int getOwnerDocument(int nodeHandle) {
                 // Assumption that Document Node is always in 0 slot
                 if ((nodeHandle & NODEHANDLE_MASK) == 0)
@@ -1358,6 +1397,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return int Node handle of owning document, or NULL if the nodeHandle is
          *             a document.
          */
+        @Override
         public int getDocumentRoot(int nodeHandle) {
                 // Assumption that Document Node is always in 0 slot
                 if ((nodeHandle & NODEHANDLE_MASK) == 0)
@@ -1374,6 +1414,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @return A string object that represents the string-value of the given node.
          */
+        @Override
         public XMLString getStringValue(int nodeHandle) {
         // ###zaj - researching
         nodes.readSlot(nodeHandle, gotslot);
@@ -1421,6 +1462,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *         the string-value of a node.
          * */
         //###zaj - tbd
+        @Override
         public int getStringValueChunkCount(int nodeHandle)
         {
                 //###zaj    return value
@@ -1452,6 +1494,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @return The character array reference where the chunk occurs.  */
         //###zaj - tbd
+        @Override
         public char[] getStringValueChunk(int nodeHandle, int chunkIndex,
                                                                                                                                                 int[] startAndLen) {return new char[0];}
 
@@ -1462,6 +1505,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @return the expanded-name id of the node.
          */
+        @Override
         public int getExpandedTypeID(int nodeHandle) {
            nodes.readSlot(nodeHandle, gotslot);
            String qName = m_localNames.indexToString(gotslot[3]);
@@ -1487,6 +1531,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @return the expanded-name id of the node.
          */
+        @Override
         public int getExpandedTypeID(String namespace, String localName, int type) {
            // Create expanded name
           // %TBD% jjk Expanded name is bitfield-encoded as
@@ -1506,6 +1551,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param ExpandedNameID an ID that represents an expanded-name.
          * @return String Local name of this node.
          */
+        @Override
         public String getLocalNameFromExpandedNameID(int ExpandedNameID) {
 
            // Get expanded name
@@ -1524,6 +1570,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return String URI value of this node's namespace, or null if no
          * namespace was resolved.
         */
+        @Override
         public String getNamespaceFromExpandedNameID(int ExpandedNameID) {
 
            String expandedName = m_localNames.indexToString(ExpandedNameID);
@@ -1556,6 +1603,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return String Name of this node, which may be an empty string.
          * %REVIEW% Document when empty string is possible...
          */
+        @Override
         public String getNodeName(int nodeHandle) {
                 nodes.readSlot(nodeHandle, gotslot);
                 short type = (short) (gotslot[0] & 0xFFFF);
@@ -1580,6 +1628,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param nodeHandle the id of the node.
          * @return String Name of this node.
          */
+        @Override
         public String getNodeNameX(int nodeHandle) {return null;}
 
         /**
@@ -1593,6 +1642,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param nodeHandle the id of the node.
          * @return String Local name of this node.
          */
+        @Override
         public String getLocalName(int nodeHandle) {
                 nodes.readSlot(nodeHandle, gotslot);
                 short type = (short) (gotslot[0] & 0xFFFF);
@@ -1619,6 +1669,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return String prefix of this node's name, or "" if no explicit
          * namespace prefix was given.
          */
+        @Override
         public String getPrefix(int nodeHandle) {
                 nodes.readSlot(nodeHandle, gotslot);
                 short type = (short) (gotslot[0] & 0xFFFF);
@@ -1640,6 +1691,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return String URI value of this node's namespace, or null if no
          * namespace was resolved.
          */
+        @Override
         public String getNamespaceURI(int nodeHandle) {return null;}
 
         /**
@@ -1651,6 +1703,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return String Value of this node, or null if not
          * meaningful for this node type.
          */
+        @Override
         public String getNodeValue(int nodeHandle)
         {
                 nodes.readSlot(nodeHandle, gotslot);
@@ -1682,6 +1735,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param nodeHandle The node id.
          * @return int Node type, as per the DOM's Node._NODE constants.
          */
+        @Override
         public short getNodeType(int nodeHandle) {
                 return(short) (nodes.readEntry(nodeHandle, 0) & 0xFFFF);
         }
@@ -1694,6 +1748,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return the number of ancestors, plus one
          * @xsl.usage internal
          */
+        @Override
         public short getLevel(int nodeHandle) {
                 short count = 0;
                 while (nodeHandle != 0) {
@@ -1717,6 +1772,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return Returns <code>true</code> if the specified feature is
          *   supported on this node, <code>false</code> otherwise.
          */
+        @Override
         public boolean isSupported(String feature, String version) {return false;}
 
         /**
@@ -1726,6 +1782,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @return the document base URI String object or null if unknown.
          */
+        @Override
         public String getDocumentBaseURI()
         {
 
@@ -1737,6 +1794,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @param baseURI the document base URI String object or null if unknown.
          */
+        @Override
         public void setDocumentBaseURI(String baseURI)
         {
 
@@ -1750,6 +1808,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param nodeHandle The node id, which can be any valid node handle.
          * @return the system identifier String object or null if unknown.
          */
+        @Override
         public String getDocumentSystemIdentifier(int nodeHandle) {return null;}
 
         /**
@@ -1759,6 +1818,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param nodeHandle The node id, which can be any valid node handle.
          * @return the document encoding String object.
          */
+        @Override
         public String getDocumentEncoding(int nodeHandle) {return null;}
 
         /**
@@ -1771,6 +1831,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param nodeHandle The node id, which can be any valid node handle.
          * @return the document standalone String object, either "yes", "no", or null.
          */
+        @Override
         public String getDocumentStandalone(int nodeHandle) {return null;}
 
         /**
@@ -1783,6 +1844,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @return the document version String object
          */
+        @Override
         public String getDocumentVersion(int documentHandle) {return null;}
 
         /**
@@ -1795,6 +1857,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return <code>true</code> if all declarations were processed {};
          *         <code>false</code> otherwise.
          */
+        @Override
         public boolean getDocumentAllDeclarationsProcessed() {return false;}
 
         /**
@@ -1805,6 +1868,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @return the system identifier String object, or null if there is none.
          */
+        @Override
         public String getDocumentTypeDeclarationSystemIdentifier() {return null;}
 
         /**
@@ -1815,6 +1879,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @return the public identifier String object, or null if there is none.
          */
+        @Override
         public String getDocumentTypeDeclarationPublicIdentifier() {return null;}
 
         /**
@@ -1834,6 +1899,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param elementId The unique <code>id</code> value for an element.
          * @return The handle of the matching element.
          */
+        @Override
         public int getElementById(String elementId) {return 0;}
 
         /**
@@ -1870,6 +1936,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return String containing the URI of the Unparsed Entity, or an
          * empty string if no such entity exists.
          */
+        @Override
         public String getUnparsedEntityURI(String name) {return null;}
 
 
@@ -1882,6 +1949,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * <p>%REVEIW% Presumes a 1:1 mapping from DTM to Document, since
          * we aren't saying which Document to query...?</p>
          */
+        @Override
         public boolean supportsPreStripping() {return false;}
 
         /**
@@ -1902,6 +1970,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * You can think of this as
          * <code>(node1.documentOrderPosition &lt;= node2.documentOrderPosition)</code>.
          */
+        @Override
         public boolean isNodeAfter(int nodeHandle1, int nodeHandle2) {return false;}
 
         /**
@@ -1920,6 +1989,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return <code>true</code> if the character data is whitespace;
          *         <code>false</code> otherwise.
          */
+        @Override
         public boolean isCharacterElementContentWhitespace(int nodeHandle) {return false;}
 
         /**
@@ -1934,6 +2004,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return <code>true</code> if all declarations were processed;
          *         <code>false</code> otherwise.
          */
+        @Override
         public boolean isDocumentAllDeclarationsProcessed(int documentHandle) {return false;}
 
         /**
@@ -1945,6 +2016,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @return <code>true</code> if the attribute was specified;
          *         <code>false</code> if it was defaulted.
          */
+        @Override
         public boolean isAttributeSpecified(int attributeHandle) {return false;}
 
         // ========== Direct SAX Dispatch, for optimization purposes ========
@@ -1962,6 +2034,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @throws org.xml.sax.SAXException
          */
+        @Override
         public void dispatchCharactersEvents(
                                                                                                                                                         int nodeHandle, org.xml.sax.ContentHandler ch, boolean normalize)
         throws org.xml.sax.SAXException {}
@@ -1975,6 +2048,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @throws org.xml.sax.SAXException
          */
 
+        @Override
         public void dispatchToEvents(int nodeHandle, org.xml.sax.ContentHandler ch)
         throws org.xml.sax.SAXException {}
 
@@ -1985,6 +2059,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @return A node representation of the DTM node.
          */
+        @Override
         public org.w3c.dom.Node getNode(int nodeHandle)
         {
           return null;
@@ -2007,6 +2082,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          * @param cloneDepth if the clone argument is true, specifies that the
          *                   clone should include all it's children.
          */
+        @Override
         public void appendChild(int newChild, boolean clone, boolean cloneDepth) {
                 boolean sameDoc = (newChild & DOCHANDLE_MASK) == m_docHandle;
                 if (clone || !sameDoc) {
@@ -2025,6 +2101,7 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
          *
          * @param str Non-null reference to a string.
          */
+        @Override
         public void appendTextChild(String str) {
                 // ###shs Think more about how this differs from createTextNode
           //%TBD%
@@ -2215,7 +2292,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    *
    * @return A DTMAxisIterator, or null if the given axis isn't supported.
    */
-  public DTMAxisTraverser getAxisTraverser(final int axis)
+  @Override
+public DTMAxisTraverser getAxisTraverser(final int axis)
   {
     return null;
   }
@@ -2230,7 +2308,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    *
    * @return A DTMAxisIterator, or null if the given axis isn't supported.
    */
-  public DTMAxisIterator getAxisIterator(final int axis)
+  @Override
+public DTMAxisIterator getAxisIterator(final int axis)
   {
     // %TBD%
     return null;
@@ -2246,7 +2325,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    *
    * @return A DTMAxisIterator, or null if the given axis isn't supported.
    */
-  public DTMAxisIterator getTypedAxisIterator(final int axis, final int type)
+  @Override
+public DTMAxisIterator getTypedAxisIterator(final int axis, final int type)
   {
     // %TBD%
     return null;
@@ -2305,7 +2385,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    * @param property a <code>String</code> value
    * @param value an <code>Object</code> value
    */
-  public void setProperty(String property, Object value)
+  @Override
+public void setProperty(String property, Object value)
   {
   }
 
@@ -2316,7 +2397,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    * @param node an <code>int</code> value
    * @return null
    */
-  public SourceLocator getSourceLocatorFor(int node)
+  @Override
+public SourceLocator getSourceLocatorFor(int node)
   {
     return null;
   }
@@ -2327,7 +2409,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    * implememtation that extends the default base requires notification
    * of registration, they can override this method.
    */
-   public void documentRegistration()
+   @Override
+public void documentRegistration()
    {
    }
 
@@ -2336,7 +2419,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
    * implememtation that extends the default base requires notification
    * when the document is being released, they can override this method
    */
-   public void documentRelease()
+   @Override
+public void documentRelease()
    {
    }
 
@@ -2347,7 +2431,8 @@ implements DTM, org.xml.sax.ContentHandler, org.xml.sax.ext.LexicalHandler
     * This is used to support DTM sharing between multiple transformations.
     * @param manager the DTMManager
     */
-   public void migrateTo(DTMManager manager)
+   @Override
+public void migrateTo(DTMManager manager)
    {
    }
 

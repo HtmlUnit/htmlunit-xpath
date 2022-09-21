@@ -41,7 +41,8 @@ public class FuncConcat extends FunctionMultiArgs
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
 
     StringBuffer sb = new StringBuffer();
@@ -72,7 +73,8 @@ public class FuncConcat extends FunctionMultiArgs
    *
    * @throws WrongNumberArgsException
    */
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException
+  @Override
+public void checkNumberArgs(int argNum) throws WrongNumberArgsException
   {
     if (argNum < 2)
       reportWrongNumberArgs();
@@ -84,7 +86,8 @@ public class FuncConcat extends FunctionMultiArgs
    *
    * @throws WrongNumberArgsException
    */
-  protected void reportWrongNumberArgs() throws WrongNumberArgsException {
+  @Override
+protected void reportWrongNumberArgs() throws WrongNumberArgsException {
       throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("gtone", null));
   }
 }

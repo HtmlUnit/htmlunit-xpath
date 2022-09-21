@@ -148,7 +148,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    *
    * @return a non-null DTM reference.
    */
-  public DTM getDTM(javax.xml.transform.Source source, boolean unique,
+  @Override
+public DTM getDTM(javax.xml.transform.Source source, boolean unique,
                     DTMWSFilter wsfilter,
                     boolean incremental,
                     boolean doIndexing)
@@ -164,7 +165,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    *
    * @return a non-null DTM reference.
    */
-  public DTM getDTM(int nodeHandle)
+  @Override
+public DTM getDTM(int nodeHandle)
   {
     return m_dtmManager.getDTM(nodeHandle);
   }
@@ -177,7 +179,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    *
    * @return a valid DTM handle.
    */
-  public int getDTMHandleFromNode(org.w3c.dom.Node node)
+  @Override
+public int getDTMHandleFromNode(org.w3c.dom.Node node)
   {
     return m_dtmManager.getDTMHandleFromNode(node);
   }
@@ -186,7 +189,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /**
    * %TBD% Doc
    */
-  public int getDTMIdentity(DTM dtm)
+  @Override
+public int getDTMIdentity(DTM dtm)
   {
     return m_dtmManager.getDTMIdentity(dtm);
   }
@@ -195,7 +199,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Creates an empty <code>DocumentFragment</code> object.
    * @return A new <code>DocumentFragment handle</code>.
    */
-  public DTM createDocumentFragment()
+  @Override
+public DTM createDocumentFragment()
   {
     return m_dtmManager.createDocumentFragment();
   }
@@ -209,7 +214,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * @param shouldHardDelete True if the DTM should be removed no matter what.
    * @return true if the DTM was removed, false if it was put back in a lru pool.
    */
-  public boolean release(DTM dtm, boolean shouldHardDelete)
+  @Override
+public boolean release(DTM dtm, boolean shouldHardDelete)
   {
     // %REVIEW% If it's a DTM which may contain multiple Result Tree
     // Fragments, we can't discard it unless we know not only that it
@@ -236,7 +242,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * @param pos The position in the expression.
    * @return The newly created <code>DTMIterator</code>.
    */
-  public DTMIterator createDTMIterator(Object xpathCompiler, int pos)
+  @Override
+public DTMIterator createDTMIterator(Object xpathCompiler, int pos)
   {
     return m_dtmManager.createDTMIterator(xpathCompiler, pos);
   }
@@ -254,7 +261,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    *
    * @return The newly created <code>DTMIterator</code>.
    */
-  public DTMIterator createDTMIterator(String xpathString,
+  @Override
+public DTMIterator createDTMIterator(String xpathString,
           PrefixResolver presolver)
   {
     return m_dtmManager.createDTMIterator(xpathString, presolver);
@@ -277,7 +285,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    *
    * @return The newly created <code>NodeIterator</code>.
    */
-  public DTMIterator createDTMIterator(int whatToShow,
+  @Override
+public DTMIterator createDTMIterator(int whatToShow,
           DTMFilter filter, boolean entityReferenceExpansion)
   {
     return m_dtmManager.createDTMIterator(whatToShow, filter, entityReferenceExpansion);
@@ -290,7 +299,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    *
    * @return The newly created <code>DTMIterator</code>.
    */
-  public DTMIterator createDTMIterator(int node)
+  @Override
+public DTMIterator createDTMIterator(int node)
   {
     // DescendantIterator iter = new DescendantIterator();
     DTMIterator iter = new net.sourceforge.htmlunit.xpath.axes.OneStepIteratorForward(Axis.SELF);

@@ -232,7 +232,8 @@ public class DTMManagerDefault extends DTMManager
    *
    * @return a non-null DTM reference.
    */
-  synchronized public DTM getDTM(Source source, boolean unique,
+  @Override
+synchronized public DTM getDTM(Source source, boolean unique,
                                  DTMWSFilter whiteSpaceFilter,
                                  boolean incremental, boolean doIndexing)
   {
@@ -466,7 +467,8 @@ public class DTMManagerDefault extends DTMManager
    *
    * @return a valid DTM handle.
    */
-  synchronized public int getDTMHandleFromNode(org.w3c.dom.Node node)
+  @Override
+synchronized public int getDTMHandleFromNode(org.w3c.dom.Node node)
   {
     if(null == node)
       throw new IllegalArgumentException(XMLMessages.createXMLMessage(XMLErrorResources.ER_NODE_NON_NULL, null)); //"node must be non-null for getDTMHandleFromNode!");
@@ -618,7 +620,8 @@ public class DTMManagerDefault extends DTMManager
    *
    * @return a reference to the DTM object containing this node.
    */
-  synchronized public DTM getDTM(int nodeHandle)
+  @Override
+synchronized public DTM getDTM(int nodeHandle)
   {
     try
     {
@@ -644,7 +647,8 @@ public class DTMManagerDefault extends DTMManager
    * @return The DTM ID (as the high bits of a NodeHandle, not as our
    * internal index), or -1 if the DTM doesn't belong to this manager.
    */
-  synchronized public int getDTMIdentity(DTM dtm)
+  @Override
+synchronized public int getDTMIdentity(DTM dtm)
   {
   // Shortcut using DTMDefaultBase's extension hooks
   // %REVIEW% Should the lookup be part of the basic DTM API?
@@ -685,7 +689,8 @@ public class DTMManagerDefault extends DTMManager
    * @return true if the DTM was released, false if shouldHardDelete was set
    * and we decided not to.
    */
-  synchronized public boolean release(DTM dtm, boolean shouldHardDelete)
+  @Override
+synchronized public boolean release(DTM dtm, boolean shouldHardDelete)
   {
     if(DEBUG)
     {
@@ -736,7 +741,8 @@ public class DTMManagerDefault extends DTMManager
    *
    * NEEDSDOC (createDocumentFragment) @return
    */
-  synchronized public DTM createDocumentFragment()
+  @Override
+synchronized public DTM createDocumentFragment()
   {
 
     try
@@ -767,7 +773,8 @@ public class DTMManagerDefault extends DTMManager
    *
    * NEEDSDOC (createDTMIterator) @return
    */
-  synchronized public DTMIterator createDTMIterator(int whatToShow, DTMFilter filter,
+  @Override
+synchronized public DTMIterator createDTMIterator(int whatToShow, DTMFilter filter,
                                        boolean entityReferenceExpansion)
   {
 
@@ -784,7 +791,8 @@ public class DTMManagerDefault extends DTMManager
    *
    * NEEDSDOC (createDTMIterator) @return
    */
-  synchronized public DTMIterator createDTMIterator(String xpathString,
+  @Override
+synchronized public DTMIterator createDTMIterator(String xpathString,
                                        PrefixResolver presolver)
   {
 
@@ -800,7 +808,8 @@ public class DTMManagerDefault extends DTMManager
    *
    * NEEDSDOC (createDTMIterator) @return
    */
-  synchronized public DTMIterator createDTMIterator(int node)
+  @Override
+synchronized public DTMIterator createDTMIterator(int node)
   {
 
     /** @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
@@ -816,7 +825,8 @@ public class DTMManagerDefault extends DTMManager
    *
    * NEEDSDOC (createDTMIterator) @return
    */
-  synchronized public DTMIterator createDTMIterator(Object xpathCompiler, int pos)
+  @Override
+synchronized public DTMIterator createDTMIterator(Object xpathCompiler, int pos)
   {
 
     /** @todo: implement this org.apache.xml.dtm.DTMManager abstract method */

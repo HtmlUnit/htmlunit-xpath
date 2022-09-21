@@ -458,33 +458,38 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
 
   /** This pair of methods are used to inform the node of its
     parent. */
-  public void exprSetParent(ExpressionNode n)
+  @Override
+public void exprSetParent(ExpressionNode n)
   {
     assertion(n != this, "Can not parent an expression to itself!");
     m_parent = n;
   }
 
-  public ExpressionNode exprGetParent()
+  @Override
+public ExpressionNode exprGetParent()
   {
     return m_parent;
   }
 
   /** This method tells the node to add its argument to the node's
     list of children.  */
-  public void exprAddChild(ExpressionNode n, int i)
+  @Override
+public void exprAddChild(ExpressionNode n, int i)
   {
     assertion(false, "exprAddChild method not implemented!");
   }
 
   /** This method returns a child node.  The children are numbered
      from zero, left to right. */
-  public ExpressionNode exprGetChild(int i)
+  @Override
+public ExpressionNode exprGetChild(int i)
   {
     return null;
   }
 
   /** Return the number of children the node has. */
-  public int exprGetNumChildren()
+  @Override
+public int exprGetNumChildren()
   {
     return 0;
   }
@@ -502,7 +507,8 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    *         null if none is available.
    * @see #getSystemId
    */
-  public String getPublicId()
+  @Override
+public String getPublicId()
   {
     if(null == m_parent)
       return null;
@@ -523,7 +529,8 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    *         if none is available.
    * @see #getPublicId
    */
-  public String getSystemId()
+  @Override
+public String getSystemId()
   {
     if(null == m_parent)
       return null;
@@ -545,7 +552,8 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    * @return The line number, or -1 if none is available.
    * @see #getColumnNumber
    */
-  public int getLineNumber()
+  @Override
+public int getLineNumber()
   {
     if(null == m_parent)
       return 0;
@@ -567,7 +575,8 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    * @return The column number, or -1 if none is available.
    * @see #getLineNumber
    */
-  public int getColumnNumber()
+  @Override
+public int getColumnNumber()
   {
     if(null == m_parent)
       return 0;

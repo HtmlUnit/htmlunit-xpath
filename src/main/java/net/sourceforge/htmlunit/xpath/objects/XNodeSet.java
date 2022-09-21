@@ -122,7 +122,8 @@ public class XNodeSet extends NodeSequence
    *
    * @return type CLASS_NODESET
    */
-  public int getType()
+  @Override
+public int getType()
   {
     return CLASS_NODESET;
   }
@@ -133,7 +134,8 @@ public class XNodeSet extends NodeSequence
    *
    * @return type string "#NODESET"
    */
-  public String getTypeString()
+  @Override
+public String getTypeString()
   {
     return "#NODESET";
   }
@@ -157,7 +159,8 @@ public class XNodeSet extends NodeSequence
    * @return numeric value of the string conversion from the
    * next node in the NodeSetDTM, or NAN if no node was found
    */
-  public double num()
+  @Override
+public double num()
   {
 
     int node = item(0);
@@ -171,7 +174,8 @@ public class XNodeSet extends NodeSequence
    * @return numeric value of the string conversion from the
    * next node in the NodeSetDTM, or NAN if no node was found
    */
-  public double numWithSideEffects()
+  @Override
+public double numWithSideEffects()
   {
     int node = nextNode();
 
@@ -184,7 +188,8 @@ public class XNodeSet extends NodeSequence
    *
    * @return True if there is a next node in the nodeset
    */
-  public boolean bool()
+  @Override
+public boolean bool()
   {
     return item(0) != DTM.NULL;
   }
@@ -195,7 +200,8 @@ public class XNodeSet extends NodeSequence
    *
    * @return True if there is a next node in the nodeset
    */
-  public boolean boolWithSideEffects()
+  @Override
+public boolean boolWithSideEffects()
   {
     return nextNode() != DTM.NULL;
   }
@@ -233,7 +239,8 @@ public class XNodeSet extends NodeSequence
    *
    * @throws org.xml.sax.SAXException
    */
-  public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
+  @Override
+public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
           throws org.xml.sax.SAXException
   {
     int node = item(0);
@@ -250,7 +257,8 @@ public class XNodeSet extends NodeSequence
    *
    * @return The document fragment node data or the empty string.
    */
-  public XMLString xstr()
+  @Override
+public XMLString xstr()
   {
     int node = item(0);
     return (node != DTM.NULL) ? getStringFromNode(node) : XString.EMPTYSTRING;
@@ -261,7 +269,8 @@ public class XNodeSet extends NodeSequence
    *
    * @return The string this wraps or the empty string if null
    */
-  public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb)
+  @Override
+public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb)
   {
     XString xstring = (XString)xstr();
     xstring.appendToFsb(fsb);
@@ -274,7 +283,8 @@ public class XNodeSet extends NodeSequence
    * @return the string conversion from the next node in the nodeset
    * or "" if there is no next node
    */
-  public String str()
+  @Override
+public String str()
   {
     int node = item(0);
     return (node != DTM.NULL) ? getStringFromNode(node).toString() : "";
@@ -286,7 +296,8 @@ public class XNodeSet extends NodeSequence
    *
    * @return The object that this class wraps
    */
-  public Object object()
+  @Override
+public Object object()
   {
     if(null == m_obj)
       return this;
@@ -329,7 +340,8 @@ public class XNodeSet extends NodeSequence
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public NodeIterator nodeset() throws javax.xml.transform.TransformerException
+  @Override
+public NodeIterator nodeset() throws javax.xml.transform.TransformerException
   {
     return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeIterator(iter());
   }
@@ -341,7 +353,8 @@ public class XNodeSet extends NodeSequence
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public NodeList nodelist() throws javax.xml.transform.TransformerException
+  @Override
+public NodeList nodelist() throws javax.xml.transform.TransformerException
   {
     net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList nodelist = new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList(this);
     // Creating a DTMNodeList has the side-effect that it will create a clone
@@ -382,7 +395,8 @@ public class XNodeSet extends NodeSequence
    *
    * @return The nodeset as a nodelist
    */
-  public DTMIterator iter()
+  @Override
+public DTMIterator iter()
   {
     try
     {
@@ -402,7 +416,8 @@ public class XNodeSet extends NodeSequence
    *
    * @return A fresh nodelist.
    */
-  public XObject getFresh()
+  @Override
+public XObject getFresh()
   {
     try
     {
@@ -422,7 +437,8 @@ public class XNodeSet extends NodeSequence
    *
    * @return The nodeset as a mutableNodeset
    */
-  public NodeSetDTM mutableNodeset()
+  @Override
+public NodeSetDTM mutableNodeset()
   {
     NodeSetDTM mnl;
 
@@ -641,7 +657,8 @@ public class XNodeSet extends NodeSequence
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean lessThan(XObject obj2) throws javax.xml.transform.TransformerException
+  @Override
+public boolean lessThan(XObject obj2) throws javax.xml.transform.TransformerException
   {
     return compare(obj2, S_LT);
   }
@@ -655,7 +672,8 @@ public class XNodeSet extends NodeSequence
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean lessThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException
+  @Override
+public boolean lessThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException
   {
     return compare(obj2, S_LTE);
   }
@@ -669,7 +687,8 @@ public class XNodeSet extends NodeSequence
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean greaterThan(XObject obj2) throws javax.xml.transform.TransformerException
+  @Override
+public boolean greaterThan(XObject obj2) throws javax.xml.transform.TransformerException
   {
     return compare(obj2, S_GT);
   }
@@ -683,7 +702,8 @@ public class XNodeSet extends NodeSequence
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean greaterThanOrEqual(XObject obj2)
+  @Override
+public boolean greaterThanOrEqual(XObject obj2)
           throws javax.xml.transform.TransformerException
   {
     return compare(obj2, S_GTE);
@@ -698,7 +718,8 @@ public class XNodeSet extends NodeSequence
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean equals(XObject obj2)
+  @Override
+public boolean equals(XObject obj2)
   {
     try
     {
@@ -719,7 +740,8 @@ public class XNodeSet extends NodeSequence
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean notEquals(XObject obj2) throws javax.xml.transform.TransformerException
+  @Override
+public boolean notEquals(XObject obj2) throws javax.xml.transform.TransformerException
   {
     return compare(obj2, S_NEQ);
   }
@@ -769,7 +791,8 @@ class LessThanComparator extends Comparator
    *
    * @return True if s1 is less than s2
    */
-  boolean compareStrings(XMLString s1, XMLString s2)
+  @Override
+boolean compareStrings(XMLString s1, XMLString s2)
   {
     return s1.toDouble() < s2.toDouble();
     // return s1.compareTo(s2) < 0;
@@ -784,7 +807,8 @@ class LessThanComparator extends Comparator
    *
    * @return true if n1 is less than n2
    */
-  boolean compareNumbers(double n1, double n2)
+  @Override
+boolean compareNumbers(double n1, double n2)
   {
     return n1 < n2;
   }
@@ -805,7 +829,8 @@ class LessThanOrEqualComparator extends Comparator
    *
    * @return true if s1 is less than or equal to s2
    */
-  boolean compareStrings(XMLString s1, XMLString s2)
+  @Override
+boolean compareStrings(XMLString s1, XMLString s2)
   {
     return s1.toDouble() <= s2.toDouble();
     // return s1.compareTo(s2) <= 0;
@@ -820,7 +845,8 @@ class LessThanOrEqualComparator extends Comparator
    *
    * @return true if n1 is less than or equal to n2
    */
-  boolean compareNumbers(double n1, double n2)
+  @Override
+boolean compareNumbers(double n1, double n2)
   {
     return n1 <= n2;
   }
@@ -841,7 +867,8 @@ class GreaterThanComparator extends Comparator
    *
    * @return true if s1 is greater than s2
    */
-  boolean compareStrings(XMLString s1, XMLString s2)
+  @Override
+boolean compareStrings(XMLString s1, XMLString s2)
   {
     return s1.toDouble() > s2.toDouble();
     // return s1.compareTo(s2) > 0;
@@ -856,7 +883,8 @@ class GreaterThanComparator extends Comparator
    *
    * @return true if n1 is greater than n2
    */
-  boolean compareNumbers(double n1, double n2)
+  @Override
+boolean compareNumbers(double n1, double n2)
   {
     return n1 > n2;
   }
@@ -877,7 +905,8 @@ class GreaterThanOrEqualComparator extends Comparator
    *
    * @return true if s1 is greater than or equal to s2
    */
-  boolean compareStrings(XMLString s1, XMLString s2)
+  @Override
+boolean compareStrings(XMLString s1, XMLString s2)
   {
     return s1.toDouble() >= s2.toDouble();
     // return s1.compareTo(s2) >= 0;
@@ -892,7 +921,8 @@ class GreaterThanOrEqualComparator extends Comparator
    *
    * @return true if n1 is greater than or equal to n2
    */
-  boolean compareNumbers(double n1, double n2)
+  @Override
+boolean compareNumbers(double n1, double n2)
   {
     return n1 >= n2;
   }
@@ -913,7 +943,8 @@ class EqualComparator extends Comparator
    *
    * @return true if s1 is equal to s2
    */
-  boolean compareStrings(XMLString s1, XMLString s2)
+  @Override
+boolean compareStrings(XMLString s1, XMLString s2)
   {
     return s1.equals(s2);
   }
@@ -927,7 +958,8 @@ class EqualComparator extends Comparator
    *
    * @return true if n1 is equal to n2
    */
-  boolean compareNumbers(double n1, double n2)
+  @Override
+boolean compareNumbers(double n1, double n2)
   {
     return n1 == n2;
   }
@@ -948,7 +980,8 @@ class NotEqualComparator extends Comparator
    *
    * @return true if s1 is not equal to s2
    */
-  boolean compareStrings(XMLString s1, XMLString s2)
+  @Override
+boolean compareStrings(XMLString s1, XMLString s2)
   {
     return !s1.equals(s2);
   }
@@ -962,7 +995,8 @@ class NotEqualComparator extends Comparator
    *
    * @return true if n1 is not equal to n2
    */
-  boolean compareNumbers(double n1, double n2)
+  @Override
+boolean compareNumbers(double n1, double n2)
   {
     return n1 != n2;
   }

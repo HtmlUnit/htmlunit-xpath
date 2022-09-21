@@ -63,7 +63,8 @@ public class ChildIterator extends LocPathIterator
    * @param xctxt The XPath runtime context.
    * @return the first node out of the nodeset, or DTM.NULL.
    */
-  public int asNode(XPathContext xctxt)
+  @Override
+public int asNode(XPathContext xctxt)
     throws javax.xml.transform.TransformerException
   {
     int current = xctxt.getCurrentNode();
@@ -81,7 +82,8 @@ public class ChildIterator extends LocPathIterator
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    */
-  public int nextNode()
+  @Override
+public int nextNode()
   {
     if(m_foundLast)
       return DTM.NULL;
@@ -112,7 +114,8 @@ public class ChildIterator extends LocPathIterator
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple 
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     return net.sourceforge.htmlunit.xpath.xml.dtm.Axis.CHILD;
   }

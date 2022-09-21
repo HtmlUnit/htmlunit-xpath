@@ -43,7 +43,8 @@ public class FuncSubstring extends Function3Args
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
 
     XMLString s1 = m_arg0.execute(xctxt).xstr();
@@ -106,7 +107,8 @@ public class FuncSubstring extends Function3Args
    *
    * @throws WrongNumberArgsException
    */
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException
+  @Override
+public void checkNumberArgs(int argNum) throws WrongNumberArgsException
   {
     if (argNum < 2)
       reportWrongNumberArgs();
@@ -118,7 +120,8 @@ public class FuncSubstring extends Function3Args
    *
    * @throws WrongNumberArgsException
    */
-  protected void reportWrongNumberArgs() throws WrongNumberArgsException {
+  @Override
+protected void reportWrongNumberArgs() throws WrongNumberArgsException {
       throw new WrongNumberArgsException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_TWO_OR_THREE, null)); //"2 or 3");
   }
 }

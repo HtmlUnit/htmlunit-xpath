@@ -44,7 +44,8 @@ public class FuncNormalizeSpace extends FunctionDef1Arg
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
     XMLString s1 = getArg0AsString(xctxt);
 
@@ -63,7 +64,8 @@ public class FuncNormalizeSpace extends FunctionDef1Arg
    * @throws javax.xml.transform.TransformerException if a runtime exception 
    *         occurs.
    */
-  public void executeCharsToContentHandler(XPathContext xctxt, 
+  @Override
+public void executeCharsToContentHandler(XPathContext xctxt, 
                                               ContentHandler handler)
     throws javax.xml.transform.TransformerException,
            org.xml.sax.SAXException

@@ -70,7 +70,8 @@ public class SelfIteratorNoPredicate extends LocPathIterator
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    */
-  public int nextNode()
+  @Override
+public int nextNode()
   {
     if (m_foundLast)
       return DTM.NULL;
@@ -104,7 +105,8 @@ public class SelfIteratorNoPredicate extends LocPathIterator
    * @param xctxt The XPath runtime context.
    * @return the first node out of the nodeset, or DTM.NULL.
    */
-  public int asNode(XPathContext xctxt)
+  @Override
+public int asNode(XPathContext xctxt)
     throws javax.xml.transform.TransformerException
   {
     return xctxt.getCurrentNode();
@@ -118,7 +120,8 @@ public class SelfIteratorNoPredicate extends LocPathIterator
    *
    * @return the index of the last node that can be itterated to.
    */
-  public int getLastPos(XPathContext xctxt)
+  @Override
+public int getLastPos(XPathContext xctxt)
   {
     return 1;
   }

@@ -165,7 +165,8 @@ public interface XMLString
    * @see     java.lang.String#compareTo(java.lang.String)
    * @see     java.lang.String#equalsIgnoreCase(java.lang.String)
    */
-  public abstract boolean equals(Object anObject);
+  @Override
+public abstract boolean equals(Object anObject);
 
   /**
    * Compares this <code>String</code> to another <code>String</code>,
@@ -322,7 +323,8 @@ public interface XMLString
    *
    * @return  a hash code value for this object.
    */
-  public abstract int hashCode();
+  @Override
+public abstract int hashCode();
 
   /**
    * Returns the index within this string of the first occurrence of the
@@ -669,7 +671,8 @@ public interface XMLString
    *
    * @return  the string itself.
    */
-  public abstract String toString();
+  @Override
+public abstract String toString();
 
   /**
    * Tell if this object contains a java String object.

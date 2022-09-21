@@ -47,7 +47,8 @@ public class Operation extends Expression implements ExpressionOwner
    *
    * @return true if traversal outside the context node's subtree can occur.
    */
-  public boolean canTraverseOutsideSubtree()
+  @Override
+public boolean canTraverseOutsideSubtree()
   {
 
     if (null != m_left && m_left.canTraverseOutsideSubtree())
@@ -85,7 +86,8 @@ public class Operation extends Expression implements ExpressionOwner
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt)
+  @Override
+public XObject execute(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
 
@@ -132,6 +134,7 @@ public class Operation extends Expression implements ExpressionOwner
     /**
      * @see ExpressionOwner#getExpression()
      */
+    @Override
     public Expression getExpression()
     {
       return m_left;
@@ -140,6 +143,7 @@ public class Operation extends Expression implements ExpressionOwner
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
       exp.exprSetParent(Operation.this);
@@ -150,7 +154,8 @@ public class Operation extends Expression implements ExpressionOwner
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
     if(visitor.visitBinaryOperation(owner, this))
     {
@@ -162,7 +167,8 @@ public class Operation extends Expression implements ExpressionOwner
   /**
    * @see ExpressionOwner#getExpression()
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return m_right;
   }
@@ -170,7 +176,8 @@ public class Operation extends Expression implements ExpressionOwner
   /**
    * @see ExpressionOwner#setExpression(Expression)
    */
-  public void setExpression(Expression exp)
+  @Override
+public void setExpression(Expression exp)
   {
     exp.exprSetParent(this);
     m_right = exp;
@@ -179,7 +186,8 @@ public class Operation extends Expression implements ExpressionOwner
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!isSameClass(expr))
       return false;

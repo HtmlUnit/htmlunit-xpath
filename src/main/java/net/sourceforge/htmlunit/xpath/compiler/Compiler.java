@@ -1128,7 +1128,8 @@ private static final boolean DEBUG = false;
    * @throws TransformerException if the current ErrorListoner determines to
    *                              throw an exception.
    */
-  public void error(String msg, Object[] args) throws TransformerException
+  @Override
+public void error(String msg, Object[] args) throws TransformerException
   {
 
     java.lang.String fmsg = XSLMessages.createXPATHMessage(msg, args);

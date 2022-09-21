@@ -114,7 +114,8 @@ public class DefaultErrorHandler implements ErrorHandler, ErrorListener
    * @throws SAXException Any SAX exception, possibly
    *            wrapping another exception.
    */
-  public void warning(SAXParseException exception) throws SAXException
+  @Override
+public void warning(SAXParseException exception) throws SAXException
   {
     PrintWriter pw = getErrorWriter();
 
@@ -143,7 +144,8 @@ public class DefaultErrorHandler implements ErrorHandler, ErrorListener
    * @throws SAXException Any SAX exception, possibly
    *            wrapping another exception.
    */
-  public void error(SAXParseException exception) throws SAXException
+  @Override
+public void error(SAXParseException exception) throws SAXException
   {
     //printLocation(exception);
     // getErrorWriter().println(exception.getMessage());
@@ -170,7 +172,8 @@ public class DefaultErrorHandler implements ErrorHandler, ErrorListener
    * @throws SAXException Any SAX exception, possibly
    *            wrapping another exception.
    */
-  public void fatalError(SAXParseException exception) throws SAXException
+  @Override
+public void fatalError(SAXParseException exception) throws SAXException
   {
     // printLocation(exception);
     // getErrorWriter().println(exception.getMessage());
@@ -195,7 +198,8 @@ public class DefaultErrorHandler implements ErrorHandler, ErrorListener
    *            wrapping another exception.
    * @see javax.xml.transform.TransformerException
    */
-  public void warning(TransformerException exception) throws TransformerException
+  @Override
+public void warning(TransformerException exception) throws TransformerException
   {
     PrintWriter pw = getErrorWriter();
 
@@ -225,7 +229,8 @@ public class DefaultErrorHandler implements ErrorHandler, ErrorListener
    *            wrapping another exception.
    * @see javax.xml.transform.TransformerException
    */
-  public void error(TransformerException exception) throws TransformerException
+  @Override
+public void error(TransformerException exception) throws TransformerException
   {
     // If the m_throwExceptionOnError flag is true, rethrow the exception.
     // Otherwise report the error to System.err.
@@ -260,7 +265,8 @@ public class DefaultErrorHandler implements ErrorHandler, ErrorListener
    *            wrapping another exception.
    * @see javax.xml.transform.TransformerException
    */
-  public void fatalError(TransformerException exception) throws TransformerException
+  @Override
+public void fatalError(TransformerException exception) throws TransformerException
   {
     // If the m_throwExceptionOnError flag is true, rethrow the exception.
     // Otherwise report the error to System.err.

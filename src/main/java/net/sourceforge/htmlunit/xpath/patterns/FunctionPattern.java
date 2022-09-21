@@ -54,7 +54,8 @@ public class FunctionPattern extends StepPattern
   /**
    * Static calc of match score.
    */
-  public final void calcScore()
+  @Override
+public final void calcScore()
   {
 
     m_score = SCORE_OTHER;
@@ -82,7 +83,8 @@ public class FunctionPattern extends StepPattern
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt, int context)
+  @Override
+public XObject execute(XPathContext xctxt, int context)
           throws javax.xml.transform.TransformerException
   {
 
@@ -125,7 +127,8 @@ public class FunctionPattern extends StepPattern
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt, int context, 
+  @Override
+public XObject execute(XPathContext xctxt, int context, 
                          DTM dtm, int expType)
           throws javax.xml.transform.TransformerException
   {
@@ -168,7 +171,8 @@ public class FunctionPattern extends StepPattern
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt)
+  @Override
+public XObject execute(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
 
@@ -203,6 +207,7 @@ public class FunctionPattern extends StepPattern
     /**
      * @see ExpressionOwner#getExpression()
      */
+    @Override
     public Expression getExpression()
     {
       return m_functionExpr;
@@ -212,6 +217,7 @@ public class FunctionPattern extends StepPattern
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
       exp.exprSetParent(FunctionPattern.this);
@@ -222,7 +228,8 @@ public class FunctionPattern extends StepPattern
   /**
    * Call the visitor for the function.
    */
-  protected void callSubtreeVisitors(XPathVisitor visitor)
+  @Override
+protected void callSubtreeVisitors(XPathVisitor visitor)
   {
     m_functionExpr.callVisitors(new FunctionOwner(), visitor);
     super.callSubtreeVisitors(visitor);

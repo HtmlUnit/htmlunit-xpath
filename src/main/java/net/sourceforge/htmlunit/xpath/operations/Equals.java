@@ -42,7 +42,8 @@ public class Equals extends Operation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject operate(XObject left, XObject right)
+  @Override
+public XObject operate(XObject left, XObject right)
           throws javax.xml.transform.TransformerException
   {
     return left.equals(right) ? XBoolean.S_TRUE : XBoolean.S_FALSE;
@@ -59,7 +60,8 @@ public class Equals extends Operation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean bool(XPathContext xctxt)
+  @Override
+public boolean bool(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
     XObject left = m_left.execute(xctxt, true);

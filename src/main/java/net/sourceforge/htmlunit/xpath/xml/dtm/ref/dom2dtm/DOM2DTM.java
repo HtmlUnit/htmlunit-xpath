@@ -312,7 +312,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
   /**
    * Get the number of nodes that have been added.
    */
-  public int getNumberOfNodes()
+  @Override
+public int getNumberOfNodes()
   {
     return m_nodes.size();
   }
@@ -325,7 +326,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @return The true if a next node is found or false if
    *         there are no more nodes.
    */
-  protected boolean nextNode()
+  @Override
+protected boolean nextNode()
   {
     // Non-recursive one-fetch-at-a-time depth-first traversal with
     // attribute/namespace nodes and white-space stripping.
@@ -602,7 +604,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * @return A node representation of the DTM node.
    */
-  public Node getNode(int nodeHandle)
+  @Override
+public Node getNode(int nodeHandle)
   {
 
     int identity = makeNodeIdentity(nodeHandle);
@@ -629,7 +632,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @param identity The node identity (index).
    * @return identity+1, or DTM.NULL.
    */
-  protected int getNextNodeIdentity(int identity)
+  @Override
+protected int getNextNodeIdentity(int identity)
   {
 
     identity += 1;
@@ -749,7 +753,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *   <code>nodeName</code>) or <code>DTM.NULL</code> if there is no such
    *   attribute.
    */
-  public int getAttributeNode(int nodeHandle, String namespaceURI,
+  @Override
+public int getAttributeNode(int nodeHandle, String namespaceURI,
                               String name)
   {
 
@@ -810,7 +815,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * @return A string object that represents the string-value of the given node.
    */
-  public XMLString getStringValue(int nodeHandle)
+  @Override
+public XMLString getStringValue(int nodeHandle)
   {
 
     int type = getNodeType(nodeHandle);
@@ -953,7 +959,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * %REVIEW% Document when empty string is possible...
    * %REVIEW-COMMENT% It should never be empty, should it?
    */
-  public String getNodeName(int nodeHandle)
+  @Override
+public String getNodeName(int nodeHandle)
   {
 
     Node node = getNode(nodeHandle);
@@ -970,7 +977,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @param nodeHandle the id of the node.
    * @return String Name of this node, which may be an empty string.
    */
-  public String getNodeNameX(int nodeHandle)
+  @Override
+public String getNodeNameX(int nodeHandle)
   {
 
     String name;
@@ -1020,7 +1028,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @param nodeHandle the id of the node.
    * @return String Local name of this node.
    */
-  public String getLocalName(int nodeHandle)
+  @Override
+public String getLocalName(int nodeHandle)
   {
     if(JJK_NEWCODE)
     {
@@ -1091,7 +1100,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @return String prefix of this node's name, or "" if no explicit
    * namespace prefix was given.
    */
-  public String getPrefix(int nodeHandle)
+  @Override
+public String getPrefix(int nodeHandle)
   {
 
     String prefix;
@@ -1140,7 +1150,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @return String URI value of this node's namespace, or null if no
    * namespace was resolved.
    */
-  public String getNamespaceURI(int nodeHandle)
+  @Override
+public String getNamespaceURI(int nodeHandle)
   {
     if(JJK_NEWCODE)
     {
@@ -1229,7 +1240,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @return String Value of this node, or null if not
    * meaningful for this node type.
    */
-  public String getNodeValue(int nodeHandle)
+  @Override
+public String getNodeValue(int nodeHandle)
   {
     // The _type(nodeHandle) call was taking the lion's share of our
     // time, and was wrong anyway since it wasn't coverting handle to
@@ -1272,7 +1284,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * @return the system identifier String object, or null if there is none.
    */
-  public String getDocumentTypeDeclarationSystemIdentifier()
+  @Override
+public String getDocumentTypeDeclarationSystemIdentifier()
   {
 
     Document doc;
@@ -1303,7 +1316,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * @return the public identifier String object, or null if there is none.
    */
-  public String getDocumentTypeDeclarationPublicIdentifier()
+  @Override
+public String getDocumentTypeDeclarationPublicIdentifier()
   {
 
     Document doc;
@@ -1343,7 +1357,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @param elementId The unique <code>id</code> value for an element.
    * @return The handle of the matching element.
    */
-  public int getElementById(String elementId)
+  @Override
+public int getElementById(String elementId)
   {
 
     Document doc = (m_root.getNodeType() == Node.DOCUMENT_NODE)
@@ -1411,7 +1426,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @return String containing the URI of the Unparsed Entity, or an
    * empty string if no such entity exists.
    */
-  public String getUnparsedEntityURI(String name)
+  @Override
+public String getUnparsedEntityURI(String name)
   {
 
     String url = "";
@@ -1471,7 +1487,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @return <code>true</code> if the attribute was specified;
    *         <code>false</code> if it was defaulted.
    */
-  public boolean isAttributeSpecified(int attributeHandle)
+  @Override
+public boolean isAttributeSpecified(int attributeHandle)
   {
     int type = getNodeType(attributeHandle);
 
@@ -1502,7 +1519,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * the IncrmentalSAXSource if we're bound to one and should receive
    * the SAX stream via it for incremental build purposes...
    * */
-  public org.xml.sax.ContentHandler getContentHandler()
+  @Override
+public org.xml.sax.ContentHandler getContentHandler()
   {
       return null;
   }
@@ -1517,7 +1535,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * the IncrementalSAXSource if we're bound to one and should receive
    * the SAX stream via it for incremental build purposes...
    */
-  public org.xml.sax.ext.LexicalHandler getLexicalHandler()
+  @Override
+public org.xml.sax.ext.LexicalHandler getLexicalHandler()
   {
 
     return null;
@@ -1529,7 +1548,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * @return null if this model doesn't respond to SAX entity ref events.
    */
-  public org.xml.sax.EntityResolver getEntityResolver()
+  @Override
+public org.xml.sax.EntityResolver getEntityResolver()
   {
 
     return null;
@@ -1540,7 +1560,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * @return null if this model doesn't respond to SAX dtd events.
    */
-  public org.xml.sax.DTDHandler getDTDHandler()
+  @Override
+public org.xml.sax.DTDHandler getDTDHandler()
   {
 
     return null;
@@ -1551,7 +1572,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * @return null if this model doesn't respond to SAX error events.
    */
-  public org.xml.sax.ErrorHandler getErrorHandler()
+  @Override
+public org.xml.sax.ErrorHandler getErrorHandler()
   {
 
     return null;
@@ -1562,7 +1584,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * @return null if this model doesn't respond to SAX Decl events.
    */
-  public org.xml.sax.ext.DeclHandler getDeclHandler()
+  @Override
+public org.xml.sax.ext.DeclHandler getDeclHandler()
   {
 
     return null;
@@ -1573,7 +1596,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * transformation and the parse run simultaneously. Guidance to the
    * DTMManager.
    * */
-  public boolean needsTwoThreads()
+  @Override
+public boolean needsTwoThreads()
   {
     return false;
   }
@@ -1593,7 +1617,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * @throws org.xml.sax.SAXException
    */
-  public void dispatchCharactersEvents(
+  @Override
+public void dispatchCharactersEvents(
           int nodeHandle, org.xml.sax.ContentHandler ch,
           boolean normalize)
             throws org.xml.sax.SAXException
@@ -1698,7 +1723,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    *
    * @throws org.xml.sax.SAXException
    */
-  public void dispatchToEvents(int nodeHandle, org.xml.sax.ContentHandler ch)
+  @Override
+public void dispatchToEvents(int nodeHandle, org.xml.sax.ContentHandler ch)
           throws org.xml.sax.SAXException
   {
     TreeWalker treeWalker = m_walker;
@@ -1734,7 +1760,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @param property a <code>String</code> value
    * @param value an <code>Object</code> value
    */
-  public void setProperty(String property, Object value)
+  @Override
+public void setProperty(String property, Object value)
   {
   }
 
@@ -1745,7 +1772,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators
    * @param node an <code>int</code> value
    * @return null
    */
-  public SourceLocator getSourceLocatorFor(int node)
+  @Override
+public SourceLocator getSourceLocatorFor(int node)
   {
     return null;
   }

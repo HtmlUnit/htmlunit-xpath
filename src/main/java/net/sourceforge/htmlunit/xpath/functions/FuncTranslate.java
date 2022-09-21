@@ -40,7 +40,8 @@ public class FuncTranslate extends Function3Args
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
 
     String theFirstString = m_arg0.execute(xctxt).str();

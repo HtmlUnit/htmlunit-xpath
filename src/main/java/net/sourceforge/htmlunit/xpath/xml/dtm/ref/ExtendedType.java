@@ -93,6 +93,7 @@ public final class ExtendedType
     /**
      * Override the hashCode() method in the Object class
      */
+    @Override
     public int hashCode()
     {
       return hash;

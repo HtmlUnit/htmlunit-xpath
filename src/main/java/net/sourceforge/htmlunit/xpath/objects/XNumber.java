@@ -68,7 +68,8 @@ public class XNumber extends XObject
    *
    * @return node type CLASS_NUMBER 
    */
-  public int getType()
+  @Override
+public int getType()
   {
     return CLASS_NUMBER;
   }
@@ -79,7 +80,8 @@ public class XNumber extends XObject
    *
    * @return type string "#NUMBER" 
    */
-  public String getTypeString()
+  @Override
+public String getTypeString()
   {
     return "#NUMBER";
   }
@@ -89,7 +91,8 @@ public class XNumber extends XObject
    *
    * @return the value of the XNumber object
    */
-  public double num()
+  @Override
+public double num()
   {
     return m_val;
   }
@@ -101,7 +104,8 @@ public class XNumber extends XObject
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public double num(XPathContext xctxt) 
+  @Override
+public double num(XPathContext xctxt) 
     throws javax.xml.transform.TransformerException
   {
 
@@ -113,7 +117,8 @@ public class XNumber extends XObject
    *
    * @return false if the value is NaN or equal to 0.0
    */
-  public boolean bool()
+  @Override
+public boolean bool()
   {
     return (Double.isNaN(m_val) || (m_val == 0.0)) ? false : true;
   }
@@ -274,7 +279,8 @@ public class XNumber extends XObject
    * @return "NaN" if the number is NaN, Infinity or -Infinity if
    * the number is infinite or the string value of the number.
    */
-  public String str()
+  @Override
+public String str()
   {
 
     if (Double.isNaN(m_val))
@@ -374,7 +380,8 @@ public class XNumber extends XObject
    *
    * @return The value of this XNumber as a Double object
    */
-  public Object object()
+  @Override
+public Object object()
   {
     if(null == m_obj)
       setObject(new Double(m_val));
@@ -390,7 +397,8 @@ public class XNumber extends XObject
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean equals(XObject obj2)
+  @Override
+public boolean equals(XObject obj2)
   {
 
     // In order to handle the 'all' semantics of 
@@ -420,7 +428,8 @@ public class XNumber extends XObject
    *
    * @return true if the expression represents a stable number.
    */
-  public boolean isStableNumber()
+  @Override
+public boolean isStableNumber()
   {
     return true;
   }
@@ -428,7 +437,8 @@ public class XNumber extends XObject
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
     visitor.visitNumberLiteral(owner, this);
   }

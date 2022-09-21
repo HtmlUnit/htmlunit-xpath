@@ -47,7 +47,9 @@ final  DTM getDTM(){return m_dtm;}
 public final  int getDTMIdentity(){return m_dtmIdentity;}
 final  XPathContext getXPathContext(){return m_xctxt;}
 
+@Override
 public final int hashCode() { return m_dtmIdentity; }
+@Override
 public final boolean equals(Object obj) {
    if (obj instanceof DTMXRTreeFrag) {
        return m_dtmIdentity == ((DTMXRTreeFrag)obj).getDTMIdentity();

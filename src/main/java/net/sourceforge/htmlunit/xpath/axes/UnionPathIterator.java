@@ -64,7 +64,8 @@ public class UnionPathIterator extends LocPathIterator
    * @param context The XPath runtime context for this
    * transformation.
    */
-  public void setRoot(int context, Object environment)
+  @Override
+public void setRoot(int context, Object environment)
   {
     super.setRoot(context, environment);
 
@@ -128,7 +129,8 @@ public class UnionPathIterator extends LocPathIterator
    * <code>nextNode</code> or<code>previousNode</code> will raise the
    * exception INVALID_STATE_ERR.
    */
-  public void detach()
+  @Override
+public void detach()
   {
           if(m_allowDetach && null != m_iterators){
                   int n = m_iterators.length;
@@ -228,7 +230,8 @@ public class UnionPathIterator extends LocPathIterator
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
-  public int getAnalysisBits()
+  @Override
+public int getAnalysisBits()
   {
     int bits = 0;
 
@@ -276,7 +279,8 @@ public class UnionPathIterator extends LocPathIterator
    *
    * @throws CloneNotSupportedException
    */
-  public Object clone() throws CloneNotSupportedException
+  @Override
+public Object clone() throws CloneNotSupportedException
   {
 
     UnionPathIterator clone = (UnionPathIterator) super.clone();
@@ -379,7 +383,8 @@ public class UnionPathIterator extends LocPathIterator
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    */
-  public int nextNode()
+  @Override
+public int nextNode()
   {
     if(m_foundLast)
       return DTM.NULL;
@@ -450,7 +455,8 @@ public class UnionPathIterator extends LocPathIterator
    * in the stack frame (but variables above the globalsTop value will need
    * to be offset to the current stack frame).
    */
-  public void fixupVariables(java.util.Vector vars, int globalsSize)
+  @Override
+public void fixupVariables(java.util.Vector vars, int globalsSize)
   {
     for (int i = 0; i < m_exprs.length; i++)
     {
@@ -482,7 +488,8 @@ public class UnionPathIterator extends LocPathIterator
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     // Could be smarter.
     return -1;
@@ -500,6 +507,7 @@ public class UnionPathIterator extends LocPathIterator
     /**
      * @see ExpressionOwner#getExpression()
      */
+    @Override
     public Expression getExpression()
     {
       return m_exprs[m_index];
@@ -508,6 +516,7 @@ public class UnionPathIterator extends LocPathIterator
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
 
@@ -534,7 +543,8 @@ public class UnionPathIterator extends LocPathIterator
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
        if(visitor.visitUnionPath(owner, this))
        {
@@ -552,6 +562,7 @@ public class UnionPathIterator extends LocPathIterator
     /**
      * @see Expression#deepEquals(Expression)
      */
+    @Override
     public boolean deepEquals(Expression expr)
     {
       if (!super.deepEquals(expr))

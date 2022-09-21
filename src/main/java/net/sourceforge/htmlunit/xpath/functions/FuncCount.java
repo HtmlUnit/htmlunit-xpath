@@ -41,7 +41,8 @@ public class FuncCount extends FunctionOneArg
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
 
 //    DTMIterator nl = m_arg0.asIterator(xctxt, xctxt.getCurrentNode());

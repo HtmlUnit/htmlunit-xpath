@@ -470,7 +470,8 @@ public class XSLTErrorResources extends ListResourceBundle
    *
    * @return The int to message lookup table.
    */
-  public Object[][] getContents()
+  @Override
+public Object[][] getContents()
   {
     return new Object[][] {
 

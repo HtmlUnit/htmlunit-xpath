@@ -47,7 +47,8 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt)
+  @Override
+public XObject execute(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
    XObject m_selected;
@@ -68,7 +69,8 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    * 
    * In general, detach should only be called once on the object.
    */
-  public void detach()
+  @Override
+public void detach()
   {
   throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_DETACH_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"detach() not supported by XRTreeFragSelectWrapper!");
   }
@@ -78,7 +80,8 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    *
    * @return The result tree fragment as a number or NaN
    */
-  public double num()
+  @Override
+public double num()
     throws javax.xml.transform.TransformerException
   {
 
@@ -91,7 +94,8 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    *
    * @return The document fragment node data or the empty string. 
    */
-  public XMLString xstr()
+  @Override
+public XMLString xstr()
   {
   throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_XSTR_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"xstr() not supported by XRTreeFragSelectWrapper!");
   }
@@ -101,7 +105,8 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    *
    * @return The document fragment node data or the empty string. 
    */
-  public String str()
+  @Override
+public String str()
   {
   throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_STR_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"str() not supported by XRTreeFragSelectWrapper!");
   }
@@ -111,7 +116,8 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    *
    * @return the string type
    */
-  public int getType()
+  @Override
+public int getType()
   {
     return CLASS_STRING;
   }
@@ -121,7 +127,8 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    *
    * @return The document fragment this wraps
    */
-  public int rtf()
+  @Override
+public int rtf()
   {
     throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_RTF_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"rtf() not supported by XRTreeFragSelectWrapper!");
   }
@@ -131,7 +138,8 @@ public class XRTreeFragSelectWrapper extends XRTreeFrag implements Cloneable
    *
    * @return The document fragment as a DTMIterator
    */
-  public DTMIterator asNodeIterator()
+  @Override
+public DTMIterator asNodeIterator()
   {
     throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_RTF_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER, null)); //"asNodeIterator() not supported by XRTreeFragSelectWrapper!");
   }

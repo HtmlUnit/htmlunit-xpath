@@ -41,7 +41,8 @@ public class FuncPosition extends Function
    * Figure out if we're executing a toplevel expression.
    * If so, we can't be inside of a predicate. 
    */
-  public void postCompileStep(Compiler compiler)
+  @Override
+public void postCompileStep(Compiler compiler)
   {
     m_isTopLevel = compiler.getLocationPathDepth() == -1;
   }
@@ -117,7 +118,8 @@ public class FuncPosition extends Function
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
     double pos = (double) getPositionInContextNodeList(xctxt);
     

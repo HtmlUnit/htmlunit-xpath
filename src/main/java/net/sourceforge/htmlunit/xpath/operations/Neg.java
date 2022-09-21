@@ -41,7 +41,8 @@ public class Neg extends UnaryOperation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject operate(XObject right) throws javax.xml.transform.TransformerException
+  @Override
+public XObject operate(XObject right) throws javax.xml.transform.TransformerException
   {
     return new XNumber(-right.num());
   }
@@ -55,7 +56,8 @@ public class Neg extends UnaryOperation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public double num(XPathContext xctxt)
+  @Override
+public double num(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
 

@@ -194,7 +194,8 @@ public final class BoolStack implements Cloneable
     m_values = newVector;
   }
 
-  public Object clone()
+  @Override
+public Object clone()
     throws CloneNotSupportedException
   {
     return super.clone();

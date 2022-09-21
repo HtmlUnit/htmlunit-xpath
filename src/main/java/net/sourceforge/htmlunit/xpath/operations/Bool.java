@@ -41,7 +41,8 @@ public class Bool extends UnaryOperation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject operate(XObject right) throws javax.xml.transform.TransformerException
+  @Override
+public XObject operate(XObject right) throws javax.xml.transform.TransformerException
   {
 
     if (XObject.CLASS_BOOLEAN == right.getType())
@@ -59,7 +60,8 @@ public class Bool extends UnaryOperation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean bool(XPathContext xctxt)
+  @Override
+public boolean bool(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
     return m_right.bool(xctxt);

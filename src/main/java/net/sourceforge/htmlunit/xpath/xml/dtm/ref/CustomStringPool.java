@@ -62,6 +62,7 @@ public class CustomStringPool extends DTMStringPool {
                 //removeAllElements();
         }
 
+        @Override
         public void removeAllElements()
         {
                 m_intToString.removeAllElements();
@@ -73,6 +74,7 @@ public class CustomStringPool extends DTMStringPool {
          * @throws java.lang.ArrayIndexOutOfBoundsException
          *  if index doesn't map to a string.
          * */
+        @Override
         public String indexToString(int i)
         throws java.lang.ArrayIndexOutOfBoundsException
         {
@@ -80,6 +82,7 @@ public class CustomStringPool extends DTMStringPool {
         }
 
         /** @return integer index uniquely identifying the value of this string. */
+        @Override
         public int stringToIndex(String s)
         {
                 if (s==null) return NULL;

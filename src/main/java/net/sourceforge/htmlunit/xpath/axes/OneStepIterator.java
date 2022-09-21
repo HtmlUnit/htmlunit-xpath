@@ -90,7 +90,8 @@ public class OneStepIterator extends ChildTestIterator
    * @param context The XPath runtime context for this
    * transformation.
    */
-  public void setRoot(int context, Object environment)
+  @Override
+public void setRoot(int context, Object environment)
   {
     super.setRoot(context, environment);
     if(m_axis > -1)
@@ -105,7 +106,8 @@ public class OneStepIterator extends ChildTestIterator
    * <code>nextNode</code> or<code>previousNode</code> will raise the
    * exception INVALID_STATE_ERR.
    */
-  public void detach()
+  @Override
+public void detach()
   {
     if(m_allowDetach)
     {
@@ -120,7 +122,8 @@ public class OneStepIterator extends ChildTestIterator
   /**
    * Get the next node via getFirstAttribute && getNextAttribute.
    */
-  protected int getNextNode()
+  @Override
+protected int getNextNode()
   {
     return m_lastFetched = m_iterator.next();
   }
@@ -132,7 +135,8 @@ public class OneStepIterator extends ChildTestIterator
    *
    * @throws CloneNotSupportedException
    */
-  public Object clone() throws CloneNotSupportedException
+  @Override
+public Object clone() throws CloneNotSupportedException
   {
     // Do not access the location path itterator during this operation!
 
@@ -153,7 +157,8 @@ public class OneStepIterator extends ChildTestIterator
    *
    *  @throws CloneNotSupportedException
    */
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException
+  @Override
+public DTMIterator cloneWithReset() throws CloneNotSupportedException
   {
 
     OneStepIterator clone = (OneStepIterator) super.cloneWithReset();
@@ -169,7 +174,8 @@ public class OneStepIterator extends ChildTestIterator
    *
    * @return true for this class.
    */
-  public boolean isReverseAxes()
+  @Override
+public boolean isReverseAxes()
   {
     return m_iterator.isReverse();
   }
@@ -185,7 +191,8 @@ public class OneStepIterator extends ChildTestIterator
    *
    * @return The pridicate index, or -1.
    */
-  protected int getProximityPosition(int predicateIndex)
+  @Override
+protected int getProximityPosition(int predicateIndex)
   {
     if(!isReverseAxes())
       return super.getProximityPosition(predicateIndex);
@@ -240,7 +247,8 @@ public class OneStepIterator extends ChildTestIterator
    *
    * @return The number of nodes in the list, always greater or equal to zero.
    */
-  public int getLength()
+  @Override
+public int getLength()
   {
     if(!isReverseAxes())
       return super.getLength();
@@ -291,7 +299,8 @@ public class OneStepIterator extends ChildTestIterator
    *
    * @param i The predicate index.
    */
-  protected void countProximityPosition(int i)
+  @Override
+protected void countProximityPosition(int i)
   {
     if(!isReverseAxes())
       super.countProximityPosition(i);
@@ -302,7 +311,8 @@ public class OneStepIterator extends ChildTestIterator
   /**
    * Reset the iterator.
    */
-  public void reset()
+  @Override
+public void reset()
   {
 
     super.reset();
@@ -316,7 +326,8 @@ public class OneStepIterator extends ChildTestIterator
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     return m_axis;
   }
@@ -324,7 +335,8 @@ public class OneStepIterator extends ChildTestIterator
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!super.deepEquals(expr))
       return false;

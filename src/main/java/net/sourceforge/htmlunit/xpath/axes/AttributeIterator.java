@@ -51,7 +51,8 @@ public class AttributeIterator extends ChildTestIterator
   /**
    * Get the next node via getFirstAttribute && getNextAttribute.
    */
-  protected int getNextNode()
+  @Override
+protected int getNextNode()
   {
     m_lastFetched = (DTM.NULL == m_lastFetched)
                      ? m_cdtm.getFirstAttribute(m_context)
@@ -65,7 +66,8 @@ public class AttributeIterator extends ChildTestIterator
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple 
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     return net.sourceforge.htmlunit.xpath.xml.dtm.Axis.ATTRIBUTE;
   }

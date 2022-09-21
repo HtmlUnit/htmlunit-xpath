@@ -360,7 +360,8 @@ public static final String ER_IGNORABLE_WHITESPACE_NOT_HANDLED =
    *
    * @return The association list.
    */
-  public Object[][] getContents()
+  @Override
+public Object[][] getContents()
   {
     return new Object[][]{
 

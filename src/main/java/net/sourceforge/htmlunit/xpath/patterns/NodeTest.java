@@ -215,7 +215,8 @@ public class NodeTest extends Expression
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!isSameClass(expr))
       return false;
@@ -522,7 +523,8 @@ public class NodeTest extends Expression
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt, int context)
+  @Override
+public XObject execute(XPathContext xctxt, int context)
           throws javax.xml.transform.TransformerException
   {
 
@@ -596,7 +598,8 @@ public class NodeTest extends Expression
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt, int context,
+  @Override
+public XObject execute(XPathContext xctxt, int context,
                          DTM dtm, int expType)
           throws javax.xml.transform.TransformerException
   {
@@ -666,7 +669,8 @@ public class NodeTest extends Expression
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt)
+  @Override
+public XObject execute(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
     return execute(xctxt, xctxt.getCurrentNode());
@@ -683,7 +687,8 @@ public class NodeTest extends Expression
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
     assertion(false, "callVisitors should not be called for this object!!!");
   }

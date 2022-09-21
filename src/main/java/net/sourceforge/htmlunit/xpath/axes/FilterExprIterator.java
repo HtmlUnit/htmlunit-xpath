@@ -65,7 +65,8 @@ public class FilterExprIterator extends BasicTestIterator
    * @param context The XPath runtime context for this
    * transformation.
    */
-  public void setRoot(int context, Object environment)
+  @Override
+public void setRoot(int context, Object environment)
   {
     super.setRoot(context, environment);
 
@@ -79,7 +80,8 @@ public class FilterExprIterator extends BasicTestIterator
    * Get the next node via getNextXXX.  Bottlenecked for derived class override.
    * @return The next node on the axis, or DTM.NULL.
    */
-  protected int getNextNode()
+  @Override
+protected int getNextNode()
   {
     if (null != m_exprObj)
     {
@@ -96,7 +98,8 @@ public class FilterExprIterator extends BasicTestIterator
    * any computational resources and placing the iterator in the INVALID
    * state.
    */
-  public void detach()
+  @Override
+public void detach()
   {
     super.detach();
     m_exprObj.detach();
@@ -124,7 +127,8 @@ public class FilterExprIterator extends BasicTestIterator
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
-  public int getAnalysisBits()
+  @Override
+public int getAnalysisBits()
   {
     if (null != m_expr && m_expr instanceof PathComponent)
     {
@@ -140,7 +144,8 @@ public class FilterExprIterator extends BasicTestIterator
    *
    * @return true as a default.
    */
-  public boolean isDocOrdered()
+  @Override
+public boolean isDocOrdered()
   {
     return m_exprObj.isDocOrdered();
   }
@@ -150,6 +155,7 @@ public class FilterExprIterator extends BasicTestIterator
     /**
     * @see ExpressionOwner#getExpression()
     */
+    @Override
     public Expression getExpression()
     {
       return m_expr;
@@ -158,6 +164,7 @@ public class FilterExprIterator extends BasicTestIterator
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
       exp.exprSetParent(FilterExprIterator.this);
@@ -173,7 +180,8 @@ public class FilterExprIterator extends BasicTestIterator
    *
    * @param visitor The visitor whose appropriate method will be called.
    */
-  public void callPredicateVisitors(XPathVisitor visitor)
+  @Override
+public void callPredicateVisitors(XPathVisitor visitor)
   {
     m_expr.callVisitors(new filterExprOwner(), visitor);
 
@@ -183,7 +191,8 @@ public class FilterExprIterator extends BasicTestIterator
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if (!super.deepEquals(expr))
       return false;

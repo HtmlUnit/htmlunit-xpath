@@ -101,6 +101,7 @@ public class DTMAxisIterNodeList extends DTMNodeListBase {
      *   <code>NodeList</code>, or <code>null</code> if that is not a valid 
      *   index.
      */
+    @Override
     public Node item(int index) {
         if (m_iter != null) {
             int node;
@@ -129,6 +130,7 @@ public class DTMAxisIterNodeList extends DTMNodeListBase {
      * The number of nodes in the list. The range of valid child node indices 
      * is 0 to <code>length-1</code> inclusive. 
      */
+    @Override
     public int getLength() {
         if (m_last == -1) {
             int node;

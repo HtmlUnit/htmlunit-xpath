@@ -40,7 +40,8 @@ public class FuncRound extends FunctionOneArg
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
           final XObject obj = m_arg0.execute(xctxt);
           final double val= obj.num();

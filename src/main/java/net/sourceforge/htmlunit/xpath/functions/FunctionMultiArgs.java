@@ -59,7 +59,8 @@ public class FunctionMultiArgs extends Function3Args
    * @throws WrongNumberArgsException If a derived class determines that the
    * number of arguments is incorrect.
    */
-  public void setArg(Expression arg, int argNum)
+  @Override
+public void setArg(Expression arg, int argNum)
           throws WrongNumberArgsException
   {
 
@@ -95,7 +96,8 @@ public class FunctionMultiArgs extends Function3Args
    *
    * @throws WrongNumberArgsException
    */
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException{}
+  @Override
+public void checkNumberArgs(int argNum) throws WrongNumberArgsException{}
 
   /**
    * Constructs and throws a WrongNumberArgException with the appropriate
@@ -104,7 +106,8 @@ public class FunctionMultiArgs extends Function3Args
    *
    * @throws WrongNumberArgsException
    */
-  protected void reportWrongNumberArgs() throws WrongNumberArgsException {
+  @Override
+protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     String fMsg = XSLMessages.createXPATHMessage(
         XPATHErrorResources.ER_INCORRECT_PROGRAMMER_ASSERTION,
         new Object[]{ "Programmer's assertion:  the method FunctionMultiArgs.reportWrongNumberArgs() should never be called." });
@@ -118,7 +121,8 @@ public class FunctionMultiArgs extends Function3Args
    *
    * @return true if traversal outside the context node's subtree can occur.
    */
-  public boolean canTraverseOutsideSubtree()
+  @Override
+public boolean canTraverseOutsideSubtree()
   {
 
     if (super.canTraverseOutsideSubtree())
@@ -149,6 +153,7 @@ public class FunctionMultiArgs extends Function3Args
     /**
      * @see ExpressionOwner#getExpression()
      */
+    @Override
     public Expression getExpression()
     {
       return m_args[m_argIndex];
@@ -158,6 +163,7 @@ public class FunctionMultiArgs extends Function3Args
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
       exp.exprSetParent(FunctionMultiArgs.this);
@@ -169,6 +175,7 @@ public class FunctionMultiArgs extends Function3Args
     /**
      * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
      */
+    @Override
     public void callArgVisitors(XPathVisitor visitor)
     {
       super.callArgVisitors(visitor);
@@ -185,6 +192,7 @@ public class FunctionMultiArgs extends Function3Args
     /**
      * @see Expression#deepEquals(Expression)
      */
+    @Override
     public boolean deepEquals(Expression expr)
     {
       if (!super.deepEquals(expr))

@@ -42,7 +42,8 @@ public class Or extends Operation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
 
     XObject expr1 = m_left.execute(xctxt);
@@ -66,7 +67,8 @@ public class Or extends Operation
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean bool(XPathContext xctxt)
+  @Override
+public boolean bool(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
     return m_left.bool(xctxt) || m_right.bool(xctxt);

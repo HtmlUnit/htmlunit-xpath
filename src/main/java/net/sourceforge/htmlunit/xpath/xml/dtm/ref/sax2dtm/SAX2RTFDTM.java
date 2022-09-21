@@ -161,7 +161,8 @@ public class SAX2RTFDTM extends SAX2DTM
    *  @return int Node handle of Document node, or null if this DTM does not
    *  contain an "active" document.
    * */
-  public int getDocument()
+  @Override
+public int getDocument()
   {
     return makeNodeHandle(m_currentDocumentNode);
   }
@@ -177,7 +178,8 @@ public class SAX2RTFDTM extends SAX2DTM
    * @param nodeHandle the id of the node.
    * @return int Node handle of owning document
    */
-  public int getDocumentRoot(int nodeHandle)
+  @Override
+public int getDocumentRoot(int nodeHandle)
   {
     for (int id=makeNodeIdentity(nodeHandle); id!=NULL; id=_parent(id)) {
       if (_type(id)==DTM.DOCUMENT_NODE) {
@@ -220,7 +222,8 @@ public class SAX2RTFDTM extends SAX2DTM
    *            wrapping another exception.
    * @see org.xml.sax.ContentHandler#startDocument
    * */
-  public void startDocument() throws SAXException
+  @Override
+public void startDocument() throws SAXException
   {
     // Re-initialize the tree append process
     m_endDocumentOccured = false;
@@ -244,7 +247,8 @@ public class SAX2RTFDTM extends SAX2DTM
    *            wrapping another exception.
    * @see org.xml.sax.ContentHandler#endDocument
    * */
-  public void endDocument() throws SAXException
+  @Override
+public void endDocument() throws SAXException
   {
     charactersFlush();
 

@@ -68,7 +68,8 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator
    *
    * @return The root node of the iteration.
    */
-  public int getStartNode()
+  @Override
+public int getStartNode()
   {
     return _startNode;
   }
@@ -77,7 +78,8 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator
    * @return A DTMAxisIterator which has been reset to the start node,
    * which may or may not be the same as this iterator.
    * */
-  public DTMAxisIterator reset()
+  @Override
+public DTMAxisIterator reset()
   {
 
     final boolean temp = _isRestartable;
@@ -119,7 +121,8 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator
    *
    * @return The number of nodes in this iterator (forward) or 1 (reverse).
    */
-  public int getLast()
+  @Override
+public int getLast()
   {
 
     if (_last == -1)    // Not previously established
@@ -152,7 +155,8 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator
    * @return The position of the current node within the set, as defined by
    * XPath. Note that this is one-based, not zero-based.
    */
-  public int getPosition()
+  @Override
+public int getPosition()
   {
     return _position == 0 ? 1 : _position;
   }
@@ -160,7 +164,8 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator
   /**
    * @return true if this iterator has a reversed axis, else false
    */
-  public boolean isReverse()
+  @Override
+public boolean isReverse()
   {
     return false;
   }
@@ -172,7 +177,8 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator
    *
    * @return a deep copy of this iterator.
    */
-  public DTMAxisIterator cloneIterator()
+  @Override
+public DTMAxisIterator cloneIterator()
   {
 
     try
@@ -253,7 +259,8 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator
     return -1;
   }
   
-  public void setRestartable(boolean isRestartable) {
+  @Override
+public void setRestartable(boolean isRestartable) {
     _isRestartable = isRestartable;
   }  
 
@@ -263,7 +270,8 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator
    * @param position The position
    * @return The node at the given position.
    */
-  public int getNodeByPosition(int position)
+  @Override
+public int getNodeByPosition(int position)
   {
     if (position > 0) {
       final int pos = isReverse() ? getLast() - position + 1

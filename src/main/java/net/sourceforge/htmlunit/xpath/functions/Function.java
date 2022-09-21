@@ -94,7 +94,8 @@ public abstract class Function extends Expression
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
 
     // Programmer's assert.  (And, no, I don't want the method to be abstract).
@@ -114,7 +115,8 @@ public abstract class Function extends Expression
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
     if(visitor.visitFunction(owner, this))
     {
@@ -125,7 +127,8 @@ public abstract class Function extends Expression
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!isSameClass(expr))
       return false;

@@ -57,7 +57,8 @@ public class FunctionOneArg extends Function implements ExpressionOwner
    *
    * @throws WrongNumberArgsException If the argNum parameter is greater than 0.
    */
-  public void setArg(Expression arg, int argNum)
+  @Override
+public void setArg(Expression arg, int argNum)
           throws WrongNumberArgsException
   {
 
@@ -78,7 +79,8 @@ public class FunctionOneArg extends Function implements ExpressionOwner
    *
    * @throws WrongNumberArgsException
    */
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException
+  @Override
+public void checkNumberArgs(int argNum) throws WrongNumberArgsException
   {
     if (argNum != 1)
       reportWrongNumberArgs();
@@ -90,7 +92,8 @@ public class FunctionOneArg extends Function implements ExpressionOwner
    *
    * @throws WrongNumberArgsException
    */
-  protected void reportWrongNumberArgs() throws WrongNumberArgsException {
+  @Override
+protected void reportWrongNumberArgs() throws WrongNumberArgsException {
       throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("one", null));
   }
   
@@ -100,7 +103,8 @@ public class FunctionOneArg extends Function implements ExpressionOwner
    * 
    * @return true if traversal outside the context node's subtree can occur.
    */
-   public boolean canTraverseOutsideSubtree()
+   @Override
+public boolean canTraverseOutsideSubtree()
    {
     return m_arg0.canTraverseOutsideSubtree();
    }
@@ -108,7 +112,8 @@ public class FunctionOneArg extends Function implements ExpressionOwner
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callArgVisitors(XPathVisitor visitor)
+  @Override
+public void callArgVisitors(XPathVisitor visitor)
   {
     if(null != m_arg0)
       m_arg0.callVisitors(this, visitor);
@@ -118,7 +123,8 @@ public class FunctionOneArg extends Function implements ExpressionOwner
   /**
    * @see ExpressionOwner#getExpression()
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return m_arg0;
   }
@@ -126,7 +132,8 @@ public class FunctionOneArg extends Function implements ExpressionOwner
   /**
    * @see ExpressionOwner#setExpression(Expression)
    */
-  public void setExpression(Expression exp)
+  @Override
+public void setExpression(Expression exp)
   {
     exp.exprSetParent(this);
     m_arg0 = exp;
@@ -135,7 +142,8 @@ public class FunctionOneArg extends Function implements ExpressionOwner
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!super.deepEquals(expr))
       return false;

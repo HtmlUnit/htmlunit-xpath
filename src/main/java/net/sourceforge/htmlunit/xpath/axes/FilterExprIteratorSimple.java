@@ -72,7 +72,8 @@ public class FilterExprIteratorSimple extends LocPathIterator
    * @param context The XPath runtime context for this
    * transformation.
    */
-  public void setRoot(int context, Object environment)
+  @Override
+public void setRoot(int context, Object environment)
   {
     super.setRoot(context, environment);
     m_exprObj = executeFilterExpr(context, m_execContext, getPrefixResolver(),
@@ -136,7 +137,8 @@ public class FilterExprIteratorSimple extends LocPathIterator
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    */
-  public int nextNode()
+  @Override
+public int nextNode()
   {
     if(m_foundLast)
       return DTM.NULL;
@@ -169,7 +171,8 @@ public class FilterExprIteratorSimple extends LocPathIterator
    * any computational resources and placing the iterator in the INVALID
    * state.
    */
-  public void detach()
+  @Override
+public void detach()
   {
     if(m_allowDetach)
     {
@@ -200,7 +203,8 @@ public class FilterExprIteratorSimple extends LocPathIterator
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
-  public int getAnalysisBits()
+  @Override
+public int getAnalysisBits()
   {
     if (null != m_expr && m_expr instanceof PathComponent)
     {
@@ -216,7 +220,8 @@ public class FilterExprIteratorSimple extends LocPathIterator
    *
    * @return true as a default.
    */
-  public boolean isDocOrdered()
+  @Override
+public boolean isDocOrdered()
   {
     return m_exprObj.isDocOrdered();
   }
@@ -226,6 +231,7 @@ public class FilterExprIteratorSimple extends LocPathIterator
     /**
     * @see ExpressionOwner#getExpression()
     */
+    @Override
     public Expression getExpression()
     {
       return m_expr;
@@ -234,6 +240,7 @@ public class FilterExprIteratorSimple extends LocPathIterator
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
       exp.exprSetParent(FilterExprIteratorSimple.this);
@@ -249,7 +256,8 @@ public class FilterExprIteratorSimple extends LocPathIterator
    *
    * @param visitor The visitor whose appropriate method will be called.
    */
-  public void callPredicateVisitors(XPathVisitor visitor)
+  @Override
+public void callPredicateVisitors(XPathVisitor visitor)
   {
     m_expr.callVisitors(new filterExprOwner(), visitor);
 
@@ -259,7 +267,8 @@ public class FilterExprIteratorSimple extends LocPathIterator
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if (!super.deepEquals(expr))
       return false;
@@ -277,7 +286,8 @@ public class FilterExprIteratorSimple extends LocPathIterator
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     if(null != m_exprObj)
       return m_exprObj.getAxis();

@@ -104,7 +104,8 @@ public class SAXSourceLocator extends LocatorImpl
    *         null if none is available.
    * @see #getSystemId
    */
-  public String getPublicId()
+  @Override
+public String getPublicId()
   {
     return (null == m_locator) ? super.getPublicId() : m_locator.getPublicId();
   }
@@ -123,7 +124,8 @@ public class SAXSourceLocator extends LocatorImpl
    *         if none is available.
    * @see #getPublicId
    */
-  public String getSystemId()
+  @Override
+public String getSystemId()
   {
     return (null == m_locator) ? super.getSystemId() : m_locator.getSystemId();
   }
@@ -143,7 +145,8 @@ public class SAXSourceLocator extends LocatorImpl
    * @return The line number, or -1 if none is available.
    * @see #getColumnNumber
    */
-  public int getLineNumber()
+  @Override
+public int getLineNumber()
   {
     return (null == m_locator) ? super.getLineNumber() : m_locator.getLineNumber();
   }
@@ -163,7 +166,8 @@ public class SAXSourceLocator extends LocatorImpl
    * @return The column number, or -1 if none is available.
    * @see #getLineNumber
    */
-  public int getColumnNumber()
+  @Override
+public int getColumnNumber()
   {
     return (null == m_locator) ? super.getColumnNumber() : m_locator.getColumnNumber();
   }

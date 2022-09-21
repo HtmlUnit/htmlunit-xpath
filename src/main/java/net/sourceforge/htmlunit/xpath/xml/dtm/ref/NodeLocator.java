@@ -59,7 +59,8 @@ public class NodeLocator implements SourceLocator
    *
    * @return a <code>String</code> value
    */
-  public String getPublicId()
+  @Override
+public String getPublicId()
   {
     return m_publicId;
   }
@@ -69,7 +70,8 @@ public class NodeLocator implements SourceLocator
    *
    * @return a <code>String</code> value
    */
-  public String getSystemId()
+  @Override
+public String getSystemId()
   {
     return m_systemId;
   }
@@ -79,7 +81,8 @@ public class NodeLocator implements SourceLocator
    *
    * @return an <code>int</code> value
    */
-  public int getLineNumber()
+  @Override
+public int getLineNumber()
   {
     return m_lineNumber;
   }
@@ -90,7 +93,8 @@ public class NodeLocator implements SourceLocator
    *
    * @return an <code>int</code> value
    */
-  public int getColumnNumber()
+  @Override
+public int getColumnNumber()
   {
     return m_columnNumber;
   }
@@ -101,7 +105,8 @@ public class NodeLocator implements SourceLocator
    *
    * @return a <code>String</code> value
    */
-  public String toString()
+  @Override
+public String toString()
   {
     return "file '" + m_systemId
       + "', line #" + m_lineNumber

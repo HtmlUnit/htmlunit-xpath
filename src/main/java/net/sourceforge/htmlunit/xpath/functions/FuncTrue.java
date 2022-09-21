@@ -40,7 +40,8 @@ public class FuncTrue extends Function
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
     return XBoolean.S_TRUE;
   }

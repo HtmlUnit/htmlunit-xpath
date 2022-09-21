@@ -79,7 +79,8 @@ public class AttList implements Attributes
    *
    * @return number of attribute nodes
    */
-  public int getLength()
+  @Override
+public int getLength()
   {
     return m_attrs.getLength();
   }
@@ -92,7 +93,8 @@ public class AttList implements Attributes
    *         is available, or null if the index is out of
    *         range.
    */
-  public String getURI(int index)
+  @Override
+public String getURI(int index)
   {
     String ns = m_dh.getNamespaceOfNode((Attr) m_attrs.item(index));
     if(null == ns)
@@ -108,7 +110,8 @@ public class AttList implements Attributes
    *         processing is not being performed, or null
    *         if the index is out of range.
    */
-  public String getLocalName(int index)
+  @Override
+public String getLocalName(int index)
   {
     return m_dh.getLocalNameOfNode((Attr) m_attrs.item(index));
   }
@@ -121,7 +124,8 @@ public class AttList implements Attributes
    *
    * @return The attribute's qualified name
    */
-  public String getQName(int i)
+  @Override
+public String getQName(int i)
   {
     return ((Attr) m_attrs.item(i)).getName();
   }
@@ -134,7 +138,8 @@ public class AttList implements Attributes
    *
    * @return the attribute's node type
    */
-  public String getType(int i)
+  @Override
+public String getType(int i)
   {
     return "CDATA";  // for the moment
   }
@@ -147,7 +152,8 @@ public class AttList implements Attributes
    *
    * @return the attribute's node value
    */
-  public String getValue(int i)
+  @Override
+public String getValue(int i)
   {
     return ((Attr) m_attrs.item(i)).getValue();
   }
@@ -160,7 +166,8 @@ public class AttList implements Attributes
    *
    * @return the attribute's node type
    */
-  public String getType(String name)
+  @Override
+public String getType(String name)
   {
     return "CDATA";  // for the moment
   }
@@ -175,7 +182,8 @@ public class AttList implements Attributes
    *         attribute is not in the list or if Namespace
    *         processing is not being performed.
    */
-  public String getType(String uri, String localName)
+  @Override
+public String getType(String uri, String localName)
   {
     return "CDATA";  // for the moment
   }
@@ -188,7 +196,8 @@ public class AttList implements Attributes
    *
    * @return The attribute node's value
    */
-  public String getValue(String name)
+  @Override
+public String getValue(String name)
   {
     Attr attr = (Attr) m_attrs.getNamedItem(name);
     return (null != attr)
@@ -204,7 +213,8 @@ public class AttList implements Attributes
    * @return The attribute value as a string, or null if the
    *         attribute is not in the list.
    */
-  public String getValue(String uri, String localName)
+  @Override
+public String getValue(String uri, String localName)
   {
     Node a=m_attrs.getNamedItemNS(uri,localName);
     return (a==null) ? null : a.getNodeValue();
@@ -219,7 +229,8 @@ public class AttList implements Attributes
    * @return The index of the attribute, or -1 if it does not
    *         appear in the list.
    */
-  public int getIndex(String uri, String localPart)
+  @Override
+public int getIndex(String uri, String localPart)
   {
     for(int i=m_attrs.getLength()-1;i>=0;--i)
     {
@@ -240,7 +251,8 @@ public class AttList implements Attributes
    * @return The index of the attribute, or -1 if it does not
    *         appear in the list.
    */
-  public int getIndex(String qName)
+  @Override
+public int getIndex(String qName)
   {
     for(int i=m_attrs.getLength()-1;i>=0;--i)
     {

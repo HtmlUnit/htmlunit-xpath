@@ -57,7 +57,8 @@ public class UnionPattern extends Expression
    * 
    * @return true if traversal outside the context node's subtree can occur.
    */
-   public boolean canTraverseOutsideSubtree()
+   @Override
+public boolean canTraverseOutsideSubtree()
    {
      if(null != m_patterns)
      {
@@ -114,7 +115,8 @@ public class UnionPattern extends Expression
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
 
     XObject bestScore = null;
@@ -153,6 +155,7 @@ public class UnionPattern extends Expression
     /**
      * @see ExpressionOwner#getExpression()
      */
+    @Override
     public Expression getExpression()
     {
       return m_patterns[m_index];
@@ -162,6 +165,7 @@ public class UnionPattern extends Expression
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
       exp.exprSetParent(UnionPattern.this);
@@ -172,7 +176,8 @@ public class UnionPattern extends Expression
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
     visitor.visitUnionPattern(owner, this);
     if(null != m_patterns)
@@ -188,7 +193,8 @@ public class UnionPattern extends Expression
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!isSameClass(expr))
       return false;

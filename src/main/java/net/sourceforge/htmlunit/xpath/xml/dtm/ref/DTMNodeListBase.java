@@ -67,6 +67,7 @@ public class DTMNodeListBase implements org.w3c.dom.NodeList {
      *   <code>NodeList</code>, or <code>null</code> if that is not a valid 
      *   index.
      */
+    @Override
     public Node item(int index) {
         return null;
     }
@@ -75,6 +76,7 @@ public class DTMNodeListBase implements org.w3c.dom.NodeList {
      * The number of nodes in the list. The range of valid child node indices 
      * is 0 to <code>length-1</code> inclusive. 
      */
+    @Override
     public int getLength() {
         return 0;
     }

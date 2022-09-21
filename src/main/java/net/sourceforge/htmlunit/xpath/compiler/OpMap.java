@@ -44,7 +44,8 @@ public class OpMap
    *
    * @return The expression string.
    */
-  public String toString()
+  @Override
+public String toString()
   {
     return m_currentPattern;
   }

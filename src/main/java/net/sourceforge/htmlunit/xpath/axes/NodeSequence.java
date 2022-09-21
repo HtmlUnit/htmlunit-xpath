@@ -217,7 +217,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#getDTM(int)
    */
-  public DTM getDTM(int nodeHandle)
+  @Override
+public DTM getDTM(int nodeHandle)
   {
     DTMManager mgr = getDTMManager();
     if(null != mgr)
@@ -232,7 +233,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#getDTMManager()
    */
-  public DTMManager getDTMManager()
+  @Override
+public DTMManager getDTMManager()
   {
     return m_dtmMgr;
   }
@@ -240,7 +242,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#getRoot()
    */
-  public int getRoot()
+  @Override
+public int getRoot()
   {
     if(null != m_iter)
       return m_iter.getRoot();
@@ -256,7 +259,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#setRoot(int, Object)
    */
-  public void setRoot(int nodeHandle, Object environment)
+  @Override
+public void setRoot(int nodeHandle, Object environment)
   {
     if(null != m_iter)
     {
@@ -278,7 +282,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#reset()
    */
-  public void reset()
+  @Override
+public void reset()
   {
     m_next = 0;
     // not resetting the iterator on purpose!!!
@@ -287,7 +292,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#getWhatToShow()
    */
-  public int getWhatToShow()
+  @Override
+public int getWhatToShow()
   {
     return hasCache() ? (DTMFilter.SHOW_ALL & ~DTMFilter.SHOW_ENTITY_REFERENCE)
       : m_iter.getWhatToShow();
@@ -296,7 +302,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#getExpandEntityReferences()
    */
-  public boolean getExpandEntityReferences()
+  @Override
+public boolean getExpandEntityReferences()
   {
     if(null != m_iter)
       return m_iter.getExpandEntityReferences();
@@ -307,7 +314,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#nextNode()
    */
-  public int nextNode()
+  @Override
+public int nextNode()
   {
     // If the cache is on, and the node has already been found, then
     // just return from the list.
@@ -369,7 +377,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#previousNode()
    */
-  public int previousNode()
+  @Override
+public int previousNode()
   {
     if(hasCache())
     {
@@ -392,7 +401,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#detach()
    */
-  public void detach()
+  @Override
+public void detach()
   {
     if(null != m_iter)
       m_iter.detach();
@@ -404,7 +414,8 @@ public class NodeSequence extends XObject
    * to be cached.
    * @see DTMIterator#allowDetachToRelease(boolean)
    */
-  public void allowDetachToRelease(boolean allowRelease)
+  @Override
+public void allowDetachToRelease(boolean allowRelease)
   {
     if((false == allowRelease) && !hasCache())
     {
@@ -419,7 +430,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#getCurrentNode()
    */
-  public int getCurrentNode()
+  @Override
+public int getCurrentNode()
   {
     if(hasCache())
     {
@@ -442,7 +454,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#isFresh()
    */
-  public boolean isFresh()
+  @Override
+public boolean isFresh()
   {
     return 0 == m_next;
   }
@@ -450,7 +463,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#setShouldCacheNodes(boolean)
    */
-  public void setShouldCacheNodes(boolean b)
+  @Override
+public void setShouldCacheNodes(boolean b)
   {
     if (b)
     {
@@ -468,7 +482,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#isMutable()
    */
-  public boolean isMutable()
+  @Override
+public boolean isMutable()
   {
     return hasCache(); // though may be surprising if it also has an iterator!
   }
@@ -476,7 +491,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#getCurrentPos()
    */
-  public int getCurrentPos()
+  @Override
+public int getCurrentPos()
   {
     return m_next;
   }
@@ -484,7 +500,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#runTo(int)
    */
-  public void runTo(int index)
+  @Override
+public void runTo(int index)
   {
     int n;
 
@@ -516,7 +533,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#setCurrentPos(int)
    */
-  public void setCurrentPos(int i)
+  @Override
+public void setCurrentPos(int i)
   {
     runTo(i);
   }
@@ -524,7 +542,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#item(int)
    */
-  public int item(int index)
+  @Override
+public int item(int index)
   {
     setCurrentPos(index);
     int n = nextNode();
@@ -535,7 +554,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#setItem(int, int)
    */
-  public void setItem(int node, int index)
+  @Override
+public void setItem(int node, int index)
   {
     NodeVector vec = getVector();
     if(null != vec)
@@ -584,7 +604,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#getLength()
    */
-  public int getLength()
+  @Override
+public int getLength()
   {
     IteratorCache cache = getCache();
 
@@ -624,7 +645,8 @@ public class NodeSequence extends XObject
    * Note: Not a deep clone.
    * @see DTMIterator#cloneWithReset()
    */
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException
+  @Override
+public DTMIterator cloneWithReset() throws CloneNotSupportedException
   {
     NodeSequence seq = (NodeSequence)super.clone();
     seq.m_next = 0;
@@ -649,7 +671,8 @@ public class NodeSequence extends XObject
    *
    * @throws CloneNotSupportedException
    */
-  public Object clone() throws CloneNotSupportedException
+  @Override
+public Object clone() throws CloneNotSupportedException
   {
           NodeSequence clone = (NodeSequence) super.clone();
           if (null != m_iter) clone.m_iter = (DTMIterator) m_iter.clone();
@@ -669,7 +692,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#isDocOrdered()
    */
-  public boolean isDocOrdered()
+  @Override
+public boolean isDocOrdered()
   {
     if(null != m_iter)
       return m_iter.isDocOrdered();
@@ -680,7 +704,8 @@ public class NodeSequence extends XObject
   /**
    * @see DTMIterator#getAxis()
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     if(null != m_iter)
       return m_iter.getAxis();
@@ -694,7 +719,8 @@ public class NodeSequence extends XObject
   /**
    * @see PathComponent#getAnalysisBits()
    */
-  public int getAnalysisBits()
+  @Override
+public int getAnalysisBits()
   {
     if((null != m_iter) && (m_iter instanceof PathComponent))
       return ((PathComponent)m_iter).getAnalysisBits();
@@ -705,7 +731,8 @@ public class NodeSequence extends XObject
   /**
    * @see net.sourceforge.htmlunit.xpath.Expression#fixupVariables(Vector, int)
    */
-  public void fixupVariables(Vector vars, int globalsSize)
+  @Override
+public void fixupVariables(Vector vars, int globalsSize)
   {
     super.fixupVariables(vars, globalsSize);
   }
@@ -774,7 +801,8 @@ public class NodeSequence extends XObject
     * to update some caching information.
     *
     */
-   protected void setObject(Object obj) {
+   @Override
+protected void setObject(Object obj) {
        if (obj instanceof NodeVector) {
            // Keep our superclass informed of the current NodeVector
            // ... if we don't the smoketest fails (don't know why).

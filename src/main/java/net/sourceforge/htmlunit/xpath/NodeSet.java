@@ -139,7 +139,8 @@ public class NodeSet
    * @return The root node of the Iterator, as specified when it was created.
    * For non-Iterator NodeSets, this will be null.
    */
-  public Node getRoot()
+  @Override
+public Node getRoot()
   {
     return null;
   }
@@ -154,7 +155,8 @@ public class NodeSet
    * @throws CloneNotSupportedException if this subclass of NodeSet
    * does not support the clone() operation.
    */
-  public NodeIterator cloneWithReset() throws CloneNotSupportedException
+  @Override
+public NodeIterator cloneWithReset() throws CloneNotSupportedException
   {
 
     NodeSet clone = (NodeSet) clone();
@@ -167,7 +169,8 @@ public class NodeSet
   /**
    * Reset the iterator. May have no effect on non-iterator Nodesets.
    */
-  public void reset()
+  @Override
+public void reset()
   {
     m_next = 0;
   }
@@ -184,7 +187,8 @@ public class NodeSet
    * <code>SHOW_ALL & ~SHOW_ENTITY_REFERENCE</code>, meaning that
    * only entity references are suppressed.
    */
-  public int getWhatToShow()
+  @Override
+public int getWhatToShow()
   {
     return NodeFilter.SHOW_ALL & ~NodeFilter.SHOW_ENTITY_REFERENCE;
   }
@@ -202,7 +206,8 @@ public class NodeSet
    * returning a placeholder object just to indicate that this is
    * not going to return all nodes selected by whatToShow.
    */
-  public NodeFilter getFilter()
+  @Override
+public NodeFilter getFilter()
   {
     return null;
   }
@@ -223,7 +228,8 @@ public class NodeSet
    * contents of EntityRefrence nodes may be returned (though whatToShow
    * says that the EntityReferences themselves are not shown.)
    */
-  public boolean getExpandEntityReferences()
+  @Override
+public boolean getExpandEntityReferences()
   {
     return true;
   }
@@ -238,7 +244,8 @@ public class NodeSet
    *    INVALID_STATE_ERR: Raised if this method is called after the
    *   <code>detach</code> method was invoked.
    */
-  public Node nextNode() throws DOMException
+  @Override
+public Node nextNode() throws DOMException
   {
 
     if (m_next < this.size())
@@ -264,7 +271,8 @@ public class NodeSet
    * @throws RuntimeException thrown if this NodeSet is not of
    * a cached type, and hence doesn't know what the previous node was.
    */
-  public Node previousNode() throws DOMException
+  @Override
+public Node previousNode() throws DOMException
   {
 
     if (!m_cacheNodes)
@@ -292,7 +300,8 @@ public class NodeSet
    * INVALID_STATE_ERR to be raised by later operations.
    * </p>
    */
-  public void detach(){}
+  @Override
+public void detach(){}
 
   /**
    * Tells if this NodeSet is "fresh", in other words, if
@@ -302,7 +311,8 @@ public class NodeSet
    * @return true if nextNode() would return the first node in the set,
    * false if it would return a later one.
    */
-  public boolean isFresh()
+  @Override
+public boolean isFresh()
   {
     return m_next == 0;
   }
@@ -319,7 +329,8 @@ public class NodeSet
    * @throws RuntimeException thrown if this NodeSet is not
    * one of the types which supports indexing/counting.
    */
-  public void runTo(int index)
+  @Override
+public void runTo(int index)
   {
 
     if (!m_cacheNodes)
@@ -344,7 +355,8 @@ public class NodeSet
    *   <code>NodeList</code>, or <code>null</code> if that is not a valid
    *   index.
    */
-  public Node item(int index)
+  @Override
+public Node item(int index)
   {
 
     runTo(index);
@@ -360,7 +372,8 @@ public class NodeSet
    *
    * @return integer indicating how many nodes are represented by this list.
    */
-  public int getLength()
+  @Override
+public int getLength()
   {
 
     runTo(-1);
@@ -725,7 +738,8 @@ public class NodeSet
    *
    * @return The the current position index.
    */
-  public int getCurrentPos()
+  @Override
+public int getCurrentPos()
   {
     return m_next;
   }
@@ -736,7 +750,8 @@ public class NodeSet
    * @throws RuntimeException thrown if this NodeSet is not of
    * a cached type, and thus doesn't permit indexed access.
    */
-  public void setCurrentPos(int i)
+  @Override
+public void setCurrentPos(int i)
   {
 
     if (!m_cacheNodes)
@@ -753,7 +768,8 @@ public class NodeSet
    * @throws RuntimeException thrown if this NodeSet is not of
    * a cached type, and thus doesn't permit indexed access.
    */
-  public Node getCurrentNode()
+  @Override
+public Node getCurrentNode()
   {
 
     if (!m_cacheNodes)
@@ -795,7 +811,8 @@ public class NodeSet
    * request caching after we've already begun stepping through the
    * nodes in this set.
   */
-  public void setShouldCacheNodes(boolean b)
+  @Override
+public void setShouldCacheNodes(boolean b)
   {
 
     if (!isFresh())
@@ -809,12 +826,14 @@ public class NodeSet
 
   transient private int m_last = 0;
 
-  public int getLast()
+  @Override
+public int getLast()
   {
     return m_last;
   }
 
-  public void setLast(int last)
+  @Override
+public void setLast(int last)
   {
     m_last = last;
   }
@@ -842,7 +861,8 @@ public class NodeSet
    *
    * @throws CloneNotSupportedException
    */
-  public Object clone() throws CloneNotSupportedException
+  @Override
+public Object clone() throws CloneNotSupportedException
   {
 
     NodeSet clone = (NodeSet) super.clone();
@@ -862,7 +882,8 @@ public class NodeSet
    *
    * @return Number of nodes in this NodeVector
    */
-  public int size()
+  @Override
+public int size()
   {
     return m_firstFree;
   }

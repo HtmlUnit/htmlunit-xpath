@@ -78,7 +78,8 @@ public class WalkingIteratorSorted extends WalkingIterator
    *
    * @return true as a default.
    */
-  public boolean isDocOrdered()
+  @Override
+public boolean isDocOrdered()
   {
     return m_inNaturalOrderStatic;
   }
@@ -193,7 +194,8 @@ public class WalkingIteratorSorted extends WalkingIterator
    * in the stack frame (but variables above the globalsTop value will need
    * to be offset to the current stack frame).
    */
-  public void fixupVariables(java.util.Vector vars, int globalsSize)
+  @Override
+public void fixupVariables(java.util.Vector vars, int globalsSize)
   {
     super.fixupVariables(vars, globalsSize);
 

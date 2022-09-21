@@ -395,7 +395,8 @@ public class FastStringBuffer
    *
    * @return the contents of the FastStringBuffer as a standard Java string.
    */
-  public final String toString()
+  @Override
+public final String toString()
   {
 
     int length = (m_lastChunk << m_chunkBits) + m_firstFree;

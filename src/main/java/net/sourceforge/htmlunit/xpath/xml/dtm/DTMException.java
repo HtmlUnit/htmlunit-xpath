@@ -80,6 +80,7 @@ public class DTMException extends RuntimeException {
      * cause is nonexistent or unknown.  (The cause is the throwable that
      * caused this throwable to get thrown.)
      */
+    @Override
     public Throwable getCause() {
 
         return (containedException == this)
@@ -111,6 +112,7 @@ public class DTMException extends RuntimeException {
      *         {@link #DTMException(String,Throwable)}, or this method has already
      *         been called on this throwable.
      */
+    @Override
     public synchronized Throwable initCause(Throwable cause) {
 
         if ((this.containedException == null) && (cause != null)) {
@@ -285,6 +287,7 @@ public class DTMException extends RuntimeException {
      * originated.  This will trace all nested exception
      * objects, as well as this object.
      */
+    @Override
     public void printStackTrace() {
         printStackTrace(new java.io.PrintWriter(System.err, true));
     }
@@ -295,6 +298,7 @@ public class DTMException extends RuntimeException {
      * objects, as well as this object.
      * @param s The stream where the dump will be sent to.
      */
+    @Override
     public void printStackTrace(java.io.PrintStream s) {
         printStackTrace(new java.io.PrintWriter(s));
     }
@@ -305,6 +309,7 @@ public class DTMException extends RuntimeException {
      * objects, as well as this object.
      * @param s The writer where the dump will be sent to.
      */
+    @Override
     public void printStackTrace(java.io.PrintWriter s) {
 
         if (s == null) {

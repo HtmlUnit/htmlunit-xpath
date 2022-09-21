@@ -78,7 +78,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    *
    * @return The object that this class wraps
    */
-  public Object object()
+  @Override
+public Object object()
   {
     if (m_DTMXRTreeFrag.getXPathContext() != null)
       return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeIterator((DTMIterator)(new net.sourceforge.htmlunit.xpath.NodeSetDTM(m_dtmRoot, m_DTMXRTreeFrag.getXPathContext().getDTMManager())));
@@ -101,7 +102,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    * @param allowRelease true if it is OK for detach to release this iterator 
    * for pooling.
    */
-  public void allowDetachToRelease(boolean allowRelease)
+  @Override
+public void allowDetachToRelease(boolean allowRelease)
   {
     m_allowRelease = allowRelease;
   }
@@ -115,7 +117,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    * 
    * In general, detach should only be called once on the object.
    */
-  public void detach(){
+  @Override
+public void detach(){
     if(m_allowRelease){
       m_DTMXRTreeFrag.destruct();
       setObject(null);
@@ -127,7 +130,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    *
    * @return type CLASS_RTREEFRAG 
    */
-  public int getType()
+  @Override
+public int getType()
   {
     return CLASS_RTREEFRAG;
   }
@@ -138,7 +142,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    *
    * @return type string "#RTREEFRAG"
    */
-  public String getTypeString()
+  @Override
+public String getTypeString()
   {
     return "#RTREEFRAG";
   }
@@ -148,7 +153,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    *
    * @return The result tree fragment as a number or NaN
    */
-  public double num()
+  @Override
+public double num()
     throws javax.xml.transform.TransformerException
   {
 
@@ -163,7 +169,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    *
    * @return true
    */
-  public boolean bool()
+  @Override
+public boolean bool()
   {
     return true;
   }
@@ -175,7 +182,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    *
    * @return The document fragment node data or the empty string. 
    */
-  public XMLString xstr()
+  @Override
+public XMLString xstr()
   {
     if(null == m_xmlStr)
       m_xmlStr = m_DTMXRTreeFrag.getDTM().getStringValue(m_dtmRoot);
@@ -188,7 +196,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    *
    * @return The string this wraps or the empty string if null
    */
-  public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb)
+  @Override
+public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb)
   {
     XString xstring = (XString)xstr();
     xstring.appendToFsb(fsb);
@@ -200,7 +209,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    *
    * @return The document fragment node data or the empty string. 
    */
-  public String str()
+  @Override
+public String str()
   {
     String str = m_DTMXRTreeFrag.getDTM().getStringValue(m_dtmRoot).toString();
 
@@ -212,7 +222,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    *
    * @return The document fragment this wraps
    */
-  public int rtf()
+  @Override
+public int rtf()
   {
     return m_dtmRoot;
   }
@@ -252,7 +263,8 @@ public class XRTreeFrag extends XObject implements Cloneable
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean equals(XObject obj2)
+  @Override
+public boolean equals(XObject obj2)
   {
 
     try

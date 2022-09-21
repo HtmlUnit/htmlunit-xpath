@@ -48,7 +48,8 @@ public class ReverseAxesWalker extends AxesWalker
    *
    * @param root The context node of this step.
    */
-  public void setRoot(int root)
+  @Override
+public void setRoot(int root)
   {
     super.setRoot(root);
     m_iterator = getDTM(root).getAxisIterator(m_axis);
@@ -60,7 +61,8 @@ public class ReverseAxesWalker extends AxesWalker
    * any computational resources and placing the iterator in the INVALID
    * state.
    */
-  public void detach()
+  @Override
+public void detach()
   {
     m_iterator = null;
     super.detach();
@@ -71,7 +73,8 @@ public class ReverseAxesWalker extends AxesWalker
    *
    * @return the next node in document order on the axes, or null.
    */
-  protected int getNextNode()
+  @Override
+protected int getNextNode()
   {
     if (m_foundLast)
       return DTM.NULL;
@@ -93,7 +96,8 @@ public class ReverseAxesWalker extends AxesWalker
    *
    * @return true for this class.
    */
-  public boolean isReverseAxes()
+  @Override
+public boolean isReverseAxes()
   {
     return true;
   }
@@ -119,7 +123,8 @@ public class ReverseAxesWalker extends AxesWalker
    *
    * @return The pridicate index, or -1.
    */
-  protected int getProximityPosition(int predicateIndex)
+  @Override
+protected int getProximityPosition(int predicateIndex)
   {
     // A negative predicate index seems to occur with
     // (preceding-sibling::*|following-sibling::*)/ancestor::*[position()]/*[position()]
@@ -175,7 +180,8 @@ public class ReverseAxesWalker extends AxesWalker
    *
    * @param i The predicate index.
    */
-  protected void countProximityPosition(int i)
+  @Override
+protected void countProximityPosition(int i)
   {
     if (i < m_proximityPositions.length)
       m_proximityPositions[i]--;
@@ -190,7 +196,8 @@ public class ReverseAxesWalker extends AxesWalker
    *
    * @return the number of nodes in this node list.
    */
-  public int getLastPos(XPathContext xctxt)
+  @Override
+public int getLastPos(XPathContext xctxt)
   {
 
     int count = 0;
@@ -237,7 +244,8 @@ public class ReverseAxesWalker extends AxesWalker
    * 
    * @return false.
    */
-  public boolean isDocOrdered()
+  @Override
+public boolean isDocOrdered()
   {
     return false;  // I think.
   }

@@ -410,7 +410,8 @@ public class IntVector implements Cloneable
    *
    * @return clone of current IntVector
    */
-  public Object clone()
+  @Override
+public Object clone()
     throws CloneNotSupportedException
   {
     return new IntVector(this);

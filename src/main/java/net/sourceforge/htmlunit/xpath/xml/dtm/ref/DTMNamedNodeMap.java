@@ -70,7 +70,8 @@ public class DTMNamedNodeMap implements NamedNodeMap
    *
    * @return The number of nodes in this map.
    */
-  public int getLength()
+  @Override
+public int getLength()
   {
 
     if (m_count == -1)
@@ -96,7 +97,8 @@ public class DTMNamedNodeMap implements NamedNodeMap
    *   <code>nodeName</code>, or <code>null</code> if it does not identify
    *   any node in this map.
    */
-  public Node getNamedItem(String name)
+  @Override
+public Node getNamedItem(String name)
   {
 
     for (int n = dtm.getFirstAttribute(element); n != DTM.NULL;
@@ -117,7 +119,8 @@ public class DTMNamedNodeMap implements NamedNodeMap
    * @return The node at the <code>index</code>th position in the map, or
    *   <code>null</code> if that is not a valid index.
    */
-  public Node item(int i)
+  @Override
+public Node item(int i)
   {
 
     int count = 0;
@@ -158,7 +161,8 @@ public class DTMNamedNodeMap implements NamedNodeMap
    *   <code>Element</code> object. The DOM user must explicitly clone
    *   <code>Attr</code> nodes to re-use them in other elements.
    */
-  public Node setNamedItem(Node newNode)
+  @Override
+public Node setNamedItem(Node newNode)
   {
     throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
   }
@@ -178,7 +182,8 @@ public class DTMNamedNodeMap implements NamedNodeMap
    *   this map.
    *   <br>NO_MODIFICATION_ALLOWED_ERR: Raised if this map is readonly.
    */
-  public Node removeNamedItem(String name)
+  @Override
+public Node removeNamedItem(String name)
   {
     throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
   }
@@ -194,7 +199,8 @@ public class DTMNamedNodeMap implements NamedNodeMap
    *   identify any node in this map.
    * @since DOM Level 2
    */
-  public Node getNamedItemNS(String namespaceURI, String localName)
+  @Override
+public Node getNamedItemNS(String namespaceURI, String localName)
   {
        Node retNode = null;
        for (int n = dtm.getFirstAttribute(element); n != DTM.NULL;
@@ -237,7 +243,8 @@ public class DTMNamedNodeMap implements NamedNodeMap
    *   <code>Attr</code> nodes to re-use them in other elements.
    * @since DOM Level 2
    */
-  public Node setNamedItemNS(Node arg) throws DOMException
+  @Override
+public Node setNamedItemNS(Node arg) throws DOMException
   {
     throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
   }
@@ -262,7 +269,8 @@ public class DTMNamedNodeMap implements NamedNodeMap
    *   <br>NO_MODIFICATION_ALLOWED_ERR: Raised if this map is readonly.
    * @since DOM Level 2
    */
-  public Node removeNamedItemNS(String namespaceURI, String localName)
+  @Override
+public Node removeNamedItemNS(String namespaceURI, String localName)
           throws DOMException
   {
     throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);

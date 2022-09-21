@@ -57,7 +57,8 @@ public class Function3Args extends Function2Args
    *
    * @throws WrongNumberArgsException If the argNum parameter is greater than 2.
    */
-  public void setArg(Expression arg, int argNum)
+  @Override
+public void setArg(Expression arg, int argNum)
           throws WrongNumberArgsException
   {
 
@@ -80,7 +81,8 @@ public class Function3Args extends Function2Args
    *
    * @throws WrongNumberArgsException
    */
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException
+  @Override
+public void checkNumberArgs(int argNum) throws WrongNumberArgsException
   {
     if (argNum != 3)
       reportWrongNumberArgs();
@@ -92,7 +94,8 @@ public class Function3Args extends Function2Args
    *
    * @throws WrongNumberArgsException
    */
-  protected void reportWrongNumberArgs() throws WrongNumberArgsException {
+  @Override
+protected void reportWrongNumberArgs() throws WrongNumberArgsException {
       throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("three", null));
   }
   
@@ -102,7 +105,8 @@ public class Function3Args extends Function2Args
    * 
    * @return true if traversal outside the context node's subtree can occur.
    */
-   public boolean canTraverseOutsideSubtree()
+   @Override
+public boolean canTraverseOutsideSubtree()
    {
     return super.canTraverseOutsideSubtree() 
     ? true : m_arg2.canTraverseOutsideSubtree();
@@ -113,6 +117,7 @@ public class Function3Args extends Function2Args
     /**
      * @see ExpressionOwner#getExpression()
      */
+    @Override
     public Expression getExpression()
     {
       return m_arg2;
@@ -122,6 +127,7 @@ public class Function3Args extends Function2Args
     /**
      * @see ExpressionOwner#setExpression(Expression)
      */
+    @Override
     public void setExpression(Expression exp)
     {
       exp.exprSetParent(Function3Args.this);
@@ -133,7 +139,8 @@ public class Function3Args extends Function2Args
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callArgVisitors(XPathVisitor visitor)
+  @Override
+public void callArgVisitors(XPathVisitor visitor)
   {
     super.callArgVisitors(visitor);
     if(null != m_arg2)
@@ -143,7 +150,8 @@ public class Function3Args extends Function2Args
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!super.deepEquals(expr))
       return false;

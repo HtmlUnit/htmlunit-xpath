@@ -60,7 +60,8 @@ public class HasPositionalPredChecker extends XPathVisitor
    * @param func The function reference object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitFunction(ExpressionOwner owner, Function func)
+  @Override
+public boolean visitFunction(ExpressionOwner owner, Function func)
   {
     if((func instanceof FuncPosition) ||
        (func instanceof FuncLast))
@@ -91,7 +92,8 @@ public class HasPositionalPredChecker extends XPathVisitor
    * @param pred The predicate object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitPredicate(ExpressionOwner owner, Expression pred)
+  @Override
+public boolean visitPredicate(ExpressionOwner owner, Expression pred)
   {
     m_predDepth++;
 

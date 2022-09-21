@@ -519,7 +519,8 @@ public class QName implements java.io.Serializable
    *
    * @return the string representation of the namespace
    */
-  public String toString()
+  @Override
+public String toString()
   {
 
     return _prefix != null
@@ -568,7 +569,8 @@ public class QName implements java.io.Serializable
    *
    * @return the cached hashcode of the qualified name
    */
-  public int hashCode()
+  @Override
+public int hashCode()
   {
     return m_hashCode;
   }
@@ -601,7 +603,8 @@ public class QName implements java.io.Serializable
    *
    * @return True if the qualified names are equal
    */
-  public boolean equals(Object object)
+  @Override
+public boolean equals(Object object)
   {
 
     if (object == this)

@@ -423,7 +423,8 @@ public class ObjectVector implements Cloneable
    *
    * @return clone of current ObjectVector
    */
-  public Object clone()
+  @Override
+public Object clone()
     throws CloneNotSupportedException
   {
     return new ObjectVector(this);

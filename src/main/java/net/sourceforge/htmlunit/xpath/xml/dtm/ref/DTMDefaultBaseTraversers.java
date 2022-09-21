@@ -101,7 +101,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
    *
    * @return A DTMAxisTraverser, or null if the given axis isn't supported.
    */
-  public DTMAxisTraverser getAxisTraverser(final int axis)
+  @Override
+public DTMAxisTraverser getAxisTraverser(final int axis)
   {
 
     DTMAxisTraverser traverser;
@@ -211,6 +212,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
       return getParent(current);
@@ -226,6 +228,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
       // Process using identities
@@ -256,6 +259,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context)
     {
       return context;
@@ -273,6 +277,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context, int expandedTypeID)
     {
       return (getExpandedTypeID(context) == expandedTypeID)
@@ -294,6 +299,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
       return (context == current)
@@ -310,6 +316,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
 
@@ -408,6 +415,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * that the traversal starts from.
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context)
     {
       return getFirstChild(context);
@@ -427,6 +435,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context, int expandedTypeID)
     {
       if(true)
@@ -460,6 +469,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
       return getNextSibling(current);
@@ -475,6 +485,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
       // Process in Identifier space
@@ -604,6 +615,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return true if the axis has been fully processed.
      */
+    @Override
     protected boolean axisHasBeenProcessed(int axisRoot)
     {
       return !(m_nextsib.elementAt(axisRoot) == NOTPROCESSED);
@@ -649,6 +661,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return true if the given node falls outside the axis being traversed.
      */
+    @Override
     protected boolean isAfterAxis(int axisRoot, int identity)
     {
       // %REVIEW% Is there *any* cheaper way to do this?
@@ -679,6 +692,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context, int expandedTypeID)
     {
 
@@ -701,6 +715,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
 
@@ -730,6 +745,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
 
@@ -771,6 +787,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return The axis context.
      */
+    @Override
     protected int getFirstPotential(int identity)
     {
       return identity;
@@ -785,6 +802,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context)
     {
       return context;
@@ -805,6 +823,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
 
@@ -840,6 +859,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * that the traversal starts from.
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context)
     {
       // Compute in ID space
@@ -878,6 +898,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context, int expandedTypeID)
     {
       // %REVIEW% This looks like it might want shift into identity space
@@ -926,6 +947,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
       // Compute in identity space
@@ -958,6 +980,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
       // Compute in ID space
@@ -994,6 +1017,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
       return getNextSibling(current);
@@ -1009,6 +1033,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
 
@@ -1036,6 +1061,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
 
@@ -1054,6 +1080,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
 
@@ -1087,6 +1114,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
 
@@ -1105,6 +1133,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
 
@@ -1141,6 +1170,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * that the traversal starts from.
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context)
     {
       return getParent(context);
@@ -1160,6 +1190,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int current, int expandedTypeID)
     {
       // Compute in ID space
@@ -1183,6 +1214,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
 
@@ -1201,6 +1233,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
 
@@ -1245,6 +1278,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
       // compute in ID space
@@ -1274,6 +1308,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
       // Compute in ID space
@@ -1309,6 +1344,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
       // Compute in ID space
@@ -1337,6 +1373,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
       // Compute in ID space
@@ -1370,6 +1407,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
       return getPreviousSibling(current);
@@ -1385,6 +1423,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
 
@@ -1413,6 +1452,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context)
     {
       return context;
@@ -1430,6 +1470,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context, int expandedTypeID)
     {
       return (getExpandedTypeID(context) == expandedTypeID) ? context : NULL;
@@ -1443,6 +1484,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return Always return NULL for this axis.
      */
+    @Override
     public int next(int context, int current)
     {
       return NULL;
@@ -1458,6 +1500,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
       return NULL;
@@ -1477,6 +1520,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context)
     {
       return getDocumentRoot(context);
@@ -1490,6 +1534,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context, int expandedTypeID)
     {
       return (getExpandedTypeID(getDocumentRoot(context)) == expandedTypeID)
@@ -1504,6 +1549,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current)
     {
       // Compute in ID space
@@ -1530,6 +1576,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
       // Compute in ID space
@@ -1564,6 +1611,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context, int expandedTypeID)
     {
       int root=getDocumentRoot(context);
@@ -1579,6 +1627,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return Always return NULL for this axis.
      */
+    @Override
     public int next(int context, int current)
     {
       return NULL;
@@ -1594,6 +1643,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the next node in the iteration, or DTM.NULL.
      */
+    @Override
     public int next(int context, int current, int expandedTypeID)
     {
       return NULL;
@@ -1615,6 +1665,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return The identity argument.
      */
+    @Override
     protected int getFirstPotential(int identity)
     {
       return identity;
@@ -1625,6 +1676,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * @param handle handle to the root context.
      * @return identity of the root of the subtree.
      */
+    @Override
     protected int getSubtreeRoot(int handle)
     {
       // %REVIEW% Shouldn't this always be 0?
@@ -1638,6 +1690,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context)
     {
       return getDocumentRoot(context);
@@ -1657,6 +1710,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context, int expandedTypeID)
     {
       if (isIndexed(expandedTypeID))
@@ -1687,6 +1741,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return The identity argument.
      */
+    @Override
     protected int getFirstPotential(int identity)
     {
       return _firstch(0);
@@ -1697,6 +1752,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      * @param handle handle to the root context.
      * @return identity of the root of the subtree.
      */
+    @Override
     protected int getSubtreeRoot(int handle)
     {
       return 0;
@@ -1709,6 +1765,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context)
     {
       return makeNodeHandle(_firstch(0));
@@ -1728,6 +1785,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase
      *
      * @return the first node in the traversal.
      */
+    @Override
     public int first(int context, int expandedTypeID)
     {
       if (isIndexed(expandedTypeID))

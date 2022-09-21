@@ -82,7 +82,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
-  public int getAnalysisBits()
+  @Override
+public int getAnalysisBits()
   {
     int bits = 0;
     if (null != m_firstWalker)
@@ -107,7 +108,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
    *
    * @throws CloneNotSupportedException
    */
-  public Object clone() throws CloneNotSupportedException
+  @Override
+public Object clone() throws CloneNotSupportedException
   {
 
     WalkingIterator clone = (WalkingIterator) super.clone();
@@ -125,7 +127,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
   /**
    * Reset the iterator.
    */
-  public void reset()
+  @Override
+public void reset()
   {
 
     super.reset();
@@ -146,7 +149,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
    * @param context The XPath runtime context for this
    * transformation.
    */
-  public void setRoot(int context, Object environment)
+  @Override
+public void setRoot(int context, Object environment)
   {
 
     super.setRoot(context, environment);
@@ -165,7 +169,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    */
-  public int nextNode()
+  @Override
+public int nextNode()
   {
     if(m_foundLast)
       return DTM.NULL;
@@ -243,7 +248,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
    * <code>nextNode</code> or<code>previousNode</code> will raise the
    * exception INVALID_STATE_ERR.
    */
-  public void detach()
+  @Override
+public void detach()
   {
     if(m_allowDetach)
     {
@@ -271,7 +277,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
    * in the stack frame (but variables above the globalsTop value will need
    * to be offset to the current stack frame).
    */
-  public void fixupVariables(java.util.Vector vars, int globalsSize)
+  @Override
+public void fixupVariables(java.util.Vector vars, int globalsSize)
   {
     m_predicateIndex = -1;
 
@@ -287,7 +294,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
        if(visitor.visitLocationPath(owner, this))
        {
@@ -310,7 +318,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
   /**
    * @see ExpressionOwner#getExpression()
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return m_firstWalker;
   }
@@ -318,7 +327,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
   /**
    * @see ExpressionOwner#setExpression(Expression)
    */
-  public void setExpression(Expression exp)
+  @Override
+public void setExpression(Expression exp)
   {
     exp.exprSetParent(this);
     m_firstWalker = (AxesWalker)exp;
@@ -327,6 +337,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner
     /**
      * @see Expression#deepEquals(Expression)
      */
+    @Override
     public boolean deepEquals(Expression expr)
     {
       if (!super.deepEquals(expr))

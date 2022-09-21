@@ -84,7 +84,8 @@ public class XObject extends Expression implements Serializable, Cloneable
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt)
+  @Override
+public XObject execute(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
     return this;
@@ -307,7 +308,8 @@ public class XObject extends Expression implements Serializable, Cloneable
    *
    * @return the string representation of the object
    */
-  public String toString()
+  @Override
+public String toString()
   {
     return str();
   }
@@ -735,14 +737,16 @@ public class XObject extends Expression implements Serializable, Cloneable
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
     assertion(false, "callVisitors should not be called for this object!!!");
   }
   /**
    * @see Expression#deepEquals(Expression)
    */
-  public boolean deepEquals(Expression expr)
+  @Override
+public boolean deepEquals(Expression expr)
   {
     if(!isSameClass(expr))
       return false;

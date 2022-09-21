@@ -41,7 +41,8 @@ public class FuncSubstringAfter extends Function2Args
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
+  @Override
+public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
   {
 
     XMLString s1 = m_arg0.execute(xctxt).xstr();

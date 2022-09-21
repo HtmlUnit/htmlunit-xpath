@@ -84,7 +84,8 @@ public class AxesWalker extends PredicatedNodeTest
    *
    * @throws CloneNotSupportedException
    */
-  public Object clone() throws CloneNotSupportedException
+  @Override
+public Object clone() throws CloneNotSupportedException
   {
     // Do not access the location path itterator during this operation!
     
@@ -200,7 +201,8 @@ public class AxesWalker extends PredicatedNodeTest
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
-  public int getAnalysisBits()
+  @Override
+public int getAnalysisBits()
   {
     int axis = getAxis();
     int bit = WalkerFactory.getAnalysisBitFromAxes(axis);
@@ -409,7 +411,8 @@ public class AxesWalker extends PredicatedNodeTest
    *
    * @return the index of the last node that can be itterated to.
    */
-  public int getLastPos(XPathContext xctxt)
+  @Override
+public int getLastPos(XPathContext xctxt)
   {
 
     int pos = getProximityPosition();
@@ -517,7 +520,8 @@ public class AxesWalker extends PredicatedNodeTest
    *              rewritten if needed.
    * @param visitor The visitor whose appropriate method will be called.
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
     if(visitor.visitStep(owner, this))
     {
@@ -532,7 +536,8 @@ public class AxesWalker extends PredicatedNodeTest
   /**
    * @see ExpressionOwner#getExpression()
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return m_nextWalker;
   }
@@ -540,7 +545,8 @@ public class AxesWalker extends PredicatedNodeTest
   /**
    * @see ExpressionOwner#setExpression(Expression)
    */
-  public void setExpression(Expression exp)
+  @Override
+public void setExpression(Expression exp)
   {
     exp.exprSetParent(this);
     m_nextWalker = (AxesWalker)exp;
@@ -549,6 +555,7 @@ public class AxesWalker extends PredicatedNodeTest
     /**
      * @see Expression#deepEquals(Expression)
      */
+    @Override
     public boolean deepEquals(Expression expr)
     {
       if (!super.deepEquals(expr))

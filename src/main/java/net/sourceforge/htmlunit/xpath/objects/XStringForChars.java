@@ -84,7 +84,8 @@ public class XStringForChars extends XString
    *
    * @return The string this wraps or the empty string if null
    */
-  public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb)
+  @Override
+public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb)
   {
     fsb.append((char[])m_obj, m_start, m_length);
   }
@@ -95,7 +96,8 @@ public class XStringForChars extends XString
    *
    * @return true if this XMLString can return a string without creating one.
    */
-  public boolean hasString()
+  @Override
+public boolean hasString()
   {
     return null != m_strCache;
   }
@@ -106,7 +108,8 @@ public class XStringForChars extends XString
    *
    * @return The string this wraps or the empty string if null
    */
-  public String str()
+  @Override
+public String str()
   {
     if(null == m_strCache)
       m_strCache = new String((char[])m_obj, m_start, m_length);
@@ -121,7 +124,8 @@ public class XStringForChars extends XString
    *
    * @return The java String representation of this object.
    */
-  public Object object()
+  @Override
+public Object object()
   {
     return str();
   }
@@ -137,7 +141,8 @@ public class XStringForChars extends XString
    *
    * @throws org.xml.sax.SAXException
    */
-  public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
+  @Override
+public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
       throws org.xml.sax.SAXException
   {
     ch.characters((char[])m_obj, m_start, m_length);
@@ -152,7 +157,8 @@ public class XStringForChars extends XString
    *
    * @throws org.xml.sax.SAXException
    */
-  public void dispatchAsComment(org.xml.sax.ext.LexicalHandler lh)
+  @Override
+public void dispatchAsComment(org.xml.sax.ext.LexicalHandler lh)
       throws org.xml.sax.SAXException
   {
     lh.comment((char[])m_obj, m_start, m_length);
@@ -164,7 +170,8 @@ public class XStringForChars extends XString
    * @return  the length of the sequence of characters represented by this
    *          object.
    */
-  public int length()
+  @Override
+public int length()
   {
     return m_length;
   }
@@ -182,7 +189,8 @@ public class XStringForChars extends XString
    *             argument is negative or not less than the length of this
    *             string.
    */
-  public char charAt(int index)
+  @Override
+public char charAt(int index)
   {
     return ((char[])m_obj)[index+m_start];
   }
@@ -208,7 +216,8 @@ public class XStringForChars extends XString
    *                <code>dst.length</code></ul>
    * @exception NullPointerException if <code>dst</code> is <code>null</code>
    */
-  public void getChars(int srcBegin, int srcEnd, char dst[], int dstBegin)
+  @Override
+public void getChars(int srcBegin, int srcEnd, char dst[], int dstBegin)
   {
     System.arraycopy((char[])m_obj, m_start+srcBegin, dst, dstBegin, srcEnd);
   }

@@ -173,7 +173,8 @@ public class XPathException extends TransformerException
    * objects, as well as this object.
    * @param s The stream where the dump will be sent to.
    */
-  public void printStackTrace(java.io.PrintStream s)
+  @Override
+public void printStackTrace(java.io.PrintStream s)
   {
 
     if (s == null)
@@ -214,7 +215,8 @@ public class XPathException extends TransformerException
    *
    * @return The error message of the originating exception.
    */
-  public String getMessage()
+  @Override
+public String getMessage()
   {
 
     String lastMessage = super.getMessage();
@@ -252,7 +254,8 @@ public class XPathException extends TransformerException
    * objects, as well as this object.
    * @param s The writer where the dump will be sent to.
    */
-  public void printStackTrace(java.io.PrintWriter s)
+  @Override
+public void printStackTrace(java.io.PrintWriter s)
   {
 
     if (s == null)
@@ -321,7 +324,8 @@ public class XPathException extends TransformerException
    *
    *  @return The embedded exception, or null if there is none.
    */
-  public Throwable getException()
+  @Override
+public Throwable getException()
   {
     return m_exception;
   }

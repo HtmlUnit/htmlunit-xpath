@@ -65,37 +65,67 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
     this.handle=handle;
     this.nodename="xmlns:"+prefix;
   }
-  public String getNodeName() {return nodename;}
-  public String getName() {return nodename;}
-  public String getNamespaceURI() {return "http://www.w3.org/2000/xmlns/";}
-  public String getPrefix() {return prefix;}
-  public String getLocalName() {return prefix;}
-  public String getNodeValue() {return uri;}
-  public String getValue() {return uri;}
-  public Element getOwnerElement() {return pseudoparent;}
+  @Override
+public String getNodeName() {return nodename;}
+  @Override
+public String getName() {return nodename;}
+  @Override
+public String getNamespaceURI() {return "http://www.w3.org/2000/xmlns/";}
+  @Override
+public String getPrefix() {return prefix;}
+  @Override
+public String getLocalName() {return prefix;}
+  @Override
+public String getNodeValue() {return uri;}
+  @Override
+public String getValue() {return uri;}
+  @Override
+public Element getOwnerElement() {return pseudoparent;}
   
-  public boolean isSupported(String feature, String version) {return false;}
-  public boolean hasChildNodes() {return false;}
-  public boolean hasAttributes() {return false;}
-  public Node getParentNode() {return null;}
-  public Node getFirstChild() {return null;}
-  public Node getLastChild() {return null;}
-  public Node getPreviousSibling() {return null;}
-  public Node getNextSibling() {return null;}
-  public boolean getSpecified() {return false;}
-  public void normalize() {return;}
-  public NodeList getChildNodes() {return null;}
-  public NamedNodeMap getAttributes() {return null;}
-  public short getNodeType() {return Node.ATTRIBUTE_NODE;}
-  public void setNodeValue(String value) {throw new DTMException(NOT_SUPPORTED_ERR);}
-  public void setValue(String value) {throw new DTMException(NOT_SUPPORTED_ERR);}
-  public void setPrefix(String value) {throw new DTMException(NOT_SUPPORTED_ERR);}
-  public Node insertBefore(Node a, Node b) {throw new DTMException(NOT_SUPPORTED_ERR);}
-  public Node replaceChild(Node a, Node b) {throw new DTMException(NOT_SUPPORTED_ERR);}
-  public Node appendChild(Node a) {throw new DTMException(NOT_SUPPORTED_ERR);}
-  public Node removeChild(Node a) {throw new DTMException(NOT_SUPPORTED_ERR);}
-  public Document getOwnerDocument() {return pseudoparent.getOwnerDocument();}
-  public Node cloneNode(boolean deep) {throw new DTMException(NOT_SUPPORTED_ERR);}
+  @Override
+public boolean isSupported(String feature, String version) {return false;}
+  @Override
+public boolean hasChildNodes() {return false;}
+  @Override
+public boolean hasAttributes() {return false;}
+  @Override
+public Node getParentNode() {return null;}
+  @Override
+public Node getFirstChild() {return null;}
+  @Override
+public Node getLastChild() {return null;}
+  @Override
+public Node getPreviousSibling() {return null;}
+  @Override
+public Node getNextSibling() {return null;}
+  @Override
+public boolean getSpecified() {return false;}
+  @Override
+public void normalize() {return;}
+  @Override
+public NodeList getChildNodes() {return null;}
+  @Override
+public NamedNodeMap getAttributes() {return null;}
+  @Override
+public short getNodeType() {return Node.ATTRIBUTE_NODE;}
+  @Override
+public void setNodeValue(String value) {throw new DTMException(NOT_SUPPORTED_ERR);}
+  @Override
+public void setValue(String value) {throw new DTMException(NOT_SUPPORTED_ERR);}
+  @Override
+public void setPrefix(String value) {throw new DTMException(NOT_SUPPORTED_ERR);}
+  @Override
+public Node insertBefore(Node a, Node b) {throw new DTMException(NOT_SUPPORTED_ERR);}
+  @Override
+public Node replaceChild(Node a, Node b) {throw new DTMException(NOT_SUPPORTED_ERR);}
+  @Override
+public Node appendChild(Node a) {throw new DTMException(NOT_SUPPORTED_ERR);}
+  @Override
+public Node removeChild(Node a) {throw new DTMException(NOT_SUPPORTED_ERR);}
+  @Override
+public Document getOwnerDocument() {return pseudoparent.getOwnerDocument();}
+  @Override
+public Node cloneNode(boolean deep) {throw new DTMException(NOT_SUPPORTED_ERR);}
   
     /** Non-DOM method, part of the temporary kluge
      * %REVIEW% This would be a pruning problem, but since it will always be
@@ -112,22 +142,27 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
     /**
      * @see org.w3c.dom.TypeInfo#getTypeName()
      */
+    @Override
     public String getTypeName() {return null; }
      
     /**
      * @see org.w3c.dom.TypeInfo#getTypeNamespace()
      */
+    @Override
     public String getTypeNamespace() { return null;}
     
     /**
      * @see or.gw3c.dom.TypeInfo#isDerivedFrom(String,String,int)
      */
+    @Override
     public boolean isDerivedFrom( String ns, String localName, int derivationMethod ) {
         return false;
     }
 
+    @Override
     public TypeInfo getSchemaTypeInfo() { return this; }
     
+    @Override
     public boolean isId( ) { return false; }
 
     /**
@@ -143,6 +178,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      *   the given key on this node, or <code>null</code> if there was none.
      * @since DOM Level 3
      */
+    @Override
     public Object setUserData(String key,
                               Object data,
                               UserDataHandler handler) {
@@ -158,6 +194,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      *   on this node, or <code>null</code> if there was none.
      * @since DOM Level 3
      */
+    @Override
     public Object getUserData(String key) {
         return getOwnerDocument().getUserData( key);
     } 
@@ -182,6 +219,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      *   childNodes, etc.
      * @since DOM Level 3
      */
+    @Override
     public Object getFeature(String feature, String version) {
         // we don't have any alternate node, either this node does the job
         // or we don't have anything that does
@@ -230,6 +268,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      *   <code>true</code> otherwise <code>false</code>.
      * @since DOM Level 3
      */
+    @Override
     public boolean isEqualNode(Node arg) {
         if (arg == this) {
             return true;
@@ -306,6 +345,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * @return th URI for the namespace
      * @since DOM Level 3
      */
+    @Override
     public String lookupNamespaceURI(String specifiedPrefix) {
         short type = this.getNodeType();
         switch (type) {
@@ -397,6 +437,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      *   is the default namespace, <code>false</code> otherwise.
      * @since DOM Level 3
      */
+    @Override
     public boolean isDefaultNamespace(String namespaceURI){
        /*
         // REVISIT: remove casts when DOM L3 becomes REC.
@@ -471,6 +512,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * @param namespaceURI
      * @return the prefix for the namespace
      */
+    @Override
     public String lookupPrefix(String namespaceURI){
 
         // REVISIT: When Namespaces 1.1 comes out this may not be true
@@ -532,6 +574,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      *   <code>false</code> otherwise.
      * @since DOM Level 3
      */
+    @Override
     public boolean isSameNode(Node other) {
         // we do not use any wrapper so the answer is obvious
         return this == other;
@@ -582,6 +625,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      *   platform.
      * @since DOM Level 3
      */
+    @Override
     public void setTextContent(String textContent)
         throws DOMException {
         setNodeValue(textContent);
@@ -632,6 +676,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      *   platform.
      * @since DOM Level 3
      */
+    @Override
     public String getTextContent() throws DOMException {
         return getNodeValue();  // overriden in some subclasses
     }
@@ -644,6 +689,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      *   node.
      * @since DOM Level 3
      */
+    @Override
     public short compareDocumentPosition(Node other) throws DOMException {
         return 0;
     }
@@ -672,6 +718,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * Yes. (F2F 26 Sep 2001)
      * @since DOM Level 3
      */
+    @Override
     public String getBaseURI() {
         return null;
     }

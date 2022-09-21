@@ -119,7 +119,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
-  public int getAnalysisBits()
+  @Override
+public int getAnalysisBits()
   {
     int axis = getAxis();
     int bit = WalkerFactory.getAnalysisBitFromAxes(axis);
@@ -175,7 +176,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @return a non-null DTM reference.
    */
-  public DTM getDTM(int nodeHandle)
+  @Override
+public DTM getDTM(int nodeHandle)
   {
     // %OPT%
     return m_execContext.getDTM(nodeHandle);
@@ -188,7 +190,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @return a non-null DTMManager reference.
    */
-  public DTMManager getDTMManager()
+  @Override
+public DTMManager getDTMManager()
   {
     return m_execContext.getDTMManager();
   }
@@ -205,7 +208,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public XObject execute(XPathContext xctxt)
+  @Override
+public XObject execute(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
 
@@ -230,7 +234,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *         occurs.
    * @throws org.xml.sax.SAXException
    */
-  public void executeCharsToContentHandler(
+  @Override
+public void executeCharsToContentHandler(
           XPathContext xctxt, org.xml.sax.ContentHandler handler)
             throws javax.xml.transform.TransformerException,
                    org.xml.sax.SAXException
@@ -262,7 +267,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @throws javax.xml.transform.TransformerException
    * @xsl.usage experimental
    */
-  public DTMIterator asIterator(
+  @Override
+public DTMIterator asIterator(
           XPathContext xctxt, int contextNode)
             throws javax.xml.transform.TransformerException
   {
@@ -279,7 +285,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @return true if the expression can be represented as a nodeset.
    */
-  public boolean isNodesetExpr()
+  @Override
+public boolean isNodesetExpr()
   {
     return true;
   }
@@ -292,7 +299,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @param xctxt The XPath runtime context.
    * @return the first node out of the nodeset, or DTM.NULL.
    */
-  public int asNode(XPathContext xctxt)
+  @Override
+public int asNode(XPathContext xctxt)
     throws javax.xml.transform.TransformerException
   {
     DTMIterator iter = (DTMIterator)m_clones.getInstance();
@@ -316,7 +324,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @throws javax.xml.transform.TransformerException
    */
-  public boolean bool(XPathContext xctxt)
+  @Override
+public boolean bool(XPathContext xctxt)
           throws javax.xml.transform.TransformerException
   {
     return asNode(xctxt) != DTM.NULL;
@@ -356,7 +365,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @param context The XPath runtime context for this
    * transformation.
    */
-  public void setRoot(int context, Object environment)
+  @Override
+public void setRoot(int context, Object environment)
   {
 
     m_context = context;
@@ -399,7 +409,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @return A value greater than or equal to zero that indicates the next
    * node position to fetch.
    */
-  public final int getCurrentPos()
+  @Override
+public final int getCurrentPos()
   {
     return m_pos;
   }
@@ -411,7 +422,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @param b True if this iterator should cache nodes.
    */
-  public void setShouldCacheNodes(boolean b)
+  @Override
+public void setShouldCacheNodes(boolean b)
   {
 
     assertion(false, "setShouldCacheNodes not supported by this iterater!");
@@ -423,7 +435,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @return True if the nodelist can be mutated.
    */
-  public boolean isMutable()
+  @Override
+public boolean isMutable()
   {
     return false;
   }
@@ -434,7 +447,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @param i Must be a valid index greater
    * than or equal to zero and less than m_cachedNodes.size().
    */
-  public void setCurrentPos(int i)
+  @Override
+public void setCurrentPos(int i)
   {
     assertion(false, "setCurrentPos not supported by this iterator!");
   }
@@ -473,7 +487,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *   <code>NodeList</code> , or <code>null</code> if that is not a valid
    *   index.
    */
-  public int item(int index)
+  @Override
+public int item(int index)
   {
   assertion(false, "item(int index) not supported by this iterator!");
   return 0;
@@ -492,7 +507,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @param node Node to set
    * @param index Index of where to set the node
    */
-  public void setItem(int node, int index)
+  @Override
+public void setItem(int node, int index)
   {
   assertion(false, "setItem not supported by this iterator!");
   }
@@ -503,7 +519,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @return The number of nodes in the list, always greater or equal to zero.
    */
-  public int getLength()
+  @Override
+public int getLength()
   {
     // Tell if this is being called from within a predicate.
     boolean isPredicateTest = this == m_execContext.getSubContextList();
@@ -568,7 +585,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @return true of nextNode has not been called.
    */
-  public boolean isFresh()
+  @Override
+public boolean isFresh()
   {
     return m_pos == 0;
   }
@@ -579,7 +597,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @return  The previous <code>Node</code> in the set being iterated over,
    *   or<code>null</code> if there are no more members in that set.
    */
-  public int previousNode()
+  @Override
+public int previousNode()
   {
     throw new RuntimeException(
       XSLMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null)); //"This NodeSetDTM can not iterate to a previous node!");
@@ -598,7 +617,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @return For now, always NodeFilter.SHOW_ALL & ~NodeFilter.SHOW_ENTITY_REFERENCE.
    * @see org.w3c.dom.traversal.NodeIterator
    */
-  public int getWhatToShow()
+  @Override
+public int getWhatToShow()
   {
 
     // TODO: ??
@@ -624,7 +644,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @return The "root" of this iterator, which, in XPath terms,
    * is the node context for this iterator.
    */
-  public int getRoot()
+  @Override
+public int getRoot()
   {
     return m_context;
   }
@@ -644,7 +665,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @return Always true, since entity reference nodes are not
    * visible in the XPath model.
    */
-  public boolean getExpandEntityReferences()
+  @Override
+public boolean getExpandEntityReferences()
   {
     return true;
   }
@@ -658,7 +680,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @param allowRelease true if it is OK for detach to release this iterator
    * for pooling.
    */
-  public void allowDetachToRelease(boolean allowRelease)
+  @Override
+public void allowDetachToRelease(boolean allowRelease)
   {
     m_allowDetach = allowRelease;
   }
@@ -670,7 +693,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * <code>nextNode</code> or<code>previousNode</code> will raise the
    * exception INVALID_STATE_ERR.
    */
-  public void detach()
+  @Override
+public void detach()
   {
     if(m_allowDetach)
     {
@@ -692,7 +716,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   /**
    * Reset the iterator.
    */
-  public void reset()
+  @Override
+public void reset()
   {
     assertion(false, "This iterator can not reset!");
   }
@@ -705,7 +730,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @throws CloneNotSupportedException
    */
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException
+  @Override
+public DTMIterator cloneWithReset() throws CloneNotSupportedException
   {
     LocPathIterator clone;
 //    clone = (LocPathIterator) clone();
@@ -745,7 +771,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    */
-  public abstract int nextNode();
+  @Override
+public abstract int nextNode();
 
   /**
    * Bottleneck the return of a next node, to make returns
@@ -776,7 +803,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @return The last fetched node, or null if the last fetch was null.
    */
-  public int getCurrentNode()
+  @Override
+public int getCurrentNode()
   {
     return m_lastFetched;
   }
@@ -790,7 +818,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @param index The index to run to, or -1 if the iterator
    * should run to the end.
    */
-  public void runTo(int index)
+  @Override
+public void runTo(int index)
   {
 
     if (m_foundLast || ((index >= 0) && (index <= getCurrentPos())))
@@ -912,7 +941,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
+  @Override
+public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
   {
        if(visitor.visitLocationPath(owner, this))
        {
@@ -993,7 +1023,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @return true as a default.
    */
-  public boolean isDocOrdered()
+  @Override
+public boolean isDocOrdered()
   {
     return true;
   }
@@ -1004,7 +1035,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
-  public int getAxis()
+  @Override
+public int getAxis()
   {
     return -1;
   }
@@ -1020,7 +1052,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   /**
    * @see PredicatedNodeTest#getLastPos(XPathContext)
    */
-  public int getLastPos(XPathContext xctxt)
+  @Override
+public int getLastPos(XPathContext xctxt)
   {
     return getLength();
   }
