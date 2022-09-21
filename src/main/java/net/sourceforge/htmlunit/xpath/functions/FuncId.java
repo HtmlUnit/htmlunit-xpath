@@ -20,6 +20,8 @@
  */
 package net.sourceforge.htmlunit.xpath.functions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import net.sourceforge.htmlunit.xpath.NodeSetDTM;
@@ -29,7 +31,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
-import net.sourceforge.htmlunit.xpath.xml.utils.StringVector;
 
 /**
  * Execute the Id() function.
@@ -40,7 +41,7 @@ public class FuncId extends FunctionOneArg
     static final long serialVersionUID = 8930573966143567310L;
 
   /**
-   * Fill in a list with nodes that match a space delimited list if ID 
+   * Fill in a list with nodes that match a space delimited list if ID
    * ID references.
    *
    * @param xctxt The runtime XPath context.
@@ -52,8 +53,8 @@ public class FuncId extends FunctionOneArg
    *
    * @return The usedrefs value.
    */
-  private StringVector getNodesByID(XPathContext xctxt, int docContext,
-                                    String refval, StringVector usedrefs,
+  private List<String> getNodesByID(XPathContext xctxt, int docContext,
+                                    String refval, List<String> usedrefs,
                                     NodeSetDTM nodeSet, boolean mayBeMore)
   {
 
@@ -85,9 +86,9 @@ public class FuncId extends FunctionOneArg
         if ((null != ref) && (hasMore || mayBeMore))
         {
           if (null == usedrefs)
-            usedrefs = new StringVector();
+            usedrefs = new ArrayList<String>();
 
-          usedrefs.addElement(ref);
+          usedrefs.add(ref);
         }
       }
     }
@@ -121,7 +122,7 @@ public class FuncId extends FunctionOneArg
     if (XObject.CLASS_NODESET == argType)
     {
       DTMIterator ni = arg.iter();
-      StringVector usedrefs = null;
+      List<String> usedrefs = null;
       int pos = ni.nextNode();
 
       while (DTM.NULL != pos)

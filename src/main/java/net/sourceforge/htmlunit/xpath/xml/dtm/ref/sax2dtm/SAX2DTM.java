@@ -20,7 +20,9 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref.sax2dtm;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Vector;
 
 import javax.xml.transform.Source;
@@ -53,7 +55,6 @@ import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer;
 import net.sourceforge.htmlunit.xpath.xml.utils.IntStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.IntVector;
-import net.sourceforge.htmlunit.xpath.xml.utils.StringVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.SuballocatedIntVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.SystemIDResolver;
 import net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException;
@@ -214,7 +215,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
    /** Made protected for access by SAX2RTFDTM.
    */
-  protected StringVector m_sourceSystemId;
+  protected List<String> m_sourceSystemId;
    /** Made protected for access by SAX2RTFDTM.
    */
   protected IntVector m_sourceLine;
@@ -304,7 +305,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
     // m_useSourceLocationProperty=org.apache.xalan.processor.TransformerFactoryImpl.m_source_location;
     m_useSourceLocationProperty = mgr.getSource_location();
-    m_sourceSystemId = m_useSourceLocationProperty ? new StringVector() : null;
+    m_sourceSystemId = m_useSourceLocationProperty ? new ArrayList<String>() : null;
     m_sourceLine = m_useSourceLocationProperty ?  new IntVector() : null;
     m_sourceColumn = m_useSourceLocationProperty ?  new IntVector() : null;
   }
@@ -990,7 +991,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
    * as every node is added to the DTM or for no node.
    */
   protected void setSourceLocation() {
-    m_sourceSystemId.addElement(m_locator.getSystemId());
+    m_sourceSystemId.add(m_locator.getSystemId());
     m_sourceLine.addElement(m_locator.getLineNumber());
     m_sourceColumn.addElement(m_locator.getColumnNumber());
 
@@ -2511,7 +2512,7 @@ public class SAX2DTM extends DTMDefaultBaseIterators
 
 
       return new NodeLocator(null,
-                             m_sourceSystemId.elementAt(node),
+                             m_sourceSystemId.get(node),
                              m_sourceLine.elementAt(node),
                              m_sourceColumn.elementAt(node));
     }

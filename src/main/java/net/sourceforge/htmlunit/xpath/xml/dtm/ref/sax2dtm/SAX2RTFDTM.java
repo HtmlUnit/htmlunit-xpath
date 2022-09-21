@@ -20,6 +20,8 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref.sax2dtm;
 
+import java.util.ArrayList;
+
 import javax.xml.transform.Source;
 
 import org.xml.sax.SAXException;
@@ -29,7 +31,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
 import net.sourceforge.htmlunit.xpath.xml.utils.IntStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.IntVector;
-import net.sourceforge.htmlunit.xpath.xml.utils.StringVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
 
 /**
@@ -130,8 +131,7 @@ public class SAX2RTFDTM extends SAX2DTM
     // (If we did track them, we'd need to tail-prune these too.)
     //org.apache.xalan.processor.TransformerFactoryImpl.m_source_location;
     m_useSourceLocationProperty=false;
-    m_sourceSystemId = m_useSourceLocationProperty ? new StringVector()
-                                                     : null;
+    m_sourceSystemId = m_useSourceLocationProperty ? new ArrayList<String>() : null;
     m_sourceLine = m_useSourceLocationProperty ? new IntVector() : null;
     m_sourceColumn = m_useSourceLocationProperty ? new IntVector() : null;
 
