@@ -235,47 +235,6 @@ public class XPathException extends TransformerException {
       super.printStackTrace(s);
     } catch (Exception e) {
     }
-
-    boolean isJdk14OrHigher = false;
-    try {
-      Throwable.class.getMethod("getCause", null);
-      isJdk14OrHigher = true;
-    } catch (NoSuchMethodException nsme) {
-      // do nothing
-    }
-
-    // The printStackTrace method of the Throwable class in jdk 1.4
-    // and higher will include the cause when printing the backtrace.
-    // The following code is only required when using jdk 1.3 or lower
-    if (!isJdk14OrHigher) {
-
-      Throwable exception = m_exception;
-
-      for (int i = 0; (i < 10) && (null != exception); i++) {
-        s.println("---------");
-
-        try {
-          exception.printStackTrace(s);
-        } catch (Exception e) {
-          s.println("Could not print stack trace...");
-        }
-
-        if (exception instanceof TransformerException) {
-          TransformerException se = (TransformerException) exception;
-          Throwable prev = exception;
-
-          exception = se.getException();
-
-          if (prev == exception) {
-            exception = null;
-
-            break;
-          }
-        } else {
-          exception = null;
-        }
-      }
-    }
   }
 
   /**

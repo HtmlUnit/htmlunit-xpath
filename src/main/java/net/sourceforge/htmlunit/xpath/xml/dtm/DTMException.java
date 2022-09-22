@@ -17,8 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import javax.xml.transform.SourceLocator;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
@@ -307,61 +305,6 @@ public class DTMException extends RuntimeException {
 
       super.printStackTrace(s);
     } catch (Throwable e) {
-    }
-
-    boolean isJdk14OrHigher = false;
-    try {
-      Throwable.class.getMethod("getCause", null);
-      isJdk14OrHigher = true;
-    } catch (NoSuchMethodException nsme) {
-      // do nothing
-    }
-
-    // The printStackTrace method of the Throwable class in jdk 1.4
-    // and higher will include the cause when printing the backtrace.
-    // The following code is only required when using jdk 1.3 or lower
-    if (!isJdk14OrHigher) {
-      Throwable exception = getException();
-
-      for (int i = 0; (i < 10) && (null != exception); i++) {
-        s.println("---------");
-
-        try {
-          if (exception instanceof DTMException) {
-            String locInfo = ((DTMException) exception).getLocationAsString();
-
-            if (null != locInfo) {
-              s.println(locInfo);
-            }
-          }
-
-          exception.printStackTrace(s);
-        } catch (Throwable e) {
-          s.println("Could not print stack trace...");
-        }
-
-        try {
-          Method meth = ((Object) exception).getClass().getMethod("getException", null);
-
-          if (null != meth) {
-            Throwable prev = exception;
-
-            exception = (Throwable) meth.invoke(exception, null);
-
-            if (prev == exception) {
-              break;
-            }
-          } else {
-            exception = null;
-          }
-        } catch (InvocationTargetException ite) {
-          exception = null;
-        } catch (IllegalAccessException iae) {
-          exception = null;
-        } catch (NoSuchMethodException nsme) {
-          exception = null;
-        }
-      }
     }
   }
 }
