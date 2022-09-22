@@ -27,140 +27,108 @@ import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 
 /**
  * Base class for functions that accept one argument.
+ *
  * @xsl.usage advanced
  */
-public class FunctionOneArg extends Function implements ExpressionOwner
-{
-    static final long serialVersionUID = -5180174180765609758L;
+public class FunctionOneArg extends Function implements ExpressionOwner {
+  static final long serialVersionUID = -5180174180765609758L;
 
-  /** The first argument passed to the function (at index 0).
-   *  @serial  */
+  /**
+   * The first argument passed to the function (at index 0).
+   *
+   * @serial
+   */
   Expression m_arg0;
 
   /**
    * Return the first argument passed to the function (at index 0).
    *
-   * @return An expression that represents the first argument passed to the 
-   *         function.
+   * @return An expression that represents the first argument passed to the function.
    */
-  public Expression getArg0()
-  {
+  public Expression getArg0() {
     return m_arg0;
   }
-  
+
   /**
-   * Set an argument expression for a function.  This method is called by the 
-   * XPath compiler.
+   * Set an argument expression for a function. This method is called by the XPath compiler.
    *
    * @param arg non-null expression that represents the argument.
    * @param argNum The argument number index.
-   *
    * @throws WrongNumberArgsException If the argNum parameter is greater than 0.
    */
   @Override
-public void setArg(Expression arg, int argNum)
-          throws WrongNumberArgsException
-  {
+  public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
 
-    if (0 == argNum)
-    {
+    if (0 == argNum) {
       m_arg0 = arg;
       arg.exprSetParent(this);
-    }
-    else
-      reportWrongNumberArgs();
+    } else reportWrongNumberArgs();
   }
 
   /**
-   * Check that the number of arguments passed to this function is correct. 
-   *
+   * Check that the number of arguments passed to this function is correct.
    *
    * @param argNum The number of arguments that is being passed to the function.
-   *
    * @throws WrongNumberArgsException
    */
   @Override
-public void checkNumberArgs(int argNum) throws WrongNumberArgsException
-  {
-    if (argNum != 1)
-      reportWrongNumberArgs();
+  public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
+    if (argNum != 1) reportWrongNumberArgs();
   }
 
   /**
-   * Constructs and throws a WrongNumberArgException with the appropriate
-   * message for this function object.
+   * Constructs and throws a WrongNumberArgException with the appropriate message for this function
+   * object.
    *
    * @throws WrongNumberArgsException
    */
   @Override
-protected void reportWrongNumberArgs() throws WrongNumberArgsException {
-      throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("one", null));
+  protected void reportWrongNumberArgs() throws WrongNumberArgsException {
+    throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("one", null));
   }
-  
+
   /**
-   * Tell if this expression or it's subexpressions can traverse outside 
-   * the current subtree.
-   * 
+   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
+   *
    * @return true if traversal outside the context node's subtree can occur.
    */
-   @Override
-public boolean canTraverseOutsideSubtree()
-   {
+  @Override
+  public boolean canTraverseOutsideSubtree() {
     return m_arg0.canTraverseOutsideSubtree();
-   }
-   
+  }
+
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   @Override
-public void callArgVisitors(XPathVisitor visitor)
-  {
-    if(null != m_arg0)
-      m_arg0.callVisitors(this, visitor);
+  public void callArgVisitors(XPathVisitor visitor) {
+    if (null != m_arg0) m_arg0.callVisitors(this, visitor);
   }
 
-
-  /**
-   * @see ExpressionOwner#getExpression()
-   */
+  /** @see ExpressionOwner#getExpression() */
   @Override
-public Expression getExpression()
-  {
+  public Expression getExpression() {
     return m_arg0;
   }
 
-  /**
-   * @see ExpressionOwner#setExpression(Expression)
-   */
+  /** @see ExpressionOwner#setExpression(Expression) */
   @Override
-public void setExpression(Expression exp)
-  {
+  public void setExpression(Expression exp) {
     exp.exprSetParent(this);
     m_arg0 = exp;
   }
-  
-  /**
-   * @see Expression#deepEquals(Expression)
-   */
+
+  /** @see Expression#deepEquals(Expression) */
   @Override
-public boolean deepEquals(Expression expr)
-  {
-    if(!super.deepEquals(expr))
-      return false;
-      
-    if(null != m_arg0)
-    {
-      if(null == ((FunctionOneArg)expr).m_arg0)
-        return false;
-        
-      if(!m_arg0.deepEquals(((FunctionOneArg)expr).m_arg0))
-        return false;
-    }
-    else if(null != ((FunctionOneArg)expr).m_arg0)
-      return false;
+  public boolean deepEquals(Expression expr) {
+    if (!super.deepEquals(expr)) return false;
+
+    if (null != m_arg0) {
+      if (null == ((FunctionOneArg) expr).m_arg0) return false;
+
+      if (!m_arg0.deepEquals(((FunctionOneArg) expr).m_arg0)) return false;
+    } else if (null != ((FunctionOneArg) expr).m_arg0) return false;
 
     return true;
   }
-
-
 }

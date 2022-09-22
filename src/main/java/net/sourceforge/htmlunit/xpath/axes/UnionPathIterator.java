@@ -31,23 +31,19 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /**
- * This class extends NodeSetDTM, which implements DTMIterator,
- * and fetches nodes one at a time in document order based on a XPath
- * <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
- * As each node is iterated via nextNode(), the node is also stored
- * in the NodeVector, so that previousNode() can easily be done.
+ * This class extends NodeSetDTM, which implements DTMIterator, and fetches nodes one at a time in
+ * document order based on a XPath <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
+ * As each node is iterated via nextNode(), the node is also stored in the NodeVector, so that
+ * previousNode() can easily be done.
+ *
  * @xsl.usage advanced
  */
 public class UnionPathIterator extends LocPathIterator
-        implements Cloneable, DTMIterator, java.io.Serializable, PathComponent
-{
-    static final long serialVersionUID = -3910351546843826781L;
+    implements Cloneable, DTMIterator, java.io.Serializable, PathComponent {
+  static final long serialVersionUID = -3910351546843826781L;
 
-  /**
-   * Constructor to create an instance which you can add location paths to.
-   */
-  public UnionPathIterator()
-  {
+  /** Constructor to create an instance which you can add location paths to. */
+  public UnionPathIterator() {
 
     super();
 
@@ -58,35 +54,27 @@ public class UnionPathIterator extends LocPathIterator
   }
 
   /**
-   * Initialize the context values for this expression
-   * after it is cloned.
+   * Initialize the context values for this expression after it is cloned.
    *
-   * @param context The XPath runtime context for this
-   * transformation.
+   * @param context The XPath runtime context for this transformation.
    */
   @Override
-public void setRoot(int context, Object environment)
-  {
+  public void setRoot(int context, Object environment) {
     super.setRoot(context, environment);
 
-    try
-    {
-      if (null != m_exprs)
-      {
+    try {
+      if (null != m_exprs) {
         int n = m_exprs.length;
         DTMIterator newIters[] = new DTMIterator[n];
 
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
           DTMIterator iter = m_exprs[i].asIterator(m_execContext, context);
           newIters[i] = iter;
           iter.nextNode();
         }
         m_iterators = newIters;
       }
-    }
-    catch(Exception e)
-    {
+    } catch (Exception e) {
       throw new net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException(e);
     }
   }
@@ -96,18 +84,14 @@ public void setRoot(int context, Object environment)
    *
    * @param expr non-null reference to a location path iterator.
    */
-  public void addIterator(DTMIterator expr)
-  {
+  public void addIterator(DTMIterator expr) {
 
     // Increase array size by only 1 at a time.  Fix this
     // if it looks to be a problem.
-    if (null == m_iterators)
-    {
+    if (null == m_iterators) {
       m_iterators = new DTMIterator[1];
       m_iterators[0] = expr;
-    }
-    else
-    {
+    } else {
       DTMIterator[] exprs = m_iterators;
       int len = m_iterators.length;
 
@@ -118,46 +102,36 @@ public void setRoot(int context, Object environment)
       m_iterators[len] = expr;
     }
     expr.nextNode();
-    if(expr instanceof Expression)
-      ((Expression)expr).exprSetParent(this);
+    if (expr instanceof Expression) ((Expression) expr).exprSetParent(this);
   }
 
   /**
-   *  Detaches the iterator from the set which it iterated over, releasing
-   * any computational resources and placing the iterator in the INVALID
-   * state. After<code>detach</code> has been invoked, calls to
-   * <code>nextNode</code> or<code>previousNode</code> will raise the
-   * exception INVALID_STATE_ERR.
+   * Detaches the iterator from the set which it iterated over, releasing any computational
+   * resources and placing the iterator in the INVALID state. After<code>detach</code> has been
+   * invoked, calls to <code>nextNode</code> or<code>previousNode</code> will raise the exception
+   * INVALID_STATE_ERR.
    */
   @Override
-public void detach()
-  {
-          if(m_allowDetach && null != m_iterators){
-                  int n = m_iterators.length;
-                  for(int i = 0; i < n; i++)
-                  {
-                          m_iterators[i].detach();
-                  }
-                  m_iterators = null;
-          }
+  public void detach() {
+    if (m_allowDetach && null != m_iterators) {
+      int n = m_iterators.length;
+      for (int i = 0; i < n; i++) {
+        m_iterators[i].detach();
+      }
+      m_iterators = null;
+    }
   }
 
-
   /**
-   * Create a UnionPathIterator object, including creation
-   * of location path iterators from the opcode list, and call back
-   * into the Compiler to create predicate expressions.
+   * Create a UnionPathIterator object, including creation of location path iterators from the
+   * opcode list, and call back into the Compiler to create predicate expressions.
    *
-   * @param compiler The Compiler which is creating
-   * this expression.
-   * @param opPos The position of this iterator in the
-   * opcode list from the compiler.
-   *
+   * @param compiler The Compiler which is creating this expression.
+   * @param opPos The position of this iterator in the opcode list from the compiler.
    * @throws javax.xml.transform.TransformerException
    */
   public UnionPathIterator(Compiler compiler, int opPos)
-          throws javax.xml.transform.TransformerException
-  {
+      throws javax.xml.transform.TransformerException {
 
     super();
 
@@ -169,18 +143,13 @@ public void detach()
   /**
    * This will return an iterator capable of handling the union of paths given.
    *
-   * @param compiler The Compiler which is creating
-   * this expression.
-   * @param opPos The position of this iterator in the
-   * opcode list from the compiler.
-   *
+   * @param compiler The Compiler which is creating this expression.
+   * @param opPos The position of this iterator in the opcode list from the compiler.
    * @return Object that is derived from LocPathIterator.
-   *
    * @throws javax.xml.transform.TransformerException
    */
   public static LocPathIterator createUnionIterator(Compiler compiler, int opPos)
-          throws javax.xml.transform.TransformerException
-  {
+      throws javax.xml.transform.TransformerException {
     // For the moment, I'm going to first create a full UnionPathIterator, and
     // then see if I can reduce it to a UnionChildIterator.  It would obviously
     // be more effecient to just test for the conditions for a UnionChildIterator,
@@ -188,31 +157,24 @@ public void detach()
     UnionPathIterator upi = new UnionPathIterator(compiler, opPos);
     int nPaths = upi.m_exprs.length;
     boolean isAllChildIterators = true;
-    for(int i = 0; i < nPaths; i++)
-    {
+    for (int i = 0; i < nPaths; i++) {
       LocPathIterator lpi = upi.m_exprs[i];
 
-      if(lpi.getAxis() != Axis.CHILD)
-      {
+      if (lpi.getAxis() != Axis.CHILD) {
         isAllChildIterators = false;
         break;
-      }
-      else
-      {
+      } else {
         // check for positional predicates or position function, which won't work.
-        if(HasPositionalPredChecker.check(lpi))
-        {
+        if (HasPositionalPredChecker.check(lpi)) {
           isAllChildIterators = false;
           break;
         }
       }
     }
-    if(isAllChildIterators)
-    {
+    if (isAllChildIterators) {
       UnionChildIterator uci = new UnionChildIterator();
 
-      for(int i = 0; i < nPaths; i++)
-      {
+      for (int i = 0; i < nPaths; i++) {
         PredicatedNodeTest lpi = upi.m_exprs[i];
         // I could strip the lpi down to a pure PredicatedNodeTest, but
         // I don't think it's worth it.  Note that the test can be used
@@ -221,26 +183,22 @@ public void detach()
       }
       return uci;
 
-    }
-    else
-      return upi;
+    } else return upi;
   }
 
   /**
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
+   *
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
   @Override
-public int getAnalysisBits()
-  {
+  public int getAnalysisBits() {
     int bits = 0;
 
-    if (m_exprs != null)
-    {
+    if (m_exprs != null) {
       int n = m_exprs.length;
 
-      for (int i = 0; i < n; i++)
-      {
+      for (int i = 0; i < n; i++) {
         int bit = m_exprs[i].getAnalysisBits();
         bits |= bit;
       }
@@ -253,176 +211,140 @@ public int getAnalysisBits()
    * Read the object from a serialization stream.
    *
    * @param stream Input stream to read from
-   *
    * @throws java.io.IOException
    * @throws javax.xml.transform.TransformerException
    */
   private void readObject(java.io.ObjectInputStream stream)
-          throws java.io.IOException, javax.xml.transform.TransformerException
-  {
-    try
-    {
+      throws java.io.IOException, javax.xml.transform.TransformerException {
+    try {
       stream.defaultReadObject();
-      m_clones =  new IteratorPool(this);
-    }
-    catch (ClassNotFoundException cnfe)
-    {
+      m_clones = new IteratorPool(this);
+    } catch (ClassNotFoundException cnfe) {
       throw new javax.xml.transform.TransformerException(cnfe);
     }
   }
 
   /**
-   * Get a cloned LocPathIterator that holds the same
-   * position as this iterator.
+   * Get a cloned LocPathIterator that holds the same position as this iterator.
    *
    * @return A clone of this iterator that holds the same node position.
-   *
    * @throws CloneNotSupportedException
    */
   @Override
-public Object clone() throws CloneNotSupportedException
-  {
+  public Object clone() throws CloneNotSupportedException {
 
     UnionPathIterator clone = (UnionPathIterator) super.clone();
-    if (m_iterators != null)
-    {
+    if (m_iterators != null) {
       int n = m_iterators.length;
 
       clone.m_iterators = new DTMIterator[n];
 
-      for (int i = 0; i < n; i++)
-      {
-        clone.m_iterators[i] = (DTMIterator)m_iterators[i].clone();
+      for (int i = 0; i < n; i++) {
+        clone.m_iterators[i] = (DTMIterator) m_iterators[i].clone();
       }
     }
 
     return clone;
   }
 
-
   /**
    * Create a new location path iterator.
    *
-   * @param compiler The Compiler which is creating
-   * this expression.
+   * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the
-   *
    * @return New location path iterator.
-   *
    * @throws javax.xml.transform.TransformerException
    */
-  protected LocPathIterator createDTMIterator(
-          Compiler compiler, int opPos) throws javax.xml.transform.TransformerException
-  {
-    LocPathIterator lpi = (LocPathIterator)WalkerFactory.newDTMIterator(compiler, opPos,
-                                      compiler.getLocationPathDepth() <= 0);
+  protected LocPathIterator createDTMIterator(Compiler compiler, int opPos)
+      throws javax.xml.transform.TransformerException {
+    LocPathIterator lpi =
+        (LocPathIterator)
+            WalkerFactory.newDTMIterator(compiler, opPos, compiler.getLocationPathDepth() <= 0);
     return lpi;
   }
 
   /**
-   * Initialize the location path iterators.  Recursive.
+   * Initialize the location path iterators. Recursive.
    *
-   * @param compiler The Compiler which is creating
-   * this expression.
-   * @param opPos The position of this iterator in the
-   * opcode list from the compiler.
+   * @param compiler The Compiler which is creating this expression.
+   * @param opPos The position of this iterator in the opcode list from the compiler.
    * @param count The insert position of the iterator.
-   *
    * @throws javax.xml.transform.TransformerException
    */
   protected void loadLocationPaths(Compiler compiler, int opPos, int count)
-          throws javax.xml.transform.TransformerException
-  {
+      throws javax.xml.transform.TransformerException {
 
     // TODO: Handle unwrapped FilterExpr
     int steptype = compiler.getOp(opPos);
 
-    if (steptype == OpCodes.OP_LOCATIONPATH)
-    {
+    if (steptype == OpCodes.OP_LOCATIONPATH) {
       loadLocationPaths(compiler, compiler.getNextOpPos(opPos), count + 1);
 
       m_exprs[count] = createDTMIterator(compiler, opPos);
       m_exprs[count].exprSetParent(this);
-    }
-    else
-    {
+    } else {
 
       // Have to check for unwrapped functions, which the LocPathIterator
       // doesn't handle.
-      switch (steptype)
-      {
-      case OpCodes.OP_VARIABLE :
-      case OpCodes.OP_EXTFUNCTION :
-      case OpCodes.OP_FUNCTION :
-      case OpCodes.OP_GROUP :
-        loadLocationPaths(compiler, compiler.getNextOpPos(opPos), count + 1);
+      switch (steptype) {
+        case OpCodes.OP_VARIABLE:
+        case OpCodes.OP_EXTFUNCTION:
+        case OpCodes.OP_FUNCTION:
+        case OpCodes.OP_GROUP:
+          loadLocationPaths(compiler, compiler.getNextOpPos(opPos), count + 1);
 
-        WalkingIterator iter =
-          new WalkingIterator(compiler.getNamespaceContext());
-        iter.exprSetParent(this);
+          WalkingIterator iter = new WalkingIterator(compiler.getNamespaceContext());
+          iter.exprSetParent(this);
 
-        if(compiler.getLocationPathDepth() <= 0)
-          iter.setIsTopLevel(true);
+          if (compiler.getLocationPathDepth() <= 0) iter.setIsTopLevel(true);
 
-        iter.m_firstWalker = new net.sourceforge.htmlunit.xpath.axes.FilterExprWalker(iter);
+          iter.m_firstWalker = new net.sourceforge.htmlunit.xpath.axes.FilterExprWalker(iter);
 
-        iter.m_firstWalker.init(compiler, opPos, steptype);
+          iter.m_firstWalker.init(compiler, opPos, steptype);
 
-        m_exprs[count] = iter;
-        break;
-      default :
-        m_exprs = new LocPathIterator[count];
+          m_exprs[count] = iter;
+          break;
+        default:
+          m_exprs = new LocPathIterator[count];
       }
     }
   }
 
   /**
-   *  Returns the next node in the set and advances the position of the
-   * iterator in the set. After a DTMIterator is created, the first call
-   * to nextNode() returns the first node in the set.
-   * @return  The next <code>Node</code> in the set being iterated over, or
-   *   <code>null</code> if there are no more members in that set.
+   * Returns the next node in the set and advances the position of the iterator in the set. After a
+   * DTMIterator is created, the first call to nextNode() returns the first node in the set.
+   *
+   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
+   *     there are no more members in that set.
    */
   @Override
-public int nextNode()
-  {
-    if(m_foundLast)
-      return DTM.NULL;
+  public int nextNode() {
+    if (m_foundLast) return DTM.NULL;
 
     // Loop through the iterators getting the current fetched
     // node, and get the earliest occuring in document order
     int earliestNode = DTM.NULL;
 
-    if (null != m_iterators)
-    {
+    if (null != m_iterators) {
       int n = m_iterators.length;
       int iteratorUsed = -1;
 
-      for (int i = 0; i < n; i++)
-      {
+      for (int i = 0; i < n; i++) {
         int node = m_iterators[i].getCurrentNode();
 
-        if (DTM.NULL == node)
-          continue;
-        else if (DTM.NULL == earliestNode)
-        {
+        if (DTM.NULL == node) continue;
+        else if (DTM.NULL == earliestNode) {
           iteratorUsed = i;
           earliestNode = node;
-        }
-        else
-        {
-          if (node == earliestNode)
-          {
+        } else {
+          if (node == earliestNode) {
 
             // Found a duplicate, so skip past it.
             m_iterators[i].nextNode();
-          }
-          else
-          {
+          } else {
             DTM dtm = getDTM(node);
 
-            if (dtm.isNodeAfter(node, earliestNode))
-            {
+            if (dtm.isNodeAfter(node, earliestNode)) {
               iteratorUsed = i;
               earliestNode = node;
             }
@@ -430,14 +352,11 @@ public int nextNode()
         }
       }
 
-      if (DTM.NULL != earliestNode)
-      {
+      if (DTM.NULL != earliestNode) {
         m_iterators[iteratorUsed].nextNode();
 
         incrementCurrentPos();
-      }
-      else
-        m_foundLast = true;
+      } else m_foundLast = true;
     }
 
     m_lastFetched = earliestNode;
@@ -446,18 +365,19 @@ public int nextNode()
   }
 
   /**
-   * The location path iterators, one for each
-   * <a href="http://www.w3.org/TR/xpath#NT-LocationPath">location
-   * path</a> contained in the union expression.
+   * The location path iterators, one for each <a
+   * href="http://www.w3.org/TR/xpath#NT-LocationPath">location path</a> contained in the union
+   * expression.
+   *
    * @serial
    */
   protected LocPathIterator[] m_exprs;
 
-
   /**
-   * The location path iterators, one for each
-   * <a href="http://www.w3.org/TR/xpath#NT-LocationPath">location
-   * path</a> contained in the union expression.
+   * The location path iterators, one for each <a
+   * href="http://www.w3.org/TR/xpath#NT-LocationPath">location path</a> contained in the union
+   * expression.
+   *
    * @serial
    */
   protected DTMIterator[] m_iterators;
@@ -465,43 +385,32 @@ public int nextNode()
   /**
    * Returns the axis being iterated, if it is known.
    *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
-   * types.
+   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
    */
   @Override
-public int getAxis()
-  {
+  public int getAxis() {
     // Could be smarter.
     return -1;
   }
 
-  class iterOwner implements ExpressionOwner
-  {
+  class iterOwner implements ExpressionOwner {
     int m_index;
 
-    iterOwner(int index)
-    {
+    iterOwner(int index) {
       m_index = index;
     }
 
-    /**
-     * @see ExpressionOwner#getExpression()
-     */
+    /** @see ExpressionOwner#getExpression() */
     @Override
-    public Expression getExpression()
-    {
+    public Expression getExpression() {
       return m_exprs[m_index];
     }
 
-    /**
-     * @see ExpressionOwner#setExpression(Expression)
-     */
+    /** @see ExpressionOwner#setExpression(Expression) */
     @Override
-    public void setExpression(Expression exp)
-    {
+    public void setExpression(Expression exp) {
 
-      if(!(exp instanceof LocPathIterator))
-      {
+      if (!(exp instanceof LocPathIterator)) {
         // Yuck.  Need FilterExprIter.  Or make it so m_exprs can be just
         // plain expressions?
         WalkingIterator wi = new WalkingIterator(getPrefixResolver());
@@ -512,64 +421,45 @@ public int getAxis()
         few.exprSetParent(wi);
         exp.exprSetParent(few);
         exp = wi;
-      }
-      else
-        exp.exprSetParent(UnionPathIterator.this);
-      m_exprs[m_index] = (LocPathIterator)exp;
+      } else exp.exprSetParent(UnionPathIterator.this);
+      m_exprs[m_index] = (LocPathIterator) exp;
     }
-
   }
 
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   @Override
-public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
-  {
-       if(visitor.visitUnionPath(owner, this))
-       {
-         if(null != m_exprs)
-         {
-           int n = m_exprs.length;
-           for(int i = 0; i < n; i++)
-           {
-             m_exprs[i].callVisitors(new iterOwner(i), visitor);
-           }
-         }
-       }
-  }
-
-    /**
-     * @see Expression#deepEquals(Expression)
-     */
-    @Override
-    public boolean deepEquals(Expression expr)
-    {
-      if (!super.deepEquals(expr))
-            return false;
-
-      UnionPathIterator upi = (UnionPathIterator) expr;
-
-      if (null != m_exprs)
-      {
+  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+    if (visitor.visitUnionPath(owner, this)) {
+      if (null != m_exprs) {
         int n = m_exprs.length;
-
-        if((null == upi.m_exprs) || (upi.m_exprs.length != n))
-          return false;
-
-        for (int i = 0; i < n; i++)
-        {
-          if(!m_exprs[i].deepEquals(upi.m_exprs[i]))
-            return false;
+        for (int i = 0; i < n; i++) {
+          m_exprs[i].callVisitors(new iterOwner(i), visitor);
         }
       }
-      else if (null != upi.m_exprs)
-      {
-          return false;
-      }
+    }
+  }
 
-      return true;
+  /** @see Expression#deepEquals(Expression) */
+  @Override
+  public boolean deepEquals(Expression expr) {
+    if (!super.deepEquals(expr)) return false;
+
+    UnionPathIterator upi = (UnionPathIterator) expr;
+
+    if (null != m_exprs) {
+      int n = m_exprs.length;
+
+      if ((null == upi.m_exprs) || (upi.m_exprs.length != n)) return false;
+
+      for (int i = 0; i < n; i++) {
+        if (!m_exprs[i].deepEquals(upi.m_exprs[i])) return false;
+      }
+    } else if (null != upi.m_exprs) {
+      return false;
     }
 
-
+    return true;
+  }
 }

@@ -24,19 +24,19 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.xml.utils.QName;
 
 /**
- * This class holds an instance of an argument on
- * the stack. The value of the argument can be either an
- * XObject or a String containing an expression.
+ * This class holds an instance of an argument on the stack. The value of the argument can be either
+ * an XObject or a String containing an expression.
+ *
  * @xsl.usage internal
  */
-public class Arg
-{
+public class Arg {
 
-  /** Field m_qname: The name of this argument, expressed as a QName
-   * (Qualified Name) object.
+  /**
+   * Field m_qname: The name of this argument, expressed as a QName (Qualified Name) object.
+   *
    * @see getQName
    * @see setQName
-   *  */
+   */
   private QName m_qname;
 
   /**
@@ -44,8 +44,7 @@ public class Arg
    *
    * @return QName object containing the qualified name
    */
-  public final QName getQName()
-  {
+  public final QName getQName() {
     return m_qname;
   }
 
@@ -54,12 +53,13 @@ public class Arg
    *
    * @param name QName object representing the new Qualified Name.
    */
-  public final void setQName(QName name)
-  {
+  public final void setQName(QName name) {
     m_qname = name;
   }
 
-  /** Field m_val: Stored XObject value of this argument
+  /**
+   * Field m_val: Stored XObject value of this argument
+   *
    * @see #getVal()
    * @see #setVal()
    */
@@ -71,8 +71,7 @@ public class Arg
    * @return the argument's stored XObject value.
    * @see #setVal(XObject)
    */
-  public final XObject getVal()
-  {
+  public final XObject getVal() {
     return m_val;
   }
 
@@ -82,105 +81,82 @@ public class Arg
    * @param val an XObject representing the arguments's value.
    * @see #getVal()
    */
-  public final void setVal(XObject val)
-  {
+  public final void setVal(XObject val) {
     m_val = val;
   }
-  
+
   /**
-   * Have the object release it's resources.
-   * Call only when the variable or argument is going out of scope.
+   * Have the object release it's resources. Call only when the variable or argument is going out of
+   * scope.
    */
-  public void detach()
-  {
-    if(null != m_val)
-    {
+  public void detach() {
+    if (null != m_val) {
       m_val.allowDetachToRelease(true);
       m_val.detach();
     }
   }
 
-
-  /** Field m_expression: Stored expression value of this argument.
+  /**
+   * Field m_expression: Stored expression value of this argument.
+   *
    * @see #setExpression
    * @see #getExpression
-   * */
+   */
   private String m_expression;
 
   /**
    * Get the value expression for this argument.
    *
-   * @return String containing the expression previously stored into this
-   * argument
+   * @return String containing the expression previously stored into this argument
    * @see #setExpression
    */
-  public String getExpression()
-  {
+  public String getExpression() {
     return m_expression;
   }
 
   /**
    * Set the value expression for this argument.
    *
-   * @param expr String containing the expression to be stored as this
-   * argument's value.
+   * @param expr String containing the expression to be stored as this argument's value.
    * @see #getExpression
    */
-  public void setExpression(String expr)
-  {
+  public void setExpression(String expr) {
     m_expression = expr;
   }
 
-  /** 
-   * True if this variable was added with an xsl:with-param or
-   * is added via setParameter.
-   */
+  /** True if this variable was added with an xsl:with-param or is added via setParameter. */
   private boolean m_isFromWithParam;
 
-  /**
-   * Tell if this variable is a parameter passed with a with-param or as 
-   * a top-level parameter.
-   */
-   public boolean isFromWithParam()
-   {
+  /** Tell if this variable is a parameter passed with a with-param or as a top-level parameter. */
+  public boolean isFromWithParam() {
     return m_isFromWithParam;
-   }
+  }
 
-  /** 
-   * True if this variable is currently visible.  To be visible,
-   * a variable needs to come either from xsl:variable or be 
-   * a "received" parameter, ie one for which an xsl:param has
-   * been encountered.
+  /**
+   * True if this variable is currently visible. To be visible, a variable needs to come either from
+   * xsl:variable or be a "received" parameter, ie one for which an xsl:param has been encountered.
    * Set at the time the object is constructed and updated as needed.
    */
   private boolean m_isVisible;
 
-  /**
-   * Tell if this variable is currently visible.
-   */
-   public boolean isVisible()
-   {
+  /** Tell if this variable is currently visible. */
+  public boolean isVisible() {
     return m_isVisible;
-   }
-   
-  /**
-   * Update visibility status of this variable.
-   */
-   public void setIsVisible(boolean b)
-   {
+  }
+
+  /** Update visibility status of this variable. */
+  public void setIsVisible(boolean b) {
     m_isVisible = b;
-   }
+  }
 
   /**
-   * Construct a dummy parameter argument, with no QName and no
-   * value (either expression string or value XObject). isVisible
-   * defaults to true.
+   * Construct a dummy parameter argument, with no QName and no value (either expression string or
+   * value XObject). isVisible defaults to true.
    */
-  public Arg()
-  {
+  public Arg() {
 
     m_qname = new QName("");
-    ;  // so that string compares can be done.
+    ; // so that string compares can be done.
     m_val = null;
     m_expression = null;
     m_isVisible = true;
@@ -194,8 +170,7 @@ public class Arg
    * @param expression String to be stored as this argument's value expression.
    * @param isFromWithParam True if this is a parameter variable.
    */
-  public Arg(QName qname, String expression, boolean isFromWithParam)
-  {
+  public Arg(QName qname, String expression, boolean isFromWithParam) {
 
     m_qname = qname;
     m_val = null;
@@ -205,14 +180,12 @@ public class Arg
   }
 
   /**
-   * Construct a parameter argument which has an XObject value.
-   * isVisible defaults to true.
+   * Construct a parameter argument which has an XObject value. isVisible defaults to true.
    *
    * @param qname Name of the argument, expressed as a QName object.
    * @param val Value of the argument, expressed as an XObject
    */
-  public Arg(QName qname, XObject val)
-  {
+  public Arg(QName qname, XObject val) {
 
     m_qname = qname;
     m_val = val;
@@ -220,24 +193,20 @@ public class Arg
     m_isFromWithParam = false;
     m_expression = null;
   }
-  
+
   /**
-   * Equality function specialized for the variable name.  If the argument 
-   * is not a qname, it will deligate to the super class.
-   * 
-   * @param   obj   the reference object with which to compare.
-   * @return  <code>true</code> if this object is the same as the obj
-   *          argument; <code>false</code> otherwise.
+   * Equality function specialized for the variable name. If the argument is not a qname, it will
+   * deligate to the super class.
+   *
+   * @param obj the reference object with which to compare.
+   * @return <code>true</code> if this object is the same as the obj argument; <code>false</code>
+   *     otherwise.
    */
   @Override
-public boolean equals(Object obj) 
-  {
-    if(obj instanceof QName)
-    {
+  public boolean equals(Object obj) {
+    if (obj instanceof QName) {
       return m_qname.equals(obj);
-    }
-    else
-      return super.equals(obj);
+    } else return super.equals(obj);
   }
 
   /**
@@ -247,8 +216,7 @@ public boolean equals(Object obj)
    * @param val Value of the argument, expressed as an XObject
    * @param isFromWithParam True if this is a parameter variable.
    */
-  public Arg(QName qname, XObject val, boolean isFromWithParam)
-  {
+  public Arg(QName qname, XObject val, boolean isFromWithParam) {
 
     m_qname = qname;
     m_val = val;

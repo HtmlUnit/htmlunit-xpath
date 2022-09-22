@@ -33,20 +33,19 @@ import net.sourceforge.htmlunit.xpath.operations.Mod;
 import net.sourceforge.htmlunit.xpath.operations.Mult;
 import net.sourceforge.htmlunit.xpath.operations.Plus;
 
-public class HasPositionalPredChecker extends XPathVisitor
-{
+public class HasPositionalPredChecker extends XPathVisitor {
   private boolean m_hasPositionalPred = false;
   private int m_predDepth = 0;
 
   /**
-   * Process the LocPathIterator to see if it contains variables
-   * or functions that may make it context dependent.
+   * Process the LocPathIterator to see if it contains variables or functions that may make it
+   * context dependent.
+   *
    * @param path LocPathIterator that is assumed to be absolute, but needs checking.
-   * @return true if the path is confirmed to be absolute, false if it
-   * may contain context dependencies.
+   * @return true if the path is confirmed to be absolute, false if it may contain context
+   *     dependencies.
    */
-  public static boolean check(LocPathIterator path)
-  {
+  public static boolean check(LocPathIterator path) {
     HasPositionalPredChecker hppc = new HasPositionalPredChecker();
     path.callVisitors(null, hppc);
     return hppc.m_hasPositionalPred;
@@ -54,61 +53,54 @@ public class HasPositionalPredChecker extends XPathVisitor
 
   /**
    * Visit a function.
-   * @param owner The owner of the expression, to which the expression can
-   *              be reset if rewriting takes place.
+   *
+   * @param owner The owner of the expression, to which the expression can be reset if rewriting
+   *     takes place.
    * @param func The function reference object.
    * @return true if the sub expressions should be traversed.
    */
   @Override
-public boolean visitFunction(ExpressionOwner owner, Function func)
-  {
-    if((func instanceof FuncPosition) ||
-       (func instanceof FuncLast))
-      m_hasPositionalPred = true;
+  public boolean visitFunction(ExpressionOwner owner, Function func) {
+    if ((func instanceof FuncPosition) || (func instanceof FuncLast)) m_hasPositionalPred = true;
     return true;
   }
 
-//  /**
-//   * Visit a variable reference.
-//   * @param owner The owner of the expression, to which the expression can
-//   *              be reset if rewriting takes place.
-//   * @param var The variable reference object.
-//   * @return true if the sub expressions should be traversed.
-//   */
-//  public boolean visitVariableRef(ExpressionOwner owner, Variable var)
-//  {
-//    m_hasPositionalPred = true;
-//    return true;
-//  }
+  //  /**
+  //   * Visit a variable reference.
+  //   * @param owner The owner of the expression, to which the expression can
+  //   *              be reset if rewriting takes place.
+  //   * @param var The variable reference object.
+  //   * @return true if the sub expressions should be traversed.
+  //   */
+  //  public boolean visitVariableRef(ExpressionOwner owner, Variable var)
+  //  {
+  //    m_hasPositionalPred = true;
+  //    return true;
+  //  }
 
   /**
-   * Visit a predicate within a location path.  Note that there isn't a
-   * proper unique component for predicates, and that the expression will
-   * be called also for whatever type Expression is.
+   * Visit a predicate within a location path. Note that there isn't a proper unique component for
+   * predicates, and that the expression will be called also for whatever type Expression is.
    *
-   * @param owner The owner of the expression, to which the expression can
-   *              be reset if rewriting takes place.
+   * @param owner The owner of the expression, to which the expression can be reset if rewriting
+   *     takes place.
    * @param pred The predicate object.
    * @return true if the sub expressions should be traversed.
    */
   @Override
-public boolean visitPredicate(ExpressionOwner owner, Expression pred)
-  {
+  public boolean visitPredicate(ExpressionOwner owner, Expression pred) {
     m_predDepth++;
 
-    if(m_predDepth == 1)
-    {
-      if((pred instanceof XNumber) ||
-         (pred instanceof Div) ||
-         (pred instanceof Plus) ||
-         (pred instanceof Minus) ||
-         (pred instanceof Mod) ||
-         (pred instanceof Mult) ||
-         (pred instanceof net.sourceforge.htmlunit.xpath.operations.Number) ||
-         (pred instanceof Function))
-          m_hasPositionalPred = true;
-      else
-        pred.callVisitors(owner, this);
+    if (m_predDepth == 1) {
+      if ((pred instanceof XNumber)
+          || (pred instanceof Div)
+          || (pred instanceof Plus)
+          || (pred instanceof Minus)
+          || (pred instanceof Mod)
+          || (pred instanceof Mult)
+          || (pred instanceof net.sourceforge.htmlunit.xpath.operations.Number)
+          || (pred instanceof Function)) m_hasPositionalPred = true;
+      else pred.callVisitors(owner, this);
     }
 
     m_predDepth--;
@@ -116,7 +108,4 @@ public boolean visitPredicate(ExpressionOwner owner, Expression pred)
     // Don't go have the caller go any further down the subtree.
     return false;
   }
-
-
 }
-

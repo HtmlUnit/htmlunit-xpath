@@ -26,23 +26,21 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /**
  * Execute the Ceiling() function.
+ *
  * @xsl.usage advanced
  */
-public class FuncCeiling extends FunctionOneArg
-{
-    static final long serialVersionUID = -1275988936390464739L;
+public class FuncCeiling extends FunctionOneArg {
+  static final long serialVersionUID = -1275988936390464739L;
 
   /**
-   * Execute the function.  The function must return
-   * a valid object.
+   * Execute the function. The function must return a valid object.
+   *
    * @param xctxt The current execution context.
    * @return A valid XObject.
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException
-  {
+  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return new XNumber(Math.ceil(m_arg0.execute(xctxt).num()));
   }
 }

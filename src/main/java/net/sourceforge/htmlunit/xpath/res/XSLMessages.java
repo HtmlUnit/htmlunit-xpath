@@ -23,59 +23,47 @@ package net.sourceforge.htmlunit.xpath.res;
 import java.util.ListResourceBundle;
 
 /**
- * Sets things up for issuing error messages.  This class is misnamed, and
- * should be called XalanMessages, or some such.
+ * Sets things up for issuing error messages. This class is misnamed, and should be called
+ * XalanMessages, or some such.
+ *
  * @xsl.usage internal
  */
-public class XSLMessages extends XPATHMessages
-{
+public class XSLMessages extends XPATHMessages {
 
-  /** The language specific resource object for Xalan messages.  */
+  /** The language specific resource object for Xalan messages. */
   private static ListResourceBundle XSLTBundle = null;
 
   /**
-   * Creates a message from the specified key and replacement
-   * arguments, localized to the given locale.
+   * Creates a message from the specified key and replacement arguments, localized to the given
+   * locale.
    *
-   * @param msgKey    The key for the message text.
-   * @param args      The arguments to be used as replacement text
-   *                  in the message created.
-   *
+   * @param msgKey The key for the message text.
+   * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted message string.
    */
-  public static final String createMessage(String msgKey, Object args[])  //throws Exception
-  {
-    if (XSLTBundle == null)
-      XSLTBundle = new XSLTErrorResources();
+  public static final String createMessage(String msgKey, Object args[]) // throws Exception
+      {
+    if (XSLTBundle == null) XSLTBundle = new XSLTErrorResources();
 
-    if (XSLTBundle != null)
-    {
+    if (XSLTBundle != null) {
       return createMsg(XSLTBundle, msgKey, args);
-    }
-    else
-      return "Could not load any resource bundles.";
+    } else return "Could not load any resource bundles.";
   }
 
   /**
-   * Creates a message from the specified key and replacement
-   * arguments, localized to the given locale.
+   * Creates a message from the specified key and replacement arguments, localized to the given
+   * locale.
    *
-   * @param msgKey    The key for the message text.
-   * @param args      The arguments to be used as replacement text
-   *                  in the message created.
-   *
+   * @param msgKey The key for the message text.
+   * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted warning string.
    */
-  public static final String createWarning(String msgKey, Object args[])  //throws Exception
-  {
-    if (XSLTBundle == null)
-      XSLTBundle = new XSLTErrorResources();
+  public static final String createWarning(String msgKey, Object args[]) // throws Exception
+      {
+    if (XSLTBundle == null) XSLTBundle = new XSLTErrorResources();
 
-    if (XSLTBundle != null)
-    {
+    if (XSLTBundle != null) {
       return createMsg(XSLTBundle, msgKey, args);
-    }
-    else
-      return "Could not load any resource bundles.";
+    } else return "Could not load any resource bundles.";
   }
 }

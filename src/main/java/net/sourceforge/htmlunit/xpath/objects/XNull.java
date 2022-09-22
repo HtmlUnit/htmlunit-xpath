@@ -21,19 +21,16 @@
 package net.sourceforge.htmlunit.xpath.objects;
 
 /**
- * This class represents an XPath null object, and is capable of
- * converting the null to other types, such as a string.
+ * This class represents an XPath null object, and is capable of converting the null to other types,
+ * such as a string.
+ *
  * @xsl.usage general
  */
-public class XNull extends XNodeSet
-{
-    static final long serialVersionUID = -6841683711458983005L;
+public class XNull extends XNodeSet {
+  static final long serialVersionUID = -6841683711458983005L;
 
-  /**
-   * Create an XObject.
-   */
-  public XNull()
-  {
+  /** Create an XObject. */
+  public XNull() {
     super();
   }
 
@@ -43,20 +40,17 @@ public class XNull extends XNodeSet
    * @return type CLASS_NULL
    */
   @Override
-public int getType()
-  {
+  public int getType() {
     return CLASS_NULL;
   }
 
   /**
-   * Given a request type, return the equivalent string.
-   * For diagnostic purposes.
+   * Given a request type, return the equivalent string. For diagnostic purposes.
    *
    * @return type string "#CLASS_NULL"
    */
   @Override
-public String getTypeString()
-  {
+  public String getTypeString() {
     return "#CLASS_NULL";
   }
 
@@ -65,10 +59,8 @@ public String getTypeString()
    *
    * @return 0.0
    */
-
   @Override
-public double num()
-  {
+  public double num() {
     return 0.0;
   }
 
@@ -78,8 +70,7 @@ public double num()
    * @return false
    */
   @Override
-public boolean bool()
-  {
+  public boolean bool() {
     return false;
   }
 
@@ -89,33 +80,28 @@ public boolean bool()
    * @return empty string ""
    */
   @Override
-public String str()
-  {
+  public String str() {
     return "";
   }
 
-
-
-//  /**
-//   * Cast result object to a nodelist.
-//   *
-//   * @return null
-//   */
-//  public DTMIterator iter()
-//  {
-//    return null;
-//  }
+  //  /**
+  //   * Cast result object to a nodelist.
+  //   *
+  //   * @return null
+  //   */
+  //  public DTMIterator iter()
+  //  {
+  //    return null;
+  //  }
 
   /**
    * Tell if two objects are functionally equal.
    *
    * @param obj2 Object to compare this to
-   *
    * @return True if the given object is of type CLASS_NULL
    */
   @Override
-public boolean equals(XObject obj2)
-  {
+  public boolean equals(XObject obj2) {
     return obj2.getType() == CLASS_NULL;
   }
 }

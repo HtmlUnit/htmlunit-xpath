@@ -24,28 +24,21 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XNumber;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * The 'div' operation expression executer.
- */
-public class Div extends Operation
-{
-    static final long serialVersionUID = 6220756595959798135L;
+/** The 'div' operation expression executer. */
+public class Div extends Operation {
+  static final long serialVersionUID = 6220756595959798135L;
 
   /**
    * Apply the operation to two operands, and return the result.
    *
-   *
    * @param left non-null reference to the evaluated left operand.
    * @param right non-null reference to the evaluated right operand.
-   *
    * @return non-null reference to the XObject that represents the result of the operation.
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public XObject operate(XObject left, XObject right)
-          throws javax.xml.transform.TransformerException
-  {
+  public XObject operate(XObject left, XObject right)
+      throws javax.xml.transform.TransformerException {
     return new XNumber(left.num() / right.num());
   }
 
@@ -53,17 +46,12 @@ public XObject operate(XObject left, XObject right)
    * Evaluate this operation directly to a double.
    *
    * @param xctxt The runtime execution context.
-   *
    * @return The result of the operation as a double.
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public double num(XPathContext xctxt)
-          throws javax.xml.transform.TransformerException
-  {
+  public double num(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     return m_left.num(xctxt) / m_right.num(xctxt);
   }
-
 }

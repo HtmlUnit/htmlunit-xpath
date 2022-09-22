@@ -20,46 +20,40 @@
  */
 package net.sourceforge.htmlunit.xpath.objects;
 
+import net.sourceforge.htmlunit.xpath.NodeSetDTM;
+import net.sourceforge.htmlunit.xpath.XPathContext;
+import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.NodeIterator;
 
-import net.sourceforge.htmlunit.xpath.NodeSetDTM;
-import net.sourceforge.htmlunit.xpath.XPathContext;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-
 /**
- * This class overrides the XNodeSet#object() method to provide the original 
- * Node object, NodeList object, or NodeIterator.
+ * This class overrides the XNodeSet#object() method to provide the original Node object, NodeList
+ * object, or NodeIterator.
  */
-public class XNodeSetForDOM extends XNodeSet
-{
-    static final long serialVersionUID = -8396190713754624640L;
+public class XNodeSetForDOM extends XNodeSet {
+  static final long serialVersionUID = -8396190713754624640L;
   Object m_origObj;
 
-  public XNodeSetForDOM(Node node, DTMManager dtmMgr)
-  {
+  public XNodeSetForDOM(Node node, DTMManager dtmMgr) {
     m_dtmMgr = dtmMgr;
     m_origObj = node;
     int dtmHandle = dtmMgr.getDTMHandleFromNode(node);
     setObject(new NodeSetDTM(dtmMgr));
     ((NodeSetDTM) m_obj).addNode(dtmHandle);
   }
-  
+
   /**
    * Construct a XNodeSet object.
    *
    * @param val Value of the XNodeSet object
    */
-  public XNodeSetForDOM(XNodeSet val)
-  {
+  public XNodeSetForDOM(XNodeSet val) {
     super(val);
-    if(val instanceof XNodeSetForDOM)
-      m_origObj = ((XNodeSetForDOM)val).m_origObj;
+    if (val instanceof XNodeSetForDOM) m_origObj = ((XNodeSetForDOM) val).m_origObj;
   }
-  
-  public XNodeSetForDOM(NodeList nodeList, XPathContext xctxt)
-  {
+
+  public XNodeSetForDOM(NodeList nodeList, XPathContext xctxt) {
     m_dtmMgr = xctxt.getDTMManager();
     m_origObj = nodeList;
 
@@ -67,13 +61,13 @@ public class XNodeSetForDOM extends XNodeSet
     // folks to request length through an accessor, so we can defer this
     // retrieval... but that requires an API change.
     // m_obj=new org.apache.xpath.NodeSetDTM(nodeList, xctxt);
-    net.sourceforge.htmlunit.xpath.NodeSetDTM nsdtm=new net.sourceforge.htmlunit.xpath.NodeSetDTM(nodeList, xctxt);
-    m_last=nsdtm.getLength();
-    setObject(nsdtm);   
+    net.sourceforge.htmlunit.xpath.NodeSetDTM nsdtm =
+        new net.sourceforge.htmlunit.xpath.NodeSetDTM(nodeList, xctxt);
+    m_last = nsdtm.getLength();
+    setObject(nsdtm);
   }
 
-  public XNodeSetForDOM(NodeIterator nodeIter, XPathContext xctxt)
-  {
+  public XNodeSetForDOM(NodeIterator nodeIter, XPathContext xctxt) {
     m_dtmMgr = xctxt.getDTMManager();
     m_origObj = nodeIter;
 
@@ -81,51 +75,42 @@ public class XNodeSetForDOM extends XNodeSet
     // folks to request length through an accessor, so we can defer this
     // retrieval... but that requires an API change.
     // m_obj = new org.apache.xpath.NodeSetDTM(nodeIter, xctxt);
-    net.sourceforge.htmlunit.xpath.NodeSetDTM nsdtm=new net.sourceforge.htmlunit.xpath.NodeSetDTM(nodeIter, xctxt);
-    m_last=nsdtm.getLength();
-    setObject(nsdtm);   
+    net.sourceforge.htmlunit.xpath.NodeSetDTM nsdtm =
+        new net.sourceforge.htmlunit.xpath.NodeSetDTM(nodeIter, xctxt);
+    m_last = nsdtm.getLength();
+    setObject(nsdtm);
   }
-  
+
   /**
-   * Return the original DOM object that the user passed in.  For use primarily
-   * by the extension mechanism.
+   * Return the original DOM object that the user passed in. For use primarily by the extension
+   * mechanism.
    *
    * @return The object that this class wraps
    */
   @Override
-public Object object()
-  {
+  public Object object() {
     return m_origObj;
   }
-  
+
   /**
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return null
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public NodeIterator nodeset() throws javax.xml.transform.TransformerException
-  {
-    return (m_origObj instanceof NodeIterator) 
-                   ? (NodeIterator)m_origObj : super.nodeset();      
+  public NodeIterator nodeset() throws javax.xml.transform.TransformerException {
+    return (m_origObj instanceof NodeIterator) ? (NodeIterator) m_origObj : super.nodeset();
   }
-  
+
   /**
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return null
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public NodeList nodelist() throws javax.xml.transform.TransformerException
-  {
-    return (m_origObj instanceof NodeList) 
-                   ? (NodeList)m_origObj : super.nodelist();      
+  public NodeList nodelist() throws javax.xml.transform.TransformerException {
+    return (m_origObj instanceof NodeList) ? (NodeList) m_origObj : super.nodelist();
   }
-
-
-
 }

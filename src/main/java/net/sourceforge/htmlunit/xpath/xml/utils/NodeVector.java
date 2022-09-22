@@ -21,46 +21,46 @@
 package net.sourceforge.htmlunit.xpath.xml.utils;
 
 import java.io.Serializable;
-
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
 /**
  * A very simple table that stores a list of Nodes.
+ *
  * @xsl.usage internal
  */
-public class NodeVector implements Serializable, Cloneable
-{
-    static final long serialVersionUID = -713473092200731870L;
+public class NodeVector implements Serializable, Cloneable {
+  static final long serialVersionUID = -713473092200731870L;
 
   /**
    * Size of blocks to allocate.
-   *  @serial
+   *
+   * @serial
    */
   private int m_blocksize;
 
   /**
    * Array of nodes this points to.
-   *  @serial
+   *
+   * @serial
    */
   private int m_map[];
 
   /**
    * Number of nodes in this NodeVector.
-   *  @serial
+   *
+   * @serial
    */
   protected int m_firstFree = 0;
 
   /**
    * Size of the array this points to.
-   *  @serial
+   *
+   * @serial
    */
-  private int m_mapSize;  // lazy initialization
+  private int m_mapSize; // lazy initialization
 
-  /**
-   * Default constructor.
-   */
-  public NodeVector()
-  {
+  /** Default constructor. */
+  public NodeVector() {
     m_blocksize = 32;
     m_mapSize = 0;
   }
@@ -70,8 +70,7 @@ public class NodeVector implements Serializable, Cloneable
    *
    * @param blocksize Size of blocks to allocate
    */
-  public NodeVector(int blocksize)
-  {
+  public NodeVector(int blocksize) {
     m_blocksize = blocksize;
     m_mapSize = 0;
   }
@@ -80,17 +79,14 @@ public class NodeVector implements Serializable, Cloneable
    * Get a cloned LocPathIterator.
    *
    * @return A clone of this
-   *
    * @throws CloneNotSupportedException
    */
   @Override
-public Object clone() throws CloneNotSupportedException
-  {
+  public Object clone() throws CloneNotSupportedException {
 
     NodeVector clone = (NodeVector) super.clone();
 
-    if ((null != this.m_map) && (this.m_map == clone.m_map))
-    {
+    if ((null != this.m_map) && (this.m_map == clone.m_map)) {
       clone.m_map = new int[this.m_map.length];
 
       System.arraycopy(this.m_map, 0, clone.m_map, 0, this.m_map.length);
@@ -104,8 +100,7 @@ public Object clone() throws CloneNotSupportedException
    *
    * @return Number of nodes in this NodeVector
    */
-  public int size()
-  {
+  public int size() {
     return m_firstFree;
   }
 
@@ -114,18 +109,13 @@ public Object clone() throws CloneNotSupportedException
    *
    * @param value Node to add to the vector
    */
-  public void addElement(int value)
-  {
+  public void addElement(int value) {
 
-    if ((m_firstFree + 1) >= m_mapSize)
-    {
-      if (null == m_map)
-      {
+    if ((m_firstFree + 1) >= m_mapSize) {
+      if (null == m_map) {
         m_map = new int[m_blocksize];
         m_mapSize = m_blocksize;
-      }
-      else
-      {
+      } else {
         m_mapSize += m_blocksize;
 
         int newMap[] = new int[m_mapSize];
@@ -146,20 +136,15 @@ public Object clone() throws CloneNotSupportedException
    *
    * @param value Node to add to the vector
    */
-  public final void push(int value)
-  {
+  public final void push(int value) {
 
     int ff = m_firstFree;
 
-    if ((ff + 1) >= m_mapSize)
-    {
-      if (null == m_map)
-      {
+    if ((ff + 1) >= m_mapSize) {
+      if (null == m_map) {
         m_map = new int[m_blocksize];
         m_mapSize = m_blocksize;
-      }
-      else
-      {
+      } else {
         m_mapSize += m_blocksize;
 
         int newMap[] = new int[m_mapSize];
@@ -182,8 +167,7 @@ public Object clone() throws CloneNotSupportedException
    *
    * @return the node at the tail of the vector
    */
-  public final int pop()
-  {
+  public final int pop() {
 
     m_firstFree--;
 
@@ -195,13 +179,11 @@ public Object clone() throws CloneNotSupportedException
   }
 
   /**
-   * Pop a node from the tail of the vector and return the
-   * top of the stack after the pop.
+   * Pop a node from the tail of the vector and return the top of the stack after the pop.
    *
    * @return The top of the stack after it's been popped
    */
-  public final int popAndTop()
-  {
+  public final int popAndTop() {
 
     m_firstFree--;
 
@@ -210,11 +192,8 @@ public Object clone() throws CloneNotSupportedException
     return (m_firstFree == 0) ? DTM.NULL : m_map[m_firstFree - 1];
   }
 
-  /**
-   * Pop a node from the tail of the vector.
-   */
-  public final void popQuick()
-  {
+  /** Pop a node from the tail of the vector. */
+  public final void popQuick() {
 
     m_firstFree--;
 
@@ -222,38 +201,29 @@ public Object clone() throws CloneNotSupportedException
   }
 
   /**
-   * Return the node at the top of the stack without popping the stack.
-   * Special purpose method for TransformerImpl, pushElemTemplateElement.
-   * Performance critical.
+   * Return the node at the top of the stack without popping the stack. Special purpose method for
+   * TransformerImpl, pushElemTemplateElement. Performance critical.
    *
    * @return Node at the top of the stack or null if stack is empty.
    */
-  public final int peepOrNull()
-  {
-    return ((null != m_map) && (m_firstFree > 0))
-           ? m_map[m_firstFree - 1] : DTM.NULL;
+  public final int peepOrNull() {
+    return ((null != m_map) && (m_firstFree > 0)) ? m_map[m_firstFree - 1] : DTM.NULL;
   }
 
   /**
-   * Push a pair of nodes into the stack.
-   * Special purpose method for TransformerImpl, pushElemTemplateElement.
-   * Performance critical.
+   * Push a pair of nodes into the stack. Special purpose method for TransformerImpl,
+   * pushElemTemplateElement. Performance critical.
    *
    * @param v1 First node to add to vector
    * @param v2 Second node to add to vector
    */
-  public final void pushPair(int v1, int v2)
-  {
+  public final void pushPair(int v1, int v2) {
 
-    if (null == m_map)
-    {
+    if (null == m_map) {
       m_map = new int[m_blocksize];
       m_mapSize = m_blocksize;
-    }
-    else
-    {
-      if ((m_firstFree + 2) >= m_mapSize)
-      {
+    } else {
+      if ((m_firstFree + 2) >= m_mapSize) {
         m_mapSize += m_blocksize;
 
         int newMap[] = new int[m_mapSize];
@@ -270,12 +240,10 @@ public Object clone() throws CloneNotSupportedException
   }
 
   /**
-   * Pop a pair of nodes from the tail of the stack.
-   * Special purpose method for TransformerImpl, pushElemTemplateElement.
-   * Performance critical.
+   * Pop a pair of nodes from the tail of the stack. Special purpose method for TransformerImpl,
+   * pushElemTemplateElement. Performance critical.
    */
-  public final void popPair()
-  {
+  public final void popPair() {
 
     m_firstFree -= 2;
     m_map[m_firstFree] = DTM.NULL;
@@ -283,50 +251,42 @@ public Object clone() throws CloneNotSupportedException
   }
 
   /**
-   * Set the tail of the stack to the given node.
-   * Special purpose method for TransformerImpl, pushElemTemplateElement.
-   * Performance critical.
+   * Set the tail of the stack to the given node. Special purpose method for TransformerImpl,
+   * pushElemTemplateElement. Performance critical.
    *
    * @param n Node to set at the tail of vector
    */
-  public final void setTail(int n)
-  {
+  public final void setTail(int n) {
     m_map[m_firstFree - 1] = n;
   }
 
   /**
-   * Set the given node one position from the tail.
-   * Special purpose method for TransformerImpl, pushElemTemplateElement.
-   * Performance critical.
+   * Set the given node one position from the tail. Special purpose method for TransformerImpl,
+   * pushElemTemplateElement. Performance critical.
    *
    * @param n Node to set
    */
-  public final void setTailSub1(int n)
-  {
+  public final void setTailSub1(int n) {
     m_map[m_firstFree - 2] = n;
   }
 
   /**
-   * Return the node at the tail of the vector without popping
-   * Special purpose method for TransformerImpl, pushElemTemplateElement.
-   * Performance critical.
+   * Return the node at the tail of the vector without popping Special purpose method for
+   * TransformerImpl, pushElemTemplateElement. Performance critical.
    *
    * @return Node at the tail of the vector
    */
-  public final int peepTail()
-  {
+  public final int peepTail() {
     return m_map[m_firstFree - 1];
   }
 
   /**
-   * Return the node one position from the tail without popping.
-   * Special purpose method for TransformerImpl, pushElemTemplateElement.
-   * Performance critical.
+   * Return the node one position from the tail without popping. Special purpose method for
+   * TransformerImpl, pushElemTemplateElement. Performance critical.
    *
    * @return Node one away from the tail
    */
-  public final int peepTailSub1()
-  {
+  public final int peepTailSub1() {
     return m_map[m_firstFree - 2];
   }
 
@@ -335,13 +295,10 @@ public Object clone() throws CloneNotSupportedException
    *
    * @param value Node to insert
    */
-  public void insertInOrder(int value)
-  {
+  public void insertInOrder(int value) {
 
-    for (int i = 0; i < m_firstFree; i++)
-    {
-      if (value < m_map[i])
-      {
+    for (int i = 0; i < m_firstFree; i++) {
+      if (value < m_map[i]) {
         insertElementAt(value, i);
 
         return;
@@ -352,24 +309,19 @@ public Object clone() throws CloneNotSupportedException
   }
 
   /**
-   * Inserts the specified node in this vector at the specified index.
-   * Each component in this vector with an index greater or equal to
-   * the specified index is shifted upward to have an index one greater
-   * than the value it had previously.
+   * Inserts the specified node in this vector at the specified index. Each component in this vector
+   * with an index greater or equal to the specified index is shifted upward to have an index one
+   * greater than the value it had previously.
    *
    * @param value Node to insert
    * @param at Position where to insert
    */
-  public void insertElementAt(int value, int at)
-  {
+  public void insertElementAt(int value, int at) {
 
-    if (null == m_map)
-    {
+    if (null == m_map) {
       m_map = new int[m_blocksize];
       m_mapSize = m_blocksize;
-    }
-    else if ((m_firstFree + 1) >= m_mapSize)
-    {
+    } else if ((m_firstFree + 1) >= m_mapSize) {
       m_mapSize += m_blocksize;
 
       int newMap[] = new int[m_mapSize];
@@ -379,8 +331,7 @@ public Object clone() throws CloneNotSupportedException
       m_map = newMap;
     }
 
-    if (at <= (m_firstFree - 1))
-    {
+    if (at <= (m_firstFree - 1)) {
       System.arraycopy(m_map, at, m_map, at + 1, m_firstFree - at);
     }
 
@@ -394,18 +345,14 @@ public Object clone() throws CloneNotSupportedException
    *
    * @param nodes NodeVector to append to this list
    */
-  public void appendNodes(NodeVector nodes)
-  {
+  public void appendNodes(NodeVector nodes) {
 
     int nNodes = nodes.size();
 
-    if (null == m_map)
-    {
+    if (null == m_map) {
       m_mapSize = nNodes + m_blocksize;
       m_map = new int[m_mapSize];
-    }
-    else if ((m_firstFree + nNodes) >= m_mapSize)
-    {
+    } else if ((m_firstFree + nNodes) >= m_mapSize) {
       m_mapSize += nNodes + m_blocksize;
 
       int newMap[] = new int[m_mapSize];
@@ -421,64 +368,47 @@ public Object clone() throws CloneNotSupportedException
   }
 
   /**
-   * Inserts the specified node in this vector at the specified index.
-   * Each component in this vector with an index greater or equal to
-   * the specified index is shifted upward to have an index one greater
-   * than the value it had previously.
+   * Inserts the specified node in this vector at the specified index. Each component in this vector
+   * with an index greater or equal to the specified index is shifted upward to have an index one
+   * greater than the value it had previously.
    */
-  public void removeAllElements()
-  {
+  public void removeAllElements() {
 
-    if (null == m_map)
-      return;
+    if (null == m_map) return;
 
-    for (int i = 0; i < m_firstFree; i++)
-    {
+    for (int i = 0; i < m_firstFree; i++) {
       m_map[i] = DTM.NULL;
     }
 
     m_firstFree = 0;
   }
 
-  /**
-   * Set the length to zero, but don't clear the array.
-   */
-  public void RemoveAllNoClear()
-  {
+  /** Set the length to zero, but don't clear the array. */
+  public void RemoveAllNoClear() {
 
-    if (null == m_map)
-      return;
+    if (null == m_map) return;
 
     m_firstFree = 0;
   }
 
   /**
-   * Removes the first occurrence of the argument from this vector.
-   * If the object is found in this vector, each component in the vector
-   * with an index greater or equal to the object's index is shifted
-   * downward to have an index one smaller than the value it had
-   * previously.
+   * Removes the first occurrence of the argument from this vector. If the object is found in this
+   * vector, each component in the vector with an index greater or equal to the object's index is
+   * shifted downward to have an index one smaller than the value it had previously.
    *
    * @param s Node to remove from the list
-   *
    * @return True if the node was successfully removed
    */
-  public boolean removeElement(int s)
-  {
+  public boolean removeElement(int s) {
 
-    if (null == m_map)
-      return false;
+    if (null == m_map) return false;
 
-    for (int i = 0; i < m_firstFree; i++)
-    {
+    for (int i = 0; i < m_firstFree; i++) {
       int node = m_map[i];
 
-      if (node == s)
-      {
-        if (i > m_firstFree)
-          System.arraycopy(m_map, i + 1, m_map, i - 1, m_firstFree - i);
-        else
-          m_map[i] = DTM.NULL;
+      if (node == s) {
+        if (i > m_firstFree) System.arraycopy(m_map, i + 1, m_map, i - 1, m_firstFree - i);
+        else m_map[i] = DTM.NULL;
 
         m_firstFree--;
 
@@ -490,46 +420,38 @@ public Object clone() throws CloneNotSupportedException
   }
 
   /**
-   * Deletes the component at the specified index. Each component in
-   * this vector with an index greater or equal to the specified
-   * index is shifted downward to have an index one smaller than
+   * Deletes the component at the specified index. Each component in this vector with an index
+   * greater or equal to the specified index is shifted downward to have an index one smaller than
    * the value it had previously.
    *
    * @param i Index of node to remove
    */
-  public void removeElementAt(int i)
-  {
+  public void removeElementAt(int i) {
 
-    if (null == m_map)
-      return;
+    if (null == m_map) return;
 
-    if (i > m_firstFree)
-      System.arraycopy(m_map, i + 1, m_map, i - 1, m_firstFree - i);
-    else
-      m_map[i] = DTM.NULL;
+    if (i > m_firstFree) System.arraycopy(m_map, i + 1, m_map, i - 1, m_firstFree - i);
+    else m_map[i] = DTM.NULL;
   }
 
   /**
-   * Sets the component at the specified index of this vector to be the
-   * specified object. The previous component at that position is discarded.
+   * Sets the component at the specified index of this vector to be the specified object. The
+   * previous component at that position is discarded.
    *
-   * The index must be a value greater than or equal to 0 and less
-   * than the current size of the vector.
+   * <p>The index must be a value greater than or equal to 0 and less than the current size of the
+   * vector.
    *
    * @param node Node to set
    * @param index Index of where to set the node
    */
-  public void setElementAt(int node, int index)
-  {
+  public void setElementAt(int node, int index) {
 
-    if (null == m_map)
-    {
+    if (null == m_map) {
       m_map = new int[m_blocksize];
       m_mapSize = m_blocksize;
     }
 
-    if(index == -1)
-      addElement(node);
+    if (index == -1) addElement(node);
 
     m_map[index] = node;
   }
@@ -538,14 +460,11 @@ public Object clone() throws CloneNotSupportedException
    * Get the nth element.
    *
    * @param i Index of node to get
-   *
    * @return Node at specified index
    */
-  public int elementAt(int i)
-  {
+  public int elementAt(int i) {
 
-    if (null == m_map)
-      return DTM.NULL;
+    if (null == m_map) return DTM.NULL;
 
     return m_map[i];
   }
@@ -554,76 +473,59 @@ public Object clone() throws CloneNotSupportedException
    * Tell if the table contains the given node.
    *
    * @param s Node to look for
-   *
    * @return True if the given node was found.
    */
-  public boolean contains(int s)
-  {
+  public boolean contains(int s) {
 
-    if (null == m_map)
-      return false;
+    if (null == m_map) return false;
 
-    for (int i = 0; i < m_firstFree; i++)
-    {
+    for (int i = 0; i < m_firstFree; i++) {
       int node = m_map[i];
 
-      if (node == s)
-        return true;
+      if (node == s) return true;
     }
 
     return false;
   }
 
   /**
-   * Searches for the first occurence of the given argument,
-   * beginning the search at index, and testing for equality
-   * using the equals method.
+   * Searches for the first occurence of the given argument, beginning the search at index, and
+   * testing for equality using the equals method.
    *
    * @param elem Node to look for
    * @param index Index of where to start the search
-   * @return the index of the first occurrence of the object
-   * argument in this vector at position index or later in the
-   * vector; returns -1 if the object is not found.
+   * @return the index of the first occurrence of the object argument in this vector at position
+   *     index or later in the vector; returns -1 if the object is not found.
    */
-  public int indexOf(int elem, int index)
-  {
+  public int indexOf(int elem, int index) {
 
-    if (null == m_map)
-      return -1;
+    if (null == m_map) return -1;
 
-    for (int i = index; i < m_firstFree; i++)
-    {
+    for (int i = index; i < m_firstFree; i++) {
       int node = m_map[i];
 
-      if (node == elem)
-        return i;
+      if (node == elem) return i;
     }
 
     return -1;
   }
 
   /**
-   * Searches for the first occurence of the given argument,
-   * beginning the search at index, and testing for equality
-   * using the equals method.
+   * Searches for the first occurence of the given argument, beginning the search at index, and
+   * testing for equality using the equals method.
    *
    * @param elem Node to look for
-   * @return the index of the first occurrence of the object
-   * argument in this vector at position index or later in the
-   * vector; returns -1 if the object is not found.
+   * @return the index of the first occurrence of the object argument in this vector at position
+   *     index or later in the vector; returns -1 if the object is not found.
    */
-  public int indexOf(int elem)
-  {
+  public int indexOf(int elem) {
 
-    if (null == m_map)
-      return -1;
+    if (null == m_map) return -1;
 
-    for (int i = 0; i < m_firstFree; i++)
-    {
+    for (int i = 0; i < m_firstFree; i++) {
       int node = m_map[i];
 
-      if (node == elem)
-        return i;
+      if (node == elem) return i;
     }
 
     return -1;
@@ -633,30 +535,24 @@ public Object clone() throws CloneNotSupportedException
    * Sort an array using a quicksort algorithm.
    *
    * @param a The array to be sorted.
-   * @param lo0  The low index.
-   * @param hi0  The high index.
-   *
+   * @param lo0 The low index.
+   * @param hi0 The high index.
    * @throws Exception
    */
-  public void sort(int a[], int lo0, int hi0) throws Exception
-  {
+  public void sort(int a[], int lo0, int hi0) throws Exception {
 
     int lo = lo0;
     int hi = hi0;
 
     // pause(lo, hi);
-    if (lo >= hi)
-    {
+    if (lo >= hi) {
       return;
-    }
-    else if (lo == hi - 1)
-    {
+    } else if (lo == hi - 1) {
 
       /*
        *  sort a two element list by swapping if necessary
        */
-      if (a[lo] > a[hi])
-      {
+      if (a[lo] > a[hi]) {
         int T = a[lo];
 
         a[lo] = a[hi];
@@ -675,15 +571,13 @@ public Object clone() throws CloneNotSupportedException
     a[mid] = a[hi];
     a[hi] = pivot;
 
-    while (lo < hi)
-    {
+    while (lo < hi) {
 
       /*
        *  Search forward from a[lo] until an element is found that
        *  is greater than the pivot or lo >= hi
        */
-      while (a[lo] <= pivot && lo < hi)
-      {
+      while (a[lo] <= pivot && lo < hi) {
         lo++;
       }
 
@@ -691,16 +585,14 @@ public Object clone() throws CloneNotSupportedException
        *  Search backward from a[hi] until element is found that
        *  is less than the pivot, or lo >= hi
        */
-      while (pivot <= a[hi] && lo < hi)
-      {
+      while (pivot <= a[hi] && lo < hi) {
         hi--;
       }
 
       /*
        *  Swap elements a[lo] and a[hi]
        */
-      if (lo < hi)
-      {
+      if (lo < hi) {
         int T = a[lo];
 
         a[lo] = a[hi];
@@ -734,8 +626,7 @@ public Object clone() throws CloneNotSupportedException
    *
    * @throws Exception
    */
-  public void sort() throws Exception
-  {
+  public void sort() throws Exception {
     sort(m_map, 0, m_firstFree - 1);
   }
 }

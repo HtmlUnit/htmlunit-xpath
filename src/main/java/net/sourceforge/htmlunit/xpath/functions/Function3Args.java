@@ -27,148 +27,112 @@ import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 
 /**
  * Base class for functions that accept three arguments.
+ *
  * @xsl.usage advanced
  */
-public class Function3Args extends Function2Args
-{
-    static final long serialVersionUID = 7915240747161506646L;
+public class Function3Args extends Function2Args {
+  static final long serialVersionUID = 7915240747161506646L;
 
-  /** The third argument passed to the function (at index 2).
-   *  @serial  */
+  /**
+   * The third argument passed to the function (at index 2).
+   *
+   * @serial
+   */
   Expression m_arg2;
 
   /**
    * Return the third argument passed to the function (at index 2).
    *
-   * @return An expression that represents the third argument passed to the 
-   *         function.
+   * @return An expression that represents the third argument passed to the function.
    */
-  public Expression getArg2()
-  {
+  public Expression getArg2() {
     return m_arg2;
   }
-  
+
   /**
-   * Set an argument expression for a function.  This method is called by the 
-   * XPath compiler.
+   * Set an argument expression for a function. This method is called by the XPath compiler.
    *
    * @param arg non-null expression that represents the argument.
    * @param argNum The argument number index.
-   *
    * @throws WrongNumberArgsException If the argNum parameter is greater than 2.
    */
   @Override
-public void setArg(Expression arg, int argNum)
-          throws WrongNumberArgsException
-  {
+  public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
 
-    if (argNum < 2)
-      super.setArg(arg, argNum);
-    else if (2 == argNum)
-    {
+    if (argNum < 2) super.setArg(arg, argNum);
+    else if (2 == argNum) {
       m_arg2 = arg;
       arg.exprSetParent(this);
-    }
-    else
-      reportWrongNumberArgs();
+    } else reportWrongNumberArgs();
   }
 
   /**
-   * Check that the number of arguments passed to this function is correct. 
-   *
+   * Check that the number of arguments passed to this function is correct.
    *
    * @param argNum The number of arguments that is being passed to the function.
-   *
    * @throws WrongNumberArgsException
    */
   @Override
-public void checkNumberArgs(int argNum) throws WrongNumberArgsException
-  {
-    if (argNum != 3)
-      reportWrongNumberArgs();
+  public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
+    if (argNum != 3) reportWrongNumberArgs();
   }
 
   /**
-   * Constructs and throws a WrongNumberArgException with the appropriate
-   * message for this function object.
+   * Constructs and throws a WrongNumberArgException with the appropriate message for this function
+   * object.
    *
    * @throws WrongNumberArgsException
    */
   @Override
-protected void reportWrongNumberArgs() throws WrongNumberArgsException {
-      throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("three", null));
+  protected void reportWrongNumberArgs() throws WrongNumberArgsException {
+    throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("three", null));
   }
-  
+
   /**
-   * Tell if this expression or it's subexpressions can traverse outside 
-   * the current subtree.
-   * 
+   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
+   *
    * @return true if traversal outside the context node's subtree can occur.
    */
-   @Override
-public boolean canTraverseOutsideSubtree()
-   {
-    return super.canTraverseOutsideSubtree() 
-    ? true : m_arg2.canTraverseOutsideSubtree();
-   }
-   
-  class Arg2Owner implements ExpressionOwner
-  {
-    /**
-     * @see ExpressionOwner#getExpression()
-     */
+  @Override
+  public boolean canTraverseOutsideSubtree() {
+    return super.canTraverseOutsideSubtree() ? true : m_arg2.canTraverseOutsideSubtree();
+  }
+
+  class Arg2Owner implements ExpressionOwner {
+    /** @see ExpressionOwner#getExpression() */
     @Override
-    public Expression getExpression()
-    {
+    public Expression getExpression() {
       return m_arg2;
     }
 
-
-    /**
-     * @see ExpressionOwner#setExpression(Expression)
-     */
+    /** @see ExpressionOwner#setExpression(Expression) */
     @Override
-    public void setExpression(Expression exp)
-    {
+    public void setExpression(Expression exp) {
       exp.exprSetParent(Function3Args.this);
       m_arg2 = exp;
     }
   }
 
-   
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   @Override
-public void callArgVisitors(XPathVisitor visitor)
-  {
+  public void callArgVisitors(XPathVisitor visitor) {
     super.callArgVisitors(visitor);
-    if(null != m_arg2)
-      m_arg2.callVisitors(new Arg2Owner(), visitor);
+    if (null != m_arg2) m_arg2.callVisitors(new Arg2Owner(), visitor);
   }
 
-  /**
-   * @see Expression#deepEquals(Expression)
-   */
+  /** @see Expression#deepEquals(Expression) */
   @Override
-public boolean deepEquals(Expression expr)
-  {
-    if(!super.deepEquals(expr))
-      return false;
-      
-    if(null != m_arg2)
-    {
-      if(null == ((Function3Args)expr).m_arg2)
-        return false;
+  public boolean deepEquals(Expression expr) {
+    if (!super.deepEquals(expr)) return false;
 
-      if(!m_arg2.deepEquals(((Function3Args)expr).m_arg2))
-        return false;
-    }
-    else if (null != ((Function3Args)expr).m_arg2)
-      return false;
-      
+    if (null != m_arg2) {
+      if (null == ((Function3Args) expr).m_arg2) return false;
+
+      if (!m_arg2.deepEquals(((Function3Args) expr).m_arg2)) return false;
+    } else if (null != ((Function3Args) expr).m_arg2) return false;
+
     return true;
   }
-
-
 }

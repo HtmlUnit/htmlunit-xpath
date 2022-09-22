@@ -20,8 +20,6 @@
  */
 package net.sourceforge.htmlunit.xpath.objects;
 
-import org.w3c.dom.NodeList;
-
 import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.ExpressionNode;
 import net.sourceforge.htmlunit.xpath.XPathContext;
@@ -29,97 +27,83 @@ import net.sourceforge.htmlunit.xpath.axes.RTFIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
+import org.w3c.dom.NodeList;
 
 /**
- * This class represents an XPath result tree fragment object, and is capable of
- * converting the RTF to other types, such as a string.
+ * This class represents an XPath result tree fragment object, and is capable of converting the RTF
+ * to other types, such as a string.
+ *
  * @xsl.usage general
  */
-public class XRTreeFrag extends XObject implements Cloneable
-{
-    static final long serialVersionUID = -3201553822254911567L;
+public class XRTreeFrag extends XObject implements Cloneable {
+  static final long serialVersionUID = -3201553822254911567L;
   private DTMXRTreeFrag m_DTMXRTreeFrag;
   private int m_dtmRoot = DTM.NULL;
   protected boolean m_allowRelease = false;
 
-
-  /**
-   * Create an XRTreeFrag Object.
-   *
-   */
-  public XRTreeFrag(int root, XPathContext xctxt, ExpressionNode parent)
-  {
+  /** Create an XRTreeFrag Object. */
+  public XRTreeFrag(int root, XPathContext xctxt, ExpressionNode parent) {
     super(null);
     exprSetParent(parent);
     initDTM(root, xctxt);
   }
 
-  /**
-   * Create an XRTreeFrag Object.
-   *
-   */
-  public XRTreeFrag(int root, XPathContext xctxt)
-  {
+  /** Create an XRTreeFrag Object. */
+  public XRTreeFrag(int root, XPathContext xctxt) {
     super(null);
-   initDTM(root, xctxt);
+    initDTM(root, xctxt);
   }
 
-  private final void initDTM(int root, XPathContext xctxt){
+  private final void initDTM(int root, XPathContext xctxt) {
     m_dtmRoot = root;
     final DTM dtm = xctxt.getDTM(root);
-    if(dtm != null){
+    if (dtm != null) {
       m_DTMXRTreeFrag = xctxt.getDTMXRTreeFrag(xctxt.getDTMIdentity(dtm));
     }
   }
 
   /**
-   * Return a java object that's closest to the representation
-   * that should be handed to an extension.
+   * Return a java object that's closest to the representation that should be handed to an
+   * extension.
    *
    * @return The object that this class wraps
    */
   @Override
-public Object object()
-  {
+  public Object object() {
     if (m_DTMXRTreeFrag.getXPathContext() != null)
-      return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeIterator((DTMIterator)(new net.sourceforge.htmlunit.xpath.NodeSetDTM(m_dtmRoot, m_DTMXRTreeFrag.getXPathContext().getDTMManager())));
-    else
-      return super.object();
+      return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeIterator(
+          (DTMIterator)
+              (new net.sourceforge.htmlunit.xpath.NodeSetDTM(
+                  m_dtmRoot, m_DTMXRTreeFrag.getXPathContext().getDTMManager())));
+    else return super.object();
   }
 
-  /**
-   * Create an XRTreeFrag Object.
-   *
-   */
-  public XRTreeFrag(Expression expr)
-  {
+  /** Create an XRTreeFrag Object. */
+  public XRTreeFrag(Expression expr) {
     super(expr);
   }
 
   /**
    * Specify if it's OK for detach to release the iterator for reuse.
    *
-   * @param allowRelease true if it is OK for detach to release this iterator
-   * for pooling.
+   * @param allowRelease true if it is OK for detach to release this iterator for pooling.
    */
   @Override
-public void allowDetachToRelease(boolean allowRelease)
-  {
+  public void allowDetachToRelease(boolean allowRelease) {
     m_allowRelease = allowRelease;
   }
 
   /**
-   * Detaches the <code>DTMIterator</code> from the set which it iterated
-   * over, releasing any computational resources and placing the iterator
-   * in the INVALID state. After <code>detach</code> has been invoked,
-   * calls to <code>nextNode</code> or <code>previousNode</code> will
+   * Detaches the <code>DTMIterator</code> from the set which it iterated over, releasing any
+   * computational resources and placing the iterator in the INVALID state. After <code>detach
+   * </code> has been invoked, calls to <code>nextNode</code> or <code>previousNode</code> will
    * raise a runtime exception.
    *
-   * In general, detach should only be called once on the object.
+   * <p>In general, detach should only be called once on the object.
    */
   @Override
-public void detach(){
-    if(m_allowRelease){
+  public void detach() {
+    if (m_allowRelease) {
       m_DTMXRTreeFrag.destruct();
       setObject(null);
     }
@@ -131,20 +115,17 @@ public void detach(){
    * @return type CLASS_RTREEFRAG
    */
   @Override
-public int getType()
-  {
+  public int getType() {
     return CLASS_RTREEFRAG;
   }
 
   /**
-   * Given a request type, return the equivalent string.
-   * For diagnostic purposes.
+   * Given a request type, return the equivalent string. For diagnostic purposes.
    *
    * @return type string "#RTREEFRAG"
    */
   @Override
-public String getTypeString()
-  {
+  public String getTypeString() {
     return "#RTREEFRAG";
   }
 
@@ -154,9 +135,7 @@ public String getTypeString()
    * @return The result tree fragment as a number or NaN
    */
   @Override
-public double num()
-    throws javax.xml.transform.TransformerException
-  {
+  public double num() throws javax.xml.transform.TransformerException {
 
     XMLString s = xstr();
 
@@ -164,14 +143,13 @@ public double num()
   }
 
   /**
-   * Cast result object to a boolean.  This always returns true for a RTreeFrag
-   * because it is treated like a node-set with a single root node.
+   * Cast result object to a boolean. This always returns true for a RTreeFrag because it is treated
+   * like a node-set with a single root node.
    *
    * @return true
    */
   @Override
-public boolean bool()
-  {
+  public boolean bool() {
     return true;
   }
 
@@ -183,10 +161,8 @@ public boolean bool()
    * @return The document fragment node data or the empty string.
    */
   @Override
-public XMLString xstr()
-  {
-    if(null == m_xmlStr)
-      m_xmlStr = m_DTMXRTreeFrag.getDTM().getStringValue(m_dtmRoot);
+  public XMLString xstr() {
+    if (null == m_xmlStr) m_xmlStr = m_DTMXRTreeFrag.getDTM().getStringValue(m_dtmRoot);
 
     return m_xmlStr;
   }
@@ -197,12 +173,10 @@ public XMLString xstr()
    * @return The string this wraps or the empty string if null
    */
   @Override
-public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb)
-  {
-    XString xstring = (XString)xstr();
+  public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb) {
+    XString xstring = (XString) xstr();
     xstring.appendToFsb(fsb);
   }
-
 
   /**
    * Cast result object to a string.
@@ -210,22 +184,19 @@ public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffe
    * @return The document fragment node data or the empty string.
    */
   @Override
-public String str()
-  {
+  public String str() {
     String str = m_DTMXRTreeFrag.getDTM().getStringValue(m_dtmRoot).toString();
 
     return (null == str) ? "" : str;
   }
 
   /**
-   * Cast result object to a DTMIterator.
-   * dml - modified to return an RTFIterator for
-   * benefit of EXSLT object-type function in
-   * {@link org.apache.xalan.lib.ExsltCommon}.
+   * Cast result object to a DTMIterator. dml - modified to return an RTFIterator for benefit of
+   * EXSLT object-type function in {@link org.apache.xalan.lib.ExsltCommon}.
+   *
    * @return The document fragment as a DTMIterator
    */
-  public DTMIterator asNodeIterator()
-  {
+  public DTMIterator asNodeIterator() {
     return new RTFIterator(m_dtmRoot, m_DTMXRTreeFrag.getXPathContext().getDTMManager());
   }
 
@@ -234,69 +205,46 @@ public String str()
    *
    * @return The document fragment as a nodelist
    */
-  public NodeList convertToNodeset()
-  {
+  public NodeList convertToNodeset() {
 
-    if (m_obj instanceof NodeList)
-      return (NodeList) m_obj;
-    else
-      return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList(asNodeIterator());
+    if (m_obj instanceof NodeList) return (NodeList) m_obj;
+    else return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList(asNodeIterator());
   }
 
   /**
    * Tell if two objects are functionally equal.
    *
    * @param obj2 Object to compare this to
-   *
    * @return True if the two objects are equal
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public boolean equals(XObject obj2)
-  {
+  public boolean equals(XObject obj2) {
 
-    try
-    {
-      if (XObject.CLASS_NODESET == obj2.getType())
-      {
+    try {
+      if (XObject.CLASS_NODESET == obj2.getType()) {
 
         // In order to handle the 'all' semantics of
         // nodeset comparisons, we always call the
         // nodeset function.
         return obj2.equals(this);
-      }
-      else if (XObject.CLASS_BOOLEAN == obj2.getType())
-      {
+      } else if (XObject.CLASS_BOOLEAN == obj2.getType()) {
         return bool() == obj2.bool();
-      }
-      else if (XObject.CLASS_NUMBER == obj2.getType())
-      {
+      } else if (XObject.CLASS_NUMBER == obj2.getType()) {
         return num() == obj2.num();
-      }
-      else if (XObject.CLASS_NODESET == obj2.getType())
-      {
+      } else if (XObject.CLASS_NODESET == obj2.getType()) {
         return xstr().equals(obj2.xstr());
-      }
-      else if (XObject.CLASS_STRING == obj2.getType())
-      {
+      } else if (XObject.CLASS_STRING == obj2.getType()) {
         return xstr().equals(obj2.xstr());
-      }
-      else if (XObject.CLASS_RTREEFRAG == obj2.getType())
-      {
+      } else if (XObject.CLASS_RTREEFRAG == obj2.getType()) {
 
         // Probably not so good.  Think about this.
         return xstr().equals(obj2.xstr());
-      }
-      else
-      {
+      } else {
         return super.equals(obj2);
       }
-    }
-    catch(javax.xml.transform.TransformerException te)
-    {
+    } catch (javax.xml.transform.TransformerException te) {
       throw new net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
     }
   }
-
 }

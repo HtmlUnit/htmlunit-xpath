@@ -30,72 +30,64 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
- * Class to use for one-step iteration that doesn't have a predicate, and
- * doesn't need to set the context.
+ * Class to use for one-step iteration that doesn't have a predicate, and doesn't need to set the
+ * context.
  */
-public class FilterExprIteratorSimple extends LocPathIterator
-{
-    static final long serialVersionUID = -6978977187025375579L;
-  /** The contained expression. Should be non-null.
-   *  @serial   */
+public class FilterExprIteratorSimple extends LocPathIterator {
+  static final long serialVersionUID = -6978977187025375579L;
+  /**
+   * The contained expression. Should be non-null.
+   *
+   * @serial
+   */
   private Expression m_expr;
 
-  /** The result of executing m_expr.  Needs to be deep cloned on clone op.  */
-  transient private XNodeSet m_exprObj;
+  /** The result of executing m_expr. Needs to be deep cloned on clone op. */
+  private transient XNodeSet m_exprObj;
 
   private boolean m_mustHardReset = false;
   private boolean m_canDetachNodeset = true;
 
-  /**
-   * Create a FilterExprIteratorSimple object.
-   *
-   */
-  public FilterExprIteratorSimple()
-  {
+  /** Create a FilterExprIteratorSimple object. */
+  public FilterExprIteratorSimple() {
     super(null);
   }
 
-  /**
-   * Create a FilterExprIteratorSimple object.
-   *
-   */
-  public FilterExprIteratorSimple(Expression expr)
-  {
+  /** Create a FilterExprIteratorSimple object. */
+  public FilterExprIteratorSimple(Expression expr) {
     super(null);
     m_expr = expr;
   }
 
   /**
-   * Initialize the context values for this expression
-   * after it is cloned.
+   * Initialize the context values for this expression after it is cloned.
    *
-   * @param context The XPath runtime context for this
-   * transformation.
+   * @param context The XPath runtime context for this transformation.
    */
   @Override
-public void setRoot(int context, Object environment)
-  {
+  public void setRoot(int context, Object environment) {
     super.setRoot(context, environment);
-    m_exprObj = executeFilterExpr(context, m_execContext, getPrefixResolver(),
-                      getIsTopLevel(), m_stackFrame, m_expr);
+    m_exprObj =
+        executeFilterExpr(
+            context, m_execContext, getPrefixResolver(), getIsTopLevel(), m_stackFrame, m_expr);
   }
 
   /**
-   * Execute the expression.  Meant for reuse by other FilterExpr iterators
-   * that are not derived from this object.
+   * Execute the expression. Meant for reuse by other FilterExpr iterators that are not derived from
+   * this object.
    */
-  public static XNodeSet executeFilterExpr(int context, XPathContext xctxt,
-                          PrefixResolver prefixResolver,
-                          boolean isTopLevel,
-                          int stackFrame,
-                          Expression expr )
-    throws net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException
-  {
+  public static XNodeSet executeFilterExpr(
+      int context,
+      XPathContext xctxt,
+      PrefixResolver prefixResolver,
+      boolean isTopLevel,
+      int stackFrame,
+      Expression expr)
+      throws net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException {
     PrefixResolver savedResolver = xctxt.getNamespaceContext();
     XNodeSet result = null;
 
-    try
-    {
+    try {
       xctxt.pushCurrentNode(context);
       xctxt.setNamespaceContext(prefixResolver);
 
@@ -104,25 +96,18 @@ public void setRoot(int context, Object environment)
       // so we have to set up the variable context, execute the expression,
       // and then restore the variable context.
 
-      if (isTopLevel)
-      {
+      if (isTopLevel) {
         // System.out.println("calling m_expr.execute(getXPathContext())");
 
-          result = (net.sourceforge.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
+        result = (net.sourceforge.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
         result.setShouldCacheNodes(true);
-      }
-      else
-          result = (net.sourceforge.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
+      } else result = (net.sourceforge.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
 
-    }
-    catch (javax.xml.transform.TransformerException se)
-    {
+    } catch (javax.xml.transform.TransformerException se) {
 
       // TODO: Fix...
       throw new net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException(se);
-    }
-    finally
-    {
+    } finally {
       xctxt.popCurrentNode();
       xctxt.setNamespaceContext(savedResolver);
     }
@@ -130,36 +115,27 @@ public void setRoot(int context, Object environment)
   }
 
   /**
-   *  Returns the next node in the set and advances the position of the
-   * iterator in the set. After a NodeIterator is created, the first call
-   * to nextNode() returns the first node in the set.
+   * Returns the next node in the set and advances the position of the iterator in the set. After a
+   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
    *
-   * @return  The next <code>Node</code> in the set being iterated over, or
-   *   <code>null</code> if there are no more members in that set.
+   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
+   *     there are no more members in that set.
    */
   @Override
-public int nextNode()
-  {
-    if(m_foundLast)
-      return DTM.NULL;
+  public int nextNode() {
+    if (m_foundLast) return DTM.NULL;
 
     int next;
 
-    if (null != m_exprObj)
-    {
+    if (null != m_exprObj) {
       m_lastFetched = next = m_exprObj.nextNode();
-    }
-    else
-      m_lastFetched = next = DTM.NULL;
+    } else m_lastFetched = next = DTM.NULL;
 
     // m_lastFetched = next;
-    if (DTM.NULL != next)
-    {
+    if (DTM.NULL != next) {
       m_pos++;
       return next;
-    }
-    else
-    {
+    } else {
       m_foundLast = true;
 
       return DTM.NULL;
@@ -167,115 +143,88 @@ public int nextNode()
   }
 
   /**
-   * Detaches the walker from the set which it iterated over, releasing
-   * any computational resources and placing the iterator in the INVALID
-   * state.
+   * Detaches the walker from the set which it iterated over, releasing any computational resources
+   * and placing the iterator in the INVALID state.
    */
   @Override
-public void detach()
-  {
-    if(m_allowDetach)
-    {
+  public void detach() {
+    if (m_allowDetach) {
       super.detach();
       m_exprObj.detach();
       m_exprObj = null;
     }
   }
 
-  /**
-   * Get the inner contained expression of this filter.
-   */
-  public Expression getInnerExpression()
-  {
+  /** Get the inner contained expression of this filter. */
+  public Expression getInnerExpression() {
     return m_expr;
   }
 
-  /**
-   * Set the inner contained expression of this filter.
-   */
-  public void setInnerExpression(Expression expr)
-  {
+  /** Set the inner contained expression of this filter. */
+  public void setInnerExpression(Expression expr) {
     expr.exprSetParent(this);
     m_expr = expr;
   }
 
   /**
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
+   *
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
   @Override
-public int getAnalysisBits()
-  {
-    if (null != m_expr && m_expr instanceof PathComponent)
-    {
+  public int getAnalysisBits() {
+    if (null != m_expr && m_expr instanceof PathComponent) {
       return ((PathComponent) m_expr).getAnalysisBits();
     }
     return WalkerFactory.BIT_FILTER;
   }
 
   /**
-   * Returns true if all the nodes in the iteration well be returned in document
-   * order.
-   * Warning: This can only be called after setRoot has been called!
+   * Returns true if all the nodes in the iteration well be returned in document order. Warning:
+   * This can only be called after setRoot has been called!
    *
    * @return true as a default.
    */
   @Override
-public boolean isDocOrdered()
-  {
+  public boolean isDocOrdered() {
     return m_exprObj.isDocOrdered();
   }
 
-  class filterExprOwner implements ExpressionOwner
-  {
-    /**
-    * @see ExpressionOwner#getExpression()
-    */
+  class filterExprOwner implements ExpressionOwner {
+    /** @see ExpressionOwner#getExpression() */
     @Override
-    public Expression getExpression()
-    {
+    public Expression getExpression() {
       return m_expr;
     }
 
-    /**
-     * @see ExpressionOwner#setExpression(Expression)
-     */
+    /** @see ExpressionOwner#setExpression(Expression) */
     @Override
-    public void setExpression(Expression exp)
-    {
+    public void setExpression(Expression exp) {
       exp.exprSetParent(FilterExprIteratorSimple.this);
       m_expr = exp;
     }
-
   }
 
   /**
-   * This will traverse the heararchy, calling the visitor for
-   * each member.  If the called visitor method returns
-   * false, the subtree should not be called.
+   * This will traverse the heararchy, calling the visitor for each member. If the called visitor
+   * method returns false, the subtree should not be called.
    *
    * @param visitor The visitor whose appropriate method will be called.
    */
   @Override
-public void callPredicateVisitors(XPathVisitor visitor)
-  {
+  public void callPredicateVisitors(XPathVisitor visitor) {
     m_expr.callVisitors(new filterExprOwner(), visitor);
 
     super.callPredicateVisitors(visitor);
   }
 
-  /**
-   * @see Expression#deepEquals(Expression)
-   */
+  /** @see Expression#deepEquals(Expression) */
   @Override
-public boolean deepEquals(Expression expr)
-  {
-    if (!super.deepEquals(expr))
-      return false;
+  public boolean deepEquals(Expression expr) {
+    if (!super.deepEquals(expr)) return false;
 
     FilterExprIteratorSimple fet = (FilterExprIteratorSimple) expr;
-    if (!m_expr.deepEquals(fet.m_expr))
-      return false;
+    if (!m_expr.deepEquals(fet.m_expr)) return false;
 
     return true;
   }
@@ -283,18 +232,11 @@ public boolean deepEquals(Expression expr)
   /**
    * Returns the axis being iterated, if it is known.
    *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
-   * types.
+   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
    */
   @Override
-public int getAxis()
-  {
-    if(null != m_exprObj)
-      return m_exprObj.getAxis();
-    else
-      return Axis.FILTEREDLIST;
+  public int getAxis() {
+    if (null != m_exprObj) return m_exprObj.getAxis();
+    else return Axis.FILTEREDLIST;
   }
-
-
 }
-

@@ -21,30 +21,25 @@
 package net.sourceforge.htmlunit.xpath;
 
 import javax.xml.transform.SourceLocator;
-
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
- * Factory class for creating an XPath.  Implementors of XPath derivatives
- * will need to make a derived class of this.
+ * Factory class for creating an XPath. Implementors of XPath derivatives will need to make a
+ * derived class of this.
+ *
  * @xsl.usage advanced
  */
-public interface XPathFactory
-{
+public interface XPathFactory {
 
   /**
    * Create an XPath.
    *
    * @param exprString The XPath expression string.
-   * @param locator The location of the expression string, mainly for diagnostic
-   *                purposes.
-   * @param prefixResolver This will be called in order to resolve prefixes 
-   *        to namespace URIs.
-   * @param type One of {@link net.sourceforge.htmlunit.xpath.XPath#SELECT} or 
-   *             {@link net.sourceforge.htmlunit.xpath.XPath#MATCH}.
-   *
+   * @param locator The location of the expression string, mainly for diagnostic purposes.
+   * @param prefixResolver This will be called in order to resolve prefixes to namespace URIs.
+   * @param type One of {@link net.sourceforge.htmlunit.xpath.XPath#SELECT} or {@link
+   *     net.sourceforge.htmlunit.xpath.XPath#MATCH}.
    * @return an XPath ready for execution.
    */
-  XPath create(String exprString, SourceLocator locator,
-               PrefixResolver prefixResolver, int type);
+  XPath create(String exprString, SourceLocator locator, PrefixResolver prefixResolver, int type);
 }

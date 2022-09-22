@@ -27,148 +27,113 @@ import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 
 /**
  * Base class for functions that accept two arguments.
+ *
  * @xsl.usage advanced
  */
-public class Function2Args extends FunctionOneArg
-{
-    static final long serialVersionUID = 5574294996842710641L;
+public class Function2Args extends FunctionOneArg {
+  static final long serialVersionUID = 5574294996842710641L;
 
-  /** The second argument passed to the function (at index 1).
-   *  @serial  */
+  /**
+   * The second argument passed to the function (at index 1).
+   *
+   * @serial
+   */
   Expression m_arg1;
 
   /**
    * Return the second argument passed to the function (at index 1).
    *
-   * @return An expression that represents the second argument passed to the 
-   *         function.
+   * @return An expression that represents the second argument passed to the function.
    */
-  public Expression getArg1()
-  {
+  public Expression getArg1() {
     return m_arg1;
   }
-  
+
   /**
-   * Set an argument expression for a function.  This method is called by the 
-   * XPath compiler.
+   * Set an argument expression for a function. This method is called by the XPath compiler.
    *
    * @param arg non-null expression that represents the argument.
    * @param argNum The argument number index.
-   *
    * @throws WrongNumberArgsException If the argNum parameter is greater than 1.
    */
   @Override
-public void setArg(Expression arg, int argNum)
-          throws WrongNumberArgsException
-  {
+  public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
 
     // System.out.println("argNum: "+argNum);
-    if (argNum == 0)
-      super.setArg(arg, argNum);
-    else if (1 == argNum)
-    {
+    if (argNum == 0) super.setArg(arg, argNum);
+    else if (1 == argNum) {
       m_arg1 = arg;
       arg.exprSetParent(this);
-    }
-    else
-      reportWrongNumberArgs();
+    } else reportWrongNumberArgs();
   }
 
   /**
-   * Check that the number of arguments passed to this function is correct. 
-   *
+   * Check that the number of arguments passed to this function is correct.
    *
    * @param argNum The number of arguments that is being passed to the function.
-   *
    * @throws WrongNumberArgsException
    */
   @Override
-public void checkNumberArgs(int argNum) throws WrongNumberArgsException
-  {
-    if (argNum != 2)
-      reportWrongNumberArgs();
+  public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
+    if (argNum != 2) reportWrongNumberArgs();
   }
 
   /**
-   * Constructs and throws a WrongNumberArgException with the appropriate
-   * message for this function object.
+   * Constructs and throws a WrongNumberArgException with the appropriate message for this function
+   * object.
    *
    * @throws WrongNumberArgsException
    */
   @Override
-protected void reportWrongNumberArgs() throws WrongNumberArgsException {
-      throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("two", null));
+  protected void reportWrongNumberArgs() throws WrongNumberArgsException {
+    throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("two", null));
   }
-  
+
   /**
-   * Tell if this expression or it's subexpressions can traverse outside 
-   * the current subtree.
-   * 
+   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
+   *
    * @return true if traversal outside the context node's subtree can occur.
    */
-   @Override
-public boolean canTraverseOutsideSubtree()
-   {
-    return super.canTraverseOutsideSubtree() 
-    ? true : m_arg1.canTraverseOutsideSubtree();
-   }
-   
-  class Arg1Owner implements ExpressionOwner
-  {
-    /**
-     * @see ExpressionOwner#getExpression()
-     */
+  @Override
+  public boolean canTraverseOutsideSubtree() {
+    return super.canTraverseOutsideSubtree() ? true : m_arg1.canTraverseOutsideSubtree();
+  }
+
+  class Arg1Owner implements ExpressionOwner {
+    /** @see ExpressionOwner#getExpression() */
     @Override
-    public Expression getExpression()
-    {
+    public Expression getExpression() {
       return m_arg1;
     }
 
-
-    /**
-     * @see ExpressionOwner#setExpression(Expression)
-     */
+    /** @see ExpressionOwner#setExpression(Expression) */
     @Override
-    public void setExpression(Expression exp)
-    {
+    public void setExpression(Expression exp) {
       exp.exprSetParent(Function2Args.this);
       m_arg1 = exp;
     }
   }
 
-   
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   @Override
-public void callArgVisitors(XPathVisitor visitor)
-  {
+  public void callArgVisitors(XPathVisitor visitor) {
     super.callArgVisitors(visitor);
-    if(null != m_arg1)
-      m_arg1.callVisitors(new Arg1Owner(), visitor);
+    if (null != m_arg1) m_arg1.callVisitors(new Arg1Owner(), visitor);
   }
 
-  /**
-   * @see Expression#deepEquals(Expression)
-   */
+  /** @see Expression#deepEquals(Expression) */
   @Override
-public boolean deepEquals(Expression expr)
-  {
-    if(!super.deepEquals(expr))
-      return false;
-      
-    if(null != m_arg1)
-    {
-      if(null == ((Function2Args)expr).m_arg1)
-        return false;
-        
-      if(!m_arg1.deepEquals(((Function2Args)expr).m_arg1))
-        return false;
-    }
-    else if(null != ((Function2Args)expr).m_arg1)
-      return false;
-      
+  public boolean deepEquals(Expression expr) {
+    if (!super.deepEquals(expr)) return false;
+
+    if (null != m_arg1) {
+      if (null == ((Function2Args) expr).m_arg1) return false;
+
+      if (!m_arg1.deepEquals(((Function2Args) expr).m_arg1)) return false;
+    } else if (null != ((Function2Args) expr).m_arg1) return false;
+
     return true;
   }
-
 }

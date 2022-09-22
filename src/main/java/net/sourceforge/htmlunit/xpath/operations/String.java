@@ -23,26 +23,19 @@ package net.sourceforge.htmlunit.xpath.operations;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 
-/**
- * The 'string()' operation expression executer.
- */
-public class String extends UnaryOperation
-{
-    static final long serialVersionUID = 2973374377453022888L;
+/** The 'string()' operation expression executer. */
+public class String extends UnaryOperation {
+  static final long serialVersionUID = 2973374377453022888L;
 
   /**
    * Apply the operation to two operands, and return the result.
    *
-   *
    * @param right non-null reference to the evaluated right operand.
-   *
    * @return non-null reference to the XObject that represents the result of the operation.
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public XObject operate(XObject right) throws javax.xml.transform.TransformerException
-  {
-    return (XString)right.xstr(); // semi-safe cast.
+  public XObject operate(XObject right) throws javax.xml.transform.TransformerException {
+    return (XString) right.xstr(); // semi-safe cast.
   }
 }

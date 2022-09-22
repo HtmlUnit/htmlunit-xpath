@@ -31,76 +31,66 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /**
  * Match pattern step that contains a function.
+ *
  * @xsl.usage advanced
  */
-public class FunctionPattern extends StepPattern
-{
-    static final long serialVersionUID = -5426793413091209944L;
+public class FunctionPattern extends StepPattern {
+  static final long serialVersionUID = -5426793413091209944L;
 
   /**
-   * Construct a FunctionPattern from a
-   * {@link net.sourceforge.htmlunit.xpath.functions.Function expression}.
+   * Construct a FunctionPattern from a {@link net.sourceforge.htmlunit.xpath.functions.Function
+   * expression}.
    *
-   * NEEDSDOC @param expr
+   * <p>NEEDSDOC @param expr
    */
-  public FunctionPattern(Expression expr, int axis, int predaxis)
-  {
+  public FunctionPattern(Expression expr, int axis, int predaxis) {
 
     super(0, null, null, axis, predaxis);
 
     m_functionExpr = expr;
   }
 
-  /**
-   * Static calc of match score.
-   */
+  /** Static calc of match score. */
   @Override
-public final void calcScore()
-  {
+  public final void calcScore() {
 
     m_score = SCORE_OTHER;
 
-    if (null == m_targetString)
-      calcTargetString();
+    if (null == m_targetString) calcTargetString();
   }
 
   /**
    * Should be a {@link net.sourceforge.htmlunit.xpath.functions.Function expression}.
-   *  @serial   
+   *
+   * @serial
    */
   Expression m_functionExpr;
-  
+
   /**
    * Test a node to see if it matches the given node test.
    *
    * @param xctxt XPath runtime context.
-   *
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST},
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE},
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD},
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   *
+   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public XObject execute(XPathContext xctxt, int context)
-          throws javax.xml.transform.TransformerException
-  {
+  public XObject execute(XPathContext xctxt, int context)
+      throws javax.xml.transform.TransformerException {
 
     DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
     XNumber score = SCORE_NONE;
 
-    if (null != nl)
-    {
+    if (null != nl) {
       int n;
 
-      while (DTM.NULL != (n = nl.nextNode()))
-      {
+      while (DTM.NULL != (n = nl.nextNode())) {
         score = (n == context) ? SCORE_OTHER : SCORE_NONE;
 
-        if (score == SCORE_OTHER)
-        {
+        if (score == SCORE_OTHER) {
           context = n;
 
           break;
@@ -113,39 +103,32 @@ public XObject execute(XPathContext xctxt, int context)
 
     return score;
   }
-  
+
   /**
    * Test a node to see if it matches the given node test.
    *
    * @param xctxt XPath runtime context.
-   *
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST},
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE},
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD},
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   *
+   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public XObject execute(XPathContext xctxt, int context, 
-                         DTM dtm, int expType)
-          throws javax.xml.transform.TransformerException
-  {
+  public XObject execute(XPathContext xctxt, int context, DTM dtm, int expType)
+      throws javax.xml.transform.TransformerException {
 
     DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
     XNumber score = SCORE_NONE;
 
-    if (null != nl)
-    {
+    if (null != nl) {
       int n;
 
-      while (DTM.NULL != (n = nl.nextNode()))
-      {
+      while (DTM.NULL != (n = nl.nextNode())) {
         score = (n == context) ? SCORE_OTHER : SCORE_NONE;
 
-        if (score == SCORE_OTHER)
-        {
+        if (score == SCORE_OTHER) {
           context = n;
 
           break;
@@ -157,39 +140,32 @@ public XObject execute(XPathContext xctxt, int context,
 
     return score;
   }
-  
+
   /**
    * Test a node to see if it matches the given node test.
    *
    * @param xctxt XPath runtime context.
-   *
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST},
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE},
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD},
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or
-   *         {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   *
+   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
+   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public XObject execute(XPathContext xctxt)
-          throws javax.xml.transform.TransformerException
-  {
+  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     int context = xctxt.getCurrentNode();
     DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
     XNumber score = SCORE_NONE;
 
-    if (null != nl)
-    {
+    if (null != nl) {
       int n;
 
-      while (DTM.NULL != (n = nl.nextNode()))
-      {
+      while (DTM.NULL != (n = nl.nextNode())) {
         score = (n == context) ? SCORE_OTHER : SCORE_NONE;
 
-        if (score == SCORE_OTHER)
-        {
+        if (score == SCORE_OTHER) {
           context = n;
 
           break;
@@ -201,38 +177,26 @@ public XObject execute(XPathContext xctxt)
 
     return score;
   }
-  
-  class FunctionOwner implements ExpressionOwner
-  {
-    /**
-     * @see ExpressionOwner#getExpression()
-     */
+
+  class FunctionOwner implements ExpressionOwner {
+    /** @see ExpressionOwner#getExpression() */
     @Override
-    public Expression getExpression()
-    {
+    public Expression getExpression() {
       return m_functionExpr;
     }
 
-
-    /**
-     * @see ExpressionOwner#setExpression(Expression)
-     */
+    /** @see ExpressionOwner#setExpression(Expression) */
     @Override
-    public void setExpression(Expression exp)
-    {
+    public void setExpression(Expression exp) {
       exp.exprSetParent(FunctionPattern.this);
       m_functionExpr = exp;
     }
   }
-  
-  /**
-   * Call the visitor for the function.
-   */
+
+  /** Call the visitor for the function. */
   @Override
-protected void callSubtreeVisitors(XPathVisitor visitor)
-  {
+  protected void callSubtreeVisitors(XPathVisitor visitor) {
     m_functionExpr.callVisitors(new FunctionOwner(), visitor);
     super.callSubtreeVisitors(visitor);
   }
-
 }

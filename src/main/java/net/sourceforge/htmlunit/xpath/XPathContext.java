@@ -24,13 +24,9 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Stack;
-
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.URIResolver;
-
-import org.xml.sax.XMLReader;
-
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.objects.DTMXRTreeFrag;
 import net.sourceforge.htmlunit.xpath.objects.XString;
@@ -47,151 +43,127 @@ import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.ObjectStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
+import org.xml.sax.XMLReader;
 
 /**
  * Default class for the runtime execution context for XPath.
  *
- * <p>This class extends DTMManager but does not directly implement it.</p>
+ * <p>This class extends DTMManager but does not directly implement it.
+ *
  * @xsl.usage advanced
  */
 public class XPathContext extends DTMManager // implements ExpressionContext
 {
   /**
-   * HashMap of cached the DTMXRTreeFrag objects, which are identified by DTM IDs.
-   * The object are just wrappers for DTMs which are used in  XRTreeFrag.
+   * HashMap of cached the DTMXRTreeFrag objects, which are identified by DTM IDs. The object are
+   * just wrappers for DTMs which are used in XRTreeFrag.
    */
   private HashMap<Integer, DTMXRTreeFrag> m_DTMXRTreeFrags = null;
 
-  /**
-   * state of the secure processing feature.
-   */
+  /** state of the secure processing feature. */
   private boolean m_isSecureProcessing = false;
 
   /**
-   * Though XPathContext context extends
-   * the DTMManager, it really is a proxy for this object, which
+   * Though XPathContext context extends the DTMManager, it really is a proxy for this object, which
    * is the real DTMManager.
    */
-  protected DTMManager m_dtmManager = DTMManager.newInstance(
-                   net.sourceforge.htmlunit.xpath.objects.XMLStringFactoryImpl.getFactory());
+  protected DTMManager m_dtmManager =
+      DTMManager.newInstance(
+          net.sourceforge.htmlunit.xpath.objects.XMLStringFactoryImpl.getFactory());
 
   /**
-   * Return the DTMManager object.  Though XPathContext context extends
-   * the DTMManager, it really is a proxy for the real DTMManager.  If a
-   * caller needs to make a lot of calls to the DTMManager, it is faster
-   * if it gets the real one from this function.
+   * Return the DTMManager object. Though XPathContext context extends the DTMManager, it really is
+   * a proxy for the real DTMManager. If a caller needs to make a lot of calls to the DTMManager, it
+   * is faster if it gets the real one from this function.
    */
-   public DTMManager getDTMManager()
-   {
-     return m_dtmManager;
-   }
+  public DTMManager getDTMManager() {
+    return m_dtmManager;
+  }
 
-  /**
-   * Set the state of the secure processing feature
-   */
-  public void setSecureProcessing(boolean flag)
-  {
+  /** Set the state of the secure processing feature */
+  public void setSecureProcessing(boolean flag) {
     m_isSecureProcessing = flag;
   }
 
-  /**
-   * Return the state of the secure processing feature
-   */
-  public boolean isSecureProcessing()
-  {
+  /** Return the state of the secure processing feature */
+  public boolean isSecureProcessing() {
     return m_isSecureProcessing;
   }
 
   /**
-   * Get an instance of a DTM, loaded with the content from the
-   * specified source.  If the unique flag is true, a new instance will
-   * always be returned.  Otherwise it is up to the DTMManager to return a
-   * new instance or an instance that it already created and may be being used
-   * by someone else.
-   * (I think more parameters will need to be added for error handling, and entity
-   * resolution).
+   * Get an instance of a DTM, loaded with the content from the specified source. If the unique flag
+   * is true, a new instance will always be returned. Otherwise it is up to the DTMManager to return
+   * a new instance or an instance that it already created and may be being used by someone else. (I
+   * think more parameters will need to be added for error handling, and entity resolution).
    *
-   * @param source the specification of the source object, which may be null,
-   *               in which case it is assumed that node construction will take
-   *               by some other means.
-   * @param unique true if the returned DTM must be unique, probably because it
-   * is going to be mutated.
+   * @param source the specification of the source object, which may be null, in which case it is
+   *     assumed that node construction will take by some other means.
+   * @param unique true if the returned DTM must be unique, probably because it is going to be
+   *     mutated.
    * @param wsfilter Enables filtering of whitespace nodes, and may be null.
    * @param incremental true if the construction should try and be incremental.
-   * @param doIndexing true if the caller considers it worth it to use
-   *                   indexing schemes.
-   *
+   * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    * @return a non-null DTM reference.
    */
   @Override
-public DTM getDTM(javax.xml.transform.Source source, boolean unique,
-                    DTMWSFilter wsfilter,
-                    boolean incremental,
-                    boolean doIndexing)
-  {
-    return m_dtmManager.getDTM(source, unique, wsfilter,
-                               incremental, doIndexing);
+  public DTM getDTM(
+      javax.xml.transform.Source source,
+      boolean unique,
+      DTMWSFilter wsfilter,
+      boolean incremental,
+      boolean doIndexing) {
+    return m_dtmManager.getDTM(source, unique, wsfilter, incremental, doIndexing);
   }
 
   /**
    * Get an instance of a DTM that "owns" a node handle.
    *
    * @param nodeHandle the nodeHandle.
-   *
    * @return a non-null DTM reference.
    */
   @Override
-public DTM getDTM(int nodeHandle)
-  {
+  public DTM getDTM(int nodeHandle) {
     return m_dtmManager.getDTM(nodeHandle);
   }
 
   /**
-   * Given a W3C DOM node, try and return a DTM handle.
-   * Note: calling this may be non-optimal.
+   * Given a W3C DOM node, try and return a DTM handle. Note: calling this may be non-optimal.
    *
    * @param node Non-null reference to a DOM node.
-   *
    * @return a valid DTM handle.
    */
   @Override
-public int getDTMHandleFromNode(org.w3c.dom.Node node)
-  {
+  public int getDTMHandleFromNode(org.w3c.dom.Node node) {
     return m_dtmManager.getDTMHandleFromNode(node);
   }
-//
-//
-  /**
-   * %TBD% Doc
-   */
+  //
+  //
+  /** %TBD% Doc */
   @Override
-public int getDTMIdentity(DTM dtm)
-  {
+  public int getDTMIdentity(DTM dtm) {
     return m_dtmManager.getDTMIdentity(dtm);
   }
-//
+  //
   /**
    * Creates an empty <code>DocumentFragment</code> object.
+   *
    * @return A new <code>DocumentFragment handle</code>.
    */
   @Override
-public DTM createDocumentFragment()
-  {
+  public DTM createDocumentFragment() {
     return m_dtmManager.createDocumentFragment();
   }
-//
+  //
   /**
-   * Release a DTM either to a lru pool, or completely remove reference.
-   * DTMs without system IDs are always hard deleted.
-   * State: experimental.
+   * Release a DTM either to a lru pool, or completely remove reference. DTMs without system IDs are
+   * always hard deleted. State: experimental.
    *
    * @param dtm The DTM to be released.
    * @param shouldHardDelete True if the DTM should be removed no matter what.
    * @return true if the DTM was removed, false if it was put back in a lru pool.
    */
   @Override
-public boolean release(DTM dtm, boolean shouldHardDelete)
-  {
+  public boolean release(DTM dtm, boolean shouldHardDelete) {
     // %REVIEW% If it's a DTM which may contain multiple Result Tree
     // Fragments, we can't discard it unless we know not only that it
     // is empty, but that the XPathContext itself is going away. So do
@@ -201,64 +173,53 @@ public boolean release(DTM dtm, boolean shouldHardDelete)
   }
 
   /**
-   * Create a new <code>DTMIterator</code> based on an XPath
-   * <a href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or
-   * a <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
+   * Create a new <code>DTMIterator</code> based on an XPath <a
+   * href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a
+   * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    *
-   * @param xpathCompiler ??? Somehow we need to pass in a subpart of the
-   * expression.  I hate to do this with strings, since the larger expression
-   * has already been parsed.
-   *
+   * @param xpathCompiler ??? Somehow we need to pass in a subpart of the expression. I hate to do
+   *     this with strings, since the larger expression has already been parsed.
    * @param pos The position in the expression.
    * @return The newly created <code>DTMIterator</code>.
    */
   @Override
-public DTMIterator createDTMIterator(Object xpathCompiler, int pos)
-  {
+  public DTMIterator createDTMIterator(Object xpathCompiler, int pos) {
     return m_dtmManager.createDTMIterator(xpathCompiler, pos);
   }
-//
+  //
   /**
-   * Create a new <code>DTMIterator</code> based on an XPath
-   * <a href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or
-   * a <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
+   * Create a new <code>DTMIterator</code> based on an XPath <a
+   * href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a
+   * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    *
-   * @param xpathString Must be a valid string expressing a
-   * <a href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or
-   * a <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
-   *
+   * @param xpathString Must be a valid string expressing a <a
+   *     href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a
+   *     href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    * @param presolver An object that can resolve prefixes to namespace URLs.
-   *
    * @return The newly created <code>DTMIterator</code>.
    */
   @Override
-public DTMIterator createDTMIterator(String xpathString,
-          PrefixResolver presolver)
-  {
+  public DTMIterator createDTMIterator(String xpathString, PrefixResolver presolver) {
     return m_dtmManager.createDTMIterator(xpathString, presolver);
   }
-//
+  //
   /**
-   * Create a new <code>DTMIterator</code> based only on a whatToShow and
-   * a DTMFilter.  The traversal semantics are defined as the descendant
-   * access.
+   * Create a new <code>DTMIterator</code> based only on a whatToShow and a DTMFilter. The traversal
+   * semantics are defined as the descendant access.
    *
-   * @param whatToShow This flag specifies which node types may appear in
-   *   the logical view of the tree presented by the iterator. See the
-   *   description of <code>NodeFilter</code> for the set of possible
-   *   <code>SHOW_</code> values.These flags can be combined using
-   *   <code>OR</code>.
-   * @param filter The <code>NodeFilter</code> to be used with this
-   *   <code>TreeWalker</code>, or <code>null</code> to indicate no filter.
-   * @param entityReferenceExpansion The value of this flag determines
-   *   whether entity reference nodes are expanded.
-   *
+   * @param whatToShow This flag specifies which node types may appear in the logical view of the
+   *     tree presented by the iterator. See the description of <code>NodeFilter</code> for the set
+   *     of possible <code>SHOW_</code> values.These flags can be combined using <code>OR
+   *     </code>.
+   * @param filter The <code>NodeFilter</code> to be used with this <code>TreeWalker</code>, or
+   *     <code>null</code> to indicate no filter.
+   * @param entityReferenceExpansion The value of this flag determines whether entity reference
+   *     nodes are expanded.
    * @return The newly created <code>NodeIterator</code>.
    */
   @Override
-public DTMIterator createDTMIterator(int whatToShow,
-          DTMFilter filter, boolean entityReferenceExpansion)
-  {
+  public DTMIterator createDTMIterator(
+      int whatToShow, DTMFilter filter, boolean entityReferenceExpansion) {
     return m_dtmManager.createDTMIterator(whatToShow, filter, entityReferenceExpansion);
   }
 
@@ -266,12 +227,10 @@ public DTMIterator createDTMIterator(int whatToShow,
    * Create a new <code>DTMIterator</code> that holds exactly one node.
    *
    * @param node The node handle that the DTMIterator will iterate to.
-   *
    * @return The newly created <code>DTMIterator</code>.
    */
   @Override
-public DTMIterator createDTMIterator(int node)
-  {
+  public DTMIterator createDTMIterator(int node) {
     // DescendantIterator iter = new DescendantIterator();
     DTMIterator iter = new net.sourceforge.htmlunit.xpath.axes.OneStepIteratorForward(Axis.SELF);
     iter.setRoot(node, this);
@@ -280,9 +239,8 @@ public DTMIterator createDTMIterator(int node)
   }
 
   /**
-   * Create an XPathContext instance.  This is equivalent to calling
-   * the {@link #XPathContext(boolean)} constructor with the value
-   * <code>true</code>.
+   * Create an XPathContext instance. This is equivalent to calling the {@link
+   * #XPathContext(boolean)} constructor with the value <code>true</code>.
    */
   public XPathContext() {
     this(true);
@@ -290,9 +248,9 @@ public DTMIterator createDTMIterator(int node)
 
   /**
    * Create an XPathContext instance.
-   * @param recursiveVarContext A <code>boolean</code> value indicating whether
-   *             the XPath context needs to support pushing of scopes for
-   *             variable resolution
+   *
+   * @param recursiveVarContext A <code>boolean</code> value indicating whether the XPath context
+   *     needs to support pushing of scopes for variable resolution
    */
   public XPathContext(boolean recursiveVarContext) {
     m_prefixResolvers.push(null);
@@ -302,54 +260,52 @@ public DTMIterator createDTMIterator(int node)
   }
 
   /**
-   * Create an XPathContext instance.  This is equivalent to calling the
-   * constructor {@link #XPathContext(java.lang.Object,boolean)} with the
-   * value of the second parameter set to <code>true</code>.
+   * Create an XPathContext instance. This is equivalent to calling the constructor {@link
+   * #XPathContext(java.lang.Object,boolean)} with the value of the second parameter set to <code>
+   * true</code>.
+   *
    * @param owner Value that can be retrieved via the getOwnerObject() method.
    * @see #getOwnerObject
    */
-  public XPathContext(Object owner)
-  {
+  public XPathContext(Object owner) {
     this(owner, true);
   }
 
   /**
    * Create an XPathContext instance.
+   *
    * @param owner Value that can be retrieved via the getOwnerObject() method.
    * @see #getOwnerObject
-   * @param recursiveVarContext A <code>boolean</code> value indicating whether
-   *             the XPath context needs to support pushing of scopes for
-   *             variable resolution
+   * @param recursiveVarContext A <code>boolean</code> value indicating whether the XPath context
+   *     needs to support pushing of scopes for variable resolution
    */
   public XPathContext(Object owner, boolean recursiveVarContext) {
     this(recursiveVarContext);
     m_owner = owner;
     try {
       m_ownerGetErrorListener = m_owner.getClass().getMethod("getErrorListener", new Class[] {});
+    } catch (NoSuchMethodException nsme) {
     }
-    catch (NoSuchMethodException nsme) {}
   }
 
-  /**
-   * Reset for new run.
-   */
-  public void reset()
-  {
+  /** Reset for new run. */
+  public void reset() {
     releaseDTMXRTreeFrags();
-    m_dtmManager = DTMManager.newInstance(
-                   net.sourceforge.htmlunit.xpath.objects.XMLStringFactoryImpl.getFactory());
+    m_dtmManager =
+        DTMManager.newInstance(
+            net.sourceforge.htmlunit.xpath.objects.XMLStringFactoryImpl.getFactory());
 
     m_saxLocations.removeAllElements();
-  m_axesIteratorStack.removeAllElements();
-  m_contextNodeLists.removeAllElements();
-  m_currentExpressionNodes.removeAllElements();
-  m_currentNodes.removeAllElements();
-  m_iteratorRoots.RemoveAllNoClear();
-  m_predicatePos.removeAllElements();
-  m_predicateRoots.RemoveAllNoClear();
-  m_prefixResolvers.removeAllElements();
+    m_axesIteratorStack.removeAllElements();
+    m_contextNodeLists.removeAllElements();
+    m_currentExpressionNodes.removeAllElements();
+    m_currentNodes.removeAllElements();
+    m_iteratorRoots.RemoveAllNoClear();
+    m_predicatePos.removeAllElements();
+    m_predicateRoots.RemoveAllNoClear();
+    m_prefixResolvers.removeAllElements();
 
-  m_prefixResolvers.push(null);
+    m_prefixResolvers.push(null);
     m_currentNodes.push(DTM.NULL);
     m_currentExpressionNodes.push(DTM.NULL);
     m_saxLocations.push(null);
@@ -363,8 +319,7 @@ public DTMIterator createDTMIterator(int node)
    *
    * @param location The location within the stylesheet.
    */
-  public void setSAXLocator(SourceLocator location)
-  {
+  public void setSAXLocator(SourceLocator location) {
     m_saxLocations.setTop(location);
   }
 
@@ -373,27 +328,17 @@ public DTMIterator createDTMIterator(int node)
    *
    * @param location The location within the stylesheet.
    */
-  public void pushSAXLocator(SourceLocator location)
-  {
+  public void pushSAXLocator(SourceLocator location) {
     m_saxLocations.push(location);
   }
 
-  /**
-   * Push a slot on the locations stack so that setSAXLocator can be
-   * repeatedly called.
-   *
-   */
-  public void pushSAXLocatorNull()
-  {
+  /** Push a slot on the locations stack so that setSAXLocator can be repeatedly called. */
+  public void pushSAXLocatorNull() {
     m_saxLocations.push(null);
   }
 
-
-  /**
-   * Pop the current locater.
-   */
-  public void popSAXLocator()
-  {
+  /** Pop the current locater. */
+  public void popSAXLocator() {
     m_saxLocations.pop();
   }
 
@@ -402,39 +347,38 @@ public DTMIterator createDTMIterator(int node)
    *
    * @return The location within the stylesheet, or null if not known.
    */
-  public SourceLocator getSAXLocator()
-  {
+  public SourceLocator getSAXLocator() {
     return (SourceLocator) m_saxLocations.peek();
   }
 
-  /** The owner context of this XPathContext.  In the case of XSLT, this will be a
-   *  Transformer object.
+  /**
+   * The owner context of this XPathContext. In the case of XSLT, this will be a Transformer object.
    */
   private Object m_owner;
 
-  /** The owner context of this XPathContext.  In the case of XSLT, this will be a
-   *  Transformer object.
+  /**
+   * The owner context of this XPathContext. In the case of XSLT, this will be a Transformer object.
    */
   private Method m_ownerGetErrorListener;
 
   /**
-   * Get the "owner" context of this context, which should be,
-   * in the case of XSLT, the Transformer object.  This is needed
-   * so that XSLT functions can get the Transformer.
+   * Get the "owner" context of this context, which should be, in the case of XSLT, the Transformer
+   * object. This is needed so that XSLT functions can get the Transformer.
+   *
    * @return The owner object passed into the constructor, or null.
    */
-  public Object getOwnerObject()
-  {
+  public Object getOwnerObject() {
     return m_owner;
   }
 
   // =================================================
 
-  /** The ErrorListener where errors and warnings are to be reported.   */
+  /** The ErrorListener where errors and warnings are to be reported. */
   private ErrorListener m_errorListener;
 
-  /** A default ErrorListener in case our m_errorListener was not specified and our
-   *  owner either does not have an ErrorListener or has a null one.
+  /**
+   * A default ErrorListener in case our m_errorListener was not specified and our owner either does
+   * not have an ErrorListener or has a null one.
    */
   private ErrorListener m_defaultErrorListener;
 
@@ -443,22 +387,19 @@ public DTMIterator createDTMIterator(int node)
    *
    * @return A non-null ErrorListener reference.
    */
-  public final ErrorListener getErrorListener()
-  {
+  public final ErrorListener getErrorListener() {
 
-    if (null != m_errorListener)
-        return m_errorListener;
+    if (null != m_errorListener) return m_errorListener;
 
     ErrorListener retval = null;
 
     try {
       if (null != m_ownerGetErrorListener)
         retval = (ErrorListener) m_ownerGetErrorListener.invoke(m_owner, new Object[] {});
+    } catch (Exception e) {
     }
-    catch (Exception e) {}
 
-    if (null == retval)
-    {
+    if (null == retval) {
       if (null == m_defaultErrorListener)
         m_defaultErrorListener = new net.sourceforge.htmlunit.xpath.xml.utils.DefaultErrorHandler();
       retval = m_defaultErrorListener;
@@ -472,18 +413,19 @@ public DTMIterator createDTMIterator(int node)
    *
    * @param listener A non-null ErrorListener reference.
    */
-  public void setErrorListener(ErrorListener listener) throws IllegalArgumentException
-  {
+  public void setErrorListener(ErrorListener listener) throws IllegalArgumentException {
     if (listener == null)
-      throw new IllegalArgumentException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_NULL_ERROR_HANDLER, null)); //"Null error handler");
+      throw new IllegalArgumentException(
+          XSLMessages.createXPATHMessage(
+              XPATHErrorResources.ER_NULL_ERROR_HANDLER, null)); // "Null error handler");
     m_errorListener = listener;
   }
 
-
   // =================================================
 
-  /** The TrAX URI Resolver for resolving URIs from the document(...)
-   *  function to source tree nodes.  */
+  /**
+   * The TrAX URI Resolver for resolving URIs from the document(...) function to source tree nodes.
+   */
   private URIResolver m_uriResolver;
 
   /**
@@ -491,25 +433,23 @@ public DTMIterator createDTMIterator(int node)
    *
    * @return a URI resolver, which may be null.
    */
-  public final URIResolver getURIResolver()
-  {
+  public final URIResolver getURIResolver() {
     return m_uriResolver;
   }
 
   /**
    * Set the URIResolver associated with this execution context.
    *
-   * @param resolver the URIResolver to be associated with this
-   *        execution context, may be null to clear an already set resolver.
+   * @param resolver the URIResolver to be associated with this execution context, may be null to
+   *     clear an already set resolver.
    */
-  public void setURIResolver(URIResolver resolver)
-  {
+  public void setURIResolver(URIResolver resolver) {
     m_uriResolver = resolver;
   }
 
   // =================================================
 
-  /** The reader of the primary source tree.    */
+  /** The reader of the primary source tree. */
   public XMLReader m_primaryReader;
 
   /**
@@ -517,8 +457,7 @@ public DTMIterator createDTMIterator(int node)
    *
    * @return The reader of the primary source tree.
    */
-  public final XMLReader getPrimaryReader()
-  {
+  public final XMLReader getPrimaryReader() {
     return m_primaryReader;
   }
 
@@ -527,94 +466,90 @@ public DTMIterator createDTMIterator(int node)
    *
    * @param reader The reader of the primary source tree.
    */
-  public void setPrimaryReader(XMLReader reader)
-  {
+  public void setPrimaryReader(XMLReader reader) {
     m_primaryReader = reader;
   }
 
   // =================================================
 
-
-  /** Misnamed string manager for XPath messages.  */
+  /** Misnamed string manager for XPath messages. */
   // private static XSLMessages m_XSLMessages = new XSLMessages();
 
-
-
-  //==========================================================
+  // ==========================================================
   // SECTION: Execution context state tracking
-  //==========================================================
+  // ==========================================================
 
-  /**
-   * The current context node list.
-   */
+  /** The current context node list. */
   private Stack<DTMIterator> m_contextNodeLists = new Stack<>();
 
-  public Stack<DTMIterator> getContextNodeListsStack() { return m_contextNodeLists; }
-  public void setContextNodeListsStack(Stack<DTMIterator> s) { m_contextNodeLists = s; }
+  public Stack<DTMIterator> getContextNodeListsStack() {
+    return m_contextNodeLists;
+  }
+
+  public void setContextNodeListsStack(Stack<DTMIterator> s) {
+    m_contextNodeLists = s;
+  }
 
   /**
    * Get the current context node list.
    *
-   * @return  the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>,
-   * also refered to here as a <term>context node list</term>.
+   * @return the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>,
+   *     also refered to here as a <term>context node list</term>.
    */
-  public final DTMIterator getContextNodeList()
-  {
+  public final DTMIterator getContextNodeList() {
 
-    if (m_contextNodeLists.size() > 0)
-      return (DTMIterator) m_contextNodeLists.peek();
-    else
-      return null;
+    if (m_contextNodeLists.size() > 0) return (DTMIterator) m_contextNodeLists.peek();
+    else return null;
   }
 
   /**
    * Set the current context node list.
    *
    * @param nl the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>,
-   * also refered to here as a <term>context node list</term>.
+   *     also refered to here as a <term>context node list</term>.
    * @xsl.usage internal
    */
-  public final void pushContextNodeList(DTMIterator nl)
-  {
+  public final void pushContextNodeList(DTMIterator nl) {
     m_contextNodeLists.push(nl);
   }
 
   /**
    * Pop the current context node list.
+   *
    * @xsl.usage internal
    */
-  public final void popContextNodeList()
-  {
-    if(m_contextNodeLists.isEmpty())
+  public final void popContextNodeList() {
+    if (m_contextNodeLists.isEmpty())
       System.err.println("Warning: popContextNodeList when stack is empty!");
-    else
-      m_contextNodeLists.pop();
+    else m_contextNodeLists.pop();
   }
 
-  /**
-   * The ammount to use for stacks that record information during the
-   * recursive execution.
-   */
-  public static final int RECURSIONLIMIT = 1024*4;
+  /** The ammount to use for stacks that record information during the recursive execution. */
+  public static final int RECURSIONLIMIT = 1024 * 4;
 
-  /** The stack of <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a> objects.
-   *  Not to be confused with the current node list.  %REVIEW% Note that there
-   *  are no bounds check and resize for this stack, so if it is blown, it's all
-   *  over.  */
+  /**
+   * The stack of <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a> objects. Not
+   * to be confused with the current node list. %REVIEW% Note that there are no bounds check and
+   * resize for this stack, so if it is blown, it's all over.
+   */
   private IntStack m_currentNodes = new IntStack(RECURSIONLIMIT);
 
-//  private NodeVector m_currentNodes = new NodeVector();
+  //  private NodeVector m_currentNodes = new NodeVector();
 
-  public IntStack getCurrentNodeStack() {return m_currentNodes; }
-  public void setCurrentNodeStack(IntStack nv) { m_currentNodes = nv; }
+  public IntStack getCurrentNodeStack() {
+    return m_currentNodes;
+  }
+
+  public void setCurrentNodeStack(IntStack nv) {
+    m_currentNodes = nv;
+  }
 
   /**
    * Get the current context node.
    *
    * @return the <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a>.
    */
-  public final int getCurrentNode()
-  {
+  public final int getCurrentNode() {
     return m_currentNodes.peek();
   }
 
@@ -624,17 +559,13 @@ public DTMIterator createDTMIterator(int node)
    * @param cn the <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a>.
    * @param en the sub-expression context node.
    */
-  public final void pushCurrentNodeAndExpression(int cn, int en)
-  {
+  public final void pushCurrentNodeAndExpression(int cn, int en) {
     m_currentNodes.push(cn);
     m_currentExpressionNodes.push(cn);
   }
 
-  /**
-   * Set the current context node.
-   */
-  public final void popCurrentNodeAndExpression()
-  {
+  /** Set the current context node. */
+  public final void popCurrentNodeAndExpression() {
     m_currentNodes.quickPop(1);
     m_currentExpressionNodes.quickPop(1);
   }
@@ -646,118 +577,91 @@ public DTMIterator createDTMIterator(int node)
    * @param en the sub-expression context node.
    * @param nc the namespace context (prefix resolver.
    */
-  public final void pushExpressionState(int cn, int en, PrefixResolver nc)
-  {
+  public final void pushExpressionState(int cn, int en, PrefixResolver nc) {
     m_currentNodes.push(cn);
     m_currentExpressionNodes.push(cn);
     m_prefixResolvers.push(nc);
   }
 
-  /**
-   * Pop the current context node, expression node, and prefix resolver.
-   */
-  public final void popExpressionState()
-  {
+  /** Pop the current context node, expression node, and prefix resolver. */
+  public final void popExpressionState() {
     m_currentNodes.quickPop(1);
     m_currentExpressionNodes.quickPop(1);
     m_prefixResolvers.pop();
   }
-
-
 
   /**
    * Set the current context node.
    *
    * @param n the <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a>.
    */
-  public final void pushCurrentNode(int n)
-  {
+  public final void pushCurrentNode(int n) {
     m_currentNodes.push(n);
   }
 
-  /**
-   * Pop the current context node.
-   */
-  public final void popCurrentNode()
-  {
+  /** Pop the current context node. */
+  public final void popCurrentNode() {
     m_currentNodes.quickPop(1);
   }
 
-  /**
-   * Set the current predicate root.
-   */
-  public final void pushPredicateRoot(int n)
-  {
+  /** Set the current predicate root. */
+  public final void pushPredicateRoot(int n) {
     m_predicateRoots.push(n);
   }
 
-  /**
-   * Pop the current predicate root.
-   */
-  public final void popPredicateRoot()
-  {
+  /** Pop the current predicate root. */
+  public final void popPredicateRoot() {
     m_predicateRoots.popQuick();
   }
 
-  /**
-   * Get the current predicate root.
-   */
-  public final int getPredicateRoot()
-  {
+  /** Get the current predicate root. */
+  public final int getPredicateRoot() {
     return m_predicateRoots.peepOrNull();
   }
 
-  /**
-   * Set the current location path iterator root.
-   */
-  public final void pushIteratorRoot(int n)
-  {
+  /** Set the current location path iterator root. */
+  public final void pushIteratorRoot(int n) {
     m_iteratorRoots.push(n);
   }
 
-  /**
-   * Pop the current location path iterator root.
-   */
-  public final void popIteratorRoot()
-  {
+  /** Pop the current location path iterator root. */
+  public final void popIteratorRoot() {
     m_iteratorRoots.popQuick();
   }
 
-  /**
-   * Get the current location path iterator root.
-   */
-  public final int getIteratorRoot()
-  {
+  /** Get the current location path iterator root. */
+  public final int getIteratorRoot() {
     return m_iteratorRoots.peepOrNull();
   }
 
-  /** A stack of the current sub-expression nodes.  */
+  /** A stack of the current sub-expression nodes. */
   private NodeVector m_iteratorRoots = new NodeVector();
 
-  /** A stack of the current sub-expression nodes.  */
+  /** A stack of the current sub-expression nodes. */
   private NodeVector m_predicateRoots = new NodeVector();
 
-  /** A stack of the current sub-expression nodes.  */
+  /** A stack of the current sub-expression nodes. */
   private IntStack m_currentExpressionNodes = new IntStack(RECURSIONLIMIT);
 
+  public IntStack getCurrentExpressionNodeStack() {
+    return m_currentExpressionNodes;
+  }
 
-  public IntStack getCurrentExpressionNodeStack() { return m_currentExpressionNodes; }
-  public void setCurrentExpressionNodeStack(IntStack nv) { m_currentExpressionNodes = nv; }
+  public void setCurrentExpressionNodeStack(IntStack nv) {
+    m_currentExpressionNodes = nv;
+  }
 
   private IntStack m_predicatePos = new IntStack();
 
-  public final int getPredicatePos()
-  {
+  public final int getPredicatePos() {
     return m_predicatePos.peek();
   }
 
-  public final void pushPredicatePos(int n)
-  {
+  public final void pushPredicatePos(int n) {
     m_predicatePos.push(n);
   }
 
-  public final void popPredicatePos()
-  {
+  public final void popPredicatePos() {
     m_predicatePos.pop();
   }
 
@@ -766,8 +670,7 @@ public DTMIterator createDTMIterator(int node)
    *
    * @return The current sub-expression node.
    */
-  public final int getCurrentExpressionNode()
-  {
+  public final int getCurrentExpressionNode() {
     return m_currentExpressionNodes.peek();
   }
 
@@ -776,84 +679,71 @@ public DTMIterator createDTMIterator(int node)
    *
    * @param n The sub-expression node to be current.
    */
-  public final void pushCurrentExpressionNode(int n)
-  {
+  public final void pushCurrentExpressionNode(int n) {
     m_currentExpressionNodes.push(n);
   }
 
-  /**
-   * Pop the current node that is the expression's context
-   * (i.e. for current() support).
-   */
-  public final void popCurrentExpressionNode()
-  {
+  /** Pop the current node that is the expression's context (i.e. for current() support). */
+  public final void popCurrentExpressionNode() {
     m_currentExpressionNodes.quickPop(1);
   }
 
-  private ObjectStack m_prefixResolvers
-                                   = new ObjectStack(RECURSIONLIMIT);
+  private ObjectStack m_prefixResolvers = new ObjectStack(RECURSIONLIMIT);
 
   /**
    * Get the current namespace context for the xpath.
    *
-   * @return the current prefix resolver for resolving prefixes to
-   *         namespace URLs.
+   * @return the current prefix resolver for resolving prefixes to namespace URLs.
    */
-  public final PrefixResolver getNamespaceContext()
-  {
+  public final PrefixResolver getNamespaceContext() {
     return (PrefixResolver) m_prefixResolvers.peek();
   }
 
   /**
    * Get the current namespace context for the xpath.
    *
-   * @param pr the prefix resolver to be used for resolving prefixes to
-   *         namespace URLs.
+   * @param pr the prefix resolver to be used for resolving prefixes to namespace URLs.
    */
-  public final void setNamespaceContext(PrefixResolver pr)
-  {
+  public final void setNamespaceContext(PrefixResolver pr) {
     m_prefixResolvers.setTop(pr);
   }
 
   /**
    * Push a current namespace context for the xpath.
    *
-   * @param pr the prefix resolver to be used for resolving prefixes to
-   *         namespace URLs.
+   * @param pr the prefix resolver to be used for resolving prefixes to namespace URLs.
    */
-  public final void pushNamespaceContext(PrefixResolver pr)
-  {
+  public final void pushNamespaceContext(PrefixResolver pr) {
     m_prefixResolvers.push(pr);
   }
 
   /**
-   * Just increment the namespace contest stack, so that setNamespaceContext
-   * can be used on the slot.
+   * Just increment the namespace contest stack, so that setNamespaceContext can be used on the
+   * slot.
    */
-  public final void pushNamespaceContextNull()
-  {
+  public final void pushNamespaceContextNull() {
     m_prefixResolvers.push(null);
   }
 
-  /**
-   * Pop the current namespace context for the xpath.
-   */
-  public final void popNamespaceContext()
-  {
+  /** Pop the current namespace context for the xpath. */
+  public final void popNamespaceContext() {
     m_prefixResolvers.pop();
   }
 
-  //==========================================================
+  // ==========================================================
   // SECTION: Current TreeWalker contexts (for internal use)
-  //==========================================================
+  // ==========================================================
 
-  /**
-   * Stack of AxesIterators.
-   */
+  /** Stack of AxesIterators. */
   private Stack<SubContextList> m_axesIteratorStack = new Stack<>();
 
-  public Stack<SubContextList> getAxesIteratorStackStacks() { return m_axesIteratorStack; }
-  public void setAxesIteratorStackStacks(Stack<SubContextList> s) { m_axesIteratorStack = s; }
+  public Stack<SubContextList> getAxesIteratorStackStacks() {
+    return m_axesIteratorStack;
+  }
+
+  public void setAxesIteratorStackStacks(Stack<SubContextList> s) {
+    m_axesIteratorStack = s;
+  }
 
   /**
    * Push a TreeWalker on the stack.
@@ -861,17 +751,16 @@ public DTMIterator createDTMIterator(int node)
    * @param iter A sub-context AxesWalker.
    * @xsl.usage internal
    */
-  public final void pushSubContextList(SubContextList iter)
-  {
+  public final void pushSubContextList(SubContextList iter) {
     m_axesIteratorStack.push(iter);
   }
 
   /**
    * Pop the last pushed axes iterator.
+   *
    * @xsl.usage internal
    */
-  public final void popSubContextList()
-  {
+  public final void popSubContextList() {
     m_axesIteratorStack.pop();
   }
 
@@ -881,94 +770,80 @@ public DTMIterator createDTMIterator(int node)
    * @return the sub-context node list.
    * @xsl.usage internal
    */
-  public SubContextList getSubContextList()
-  {
-    return m_axesIteratorStack.isEmpty()
-           ? null : (SubContextList) m_axesIteratorStack.peek();
+  public SubContextList getSubContextList() {
+    return m_axesIteratorStack.isEmpty() ? null : (SubContextList) m_axesIteratorStack.peek();
   }
 
   /**
-   * Get the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>
-   * as defined by the XSLT spec.
+   * Get the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a> as
+   * defined by the XSLT spec.
    *
    * @return the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>.
    * @xsl.usage internal
    */
-
-  public net.sourceforge.htmlunit.xpath.axes.SubContextList getCurrentNodeList()
-  {
-    return m_axesIteratorStack.isEmpty()
-           ? null : (SubContextList) m_axesIteratorStack.elementAt(0);
+  public net.sourceforge.htmlunit.xpath.axes.SubContextList getCurrentNodeList() {
+    return m_axesIteratorStack.isEmpty() ? null : (SubContextList) m_axesIteratorStack.elementAt(0);
   }
-  //==========================================================
+  // ==========================================================
   // SECTION: Implementation of ExpressionContext interface
-  //==========================================================
+  // ==========================================================
 
   /**
    * Get the current context node.
+   *
    * @return The current context node.
    */
-  public final int getContextNode()
-  {
+  public final int getContextNode() {
     return this.getCurrentNode();
   }
 
   /**
    * Get the current context node list.
-   * @return An iterator for the current context list, as
-   * defined in XSLT.
+   *
+   * @return An iterator for the current context list, as defined in XSLT.
    */
-  public final DTMIterator getContextNodes()
-  {
+  public final DTMIterator getContextNodes() {
 
-    try
-    {
+    try {
       DTMIterator cnl = getContextNodeList();
 
-      if (null != cnl)
-        return cnl.cloneWithReset();
-      else
-        return null;  // for now... this might ought to be an empty iterator.
-    }
-    catch (CloneNotSupportedException cnse)
-    {
-      return null;  // error reporting?
+      if (null != cnl) return cnl.cloneWithReset();
+      else return null; // for now... this might ought to be an empty iterator.
+    } catch (CloneNotSupportedException cnse) {
+      return null; // error reporting?
     }
   }
 
   XPathExpressionContext expressionContext = new XPathExpressionContext();
 
-  public class XPathExpressionContext
-  {
+  public class XPathExpressionContext {
     /**
-     * Return the XPathContext associated with this XPathExpressionContext.
-     * Extensions should use this judiciously and only when special processing
-     * requirements cannot be met another way.  Consider requesting an enhancement
-     * to the ExpressionContext interface to avoid having to call this method.
+     * Return the XPathContext associated with this XPathExpressionContext. Extensions should use
+     * this judiciously and only when special processing requirements cannot be met another way.
+     * Consider requesting an enhancement to the ExpressionContext interface to avoid having to call
+     * this method.
+     *
      * @return the XPathContext associated with this XPathExpressionContext.
      */
-     public XPathContext getXPathContext()
-     {
-       return XPathContext.this;
-     }
+    public XPathContext getXPathContext() {
+      return XPathContext.this;
+    }
 
     /**
-     * Return the DTMManager object.  Though XPathContext context extends
-     * the DTMManager, it really is a proxy for the real DTMManager.  If a
-     * caller needs to make a lot of calls to the DTMManager, it is faster
-     * if it gets the real one from this function.
+     * Return the DTMManager object. Though XPathContext context extends the DTMManager, it really
+     * is a proxy for the real DTMManager. If a caller needs to make a lot of calls to the
+     * DTMManager, it is faster if it gets the real one from this function.
      */
-     public DTMManager getDTMManager()
-     {
-       return m_dtmManager;
-     }
+    public DTMManager getDTMManager() {
+      return m_dtmManager;
+    }
 
     /**
      * Get the current context node.
+     *
      * @return The current context node.
      */
-    public org.w3c.dom.Node getContextNode()
-    {
+    public org.w3c.dom.Node getContextNode() {
       int context = getCurrentNode();
 
       return getDTM(context).getNode(context);
@@ -976,44 +851,43 @@ public DTMIterator createDTMIterator(int node)
 
     /**
      * Get the current context node list.
-     * @return An iterator for the current context list, as
-     * defined in XSLT.
+     *
+     * @return An iterator for the current context list, as defined in XSLT.
      */
-    public org.w3c.dom.traversal.NodeIterator getContextNodes()
-    {
+    public org.w3c.dom.traversal.NodeIterator getContextNodes() {
       return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeIterator(getContextNodeList());
     }
 
     /**
      * Get the error listener.
+     *
      * @return The registered error listener.
      */
-    public ErrorListener getErrorListener()
-    {
+    public ErrorListener getErrorListener() {
       return XPathContext.this.getErrorListener();
     }
 
     /**
      * Get the value of a node as a number.
-     * @param n Node to be converted to a number.  May be null.
+     *
+     * @param n Node to be converted to a number. May be null.
      * @return value of n as a number.
      */
-    public double toNumber(org.w3c.dom.Node n)
-    {
+    public double toNumber(org.w3c.dom.Node n) {
       // %REVIEW% You can't get much uglier than this...
       int nodeHandle = getDTMHandleFromNode(n);
       DTM dtm = getDTM(nodeHandle);
-      XString xobj = (XString)dtm.getStringValue(nodeHandle);
+      XString xobj = (XString) dtm.getStringValue(nodeHandle);
       return xobj.num();
     }
 
     /**
      * Get the value of a node as a string.
-     * @param n Node to be converted to a string.  May be null.
+     *
+     * @param n Node to be converted to a string. May be null.
      * @return value of n as a string, or an empty string if n is null.
      */
-    public String toString(org.w3c.dom.Node n)
-    {
+    public String toString(org.w3c.dom.Node n) {
       // %REVIEW% You can't get much uglier than this...
       int nodeHandle = getDTMHandleFromNode(n);
       DTM dtm = getDTM(nodeHandle);
@@ -1023,40 +897,37 @@ public DTMIterator createDTMIterator(int node)
   }
 
   /**
-   * Gets DTMXRTreeFrag object if one has already been created.
-   * Creates new DTMXRTreeFrag object and adds to m_DTMXRTreeFrags  HashMap,
-   * otherwise.
+   * Gets DTMXRTreeFrag object if one has already been created. Creates new DTMXRTreeFrag object and
+   * adds to m_DTMXRTreeFrags HashMap, otherwise.
+   *
    * @param dtmIdentity
    * @return DTMXRTreeFrag
    */
-  public DTMXRTreeFrag getDTMXRTreeFrag(int dtmIdentity){
-    if(m_DTMXRTreeFrags == null){
+  public DTMXRTreeFrag getDTMXRTreeFrag(int dtmIdentity) {
+    if (m_DTMXRTreeFrags == null) {
       m_DTMXRTreeFrags = new HashMap<>();
     }
 
-    if(m_DTMXRTreeFrags.containsKey(new Integer(dtmIdentity))){
-       return (DTMXRTreeFrag)m_DTMXRTreeFrags.get(new Integer(dtmIdentity));
-    }else{
-      final DTMXRTreeFrag frag = new DTMXRTreeFrag(dtmIdentity,this);
-      m_DTMXRTreeFrags.put(new Integer(dtmIdentity),frag);
-      return frag ;
+    if (m_DTMXRTreeFrags.containsKey(new Integer(dtmIdentity))) {
+      return (DTMXRTreeFrag) m_DTMXRTreeFrags.get(new Integer(dtmIdentity));
+    } else {
+      final DTMXRTreeFrag frag = new DTMXRTreeFrag(dtmIdentity, this);
+      m_DTMXRTreeFrags.put(new Integer(dtmIdentity), frag);
+      return frag;
     }
   }
 
-  /**
-   * Cleans DTMXRTreeFrag objects by removing references
-   * to DTM and XPathContext objects.
-   */
-  private final void releaseDTMXRTreeFrags(){
-    if(m_DTMXRTreeFrags == null){
+  /** Cleans DTMXRTreeFrag objects by removing references to DTM and XPathContext objects. */
+  private final void releaseDTMXRTreeFrags() {
+    if (m_DTMXRTreeFrags == null) {
       return;
     }
     final Iterator<DTMXRTreeFrag> iter = (m_DTMXRTreeFrags.values()).iterator();
-    while(iter.hasNext()){
-      DTMXRTreeFrag frag = (DTMXRTreeFrag)iter.next();
+    while (iter.hasNext()) {
+      DTMXRTreeFrag frag = (DTMXRTreeFrag) iter.next();
       frag.destruct();
       iter.remove();
     }
     m_DTMXRTreeFrags = null;
- }
+  }
 }

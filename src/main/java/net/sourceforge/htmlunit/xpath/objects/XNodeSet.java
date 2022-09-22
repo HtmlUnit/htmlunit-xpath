@@ -22,56 +22,45 @@ package net.sourceforge.htmlunit.xpath.objects;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.w3c.dom.NodeList;
-import org.w3c.dom.traversal.NodeIterator;
-
 import net.sourceforge.htmlunit.xpath.NodeSetDTM;
 import net.sourceforge.htmlunit.xpath.axes.NodeSequence;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.traversal.NodeIterator;
 
 /**
- * This class represents an XPath nodeset object, and is capable of
- * converting the nodeset to other types, such as a string.
+ * This class represents an XPath nodeset object, and is capable of converting the nodeset to other
+ * types, such as a string.
+ *
  * @xsl.usage general
  */
-public class XNodeSet extends NodeSequence
-{
-    static final long serialVersionUID = 1916026368035639667L;
-  /**
-   * Default constructor for derived objects.
-   */
-  protected XNodeSet()
-  {
-  }
+public class XNodeSet extends NodeSequence {
+  static final long serialVersionUID = 1916026368035639667L;
+  /** Default constructor for derived objects. */
+  protected XNodeSet() {}
 
   /**
    * Construct a XNodeSet object.
    *
    * @param val Value of the XNodeSet object
    */
-  public XNodeSet(DTMIterator val)
-  {
+  public XNodeSet(DTMIterator val) {
     super();
-    if(val instanceof XNodeSet)
-    {
-        final XNodeSet nodeSet = (XNodeSet) val;
+    if (val instanceof XNodeSet) {
+      final XNodeSet nodeSet = (XNodeSet) val;
       setIter(nodeSet.m_iter);
       m_dtmMgr = nodeSet.m_dtmMgr;
       m_last = nodeSet.m_last;
-        // First make sure the DTMIterator val has a cache,
-        // so if it doesn't have one, make one.
-      if(!nodeSet.hasCache())
-          nodeSet.setShouldCacheNodes(true);
+      // First make sure the DTMIterator val has a cache,
+      // so if it doesn't have one, make one.
+      if (!nodeSet.hasCache()) nodeSet.setShouldCacheNodes(true);
 
-        // Get the cache from val and use it ourselves (we share it).
+      // Get the cache from val and use it ourselves (we share it).
       setObject(nodeSet.getIteratorCache());
-    }
-    else
-      setIter(val);
+    } else setIter(val);
   }
 
   /**
@@ -79,25 +68,21 @@ public class XNodeSet extends NodeSequence
    *
    * @param val Value of the XNodeSet object
    */
-  public XNodeSet(XNodeSet val)
-  {
+  public XNodeSet(XNodeSet val) {
     super();
     setIter(val.m_iter);
     m_dtmMgr = val.m_dtmMgr;
     m_last = val.m_last;
-    if(!val.hasCache())
-      val.setShouldCacheNodes(true);
+    if (!val.hasCache()) val.setShouldCacheNodes(true);
     setObject(val.m_obj);
   }
 
-
   /**
-   * Construct an empty XNodeSet object.  This is used to create a mutable
-   * nodeset to which random nodes may be added.
+   * Construct an empty XNodeSet object. This is used to create a mutable nodeset to which random
+   * nodes may be added.
    */
-  public XNodeSet(DTMManager dtmMgr)
-  {
-     this(DTM.NULL,dtmMgr);
+  public XNodeSet(DTMManager dtmMgr) {
+    this(DTM.NULL, dtmMgr);
   }
 
   /**
@@ -105,19 +90,15 @@ public class XNodeSet extends NodeSequence
    *
    * @param n Node to add to the new XNodeSet object
    */
-  public XNodeSet(int n, DTMManager dtmMgr)
-  {
+  public XNodeSet(int n, DTMManager dtmMgr) {
 
     super(new NodeSetDTM(dtmMgr));
     m_dtmMgr = dtmMgr;
 
-    if (DTM.NULL != n)
-    {
+    if (DTM.NULL != n) {
       ((NodeSetDTM) m_obj).addNode(n);
       m_last = 1;
-    }
-    else
-      m_last = 0;
+    } else m_last = 0;
   }
 
   /**
@@ -126,20 +107,17 @@ public class XNodeSet extends NodeSequence
    * @return type CLASS_NODESET
    */
   @Override
-public int getType()
-  {
+  public int getType() {
     return CLASS_NODESET;
   }
 
   /**
-   * Given a request type, return the equivalent string.
-   * For diagnostic purposes.
+   * Given a request type, return the equivalent string. For diagnostic purposes.
    *
    * @return type string "#NODESET"
    */
   @Override
-public String getTypeString()
-  {
+  public String getTypeString() {
     return "#NODESET";
   }
 
@@ -147,11 +125,9 @@ public String getTypeString()
    * Get numeric value of the string conversion from a single node.
    *
    * @param n Node to convert
-   *
    * @return numeric value of the string conversion from a single node.
    */
-  public double getNumberFromNode(int n)
-  {
+  public double getNumberFromNode(int n) {
     XMLString xstr = m_dtmMgr.getDTM(n).getStringValue(n);
     return xstr.toDouble();
   }
@@ -159,32 +135,29 @@ public String getTypeString()
   /**
    * Cast result object to a number.
    *
-   * @return numeric value of the string conversion from the
-   * next node in the NodeSetDTM, or NAN if no node was found
+   * @return numeric value of the string conversion from the next node in the NodeSetDTM, or NAN if
+   *     no node was found
    */
   @Override
-public double num()
-  {
+  public double num() {
 
     int node = item(0);
     return (node != DTM.NULL) ? getNumberFromNode(node) : Double.NaN;
   }
 
   /**
-   * Cast result object to a number, but allow side effects, such as the
-   * incrementing of an iterator.
+   * Cast result object to a number, but allow side effects, such as the incrementing of an
+   * iterator.
    *
-   * @return numeric value of the string conversion from the
-   * next node in the NodeSetDTM, or NAN if no node was found
+   * @return numeric value of the string conversion from the next node in the NodeSetDTM, or NAN if
+   *     no node was found
    */
   @Override
-public double numWithSideEffects()
-  {
+  public double numWithSideEffects() {
     int node = nextNode();
 
     return (node != DTM.NULL) ? getNumberFromNode(node) : Double.NaN;
   }
-
 
   /**
    * Cast result object to a boolean.
@@ -192,67 +165,53 @@ public double numWithSideEffects()
    * @return True if there is a next node in the nodeset
    */
   @Override
-public boolean bool()
-  {
+  public boolean bool() {
     return item(0) != DTM.NULL;
   }
 
   /**
-   * Cast result object to a boolean, but allow side effects, such as the
-   * incrementing of an iterator.
+   * Cast result object to a boolean, but allow side effects, such as the incrementing of an
+   * iterator.
    *
    * @return True if there is a next node in the nodeset
    */
   @Override
-public boolean boolWithSideEffects()
-  {
+  public boolean boolWithSideEffects() {
     return nextNode() != DTM.NULL;
   }
-
 
   /**
    * Get the string conversion from a single node.
    *
    * @param n Node to convert
-   *
    * @return the string conversion from a single node.
    */
-  public XMLString getStringFromNode(int n)
-  {
+  public XMLString getStringFromNode(int n) {
     // %OPT%
     // I guess we'll have to get a static instance of the DTM manager...
-    if(DTM.NULL != n)
-    {
+    if (DTM.NULL != n) {
       return m_dtmMgr.getDTM(n).getStringValue(n);
-    }
-    else
-    {
+    } else {
       return net.sourceforge.htmlunit.xpath.objects.XString.EMPTYSTRING;
     }
   }
 
   /**
-   * Directly call the
-   * characters method on the passed ContentHandler for the
-   * string-value. Multiple calls to the
-   * ContentHandler's characters methods may well occur for a single call to
-   * this method.
+   * Directly call the characters method on the passed ContentHandler for the string-value. Multiple
+   * calls to the ContentHandler's characters methods may well occur for a single call to this
+   * method.
    *
    * @param ch A non-null reference to a ContentHandler.
-   *
    * @throws org.xml.sax.SAXException
    */
   @Override
-public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
-          throws org.xml.sax.SAXException
-  {
+  public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
+      throws org.xml.sax.SAXException {
     int node = item(0);
 
-    if(node != DTM.NULL)
-    {
+    if (node != DTM.NULL) {
       m_dtmMgr.getDTM(node).dispatchCharactersEvents(node, ch, false);
     }
-
   }
 
   /**
@@ -261,8 +220,7 @@ public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
    * @return The document fragment node data or the empty string.
    */
   @Override
-public XMLString xstr()
-  {
+  public XMLString xstr() {
     int node = item(0);
     return (node != DTM.NULL) ? getStringFromNode(node) : XString.EMPTYSTRING;
   }
@@ -273,51 +231,42 @@ public XMLString xstr()
    * @return The string this wraps or the empty string if null
    */
   @Override
-public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb)
-  {
-    XString xstring = (XString)xstr();
+  public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb) {
+    XString xstring = (XString) xstr();
     xstring.appendToFsb(fsb);
   }
-
 
   /**
    * Cast result object to a string.
    *
-   * @return the string conversion from the next node in the nodeset
-   * or "" if there is no next node
+   * @return the string conversion from the next node in the nodeset or "" if there is no next node
    */
   @Override
-public String str()
-  {
+  public String str() {
     int node = item(0);
     return (node != DTM.NULL) ? getStringFromNode(node).toString() : "";
   }
 
   /**
-   * Return a java object that's closest to the representation
-   * that should be handed to an extension.
+   * Return a java object that's closest to the representation that should be handed to an
+   * extension.
    *
    * @return The object that this class wraps
    */
   @Override
-public Object object()
-  {
-    if(null == m_obj)
-      return this;
-    else
-      return m_obj;
+  public Object object() {
+    if (null == m_obj) return this;
+    else return m_obj;
   }
 
   /**
    * Cast result object to a nodelist.
    *
    * @return a NodeIterator.
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public NodeIterator nodeset() throws javax.xml.transform.TransformerException
-  {
+  public NodeIterator nodeset() throws javax.xml.transform.TransformerException {
     return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeIterator(iter());
   }
 
@@ -325,45 +274,38 @@ public NodeIterator nodeset() throws javax.xml.transform.TransformerException
    * Cast result object to a nodelist.
    *
    * @return a NodeList.
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public NodeList nodelist() throws javax.xml.transform.TransformerException
-  {
-    net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList nodelist = new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList(this);
+  public NodeList nodelist() throws javax.xml.transform.TransformerException {
+    net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList nodelist =
+        new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList(this);
     // Creating a DTMNodeList has the side-effect that it will create a clone
     // XNodeSet with cache and run m_iter to the end. You cannot get any node
     // from m_iter after this call. As a fix, we call SetVector() on the clone's
     // cache. See Bugzilla 14406.
-    XNodeSet clone = (XNodeSet)nodelist.getDTMIterator();
+    XNodeSet clone = (XNodeSet) nodelist.getDTMIterator();
     SetVector(clone.getVector());
     return nodelist;
   }
 
+  //  /**
+  //   * Return a java object that's closest to the representation
+  //   * that should be handed to an extension.
+  //   *
+  //   * @return The object that this class wraps
+  //   */
+  //  public Object object()
+  //  {
+  //    return new org.apache.xml.dtm.ref.DTMNodeList(iter());
+  //  }
 
-//  /**
-//   * Return a java object that's closest to the representation
-//   * that should be handed to an extension.
-//   *
-//   * @return The object that this class wraps
-//   */
-//  public Object object()
-//  {
-//    return new org.apache.xml.dtm.ref.DTMNodeList(iter());
-//  }
-
-  /**
-   * Return the iterator without cloning, etc.
-   */
-  public DTMIterator iterRaw()
-  {
+  /** Return the iterator without cloning, etc. */
+  public DTMIterator iterRaw() {
     return this;
   }
 
-  public void release(DTMIterator iter)
-  {
-  }
+  public void release(DTMIterator iter) {}
 
   /**
    * Cast result object to a nodelist.
@@ -371,38 +313,26 @@ public NodeList nodelist() throws javax.xml.transform.TransformerException
    * @return The nodeset as a nodelist
    */
   @Override
-public DTMIterator iter()
-  {
-    try
-    {
-      if(hasCache())
-          return cloneWithReset();
-        else
-          return this; // don't bother to clone... won't do any good!
-    }
-    catch (CloneNotSupportedException cnse)
-    {
+  public DTMIterator iter() {
+    try {
+      if (hasCache()) return cloneWithReset();
+      else return this; // don't bother to clone... won't do any good!
+    } catch (CloneNotSupportedException cnse) {
       throw new RuntimeException(cnse.getMessage());
     }
   }
 
   /**
-   * Get a fresh copy of the object.  For use with variables.
+   * Get a fresh copy of the object. For use with variables.
    *
    * @return A fresh nodelist.
    */
   @Override
-public XObject getFresh()
-  {
-    try
-    {
-      if(hasCache())
-          return (XObject)cloneWithReset();
-        else
-          return this; // don't bother to clone... won't do any good!
-    }
-    catch (CloneNotSupportedException cnse)
-    {
+  public XObject getFresh() {
+    try {
+      if (hasCache()) return (XObject) cloneWithReset();
+      else return this; // don't bother to clone... won't do any good!
+    } catch (CloneNotSupportedException cnse) {
       throw new RuntimeException(cnse.getMessage());
     }
   }
@@ -413,16 +343,12 @@ public XObject getFresh()
    * @return The nodeset as a mutableNodeset
    */
   @Override
-public NodeSetDTM mutableNodeset()
-  {
+  public NodeSetDTM mutableNodeset() {
     NodeSetDTM mnl;
 
-    if(m_obj instanceof NodeSetDTM)
-    {
+    if (m_obj instanceof NodeSetDTM) {
       mnl = (NodeSetDTM) m_obj;
-    }
-    else
-    {
+    } else {
       mnl = new NodeSetDTM(iter());
       setObject(mnl);
       setCurrentPos(0);
@@ -431,23 +357,22 @@ public NodeSetDTM mutableNodeset()
     return mnl;
   }
 
-  /** Less than comparator         */
+  /** Less than comparator */
   static final LessThanComparator S_LT = new LessThanComparator();
 
-  /** Less than or equal comparator          */
+  /** Less than or equal comparator */
   static final LessThanOrEqualComparator S_LTE = new LessThanOrEqualComparator();
 
-  /** Greater than comparator         */
+  /** Greater than comparator */
   static final GreaterThanComparator S_GT = new GreaterThanComparator();
 
-  /** Greater than or equal comparator          */
-  static final GreaterThanOrEqualComparator S_GTE =
-    new GreaterThanOrEqualComparator();
+  /** Greater than or equal comparator */
+  static final GreaterThanOrEqualComparator S_GTE = new GreaterThanOrEqualComparator();
 
-  /** Equal comparator         */
+  /** Equal comparator */
   static final EqualComparator S_EQ = new EqualComparator();
 
-  /** Not equal comparator         */
+  /** Not equal comparator */
   static final NotEqualComparator S_NEQ = new NotEqualComparator();
 
   /**
@@ -455,20 +380,16 @@ public NodeSetDTM mutableNodeset()
    *
    * @param obj2 Object to compare this nodeset to
    * @param comparator Comparator to use
-   *
    * @return See the comments below for each object type comparison
-   *
    * @throws javax.xml.transform.TransformerException
    */
   public boolean compare(XObject obj2, Comparator comparator)
-          throws javax.xml.transform.TransformerException
-  {
+      throws javax.xml.transform.TransformerException {
 
     boolean result = false;
     int type = obj2.getType();
 
-    if (XObject.CLASS_NODESET == type)
-    {
+    if (XObject.CLASS_NODESET == type) {
       // %OPT% This should be XMLString based instead of string based...
 
       // From http://www.w3.org/TR/xpath:
@@ -487,39 +408,30 @@ public NodeSetDTM mutableNodeset()
       int node1;
       List<XMLString> node2Strings = null;
 
-      while (DTM.NULL != (node1 = list1.nextNode()))
-      {
+      while (DTM.NULL != (node1 = list1.nextNode())) {
         XMLString s1 = getStringFromNode(node1);
 
-        if (null == node2Strings)
-        {
+        if (null == node2Strings) {
           int node2;
 
-          while (DTM.NULL != (node2 = list2.nextNode()))
-          {
+          while (DTM.NULL != (node2 = list2.nextNode())) {
             XMLString s2 = getStringFromNode(node2);
 
-            if (comparator.compareStrings(s1, s2))
-            {
+            if (comparator.compareStrings(s1, s2)) {
               result = true;
 
               break;
             }
 
-            if (null == node2Strings)
-              node2Strings = new ArrayList<>();
+            if (null == node2Strings) node2Strings = new ArrayList<>();
 
             node2Strings.add(s2);
           }
-        }
-        else
-        {
+        } else {
           int n = node2Strings.size();
 
-          for (int i = 0; i < n; i++)
-          {
-            if (comparator.compareStrings(s1, node2Strings.get(i)))
-            {
+          for (int i = 0; i < n; i++) {
+            if (comparator.compareStrings(s1, node2Strings.get(i))) {
               result = true;
 
               break;
@@ -529,9 +441,7 @@ public NodeSetDTM mutableNodeset()
       }
       list1.reset();
       list2.reset();
-    }
-    else if (XObject.CLASS_BOOLEAN == type)
-    {
+    } else if (XObject.CLASS_BOOLEAN == type) {
 
       // From http://www.w3.org/TR/xpath:
       // If one object to be compared is a node-set and the other is a boolean,
@@ -543,9 +453,7 @@ public NodeSetDTM mutableNodeset()
       double num2 = obj2.num();
 
       result = comparator.compareNumbers(num1, num2);
-    }
-    else if (XObject.CLASS_NUMBER == type)
-    {
+    } else if (XObject.CLASS_NUMBER == type) {
 
       // From http://www.w3.org/TR/xpath:
       // If one object to be compared is a node-set and the other is a number,
@@ -558,40 +466,32 @@ public NodeSetDTM mutableNodeset()
       double num2 = obj2.num();
       int node;
 
-      while (DTM.NULL != (node = list1.nextNode()))
-      {
+      while (DTM.NULL != (node = list1.nextNode())) {
         double num1 = getNumberFromNode(node);
 
-        if (comparator.compareNumbers(num1, num2))
-        {
+        if (comparator.compareNumbers(num1, num2)) {
           result = true;
 
           break;
         }
       }
       list1.reset();
-    }
-    else if (XObject.CLASS_RTREEFRAG == type)
-    {
+    } else if (XObject.CLASS_RTREEFRAG == type) {
       XMLString s2 = obj2.xstr();
       DTMIterator list1 = iterRaw();
       int node;
 
-      while (DTM.NULL != (node = list1.nextNode()))
-      {
+      while (DTM.NULL != (node = list1.nextNode())) {
         XMLString s1 = getStringFromNode(node);
 
-        if (comparator.compareStrings(s1, s2))
-        {
+        if (comparator.compareStrings(s1, s2)) {
           result = true;
 
           break;
         }
       }
       list1.reset();
-    }
-    else if (XObject.CLASS_STRING == type)
-    {
+    } else if (XObject.CLASS_STRING == type) {
 
       // From http://www.w3.org/TR/xpath:
       // If one object to be compared is a node-set and the other is a
@@ -603,20 +503,16 @@ public NodeSetDTM mutableNodeset()
       DTMIterator list1 = iterRaw();
       int node;
 
-      while (DTM.NULL != (node = list1.nextNode()))
-      {
+      while (DTM.NULL != (node = list1.nextNode())) {
         XMLString s1 = getStringFromNode(node);
-        if (comparator.compareStrings(s1, s2))
-        {
+        if (comparator.compareStrings(s1, s2)) {
           result = true;
 
           break;
         }
       }
       list1.reset();
-    }
-    else
-    {
+    } else {
       result = comparator.compareNumbers(this.num(), obj2.num());
     }
 
@@ -627,14 +523,11 @@ public NodeSetDTM mutableNodeset()
    * Tell if one object is less than the other.
    *
    * @param obj2 object to compare this nodeset to
-   *
    * @return see this.compare(...)
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public boolean lessThan(XObject obj2) throws javax.xml.transform.TransformerException
-  {
+  public boolean lessThan(XObject obj2) throws javax.xml.transform.TransformerException {
     return compare(obj2, S_LT);
   }
 
@@ -642,14 +535,11 @@ public boolean lessThan(XObject obj2) throws javax.xml.transform.TransformerExce
    * Tell if one object is less than or equal to the other.
    *
    * @param obj2 object to compare this nodeset to
-   *
    * @return see this.compare(...)
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public boolean lessThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException
-  {
+  public boolean lessThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException {
     return compare(obj2, S_LTE);
   }
 
@@ -657,14 +547,11 @@ public boolean lessThanOrEqual(XObject obj2) throws javax.xml.transform.Transfor
    * Tell if one object is less than the other.
    *
    * @param obj2 object to compare this nodeset to
-   *
    * @return see this.compare(...)
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public boolean greaterThan(XObject obj2) throws javax.xml.transform.TransformerException
-  {
+  public boolean greaterThan(XObject obj2) throws javax.xml.transform.TransformerException {
     return compare(obj2, S_GT);
   }
 
@@ -672,15 +559,11 @@ public boolean greaterThan(XObject obj2) throws javax.xml.transform.TransformerE
    * Tell if one object is less than the other.
    *
    * @param obj2 object to compare this nodeset to
-   *
    * @return see this.compare(...)
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public boolean greaterThanOrEqual(XObject obj2)
-          throws javax.xml.transform.TransformerException
-  {
+  public boolean greaterThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException {
     return compare(obj2, S_GTE);
   }
 
@@ -688,20 +571,14 @@ public boolean greaterThanOrEqual(XObject obj2)
    * Tell if two objects are functionally equal.
    *
    * @param obj2 object to compare this nodeset to
-   *
    * @return see this.compare(...)
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public boolean equals(XObject obj2)
-  {
-    try
-    {
+  public boolean equals(XObject obj2) {
+    try {
       return compare(obj2, S_EQ);
-    }
-    catch(javax.xml.transform.TransformerException te)
-    {
+    } catch (javax.xml.transform.TransformerException te) {
       throw new net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
     }
   }
@@ -710,31 +587,23 @@ public boolean equals(XObject obj2)
    * Tell if two objects are functionally not equal.
    *
    * @param obj2 object to compare this nodeset to
-   *
    * @return see this.compare(...)
-   *
    * @throws javax.xml.transform.TransformerException
    */
   @Override
-public boolean notEquals(XObject obj2) throws javax.xml.transform.TransformerException
-  {
+  public boolean notEquals(XObject obj2) throws javax.xml.transform.TransformerException {
     return compare(obj2, S_NEQ);
   }
 }
 
-/**
- * compares nodes for various boolean operations.
- */
-abstract class Comparator
-{
+/** compares nodes for various boolean operations. */
+abstract class Comparator {
 
   /**
    * Compare two strings
    *
-   *
    * @param s1 First string to compare
    * @param s2 Second String to compare
-   *
    * @return Whether the strings are equal or not
    */
   abstract boolean compareStrings(XMLString s1, XMLString s2);
@@ -742,33 +611,25 @@ abstract class Comparator
   /**
    * Compare two numbers
    *
-   *
    * @param n1 First number to compare
    * @param n2 Second number to compare
-   *
    * @return Whether the numbers are equal or not
    */
   abstract boolean compareNumbers(double n1, double n2);
 }
 
-/**
- * Compare strings or numbers for less than.
- */
-class LessThanComparator extends Comparator
-{
+/** Compare strings or numbers for less than. */
+class LessThanComparator extends Comparator {
 
   /**
    * Compare two strings for less than.
    *
-   *
    * @param s1 First string to compare
    * @param s2 Second String to compare
-   *
    * @return True if s1 is less than s2
    */
   @Override
-boolean compareStrings(XMLString s1, XMLString s2)
-  {
+  boolean compareStrings(XMLString s1, XMLString s2) {
     return s1.toDouble() < s2.toDouble();
     // return s1.compareTo(s2) < 0;
   }
@@ -776,37 +637,28 @@ boolean compareStrings(XMLString s1, XMLString s2)
   /**
    * Compare two numbers for less than.
    *
-   *
    * @param n1 First number to compare
    * @param n2 Second number to compare
-   *
    * @return true if n1 is less than n2
    */
   @Override
-boolean compareNumbers(double n1, double n2)
-  {
+  boolean compareNumbers(double n1, double n2) {
     return n1 < n2;
   }
 }
 
-/**
- * Compare strings or numbers for less than or equal.
- */
-class LessThanOrEqualComparator extends Comparator
-{
+/** Compare strings or numbers for less than or equal. */
+class LessThanOrEqualComparator extends Comparator {
 
   /**
    * Compare two strings for less than or equal.
    *
-   *
    * @param s1 First string to compare
    * @param s2 Second String to compare
-   *
    * @return true if s1 is less than or equal to s2
    */
   @Override
-boolean compareStrings(XMLString s1, XMLString s2)
-  {
+  boolean compareStrings(XMLString s1, XMLString s2) {
     return s1.toDouble() <= s2.toDouble();
     // return s1.compareTo(s2) <= 0;
   }
@@ -814,37 +666,28 @@ boolean compareStrings(XMLString s1, XMLString s2)
   /**
    * Compare two numbers for less than or equal.
    *
-   *
    * @param n1 First number to compare
    * @param n2 Second number to compare
-   *
    * @return true if n1 is less than or equal to n2
    */
   @Override
-boolean compareNumbers(double n1, double n2)
-  {
+  boolean compareNumbers(double n1, double n2) {
     return n1 <= n2;
   }
 }
 
-/**
- * Compare strings or numbers for greater than.
- */
-class GreaterThanComparator extends Comparator
-{
+/** Compare strings or numbers for greater than. */
+class GreaterThanComparator extends Comparator {
 
   /**
    * Compare two strings for greater than.
    *
-   *
    * @param s1 First string to compare
    * @param s2 Second String to compare
-   *
    * @return true if s1 is greater than s2
    */
   @Override
-boolean compareStrings(XMLString s1, XMLString s2)
-  {
+  boolean compareStrings(XMLString s1, XMLString s2) {
     return s1.toDouble() > s2.toDouble();
     // return s1.compareTo(s2) > 0;
   }
@@ -852,37 +695,28 @@ boolean compareStrings(XMLString s1, XMLString s2)
   /**
    * Compare two numbers for greater than.
    *
-   *
    * @param n1 First number to compare
    * @param n2 Second number to compare
-   *
    * @return true if n1 is greater than n2
    */
   @Override
-boolean compareNumbers(double n1, double n2)
-  {
+  boolean compareNumbers(double n1, double n2) {
     return n1 > n2;
   }
 }
 
-/**
- * Compare strings or numbers for greater than or equal.
- */
-class GreaterThanOrEqualComparator extends Comparator
-{
+/** Compare strings or numbers for greater than or equal. */
+class GreaterThanOrEqualComparator extends Comparator {
 
   /**
    * Compare two strings for greater than or equal.
    *
-   *
    * @param s1 First string to compare
    * @param s2 Second String to compare
-   *
    * @return true if s1 is greater than or equal to s2
    */
   @Override
-boolean compareStrings(XMLString s1, XMLString s2)
-  {
+  boolean compareStrings(XMLString s1, XMLString s2) {
     return s1.toDouble() >= s2.toDouble();
     // return s1.compareTo(s2) >= 0;
   }
@@ -890,89 +724,68 @@ boolean compareStrings(XMLString s1, XMLString s2)
   /**
    * Compare two numbers for greater than or equal.
    *
-   *
    * @param n1 First number to compare
    * @param n2 Second number to compare
-   *
    * @return true if n1 is greater than or equal to n2
    */
   @Override
-boolean compareNumbers(double n1, double n2)
-  {
+  boolean compareNumbers(double n1, double n2) {
     return n1 >= n2;
   }
 }
 
-/**
- * Compare strings or numbers for equality.
- */
-class EqualComparator extends Comparator
-{
+/** Compare strings or numbers for equality. */
+class EqualComparator extends Comparator {
 
   /**
    * Compare two strings for equality.
    *
-   *
    * @param s1 First string to compare
    * @param s2 Second String to compare
-   *
    * @return true if s1 is equal to s2
    */
   @Override
-boolean compareStrings(XMLString s1, XMLString s2)
-  {
+  boolean compareStrings(XMLString s1, XMLString s2) {
     return s1.equals(s2);
   }
 
   /**
    * Compare two numbers for equality.
    *
-   *
    * @param n1 First number to compare
    * @param n2 Second number to compare
-   *
    * @return true if n1 is equal to n2
    */
   @Override
-boolean compareNumbers(double n1, double n2)
-  {
+  boolean compareNumbers(double n1, double n2) {
     return n1 == n2;
   }
 }
 
-/**
- * Compare strings or numbers for non-equality.
- */
-class NotEqualComparator extends Comparator
-{
+/** Compare strings or numbers for non-equality. */
+class NotEqualComparator extends Comparator {
 
   /**
    * Compare two strings for non-equality.
    *
-   *
    * @param s1 First string to compare
    * @param s2 Second String to compare
-   *
    * @return true if s1 is not equal to s2
    */
   @Override
-boolean compareStrings(XMLString s1, XMLString s2)
-  {
+  boolean compareStrings(XMLString s1, XMLString s2) {
     return !s1.equals(s2);
   }
 
   /**
    * Compare two numbers for non-equality.
    *
-   *
    * @param n1 First number to compare
    * @param n2 Second number to compare
-   *
    * @return true if n1 is not equal to n2
    */
   @Override
-boolean compareNumbers(double n1, double n2)
-  {
+  boolean compareNumbers(double n1, double n2) {
     return n1 != n2;
   }
 }

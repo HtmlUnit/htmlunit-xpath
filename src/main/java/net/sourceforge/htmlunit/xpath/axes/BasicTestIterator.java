@@ -28,170 +28,129 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
- * Base for iterators that handle predicates.  Does the basic next
- * node logic, so all the derived iterator has to do is get the
- * next node.
+ * Base for iterators that handle predicates. Does the basic next node logic, so all the derived
+ * iterator has to do is get the next node.
  */
-public abstract class BasicTestIterator extends LocPathIterator
-{
-    static final long serialVersionUID = 3505378079378096623L;
+public abstract class BasicTestIterator extends LocPathIterator {
+  static final long serialVersionUID = 3505378079378096623L;
   /**
    * Create a LocPathIterator object.
    *
-   * @param nscontext The namespace context for this iterator,
-   * should be OK if null.
+   * @param nscontext The namespace context for this iterator, should be OK if null.
    */
-  protected BasicTestIterator()
-  {
-  }
-
+  protected BasicTestIterator() {}
 
   /**
    * Create a LocPathIterator object.
    *
-   * @param nscontext The namespace context for this iterator,
-   * should be OK if null.
+   * @param nscontext The namespace context for this iterator, should be OK if null.
    */
-  protected BasicTestIterator(PrefixResolver nscontext)
-  {
+  protected BasicTestIterator(PrefixResolver nscontext) {
 
     super(nscontext);
   }
 
   /**
-   * Create a LocPathIterator object, including creation
-   * of step walkers from the opcode list, and call back
-   * into the Compiler to create predicate expressions.
+   * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
+   * call back into the Compiler to create predicate expressions.
    *
-   * @param compiler The Compiler which is creating
-   * this expression.
-   * @param opPos The position of this iterator in the
-   * opcode list from the compiler.
-   *
+   * @param compiler The Compiler which is creating this expression.
+   * @param opPos The position of this iterator in the opcode list from the compiler.
    * @throws javax.xml.transform.TransformerException
    */
   protected BasicTestIterator(Compiler compiler, int opPos, int analysis)
-          throws javax.xml.transform.TransformerException
-  {
+      throws javax.xml.transform.TransformerException {
     super(compiler, opPos, analysis, false);
 
     int firstStepPos = OpMap.getFirstChildPos(opPos);
     int whatToShow = compiler.getWhatToShow(firstStepPos);
 
-    if ((0 == (whatToShow
-               & (DTMFilter.SHOW_ATTRIBUTE
-               | DTMFilter.SHOW_NAMESPACE
-               | DTMFilter.SHOW_ELEMENT
-               | DTMFilter.SHOW_PROCESSING_INSTRUCTION)))
-               || (whatToShow == DTMFilter.SHOW_ALL))
-      initNodeTest(whatToShow);
-    else
-    {
-      initNodeTest(whatToShow, compiler.getStepNS(firstStepPos),
-                              compiler.getStepLocalName(firstStepPos));
+    if ((0
+            == (whatToShow
+                & (DTMFilter.SHOW_ATTRIBUTE
+                    | DTMFilter.SHOW_NAMESPACE
+                    | DTMFilter.SHOW_ELEMENT
+                    | DTMFilter.SHOW_PROCESSING_INSTRUCTION)))
+        || (whatToShow == DTMFilter.SHOW_ALL)) initNodeTest(whatToShow);
+    else {
+      initNodeTest(
+          whatToShow, compiler.getStepNS(firstStepPos), compiler.getStepLocalName(firstStepPos));
     }
     initPredicateInfo(compiler, firstStepPos);
   }
 
   /**
-   * Create a LocPathIterator object, including creation
-   * of step walkers from the opcode list, and call back
-   * into the Compiler to create predicate expressions.
+   * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
+   * call back into the Compiler to create predicate expressions.
    *
-   * @param compiler The Compiler which is creating
-   * this expression.
-   * @param opPos The position of this iterator in the
-   * opcode list from the compiler.
-   * @param shouldLoadWalkers True if walkers should be
-   * loaded, or false if this is a derived iterator and
-   * it doesn't wish to load child walkers.
-   *
+   * @param compiler The Compiler which is creating this expression.
+   * @param opPos The position of this iterator in the opcode list from the compiler.
+   * @param shouldLoadWalkers True if walkers should be loaded, or false if this is a derived
+   *     iterator and it doesn't wish to load child walkers.
    * @throws javax.xml.transform.TransformerException
    */
-  protected BasicTestIterator(
-          Compiler compiler, int opPos, int analysis, boolean shouldLoadWalkers)
-            throws javax.xml.transform.TransformerException
-  {
+  protected BasicTestIterator(Compiler compiler, int opPos, int analysis, boolean shouldLoadWalkers)
+      throws javax.xml.transform.TransformerException {
     super(compiler, opPos, analysis, shouldLoadWalkers);
   }
 
-
   /**
-   * Get the next node via getNextXXX.  Bottlenecked for derived class override.
+   * Get the next node via getNextXXX. Bottlenecked for derived class override.
+   *
    * @return The next node on the axis, or DTM.NULL.
    */
   protected abstract int getNextNode();
 
   /**
-   *  Returns the next node in the set and advances the position of the
-   * iterator in the set. After a NodeIterator is created, the first call
-   * to nextNode() returns the first node in the set.
+   * Returns the next node in the set and advances the position of the iterator in the set. After a
+   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
    *
-   * @return  The next <code>Node</code> in the set being iterated over, or
-   *   <code>null</code> if there are no more members in that set.
+   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
+   *     there are no more members in that set.
    */
   @Override
-public int nextNode()
-  {
-    if(m_foundLast)
-    {
+  public int nextNode() {
+    if (m_foundLast) {
       m_lastFetched = DTM.NULL;
       return DTM.NULL;
     }
 
-    if(DTM.NULL == m_lastFetched)
-    {
+    if (DTM.NULL == m_lastFetched) {
       resetProximityPositions();
     }
 
     int next;
 
-    try
-    {
-      do
-      {
+    try {
+      do {
         next = getNextNode();
 
-        if (DTM.NULL != next)
-        {
-          if(DTMIterator.FILTER_ACCEPT == acceptNode(next))
-            break;
-          else
-            continue;
-        }
-        else
-          break;
-      }
-      while (next != DTM.NULL);
+        if (DTM.NULL != next) {
+          if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) break;
+          else continue;
+        } else break;
+      } while (next != DTM.NULL);
 
-      if (DTM.NULL != next)
-      {
+      if (DTM.NULL != next) {
         m_pos++;
         return next;
-      }
-      else
-      {
+      } else {
         m_foundLast = true;
 
         return DTM.NULL;
       }
-    }
-    finally
-    {
+    } finally {
     }
   }
 
   /**
-   *  Get a cloned Iterator that is reset to the beginning
-   *  of the query.
+   * Get a cloned Iterator that is reset to the beginning of the query.
    *
-   *  @return A cloned NodeIterator set of the start of the query.
-   *
-   *  @throws CloneNotSupportedException
+   * @return A cloned NodeIterator set of the start of the query.
+   * @throws CloneNotSupportedException
    */
   @Override
-public DTMIterator cloneWithReset() throws CloneNotSupportedException
-  {
+  public DTMIterator cloneWithReset() throws CloneNotSupportedException {
 
     ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();
 
@@ -199,7 +158,4 @@ public DTMIterator cloneWithReset() throws CloneNotSupportedException
 
     return clone;
   }
-
-
 }
-
