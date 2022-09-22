@@ -148,6 +148,19 @@ public class XPathTest {
 
   /** @throws Exception in case of problems */
   @Test
+  public void andSearch() throws Exception {
+    final String input = "<root><p a='1' b='2'/><p/><p/><p/></root>";
+
+    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    final DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
+
+    List<?> hits = XPathHelper.getByXPath(doc, "//p[@a=1 and @b=2]", null, false);
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
   public void attributeSearch() throws Exception {
     final String input = "<root><p/><p name='test'/><p/><p/></root>";
 
