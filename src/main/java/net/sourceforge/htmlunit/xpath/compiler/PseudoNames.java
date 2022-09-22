@@ -15,9 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*
- * $Id$
- */
 package net.sourceforge.htmlunit.xpath.compiler;
 
 /** This is used to represent names of nodes that may not be named, like a comment node. */

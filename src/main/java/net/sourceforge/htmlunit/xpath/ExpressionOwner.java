@@ -15,9 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*
- * $Id$
- */
 package net.sourceforge.htmlunit.xpath;
 
 /** Classes that implement this interface own an expression, which can be rewritten. */

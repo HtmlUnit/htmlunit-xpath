@@ -15,9 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*
- * $Id$
- */
 package net.sourceforge.htmlunit.xpath.xml.utils;
 
 /** A concrete class that implements this interface creates XMLString objects. */

@@ -15,9 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*
- * $Id$
- */
 
 /**
  * This class implements an RTF Iterator. Currently exists for sole purpose of enabling EXSLT
