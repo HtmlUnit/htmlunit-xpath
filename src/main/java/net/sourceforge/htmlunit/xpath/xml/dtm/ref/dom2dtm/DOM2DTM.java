@@ -18,15 +18,25 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
 import java.util.Vector;
+
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.dom.DOMSource;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Element;
+import org.w3c.dom.Entity;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.xml.sax.ContentHandler;
+
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMDefaultBaseIterators;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.ExpandedNameTable;
-import net.sourceforge.htmlunit.xpath.xml.dtm.ref.IncrementalSAXSource;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer;
@@ -36,14 +46,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.TreeWalker;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
-import org.w3c.dom.Entity;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.xml.sax.ContentHandler;
 
 /**
  * The <code>DOM2DTM</code> class serves up a DOM's contents via the DTM API.
@@ -1287,14 +1289,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     }
     return false;
   }
-
-  /**
-   * Bind an IncrementalSAXSource to this DTM. NOT RELEVANT for DOM2DTM, since we're wrapped around
-   * an existing DOM.
-   *
-   * @param source The IncrementalSAXSource that we want to recieve events from on demand.
-   */
-  public void setIncrementalSAXSource(IncrementalSAXSource source) {}
 
   /**
    * getContentHandler returns "our SAX builder" -- the thing that someone else should send SAX
