@@ -21,7 +21,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.sax.SAXSource;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.helpers.DefaultHandler;
+
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
@@ -32,13 +36,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm.DOM2DTM;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLReaderManager;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * The default implementation for the DTMManager.
@@ -87,12 +85,6 @@ public class DTMManagerDefault extends DTMManager {
    * it from DTMDefaultBase, which is why this is not Protected or Private.)
    */
   int m_dtm_offsets[] = new int[256];
-
-  /**
-   * The cache for XMLReader objects to be used if the user did not supply an XMLReader for a
-   * SAXSource or supplied a StreamSource.
-   */
-  protected XMLReaderManager m_readerManager = null;
 
   /** The default implementation of ContentHandler, DTDHandler and ErrorHandler. */
   protected DefaultHandler m_defaultHandler = new DefaultHandler();
@@ -330,53 +322,6 @@ public class DTMManagerDefault extends DTMManager {
                 null)); // "Could not resolve the node to a handle!");
 
       return handle;
-    }
-  }
-
-  /**
-   * This method returns the SAX2 parser to use with the InputSource obtained from this URI. It may
-   * return null if any SAX2-conformant XML parser can be used, or if getInputSource() will also
-   * return null. The parser must be free for use (i.e., not currently in use for another parse().
-   * After use of the parser is completed, the releaseXMLReader(XMLReader) must be called.
-   *
-   * @param inputSource The value returned from the URIResolver.
-   * @return a SAX2 XMLReader to use to resolve the inputSource argument.
-   * @return non-null XMLReader reference ready to parse.
-   */
-  public synchronized XMLReader getXMLReader(Source inputSource) {
-
-    try {
-      XMLReader reader =
-          (inputSource instanceof SAXSource) ? ((SAXSource) inputSource).getXMLReader() : null;
-
-      // If user did not supply a reader, ask for one from the reader manager
-      if (null == reader) {
-        if (m_readerManager == null) {
-          m_readerManager = XMLReaderManager.getInstance();
-        }
-
-        reader = m_readerManager.getXMLReader();
-      }
-
-      return reader;
-
-    } catch (SAXException se) {
-      throw new DTMException(se.getMessage(), se);
-    }
-  }
-
-  /**
-   * Indicates that the XMLReader object is no longer in use for the transform.
-   *
-   * <p>Note that the getXMLReader method may return an XMLReader that was specified on the
-   * SAXSource object by the application code. Such a reader should still be passed to
-   * releaseXMLReader, but the reader manager will only re-use XMLReaders that it created.
-   *
-   * @param reader The XMLReader to be released.
-   */
-  public synchronized void releaseXMLReader(XMLReader reader) {
-    if (m_readerManager != null) {
-      m_readerManager.releaseXMLReader(reader);
     }
   }
 
