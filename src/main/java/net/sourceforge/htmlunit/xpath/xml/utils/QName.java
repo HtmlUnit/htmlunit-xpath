@@ -17,12 +17,12 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.utils;
 
-import java.util.Stack;
 import java.util.StringTokenizer;
-import javax.xml.stream.events.Namespace;
+
+import org.w3c.dom.Element;
+
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
-import org.w3c.dom.Element;
 
 /**
  * Class to represent a qualified name: "The name of an internal XSLT object, specifically a named
@@ -201,83 +201,6 @@ public class QName implements java.io.Serializable {
     }
     _namespaceURI = null;
     _localName = localName;
-    m_hashCode = toString().hashCode();
-  }
-
-  /**
-   * Construct a QName from a string, resolving the prefix using the given namespace stack. The
-   * default namespace is not resolved.
-   *
-   * @param qname Qualified name to resolve
-   * @param namespaces Namespace stack to use to resolve namespace
-   */
-  public QName(String qname, Stack<Namespace> namespaces) {
-    this(qname, namespaces, false);
-  }
-
-  /**
-   * Construct a QName from a string, resolving the prefix using the given namespace stack. The
-   * default namespace is not resolved.
-   *
-   * @param qname Qualified name to resolve
-   * @param namespaces Namespace stack to use to resolve namespace
-   * @param validate If true the new QName will be validated and an IllegalArgumentException will be
-   *     thrown if it is invalid.
-   */
-  public QName(String qname, Stack<Namespace> namespaces, boolean validate) {
-
-    String namespace = null;
-    String prefix = null;
-    int indexOfNSSep = qname.indexOf(':');
-
-    if (indexOfNSSep > 0) {
-      prefix = qname.substring(0, indexOfNSSep);
-
-      if (prefix.equals("xml")) {
-        namespace = S_XMLNAMESPACEURI;
-      }
-      // Do we want this?
-      else if (prefix.equals("xmlns")) {
-        return;
-      } else {
-        int depth = namespaces.size();
-
-        for (int i = depth - 1; i >= 0; i--) {
-          NameSpace ns = (NameSpace) namespaces.elementAt(i);
-
-          while (null != ns) {
-            if ((null != ns.m_prefix) && prefix.equals(ns.m_prefix)) {
-              namespace = ns.m_uri;
-              i = -1;
-
-              break;
-            }
-
-            ns = ns.m_next;
-          }
-        }
-      }
-
-      if (null == namespace) {
-        throw new RuntimeException(
-            XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_PREFIX_MUST_RESOLVE,
-                new Object[] {prefix})); // "Prefix must resolve to a namespace: "+prefix);
-      }
-    }
-
-    _localName = (indexOfNSSep < 0) ? qname : qname.substring(indexOfNSSep + 1);
-
-    if (validate) {
-      if ((_localName == null) || !XML11Char.isXML11ValidNCName(_localName)) {
-        throw new IllegalArgumentException(
-            XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_ARG_LOCALNAME_INVALID,
-                null)); // "Argument 'localName' not a valid NCName");
-      }
-    }
-    _namespaceURI = namespace;
-    _prefix = prefix;
     m_hashCode = toString().hashCode();
   }
 
