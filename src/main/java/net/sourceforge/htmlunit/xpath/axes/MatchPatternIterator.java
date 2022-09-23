@@ -218,24 +218,7 @@ public class MatchPatternIterator extends LocPathIterator {
     try {
       xctxt.pushCurrentNode(n);
       xctxt.pushIteratorRoot(m_context);
-      if (DEBUG) {
-        System.out.println("traverser: " + m_traverser);
-        System.out.print("node: " + n);
-        System.out.println(", " + m_cdtm.getNodeName(n));
-        // if(m_cdtm.getNodeName(n).equals("near-east"))
-        System.out.println("pattern: " + m_pattern.toString());
-        m_pattern.debugWhatToShow(m_pattern.getWhatToShow());
-      }
-
       XObject score = m_pattern.execute(xctxt);
-
-      if (DEBUG) {
-        // System.out.println("analysis: "+Integer.toBinaryString(m_analysis));
-        System.out.println("score: " + score);
-        System.out.println("skip: " + (score == NodeTest.SCORE_NONE));
-      }
-
-      // System.out.println("\n::acceptNode - score: "+score.num()+"::");
       return (score == NodeTest.SCORE_NONE) ? DTMIterator.FILTER_SKIP : DTMIterator.FILTER_ACCEPT;
     } catch (javax.xml.transform.TransformerException se) {
 

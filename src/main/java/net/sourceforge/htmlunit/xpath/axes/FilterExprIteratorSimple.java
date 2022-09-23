@@ -42,9 +42,6 @@ public class FilterExprIteratorSimple extends LocPathIterator {
   /** The result of executing m_expr. Needs to be deep cloned on clone op. */
   private transient XNodeSet m_exprObj;
 
-  private boolean m_mustHardReset = false;
-  private boolean m_canDetachNodeset = true;
-
   /** Create a FilterExprIteratorSimple object. */
   public FilterExprIteratorSimple() {
     super(null);

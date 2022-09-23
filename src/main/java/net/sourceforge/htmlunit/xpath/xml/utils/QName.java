@@ -19,6 +19,7 @@ package net.sourceforge.htmlunit.xpath.xml.utils;
 
 import java.util.Stack;
 import java.util.StringTokenizer;
+import javax.xml.stream.events.Namespace;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import org.w3c.dom.Element;
@@ -210,7 +211,7 @@ public class QName implements java.io.Serializable {
    * @param qname Qualified name to resolve
    * @param namespaces Namespace stack to use to resolve namespace
    */
-  public QName(String qname, Stack namespaces) {
+  public QName(String qname, Stack<Namespace> namespaces) {
     this(qname, namespaces, false);
   }
 
@@ -223,7 +224,7 @@ public class QName implements java.io.Serializable {
    * @param validate If true the new QName will be validated and an IllegalArgumentException will be
    *     thrown if it is invalid.
    */
-  public QName(String qname, Stack namespaces, boolean validate) {
+  public QName(String qname, Stack<Namespace> namespaces, boolean validate) {
 
     String namespace = null;
     String prefix = null;

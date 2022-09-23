@@ -21,12 +21,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Stack;
-
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
-
-import org.xml.sax.XMLReader;
-
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.objects.DTMXRTreeFrag;
 import net.sourceforge.htmlunit.xpath.objects.XString;
@@ -42,6 +38,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.IntStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
+import org.xml.sax.XMLReader;
 
 /**
  * Default class for the runtime execution context for XPath.

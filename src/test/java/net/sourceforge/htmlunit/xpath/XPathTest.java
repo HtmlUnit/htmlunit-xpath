@@ -185,7 +185,6 @@ public class XPathTest {
     assertEquals(2, hits.size());
   }
 
-
   /** @throws Exception in case of problems */
   @Test
   public void numberSearch() throws Exception {

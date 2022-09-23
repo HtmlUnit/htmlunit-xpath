@@ -18,11 +18,9 @@
 package net.sourceforge.htmlunit.xpath;
 
 import java.io.Serializable;
-
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
-
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.compiler.FunctionTable;
 import net.sourceforge.htmlunit.xpath.compiler.XPathParser;

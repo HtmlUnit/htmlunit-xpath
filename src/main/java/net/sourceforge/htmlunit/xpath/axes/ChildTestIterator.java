@@ -112,25 +112,6 @@ public class ChildTestIterator extends BasicTestIterator {
   public void setRoot(int context, Object environment) {
     super.setRoot(context, environment);
     m_traverser = m_cdtm.getAxisTraverser(Axis.CHILD);
-
-    //    String localName = getLocalName();
-    //    String namespace = getNamespace();
-    //    int what = m_whatToShow;
-    //    // System.out.println("what: ");
-    //    // NodeTest.debugWhatToShow(what);
-    //    if(DTMFilter.SHOW_ALL == what ||
-    //       ((DTMFilter.SHOW_ELEMENT & what) == 0)
-    //       || localName == NodeTest.WILD
-    //       || namespace == NodeTest.WILD)
-    //    {
-    //      m_extendedTypeID = 0;
-    //    }
-    //    else
-    //    {
-    //      int type = getNodeTypeTest(what);
-    //      m_extendedTypeID = m_cdtm.getExpandedTypeID(namespace, localName, type);
-    //    }
-
   }
 
   /**

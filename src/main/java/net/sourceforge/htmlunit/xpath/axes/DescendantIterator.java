@@ -194,8 +194,6 @@ public class DescendantIterator extends LocPathIterator {
     String localName = getLocalName();
     String namespace = getNamespace();
     int what = m_whatToShow;
-    // System.out.println("what: ");
-    // NodeTest.debugWhatToShow(what);
     if (DTMFilter.SHOW_ALL == what
         || NodeTest.WILD.equals(localName)
         || NodeTest.WILD.equals(namespace)) {
@@ -227,11 +225,6 @@ public class DescendantIterator extends LocPathIterator {
     String localName = getLocalName();
     String namespace = getNamespace();
     int what = m_whatToShow;
-
-    // System.out.print(" (DescendantIterator) ");
-
-    // System.out.println("what: ");
-    // NodeTest.debugWhatToShow(what);
     if (DTMFilter.SHOW_ALL == what || localName == NodeTest.WILD || namespace == NodeTest.WILD) {
       return traverser.first(current);
     } else {

@@ -46,10 +46,6 @@ import org.w3c.dom.Node;
 public class DTMNodeList extends DTMNodeListBase {
   private DTMIterator m_iter;
 
-  // ================================================================
-  // Methods unique to this class
-  private DTMNodeList() {}
-
   /**
    * Public constructor: Wrap a DTMNodeList around an existing and preconfigured DTMIterator
    *

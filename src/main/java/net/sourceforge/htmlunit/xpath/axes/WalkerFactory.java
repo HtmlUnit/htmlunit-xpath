@@ -970,15 +970,6 @@ public class WalkerFactory {
               predicateAxis);
     }
 
-    if (false || DEBUG_PATTERN_CREATION) {
-      System.out.print("new step: " + ai);
-      System.out.print(", axis: " + Axis.getNames(ai.getAxis()));
-      System.out.print(", predAxis: " + Axis.getNames(ai.getAxis()));
-      System.out.print(", what: ");
-      System.out.print("    ");
-      NodeTest.debugWhatToShow(ai.getWhatToShow());
-    }
-
     int argLen = compiler.getFirstPredicateOpPos(opPos);
 
     ai.setPredicates(compiler.getCompiledPredicates(argLen));
@@ -1111,13 +1102,6 @@ public class WalkerFactory {
     } else {
       int whatToShow = compiler.getWhatToShow(opPos);
 
-      /*
-      System.out.print("construct: ");
-      NodeTest.debugWhatToShow(whatToShow);
-      System.out.println("or stuff: "+(whatToShow & (DTMFilter.SHOW_ATTRIBUTE
-                             | DTMFilter.SHOW_ELEMENT
-                             | DTMFilter.SHOW_PROCESSING_INSTRUCTION)));
-      */
       if ((0
               == (whatToShow
                   & (DTMFilter.SHOW_ATTRIBUTE

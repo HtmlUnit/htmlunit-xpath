@@ -17,8 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath.patterns;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPath;
@@ -346,56 +344,6 @@ public class NodeTest extends Expression {
     if (0 != (whatToShow & DTMFilter.SHOW_CDATA_SECTION)) return DTM.CDATA_SECTION_NODE;
 
     return 0;
-  }
-
-  /**
-   * Do a diagnostics dump of a whatToShow bit set.
-   *
-   * @param whatToShow Bit set defined mainly by {@link
-   *     net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter}.
-   */
-  public static void debugWhatToShow(int whatToShow) {
-
-    List<String> v = new ArrayList<>();
-
-    if (0 != (whatToShow & DTMFilter.SHOW_ATTRIBUTE)) v.add("SHOW_ATTRIBUTE");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_NAMESPACE)) v.add("SHOW_NAMESPACE");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_CDATA_SECTION)) v.add("SHOW_CDATA_SECTION");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_COMMENT)) v.add("SHOW_COMMENT");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT)) v.add("SHOW_DOCUMENT");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT_FRAGMENT)) v.add("SHOW_DOCUMENT_FRAGMENT");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT_TYPE)) v.add("SHOW_DOCUMENT_TYPE");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_ELEMENT)) v.add("SHOW_ELEMENT");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_ENTITY)) v.add("SHOW_ENTITY");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_ENTITY_REFERENCE)) v.add("SHOW_ENTITY_REFERENCE");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_NOTATION)) v.add("SHOW_NOTATION");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_PROCESSING_INSTRUCTION))
-      v.add("SHOW_PROCESSING_INSTRUCTION");
-
-    if (0 != (whatToShow & DTMFilter.SHOW_TEXT)) v.add("SHOW_TEXT");
-
-    int n = v.size();
-
-    for (int i = 0; i < n; i++) {
-      if (i > 0) System.out.print(" | ");
-
-      System.out.print(v.get(i));
-    }
-
-    if (0 == n) System.out.print("empty whatToShow: " + whatToShow);
-
-    System.out.println();
   }
 
   /**
