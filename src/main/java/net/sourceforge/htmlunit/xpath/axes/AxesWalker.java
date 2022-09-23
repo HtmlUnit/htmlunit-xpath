@@ -75,11 +75,6 @@ public class AxesWalker extends PredicatedNodeTest
     // Do not access the location path itterator during this operation!
 
     AxesWalker clone = (AxesWalker) super.clone();
-
-    // clone.setCurrentNode(clone.m_root);
-
-    // clone.m_isFresh = true;
-
     return clone;
   }
 

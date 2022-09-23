@@ -1222,12 +1222,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isRestartable) {
         _startNode = node;
-
-        // ?? -sb
-        // find rightmost descendant (or self)
-        // int current;
-        // while ((node = getLastChild(current = node)) != NULL){}
-        // _currentNode = current;
         _currentNode = m_traverser.first(node);
 
         // _currentNode precedes possible following(node) nodes

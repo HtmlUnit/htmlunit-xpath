@@ -342,13 +342,6 @@ public class DOMHelper {
 
     if (Node.ATTRIBUTE_NODE == nodeType) {
       Document doc = node.getOwnerDocument();
-      /*
-      TBD:
-      if(null == doc)
-      {
-        throw new RuntimeException(XSLMessages.createXPATHMessage(XPATHErrorResources.ER_CHILD_HAS_NO_OWNER_DOCUMENT, null));//"Attribute child does not have an owner document!");
-      }
-      */
 
       // Given how expensive the tree walk may be, we should first ask
       // whether this DOM can answer the question for us. The additional
@@ -381,11 +374,6 @@ public class DOMHelper {
 
     } else {
       parent = node.getParentNode();
-
-      // if((Node.DOCUMENT_NODE != nodeType) && (null == parent))
-      // {
-      //   throw new RuntimeException("Child does not have parent!");
-      // }
     }
 
     return parent;

@@ -18,8 +18,18 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
 import java.util.Vector;
+
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.dom.DOMSource;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Element;
+import org.w3c.dom.Entity;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
@@ -31,18 +41,9 @@ import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer;
 import net.sourceforge.htmlunit.xpath.xml.utils.QName;
 import net.sourceforge.htmlunit.xpath.xml.utils.StringBufferPool;
-import net.sourceforge.htmlunit.xpath.xml.utils.TreeWalker;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
-import org.w3c.dom.Entity;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.xml.sax.ContentHandler;
 
 /**
  * The <code>DOM2DTM</code> class serves up a DOM's contents via the DTM API.
@@ -1285,125 +1286,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       return attr.getSpecified();
     }
     return false;
-  }
-
-  // ========== Direct SAX Dispatch, for optimization purposes ========
-
-  /**
-   * Directly call the characters method on the passed ContentHandler for the string-value of the
-   * given node (see http://www.w3.org/TR/xpath#data-model for the definition of a node's
-   * string-value). Multiple calls to the ContentHandler's characters methods may well occur for a
-   * single call to this method.
-   *
-   * @param nodeHandle The node ID.
-   * @param ch A non-null reference to a ContentHandler.
-   * @throws org.xml.sax.SAXException
-   */
-  @Override
-  public void dispatchCharactersEvents(
-      int nodeHandle, org.xml.sax.ContentHandler ch, boolean normalize)
-      throws org.xml.sax.SAXException {
-    if (normalize) {
-      XMLString str = getStringValue(nodeHandle);
-      str = str.fixWhiteSpace(true, true, false);
-      str.dispatchCharactersEvents(ch);
-    } else {
-      int type = getNodeType(nodeHandle);
-      Node node = getNode(nodeHandle);
-      dispatchNodeData(node, ch, 0);
-      // Text coalition -- a DTM text node may represent multiple
-      // DOM nodes.
-      if (TEXT_NODE == type || CDATA_SECTION_NODE == type) {
-        while (null != (node = logicalNextDOMTextNode(node))) {
-          dispatchNodeData(node, ch, 0);
-        }
-      }
-    }
-  }
-
-  /**
-   * Retrieve the text content of a DOM subtree, appending it into a user-supplied FastStringBuffer
-   * object. Note that attributes are not considered part of the content of an element.
-   *
-   * <p>There are open questions regarding whitespace stripping. Currently we make no special effort
-   * in that regard, since the standard DOM doesn't yet provide DTD-based information to distinguish
-   * whitespace-in-element-context from genuine #PCDATA. Note that we should probably also consider
-   * xml:space if/when we address this. DOM Level 3 may solve the problem for us.
-   *
-   * <p>%REVIEW% Note that as a DOM-level operation, it can be argued that this routine _shouldn't_
-   * perform any processing beyond what the DOM already does, and that whitespace stripping and so
-   * on belong at the DTM level. If you want a stripped DOM view, wrap DTM2DOM around DOM2DTM.
-   *
-   * @param node Node whose subtree is to be walked, gathering the contents of all Text or
-   *     CDATASection nodes.
-   */
-  protected static void dispatchNodeData(Node node, org.xml.sax.ContentHandler ch, int depth)
-      throws org.xml.sax.SAXException {
-
-    switch (node.getNodeType()) {
-      case Node.DOCUMENT_FRAGMENT_NODE:
-      case Node.DOCUMENT_NODE:
-      case Node.ELEMENT_NODE:
-        {
-          for (Node child = node.getFirstChild(); null != child; child = child.getNextSibling()) {
-            dispatchNodeData(child, ch, depth + 1);
-          }
-        }
-        break;
-      case Node.PROCESSING_INSTRUCTION_NODE: // %REVIEW%
-      case Node.COMMENT_NODE:
-        if (0 != depth) break;
-        // NOTE: Because this operation works in the DOM space, it does _not_ attempt
-        // to perform Text Coalition. That should only be done in DTM space.
-      case Node.TEXT_NODE:
-      case Node.CDATA_SECTION_NODE:
-      case Node.ATTRIBUTE_NODE:
-        String str = node.getNodeValue();
-        if (ch instanceof CharacterNodeHandler) {
-          ((CharacterNodeHandler) ch).characters(node);
-        } else {
-          ch.characters(str.toCharArray(), 0, str.length());
-        }
-        break;
-        //    /* case Node.PROCESSING_INSTRUCTION_NODE :
-        //      // warning(XPATHErrorResources.WG_PARSING_AND_PREPARING);
-        //      break; */
-      default:
-        // ignore
-        break;
-    }
-  }
-
-  TreeWalker m_walker = new TreeWalker(null);
-
-  /**
-   * Directly create SAX parser events from a subtree.
-   *
-   * @param nodeHandle The node ID.
-   * @param ch A non-null reference to a ContentHandler.
-   * @throws org.xml.sax.SAXException
-   */
-  @Override
-  public void dispatchToEvents(int nodeHandle, org.xml.sax.ContentHandler ch)
-      throws org.xml.sax.SAXException {
-    TreeWalker treeWalker = m_walker;
-    ContentHandler prevCH = treeWalker.getContentHandler();
-
-    if (null != prevCH) {
-      treeWalker = new TreeWalker(null);
-    }
-    treeWalker.setContentHandler(ch);
-
-    try {
-      Node node = getNode(nodeHandle);
-      treeWalker.traverseFragment(node);
-    } finally {
-      treeWalker.setContentHandler(null);
-    }
-  }
-
-  public interface CharacterNodeHandler {
-    public void characters(Node node) throws org.xml.sax.SAXException;
   }
 
   /**

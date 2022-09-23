@@ -19,6 +19,7 @@ package net.sourceforge.htmlunit.xpath;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
+
 import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
@@ -26,7 +27,6 @@ import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
-import org.xml.sax.ContentHandler;
 
 /**
  * This abstract class serves as the base for all expression objects. An Expression can be executed
@@ -224,23 +224,6 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
     } finally {
       xctxt.popCurrentNodeAndExpression();
     }
-  }
-
-  /**
-   * Execute an expression in the XPath runtime context, and return the result of the expression.
-   *
-   * @param xctxt The XPath runtime context. NEEDSDOC @param handler
-   * @return The result of the expression in the form of a <code>XObject</code>.
-   * @throws javax.xml.transform.TransformerException if a runtime exception occurs.
-   * @throws org.xml.sax.SAXException
-   */
-  public void executeCharsToContentHandler(XPathContext xctxt, ContentHandler handler)
-      throws javax.xml.transform.TransformerException, org.xml.sax.SAXException {
-
-    XObject obj = execute(xctxt);
-
-    obj.dispatchCharactersEvents(handler);
-    obj.detach();
   }
 
   /**

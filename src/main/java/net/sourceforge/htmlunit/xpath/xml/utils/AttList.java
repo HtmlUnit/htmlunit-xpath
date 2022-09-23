@@ -41,20 +41,6 @@ public class AttList implements Attributes {
   /** Local reference to DOMHelper */
   DOMHelper m_dh;
 
-  //  /**
-  //   * Constructor AttList
-  //   *
-  //   *
-  //   * @param attrs List of attributes this will contain
-  //   */
-  //  public AttList(NamedNodeMap attrs)
-  //  {
-  //
-  //    m_attrs = attrs;
-  //    m_lastIndex = m_attrs.getLength() - 1;
-  //    m_dh = new DOM2Helper();
-  //  }
-
   /**
    * Constructor AttList
    *

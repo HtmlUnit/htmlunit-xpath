@@ -396,18 +396,6 @@ public abstract class DTMDefaultBase implements DTM {
   /** Stateless axis traversers, lazely built. */
   protected DTMAxisTraverser[] m_traversers;
 
-  //    /**
-  //     * Ensure that the size of the information arrays can hold another entry
-  //     * at the given index.
-  //     *
-  //     * @param index On exit from this function, the information arrays sizes must be
-  //     * at least index+1.
-  //     */
-  //    protected void ensureSize(int index)
-  //    {
-  //        // We've cut over to Suballocated*Vector, which are self-sizing.
-  //    }
-
   /**
    * Get the simple type ID for the given node identity.
    *
@@ -1636,11 +1624,6 @@ public abstract class DTMDefaultBase implements DTM {
    * @xsl.usage internal
    */
   public int getNodeIdent(int nodeHandle) {
-    /*if (nodeHandle != DTM.NULL)
-      return nodeHandle & m_mask;
-    else
-      return DTM.NULL;*/
-
     return makeNodeIdentity(nodeHandle);
   }
 
@@ -1652,11 +1635,6 @@ public abstract class DTMDefaultBase implements DTM {
    * @xsl.usage internal
    */
   public int getNodeHandle(int nodeId) {
-    /*if (nodeId != DTM.NULL)
-      return nodeId | m_dtmIdent;
-    else
-      return DTM.NULL;*/
-
     return makeNodeHandle(nodeId);
   }
 
@@ -1852,36 +1830,6 @@ public abstract class DTMDefaultBase implements DTM {
    */
   @Override
   public abstract boolean isAttributeSpecified(int attributeHandle);
-
-  // ========== Direct SAX Dispatch, for optimization purposes ========
-
-  /**
-   * Directly call the characters method on the passed ContentHandler for the string-value of the
-   * given node (see http://www.w3.org/TR/xpath#data-model for the definition of a node's
-   * string-value). Multiple calls to the ContentHandler's characters methods may well occur for a
-   * single call to this method.
-   *
-   * @param nodeHandle The node ID.
-   * @param ch A non-null reference to a ContentHandler.
-   * @param normalize true if the content should be normalized according to the rules for the XPath
-   *     <a href="http://www.w3.org/TR/xpath#function-normalize-space">normalize-space</a> function.
-   * @throws org.xml.sax.SAXException
-   */
-  @Override
-  public abstract void dispatchCharactersEvents(
-      int nodeHandle, org.xml.sax.ContentHandler ch, boolean normalize)
-      throws org.xml.sax.SAXException;
-
-  /**
-   * Directly create SAX parser events from a subtree.
-   *
-   * @param nodeHandle The node ID.
-   * @param ch A non-null reference to a ContentHandler.
-   * @throws org.xml.sax.SAXException
-   */
-  @Override
-  public abstract void dispatchToEvents(int nodeHandle, org.xml.sax.ContentHandler ch)
-      throws org.xml.sax.SAXException;
 
   /**
    * Return an DOM node for the given node.

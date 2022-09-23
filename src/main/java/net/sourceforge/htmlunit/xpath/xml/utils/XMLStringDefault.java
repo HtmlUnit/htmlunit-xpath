@@ -33,28 +33,6 @@ public class XMLStringDefault implements XMLString {
   }
 
   /**
-   * Directly call the characters method on the passed ContentHandler for the string-value. Multiple
-   * calls to the ContentHandler's characters methods may well occur for a single call to this
-   * method.
-   *
-   * @param ch A non-null reference to a ContentHandler.
-   * @throws org.xml.sax.SAXException
-   */
-  @Override
-  public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
-      throws org.xml.sax.SAXException {}
-
-  /**
-   * Directly call the comment method on the passed LexicalHandler for the string-value.
-   *
-   * @param lh A non-null reference to a LexicalHandler.
-   * @throws org.xml.sax.SAXException
-   */
-  @Override
-  public void dispatchAsComment(org.xml.sax.ext.LexicalHandler lh)
-      throws org.xml.sax.SAXException {}
-
-  /**
    * Conditionally trim all leading and trailing whitespace in the specified String. All strings of
    * white space are replaced by a single space character (#x20), except spaces after punctuation
    * which receive double spaces if doublePunctuationSpaces is true. This function may be useful to

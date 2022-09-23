@@ -163,32 +163,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   }
 
   /**
-   * Execute an expression in the XPath runtime context, and return the result of the expression.
-   *
-   * @param xctxt The XPath runtime context.
-   * @param handler The target content handler.
-   * @return The result of the expression in the form of a <code>XObject</code>.
-   * @throws javax.xml.transform.TransformerException if a runtime exception occurs.
-   * @throws org.xml.sax.SAXException
-   */
-  @Override
-  public void executeCharsToContentHandler(XPathContext xctxt, org.xml.sax.ContentHandler handler)
-      throws javax.xml.transform.TransformerException, org.xml.sax.SAXException {
-    LocPathIterator clone = (LocPathIterator) m_clones.getInstance();
-
-    int current = xctxt.getCurrentNode();
-    clone.setRoot(current, xctxt);
-
-    int node = clone.nextNode();
-    DTM dtm = clone.getDTM(node);
-    clone.detach();
-
-    if (node != DTM.NULL) {
-      dtm.dispatchCharactersEvents(node, handler, false);
-    }
-  }
-
-  /**
    * Given an select expression and a context, evaluate the XPath and return the resulting iterator.
    *
    * @param xctxt The execution context.

@@ -20,9 +20,7 @@ package net.sourceforge.htmlunit.xpath.functions;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
-import org.xml.sax.ContentHandler;
 
 /**
  * Execute the normalize-space() function.
@@ -44,27 +42,5 @@ public class FuncNormalizeSpace extends FunctionDef1Arg {
     XMLString s1 = getArg0AsString(xctxt);
 
     return (XString) s1.fixWhiteSpace(true, true, false);
-  }
-
-  /**
-   * Execute an expression in the XPath runtime context, and return the result of the expression.
-   *
-   * @param xctxt The XPath runtime context.
-   * @return The result of the expression in the form of a <code>XObject</code>.
-   * @throws javax.xml.transform.TransformerException if a runtime exception occurs.
-   */
-  @Override
-  public void executeCharsToContentHandler(XPathContext xctxt, ContentHandler handler)
-      throws javax.xml.transform.TransformerException, org.xml.sax.SAXException {
-    if (Arg0IsNodesetExpr()) {
-      int node = getArg0AsNode(xctxt);
-      if (DTM.NULL != node) {
-        DTM dtm = xctxt.getDTM(node);
-        dtm.dispatchCharactersEvents(node, handler, true);
-      }
-    } else {
-      XObject obj = execute(xctxt);
-      obj.dispatchCharactersEvents(handler);
-    }
   }
 }

@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * The default implementation for the DTMManager.
@@ -83,9 +82,6 @@ public class DTMManagerDefault extends DTMManager {
    * it from DTMDefaultBase, which is why this is not Protected or Private.)
    */
   int m_dtm_offsets[] = new int[256];
-
-  /** The default implementation of ContentHandler, DTDHandler and ErrorHandler. */
-  protected DefaultHandler m_defaultHandler = new DefaultHandler();
 
   /**
    * Add a DTM to the DTM table. This convenience call adds it as the "base DTM ID", with offset 0.
@@ -203,12 +199,6 @@ public class DTMManagerDefault extends DTMManager {
               this, (DOMSource) source, documentID, whiteSpaceFilter, xstringFactory, doIndexing);
 
       addDTM(dtm, dtmPos, 0);
-
-      //      if (DUMPTREE)
-      //      {
-      //        dtm.dumpDTM();
-      //      }
-
       return dtm;
     }
 

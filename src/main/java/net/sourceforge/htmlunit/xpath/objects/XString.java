@@ -157,37 +157,6 @@ public class XString extends XObject implements XMLString {
   }
 
   /**
-   * Directly call the characters method on the passed ContentHandler for the string-value. Multiple
-   * calls to the ContentHandler's characters methods may well occur for a single call to this
-   * method.
-   *
-   * @param ch A non-null reference to a ContentHandler.
-   * @throws org.xml.sax.SAXException
-   */
-  @Override
-  public void dispatchCharactersEvents(org.xml.sax.ContentHandler ch)
-      throws org.xml.sax.SAXException {
-
-    String str = str();
-
-    ch.characters(str.toCharArray(), 0, str.length());
-  }
-
-  /**
-   * Directly call the comment method on the passed LexicalHandler for the string-value.
-   *
-   * @param lh A non-null reference to a LexicalHandler.
-   * @throws org.xml.sax.SAXException
-   */
-  @Override
-  public void dispatchAsComment(org.xml.sax.ext.LexicalHandler lh) throws org.xml.sax.SAXException {
-
-    String str = str();
-
-    lh.comment(str.toCharArray(), 0, str.length());
-  }
-
-  /**
    * Returns the length of this string.
    *
    * @return the length of the sequence of characters represented by this object.

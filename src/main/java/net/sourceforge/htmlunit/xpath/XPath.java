@@ -84,19 +84,6 @@ public class XPath implements Serializable, ExpressionOwner {
     return m_mainExp;
   }
 
-  //  /**
-  //   * Set the SourceLocator on the expression object.
-  //   *
-  //   *
-  //   * @param l the SourceLocator on the expression object, which may be null.
-  //   */
-  //  public void setLocator(SourceLocator l)
-  //  {
-  //    // Note potential hazards -- l may not be serializable, or may be changed
-  //      // after being assigned here.
-  //    m_mainExp.setSourceLocator(l);
-  //  }
-
   /**
    * The pattern string, mainly kept around for diagnostic purposes.
    *

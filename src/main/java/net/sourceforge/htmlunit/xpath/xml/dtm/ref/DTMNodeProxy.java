@@ -1268,16 +1268,6 @@ public class DTMNodeProxy
     } else if (!getNodeValue().equals(arg.getNodeValue())) {
       return false;
     }
-    /*
-            if (getBaseURI() == null) {
-                if (((NodeImpl) arg).getBaseURI() != null) {
-                    return false;
-                }
-            }
-            else if (!getBaseURI().equals(((NodeImpl) arg).getBaseURI())) {
-                return false;
-            }
-    */
     return true;
   }
 
@@ -1329,19 +1319,8 @@ public class DTMNodeProxy
               }
             }
           }
-          /*
-                      NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
-                      if (ancestor != null) {
-                          return ancestor.lookupNamespaceURI(specifiedPrefix);
-                      }
-          */
           return null;
         }
-        /*
-                case Node.DOCUMENT_NODE : {
-                        return((NodeImpl)((Document)this).getDocumentElement()).lookupNamespaceURI(specifiedPrefix) ;
-                    }
-        */
       case Node.ENTITY_NODE:
       case Node.NOTATION_NODE:
       case Node.DOCUMENT_FRAGMENT_NODE:
@@ -1357,12 +1336,6 @@ public class DTMNodeProxy
         }
       default:
         {
-          /*
-             NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
-             if (ancestor != null) {
-                 return ancestor.lookupNamespaceURI(specifiedPrefix);
-             }
-          */
           return null;
         }
     }
@@ -1379,66 +1352,6 @@ public class DTMNodeProxy
    */
   @Override
   public boolean isDefaultNamespace(String namespaceURI) {
-    /*
-            // REVISIT: remove casts when DOM L3 becomes REC.
-            short type = this.getNodeType();
-            switch (type) {
-            case Node.ELEMENT_NODE: {
-                String namespace = this.getNamespaceURI();
-                String prefix = this.getPrefix();
-
-                // REVISIT: is it possible that prefix is empty string?
-                if (prefix == null || prefix.length() == 0) {
-                    if (namespaceURI == null) {
-                        return (namespace == namespaceURI);
-                    }
-                    return namespaceURI.equals(namespace);
-                }
-                if (this.hasAttributes()) {
-                    ElementImpl elem = (ElementImpl)this;
-                    NodeImpl attr = (NodeImpl)elem.getAttributeNodeNS("http://www.w3.org/2000/xmlns/", "xmlns");
-                    if (attr != null) {
-                        String value = attr.getNodeValue();
-                        if (namespaceURI == null) {
-                            return (namespace == value);
-                        }
-                        return namespaceURI.equals(value);
-                    }
-                }
-
-                NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
-                if (ancestor != null) {
-                    return ancestor.isDefaultNamespace(namespaceURI);
-                }
-                return false;
-            }
-            case Node.DOCUMENT_NODE:{
-                    return((NodeImpl)((Document)this).getDocumentElement()).isDefaultNamespace(namespaceURI);
-                }
-
-            case Node.ENTITY_NODE :
-              case Node.NOTATION_NODE:
-            case Node.DOCUMENT_FRAGMENT_NODE:
-            case Node.DOCUMENT_TYPE_NODE:
-                // type is unknown
-                return false;
-            case Node.ATTRIBUTE_NODE:{
-                    if (this.ownerNode.getNodeType() == Node.ELEMENT_NODE) {
-                        return ownerNode.isDefaultNamespace(namespaceURI);
-
-                    }
-                    return false;
-                }
-            default:{
-                    NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
-                    if (ancestor != null) {
-                        return ancestor.isDefaultNamespace(namespaceURI);
-                    }
-                    return false;
-                }
-
-            }
-    */
     return false;
   }
 
@@ -1460,17 +1373,6 @@ public class DTMNodeProxy
     short type = this.getNodeType();
 
     switch (type) {
-        /*
-                case Node.ELEMENT_NODE: {
-
-                        String namespace = this.getNamespaceURI(); // to flip out children
-                        return lookupNamespacePrefix(namespaceURI, (ElementImpl)this);
-                    }
-
-                case Node.DOCUMENT_NODE:{
-                        return((NodeImpl)((Document)this).getDocumentElement()).lookupPrefix(namespaceURI);
-                    }
-        */
       case Node.ENTITY_NODE:
       case Node.NOTATION_NODE:
       case Node.DOCUMENT_FRAGMENT_NODE:
@@ -1486,12 +1388,6 @@ public class DTMNodeProxy
         }
       default:
         {
-          /*
-                          NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
-                          if (ancestor != null) {
-                              return ancestor.lookupPrefix(namespaceURI);
-                          }
-          */
           return null;
         }
     }
@@ -1716,48 +1612,6 @@ public class DTMNodeProxy
   /** DOM Level 3 */
   @Override
   public Text replaceWholeText(String content) throws DOMException {
-    /*
-
-            if (needsSyncData()) {
-                synchronizeData();
-            }
-
-            // make sure we can make the replacement
-            if (!canModify(nextSibling)) {
-                throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR,
-                    DOMMessageFormatter.formatMessage(DOMMessageFormatter.DOM_DOMAIN, "NO_MODIFICATION_ALLOWED_ERR", null));
-            }
-
-            Node parent = this.getParentNode();
-            if (content == null || content.length() == 0) {
-                // remove current node
-                if (parent !=null) { // check if node in the tree
-                    parent.removeChild(this);
-                    return null;
-                }
-            }
-            Text currentNode = null;
-            if (isReadOnly()){
-                Text newNode = this.ownerDocument().createTextNode(content);
-                if (parent !=null) { // check if node in the tree
-                    parent.insertBefore(newNode, this);
-                    parent.removeChild(this);
-                    currentNode = newNode;
-                } else {
-                    return newNode;
-                }
-            }  else {
-                this.setData(content);
-                currentNode = this;
-            }
-            Node sibling =  currentNode.getNextSibling();
-            while ( sibling !=null) {
-                parent.removeChild(sibling);
-                sibling = currentNode.getNextSibling();
-            }
-
-            return currentNode;
-    */
     return null; // Pending
   }
 
@@ -1769,21 +1623,6 @@ public class DTMNodeProxy
    */
   @Override
   public String getWholeText() {
-
-    /*
-            if (needsSyncData()) {
-                synchronizeData();
-            }
-            if (nextSibling == null) {
-                return data;
-            }
-            StringBuffer buffer = new StringBuffer();
-            if (data != null && data.length() != 0) {
-                buffer.append(data);
-            }
-            getWholeText(nextSibling, buffer);
-            return buffer.toString();
-    */
     return null; // PENDING
   }
 

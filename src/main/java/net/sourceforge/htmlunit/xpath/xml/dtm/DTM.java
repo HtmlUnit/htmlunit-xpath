@@ -593,35 +593,6 @@ public interface DTM {
    */
   public boolean isAttributeSpecified(int attributeHandle);
 
-  // ========== Direct SAX Dispatch, for optimization purposes ========
-
-  /**
-   * Directly call the characters method on the passed ContentHandler for the string-value of the
-   * given node (see http://www.w3.org/TR/xpath#data-model for the definition of a node's
-   * string-value). Multiple calls to the ContentHandler's characters methods may well occur for a
-   * single call to this method.
-   *
-   * @param nodeHandle The node ID.
-   * @param ch A non-null reference to a ContentHandler.
-   * @param normalize true if the content should be normalized according to the rules for the XPath
-   *     <a href="http://www.w3.org/TR/xpath#function-normalize-space">normalize-space</a> function.
-   * @throws org.xml.sax.SAXException
-   */
-  public void dispatchCharactersEvents(
-      int nodeHandle, org.xml.sax.ContentHandler ch, boolean normalize)
-      throws org.xml.sax.SAXException;
-
-  /**
-   * Directly create SAX parser events representing the XML content of a DTM subtree. This is a
-   * "serialize" operation.
-   *
-   * @param nodeHandle The node ID.
-   * @param ch A non-null reference to a ContentHandler.
-   * @throws org.xml.sax.SAXException
-   */
-  public void dispatchToEvents(int nodeHandle, org.xml.sax.ContentHandler ch)
-      throws org.xml.sax.SAXException;
-
   /**
    * Return an DOM node for the given node.
    *

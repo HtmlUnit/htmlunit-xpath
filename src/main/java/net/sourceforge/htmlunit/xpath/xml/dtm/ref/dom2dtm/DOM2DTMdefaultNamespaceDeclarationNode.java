@@ -385,17 +385,6 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
     } else if (!getNodeValue().equals(arg.getNodeValue())) {
       return false;
     }
-    /*
-            if (getBaseURI() == null) {
-                if (((NodeImpl) arg).getBaseURI() != null) {
-                    return false;
-                }
-            }
-            else if (!getBaseURI().equals(((NodeImpl) arg).getBaseURI())) {
-                return false;
-            }
-    */
-
     return true;
   }
 
@@ -447,20 +436,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
               }
             }
           }
-          /*
-                      NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
-                      if (ancestor != null) {
-                          return ancestor.lookupNamespaceURI(specifiedPrefix);
-                      }
-          */
-
           return null;
         }
-        /*
-                case Node.DOCUMENT_NODE : {
-                        return((NodeImpl)((Document)this).getDocumentElement()).lookupNamespaceURI(specifiedPrefix) ;
-                    }
-        */
       case Node.ENTITY_NODE:
       case Node.NOTATION_NODE:
       case Node.DOCUMENT_FRAGMENT_NODE:
@@ -476,12 +453,6 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
         }
       default:
         {
-          /*
-             NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
-             if (ancestor != null) {
-                 return ancestor.lookupNamespaceURI(specifiedPrefix);
-             }
-          */
           return null;
         }
     }
@@ -498,66 +469,6 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
    */
   @Override
   public boolean isDefaultNamespace(String namespaceURI) {
-    /*
-            // REVISIT: remove casts when DOM L3 becomes REC.
-            short type = this.getNodeType();
-            switch (type) {
-            case Node.ELEMENT_NODE: {
-                String namespace = this.getNamespaceURI();
-                String prefix = this.getPrefix();
-
-                // REVISIT: is it possible that prefix is empty string?
-                if (prefix == null || prefix.length() == 0) {
-                    if (namespaceURI == null) {
-                        return (namespace == namespaceURI);
-                    }
-                    return namespaceURI.equals(namespace);
-                }
-                if (this.hasAttributes()) {
-                    ElementImpl elem = (ElementImpl)this;
-                    NodeImpl attr = (NodeImpl)elem.getAttributeNodeNS("http://www.w3.org/2000/xmlns/", "xmlns");
-                    if (attr != null) {
-                        String value = attr.getNodeValue();
-                        if (namespaceURI == null) {
-                            return (namespace == value);
-                        }
-                        return namespaceURI.equals(value);
-                    }
-                }
-
-                NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
-                if (ancestor != null) {
-                    return ancestor.isDefaultNamespace(namespaceURI);
-                }
-                return false;
-            }
-            case Node.DOCUMENT_NODE:{
-                    return((NodeImpl)((Document)this).getDocumentElement()).isDefaultNamespace(namespaceURI);
-                }
-
-            case Node.ENTITY_NODE :
-              case Node.NOTATION_NODE:
-            case Node.DOCUMENT_FRAGMENT_NODE:
-            case Node.DOCUMENT_TYPE_NODE:
-                // type is unknown
-                return false;
-            case Node.ATTRIBUTE_NODE:{
-                    if (this.ownerNode.getNodeType() == Node.ELEMENT_NODE) {
-                        return ownerNode.isDefaultNamespace(namespaceURI);
-
-                    }
-                    return false;
-                }
-            default:{
-                    NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
-                    if (ancestor != null) {
-                        return ancestor.isDefaultNamespace(namespaceURI);
-                    }
-                    return false;
-                }
-
-            }
-    */
     return false;
   }
 
@@ -580,17 +491,6 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
     short type = this.getNodeType();
 
     switch (type) {
-        /*
-                case Node.ELEMENT_NODE: {
-
-                        String namespace = this.getNamespaceURI(); // to flip out children
-                        return lookupNamespacePrefix(namespaceURI, (ElementImpl)this);
-                    }
-
-                case Node.DOCUMENT_NODE:{
-                        return((NodeImpl)((Document)this).getDocumentElement()).lookupPrefix(namespaceURI);
-                    }
-        */
       case Node.ENTITY_NODE:
       case Node.NOTATION_NODE:
       case Node.DOCUMENT_FRAGMENT_NODE:
@@ -606,12 +506,6 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
         }
       default:
         {
-          /*
-                          NodeImpl ancestor = (NodeImpl)getElementAncestor(this);
-                          if (ancestor != null) {
-                              return ancestor.lookupPrefix(namespaceURI);
-                          }
-          */
           return null;
         }
     }

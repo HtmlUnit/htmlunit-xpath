@@ -77,14 +77,6 @@ public class ChildTestIterator extends BasicTestIterator {
               ? m_traverser.first(m_context)
               : m_traverser.next(m_context, m_lastFetched);
     }
-    //    else
-    //    {
-    //      m_lastFetched = (DTM.NULL == m_lastFetched)
-    //                   ? m_traverser.first(m_context, m_extendedTypeID)
-    //                   : m_traverser.next(m_context, m_lastFetched,
-    //                                      m_extendedTypeID);
-    //    }
-
     return m_lastFetched;
   }
 

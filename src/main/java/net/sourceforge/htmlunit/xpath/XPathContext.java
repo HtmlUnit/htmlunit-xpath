@@ -21,8 +21,10 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Stack;
+
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
+
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.objects.DTMXRTreeFrag;
 import net.sourceforge.htmlunit.xpath.objects.XString;
@@ -38,7 +40,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.IntStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
-import org.xml.sax.XMLReader;
 
 /**
  * Default class for the runtime execution context for XPath.
@@ -398,34 +399,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   public void setURIResolver(URIResolver resolver) {
     m_uriResolver = resolver;
   }
-
-  // =================================================
-
-  /** The reader of the primary source tree. */
-  public XMLReader m_primaryReader;
-
-  /**
-   * Get primary XMLReader associated with this execution context.
-   *
-   * @return The reader of the primary source tree.
-   */
-  public final XMLReader getPrimaryReader() {
-    return m_primaryReader;
-  }
-
-  /**
-   * Set primary XMLReader associated with this execution context.
-   *
-   * @param reader The reader of the primary source tree.
-   */
-  public void setPrimaryReader(XMLReader reader) {
-    m_primaryReader = reader;
-  }
-
-  // =================================================
-
-  /** Misnamed string manager for XPath messages. */
-  // private static XSLMessages m_XSLMessages = new XSLMessages();
 
   // ==========================================================
   // SECTION: Execution context state tracking
