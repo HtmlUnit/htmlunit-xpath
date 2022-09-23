@@ -294,9 +294,7 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
 
     if (null != xctxt) {
       ErrorListener eh = xctxt.getErrorListener();
-
-      // TO DO: Need to get stylesheet Locator from here.
-      eh.warning(new TransformerException(fmsg, xctxt.getSAXLocator()));
+      eh.warning(new TransformerException(fmsg));
     }
   }
 

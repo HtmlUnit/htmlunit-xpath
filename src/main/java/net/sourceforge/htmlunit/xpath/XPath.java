@@ -18,9 +18,11 @@
 package net.sourceforge.htmlunit.xpath;
 
 import java.io.Serializable;
+
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
+
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.compiler.FunctionTable;
 import net.sourceforge.htmlunit.xpath.compiler.XPathParser;
@@ -29,7 +31,6 @@ import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import net.sourceforge.htmlunit.xpath.xml.utils.SAXSourceLocator;
 
 /**
  * The XPath class wraps an expression object and provides general services for execution of that
@@ -436,9 +437,7 @@ public class XPath implements Serializable, ExpressionOwner {
     ErrorListener ehandler = xctxt.getErrorListener();
 
     if (null != ehandler) {
-
-      // TO DO: Need to get stylesheet Locator from here.
-      ehandler.warning(new TransformerException(fmsg, (SAXSourceLocator) xctxt.getSAXLocator()));
+      ehandler.warning(new TransformerException(fmsg));
     }
   }
 
@@ -478,17 +477,7 @@ public class XPath implements Serializable, ExpressionOwner {
     ErrorListener ehandler = xctxt.getErrorListener();
 
     if (null != ehandler) {
-      ehandler.fatalError(new TransformerException(fmsg, (SAXSourceLocator) xctxt.getSAXLocator()));
-    } else {
-      SourceLocator slocator = xctxt.getSAXLocator();
-      System.out.println(
-          fmsg
-              + "; file "
-              + slocator.getSystemId()
-              + "; line "
-              + slocator.getLineNumber()
-              + "; column "
-              + slocator.getColumnNumber());
+      ehandler.fatalError(new TransformerException(fmsg));
     }
   }
 

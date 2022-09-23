@@ -161,6 +161,46 @@ public class XPathTest {
 
   /** @throws Exception in case of problems */
   @Test
+  public void orSearch() throws Exception {
+    final String input = "<root><p a='1'/><p b='2'/><p/><p/></root>";
+
+    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    final DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
+
+    List<?> hits = XPathHelper.getByXPath(doc, "//p[@a=1 or @b=2]", null, false);
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void modSearch() throws Exception {
+    final String input = "<root><p a='1'/><p a='2'/><p a='3'/><p a='4'/></root>";
+
+    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    final DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
+
+    List<?> hits = XPathHelper.getByXPath(doc, "//p[@a mod 2 = 0]", null, false);
+    assertEquals(2, hits.size());
+  }
+
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void numberSearch() throws Exception {
+    final String input = "<root><p a='1'/><p a='2'/><p a='3'/><p a='4'/></root>";
+
+    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    final DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
+
+    List<?> hits = XPathHelper.getByXPath(doc, "//p[@a=number('  4\t')]", null, false);
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
   public void attributeSearch() throws Exception {
     final String input = "<root><p/><p name='test'/><p/><p/></root>";
 

@@ -21,9 +21,12 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Stack;
+
 import javax.xml.transform.ErrorListener;
-import javax.xml.transform.SourceLocator;
 import javax.xml.transform.URIResolver;
+
+import org.xml.sax.XMLReader;
+
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.objects.DTMXRTreeFrag;
 import net.sourceforge.htmlunit.xpath.objects.XString;
@@ -37,10 +40,8 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
 import net.sourceforge.htmlunit.xpath.xml.utils.IntStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
-import net.sourceforge.htmlunit.xpath.xml.utils.ObjectStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
-import org.xml.sax.XMLReader;
 
 /**
  * Default class for the runtime execution context for XPath.
@@ -253,7 +254,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     m_prefixResolvers.push(null);
     m_currentNodes.push(DTM.NULL);
     m_currentExpressionNodes.push(DTM.NULL);
-    m_saxLocations.push(null);
   }
 
   /**
@@ -292,7 +292,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
         DTMManager.newInstance(
             net.sourceforge.htmlunit.xpath.objects.XMLStringFactoryImpl.getFactory());
 
-    m_saxLocations.removeAllElements();
     m_axesIteratorStack.removeAllElements();
     m_contextNodeLists.removeAllElements();
     m_currentExpressionNodes.removeAllElements();
@@ -305,47 +304,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     m_prefixResolvers.push(null);
     m_currentNodes.push(DTM.NULL);
     m_currentExpressionNodes.push(DTM.NULL);
-    m_saxLocations.push(null);
-  }
-
-  /** The current stylesheet locator. */
-  ObjectStack m_saxLocations = new ObjectStack(RECURSIONLIMIT);
-
-  /**
-   * Set the current locater in the stylesheet.
-   *
-   * @param location The location within the stylesheet.
-   */
-  public void setSAXLocator(SourceLocator location) {
-    m_saxLocations.setTop(location);
-  }
-
-  /**
-   * Set the current locater in the stylesheet.
-   *
-   * @param location The location within the stylesheet.
-   */
-  public void pushSAXLocator(SourceLocator location) {
-    m_saxLocations.push(location);
-  }
-
-  /** Push a slot on the locations stack so that setSAXLocator can be repeatedly called. */
-  public void pushSAXLocatorNull() {
-    m_saxLocations.push(null);
-  }
-
-  /** Pop the current locater. */
-  public void popSAXLocator() {
-    m_saxLocations.pop();
-  }
-
-  /**
-   * Get the current locater in the stylesheet.
-   *
-   * @return The location within the stylesheet, or null if not known.
-   */
-  public SourceLocator getSAXLocator() {
-    return (SourceLocator) m_saxLocations.peek();
   }
 
   /**
@@ -685,7 +643,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     m_currentExpressionNodes.quickPop(1);
   }
 
-  private ObjectStack m_prefixResolvers = new ObjectStack(RECURSIONLIMIT);
+  private Stack<PrefixResolver> m_prefixResolvers = new Stack<>();
 
   /**
    * Get the current namespace context for the xpath.
@@ -702,7 +660,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * @param pr the prefix resolver to be used for resolving prefixes to namespace URLs.
    */
   public final void setNamespaceContext(PrefixResolver pr) {
-    m_prefixResolvers.setTop(pr);
+    m_prefixResolvers.pop();
+    m_prefixResolvers.push(pr);
   }
 
   /**
