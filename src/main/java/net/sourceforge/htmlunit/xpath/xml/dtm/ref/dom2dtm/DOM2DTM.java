@@ -1287,88 +1287,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return false;
   }
 
-  /**
-   * getContentHandler returns "our SAX builder" -- the thing that someone else should send SAX
-   * events to in order to extend this DTM model.
-   *
-   * @return null if this model doesn't respond to SAX events, "this" if the DTM object has a
-   *     built-in SAX ContentHandler, the IncrmentalSAXSource if we're bound to one and should
-   *     receive the SAX stream via it for incremental build purposes...
-   */
-  @Override
-  public org.xml.sax.ContentHandler getContentHandler() {
-    return null;
-  }
-
-  /**
-   * Return this DTM's lexical handler.
-   *
-   * <p>%REVIEW% Should this return null if constrution already done/begun?
-   *
-   * @return null if this model doesn't respond to lexical SAX events, "this" if the DTM object has
-   *     a built-in SAX ContentHandler, the IncrementalSAXSource if we're bound to one and should
-   *     receive the SAX stream via it for incremental build purposes...
-   */
-  @Override
-  public org.xml.sax.ext.LexicalHandler getLexicalHandler() {
-
-    return null;
-  }
-
-  /**
-   * Return this DTM's EntityResolver.
-   *
-   * @return null if this model doesn't respond to SAX entity ref events.
-   */
-  @Override
-  public org.xml.sax.EntityResolver getEntityResolver() {
-
-    return null;
-  }
-
-  /**
-   * Return this DTM's DTDHandler.
-   *
-   * @return null if this model doesn't respond to SAX dtd events.
-   */
-  @Override
-  public org.xml.sax.DTDHandler getDTDHandler() {
-
-    return null;
-  }
-
-  /**
-   * Return this DTM's ErrorHandler.
-   *
-   * @return null if this model doesn't respond to SAX error events.
-   */
-  @Override
-  public org.xml.sax.ErrorHandler getErrorHandler() {
-
-    return null;
-  }
-
-  /**
-   * Return this DTM's DeclHandler.
-   *
-   * @return null if this model doesn't respond to SAX Decl events.
-   */
-  @Override
-  public org.xml.sax.ext.DeclHandler getDeclHandler() {
-
-    return null;
-  }
-
-  /**
-   * @return true iff we're building this model incrementally (eg we're partnered with a
-   *     IncrementalSAXSource) and thus require that the transformation and the parse run
-   *     simultaneously. Guidance to the DTMManager.
-   */
-  @Override
-  public boolean needsTwoThreads() {
-    return false;
-  }
-
   // ========== Direct SAX Dispatch, for optimization purposes ========
 
   /**
@@ -1487,15 +1405,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   public interface CharacterNodeHandler {
     public void characters(Node node) throws org.xml.sax.SAXException;
   }
-
-  /**
-   * For the moment all the run time properties are ignored by this class.
-   *
-   * @param property a <code>String</code> value
-   * @param value an <code>Object</code> value
-   */
-  @Override
-  public void setProperty(String property, Object value) {}
 
   /**
    * No source information is available for DOM2DTM, so return <code>null</code> here.

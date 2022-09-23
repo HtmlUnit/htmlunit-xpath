@@ -141,7 +141,6 @@ public class DTMManagerDefault extends DTMManager {
 
     m_dtms[id] = dtm;
     m_dtm_offsets[id] = offset;
-    dtm.documentRegistration();
     // The DTM should have been told who its manager was when we created it.
     // Do we need to allow for adopting DTMs _not_ created by this manager?
   }
@@ -412,7 +411,6 @@ public class DTMManagerDefault extends DTMManager {
       }
     }
 
-    dtm.documentRelease();
     return true;
   }
 

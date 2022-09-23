@@ -753,19 +753,6 @@ public abstract class DTMDefaultBase implements DTM {
     return sb.toString();
   }
 
-  // ========= DTM Implementation Control Functions. ==============
-
-  /**
-   * Set an implementation dependent feature.
-   *
-   * <p>%REVIEW% Do we really expect to set features on DTMs?
-   *
-   * @param featureId A feature URL.
-   * @param state true if this feature should be on, false otherwise.
-   */
-  @Override
-  public void setFeature(String featureId, boolean state) {}
-
   // ========= Document Navigation Functions =========
 
   /**
@@ -1676,24 +1663,6 @@ public abstract class DTMDefaultBase implements DTM {
   // ============== Document query functions ==============
 
   /**
-   * Tests whether DTM DOM implementation implements a specific feature and that feature is
-   * supported by this node.
-   *
-   * @param feature The name of the feature to test.
-   * @param version This is the version number of the feature to test. If the version is not
-   *     specified, supporting any version of the feature will cause the method to return <code>
-   *     true</code>.
-   * @return Returns <code>true</code> if the specified feature is supported on this node, <code>
-   *     false</code> otherwise.
-   */
-  @Override
-  public boolean isSupported(String feature, String version) {
-
-    // %TBD%
-    return false;
-  }
-
-  /**
    * Return the base URI of the document entity. If it is not known (because the document was parsed
    * from a socket connection or from standard input, for example), the value of this property is
    * unknown.
@@ -1741,33 +1710,6 @@ public abstract class DTMDefaultBase implements DTM {
 
     // %REVIEW%  OK??  -sb
     return "UTF-8";
-  }
-
-  /**
-   * Return an indication of the standalone status of the document, either "yes" or "no". This
-   * property is derived from the optional standalone document declaration in the XML declaration at
-   * the beginning of the document entity, and has no value if there is no standalone document
-   * declaration.
-   *
-   * @param nodeHandle The node id, which can be any valid node handle.
-   * @return the document standalone String object, either "yes", "no", or null.
-   */
-  @Override
-  public String getDocumentStandalone(int nodeHandle) {
-    return null;
-  }
-
-  /**
-   * Return a string representing the XML version of the document. This property is derived from the
-   * XML declaration optionally present at the beginning of the document entity, and has no value if
-   * there is no XML declaration.
-   *
-   * @param documentHandle The document handle
-   * @return the document version String object.
-   */
-  @Override
-  public String getDocumentVersion(int documentHandle) {
-    return null;
   }
 
   /**
@@ -1884,26 +1826,6 @@ public abstract class DTMDefaultBase implements DTM {
     int index2 = makeNodeIdentity(nodeHandle2);
 
     return index1 != NULL && index2 != NULL && index1 <= index2;
-  }
-
-  /**
-   * 2. [element content whitespace] A boolean indicating whether the character is white space
-   * appearing within element content (see [XML], 2.10 "White Space Handling"). Note that validating
-   * XML processors are required by XML 1.0 to provide this information. If there is no declaration
-   * for the containing element, this property has no value for white space characters. If no
-   * declaration has been read, but the [all declarations processed] property of the document
-   * information item is false (so there may be an unread declaration), then the value of this
-   * property is unknown for white space characters. It is always false for characters that are not
-   * white space.
-   *
-   * @param nodeHandle the node ID.
-   * @return <code>true</code> if the character data is whitespace; <code>false</code> otherwise.
-   */
-  @Override
-  public boolean isCharacterElementContentWhitespace(int nodeHandle) {
-
-    // %TBD%
-    return false;
   }
 
   /**
@@ -2058,21 +1980,6 @@ public abstract class DTMDefaultBase implements DTM {
 
     if (null != m_shouldStripWhitespaceStack) m_shouldStripWhitespaceStack.setTop(shouldStrip);
   }
-
-  /**
-   * A dummy routine to satisify the abstract interface. If the DTM implememtation that extends the
-   * default base requires notification of registration, they can override this method.
-   */
-  @Override
-  public void documentRegistration() {}
-
-  /**
-   * A dummy routine to satisify the abstract interface. If the DTM implememtation that extends the
-   * default base requires notification when the document is being released, they can override this
-   * method
-   */
-  @Override
-  public void documentRelease() {}
 
   /**
    * Migrate a DTM built with an old DTMManager to a new DTMManager. After the migration, the new

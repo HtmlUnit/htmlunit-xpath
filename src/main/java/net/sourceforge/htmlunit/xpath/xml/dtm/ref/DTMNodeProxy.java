@@ -1796,15 +1796,6 @@ public class DTMNodeProxy
     return false;
   }
 
-  /**
-   * NON-DOM: set the type of this attribute to be ID type.
-   *
-   * @param id
-   */
-  public void setIdAttribute(boolean id) {
-    // PENDING
-  }
-
   /** DOM Level 3: register the given attribute node as an ID attribute */
   @Override
   public void setIdAttribute(String name, boolean makeId) {

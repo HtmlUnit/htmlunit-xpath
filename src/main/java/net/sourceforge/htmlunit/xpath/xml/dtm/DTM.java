@@ -119,28 +119,6 @@ public interface DTM {
   /** The number of valid nodetypes. */
   public static final short NTYPES = 14;
 
-  // ========= DTM Implementation Control Functions. ==============
-  // %TBD% RETIRED -- do via setFeature if needed. Remove from impls.
-  // public void setParseBlockSize(int blockSizeSuggestion);
-
-  /**
-   * Set an implementation dependent feature.
-   *
-   * <p>%REVIEW% Do we really expect to set features on DTMs?
-   *
-   * @param featureId A feature URL.
-   * @param state true if this feature should be on, false otherwise.
-   */
-  public void setFeature(String featureId, boolean state);
-
-  /**
-   * Set a run time property for this DTM instance.
-   *
-   * @param property a <code>String</code> value
-   * @param value an <code>Object</code> value
-   */
-  public void setProperty(String property, Object value);
-
   // ========= Document Navigation Functions =========
 
   /**
@@ -459,19 +437,6 @@ public interface DTM {
   // ============== Document query functions ==============
 
   /**
-   * Tests whether DTM DOM implementation implements a specific feature and that feature is
-   * supported by this node.
-   *
-   * @param feature The name of the feature to test.
-   * @param version This is the version number of the feature to test. If the version is not
-   *     specified, supporting any version of the feature will cause the method to return <code>
-   *     true</code>.
-   * @return Returns <code>true</code> if the specified feature is supported on this node, <code>
-   *     false</code> otherwise.
-   */
-  public boolean isSupported(String feature, String version);
-
-  /**
    * Return the base URI of the document entity. If it is not known (because the document was parsed
    * from a socket connection or from standard input, for example), the value of this property is
    * unknown.
@@ -503,27 +468,6 @@ public interface DTM {
    * @return the document encoding String object.
    */
   public String getDocumentEncoding(int nodeHandle);
-
-  /**
-   * Return an indication of the standalone status of the document, either "yes" or "no". This
-   * property is derived from the optional standalone document declaration in the XML declaration at
-   * the beginning of the document entity, and has no value if there is no standalone document
-   * declaration.
-   *
-   * @param nodeHandle The node id, which can be any valid node handle.
-   * @return the document standalone String object, either "yes", "no", or null.
-   */
-  public String getDocumentStandalone(int nodeHandle);
-
-  /**
-   * Return a string representing the XML version of the document. This property is derived from the
-   * XML declaration optionally present at the beginning of the document entity, and has no value if
-   * there is no XML declaration.
-   *
-   * @param documentHandle the document handle
-   * @return the document version String object
-   */
-  public String getDocumentVersion(int documentHandle);
 
   /**
    * Return an indication of whether the processor has read the complete DTD. Its value is a
@@ -629,30 +573,6 @@ public interface DTM {
   public boolean isNodeAfter(int firstNodeHandle, int secondNodeHandle);
 
   /**
-   * 2. [element content whitespace] A boolean indicating whether a text node represents white space
-   * appearing within element content (see [XML], 2.10 "White Space Handling"). Note that validating
-   * XML processors are required by XML 1.0 to provide this information... but that DOM Level 2 did
-   * not support it, since it depends on knowledge of the DTD which DOM2 could not guarantee would
-   * be available.
-   *
-   * <p>If there is no declaration for the containing element, an XML processor must assume that the
-   * whitespace could be meaningful and return false. If no declaration has been read, but the [all
-   * declarations processed] property of the document information item is false (so there may be an
-   * unread declaration), then the value of this property is indeterminate for white space
-   * characters and should probably be reported as false. It is always false for text nodes that
-   * contain anything other than (or in addition to) white space.
-   *
-   * <p>Note too that it always returns false for non-Text nodes.
-   *
-   * <p>%REVIEW% Joe wants to rename this isWhitespaceInElementContent() for clarity
-   *
-   * @param nodeHandle the node ID.
-   * @return <code>true</code> if the node definitely represents whitespace in element content;
-   *     <code>false</code> otherwise.
-   */
-  public boolean isCharacterElementContentWhitespace(int nodeHandle);
-
-  /**
    * 10. [all declarations processed] This property is not strictly speaking part of the infoset of
    * the document. Rather it is an indication of whether the processor has read the complete DTD.
    * Its value is a boolean. If it is false, then certain properties (indicated in their
@@ -711,64 +631,6 @@ public interface DTM {
   public org.w3c.dom.Node getNode(int nodeHandle);
 
   // ==== Construction methods (may not be supported by some implementations!) =====
-  // %REVIEW% What response occurs if not supported?
-
-  /**
-   * @return true iff we're building this model incrementally (eg we're partnered with a
-   *     CoroutineParser) and thus require that the transformation and the parse run simultaneously.
-   *     Guidance to the DTMManager.
-   */
-  public boolean needsTwoThreads();
-
-  // %REVIEW% Do these appends make any sense, should we support a
-  // wider set of methods (like the "append" methods in the
-  // current DTMDocumentImpl draft), or should we just support SAX
-  // listener interfaces?  Should it be a separate interface to
-  // make that distinction explicit?
-
-  /**
-   * Return this DTM's content handler, if it has one.
-   *
-   * @return null if this model doesn't respond to SAX events.
-   */
-  public org.xml.sax.ContentHandler getContentHandler();
-
-  /**
-   * Return this DTM's lexical handler, if it has one.
-   *
-   * <p>%REVIEW% Should this return null if constrution already done/begun?
-   *
-   * @return null if this model doesn't respond to lexical SAX events.
-   */
-  public org.xml.sax.ext.LexicalHandler getLexicalHandler();
-
-  /**
-   * Return this DTM's EntityResolver, if it has one.
-   *
-   * @return null if this model doesn't respond to SAX entity ref events.
-   */
-  public org.xml.sax.EntityResolver getEntityResolver();
-
-  /**
-   * Return this DTM's DTDHandler, if it has one.
-   *
-   * @return null if this model doesn't respond to SAX dtd events.
-   */
-  public org.xml.sax.DTDHandler getDTDHandler();
-
-  /**
-   * Return this DTM's ErrorHandler, if it has one.
-   *
-   * @return null if this model doesn't respond to SAX error events.
-   */
-  public org.xml.sax.ErrorHandler getErrorHandler();
-
-  /**
-   * Return this DTM's DeclHandler, if it has one.
-   *
-   * @return null if this model doesn't respond to SAX Decl events.
-   */
-  public org.xml.sax.ext.DeclHandler getDeclHandler();
 
   /**
    * Append a child to "the end of the document". Please note that the node is always cloned in a
@@ -802,19 +664,6 @@ public interface DTM {
    * @return a <code>SourceLocator</code> value or null if no location is available
    */
   public SourceLocator getSourceLocatorFor(int node);
-
-  /**
-   * As the DTM is registered with the DTMManager, this method will be called. This will give the
-   * DTM implementation a chance to initialize any subsystems that are required to build the DTM
-   */
-  public void documentRegistration();
-
-  /**
-   * As documents are released from the DTMManager, the DTM implementation will be notified of the
-   * event. This will allow the DTM implementation to shutdown any subsystem activity that may of
-   * been assoiated with the active DTM Implementation.
-   */
-  public void documentRelease();
 
   /**
    * Migrate a DTM built with an old DTMManager to a new DTMManager. After the migration, the new

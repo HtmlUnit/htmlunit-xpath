@@ -160,21 +160,6 @@ public class NodeSetDTM extends NodeVector
   }
 
   /**
-   * Set the environment in which this iterator operates, which should provide: a node (the context
-   * node... same value as "root" defined below) a pair of non-zero positive integers (the context
-   * position and the context size) a set of variable bindings a function library the set of
-   * namespace declarations in scope for the expression.
-   *
-   * <p>At this time the exact implementation of this environment is application dependent. Probably
-   * a proper interface will be created fairly soon.
-   *
-   * @param environment The environment object.
-   */
-  public void setEnvironment(Object environment) {
-    // no-op
-  }
-
-  /**
    * @return The root node of the Iterator, as specified when it was created. For non-Iterator
    *     NodeSetDTMs, this will be null.
    */
@@ -792,16 +777,6 @@ public class NodeSetDTM extends NodeVector
 
     return addNodeInDocOrder(node, true, support);
   } // end addNodeInDocOrder(Vector v, Object obj)
-
-  /**
-   * Get the length of the list.
-   *
-   * @return The size of this node set.
-   */
-  @Override
-  public int size() {
-    return super.size();
-  }
 
   /**
    * Append a Node onto the vector.

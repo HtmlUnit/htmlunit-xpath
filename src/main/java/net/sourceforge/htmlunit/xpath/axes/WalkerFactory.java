@@ -1040,7 +1040,7 @@ public class WalkerFactory {
       case OpCodes.OP_GROUP:
         if (DEBUG_WALKER_CREATION)
           System.out.println(
-              "new walker:  FilterExprWalker: " + analysis + ", " + compiler.toString());
+              "new walker:  FilterExprWalker: " + analysis + ", " + compiler);
 
         ai = new FilterExprWalker(lpi);
         simpleInit = true;

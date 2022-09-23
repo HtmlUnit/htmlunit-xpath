@@ -153,7 +153,6 @@ public class Arg {
   public Arg() {
 
     m_qname = new QName("");
-    ; // so that string compares can be done.
     m_val = null;
     m_expression = null;
     m_isVisible = true;

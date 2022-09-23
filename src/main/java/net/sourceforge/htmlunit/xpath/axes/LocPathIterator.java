@@ -120,21 +120,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   }
 
   /**
-   * Set the environment in which this iterator operates, which should provide: a node (the context
-   * node... same value as "root" defined below) a pair of non-zero positive integers (the context
-   * position and the context size) a set of variable bindings a function library the set of
-   * namespace declarations in scope for the expression.
-   *
-   * <p>At this time the exact implementation of this environment is application dependent. Probably
-   * a proper interface will be created fairly soon.
-   *
-   * @param environment The environment object.
-   */
-  public void setEnvironment(Object environment) {
-    // no-op for now.
-  }
-
-  /**
    * Get an instance of a DTM that "owns" a node handle. Since a node iterator may be passed without
    * a DTMManager, this allows the caller to easily get the DTM using just the iterator.
    *

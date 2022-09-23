@@ -302,8 +302,6 @@ public class XNodeSet extends NodeSequence {
     return this;
   }
 
-  public void release(DTMIterator iter) {}
-
   /**
    * Cast result object to a nodelist.
    *
