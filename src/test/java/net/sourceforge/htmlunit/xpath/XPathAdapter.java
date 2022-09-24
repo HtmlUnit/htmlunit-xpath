@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath;
 
 import javax.xml.transform.ErrorListener;
-import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.compiler.FunctionTable;
@@ -59,7 +58,6 @@ class XPathAdapter {
    */
   XPathAdapter(
       final String exprString,
-      final SourceLocator locator,
       final PrefixResolver prefixResolver,
       final ErrorListener errorListener,
       final boolean caseSensitive)
@@ -71,17 +69,13 @@ class XPathAdapter {
     if (errListener == null) {
       errListener = new DefaultErrorHandler();
     }
-    final XPathParser parser = new XPathParser(errListener, locator);
-    final Compiler compiler = new Compiler(errorListener, locator, funcTable_);
+    final XPathParser parser = new XPathParser(errListener);
+    final Compiler compiler = new Compiler(errorListener, funcTable_);
 
     parser.initXPath(compiler, exprString, prefixResolver);
 
     final Expression expr = compiler.compile(0);
     mainExp_ = expr;
-
-    if (locator instanceof ExpressionNode) {
-      expr.exprSetParent((ExpressionNode) locator);
-    }
   }
 
   /**

@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath;
 
 import javax.xml.transform.TransformerException;
-import org.w3c.dom.Node;
 
 /**
  * This class implements an exception object that all XPath classes will throw in case of an error.
@@ -30,31 +29,6 @@ import org.w3c.dom.Node;
  */
 public class XPathException extends TransformerException {
   static final long serialVersionUID = 4263549717619045963L;
-
-  /**
-   * The home of the expression that caused the error.
-   *
-   * @serial
-   */
-  Object m_styleNode = null;
-
-  /**
-   * Get the stylesheet node from where this error originated.
-   *
-   * @return The stylesheet node from where this error originated, or null.
-   */
-  public Object getStylesheetNode() {
-    return m_styleNode;
-  }
-
-  /**
-   * Set the stylesheet node from where this error originated.
-   *
-   * @param styleNode The stylesheet node from where this error originated, or null.
-   */
-  public void setStylesheetNode(Object styleNode) {
-    m_styleNode = styleNode;
-  }
 
   /**
    * A nested exception.
@@ -71,7 +45,6 @@ public class XPathException extends TransformerException {
   public XPathException(String message, ExpressionNode ex) {
     super(message);
     this.setLocator(ex);
-    setStylesheetNode(getStylesheetNode(ex));
   }
 
   /**
@@ -84,22 +57,6 @@ public class XPathException extends TransformerException {
   }
 
   /**
-   * Get the XSLT ElemVariable that this sub-expression references. In order for this to work, the
-   * SourceLocator must be the owning ElemTemplateElement.
-   *
-   * @return The dereference to the ElemVariable, or null if not found.
-   */
-  public org.w3c.dom.Node getStylesheetNode(ExpressionNode ex) {
-
-    ExpressionNode owner = getExpressionOwner(ex);
-
-    if (null != owner && owner instanceof org.w3c.dom.Node) {
-      return (org.w3c.dom.Node) owner;
-    }
-    return null;
-  }
-
-  /**
    * Get the first non-Expression parent of this node.
    *
    * @return null or first ancestor that is not an Expression.
@@ -108,36 +65,6 @@ public class XPathException extends TransformerException {
     ExpressionNode parent = ex.exprGetParent();
     while ((null != parent) && (parent instanceof Expression)) parent = parent.exprGetParent();
     return parent;
-  }
-
-  /**
-   * Create an XPathException object that holds an error message and the stylesheet node that the
-   * error originated from.
-   *
-   * @param message The error message.
-   * @param styleNode The stylesheet node that the error originated from.
-   */
-  public XPathException(String message, Object styleNode) {
-
-    super(message);
-
-    m_styleNode = styleNode;
-  }
-
-  /**
-   * Create an XPathException object that holds an error message, the stylesheet node that the error
-   * originated from, and another exception that caused this exception.
-   *
-   * @param message The error message.
-   * @param styleNode The stylesheet node that the error originated from.
-   * @param e The exception that caused this exception.
-   */
-  public XPathException(String message, Node styleNode, Exception e) {
-
-    super(message);
-
-    m_styleNode = styleNode;
-    this.m_exception = e;
   }
 
   /**

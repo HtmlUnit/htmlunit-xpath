@@ -104,7 +104,7 @@ public final class XPathHelper {
       throws TransformerException {
     final XPathContext xpathSupport = new XPathContext();
 
-    final XPathAdapter xpath = new XPathAdapter(str, null, prefixResolver, null, caseSensitive);
+    final XPathAdapter xpath = new XPathAdapter(str, prefixResolver, null, caseSensitive);
     final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
     return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
   }

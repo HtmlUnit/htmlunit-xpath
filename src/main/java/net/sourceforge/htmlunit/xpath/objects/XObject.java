@@ -107,31 +107,6 @@ public class XObject extends Expression implements Serializable, Cloneable {
   /** Reset for fresh reuse. */
   public void reset() {}
 
-  /**
-   * Create the right XObject based on the type of the object passed. This function can not make an
-   * XObject that exposes DOM Nodes, NodeLists, and NodeIterators to the XSLT stylesheet as
-   * node-sets.
-   *
-   * @param val The java object which this object will wrap.
-   * @return the right XObject based on the type of the object passed.
-   */
-  public static XObject create(Object val) {
-    return XObjectFactory.create(val);
-  }
-
-  /**
-   * Create the right XObject based on the type of the object passed. This function <emph>can</emph>
-   * make an XObject that exposes DOM Nodes, NodeLists, and NodeIterators to the XSLT stylesheet as
-   * node-sets.
-   *
-   * @param val The java object which this object will wrap.
-   * @param xctxt The XPath context.
-   * @return the right XObject based on the type of the object passed.
-   */
-  public static XObject create(Object val, XPathContext xctxt) {
-    return XObjectFactory.create(val, xctxt);
-  }
-
   /** Constant for NULL object type */
   public static final int CLASS_NULL = -1;
 

@@ -204,7 +204,7 @@ public class XPathAPI {
                 : namespaceNode);
 
     // Create the XPath object.
-    XPath xpath = new XPath(str, null, prefixResolver, XPath.SELECT, null);
+    XPath xpath = new XPath(str, prefixResolver, XPath.SELECT, null);
 
     // Execute the XPath, and have it return the result
     // return xpath.execute(xpathSupport, contextNode, prefixResolver);
@@ -242,7 +242,7 @@ public class XPathAPI {
     //    because XPathContext is weak in a number of areas... perhaps
     //    XPathContext should be done away with.)
     // Create the XPath object.
-    XPath xpath = new XPath(str, null, prefixResolver, XPath.SELECT, null);
+    XPath xpath = new XPath(str, prefixResolver, XPath.SELECT, null);
 
     // Create an XPathContext that doesn't support pushing and popping of
     // variable resolution scopes.  Sufficient for simple XPath 1.0 expressions.

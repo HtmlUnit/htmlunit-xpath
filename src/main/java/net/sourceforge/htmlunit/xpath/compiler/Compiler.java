@@ -18,8 +18,8 @@
 package net.sourceforge.htmlunit.xpath.compiler;
 
 import javax.xml.transform.ErrorListener;
-import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
+
 import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.axes.UnionPathIterator;
 import net.sourceforge.htmlunit.xpath.axes.WalkerFactory;
@@ -53,7 +53,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import net.sourceforge.htmlunit.xpath.xml.utils.SAXSourceLocator;
 
 /**
  * An instance of this class compiles an XPath string expression into a Expression object. This
@@ -70,20 +69,16 @@ public class Compiler extends OpMap {
    *
    * @param errorHandler Error listener where messages will be sent, or null if messages should be
    *     sent to System err.
-   * @param locator The location object where the expression lives, which may be null, but which, if
-   *     not null, must be valid over the long haul, in other words, it will not be cloned.
    * @param fTable The FunctionTable object where the xpath build-in functions are stored.
    */
-  public Compiler(ErrorListener errorHandler, SourceLocator locator, FunctionTable fTable) {
+  public Compiler(ErrorListener errorHandler, FunctionTable fTable) {
     m_errorHandler = errorHandler;
-    m_locator = locator;
     m_functionTable = fTable;
   }
 
   /** Construct a Compiler instance that has a null error listener and a null source locator. */
   public Compiler() {
     m_errorHandler = null;
-    m_locator = null;
   }
 
   /**
@@ -942,8 +937,7 @@ public class Compiler extends OpMap {
         m_errorHandler.fatalError(
             new TransformerException(
                 XSLMessages.createXPATHMessage(
-                    XPATHErrorResources.ER_ONLY_ALLOWS, new Object[] {name, wnae.getMessage()}),
-                m_locator));
+                    XPATHErrorResources.ER_ONLY_ALLOWS, new Object[] {name, wnae.getMessage()})));
         // "name + " only allows " + wnae.getMessage() + " arguments", m_locator));
       }
 
@@ -969,16 +963,9 @@ public class Compiler extends OpMap {
     java.lang.String fmsg = XSLMessages.createXPATHWarning(msg, args);
 
     if (null != m_errorHandler) {
-      m_errorHandler.warning(new TransformerException(fmsg, m_locator));
+      m_errorHandler.warning(new TransformerException(fmsg));
     } else {
-      System.out.println(
-          fmsg
-              + "; file "
-              + m_locator.getSystemId()
-              + "; line "
-              + m_locator.getLineNumber()
-              + "; column "
-              + m_locator.getColumnNumber());
+      System.out.println(fmsg);
     }
   }
 
@@ -1015,14 +1002,9 @@ public class Compiler extends OpMap {
     java.lang.String fmsg = XSLMessages.createXPATHMessage(msg, args);
 
     if (null != m_errorHandler) {
-      m_errorHandler.fatalError(new TransformerException(fmsg, m_locator));
+      m_errorHandler.fatalError(new TransformerException(fmsg));
     } else {
-
-      // System.out.println(te.getMessage()
-      //                    +"; file "+te.getSystemId()
-      //                    +"; line "+te.getLineNumber()
-      //                    +"; column "+te.getColumnNumber());
-      throw new TransformerException(fmsg, (SAXSourceLocator) m_locator);
+      throw new TransformerException(fmsg);
     }
   }
 
@@ -1052,9 +1034,6 @@ public class Compiler extends OpMap {
    * to System.err. May be null.
    */
   ErrorListener m_errorHandler;
-
-  /** The source locator for the expression being compiled. May be null. */
-  SourceLocator m_locator;
 
   /** The FunctionTable for all xpath build-in functions */
   private FunctionTable m_functionTable;

@@ -121,7 +121,6 @@ public class XPath implements Serializable, ExpressionOwner {
    */
   public XPath(
       String exprString,
-      SourceLocator locator,
       PrefixResolver prefixResolver,
       int type,
       ErrorListener errorListener)
@@ -132,8 +131,8 @@ public class XPath implements Serializable, ExpressionOwner {
 
     m_patternString = exprString;
 
-    XPathParser parser = new XPathParser(errorListener, locator);
-    Compiler compiler = new Compiler(errorListener, locator, m_funcTable);
+    XPathParser parser = new XPathParser(errorListener);
+    Compiler compiler = new Compiler(errorListener, m_funcTable);
 
     if (SELECT == type) parser.initXPath(compiler, exprString, prefixResolver);
     else if (MATCH == type) parser.initMatchPattern(compiler, exprString, prefixResolver);
@@ -148,10 +147,6 @@ public class XPath implements Serializable, ExpressionOwner {
 
     // System.out.println("expr: "+expr);
     this.setExpression(expr);
-
-    if ((null != locator) && locator instanceof ExpressionNode) {
-      expr.exprSetParent((ExpressionNode) locator);
-    }
   }
 
   /**
@@ -161,7 +156,6 @@ public class XPath implements Serializable, ExpressionOwner {
    * expression.
    *
    * @param exprString The XPath expression.
-   * @param locator The location of the expression, may be null.
    * @param prefixResolver A prefix resolver to use to resolve prefixes to namespace URIs.
    * @param type one of {@link #SELECT} or {@link #MATCH}.
    * @param errorListener The error listener, or null if default should be used.
@@ -169,7 +163,6 @@ public class XPath implements Serializable, ExpressionOwner {
    */
   public XPath(
       String exprString,
-      SourceLocator locator,
       PrefixResolver prefixResolver,
       int type,
       ErrorListener errorListener,
@@ -181,8 +174,8 @@ public class XPath implements Serializable, ExpressionOwner {
 
     m_patternString = exprString;
 
-    XPathParser parser = new XPathParser(errorListener, locator);
-    Compiler compiler = new Compiler(errorListener, locator, m_funcTable);
+    XPathParser parser = new XPathParser(errorListener);
+    Compiler compiler = new Compiler(errorListener, m_funcTable);
 
     if (SELECT == type) parser.initXPath(compiler, exprString, prefixResolver);
     else if (MATCH == type) parser.initMatchPattern(compiler, exprString, prefixResolver);
@@ -198,10 +191,6 @@ public class XPath implements Serializable, ExpressionOwner {
 
     // System.out.println("expr: "+expr);
     this.setExpression(expr);
-
-    if ((null != locator) && locator instanceof ExpressionNode) {
-      expr.exprSetParent((ExpressionNode) locator);
-    }
   }
 
   /**
@@ -211,14 +200,13 @@ public class XPath implements Serializable, ExpressionOwner {
    * expression.
    *
    * @param exprString The XPath expression.
-   * @param locator The location of the expression, may be null.
    * @param prefixResolver A prefix resolver to use to resolve prefixes to namespace URIs.
    * @param type one of {@link #SELECT} or {@link #MATCH}.
    * @throws javax.xml.transform.TransformerException if syntax or other error.
    */
-  public XPath(String exprString, SourceLocator locator, PrefixResolver prefixResolver, int type)
+  public XPath(String exprString, PrefixResolver prefixResolver, int type)
       throws javax.xml.transform.TransformerException {
-    this(exprString, locator, prefixResolver, type, null);
+    this(exprString, prefixResolver, type, null);
   }
 
   /**

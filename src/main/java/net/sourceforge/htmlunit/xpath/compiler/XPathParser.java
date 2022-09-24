@@ -60,9 +60,8 @@ public class XPathParser {
   protected static final int FILTER_MATCH_PREDICATES = 2;
 
   /** The parser constructor. */
-  public XPathParser(ErrorListener errorListener, javax.xml.transform.SourceLocator sourceLocator) {
+  public XPathParser(ErrorListener errorListener) {
     m_errorListener = errorListener;
-    m_sourceLocator = sourceLocator;
   }
 
   /** The prefix resolver to map prefixes to namespaces in the OpMap. */
@@ -184,9 +183,6 @@ public class XPathParser {
 
   /** The error listener where syntax errors are to be sent. */
   private ErrorListener m_errorListener;
-
-  /** The source location of the XPath. */
-  javax.xml.transform.SourceLocator m_sourceLocator;
 
   /** The table contains build-in functions and customized functions */
   private FunctionTable m_functionTable;
@@ -328,8 +324,7 @@ public class XPathParser {
     ErrorListener ehandler = this.getErrorListener();
 
     if (null != ehandler) {
-      // TO DO: Need to get stylesheet Locator from here.
-      ehandler.warning(new TransformerException(fmsg, m_sourceLocator));
+      ehandler.warning(new TransformerException(fmsg));
     } else {
       // Should never happen.
       System.err.println(fmsg);
@@ -350,12 +345,10 @@ public class XPathParser {
     String fmsg = XSLMessages.createXPATHMessage(msg, args);
     ErrorListener ehandler = this.getErrorListener();
 
-    TransformerException te = new TransformerException(fmsg, m_sourceLocator);
+    TransformerException te = new TransformerException(fmsg);
     if (null != ehandler) {
-      // TO DO: Need to get stylesheet Locator from here.
       ehandler.fatalError(te);
     } else {
-      // System.err.println(fmsg);
       throw te;
     }
   }
