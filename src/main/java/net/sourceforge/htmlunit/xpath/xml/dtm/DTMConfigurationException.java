@@ -17,8 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm;
 
-import javax.xml.transform.SourceLocator;
-
 /** Indicates a serious configuration error. */
 public class DTMConfigurationException extends DTMException {
   static final long serialVersionUID = -4607874078818418046L;
@@ -57,30 +55,5 @@ public class DTMConfigurationException extends DTMException {
    */
   public DTMConfigurationException(String msg, Throwable e) {
     super(msg, e);
-  }
-
-  /**
-   * Create a new DTMConfigurationException from a message and a Locator.
-   *
-   * <p>This constructor is especially useful when an application is creating its own exception from
-   * within a DocumentHandler callback.
-   *
-   * @param message The error or warning message.
-   * @param locator The locator object for the error or warning.
-   */
-  public DTMConfigurationException(String message, SourceLocator locator) {
-    super(message, locator);
-  }
-
-  /**
-   * Wrap an existing exception in a DTMConfigurationException.
-   *
-   * @param message The error or warning message, or null to use the message from the embedded
-   *     exception.
-   * @param locator The locator object for the error or warning.
-   * @param e Any exception.
-   */
-  public DTMConfigurationException(String message, SourceLocator locator, Throwable e) {
-    super(message, locator, e);
   }
 }

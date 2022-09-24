@@ -17,7 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm;
 
-import javax.xml.transform.SourceLocator;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 
 /**
@@ -627,14 +626,6 @@ public interface DTM {
    * @param str Non-null reference to a string.
    */
   public void appendTextChild(String str);
-
-  /**
-   * Get the location of a node in the source document.
-   *
-   * @param node an <code>int</code> value
-   * @return a <code>SourceLocator</code> value or null if no location is available
-   */
-  public SourceLocator getSourceLocatorFor(int node);
 
   /**
    * Migrate a DTM built with an old DTMManager to a new DTMManager. After the migration, the new

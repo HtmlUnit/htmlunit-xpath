@@ -64,8 +64,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 public class Compiler extends OpMap {
 
   /**
-   * Construct a Compiler object with a specific ErrorListener and SourceLocator where the
-   * expression is located.
+   * Construct a Compiler object with a specific ErrorListener.
    *
    * @param errorHandler Error listener where messages will be sent, or null if messages should be
    *     sent to System err.
@@ -198,8 +197,6 @@ public class Compiler extends OpMap {
               Integer.toString(getOp(opPos))
             }); // "ERROR! Unknown op code: "+m_opMap[opPos]);
     }
-    //    if(null != expr)
-    //      expr.setSourceLocator(m_locator);
 
     return expr;
   }

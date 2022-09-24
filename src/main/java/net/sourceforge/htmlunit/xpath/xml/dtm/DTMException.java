@@ -17,40 +17,12 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm;
 
-import javax.xml.transform.SourceLocator;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 
 /** This class specifies an exceptional condition that occured in the DTM module. */
 public class DTMException extends RuntimeException {
   static final long serialVersionUID = -775576419181334734L;
-
-  /**
-   * Field locator specifies where the error occured.
-   *
-   * @serial
-   */
-  SourceLocator locator;
-
-  /**
-   * Method getLocator retrieves an instance of a SourceLocator object that specifies where an error
-   * occured.
-   *
-   * @return A SourceLocator object, or null if none was specified.
-   */
-  public SourceLocator getLocator() {
-    return locator;
-  }
-
-  /**
-   * Method setLocator sets an instance of a SourceLocator object that specifies where an error
-   * occured.
-   *
-   * @param location A SourceLocator object, or null to clear the location.
-   */
-  public void setLocator(SourceLocator location) {
-    locator = location;
-  }
 
   /**
    * Field containedException specifies a wrapped exception. May be null.
@@ -129,7 +101,6 @@ public class DTMException extends RuntimeException {
     super(message);
 
     this.containedException = null;
-    this.locator = null;
   }
 
   /**
@@ -142,7 +113,6 @@ public class DTMException extends RuntimeException {
     super(e.getMessage());
 
     this.containedException = e;
-    this.locator = null;
   }
 
   /**
@@ -159,108 +129,6 @@ public class DTMException extends RuntimeException {
     super(((message == null) || (message.length() == 0)) ? e.getMessage() : message);
 
     this.containedException = e;
-    this.locator = null;
-  }
-
-  /**
-   * Create a new DTMException from a message and a Locator.
-   *
-   * <p>This constructor is especially useful when an application is creating its own exception from
-   * within a DocumentHandler callback.
-   *
-   * @param message The error or warning message.
-   * @param locator The locator object for the error or warning.
-   */
-  public DTMException(String message, SourceLocator locator) {
-
-    super(message);
-
-    this.containedException = null;
-    this.locator = locator;
-  }
-
-  /**
-   * Wrap an existing exception in a DTMException.
-   *
-   * @param message The error or warning message, or null to use the message from the embedded
-   *     exception.
-   * @param locator The locator object for the error or warning.
-   * @param e Any exception
-   */
-  public DTMException(String message, SourceLocator locator, Throwable e) {
-
-    super(message);
-
-    this.containedException = e;
-    this.locator = locator;
-  }
-
-  /** Get the error message with location information appended. */
-  public String getMessageAndLocation() {
-
-    StringBuffer sbuffer = new StringBuffer();
-    String message = super.getMessage();
-
-    if (null != message) {
-      sbuffer.append(message);
-    }
-
-    if (null != locator) {
-      String systemID = locator.getSystemId();
-      int line = locator.getLineNumber();
-      int column = locator.getColumnNumber();
-
-      if (null != systemID) {
-        sbuffer.append("; SystemID: ");
-        sbuffer.append(systemID);
-      }
-
-      if (0 != line) {
-        sbuffer.append("; Line#: ");
-        sbuffer.append(line);
-      }
-
-      if (0 != column) {
-        sbuffer.append("; Column#: ");
-        sbuffer.append(column);
-      }
-    }
-
-    return sbuffer.toString();
-  }
-
-  /**
-   * Get the location information as a string.
-   *
-   * @return A string with location info, or null if there is no location information.
-   */
-  public String getLocationAsString() {
-
-    if (null != locator) {
-      StringBuffer sbuffer = new StringBuffer();
-      String systemID = locator.getSystemId();
-      int line = locator.getLineNumber();
-      int column = locator.getColumnNumber();
-
-      if (null != systemID) {
-        sbuffer.append("; SystemID: ");
-        sbuffer.append(systemID);
-      }
-
-      if (0 != line) {
-        sbuffer.append("; Line#: ");
-        sbuffer.append(line);
-      }
-
-      if (0 != column) {
-        sbuffer.append("; Column#: ");
-        sbuffer.append(column);
-      }
-
-      return sbuffer.toString();
-    } else {
-      return null;
-    }
   }
 
   /**
@@ -281,30 +149,5 @@ public class DTMException extends RuntimeException {
   @Override
   public void printStackTrace(java.io.PrintStream s) {
     printStackTrace(new java.io.PrintWriter(s));
-  }
-
-  /**
-   * Print the the trace of methods from where the error originated. This will trace all nested
-   * exception objects, as well as this object.
-   *
-   * @param s The writer where the dump will be sent to.
-   */
-  @Override
-  public void printStackTrace(java.io.PrintWriter s) {
-
-    if (s == null) {
-      s = new java.io.PrintWriter(System.err, true);
-    }
-
-    try {
-      String locInfo = getLocationAsString();
-
-      if (null != locInfo) {
-        s.println(locInfo);
-      }
-
-      super.printStackTrace(s);
-    } catch (Throwable e) {
-    }
   }
 }

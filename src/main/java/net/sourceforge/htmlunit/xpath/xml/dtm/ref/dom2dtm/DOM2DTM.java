@@ -19,7 +19,6 @@ package net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
 import java.util.Vector;
 
-import javax.xml.transform.SourceLocator;
 import javax.xml.transform.dom.DOMSource;
 
 import org.w3c.dom.Attr;
@@ -1286,16 +1285,5 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       return attr.getSpecified();
     }
     return false;
-  }
-
-  /**
-   * No source information is available for DOM2DTM, so return <code>null</code> here.
-   *
-   * @param node an <code>int</code> value
-   * @return null
-   */
-  @Override
-  public SourceLocator getSourceLocatorFor(int node) {
-    return null;
   }
 }

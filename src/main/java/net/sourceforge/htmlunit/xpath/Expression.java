@@ -54,18 +54,6 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
     return false;
   }
 
-  //  /**
-  //   * Set the location where this expression was built from.
-  //   *
-  //   *
-  //   * @param locator the location where this expression was built from, may be
-  //   *                null.
-  //   */
-  //  public void setSourceLocator(SourceLocator locator)
-  //  {
-  //    m_slocator = locator;
-  //  }
-
   /**
    * Execute an expression in the XPath runtime context, and return the result of the expression.
    *
@@ -366,8 +354,6 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
   public int exprGetNumChildren() {
     return 0;
   }
-
-  // =============== SourceLocator methods ================
 
   /**
    * Return the public identifier for the current document event.
