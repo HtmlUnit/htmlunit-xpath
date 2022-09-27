@@ -226,8 +226,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
 
     m_predicates = predicates;
     if (null != predicates) {
-      for (int i = 0; i < predicates.length; i++) {
-        predicates[i].exprSetParent(this);
+      for (Expression predicate : predicates) {
+        predicate.exprSetParent(this);
       }
     }
 
@@ -605,7 +605,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   @Override
   public String toString() {
 
-    StringBuffer buf = new StringBuffer();
+    StringBuilder buf = new StringBuilder();
 
     for (StepPattern pat = this; pat != null; pat = pat.m_relativePathPattern) {
       if (pat != this) buf.append("/");
@@ -648,7 +648,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
       } else if ((DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT) == pat.m_whatToShow) {
         buf.append("doc-root()");
       } else {
-        buf.append("?" + Integer.toHexString(pat.m_whatToShow));
+        buf.append("?").append(Integer.toHexString(pat.m_whatToShow));
       }
 
       if (null != pat.m_predicates) {

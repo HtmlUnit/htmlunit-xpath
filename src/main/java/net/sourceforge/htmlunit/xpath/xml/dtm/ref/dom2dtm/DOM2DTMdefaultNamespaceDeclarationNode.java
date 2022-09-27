@@ -145,9 +145,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   }
 
   @Override
-  public void normalize() {
-    return;
-  }
+  public void normalize() {}
 
   @Override
   public NodeList getChildNodes() {

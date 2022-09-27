@@ -112,8 +112,8 @@ public class UnionPathIterator extends LocPathIterator
   public void detach() {
     if (m_allowDetach && null != m_iterators) {
       int n = m_iterators.length;
-      for (int i = 0; i < n; i++) {
-        m_iterators[i].detach();
+      for (DTMIterator m_iterator : m_iterators) {
+        m_iterator.detach();
       }
       m_iterators = null;
     }
@@ -195,8 +195,8 @@ public class UnionPathIterator extends LocPathIterator
     if (m_exprs != null) {
       int n = m_exprs.length;
 
-      for (int i = 0; i < n; i++) {
-        int bit = m_exprs[i].getAnalysisBits();
+      for (LocPathIterator m_expr : m_exprs) {
+        int bit = m_expr.getAnalysisBits();
         bits |= bit;
       }
     }

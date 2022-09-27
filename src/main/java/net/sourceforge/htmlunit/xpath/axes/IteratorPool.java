@@ -58,7 +58,7 @@ public final class IteratorPool implements java.io.Serializable {
       return (DTMIterator) m_orig.clone();
     } else {
       // Remove object from end of free pool.
-      DTMIterator result = (DTMIterator) m_freeStack.remove(m_freeStack.size() - 1);
+      DTMIterator result = m_freeStack.remove(m_freeStack.size() - 1);
       return result;
     }
   }
@@ -80,7 +80,7 @@ public final class IteratorPool implements java.io.Serializable {
       }
     } else {
       // Remove object from end of free pool.
-      DTMIterator result = (DTMIterator) m_freeStack.remove(m_freeStack.size() - 1);
+      DTMIterator result = m_freeStack.remove(m_freeStack.size() - 1);
       return result;
     }
   }

@@ -40,7 +40,7 @@ public class FuncConcat extends FunctionMultiArgs {
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
 
     // Compiler says we must have at least two arguments.
     sb.append(m_arg0.execute(xctxt).str());
@@ -49,8 +49,8 @@ public class FuncConcat extends FunctionMultiArgs {
     if (null != m_arg2) sb.append(m_arg2.execute(xctxt).str());
 
     if (null != m_args) {
-      for (int i = 0; i < m_args.length; i++) {
-        sb.append(m_args[i].execute(xctxt).str());
+      for (net.sourceforge.htmlunit.xpath.Expression m_arg : m_args) {
+        sb.append(m_arg.execute(xctxt).str());
       }
     }
 

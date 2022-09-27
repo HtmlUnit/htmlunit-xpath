@@ -172,6 +172,6 @@ public class IntStack extends IntVector {
    */
   @Override
   public Object clone() throws CloneNotSupportedException {
-    return (IntStack) super.clone();
+    return super.clone();
   }
 }

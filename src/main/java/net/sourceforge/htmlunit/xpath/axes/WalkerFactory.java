@@ -147,7 +147,7 @@ public class WalkerFactory {
     int firstStepPos = OpMap.getFirstChildPos(opPos);
     int analysis = analyze(compiler, firstStepPos, 0);
     boolean isOneStep = isOneStep(analysis);
-    DTMIterator iter;
+    LocPathIterator iter;
 
     // Is the iteration a one-step attribute pattern (i.e. select="@foo")?
     if (isOneStep && walksSelfOnly(analysis) && isWild(analysis) && !hasPredicate(analysis)) {
@@ -236,7 +236,7 @@ public class WalkerFactory {
         iter = new WalkingIteratorSorted(compiler, opPos, analysis, true);
       }
     }
-    if (iter instanceof LocPathIterator) ((LocPathIterator) iter).setIsTopLevel(isTopLevel);
+    if (iter instanceof LocPathIterator) iter.setIsTopLevel(isTopLevel);
 
     return iter;
   }
@@ -1117,8 +1117,8 @@ public class WalkerFactory {
   }
 
   public static String getAnalysisString(int analysis) {
-    StringBuffer buf = new StringBuffer();
-    buf.append("count: " + getStepCount(analysis) + " ");
+    StringBuilder buf = new StringBuilder();
+    buf.append("count: ").append(getStepCount(analysis)).append(" ");
     if ((analysis & BIT_NODETEST_ANY) != 0) {
       buf.append("NTANY|");
     }

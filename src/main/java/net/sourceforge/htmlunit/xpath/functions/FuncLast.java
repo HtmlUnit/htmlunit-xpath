@@ -77,7 +77,7 @@ public class FuncLast extends Function {
    */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    XNumber xnum = new XNumber((double) getCountOfContextNodeList(xctxt));
+    XNumber xnum = new XNumber(getCountOfContextNodeList(xctxt));
     // System.out.println("last: "+xnum.num());
     return xnum;
   }

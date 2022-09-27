@@ -80,8 +80,7 @@ public class UnionChildIterator extends ChildTestIterator {
     XPathContext xctxt = getXPathContext();
     try {
       xctxt.pushCurrentNode(n);
-      for (int i = 0; i < m_nodeTests.length; i++) {
-        PredicatedNodeTest pnt = m_nodeTests[i];
+      for (PredicatedNodeTest pnt : m_nodeTests) {
         XObject score = pnt.execute(xctxt, n);
         if (score != NodeTest.SCORE_NONE) {
           // Note that we are assuming there are no positional predicates!

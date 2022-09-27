@@ -385,9 +385,7 @@ class Lexer {
       Integer itok = (Integer) Keywords.getKeyWord(key);
 
       tok = (null != itok) ? itok.intValue() : 0;
-    } catch (NullPointerException npe) {
-      tok = 0;
-    } catch (ClassCastException cce) {
+    } catch (NullPointerException | ClassCastException npe) {
       tok = 0;
     }
 
@@ -476,8 +474,7 @@ class Lexer {
 
     if ((null != m_namespaceContext) && !prefix.equals("*") && !prefix.equals("xmlns")) {
       try {
-        if (prefix.length() > 0)
-          uName = ((PrefixResolver) m_namespaceContext).getNamespaceForPrefix(prefix);
+        if (prefix.length() > 0) uName = m_namespaceContext.getNamespaceForPrefix(prefix);
         else {
 
           // Assume last was wildcard. This is not legal according
@@ -492,7 +489,7 @@ class Lexer {
 
             return -1;
           } else {
-            uName = ((PrefixResolver) m_namespaceContext).getNamespaceForPrefix(prefix);
+            uName = m_namespaceContext.getNamespaceForPrefix(prefix);
           }
         }
       } catch (ClassCastException cce) {

@@ -231,7 +231,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    *
    * <p>Currently there isn't a lot here
    */
-  public abstract class InternalAxisIteratorBase extends DTMAxisIteratorBase {
+  public abstract static class InternalAxisIteratorBase extends DTMAxisIteratorBase {
 
     // %REVIEW% We could opt to share _nodeType and setNodeType() as
     // well, and simply ignore them in iterators which don't use them.

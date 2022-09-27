@@ -73,7 +73,7 @@ public class AttList implements Attributes {
    */
   @Override
   public String getURI(int index) {
-    String ns = m_dh.getNamespaceOfNode((Attr) m_attrs.item(index));
+    String ns = m_dh.getNamespaceOfNode(m_attrs.item(index));
     if (null == ns) ns = "";
     return ns;
   }
@@ -87,7 +87,7 @@ public class AttList implements Attributes {
    */
   @Override
   public String getLocalName(int index) {
-    return m_dh.getLocalNameOfNode((Attr) m_attrs.item(index));
+    return m_dh.getLocalNameOfNode(m_attrs.item(index));
   }
 
   /**

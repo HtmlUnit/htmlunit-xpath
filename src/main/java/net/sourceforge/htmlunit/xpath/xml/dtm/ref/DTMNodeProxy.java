@@ -276,7 +276,7 @@ public class DTMNodeProxy
   /** @see org.w3c.dom.Node */
   @Override
   public final short getNodeType() {
-    return (short) dtm.getNodeType(node);
+    return dtm.getNodeType(node);
   }
 
   /** @see org.w3c.dom.Node */
@@ -590,10 +590,10 @@ public class DTMNodeProxy
     }
     int size = listVector.size();
     NodeSet nodeSet = new NodeSet(size);
-    for (int i = 0; i < size; i++) {
-      nodeSet.addNode((Node) listVector.get(i));
+    for (Node value : listVector) {
+      nodeSet.addNode((Node) value);
     }
-    return (NodeList) nodeSet;
+    return nodeSet;
   }
   /**
    * @param listVector
@@ -605,7 +605,6 @@ public class DTMNodeProxy
   private final void traverseChildren(
       List<Node> listVector, Node tempNode, String tagname, boolean isTagNameWildCard) {
     if (tempNode == null) {
-      return;
     } else {
       if (tempNode.getNodeType() == DTM.ELEMENT_NODE
           && (isTagNameWildCard || tempNode.getNodeName().equals(tagname))) {
@@ -690,10 +689,10 @@ public class DTMNodeProxy
     }
     int size = listVector.size();
     NodeSet nodeSet = new NodeSet(size);
-    for (int i = 0; i < size; i++) {
-      nodeSet.addNode((Node) listVector.get(i));
+    for (Node value : listVector) {
+      nodeSet.addNode((Node) value);
     }
-    return (NodeList) nodeSet;
+    return nodeSet;
   }
   /**
    * @param listVector
@@ -713,7 +712,6 @@ public class DTMNodeProxy
       boolean isNamespaceURIWildCard,
       boolean isLocalNameWildCard) {
     if (tempNode == null) {
-      return;
     } else {
       if (tempNode.getNodeType() == DTM.ELEMENT_NODE
           && (isLocalNameWildCard || tempNode.getLocalName().equals(localname))) {
@@ -1109,7 +1107,7 @@ public class DTMNodeProxy
      */
     @Override
     public boolean hasFeature(String feature, String version) {
-      if (("CORE".equals(feature.toUpperCase()) || "XML".equals(feature.toUpperCase()))
+      if (("CORE".equalsIgnoreCase(feature) || "XML".equalsIgnoreCase(feature))
           && ("1.0".equals(version) || "2.0".equals(version))) return true;
       return false;
     }

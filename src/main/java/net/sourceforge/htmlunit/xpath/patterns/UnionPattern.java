@@ -47,8 +47,8 @@ public class UnionPattern extends Expression {
   public boolean canTraverseOutsideSubtree() {
     if (null != m_patterns) {
       int n = m_patterns.length;
-      for (int i = 0; i < n; i++) {
-        if (m_patterns[i].canTraverseOutsideSubtree()) return true;
+      for (StepPattern m_pattern : m_patterns) {
+        if (m_pattern.canTraverseOutsideSubtree()) return true;
       }
     }
     return false;
@@ -62,8 +62,8 @@ public class UnionPattern extends Expression {
   public void setPatterns(StepPattern[] patterns) {
     m_patterns = patterns;
     if (null != patterns) {
-      for (int i = 0; i < patterns.length; i++) {
-        patterns[i].exprSetParent(this);
+      for (StepPattern pattern : patterns) {
+        pattern.exprSetParent(this);
       }
     }
   }
@@ -94,8 +94,8 @@ public class UnionPattern extends Expression {
     XObject bestScore = null;
     int n = m_patterns.length;
 
-    for (int i = 0; i < n; i++) {
-      XObject score = m_patterns[i].execute(xctxt);
+    for (StepPattern m_pattern : m_patterns) {
+      XObject score = m_pattern.execute(xctxt);
 
       if (score != NodeTest.SCORE_NONE) {
         if (null == bestScore) bestScore = score;

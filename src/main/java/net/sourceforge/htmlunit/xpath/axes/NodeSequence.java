@@ -153,9 +153,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   }
 
   /** Create a new NodeSequence in an invalid (null) state. */
-  public NodeSequence() {
-    return;
-  }
+  public NodeSequence() {}
 
   /** @see DTMIterator#getDTM(int) */
   @Override
@@ -359,7 +357,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       while (DTM.NULL != nextNode()) ;
       m_next = pos;
     } else if (m_next == index) {
-      return;
     } else if (hasCache() && m_next < getVector().size()) {
       m_next = index;
     } else if ((null == getVector()) && (index < m_next)) {
@@ -668,7 +665,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       m_vec2 = null;
       m_isComplete2 = false;
       m_useCount2 = 1;
-      return;
     }
 
     /** Returns count of how many NodeSequence objects share this IteratorCache object. */

@@ -55,6 +55,6 @@ public class FuncCount extends FunctionOneArg {
     int i = nl.getLength();
     nl.detach();
 
-    return new XNumber((double) i);
+    return new XNumber(i);
   }
 }

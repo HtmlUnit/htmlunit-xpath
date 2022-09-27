@@ -76,7 +76,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
       m_count = count;
     }
 
-    return (int) m_count;
+    return m_count;
   }
 
   /**

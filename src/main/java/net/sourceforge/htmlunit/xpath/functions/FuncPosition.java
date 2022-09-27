@@ -103,7 +103,7 @@ public class FuncPosition extends Function {
    */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    double pos = (double) getPositionInContextNodeList(xctxt);
+    double pos = getPositionInContextNodeList(xctxt);
 
     return new XNumber(pos);
   }

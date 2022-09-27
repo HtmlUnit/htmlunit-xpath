@@ -439,7 +439,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // workaround pending proper handling of these fields in DOM Level
     // 3. We want to recognize and reject that case.
     else if (PROCESSING_INSTRUCTION_NODE == nexttype) {
-      suppressNode = pos.getNodeName().toLowerCase().equals("xml");
+      suppressNode = pos.getNodeName().equalsIgnoreCase("xml");
     }
 
     if (!suppressNode) {
@@ -526,7 +526,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
 
     int identity = makeNodeIdentity(nodeHandle);
 
-    return (Node) m_nodes.elementAt(identity);
+    return m_nodes.elementAt(identity);
   }
 
   /**
@@ -537,7 +537,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    * <p>NEEDSDOC ($objectName$) @return
    */
   protected Node lookupNode(int nodeIdentity) {
-    return (Node) m_nodes.elementAt(nodeIdentity);
+    return m_nodes.elementAt(nodeIdentity);
   }
 
   /**
@@ -874,7 +874,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     if (JJK_NEWCODE) {
       int id = makeNodeIdentity(nodeHandle);
       if (NULL == id) return null;
-      Node newnode = (Node) m_nodes.elementAt(id);
+      Node newnode = m_nodes.elementAt(id);
       String newname = newnode.getLocalName();
       if (null == newname) {
         // XSLT treats PIs, and possibly other things, as having QNames.
@@ -981,7 +981,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     if (JJK_NEWCODE) {
       int id = makeNodeIdentity(nodeHandle);
       if (id == NULL) return null;
-      Node node = (Node) m_nodes.elementAt(id);
+      Node node = m_nodes.elementAt(id);
       return node.getNamespaceURI();
     } else {
       String nsuri;

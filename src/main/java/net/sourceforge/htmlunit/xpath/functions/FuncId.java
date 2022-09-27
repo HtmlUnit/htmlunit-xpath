@@ -77,7 +77,7 @@ public class FuncId extends FunctionOneArg {
         if (DTM.NULL != node) nodeSet.addNodeInDocOrder(node, xctxt);
 
         if ((null != ref) && (hasMore || mayBeMore)) {
-          if (null == usedrefs) usedrefs = new ArrayList<String>();
+          if (null == usedrefs) usedrefs = new ArrayList<>();
 
           usedrefs.add(ref);
         }

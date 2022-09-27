@@ -135,8 +135,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     if (pos > 0) {
       m_predicates = compiler.getCompiledPredicates(pos);
       if (null != m_predicates) {
-        for (int i = 0; i < m_predicates.length; i++) {
-          m_predicates[i].exprSetParent(this);
+        for (Expression m_predicate : m_predicates) {
+          m_predicate.exprSetParent(this);
         }
       }
     }

@@ -56,7 +56,7 @@ public class DTMNodeList extends DTMNodeListBase {
     if (dtmIterator != null) {
       int pos = dtmIterator.getCurrentPos();
       try {
-        m_iter = (DTMIterator) dtmIterator.cloneWithReset();
+        m_iter = dtmIterator.cloneWithReset();
       } catch (CloneNotSupportedException cnse) {
         m_iter = dtmIterator;
       }

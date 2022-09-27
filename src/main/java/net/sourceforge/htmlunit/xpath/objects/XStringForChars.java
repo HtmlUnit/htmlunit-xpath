@@ -141,6 +141,6 @@ public class XStringForChars extends XString {
    */
   @Override
   public void getChars(int srcBegin, int srcEnd, char dst[], int dstBegin) {
-    System.arraycopy((char[]) m_obj, m_start + srcBegin, dst, dstBegin, srcEnd);
+    System.arraycopy(m_obj, m_start + srcBegin, dst, dstBegin, srcEnd);
   }
 }

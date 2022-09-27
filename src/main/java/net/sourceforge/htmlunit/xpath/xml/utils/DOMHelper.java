@@ -172,7 +172,7 @@ public class DOMHelper {
    */
   public static boolean isNodeTheSame(Node node1, Node node2) {
     if (node1 instanceof DTMNodeProxy && node2 instanceof DTMNodeProxy)
-      return ((DTMNodeProxy) node1).equals((DTMNodeProxy) node2);
+      return ((DTMNodeProxy) node1).equals(node2);
     else return node1 == node2;
   }
 

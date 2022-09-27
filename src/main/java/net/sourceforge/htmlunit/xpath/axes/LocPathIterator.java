@@ -155,7 +155,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    XNodeSet iter = new XNodeSet((LocPathIterator) m_clones.getInstance());
+    XNodeSet iter = new XNodeSet(m_clones.getInstance());
 
     iter.setRoot(xctxt.getCurrentNode(), xctxt);
 
@@ -175,7 +175,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   @Override
   public DTMIterator asIterator(XPathContext xctxt, int contextNode)
       throws javax.xml.transform.TransformerException {
-    XNodeSet iter = new XNodeSet((LocPathIterator) m_clones.getInstance());
+    XNodeSet iter = new XNodeSet(m_clones.getInstance());
 
     iter.setRoot(contextNode, xctxt);
 
@@ -202,7 +202,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   @Override
   public int asNode(XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    DTMIterator iter = (DTMIterator) m_clones.getInstance();
+    DTMIterator iter = m_clones.getInstance();
 
     int current = xctxt.getCurrentNode();
 

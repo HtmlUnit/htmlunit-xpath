@@ -246,8 +246,7 @@ public class DTMManagerDefault extends DTMManager {
       //   Generate a list of _unique_ DTM objects?
       //   Have each DTM cache last DOM node search?
       int max = m_dtms.length;
-      for (int i = 0; i < max; i++) {
-        DTM thisDTM = m_dtms[i];
+      for (DTM thisDTM : m_dtms) {
         if ((null != thisDTM) && thisDTM instanceof DOM2DTM) {
           int handle = ((DOM2DTM) thisDTM).getHandleOfNode(node);
           if (handle != DTM.NULL) return handle;
@@ -296,7 +295,7 @@ public class DTMManagerDefault extends DTMManager {
         // Document Element, then ask it for the xml: namespace decl.
         handle = dtm.getHandleOfNode(((org.w3c.dom.Attr) node).getOwnerElement());
         handle = dtm.getAttributeNode(handle, node.getNamespaceURI(), node.getLocalName());
-      } else handle = ((DOM2DTM) dtm).getHandleOfNode(node);
+      } else handle = dtm.getHandleOfNode(node);
 
       if (DTM.NULL == handle)
         throw new RuntimeException(

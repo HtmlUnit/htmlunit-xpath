@@ -43,19 +43,19 @@ public class ExpandedNameTable {
   private int m_nextType;
 
   // These are all the types prerotated, for caller convenience.
-  public static final int ELEMENT = (int) DTM.ELEMENT_NODE;
-  public static final int ATTRIBUTE = (int) DTM.ATTRIBUTE_NODE;
-  public static final int TEXT = (int) DTM.TEXT_NODE;
-  public static final int CDATA_SECTION = (int) DTM.CDATA_SECTION_NODE;
-  public static final int ENTITY_REFERENCE = (int) DTM.ENTITY_REFERENCE_NODE;
-  public static final int ENTITY = (int) DTM.ENTITY_NODE;
-  public static final int PROCESSING_INSTRUCTION = (int) DTM.PROCESSING_INSTRUCTION_NODE;
-  public static final int COMMENT = (int) DTM.COMMENT_NODE;
-  public static final int DOCUMENT = (int) DTM.DOCUMENT_NODE;
-  public static final int DOCUMENT_TYPE = (int) DTM.DOCUMENT_TYPE_NODE;
-  public static final int DOCUMENT_FRAGMENT = (int) DTM.DOCUMENT_FRAGMENT_NODE;
-  public static final int NOTATION = (int) DTM.NOTATION_NODE;
-  public static final int NAMESPACE = (int) DTM.NAMESPACE_NODE;
+  public static final int ELEMENT = DTM.ELEMENT_NODE;
+  public static final int ATTRIBUTE = DTM.ATTRIBUTE_NODE;
+  public static final int TEXT = DTM.TEXT_NODE;
+  public static final int CDATA_SECTION = DTM.CDATA_SECTION_NODE;
+  public static final int ENTITY_REFERENCE = DTM.ENTITY_REFERENCE_NODE;
+  public static final int ENTITY = DTM.ENTITY_NODE;
+  public static final int PROCESSING_INSTRUCTION = DTM.PROCESSING_INSTRUCTION_NODE;
+  public static final int COMMENT = DTM.COMMENT_NODE;
+  public static final int DOCUMENT = DTM.DOCUMENT_NODE;
+  public static final int DOCUMENT_TYPE = DTM.DOCUMENT_TYPE_NODE;
+  public static final int DOCUMENT_FRAGMENT = DTM.DOCUMENT_FRAGMENT_NODE;
+  public static final int NOTATION = DTM.NOTATION_NODE;
+  public static final int NAMESPACE = DTM.NAMESPACE_NODE;
 
   /** Workspace for lookup. NOT THREAD SAFE! */
   ExtendedType hashET = new ExtendedType(-1, "", "");

@@ -104,19 +104,19 @@ public class XPathParser {
       Expr();
 
       if (null != m_token) {
-        String extraTokens = "";
+        StringBuilder extraTokens = new StringBuilder();
 
         while (null != m_token) {
-          extraTokens += "'" + m_token + "'";
+          extraTokens.append("'").append(m_token).append("'");
 
           nextToken();
 
-          if (null != m_token) extraTokens += ", ";
+          if (null != m_token) extraTokens.append(", ");
         }
 
         error(
             XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS,
-            new Object[] {extraTokens}); // "Extra illegal tokens: "+extraTokens);
+            new Object[] {extraTokens.toString()}); // "Extra illegal tokens: "+extraTokens);
       }
 
     } catch (net.sourceforge.htmlunit.xpath.XPathProcessorException e) {
@@ -159,19 +159,19 @@ public class XPathParser {
     Pattern();
 
     if (null != m_token) {
-      String extraTokens = "";
+      StringBuilder extraTokens = new StringBuilder();
 
       while (null != m_token) {
-        extraTokens += "'" + m_token + "'";
+        extraTokens.append("'").append(m_token).append("'");
 
         nextToken();
 
-        if (null != m_token) extraTokens += ", ";
+        if (null != m_token) extraTokens.append(", ");
       }
 
       error(
           XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS,
-          new Object[] {extraTokens}); // "Extra illegal tokens: "+extraTokens);
+          new Object[] {extraTokens.toString()}); // "Extra illegal tokens: "+extraTokens);
     }
 
     // Terminate for safety.
@@ -364,12 +364,12 @@ public class XPathParser {
     String returnMsg;
 
     if (q < m_ops.getTokenQueueSize()) {
-      String msg = "\n Remaining tokens: (";
+      StringBuilder msg = new StringBuilder("\n Remaining tokens: (");
 
       while (q < m_ops.getTokenQueueSize()) {
         String t = (String) m_ops.m_tokenQueue.elementAt(q++);
 
-        msg += " '" + t + "'";
+        msg.append(" '").append(t).append("'");
       }
 
       returnMsg = msg + ")";
@@ -400,9 +400,7 @@ public class XPathParser {
       id = Keywords.lookupNodeTest(key);
       if (null == id) id = m_functionTable.getFunctionID(key);
       tok = ((Integer) id).intValue();
-    } catch (NullPointerException npe) {
-      tok = -1;
-    } catch (ClassCastException cce) {
+    } catch (NullPointerException | ClassCastException npe) {
       tok = -1;
     }
 

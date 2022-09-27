@@ -359,7 +359,7 @@ public class OpMap {
 
     // int index = (argLenOfStep == 3) ? m_opMap[opPosOfStep+5]
     //                                  : ((argLenOfStep == 1) ? -3 : -2);
-    if (index >= 0) return (String) m_tokenQueue.elementAt(index).toString();
+    if (index >= 0) return m_tokenQueue.elementAt(index).toString();
     else if (OpCodes.ELEMWILDCARD == index) return NodeTest.WILD;
     else return null;
   }

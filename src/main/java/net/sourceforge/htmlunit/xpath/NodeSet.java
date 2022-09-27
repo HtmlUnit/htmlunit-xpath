@@ -303,7 +303,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
 
     runTo(index);
 
-    return (Node) this.elementAt(index);
+    return this.elementAt(index);
   }
 
   /**

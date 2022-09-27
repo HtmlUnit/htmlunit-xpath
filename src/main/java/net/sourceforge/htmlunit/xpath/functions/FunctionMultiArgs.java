@@ -117,8 +117,8 @@ public class FunctionMultiArgs extends Function3Args {
     else {
       int n = m_args.length;
 
-      for (int i = 0; i < n; i++) {
-        if (m_args[i].canTraverseOutsideSubtree()) return true;
+      for (Expression m_arg : m_args) {
+        if (m_arg.canTraverseOutsideSubtree()) return true;
       }
 
       return false;

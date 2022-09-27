@@ -228,9 +228,7 @@ public class FunctionTable {
     try {
       if (which < NUM_BUILT_IN_FUNCS) return (Function) m_functions[which].newInstance();
       else return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].newInstance();
-    } catch (IllegalAccessException ex) {
-      throw new TransformerException(ex.getMessage());
-    } catch (InstantiationException ex) {
+    } catch (IllegalAccessException | InstantiationException ex) {
       throw new TransformerException(ex.getMessage());
     }
   }

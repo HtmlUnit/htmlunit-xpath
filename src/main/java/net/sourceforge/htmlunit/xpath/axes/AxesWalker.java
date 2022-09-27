@@ -126,7 +126,7 @@ public class AxesWalker extends PredicatedNodeTest
       // First, look for clone on list.
       int n = cloneList.size();
       for (int i = 0; i < n; i += 2) {
-        if (key == cloneList.elementAt(i)) return (AxesWalker) cloneList.elementAt(i + 1);
+        if (key == cloneList.elementAt(i)) return cloneList.elementAt(i + 1);
       }
     }
     return null;

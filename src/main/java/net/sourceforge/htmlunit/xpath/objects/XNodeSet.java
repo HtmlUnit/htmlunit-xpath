@@ -396,8 +396,8 @@ public class XNodeSet extends NodeSequence {
         } else {
           int n = node2Strings.size();
 
-          for (int i = 0; i < n; i++) {
-            if (comparator.compareStrings(s1, node2Strings.get(i))) {
+          for (XMLString node2String : node2Strings) {
+            if (comparator.compareStrings(s1, node2String)) {
               result = true;
 
               break;

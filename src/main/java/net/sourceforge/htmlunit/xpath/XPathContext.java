@@ -265,7 +265,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     this(recursiveVarContext);
     m_owner = owner;
     try {
-      m_ownerGetErrorListener = m_owner.getClass().getMethod("getErrorListener", new Class[] {});
+      m_ownerGetErrorListener = m_owner.getClass().getMethod("getErrorListener");
     } catch (NoSuchMethodException nsme) {
     }
   }
@@ -407,7 +407,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    */
   public final DTMIterator getContextNodeList() {
 
-    if (m_contextNodeLists.size() > 0) return (DTMIterator) m_contextNodeLists.peek();
+    if (m_contextNodeLists.size() > 0) return m_contextNodeLists.peek();
     else return null;
   }
 
@@ -605,7 +605,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * @return the current prefix resolver for resolving prefixes to namespace URLs.
    */
   public final PrefixResolver getNamespaceContext() {
-    return (PrefixResolver) m_prefixResolvers.peek();
+    return m_prefixResolvers.peek();
   }
 
   /**
@@ -681,7 +681,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * @xsl.usage internal
    */
   public SubContextList getSubContextList() {
-    return m_axesIteratorStack.isEmpty() ? null : (SubContextList) m_axesIteratorStack.peek();
+    return m_axesIteratorStack.isEmpty() ? null : m_axesIteratorStack.peek();
   }
 
   /**
@@ -692,7 +692,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * @xsl.usage internal
    */
   public net.sourceforge.htmlunit.xpath.axes.SubContextList getCurrentNodeList() {
-    return m_axesIteratorStack.isEmpty() ? null : (SubContextList) m_axesIteratorStack.elementAt(0);
+    return m_axesIteratorStack.isEmpty() ? null : m_axesIteratorStack.elementAt(0);
   }
   // ==========================================================
   // SECTION: Implementation of ExpressionContext interface

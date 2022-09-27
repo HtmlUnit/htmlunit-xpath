@@ -464,35 +464,6 @@ public class Compiler extends OpMap {
     return (XNumber) getTokenQueue().elementAt(getOp(opPos));
   }
 
-  //  /**
-  //   * Compile a variable reference.
-  //   *
-  //   * @param opPos The current position in the m_opMap array.
-  //   *
-  //   * @return reference to {@link net.sourceforge.htmlunit.xpath.operations.Variable} instance.
-  //   *
-  //   * @throws TransformerException if a error occurs creating the Expression.
-  //   */
-  //  protected Expression variable(int opPos) throws TransformerException
-  //  {
-  //
-  //    Variable var = new Variable();
-  //
-  //    opPos = getFirstChildPos(opPos);
-  //
-  //    int nsPos = getOp(opPos);
-  //    java.lang.String namespace
-  //      = (OpCodes.EMPTY == nsPos) ? null
-  //                                   : (java.lang.String) getTokenQueue().elementAt(nsPos);
-  //    java.lang.String localname
-  //      = (java.lang.String) getTokenQueue().elementAt(getOp(opPos+1));
-  //    QName qname = new QName(namespace, localname);
-  //
-  //    var.setQName(qname);
-  //
-  //    return var;
-  //  }
-
   /**
    * Compile an expression group.
    *

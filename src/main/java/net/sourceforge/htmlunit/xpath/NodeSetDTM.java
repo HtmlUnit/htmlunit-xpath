@@ -95,7 +95,7 @@ public class NodeSetDTM extends NodeVector
     m_manager = nodelist.getDTMManager();
     m_root = nodelist.getRoot();
 
-    addNodes((DTMIterator) nodelist);
+    addNodes(nodelist);
   }
 
   /**

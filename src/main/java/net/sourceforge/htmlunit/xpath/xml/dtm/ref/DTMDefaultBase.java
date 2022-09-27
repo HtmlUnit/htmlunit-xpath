@@ -19,10 +19,10 @@ package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 // for dumpDTM
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.nio.file.Files;
 import java.util.Vector;
 import javax.xml.transform.Source;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
@@ -525,9 +525,9 @@ public abstract class DTMDefaultBase implements DTM {
   public void dumpDTM(OutputStream os) {
     try {
       if (os == null) {
-        File f = new File("DTMDump" + ((Object) this).hashCode() + ".txt");
+        File f = new File("DTMDump" + this.hashCode() + ".txt");
         System.err.println("Dumping... " + f.getAbsolutePath());
-        os = new FileOutputStream(f);
+        os = Files.newOutputStream(f.toPath());
       }
       PrintStream ps = new PrintStream(os);
 
@@ -704,23 +704,20 @@ public abstract class DTMDefaultBase implements DTM {
         break;
     }
 
-    StringBuffer sb = new StringBuffer();
-    sb.append(
-        "["
-            + nodeHandle
-            + ": "
-            + typestring
-            + "(0x"
-            + Integer.toHexString(getExpandedTypeID(nodeHandle))
-            + ") "
-            + getNodeNameX(nodeHandle)
-            + " {"
-            + getNamespaceURI(nodeHandle)
-            + "}"
-            + "=\""
-            + getNodeValue(nodeHandle)
-            + "\"]");
-    return sb.toString();
+    return "["
+        + nodeHandle
+        + ": "
+        + typestring
+        + "(0x"
+        + Integer.toHexString(getExpandedTypeID(nodeHandle))
+        + ") "
+        + getNodeNameX(nodeHandle)
+        + " {"
+        + getNamespaceURI(nodeHandle)
+        + "}"
+        + "=\""
+        + getNodeValue(nodeHandle)
+        + "\"]";
   }
 
   // ========= Document Navigation Functions =========
@@ -1086,7 +1083,7 @@ public abstract class DTMDefaultBase implements DTM {
       int last = m_namespaceDeclSetElements.size() - 1;
 
       if (last >= 0 && elementNodeIndex == m_namespaceDeclSetElements.elementAt(last)) {
-        nsList = (SuballocatedIntVector) m_namespaceDeclSets.elementAt(last);
+        nsList = m_namespaceDeclSets.elementAt(last);
       }
     }
     if (nsList == null) {
@@ -1143,7 +1140,7 @@ public abstract class DTMDefaultBase implements DTM {
       int wouldBeAt =
           findInSortedSuballocatedIntVector(m_namespaceDeclSetElements, elementNodeIndex);
       if (wouldBeAt >= 0) // Found it
-      return (SuballocatedIntVector) m_namespaceDeclSets.elementAt(wouldBeAt);
+      return m_namespaceDeclSets.elementAt(wouldBeAt);
       if (wouldBeAt == -1) // -1-wouldbeat == 0
       return null; // Not after anything; definitely not found
 
@@ -1171,14 +1168,14 @@ public abstract class DTMDefaultBase implements DTM {
         }
 
         if (candidate == uppermostNSCandidateID) {
-          return (SuballocatedIntVector) m_namespaceDeclSets.elementAt(wouldBeAt);
+          return m_namespaceDeclSets.elementAt(wouldBeAt);
         }
       }
 
       while (wouldBeAt >= 0 && ancestor > 0) {
         if (candidate == ancestor) {
           // Found ancestor in list
-          return (SuballocatedIntVector) m_namespaceDeclSets.elementAt(wouldBeAt);
+          return m_namespaceDeclSets.elementAt(wouldBeAt);
         } else if (candidate < ancestor) {
           // Too deep in tree
           do {
