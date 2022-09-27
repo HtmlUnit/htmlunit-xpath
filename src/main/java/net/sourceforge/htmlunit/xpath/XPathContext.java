@@ -53,8 +53,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * is the real DTMManager.
    */
   protected DTMManager m_dtmManager =
-      DTMManager.newInstance(
-          net.sourceforge.htmlunit.xpath.objects.XMLStringFactoryImpl.getFactory());
+      DTMManager.newInstance();
 
   /**
    * Return the DTMManager object. Though XPathContext context extends the DTMManager, it really is
@@ -274,9 +273,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   /** Reset for new run. */
   public void reset() {
-    m_dtmManager =
-        DTMManager.newInstance(
-            net.sourceforge.htmlunit.xpath.objects.XMLStringFactoryImpl.getFactory());
+    m_dtmManager = DTMManager.newInstance();
 
     m_axesIteratorStack.removeAllElements();
     m_contextNodeLists.removeAllElements();

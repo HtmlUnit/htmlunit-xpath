@@ -18,7 +18,18 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
 import java.util.Vector;
+
 import javax.xml.transform.dom.DOMSource;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Element;
+import org.w3c.dom.Entity;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
+import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
@@ -30,14 +41,6 @@ import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.QName;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
-import org.w3c.dom.Entity;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 
 /**
  * The <code>DOM2DTM</code> class serves up a DOM's contents via the DTM API.
@@ -93,7 +96,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    * @param domSource the DOM source that this DTM will wrap.
    * @param dtmIdentity The DTM identity ID for this DTM.
    * @param whiteSpaceFilter The white space filter for this DTM, which may be null.
-   * @param xstringfactory XMLString factory for creating character content.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
   public DOM2DTM(
@@ -101,9 +103,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       DOMSource domSource,
       int dtmIdentity,
       DTMWSFilter whiteSpaceFilter,
-      XMLStringFactory xstringfactory,
       boolean doIndexing) {
-    super(mgr, domSource, dtmIdentity, whiteSpaceFilter, xstringfactory, doIndexing);
+    super(mgr, domSource, dtmIdentity, whiteSpaceFilter, doIndexing);
 
     // Initialize DOM navigation
     m_pos = m_root = domSource.getNode();
@@ -713,7 +714,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       getNodeData(node, buf);
       String s = (buf.length() > 0) ? buf.toString() : "";
 
-      return m_xstrf.newstr(s);
+      return new XString(s);
     } else if (TEXT_NODE == type || CDATA_SECTION_NODE == type) {
       // If this is a DTM text node, it may be made of multiple DOM text
       // nodes -- including navigating into Entity References. DOM2DTM
@@ -728,8 +729,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         node = logicalNextDOMTextNode(node);
       }
       String s = (buf.length() > 0) ? buf.toString() : "";
-      return m_xstrf.newstr(s);
-    } else return m_xstrf.newstr(node.getNodeValue());
+      return new XString(s);
+    } else return new XString(node.getNodeValue());
   }
 
   /**

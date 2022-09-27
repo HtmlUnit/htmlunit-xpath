@@ -206,7 +206,7 @@ public class XObject extends Expression implements Serializable, Cloneable {
    * @return The string this wraps or the empty string if null
    */
   public XMLString xstr() {
-    return XMLStringFactoryImpl.getFactory().newstr(str());
+    return new XString(str());
   }
 
   /**

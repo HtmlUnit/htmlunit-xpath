@@ -19,7 +19,6 @@ package net.sourceforge.htmlunit.xpath.xml.dtm;
 
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
 
 /**
  * A DTMManager instance can be used to create DTM and DTMIterator objects, and manage the DTM
@@ -39,29 +38,8 @@ import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
  * <p>State: In progress!!
  */
 public abstract class DTMManager {
-  /** Factory for creating XMLString objects. %TBD% Make this set by the caller. */
-  protected XMLStringFactory m_xsf = null;
-
   /** Default constructor is protected on purpose. */
   protected DTMManager() {}
-
-  /**
-   * Get the XMLStringFactory used for the DTMs.
-   *
-   * @return a valid XMLStringFactory object, or null if it hasn't been set yet.
-   */
-  public XMLStringFactory getXMLStringFactory() {
-    return m_xsf;
-  }
-
-  /**
-   * Set the XMLStringFactory used for the DTMs.
-   *
-   * @param xsf a valid XMLStringFactory object, should not be null.
-   */
-  public void setXMLStringFactory(XMLStringFactory xsf) {
-    m_xsf = xsf;
-  }
 
   /**
    * Obtain a new instance of a <code>DTMManager</code>. This static method creates a new factory
@@ -88,9 +66,8 @@ public abstract class DTMManager {
    * @throws DTMConfigurationException if the implementation is not available or cannot be
    *     instantiated.
    */
-  public static DTMManager newInstance(XMLStringFactory xsf) throws DTMConfigurationException {
+  public static DTMManager newInstance() throws DTMConfigurationException {
     DTMManager factoryImpl = new DTMManagerDefault();
-    factoryImpl.setXMLStringFactory(xsf);
     return factoryImpl;
   }
 

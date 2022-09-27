@@ -24,7 +24,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Vector;
+
 import javax.xml.transform.Source;
+
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
@@ -35,7 +37,6 @@ import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.BoolStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.SuballocatedIntVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
 
 /**
  * The <code>DTMDefaultBase</code> class serves as a helper base for DTMs. It sets up structures for
@@ -126,9 +127,6 @@ public abstract class DTMDefaultBase implements DTM {
   /** Stack of flags indicating whether to strip whitespace nodes */
   protected BoolStack m_shouldStripWhitespaceStack;
 
-  /** The XMLString factory for creating XMLStrings. */
-  protected XMLStringFactory m_xstrf;
-
   /**
    * The table for exandedNameID lookups. This may or may not be the same table as is contained in
    * the DTMManagerDefault.
@@ -145,7 +143,6 @@ public abstract class DTMDefaultBase implements DTM {
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
    * @param whiteSpaceFilter The white space filter for this DTM, which may be null.
-   * @param xstringfactory The factory to use for creating XMLStrings.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
   public DTMDefaultBase(
@@ -153,14 +150,12 @@ public abstract class DTMDefaultBase implements DTM {
       Source source,
       int dtmIdentity,
       DTMWSFilter whiteSpaceFilter,
-      XMLStringFactory xstringfactory,
       boolean doIndexing) {
     this(
         mgr,
         source,
         dtmIdentity,
         whiteSpaceFilter,
-        xstringfactory,
         doIndexing,
         DEFAULT_BLOCKSIZE,
         true,
@@ -174,7 +169,6 @@ public abstract class DTMDefaultBase implements DTM {
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
    * @param whiteSpaceFilter The white space filter for this DTM, which may be null.
-   * @param xstringfactory The factory to use for creating XMLStrings.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    * @param blocksize The block size of the DTM.
    * @param usePrevsib true if we want to build the previous sibling node array.
@@ -185,7 +179,6 @@ public abstract class DTMDefaultBase implements DTM {
       Source source,
       int dtmIdentity,
       DTMWSFilter whiteSpaceFilter,
-      XMLStringFactory xstringfactory,
       boolean doIndexing,
       int blocksize,
       boolean usePrevsib,
@@ -217,7 +210,6 @@ public abstract class DTMDefaultBase implements DTM {
     m_documentBaseURI = (null != source) ? source.getSystemId() : null;
     m_dtmIdent.setElementAt(dtmIdentity, 0);
     m_wsfilter = whiteSpaceFilter;
-    m_xstrf = xstringfactory;
     m_indexing = doIndexing;
 
     if (doIndexing) {

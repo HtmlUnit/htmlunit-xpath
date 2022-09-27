@@ -21,6 +21,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
@@ -31,9 +35,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm.DOM2DTM;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 /**
  * The default implementation for the DTMManager.
@@ -189,14 +190,13 @@ public class DTMManagerDefault extends DTMManager {
       System.out.println(
           "Starting " + (unique ? "UNIQUE" : "shared") + " source: " + source.getSystemId());
 
-    XMLStringFactory xstringFactory = m_xsf;
     int dtmPos = getFirstFreeDTMID();
     int documentID = dtmPos << IDENT_DTM_NODE_BITS;
 
     if ((null != source) && source instanceof DOMSource) {
       DOM2DTM dtm =
           new DOM2DTM(
-              this, (DOMSource) source, documentID, whiteSpaceFilter, xstringFactory, doIndexing);
+              this, (DOMSource) source, documentID, whiteSpaceFilter, doIndexing);
 
       addDTM(dtm, dtmPos, 0);
       return dtm;

@@ -18,11 +18,11 @@
 package net.sourceforge.htmlunit.xpath.objects;
 
 import java.util.Locale;
+
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
 
 /**
  * This class represents an XPath string object, and is capable of converting the string to other
@@ -984,9 +984,7 @@ public class XString extends XObject implements XMLString {
       start++;
     }
 
-    XMLStringFactory xsf = XMLStringFactoryImpl.getFactory();
-
-    return edit ? xsf.newstr(new String(buf, start, d - start)) : this;
+    return edit ? new XString(new String(buf, start, d - start)) : this;
   }
 
   /**
