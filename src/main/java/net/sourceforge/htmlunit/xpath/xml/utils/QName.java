@@ -18,11 +18,9 @@
 package net.sourceforge.htmlunit.xpath.xml.utils;
 
 import java.util.StringTokenizer;
-
-import org.w3c.dom.Element;
-
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
+import org.w3c.dom.Element;
 
 /**
  * Class to represent a qualified name: "The name of an internal XSLT object, specifically a named

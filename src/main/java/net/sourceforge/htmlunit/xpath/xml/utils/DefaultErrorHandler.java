@@ -19,7 +19,6 @@ package net.sourceforge.htmlunit.xpath.xml.utils;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
-
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 

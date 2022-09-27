@@ -19,7 +19,6 @@ package net.sourceforge.htmlunit.xpath.compiler;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
-
 import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.axes.UnionPathIterator;
 import net.sourceforge.htmlunit.xpath.axes.WalkerFactory;

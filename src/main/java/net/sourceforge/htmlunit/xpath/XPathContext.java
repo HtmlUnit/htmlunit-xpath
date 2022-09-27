@@ -19,10 +19,8 @@ package net.sourceforge.htmlunit.xpath;
 
 import java.lang.reflect.Method;
 import java.util.Stack;
-
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
-
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;

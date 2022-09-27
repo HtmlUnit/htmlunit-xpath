@@ -18,17 +18,7 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
 import java.util.Vector;
-
 import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
-import org.w3c.dom.Entity;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
@@ -41,6 +31,13 @@ import net.sourceforge.htmlunit.xpath.xml.utils.QName;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Element;
+import org.w3c.dom.Entity;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 /**
  * The <code>DOM2DTM</code> class serves up a DOM's contents via the DTM API.
@@ -752,7 +749,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       //
       // %REVIEW% DOM Level 3 is expected to add a "whole text"
       // retrieval method which performs this function for us.
-        StringBuilder buf = new StringBuilder();
+      StringBuilder buf = new StringBuilder();
       while (node != null) {
         buf.append(node.getNodeValue());
         node = logicalNextDOMTextNode(node);

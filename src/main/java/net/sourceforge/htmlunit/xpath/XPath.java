@@ -120,10 +120,7 @@ public class XPath implements Serializable, ExpressionOwner {
    * @throws javax.xml.transform.TransformerException if syntax or other error.
    */
   public XPath(
-      String exprString,
-      PrefixResolver prefixResolver,
-      int type,
-      ErrorListener errorListener)
+      String exprString, PrefixResolver prefixResolver, int type, ErrorListener errorListener)
       throws javax.xml.transform.TransformerException {
     initFunctionTable();
     if (null == errorListener)

@@ -40,29 +40,10 @@ public class XMLCharacterRecognizer {
   /**
    * Tell if the string is whitespace.
    *
-   * @param buf StringBuffer to check as XML whitespace.
+   * @param chars CharSequence to check as XML whitespace.
    * @return True if characters in buffer are XML whitespace, false otherwise
    */
-  public static boolean isWhiteSpace(StringBuilder buf) {
-    return !buf.chars().anyMatch(i -> !XMLCharacterRecognizer.isWhiteSpace((char)i));
-  }
-
-  /**
-   * Tell if the string is whitespace.
-   *
-   * @param s String to check as XML whitespace.
-   * @return True if characters in buffer are XML whitespace, false otherwise
-   */
-  public static boolean isWhiteSpace(String s) {
-
-    if (null != s) {
-      int n = s.length();
-
-      for (int i = 0; i < n; i++) {
-        if (!isWhiteSpace(s.charAt(i))) return false;
-      }
-    }
-
-    return true;
+  public static boolean isWhiteSpace(CharSequence chars) {
+    return !chars.chars().anyMatch(i -> !XMLCharacterRecognizer.isWhiteSpace((char) i));
   }
 }

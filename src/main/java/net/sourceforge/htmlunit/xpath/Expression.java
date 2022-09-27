@@ -19,7 +19,6 @@ package net.sourceforge.htmlunit.xpath;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
-
 import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
