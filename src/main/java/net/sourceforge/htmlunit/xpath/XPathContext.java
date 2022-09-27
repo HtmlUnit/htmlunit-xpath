@@ -52,8 +52,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * Though XPathContext context extends the DTMManager, it really is a proxy for this object, which
    * is the real DTMManager.
    */
-  protected DTMManager m_dtmManager =
-      DTMManager.newInstance();
+  protected DTMManager m_dtmManager = DTMManager.newInstance();
 
   /**
    * Return the DTMManager object. Though XPathContext context extends the DTMManager, it really is

@@ -79,7 +79,7 @@ public class WalkingIteratorSorted extends WalkingIterator {
     if (null != m_firstWalker) {
       AxesWalker walker = m_firstWalker;
 
-      for (int i = 0; null != walker; i++) {
+      while (null != walker) {
         int axis = walker.getAxis();
 
         if (walker.isDocOrdered()) {

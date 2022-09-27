@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.objects;
 
 import java.util.Locale;
-
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;

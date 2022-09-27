@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
-
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;

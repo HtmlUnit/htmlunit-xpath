@@ -24,9 +24,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Vector;
-
 import javax.xml.transform.Source;
-
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
@@ -151,15 +149,7 @@ public abstract class DTMDefaultBase implements DTM {
       int dtmIdentity,
       DTMWSFilter whiteSpaceFilter,
       boolean doIndexing) {
-    this(
-        mgr,
-        source,
-        dtmIdentity,
-        whiteSpaceFilter,
-        doIndexing,
-        DEFAULT_BLOCKSIZE,
-        true,
-        false);
+    this(mgr, source, dtmIdentity, whiteSpaceFilter, doIndexing, DEFAULT_BLOCKSIZE, true, false);
   }
 
   /**
