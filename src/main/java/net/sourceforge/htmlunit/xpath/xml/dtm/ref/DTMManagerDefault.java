@@ -245,7 +245,6 @@ public class DTMManagerDefault extends DTMManager {
       // POSSIBLE SOLUTIONS:
       //   Generate a list of _unique_ DTM objects?
       //   Have each DTM cache last DOM node search?
-      int max = m_dtms.length;
       for (DTM thisDTM : m_dtms) {
         if ((null != thisDTM) && thisDTM instanceof DOM2DTM) {
           int handle = ((DOM2DTM) thisDTM).getHandleOfNode(node);

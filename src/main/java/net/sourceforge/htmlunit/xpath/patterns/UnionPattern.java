@@ -46,7 +46,6 @@ public class UnionPattern extends Expression {
   @Override
   public boolean canTraverseOutsideSubtree() {
     if (null != m_patterns) {
-      int n = m_patterns.length;
       for (StepPattern m_pattern : m_patterns) {
         if (m_pattern.canTraverseOutsideSubtree()) return true;
       }
@@ -92,8 +91,6 @@ public class UnionPattern extends Expression {
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     XObject bestScore = null;
-    int n = m_patterns.length;
-
     for (StepPattern m_pattern : m_patterns) {
       XObject score = m_pattern.execute(xctxt);
 
