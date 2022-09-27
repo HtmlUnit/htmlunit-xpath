@@ -207,17 +207,6 @@ public class XNodeSet extends NodeSequence {
   /**
    * Cast result object to a string.
    *
-   * @return The string this wraps or the empty string if null
-   */
-  @Override
-  public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb) {
-    XString xstring = (XString) xstr();
-    xstring.appendToFsb(fsb);
-  }
-
-  /**
-   * Cast result object to a string.
-   *
    * @return the string conversion from the next node in the nodeset or "" if there is no next node
    */
   @Override

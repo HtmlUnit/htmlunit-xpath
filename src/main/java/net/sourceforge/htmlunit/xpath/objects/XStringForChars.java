@@ -19,7 +19,6 @@ package net.sourceforge.htmlunit.xpath.objects;
 
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
-import net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer;
 
 /** This class will wrap a FastStringBuffer and allow for */
 public class XStringForChars extends XString {
@@ -61,28 +60,6 @@ public class XStringForChars extends XString {
         XSLMessages.createXPATHMessage(
             XPATHErrorResources.ER_XSTRINGFORCHARS_CANNOT_TAKE_STRING,
             null)); // "XStringForChars can not take a string for an argument!");
-  }
-
-  /**
-   * Cast result object to a string.
-   *
-   * @return The string this wraps or the empty string if null
-   */
-  public FastStringBuffer fsb() {
-    throw new RuntimeException(
-        XSLMessages.createXPATHMessage(
-            XPATHErrorResources.ER_FSB_NOT_SUPPORTED_XSTRINGFORCHARS,
-            null)); // "fsb() not supported for XStringForChars!");
-  }
-
-  /**
-   * Cast result object to a string.
-   *
-   * @return The string this wraps or the empty string if null
-   */
-  @Override
-  public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb) {
-    fsb.append((char[]) m_obj, m_start, m_length);
   }
 
   /**

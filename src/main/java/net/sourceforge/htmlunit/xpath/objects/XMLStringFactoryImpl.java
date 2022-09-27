@@ -17,7 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath.objects;
 
-import net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
 
@@ -48,19 +47,6 @@ public class XMLStringFactoryImpl extends XMLStringFactory {
   @Override
   public XMLString newstr(String string) {
     return new XString(string);
-  }
-
-  /**
-   * Create a XMLString from a FastStringBuffer.
-   *
-   * @param fsb FastStringBuffer reference, which must be non-null.
-   * @param start The start position in the array.
-   * @param length The number of characters to read from the array.
-   * @return An XMLString object that wraps the FastStringBuffer reference.
-   */
-  @Override
-  public XMLString newstr(FastStringBuffer fsb, int start, int length) {
-    return new XStringForFSB(fsb, start, length);
   }
 
   /**

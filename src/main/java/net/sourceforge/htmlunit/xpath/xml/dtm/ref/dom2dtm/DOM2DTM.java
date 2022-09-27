@@ -37,9 +37,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.ExpandedNameTable;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
-import net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer;
 import net.sourceforge.htmlunit.xpath.xml.utils.QName;
-import net.sourceforge.htmlunit.xpath.xml.utils.StringBufferPool;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLStringFactory;
@@ -714,16 +712,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     if (DTM.ELEMENT_NODE == type
         || DTM.DOCUMENT_NODE == type
         || DTM.DOCUMENT_FRAGMENT_NODE == type) {
-      FastStringBuffer buf = StringBufferPool.get();
-      String s;
-
-      try {
-        getNodeData(node, buf);
-
-        s = (buf.length() > 0) ? buf.toString() : "";
-      } finally {
-        StringBufferPool.free(buf);
-      }
+      StringBuilder buf = new StringBuilder();
+      getNodeData(node, buf);
+      String s = (buf.length() > 0) ? buf.toString() : "";
 
       return m_xstrf.newstr(s);
     } else if (TEXT_NODE == type || CDATA_SECTION_NODE == type) {
@@ -734,13 +725,12 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       //
       // %REVIEW% DOM Level 3 is expected to add a "whole text"
       // retrieval method which performs this function for us.
-      FastStringBuffer buf = StringBufferPool.get();
+      StringBuilder buf = new StringBuilder();
       while (node != null) {
         buf.append(node.getNodeValue());
         node = logicalNextDOMTextNode(node);
       }
       String s = (buf.length() > 0) ? buf.toString() : "";
-      StringBufferPool.free(buf);
       return m_xstrf.newstr(s);
     } else return m_xstrf.newstr(node.getNodeValue());
   }
@@ -762,14 +752,13 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       //
       // %REVIEW% DOM Level 3 is expected to add a "whole text"
       // retrieval method which performs this function for us.
-      FastStringBuffer buf = StringBufferPool.get();
+        StringBuilder buf = new StringBuilder();
       while (node != null) {
         buf.append(node.getNodeValue());
         node = logicalNextDOMTextNode(node);
       }
-      boolean b = buf.isWhitespace(0, buf.length());
-      StringBufferPool.free(buf);
-      return b;
+      // isWhitespace
+      return !buf.chars().anyMatch(i -> !XMLCharacterRecognizer.isWhiteSpace((char)i));
     }
     return false;
   }
@@ -791,7 +780,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    *     CDATASection nodes.
    * @param buf FastStringBuffer into which the contents of the text nodes are to be concatenated.
    */
-  protected static void getNodeData(Node node, FastStringBuffer buf) {
+  protected static void getNodeData(Node node, StringBuilder buf) {
 
     switch (node.getNodeType()) {
       case Node.DOCUMENT_FRAGMENT_NODE:
@@ -1088,14 +1077,13 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     Node n = logicalNextDOMTextNode(node);
     if (n == null) return node.getNodeValue();
 
-    FastStringBuffer buf = StringBufferPool.get();
+    StringBuilder buf = new StringBuilder();
     buf.append(node.getNodeValue());
     while (n != null) {
       buf.append(n.getNodeValue());
       n = logicalNextDOMTextNode(n);
     }
     String s = (buf.length() > 0) ? buf.toString() : "";
-    StringBufferPool.free(buf);
     return s;
   }
 

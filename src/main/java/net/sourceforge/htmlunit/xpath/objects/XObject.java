@@ -496,17 +496,6 @@ public class XObject extends Expression implements Serializable, Cloneable {
   }
 
   /**
-   * Cast result object to a string.
-   *
-   * <p>NEEDSDOC @param fsb
-   *
-   * @return The string this wraps or the empty string if null
-   */
-  public void appendToFsb(net.sourceforge.htmlunit.xpath.xml.utils.FastStringBuffer fsb) {
-    fsb.append(str());
-  }
-
-  /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   @Override

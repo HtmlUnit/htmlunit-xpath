@@ -36,16 +36,6 @@ public abstract class XMLStringFactory {
    * @param length The number of characters to read from the array.
    * @return An XMLString object that wraps the FastStringBuffer reference.
    */
-  public abstract XMLString newstr(FastStringBuffer string, int start, int length);
-
-  /**
-   * Create a XMLString from a FastStringBuffer.
-   *
-   * @param string FastStringBuffer reference, which must be non-null.
-   * @param start The start position in the array.
-   * @param length The number of characters to read from the array.
-   * @return An XMLString object that wraps the FastStringBuffer reference.
-   */
   public abstract XMLString newstr(char[] string, int start, int length);
 
   /**
