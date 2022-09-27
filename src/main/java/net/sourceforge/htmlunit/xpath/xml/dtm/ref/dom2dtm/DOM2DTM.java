@@ -757,8 +757,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         buf.append(node.getNodeValue());
         node = logicalNextDOMTextNode(node);
       }
-      // isWhitespace
-      return !buf.chars().anyMatch(i -> !XMLCharacterRecognizer.isWhiteSpace((char)i));
+      return XMLCharacterRecognizer.isWhiteSpace(buf);
     }
     return false;
   }
