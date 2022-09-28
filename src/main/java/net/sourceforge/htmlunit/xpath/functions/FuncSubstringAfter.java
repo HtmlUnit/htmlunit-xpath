@@ -20,7 +20,6 @@ package net.sourceforge.htmlunit.xpath.functions;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 
 /**
  * Execute the SubstringAfter() function.
@@ -40,8 +39,8 @@ public class FuncSubstringAfter extends Function2Args {
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    XMLString s1 = m_arg0.execute(xctxt).xstr();
-    XMLString s2 = m_arg1.execute(xctxt).xstr();
+    XString s1 = m_arg0.execute(xctxt).xstr();
+    XString s2 = m_arg1.execute(xctxt).xstr();
     int index = s1.indexOf(s2);
 
     return (-1 == index) ? XString.EMPTYSTRING : (XString) s1.substring(index + s2.length());

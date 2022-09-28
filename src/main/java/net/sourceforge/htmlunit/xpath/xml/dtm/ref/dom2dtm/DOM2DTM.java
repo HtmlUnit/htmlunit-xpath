@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.QName;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
@@ -698,7 +697,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    * @return A string object that represents the string-value of the given node.
    */
   @Override
-  public XMLString getStringValue(int nodeHandle) {
+  public XString getStringValue(int nodeHandle) {
 
     int type = getNodeType(nodeHandle);
     Node node = getNode(nodeHandle);

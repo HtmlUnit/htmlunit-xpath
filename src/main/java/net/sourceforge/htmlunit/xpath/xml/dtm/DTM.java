@@ -17,7 +17,7 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm;
 
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
+import net.sourceforge.htmlunit.xpath.objects.XString;
 
 /**
  * <code>DTM</code> is an XML document model expressed as a table rather than an object tree. It
@@ -292,7 +292,7 @@ public interface DTM {
    * @param nodeHandle The node ID.
    * @return A string object that represents the string-value of the given node.
    */
-  public XMLString getStringValue(int nodeHandle);
+  public XString getStringValue(int nodeHandle);
 
   /**
    * Get number of character array chunks in the string-value of a node. (see

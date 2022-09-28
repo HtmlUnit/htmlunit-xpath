@@ -66,14 +66,6 @@ public class SuballocatedIntVector {
   protected int m_buildCacheStartIndex;
 
   /**
-   * Default constructor. Note that the default block size is currently 2K, which may be overkill
-   * for small lists and undershootng for large ones.
-   */
-  public SuballocatedIntVector() {
-    this(2048);
-  }
-
-  /**
    * Construct a IntVector, using the given block size and number of blocks. For efficiency, we will
    * round the requested size off to a power of two.
    *
@@ -110,17 +102,6 @@ public class SuballocatedIntVector {
    */
   public int size() {
     return m_firstFree;
-  }
-
-  /**
-   * Set the length of the list. This will only work to truncate the list, and even then it has not
-   * been heavily tested and may not be trustworthy.
-   *
-   * @return length of the list
-   */
-  public void setSize(int sz) {
-    if (m_firstFree > sz) // Whups; had that backward!
-    m_firstFree = sz;
   }
 
   /**
@@ -163,13 +144,6 @@ public class SuballocatedIntVector {
 
       ++m_firstFree;
     }
-  }
-
-  /** Wipe it out. Currently defined as equivalent to setSize(0). */
-  public void removeAllElements() {
-    m_firstFree = 0;
-    m_buildCache = m_map0;
-    m_buildCacheStartIndex = 0;
   }
 
   /**
@@ -268,23 +242,5 @@ public class SuballocatedIntVector {
    */
   public int indexOf(int elem) {
     return indexOf(elem, 0);
-  }
-
-  /**
-   * Return the internal m_map0 array
-   *
-   * @return the m_map0 array
-   */
-  public final int[] getMap0() {
-    return m_map0;
-  }
-
-  /**
-   * Return the m_map double array
-   *
-   * @return the internal map of array of arrays
-   */
-  public final int[][] getMap() {
-    return m_map;
   }
 }

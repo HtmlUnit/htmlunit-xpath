@@ -20,7 +20,6 @@ package net.sourceforge.htmlunit.xpath.functions;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 
 /**
  * Execute the normalize-space() function.
@@ -39,8 +38,8 @@ public class FuncNormalizeSpace extends FunctionDef1Arg {
    */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    XMLString s1 = getArg0AsString(xctxt);
+    XString s1 = getArg0AsString(xctxt);
 
-    return (XString) s1.fixWhiteSpace(true, true, false);
+    return s1.fixWhiteSpace(true, true, false);
   }
 }

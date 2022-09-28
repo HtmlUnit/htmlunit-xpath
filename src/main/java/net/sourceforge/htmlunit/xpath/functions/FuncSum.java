@@ -20,9 +20,9 @@ package net.sourceforge.htmlunit.xpath.functions;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XNumber;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
+import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 
 /**
  * Execute the Sum() function.
@@ -48,7 +48,7 @@ public class FuncSum extends FunctionOneArg {
 
     while (DTM.NULL != (pos = nodes.nextNode())) {
       DTM dtm = nodes.getDTM(pos);
-      XMLString s = dtm.getStringValue(pos);
+      XString s = dtm.getStringValue(pos);
 
       if (null != s) sum += s.toDouble();
     }

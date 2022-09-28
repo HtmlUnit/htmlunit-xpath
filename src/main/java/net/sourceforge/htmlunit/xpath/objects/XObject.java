@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.NodeIterator;
 
@@ -205,7 +204,7 @@ public class XObject extends Expression implements Serializable, Cloneable {
    *
    * @return The string this wraps or the empty string if null
    */
-  public XMLString xstr() {
+  public XString xstr() {
     return new XString(str());
   }
 

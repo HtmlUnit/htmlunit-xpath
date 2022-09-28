@@ -21,11 +21,11 @@ import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
+import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 
 /**
  * This abstract class serves as the base for all expression objects. An Expression can be executed
@@ -139,7 +139,7 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    * @return The string this wraps or the empty string if null
    * @throws javax.xml.transform.TransformerException
    */
-  public XMLString xstr(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XString xstr(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return execute(xctxt).xstr();
   }
 

@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
 import net.sourceforge.htmlunit.xpath.xml.utils.IntStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 
 /**
  * Default class for the runtime execution context for XPath.
@@ -801,7 +800,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
       // %REVIEW% You can't get much uglier than this...
       int nodeHandle = getDTMHandleFromNode(n);
       DTM dtm = getDTM(nodeHandle);
-      XMLString strVal = dtm.getStringValue(nodeHandle);
+      XString strVal = dtm.getStringValue(nodeHandle);
       return strVal.toString();
     }
   }

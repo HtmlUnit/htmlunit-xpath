@@ -25,6 +25,7 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.Vector;
 import javax.xml.transform.Source;
+import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
@@ -34,7 +35,6 @@ import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.BoolStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.SuballocatedIntVector;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 
 /**
  * The <code>DTMDefaultBase</code> class serves as a helper base for DTMs. It sets up structures for
@@ -1373,7 +1373,7 @@ public abstract class DTMDefaultBase implements DTM {
    * @return A string object that represents the string-value of the given node.
    */
   @Override
-  public abstract XMLString getStringValue(int nodeHandle);
+  public abstract XString getStringValue(int nodeHandle);
 
   /**
    * Get number of character array chunks in the string-value of a node. (see

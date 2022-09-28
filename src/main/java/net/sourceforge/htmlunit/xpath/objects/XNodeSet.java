@@ -24,7 +24,6 @@ import net.sourceforge.htmlunit.xpath.axes.NodeSequence;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.NodeIterator;
 
@@ -125,7 +124,7 @@ public class XNodeSet extends NodeSequence {
    * @return numeric value of the string conversion from a single node.
    */
   public double getNumberFromNode(int n) {
-    XMLString xstr = m_dtmMgr.getDTM(n).getStringValue(n);
+    XString xstr = m_dtmMgr.getDTM(n).getStringValue(n);
     return xstr.toDouble();
   }
 
@@ -183,7 +182,7 @@ public class XNodeSet extends NodeSequence {
    * @param n Node to convert
    * @return the string conversion from a single node.
    */
-  public XMLString getStringFromNode(int n) {
+  public XString getStringFromNode(int n) {
     // %OPT%
     // I guess we'll have to get a static instance of the DTM manager...
     if (DTM.NULL != n) {
@@ -199,7 +198,7 @@ public class XNodeSet extends NodeSequence {
    * @return The document fragment node data or the empty string.
    */
   @Override
-  public XMLString xstr() {
+  public XString xstr() {
     int node = item(0);
     return (node != DTM.NULL) ? getStringFromNode(node) : XString.EMPTYSTRING;
   }
@@ -372,16 +371,16 @@ public class XNodeSet extends NodeSequence {
       DTMIterator list1 = iterRaw();
       DTMIterator list2 = ((XNodeSet) obj2).iterRaw();
       int node1;
-      List<XMLString> node2Strings = null;
+      List<XString> node2Strings = null;
 
       while (DTM.NULL != (node1 = list1.nextNode())) {
-        XMLString s1 = getStringFromNode(node1);
+        XString s1 = getStringFromNode(node1);
 
         if (null == node2Strings) {
           int node2;
 
           while (DTM.NULL != (node2 = list2.nextNode())) {
-            XMLString s2 = getStringFromNode(node2);
+            XString s2 = getStringFromNode(node2);
 
             if (comparator.compareStrings(s1, s2)) {
               result = true;
@@ -394,7 +393,7 @@ public class XNodeSet extends NodeSequence {
             node2Strings.add(s2);
           }
         } else {
-          for (XMLString node2String : node2Strings) {
+          for (XString node2String : node2Strings) {
             if (comparator.compareStrings(s1, node2String)) {
               result = true;
 
@@ -441,12 +440,12 @@ public class XNodeSet extends NodeSequence {
       }
       list1.reset();
     } else if (XObject.CLASS_RTREEFRAG == type) {
-      XMLString s2 = obj2.xstr();
+      XString s2 = obj2.xstr();
       DTMIterator list1 = iterRaw();
       int node;
 
       while (DTM.NULL != (node = list1.nextNode())) {
-        XMLString s1 = getStringFromNode(node);
+        XString s1 = getStringFromNode(node);
 
         if (comparator.compareStrings(s1, s2)) {
           result = true;
@@ -463,12 +462,12 @@ public class XNodeSet extends NodeSequence {
       // is a node in the node-set such that the result of performing
       // the comparison on the string-value of the node and the other
       // string is true.
-      XMLString s2 = obj2.xstr();
+      XString s2 = obj2.xstr();
       DTMIterator list1 = iterRaw();
       int node;
 
       while (DTM.NULL != (node = list1.nextNode())) {
-        XMLString s1 = getStringFromNode(node);
+        XString s1 = getStringFromNode(node);
         if (comparator.compareStrings(s1, s2)) {
           result = true;
 
@@ -570,7 +569,7 @@ abstract class Comparator {
    * @param s2 Second String to compare
    * @return Whether the strings are equal or not
    */
-  abstract boolean compareStrings(XMLString s1, XMLString s2);
+  abstract boolean compareStrings(XString s1, XString s2);
 
   /**
    * Compare two numbers
@@ -593,7 +592,7 @@ class LessThanComparator extends Comparator {
    * @return True if s1 is less than s2
    */
   @Override
-  boolean compareStrings(XMLString s1, XMLString s2) {
+  boolean compareStrings(XString s1, XString s2) {
     return s1.toDouble() < s2.toDouble();
     // return s1.compareTo(s2) < 0;
   }
@@ -622,7 +621,7 @@ class LessThanOrEqualComparator extends Comparator {
    * @return true if s1 is less than or equal to s2
    */
   @Override
-  boolean compareStrings(XMLString s1, XMLString s2) {
+  boolean compareStrings(XString s1, XString s2) {
     return s1.toDouble() <= s2.toDouble();
     // return s1.compareTo(s2) <= 0;
   }
@@ -651,7 +650,7 @@ class GreaterThanComparator extends Comparator {
    * @return true if s1 is greater than s2
    */
   @Override
-  boolean compareStrings(XMLString s1, XMLString s2) {
+  boolean compareStrings(XString s1, XString s2) {
     return s1.toDouble() > s2.toDouble();
     // return s1.compareTo(s2) > 0;
   }
@@ -680,7 +679,7 @@ class GreaterThanOrEqualComparator extends Comparator {
    * @return true if s1 is greater than or equal to s2
    */
   @Override
-  boolean compareStrings(XMLString s1, XMLString s2) {
+  boolean compareStrings(XString s1, XString s2) {
     return s1.toDouble() >= s2.toDouble();
     // return s1.compareTo(s2) >= 0;
   }
@@ -709,7 +708,7 @@ class EqualComparator extends Comparator {
    * @return true if s1 is equal to s2
    */
   @Override
-  boolean compareStrings(XMLString s1, XMLString s2) {
+  boolean compareStrings(XString s1, XString s2) {
     return s1.equals(s2);
   }
 
@@ -737,7 +736,7 @@ class NotEqualComparator extends Comparator {
    * @return true if s1 is not equal to s2
    */
   @Override
-  boolean compareStrings(XMLString s1, XMLString s2) {
+  boolean compareStrings(XString s1, XString s2) {
     return !s1.equals(s2);
   }
 

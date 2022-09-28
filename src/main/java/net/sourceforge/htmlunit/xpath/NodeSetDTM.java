@@ -69,21 +69,6 @@ public class NodeSetDTM extends NodeVector
     m_manager = dtmManager;
   }
 
-  // %TBD%
-  //  /**
-  //   * Create a NodeSetDTM, and copy the members of the
-  //   * given nodelist into it.
-  //   *
-  //   * @param nodelist List of Nodes to be made members of the new set.
-  //   */
-  //  public NodeSetDTM(NodeList nodelist)
-  //  {
-  //
-  //    super();
-  //
-  //    addNodes(nodelist);
-  //  }
-
   /**
    * Create a NodeSetDTM, and copy the members of the given NodeSetDTM into it.
    *

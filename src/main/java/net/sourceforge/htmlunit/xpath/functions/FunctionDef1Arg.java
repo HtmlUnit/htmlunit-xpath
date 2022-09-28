@@ -22,7 +22,6 @@ import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLString;
 
 /**
  * Base class for functions that accept one argument that can be defaulted if not specified.
@@ -66,7 +65,7 @@ public class FunctionDef1Arg extends FunctionOneArg {
    * @throws javax.xml.transform.TransformerException if an error occurs while executing the
    *     argument expression.
    */
-  protected XMLString getArg0AsString(XPathContext xctxt)
+  protected XString getArg0AsString(XPathContext xctxt)
       throws javax.xml.transform.TransformerException {
     if (null == m_arg0) {
       int currentNode = xctxt.getCurrentNode();
@@ -97,7 +96,7 @@ public class FunctionDef1Arg extends FunctionOneArg {
       if (DTM.NULL == currentNode) return 0;
       else {
         DTM dtm = xctxt.getDTM(currentNode);
-        XMLString str = dtm.getStringValue(currentNode);
+        XString str = dtm.getStringValue(currentNode);
         return str.toDouble();
       }
 
