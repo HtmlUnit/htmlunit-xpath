@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.ExpandedNameTable;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
-import net.sourceforge.htmlunit.xpath.xml.utils.QName;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -822,7 +821,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
           // assume not null.
           name = node.getNodeName();
           if (name.startsWith("xmlns:")) {
-            name = QName.getLocalPart(name);
+            name = getLocalPart(name);
           } else if (name.equals("xmlns")) {
             name = "";
           }
@@ -844,6 +843,19 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     }
 
     return name;
+  }
+
+  /**
+   * Returns the local name of the given node.
+   *
+   * @param qname Input name
+   * @return Local part of the name if prefixed, or the given name if not
+   */
+  private static String getLocalPart(String qname) {
+
+    int index = qname.indexOf(':');
+
+    return (index < 0) ? qname : qname.substring(index + 1);
   }
 
   /**
@@ -873,34 +885,34 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         }
       }
       return newname;
-    } else {
-      String name;
-      short type = getNodeType(nodeHandle);
-      switch (type) {
-        case DTM.ATTRIBUTE_NODE:
-        case DTM.ELEMENT_NODE:
-        case DTM.ENTITY_REFERENCE_NODE:
-        case DTM.NAMESPACE_NODE:
-        case DTM.PROCESSING_INSTRUCTION_NODE:
-          {
-            Node node = getNode(nodeHandle);
-
-            // assume not null.
-            name = node.getLocalName();
-
-            if (null == name) {
-              String qname = node.getNodeName();
-              int index = qname.indexOf(':');
-
-              name = (index < 0) ? qname : qname.substring(index + 1);
-            }
-          }
-          break;
-        default:
-          name = "";
-      }
-      return name;
     }
+
+    String name;
+    short type = getNodeType(nodeHandle);
+    switch (type) {
+      case DTM.ATTRIBUTE_NODE:
+      case DTM.ELEMENT_NODE:
+      case DTM.ENTITY_REFERENCE_NODE:
+      case DTM.NAMESPACE_NODE:
+      case DTM.PROCESSING_INSTRUCTION_NODE:
+        {
+          Node node = getNode(nodeHandle);
+
+          // assume not null.
+          name = node.getLocalName();
+
+          if (null == name) {
+            String qname = node.getNodeName();
+            int index = qname.indexOf(':');
+
+            name = (index < 0) ? qname : qname.substring(index + 1);
+          }
+        }
+        break;
+      default:
+        name = "";
+    }
+    return name;
   }
 
   /**
@@ -967,31 +979,31 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       if (id == NULL) return null;
       Node node = m_nodes.elementAt(id);
       return node.getNamespaceURI();
-    } else {
-      String nsuri;
-      short type = getNodeType(nodeHandle);
-
-      switch (type) {
-        case DTM.ATTRIBUTE_NODE:
-        case DTM.ELEMENT_NODE:
-        case DTM.ENTITY_REFERENCE_NODE:
-        case DTM.NAMESPACE_NODE:
-        case DTM.PROCESSING_INSTRUCTION_NODE:
-          {
-            Node node = getNode(nodeHandle);
-
-            // assume not null.
-            nsuri = node.getNamespaceURI();
-
-            // %TBD% Handle DOM1?
-          }
-          break;
-        default:
-          nsuri = null;
-      }
-
-      return nsuri;
     }
+
+    String nsuri;
+    short type = getNodeType(nodeHandle);
+
+    switch (type) {
+      case DTM.ATTRIBUTE_NODE:
+      case DTM.ELEMENT_NODE:
+      case DTM.ENTITY_REFERENCE_NODE:
+      case DTM.NAMESPACE_NODE:
+      case DTM.PROCESSING_INSTRUCTION_NODE:
+        {
+          Node node = getNode(nodeHandle);
+
+          // assume not null.
+          nsuri = node.getNamespaceURI();
+
+          // %TBD% Handle DOM1?
+        }
+        break;
+      default:
+        nsuri = null;
+    }
+
+    return nsuri;
   }
 
   /**

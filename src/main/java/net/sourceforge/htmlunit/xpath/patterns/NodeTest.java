@@ -296,15 +296,6 @@ public class NodeTest extends Expression {
   }
 
   /**
-   * Get the score that this test will return if a test succeeds.
-   *
-   * @return the score that this test will return if a test succeeds.
-   */
-  public double getDefaultScore() {
-    return m_score.num();
-  }
-
-  /**
    * Tell what node type to test, if not DTMFilter.SHOW_ALL.
    *
    * @param whatToShow Bit set defined mainly by {@link

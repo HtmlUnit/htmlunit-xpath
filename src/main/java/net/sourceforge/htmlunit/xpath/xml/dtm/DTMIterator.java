@@ -48,11 +48,11 @@ public interface DTMIterator {
   /** Accept the node. */
   public static final short FILTER_ACCEPT = 1;
 
-  /**
-   * Reject the node. Same behavior as FILTER_SKIP. (In the DOM these differ when applied to a
-   * TreeWalker but have the same result when applied to a NodeIterator).
-   */
-  public static final short FILTER_REJECT = 2;
+  //  /**
+  //   * Reject the node. Same behavior as FILTER_SKIP. (In the DOM these differ when applied to a
+  //   * TreeWalker but have the same result when applied to a NodeIterator).
+  //   */
+  //  public static final short FILTER_REJECT = 2;
 
   /** Skip this single node. */
   public static final short FILTER_SKIP = 3;

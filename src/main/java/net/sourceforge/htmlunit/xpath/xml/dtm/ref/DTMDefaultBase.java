@@ -362,8 +362,10 @@ public abstract class DTMDefaultBase implements DTM {
 
     int info = _exptype(identity);
 
-    if (NULL != info) return m_expandedNameTable.getType(info);
-    else return NULL;
+    if (NULL != info) {
+      return m_expandedNameTable.getType(info);
+    }
+    return NULL;
   }
 
   /**
@@ -417,11 +419,11 @@ public abstract class DTMDefaultBase implements DTM {
     while (info == NOTPROCESSED) {
       boolean isMore = nextNode();
 
-      if (identity >= m_size && !isMore) return NULL;
-      else {
-        info = m_firstch.elementAt(identity);
-        if (info == NOTPROCESSED && !isMore) return NULL;
+      if (identity >= m_size && !isMore) {
+        return NULL;
       }
+      info = m_firstch.elementAt(identity);
+      if (info == NOTPROCESSED && !isMore) return NULL;
     }
 
     return info;
@@ -443,11 +445,11 @@ public abstract class DTMDefaultBase implements DTM {
     while (info == NOTPROCESSED) {
       boolean isMore = nextNode();
 
-      if (identity >= m_size && !isMore) return NULL;
-      else {
-        info = m_nextsib.elementAt(identity);
-        if (info == NOTPROCESSED && !isMore) return NULL;
+      if (identity >= m_size && !isMore) {
+        return NULL;
       }
+      info = m_nextsib.elementAt(identity);
+      if (info == NOTPROCESSED && !isMore) return NULL;
     }
 
     return info;
@@ -767,10 +769,11 @@ public abstract class DTMDefaultBase implements DTM {
       // someone is apparently asking DTMs whether they contain nodes
       // which really don't belong to them. That's probably a bug
       // which should be fixed, but until it is:
-      if (m_mgrDefault.m_dtms[whichDTMindex] != this) return NULL;
-      else
-        return m_mgrDefault.m_dtm_offsets[whichDTMindex]
-            | (nodeHandle & DTMManager.IDENT_NODE_DEFAULT);
+      if (m_mgrDefault.m_dtms[whichDTMindex] != this) {
+        return NULL;
+      }
+      return m_mgrDefault.m_dtm_offsets[whichDTMindex]
+          | (nodeHandle & DTMManager.IDENT_NODE_DEFAULT);
     }
 
     int whichDTMid = m_dtmIdent.indexOf(nodeHandle & DTMManager.IDENT_DTM_DEFAULT);
@@ -972,21 +975,21 @@ public abstract class DTMDefaultBase implements DTM {
   public int getPreviousSibling(int nodeHandle) {
     if (nodeHandle == DTM.NULL) return DTM.NULL;
 
-    if (m_prevsib != null) return makeNodeHandle(_prevsib(makeNodeIdentity(nodeHandle)));
-    else {
-      // If the previous sibling array is not built, we get at
-      // the previous sibling using the parent, firstch and
-      // nextsib arrays.
-      int nodeID = makeNodeIdentity(nodeHandle);
-      int parent = _parent(nodeID);
-      int node = _firstch(parent);
-      int result = DTM.NULL;
-      while (node != nodeID) {
-        result = node;
-        node = _nextsib(node);
-      }
-      return makeNodeHandle(result);
+    if (m_prevsib != null) {
+      return makeNodeHandle(_prevsib(makeNodeIdentity(nodeHandle)));
     }
+    // If the previous sibling array is not built, we get at
+    // the previous sibling using the parent, firstch and
+    // nextsib arrays.
+    int nodeID = makeNodeIdentity(nodeHandle);
+    int parent = _parent(nodeID);
+    int node = _firstch(parent);
+    int result = DTM.NULL;
+    while (node != nodeID) {
+      result = node;
+      node = _nextsib(node);
+    }
+    return makeNodeHandle(result);
   }
 
   /**
@@ -1221,24 +1224,25 @@ public abstract class DTMDefaultBase implements DTM {
         if (nsContext == null || nsContext.size() < 1) return NULL;
 
         return nsContext.elementAt(0);
-      } else return NULL;
-    } else {
-      // Assume that attributes and namespaces immediately
-      // follow the element.
-      //
-      // %OPT% Would things be faster if all NS nodes were built
-      // before all Attr nodes? Some costs at build time for 2nd
-      // pass...
-      int identity = makeNodeIdentity(nodeHandle);
-      if (_type(identity) == DTM.ELEMENT_NODE) {
-        while (DTM.NULL != (identity = getNextNodeIdentity(identity))) {
-          int type = _type(identity);
-          if (type == DTM.NAMESPACE_NODE) return makeNodeHandle(identity);
-          else if (DTM.ATTRIBUTE_NODE != type) break;
-        }
-        return NULL;
-      } else return NULL;
+      }
+      return NULL;
     }
+    // Assume that attributes and namespaces immediately
+    // follow the element.
+    //
+    // %OPT% Would things be faster if all NS nodes were built
+    // before all Attr nodes? Some costs at build time for 2nd
+    // pass...
+    int identity = makeNodeIdentity(nodeHandle);
+    if (_type(identity) == DTM.ELEMENT_NODE) {
+      while (DTM.NULL != (identity = getNextNodeIdentity(identity))) {
+        int type = _type(identity);
+        if (type == DTM.NAMESPACE_NODE) return makeNodeHandle(identity);
+        else if (DTM.ATTRIBUTE_NODE != type) break;
+      }
+      return NULL;
+    }
+    return NULL;
   }
 
   /**
@@ -1266,16 +1270,15 @@ public abstract class DTMDefaultBase implements DTM {
       if (i <= 0 || i == nsContext.size()) return NULL;
 
       return nsContext.elementAt(i);
-    } else {
-      // Assume that attributes and namespace nodes immediately follow the element.
-      int identity = makeNodeIdentity(nodeHandle);
-      while (DTM.NULL != (identity = getNextNodeIdentity(identity))) {
-        int type = _type(identity);
-        if (type == DTM.NAMESPACE_NODE) {
-          return makeNodeHandle(identity);
-        } else if (type != DTM.ATTRIBUTE_NODE) {
-          break;
-        }
+    }
+    // Assume that attributes and namespace nodes immediately follow the element.
+    int identity = makeNodeIdentity(nodeHandle);
+    while (DTM.NULL != (identity = getNextNodeIdentity(identity))) {
+      int type = _type(identity);
+      if (type == DTM.NAMESPACE_NODE) {
+        return makeNodeHandle(identity);
+      } else if (type != DTM.ATTRIBUTE_NODE) {
+        break;
       }
     }
     return DTM.NULL;
@@ -1292,8 +1295,10 @@ public abstract class DTMDefaultBase implements DTM {
 
     int identity = makeNodeIdentity(nodeHandle);
 
-    if (identity > 0) return makeNodeHandle(_parent(identity));
-    else return DTM.NULL;
+    if (identity > 0) {
+      return makeNodeHandle(_parent(identity));
+    }
+    return DTM.NULL;
   }
 
   /**

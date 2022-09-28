@@ -48,8 +48,10 @@ public class ContextMatchStepPattern extends StepPattern {
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    if (xctxt.getIteratorRoot() == xctxt.getCurrentNode()) return getStaticScore();
-    else return SCORE_NONE;
+    if (xctxt.getIteratorRoot() == xctxt.getCurrentNode()) {
+      return getStaticScore();
+    }
+    return SCORE_NONE;
   }
 
   /**

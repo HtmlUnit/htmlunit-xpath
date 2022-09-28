@@ -305,7 +305,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     if (m_whatToShow == NodeTest.SHOW_BYFUNCTION) {
       if (null != m_relativePathPattern) {
         return m_relativePathPattern.execute(xctxt);
-      } else return NodeTest.SCORE_NONE;
+      }
+      return NodeTest.SCORE_NONE;
     }
 
     XObject score;

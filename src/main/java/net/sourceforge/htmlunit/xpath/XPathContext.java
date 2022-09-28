@@ -220,18 +220,12 @@ public class XPathContext extends DTMManager {
    * @return A non-null ErrorListener reference.
    */
   public final ErrorListener getErrorListener() {
-
     if (null != m_errorListener) return m_errorListener;
 
-    ErrorListener retval = null;
-
-    if (null == retval) {
-      if (null == m_defaultErrorListener)
-        m_defaultErrorListener = new net.sourceforge.htmlunit.xpath.xml.utils.DefaultErrorHandler();
-      retval = m_defaultErrorListener;
+    if (null == m_defaultErrorListener) {
+      m_defaultErrorListener = new net.sourceforge.htmlunit.xpath.xml.utils.DefaultErrorHandler();
     }
-
-    return retval;
+    return m_defaultErrorListener;
   }
 
   /**
