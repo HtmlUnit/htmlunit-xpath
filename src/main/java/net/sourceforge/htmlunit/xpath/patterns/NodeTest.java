@@ -408,7 +408,7 @@ public class NodeTest extends Expression {
 
         // was:
         // return (!xctxt.getDOMHelper().shouldStripSourceNode(context))
-        //       ? m_score : SCORE_NONE;
+        // ? m_score : SCORE_NONE;
         return m_score;
       case DTMFilter.SHOW_PROCESSING_INSTRUCTION:
         return subPartMatch(dtm.getNodeName(context), m_name) ? m_score : SCORE_NONE;
@@ -476,7 +476,7 @@ public class NodeTest extends Expression {
 
         // was:
         // return (!xctxt.getDOMHelper().shouldStripSourceNode(context))
-        //       ? m_score : SCORE_NONE;
+        // ? m_score : SCORE_NONE;
         return m_score;
       case DTMFilter.SHOW_PROCESSING_INSTRUCTION:
         return subPartMatch(dtm.getNodeName(context), m_name) ? m_score : SCORE_NONE;

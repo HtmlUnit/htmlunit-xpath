@@ -87,9 +87,9 @@ class Lexer {
     m_compiler.m_currentPattern = pat;
     m_patternMapSize = 0;
 
-    // This needs to grow too.  Use a conservative estimate that the OpMapVector
+    // This needs to grow too. Use a conservative estimate that the OpMapVector
     // needs about five time the length of the input path expression - to a
-    // maximum of MAXTOKENQUEUESIZE*5.  If the OpMapVector needs to grow, grow
+    // maximum of MAXTOKENQUEUESIZE*5. If the OpMapVector needs to grow, grow
     // it freely (second argument to constructor).
     int initTokQueueSize =
         ((pat.length() < OpMap.MAXTOKENQUEUESIZE) ? pat.length() : OpMap.MAXTOKENQUEUESIZE) * 5;
@@ -136,8 +136,8 @@ class Lexer {
               startSubstring = -1;
             } else {
               m_processor.error(
-                  XPATHErrorResources.ER_EXPECTED_DOUBLE_QUOTE,
-                  null); // "misquoted literal... expected double quote!");
+                  XPATHErrorResources.ER_EXPECTED_DOUBLE_QUOTE, null); // "misquoted literal...
+              // expected double quote!");
             }
           }
           break;
@@ -164,8 +164,8 @@ class Lexer {
             startSubstring = -1;
           } else {
             m_processor.error(
-                XPATHErrorResources.ER_EXPECTED_SINGLE_QUOTE,
-                null); // "misquoted literal... expected single quote!");
+                XPATHErrorResources.ER_EXPECTED_SINGLE_QUOTE, null); // "misquoted literal...
+            // expected single quote!");
           }
           break;
         case 0x0A:
@@ -508,8 +508,9 @@ class Lexer {
       if (s.length() > 0) addToTokenQueue(s);
     } else {
       m_processor.error(
-          XPATHErrorResources.ER_PREFIX_MUST_RESOLVE,
-          new String[] {prefix}); // "Prefix must resolve to a namespace: {0}";
+          XPATHErrorResources.ER_PREFIX_MUST_RESOLVE, new String[] {prefix}); // "Prefix must
+      // resolve to a
+      // namespace: {0}";
     }
 
     return -1;

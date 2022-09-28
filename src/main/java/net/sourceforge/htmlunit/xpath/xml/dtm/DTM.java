@@ -600,7 +600,8 @@ public interface DTM {
    */
   public org.w3c.dom.Node getNode(int nodeHandle);
 
-  // ==== Construction methods (may not be supported by some implementations!) =====
+  // ==== Construction methods (may not be supported by some implementations!)
+  // =====
 
   /**
    * Append a child to "the end of the document". Please note that the node is always cloned in a

@@ -160,7 +160,8 @@ public class WalkerFactory {
     // Is the iteration exactly one child step?
     else if (walksChildrenOnly(analysis) && isOneStep) {
 
-      // Does the pattern specify *any* child with no predicate? (i.e. select="child::node()".
+      // Does the pattern specify *any* child with no predicate? (i.e.
+      // select="child::node()".
       if (isWild(analysis) && !hasPredicate(analysis)) {
         if (DEBUG_ITERATOR_CREATION) diagnoseIterator("ChildIterator", analysis, compiler);
 
@@ -227,10 +228,10 @@ public class WalkerFactory {
 
         iter = new WalkingIterator(compiler, opPos, analysis, true);
       } else {
-        //        if (DEBUG_ITERATOR_CREATION)
-        //          diagnoseIterator("MatchPatternIterator", analysis, compiler);
+        // if (DEBUG_ITERATOR_CREATION)
+        // diagnoseIterator("MatchPatternIterator", analysis, compiler);
         //
-        //        return new MatchPatternIterator(compiler, opPos, analysis);
+        // return new MatchPatternIterator(compiler, opPos, analysis);
         if (DEBUG_ITERATOR_CREATION) diagnoseIterator("WalkingIteratorSorted", analysis, compiler);
 
         iter = new WalkingIteratorSorted(compiler, opPos, analysis, true);
@@ -356,9 +357,9 @@ public class WalkerFactory {
     int endFunc = opPos + compiler.getOp(opPos + 1) - 1;
     opPos = OpMap.getFirstChildPos(opPos);
     int funcID = compiler.getOp(opPos);
-    //  System.out.println("funcID: "+funcID);
-    //  System.out.println("opPos: "+opPos);
-    //  System.out.println("endFunc: "+endFunc);
+    // System.out.println("funcID: "+funcID);
+    // System.out.println("opPos: "+opPos);
+    // System.out.println("endFunc: "+endFunc);
     switch (funcID) {
       case FunctionTable.FUNC_LAST:
       case FunctionTable.FUNC_POSITION:
@@ -487,7 +488,7 @@ public class WalkerFactory {
     int nodeTestType = OpCodes.NODETYPE_NODE;
 
     while (OpCodes.ENDOP != (stepType = compiler.getOp(stepOpCodePos))) {
-      // The DescendantIterator can only do one node test.  If there's more
+      // The DescendantIterator can only do one node test. If there's more
       // than one, use another iterator.
       if (nodeTestType != OpCodes.NODETYPE_NODE && nodeTestType != OpCodes.NODETYPE_ROOT)
         return false;
@@ -583,9 +584,10 @@ public class WalkerFactory {
 
       // String namespace = compiler.getStepNS(stepOpCodePos);
       // boolean isNSWild = (null != namespace)
-      //                   ? namespace.equals(NodeTest.WILD) : false;
+      // ? namespace.equals(NodeTest.WILD) : false;
       // String localname = compiler.getStepLocalName(stepOpCodePos);
-      // boolean isWild = (null != localname) ? localname.equals(NodeTest.WILD) : false;
+      // boolean isWild = (null != localname) ? localname.equals(NodeTest.WILD) :
+      // false;
       boolean predAnalysis = analyzePredicate(compiler, stepOpCodePos, stepType);
 
       if (predAnalysis) analysisResult |= BIT_PREDICATE;
@@ -690,9 +692,9 @@ public class WalkerFactory {
     return Axis.DESCENDANTORSELF == axis
         || (Axis.DESCENDANT == axis)
         || (Axis.FOLLOWING == axis)
-        //          || (Axis.FOLLOWINGSIBLING == axis)
+        // || (Axis.FOLLOWINGSIBLING == axis)
         || (Axis.PRECEDING == axis)
-    //          || (Axis.PRECEDINGSIBLING == axis)
+    // || (Axis.PRECEDINGSIBLING == axis)
     ;
   }
 
@@ -752,7 +754,7 @@ public class WalkerFactory {
       // int nextPaxis = pat.getPredicateAxis();
       pat.setAxis(axis);
 
-      // The predicate axis can't be moved!!!  Test Axes103
+      // The predicate axis can't be moved!!! Test Axes103
       // pat.setPredicateAxis(paxis);
 
       // If we have an attribute or namespace axis that went up, then
@@ -799,7 +801,7 @@ public class WalkerFactory {
           attrPat.setStaticScore(score);
 
           // This is needed to inverse a following pattern, because of the
-          // wacky Xalan rules for following from an attribute.  See axes108.
+          // wacky Xalan rules for following from an attribute. See axes108.
           // By these rules, following from an attribute is not strictly
           // inverseable.
           if (Axis.PRECEDING == pat.getAxis()) pat.setAxis(Axis.PRECEDINGANDANCESTOR);
@@ -1024,13 +1026,13 @@ public class WalkerFactory {
     int stepType = compiler.getOp(opPos);
 
     /*
-    System.out.println("0: "+compiler.getOp(opPos));
-    System.out.println("1: "+compiler.getOp(opPos+1));
-    System.out.println("2: "+compiler.getOp(opPos+2));
-    System.out.println("3: "+compiler.getOp(opPos+3));
-    System.out.println("4: "+compiler.getOp(opPos+4));
-    System.out.println("5: "+compiler.getOp(opPos+5));
-    */
+     * System.out.println("0: "+compiler.getOp(opPos));
+     * System.out.println("1: "+compiler.getOp(opPos+1));
+     * System.out.println("2: "+compiler.getOp(opPos+2));
+     * System.out.println("3: "+compiler.getOp(opPos+3));
+     * System.out.println("4: "+compiler.getOp(opPos+4));
+     * System.out.println("5: "+compiler.getOp(opPos+5));
+     */
     boolean simpleInit = false;
 
     switch (stepType) {
@@ -1338,7 +1340,7 @@ public class WalkerFactory {
   }
 
   public static boolean canCrissCross(int analysis) {
-    // This could be done faster.  Coded for clarity.
+    // This could be done faster. Coded for clarity.
     if (walksSelfOnly(analysis)) return false;
     else if (walksDownOnly(analysis) && !canSkipSubtrees(analysis)) return false;
     else if (walksChildrenAndExtraAndSelfOnly(analysis)) return false;
@@ -1398,7 +1400,7 @@ public class WalkerFactory {
         && isSet(analysis, BIT_PRECEDING | BIT_PRECEDING_SIBLING)) return false;
 
     // OK, now we have to check for select="@*/axis::*" patterns, which
-    // can also cause duplicates to happen.  But select="axis*/@::*" patterns
+    // can also cause duplicates to happen. But select="axis*/@::*" patterns
     // are OK, as are select="@foo/axis::*" patterns.
     // Unfortunately, we can't do this just via the analysis bits.
 
@@ -1417,7 +1419,7 @@ public class WalkerFactory {
           if (foundWildAttribute) // Maybe not needed, but be safe.
           return false;
 
-          // This doesn't seem to work as a test for wild card.  Hmph.
+          // This doesn't seem to work as a test for wild card. Hmph.
           // int nodeTestType = compiler.getStepTestType(stepOpCodePos);
 
           String localName = compiler.getStepLocalName(stepOpCodePos);
@@ -1543,7 +1545,9 @@ public class WalkerFactory {
           | BIT_PRECEDING
           | BIT_FOLLOWING_SIBLING
           | BIT_FOLLOWING
-          | BIT_PARENT // except parent of attrs.
+          | BIT_PARENT // except
+          // parent of
+          // attrs.
           | BIT_ANCESTOR_OR_SELF
           | BIT_ANCESTOR
           | BIT_FILTER

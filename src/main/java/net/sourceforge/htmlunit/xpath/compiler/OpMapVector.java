@@ -87,7 +87,7 @@ public class OpMapVector {
   }
 
   /*
-   * Reset the array to the supplied size.  No checking is done.
+   * Reset the array to the supplied size. No checking is done.
    *
    * @param size The size to trim to.
    */

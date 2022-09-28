@@ -95,19 +95,20 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     DTMAxisIterator iterator = null;
 
-    /* This causes an error when using patterns for elements that
-       do not exist in the DOM (translet types which do not correspond
-       to a DOM type are mapped to the DOM.ELEMENT type).
-    */
+    /*
+     * This causes an error when using patterns for elements that do not exist in
+     * the DOM (translet types which do not correspond to a DOM type are mapped to
+     * the DOM.ELEMENT type).
+     */
 
-    //        if (type == NO_TYPE) {
-    //            return(EMPTYITERATOR);
-    //        }
-    //        else if (type == ELEMENT) {
-    //            iterator = new FilterIterator(getAxisIterator(axis),
-    //                                          getElementFilter());
-    //        }
-    //        else
+    // if (type == NO_TYPE) {
+    // return(EMPTYITERATOR);
+    // }
+    // else if (type == ELEMENT) {
+    // iterator = new FilterIterator(getAxisIterator(axis),
+    // getElementFilter());
+    // }
+    // else
     {
       switch (axis) {
         case Axis.SELF:
@@ -988,7 +989,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     protected int _markedsp, _markedNode, _markedDescendant;
 
-    /* _currentNode precedes candidates.  This is the identity, not the handle! */
+    /* _currentNode precedes candidates. This is the identity, not the handle! */
 
     /**
      * True if this iterator has a reversed axis.
@@ -1021,8 +1022,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       } catch (CloneNotSupportedException e) {
         throw new DTMException(
             XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED,
-                null)); // "Iterator clone not supported.");
+                XMLErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null)); // "Iterator
+        // clone
+        // not
+        // supported.");
       }
     }
 
@@ -1334,8 +1337,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       } catch (CloneNotSupportedException e) {
         throw new DTMException(
             XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED,
-                null)); // "Iterator clone not supported.");
+                XMLErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null)); // "Iterator
+        // clone
+        // not
+        // supported.");
       }
     }
 

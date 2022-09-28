@@ -28,6 +28,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 /** Location path iterator that uses Walkers. */
 public class WalkingIterator extends LocPathIterator implements ExpressionOwner {
   static final long serialVersionUID = 9110225941815665906L;
+
   /**
    * Create a WalkingIterator iterator, including creation of step walkers from the opcode list, and
    * call back into the Compiler to create predicate expressions.
@@ -91,8 +92,8 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
 
     WalkingIterator clone = (WalkingIterator) super.clone();
 
-    //    clone.m_varStackPos = this.m_varStackPos;
-    //    clone.m_varStackContext = this.m_varStackContext;
+    // clone.m_varStackPos = this.m_varStackPos;
+    // clone.m_varStackContext = this.m_varStackContext;
     if (null != m_firstWalker) {
       clone.m_firstWalker = m_firstWalker.cloneDeep(clone, null);
     }
@@ -142,7 +143,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
 
     // If the variable stack position is not -1, we'll have to
     // set our position in the variable stack, so our variable access
-    // will be correct.  Iterators that are at the top level of the
+    // will be correct. Iterators that are at the top level of the
     // expression need to reset the variable stack, while iterators
     // in predicates do not need to, and should not, since their execution
     // may be much later than top-level iterators.

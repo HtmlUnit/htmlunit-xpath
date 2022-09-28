@@ -186,7 +186,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
               XMLErrorResources.ER_AXIS_TRAVERSER_NOT_SUPPORTED,
               new Object[] {Axis.getNames(axis)}));
     // "Axis traverser not supported: "
-    //                       + Axis.names[axis]);
+    // + Axis.names[axis]);
 
     m_traversers[axis] = traverser;
 
@@ -331,7 +331,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
           if (parentID < axisRoot) return NULL;
 
           // Otherwise, it could be a descendant below the subtree root
-          // children, or it could be after the subtree root.  So we have
+          // children, or it could be after the subtree root. So we have
           // to climb up until the parent is less than the subtree root, in
           // which case we return NULL, or until it is equal to the subtree
           // root, in which case we continue to look.

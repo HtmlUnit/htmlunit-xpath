@@ -231,8 +231,12 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_cacheNodes)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_CANNOT_ITERATE,
-              null)); // "This NodeSet can not iterate to a previous node!");
+              XPATHErrorResources.ER_NODESET_CANNOT_ITERATE, null)); // "This
+    // NodeSet can
+    // not iterate
+    // to a
+    // previous
+    // node!");
 
     if ((m_next - 1) > 0) {
       m_next--;
@@ -281,8 +285,11 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_cacheNodes)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_CANNOT_INDEX,
-              null)); // "This NodeSet can not do indexing or counting functions!");
+              XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null)); // "This NodeSet
+    // can not do
+    // indexing or
+    // counting
+    // functions!");
 
     if ((index >= 0) && (m_next < m_firstFree)) m_next = index;
     else m_next = m_firstFree - 1;
@@ -332,8 +339,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_mutable)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE,
-              null)); // "This NodeSet is not mutable!");
+              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
+    // is not
+    // mutable!");
 
     this.addElement(n);
   }
@@ -350,8 +358,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_mutable)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE,
-              null)); // "This NodeSet is not mutable!");
+              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
+    // is not
+    // mutable!");
 
     insertElementAt(n, pos);
   }
@@ -367,8 +376,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_mutable)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE,
-              null)); // "This NodeSet is not mutable!");
+              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
+    // is not
+    // mutable!");
 
     this.removeElement(n);
   }
@@ -385,8 +395,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_mutable)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE,
-              null)); // "This NodeSet is not mutable!");
+              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
+    // is not
+    // mutable!");
 
     if (null != nodelist) // defensive to fix a bug that Sanjiva reported.
     {
@@ -420,8 +431,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_mutable)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE,
-              null)); // "This NodeSet is not mutable!");
+              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
+    // is not
+    // mutable!");
 
     addNodes((NodeIterator) ns);
   }
@@ -438,8 +450,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_mutable)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE,
-              null)); // "This NodeSet is not mutable!");
+              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
+    // is not
+    // mutable!");
 
     if (null != iterator) // defensive to fix a bug that Sanjiva reported.
     {
@@ -480,8 +493,11 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_cacheNodes)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_CANNOT_INDEX,
-              null)); // "This NodeSet can not do indexing or counting functions!");
+              XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null)); // "This NodeSet
+    // can not do
+    // indexing or
+    // counting
+    // functions!");
 
     m_next = i;
   }
@@ -499,12 +515,15 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_cacheNodes)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_CANNOT_INDEX,
-              null)); // "This NodeSet can not do indexing or counting functions!");
+              XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null)); // "This NodeSet
+    // can not do
+    // indexing or
+    // counting
+    // functions!");
 
     int saved = m_next;
     Node n = (m_next < m_firstFree) ? elementAt(m_next) : null;
-    m_next = saved; // HACK: I think this is a bit of a hack.  -sb
+    m_next = saved; // HACK: I think this is a bit of a hack. -sb
     return n;
   }
 
@@ -542,8 +561,14 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!isFresh())
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_CANNOT_CALL_SETSHOULDCACHENODE,
-              null)); // "Can not call setShouldCacheNodes after nextNode has been
+              XPATHErrorResources.ER_CANNOT_CALL_SETSHOULDCACHENODE, null)); // "Can
+    // not
+    // call
+    // setShouldCacheNodes
+    // after
+    // nextNode
+    // has
+    // been
     // called!");
 
     m_cacheNodes = b;
@@ -629,8 +654,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_mutable)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE,
-              null)); // "This NodeSet is not mutable!");
+              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
+    // is not
+    // mutable!");
 
     if ((m_firstFree + 1) >= m_mapSize) {
       if (null == m_map) {
@@ -823,8 +849,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_mutable)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE,
-              null)); // "This NodeSet is not mutable!");
+              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
+    // is not
+    // mutable!");
 
     if (null == m_map) {
       m_map = new Node[m_blocksize];
@@ -903,8 +930,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_mutable)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE,
-              null)); // "This NodeSet is not mutable!");
+              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
+    // is not
+    // mutable!");
 
     if (null == m_map) return false;
 
@@ -958,8 +986,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (!m_mutable)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE,
-              null)); // "This NodeSet is not mutable!");
+              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
+    // is not
+    // mutable!");
 
     if (null == m_map) {
       m_map = new Node[m_blocksize];

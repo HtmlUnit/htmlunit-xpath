@@ -131,14 +131,14 @@ public class FunctionTable {
 
   static {
     m_functions = new Class[NUM_BUILT_IN_FUNCS];
-    //    m_functions[FUNC_CURRENT] =
+    // m_functions[FUNC_CURRENT] =
     // net.sourceforge.htmlunit.xpath.functions.FuncCurrent.class;
     m_functions[FUNC_LAST] = net.sourceforge.htmlunit.xpath.functions.FuncLast.class;
     m_functions[FUNC_POSITION] = net.sourceforge.htmlunit.xpath.functions.FuncPosition.class;
     m_functions[FUNC_COUNT] = net.sourceforge.htmlunit.xpath.functions.FuncCount.class;
     m_functions[FUNC_ID] = net.sourceforge.htmlunit.xpath.functions.FuncId.class;
-    //    m_functions[FUNC_KEY] =
-    //      org.apache.xalan.templates.FuncKey.class;
+    // m_functions[FUNC_KEY] =
+    // org.apache.xalan.templates.FuncKey.class;
     m_functions[FUNC_LOCAL_PART] = net.sourceforge.htmlunit.xpath.functions.FuncLocalPart.class;
     m_functions[FUNC_NAMESPACE] = net.sourceforge.htmlunit.xpath.functions.FuncNamespace.class;
     m_functions[FUNC_QNAME] = net.sourceforge.htmlunit.xpath.functions.FuncQname.class;

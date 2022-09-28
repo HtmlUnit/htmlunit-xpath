@@ -49,7 +49,7 @@ public class MatchPatternIterator extends LocPathIterator {
   /** DEBUG flag for diagnostic dumps. */
   private static final boolean DEBUG = false;
 
-  //  protected int m_nsElemBase = DTM.NULL;
+  // protected int m_nsElemBase = DTM.NULL;
 
   /**
    * Create a LocPathIterator object, including creation of step walkers from the opcode list, and

@@ -116,6 +116,7 @@ public class PrefixResolverDefault implements PrefixResolver {
   public String getBaseIdentifier() {
     return null;
   }
+
   /** @see PrefixResolver#handlesNullPrefixes() */
   @Override
   public boolean handlesNullPrefixes() {

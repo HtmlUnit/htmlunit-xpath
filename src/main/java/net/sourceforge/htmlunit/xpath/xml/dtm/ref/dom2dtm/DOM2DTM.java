@@ -173,7 +173,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         // %REVIEW% Should this be a Fatal Error?
         error(
             XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_NO_DTMIDS_AVAIL, null)); // "No more DTM IDs are available";
+                XMLErrorResources.ER_NO_DTMIDS_AVAIL, null)); // "No more DTM IDs are
+        // available";
       }
     }
 
@@ -245,7 +246,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // officially accepted as Not Our Fault. But it might be nice to
     // issue a diagnostic message!
     if (node.getLocalName() == null && (type == Node.ELEMENT_NODE || type == Node.ATTRIBUTE_NODE)) {
-      // warning("DOM 'level 1' node "+node.getNodeName()+" won't be mapped properly in
+      // warning("DOM 'level 1' node "+node.getNodeName()+" won't be mapped properly
+      // in
       // DOM2DTM.");
     }
 
@@ -289,7 +291,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     if (m_nodesAreProcessed) return false;
 
     // %REVIEW% Is this local copy Really Useful from a performance
-    // point of view?  Or is this a false microoptimization?
+    // point of view? Or is this a false microoptimization?
     Node pos = m_pos;
     Node next = null;
     int nexttype = NULL;
@@ -349,8 +351,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
             }
           }
 
-          // The only parents in the DTM are Elements.  However,
-          // the DOM could contain EntityReferences.  If we
+          // The only parents in the DTM are Elements. However,
+          // the DOM could contain EntityReferences. If we
           // encounter one, pop it _without_ popping DTM.
           if (pos != null && ENTITY_REFERENCE_NODE == pos.getNodeType()) {
             // Nothing needs doing
@@ -879,7 +881,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         // XSLT treats PIs, and possibly other things, as having QNames.
         String qname = newnode.getNodeName();
         if ('#' == qname.charAt(0)) {
-          //  Match old default for this function
+          // Match old default for this function
           // This conversion may or may not be necessary
           newname = "";
         } else {

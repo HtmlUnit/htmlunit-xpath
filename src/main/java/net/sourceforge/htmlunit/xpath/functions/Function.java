@@ -45,7 +45,8 @@ public abstract class Function extends Expression {
    *     function.
    */
   public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
-    // throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("zero", null));
+    // throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("zero",
+    // null));
     reportWrongNumberArgs();
   }
 
@@ -82,7 +83,7 @@ public abstract class Function extends Expression {
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    // Programmer's assert.  (And, no, I don't want the method to be abstract).
+    // Programmer's assert. (And, no, I don't want the method to be abstract).
     System.out.println("Error! Function.execute should not be called!");
 
     return null;

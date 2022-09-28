@@ -81,15 +81,15 @@ public class XNull extends XNodeSet {
     return "";
   }
 
-  //  /**
-  //   * Cast result object to a nodelist.
-  //   *
-  //   * @return null
-  //   */
-  //  public DTMIterator iter()
-  //  {
-  //    return null;
-  //  }
+  // /**
+  // * Cast result object to a nodelist.
+  // *
+  // * @return null
+  // */
+  // public DTMIterator iter()
+  // {
+  // return null;
+  // }
 
   /**
    * Tell if two objects are functionally equal.

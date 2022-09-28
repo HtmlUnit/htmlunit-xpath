@@ -262,7 +262,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
     m_currentContextNode = context; // only if top level?
 
-    // Yech, shouldn't have to do this.  -sb
+    // Yech, shouldn't have to do this. -sb
     if (null == m_prefixResolver) m_prefixResolver = xctxt.getNamespaceContext();
 
     m_lastFetched = DTM.NULL;
@@ -304,17 +304,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   public void setShouldCacheNodes(boolean b) {
 
     assertion(false, "setShouldCacheNodes not supported by this iterater!");
-  }
-
-  /**
-   * Tells if this iterator can have nodes added to it or set via the <code>
-   * setItem(int node, int index)</code> method.
-   *
-   * @return True if the nodelist can be mutated.
-   */
-  @Override
-  public boolean isMutable() {
-    return false;
   }
 
   /**
@@ -393,12 +382,12 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     int predCount = getPredicateCount();
 
     // If we have already calculated the length, and the current predicate
-    // is the first predicate, then return the length.  We don't cache
+    // is the first predicate, then return the length. We don't cache
     // the anything but the length of the list to the first predicate.
     if (-1 != m_length && isPredicateTest && m_predicateIndex < 1) return m_length;
 
     // I'm a bit worried about this one, since it doesn't have the
-    // checks found above.  I suspect it's fine.  -sb
+    // checks found above. I suspect it's fine. -sb
     if (m_foundLast) return m_pos;
 
     // Create a clone, and count from the current position to the end
@@ -415,7 +404,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     }
 
     // We want to clip off the last predicate, but only if we are a sub
-    // context node list, NOT if we are a context list.  See pos68 test,
+    // context node list, NOT if we are a context list. See pos68 test,
     // also test against bug4638.
     if (predCount > 0 && isPredicateTest) {
       // Don't call setPredicateCount, because it clones and is slower.
@@ -456,8 +445,12 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   public int previousNode() {
     throw new RuntimeException(
         XSLMessages.createXPATHMessage(
-            XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE,
-            null)); // "This NodeSetDTM can not iterate to a previous node!");
+            XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null)); // "This
+    // NodeSetDTM
+    // can not
+    // iterate to a
+    // previous
+    // node!");
   }
 
   /**
@@ -540,7 +533,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
       // sb: allow reusing of cached nodes when possible?
       // m_cachedNodes = null;
       m_execContext = null;
-      // m_prefixResolver = null;  sb: Why would this ever want to be null?
+      // m_prefixResolver = null; sb: Why would this ever want to be null?
       m_cdtm = null;
       m_length = -1;
       m_pos = 0;
@@ -567,7 +560,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
     LocPathIterator clone;
-    //    clone = (LocPathIterator) clone();
+    // clone = (LocPathIterator) clone();
     clone = (LocPathIterator) m_clones.getInstanceOrThrow();
     clone.m_execContext = m_execContext;
     clone.m_cdtm = m_cdtm;
@@ -581,21 +574,21 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return clone;
   }
 
-  //  /**
-  //   * Get a cloned LocPathIterator that holds the same
-  //   * position as this iterator.
-  //   *
-  //   * @return A clone of this iterator that holds the same node position.
-  //   *
-  //   * @throws CloneNotSupportedException
-  //   */
-  //  public Object clone() throws CloneNotSupportedException
-  //  {
+  // /**
+  // * Get a cloned LocPathIterator that holds the same
+  // * position as this iterator.
+  // *
+  // * @return A clone of this iterator that holds the same node position.
+  // *
+  // * @throws CloneNotSupportedException
+  // */
+  // public Object clone() throws CloneNotSupportedException
+  // {
   //
-  //    LocPathIterator clone = (LocPathIterator) super.clone();
+  // LocPathIterator clone = (LocPathIterator) super.clone();
   //
-  //    return clone;
-  //  }
+  // return clone;
+  // }
 
   /**
    * Returns the next node in the set and advances the position of the iterator in the set. After a
@@ -703,16 +696,16 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     m_currentContextNode = n;
   }
 
-  //  /**
-  //   * Set the current context node for this iterator.
-  //   *
-  //   * @param n Must be a non-null reference to the node context.
-  //   */
-  //  public void setRoot(int n)
-  //  {
-  //    m_context = n;
-  //    m_cdtm = m_execContext.getDTM(n);
-  //  }
+  // /**
+  // * Set the current context node for this iterator.
+  // *
+  // * @param n Must be a non-null reference to the node context.
+  // */
+  // public void setRoot(int n)
+  // {
+  // m_context = n;
+  // m_cdtm = m_execContext.getDTM(n);
+  // }
 
   /**
    * Return the saved reference to the prefix resolver that was in effect when this iterator was
@@ -728,25 +721,25 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return m_prefixResolver;
   }
 
-  //  /**
-  //   * Get the analysis pattern built by the WalkerFactory.
-  //   *
-  //   * @return The analysis pattern built by the WalkerFactory.
-  //   */
-  //  int getAnalysis()
-  //  {
-  //    return m_analysis;
-  //  }
+  // /**
+  // * Get the analysis pattern built by the WalkerFactory.
+  // *
+  // * @return The analysis pattern built by the WalkerFactory.
+  // */
+  // int getAnalysis()
+  // {
+  // return m_analysis;
+  // }
 
-  //  /**
-  //   * Set the analysis pattern built by the WalkerFactory.
-  //   *
-  //   * @param a The analysis pattern built by the WalkerFactory.
-  //   */
-  //  void setAnalysis(int a)
-  //  {
-  //    m_analysis = a;
-  //  }
+  // /**
+  // * Set the analysis pattern built by the WalkerFactory.
+  // *
+  // * @param a The analysis pattern built by the WalkerFactory.
+  // */
+  // void setAnalysis(int a)
+  // {
+  // m_analysis = a;
+  // }
 
   /**
    * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
@@ -834,13 +827,13 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return -1;
   }
 
-  //  /**
-  //   * The analysis pattern built by the WalkerFactory.
-  //   * TODO: Move to LocPathIterator.
-  //   * @see net.sourceforge.htmlunit.xpath.axes.WalkerFactory
-  //   * @serial
-  //   */
-  //  protected int m_analysis = 0x00000000;
+  // /**
+  // * The analysis pattern built by the WalkerFactory.
+  // * TODO: Move to LocPathIterator.
+  // * @see net.sourceforge.htmlunit.xpath.axes.WalkerFactory
+  // * @serial
+  // */
+  // protected int m_analysis = 0x00000000;
   /** @see PredicatedNodeTest#getLastPos(XPathContext) */
   @Override
   public int getLastPos(XPathContext xctxt) {

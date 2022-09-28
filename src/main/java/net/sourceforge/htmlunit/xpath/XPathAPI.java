@@ -187,10 +187,10 @@ public class XPathAPI {
     // Since we don't have a XML Parser involved here, install some default support
     // for things like namespaces, etc.
     // (Changed from: XPathContext xpathSupport = new XPathContext();
-    //    because XPathContext is weak in a number of areas... perhaps
-    //    XPathContext should be done away with.)
+    // because XPathContext is weak in a number of areas... perhaps
+    // XPathContext should be done away with.)
     // Create an XPathContext that doesn't support pushing and popping of
-    // variable resolution scopes.  Sufficient for simple XPath 1.0 expressions.
+    // variable resolution scopes. Sufficient for simple XPath 1.0 expressions.
     XPathContext xpathSupport = new XPathContext(false);
 
     // Create an object to resolve namespace prefixes.
@@ -239,13 +239,13 @@ public class XPathAPI {
     // Since we don't have a XML Parser involved here, install some default support
     // for things like namespaces, etc.
     // (Changed from: XPathContext xpathSupport = new XPathContext();
-    //    because XPathContext is weak in a number of areas... perhaps
-    //    XPathContext should be done away with.)
+    // because XPathContext is weak in a number of areas... perhaps
+    // XPathContext should be done away with.)
     // Create the XPath object.
     XPath xpath = new XPath(str, prefixResolver, XPath.SELECT, null);
 
     // Create an XPathContext that doesn't support pushing and popping of
-    // variable resolution scopes.  Sufficient for simple XPath 1.0 expressions.
+    // variable resolution scopes. Sufficient for simple XPath 1.0 expressions.
     XPathContext xpathSupport = new XPathContext(false);
 
     // Execute the XPath, and have it return the result

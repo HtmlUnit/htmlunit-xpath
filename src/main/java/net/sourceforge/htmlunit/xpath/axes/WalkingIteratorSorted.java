@@ -29,8 +29,8 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 public class WalkingIteratorSorted extends WalkingIterator {
   static final long serialVersionUID = -4512512007542368213L;
 
-  //  /** True if the nodes will be found in document order */
-  //  protected boolean m_inNaturalOrder = false;
+  // /** True if the nodes will be found in document order */
+  // protected boolean m_inNaturalOrder = false;
 
   /** True if the nodes will be found in document order, and this can be determined statically. */
   protected boolean m_inNaturalOrderStatic = false;

@@ -19,7 +19,6 @@ package net.sourceforge.htmlunit.xpath.functions;
 
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
-import net.sourceforge.htmlunit.xpath.objects.XString;
 
 /**
  * Execute the String() function.
@@ -38,6 +37,6 @@ public class FuncString extends FunctionDef1Arg {
    */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    return (XString) getArg0AsString(xctxt);
+    return getArg0AsString(xctxt);
   }
 }

@@ -23,7 +23,7 @@ package net.sourceforge.htmlunit.xpath.xml.dtm;
  */
 public interface DTMFilter {
 
-  // Constants for whatToShow.  These are used to set the node type that will
+  // Constants for whatToShow. These are used to set the node type that will
   // be traversed. These values may be ORed together before being passed to
   // the DTMIterator.
 

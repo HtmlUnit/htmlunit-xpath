@@ -118,6 +118,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   public int getDTMHandleFromNode(org.w3c.dom.Node node) {
     return m_dtmManager.getDTMHandleFromNode(node);
   }
+
   //
   //
   /** %TBD% Doc */
@@ -125,6 +126,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   public int getDTMIdentity(DTM dtm) {
     return m_dtmManager.getDTMIdentity(dtm);
   }
+
   //
   /**
    * Creates an empty <code>DocumentFragment</code> object.
@@ -135,6 +137,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   public DTM createDocumentFragment() {
     return m_dtmManager.createDocumentFragment();
   }
+
   //
   /**
    * Release a DTM either to a lru pool, or completely remove reference. DTMs without system IDs are
@@ -168,6 +171,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   public DTMIterator createDTMIterator(Object xpathCompiler, int pos) {
     return m_dtmManager.createDTMIterator(xpathCompiler, pos);
   }
+
   //
   /**
    * Create a new <code>DTMIterator</code> based on an XPath <a
@@ -175,8 +179,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    *
    * @param xpathString Must be a valid string expressing a <a
-   *     href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a
-   *     href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
+   *     href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a href=
+   *     "http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    * @param presolver An object that can resolve prefixes to namespace URLs.
    * @return The newly created <code>DTMIterator</code>.
    */
@@ -184,6 +188,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   public DTMIterator createDTMIterator(String xpathString, PrefixResolver presolver) {
     return m_dtmManager.createDTMIterator(xpathString, presolver);
   }
+
   //
   /**
    * Create a new <code>DTMIterator</code> based only on a whatToShow and a DTMFilter. The traversal
@@ -192,7 +197,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    * @param whatToShow This flag specifies which node types may appear in the logical view of the
    *     tree presented by the iterator. See the description of <code>NodeFilter</code> for the set
    *     of possible <code>SHOW_</code> values.These flags can be combined using <code>OR
-   *     </code>.
+   *     </code> .
    * @param filter The <code>NodeFilter</code> to be used with this <code>TreeWalker</code>, or
    *     <code>null</code> to indicate no filter.
    * @param entityReferenceExpansion The value of this flag determines whether entity reference
@@ -353,7 +358,8 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     if (listener == null)
       throw new IllegalArgumentException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NULL_ERROR_HANDLER, null)); // "Null error handler");
+              XPATHErrorResources.ER_NULL_ERROR_HANDLER, null)); // "Null error
+    // handler");
     m_errorListener = listener;
   }
 
@@ -442,7 +448,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    */
   private IntStack m_currentNodes = new IntStack(RECURSIONLIMIT);
 
-  //  private NodeVector m_currentNodes = new NodeVector();
+  // private NodeVector m_currentNodes = new NodeVector();
 
   public IntStack getCurrentNodeStack() {
     return m_currentNodes;
@@ -716,8 +722,11 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     try {
       DTMIterator cnl = getContextNodeList();
 
-      if (null != cnl) return cnl.cloneWithReset();
-      else return null; // for now... this might ought to be an empty iterator.
+      if (null != cnl) {
+        return cnl.cloneWithReset();
+      }
+
+      return null; // for now... this might ought to be an empty iterator.
     } catch (CloneNotSupportedException cnse) {
       return null; // error reporting?
     }
@@ -786,7 +795,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
       // %REVIEW% You can't get much uglier than this...
       int nodeHandle = getDTMHandleFromNode(n);
       DTM dtm = getDTM(nodeHandle);
-      XString xobj = (XString) dtm.getStringValue(nodeHandle);
+      XString xobj = dtm.getStringValue(nodeHandle);
       return xobj.num();
     }
 

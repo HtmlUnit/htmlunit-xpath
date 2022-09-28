@@ -155,11 +155,12 @@ public class DOMHelper {
     // WARNING: The following diagnostic won't report the early
     // "same node" case. Fix if/when needed.
 
-    /* -- please do not remove... very useful for diagnostics --
-    System.out.println("node1 = "+node1.getNodeName()+"("+node1.getNodeType()+")"+
-    ", node2 = "+node2.getNodeName()
-    +"("+node2.getNodeType()+")"+
-    ", isNodeAfter = "+isNodeAfter); */
+    /*
+     * -- please do not remove... very useful for diagnostics --
+     * System.out.println("node1 = "+node1.getNodeName()+"("+node1.getNodeType()+
+     * ")"+ ", node2 = "+node2.getNodeName() +"("+node2.getNodeType()+")"+
+     * ", isNodeAfter = "+isNodeAfter);
+     */
     return isNodeAfter;
   } // end isNodeAfter(Node node1, Node node2)
 
@@ -365,8 +366,14 @@ public class DOMHelper {
       if (null == rootElem) {
         throw new RuntimeException(
             XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_CHILD_HAS_NO_OWNER_DOCUMENT_ELEMENT,
-                null)); // "Attribute child does not have an owner document
+                XMLErrorResources.ER_CHILD_HAS_NO_OWNER_DOCUMENT_ELEMENT, null)); // "Attribute
+        // child
+        // does
+        // not
+        // have
+        // an
+        // owner
+        // document
         // element!");
       }
 

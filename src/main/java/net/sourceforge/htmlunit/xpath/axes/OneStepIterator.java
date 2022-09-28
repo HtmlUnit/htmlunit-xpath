@@ -214,7 +214,7 @@ public class OneStepIterator extends ChildTestIterator {
     boolean isPredicateTest = this == m_execContext.getSubContextList();
 
     // If we have already calculated the length, and the current predicate
-    // is the first predicate, then return the length.  We don't cache
+    // is the first predicate, then return the length. We don't cache
     // the anything but the length of the list to the first predicate.
     if (-1 != m_length && isPredicateTest && m_predicateIndex < 1) return m_length;
 

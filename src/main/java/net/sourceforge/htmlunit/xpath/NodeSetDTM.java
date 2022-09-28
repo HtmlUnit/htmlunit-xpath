@@ -151,9 +151,12 @@ public class NodeSetDTM extends NodeVector
   @Override
   public int getRoot() {
     if (DTM.NULL == m_root) {
-      if (size() > 0) return item(0);
-      else return DTM.NULL;
-    } else return m_root;
+      if (size() > 0) {
+          return item(0);
+      }
+      return DTM.NULL;
+    }
+    return m_root;
   }
 
   /**
@@ -163,7 +166,7 @@ public class NodeSetDTM extends NodeVector
    */
   @Override
   public void setRoot(int context, Object environment) {
-    // no-op, I guess...  (-sb)
+    // no-op, I guess... (-sb)
   }
 
   /**
@@ -301,7 +304,8 @@ public class NodeSetDTM extends NodeVector
       m_next++;
 
       return next;
-    } else return DTM.NULL;
+    }
+    return DTM.NULL;
   }
 
   /**
@@ -321,14 +325,19 @@ public class NodeSetDTM extends NodeVector
     if (!m_cacheNodes)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE,
-              null)); // "This NodeSetDTM can not iterate to a previous node!");
+              XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null)); // "This
+    // NodeSetDTM
+    // can not
+    // iterate
+    // to a
+    // previous
+    // node!");
 
     if ((m_next - 1) > 0) {
       m_next--;
-
       return this.elementAt(m_next);
-    } else return DTM.NULL;
+    }
+    return DTM.NULL;
   }
 
   /**
@@ -381,8 +390,12 @@ public class NodeSetDTM extends NodeVector
     if (!m_cacheNodes)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX,
-              null)); // "This NodeSetDTM can not do indexing or counting
+              XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null)); // "This
+    // NodeSetDTM
+    // can not do
+    // indexing
+    // or
+    // counting
     // functions!");
 
     if ((index >= 0) && (m_next < m_firstFree)) m_next = index;
@@ -429,13 +442,6 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
   public void addNode(int n) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
     this.addElement(n);
   }
 
@@ -447,13 +453,6 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
   public void insertNode(int n, int pos) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
     insertElementAt(n, pos);
   }
 
@@ -464,75 +463,68 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
   public void removeNode(int n) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
     this.removeElement(n);
   }
 
   // %TBD%
-  //  /**
-  //   * Copy NodeList members into this nodelist, adding in
-  //   * document order.  If a node is null, don't add it.
-  //   *
-  //   * @param nodelist List of nodes which should now be referenced by
-  //   * this NodeSetDTM.
-  //   * @throws RuntimeException thrown if this NodeSetDTM is not of
-  //   * a mutable type.
-  //   */
-  //  public void addNodes(NodeList nodelist)
-  //  {
+  // /**
+  // * Copy NodeList members into this nodelist, adding in
+  // * document order. If a node is null, don't add it.
+  // *
+  // * @param nodelist List of nodes which should now be referenced by
+  // * this NodeSetDTM.
+  // * @throws RuntimeException thrown if this NodeSetDTM is not of
+  // * a mutable type.
+  // */
+  // public void addNodes(NodeList nodelist)
+  // {
   //
-  //    if (!m_mutable)
-  //      throw new RuntimeException("This NodeSetDTM is not mutable!");
+  // if (!m_mutable)
+  // throw new RuntimeException("This NodeSetDTM is not mutable!");
   //
-  //    if (null != nodelist)  // defensive to fix a bug that Sanjiva reported.
-  //    {
-  //      int nChildren = nodelist.getLength();
+  // if (null != nodelist) // defensive to fix a bug that Sanjiva reported.
+  // {
+  // int nChildren = nodelist.getLength();
   //
-  //      for (int i = 0; i < nChildren; i++)
-  //      {
-  //        int obj = nodelist.item(i);
+  // for (int i = 0; i < nChildren; i++)
+  // {
+  // int obj = nodelist.item(i);
   //
-  //        if (null != obj)
-  //        {
-  //          addElement(obj);
-  //        }
-  //      }
-  //    }
+  // if (null != obj)
+  // {
+  // addElement(obj);
+  // }
+  // }
+  // }
   //
-  //    // checkDups();
-  //  }
+  // // checkDups();
+  // }
 
   // %TBD%
-  //  /**
-  //   * <p>Copy NodeList members into this nodelist, adding in
-  //   * document order.  Only genuine node references will be copied;
-  //   * nulls appearing in the source NodeSetDTM will
-  //   * not be added to this one. </p>
-  //   *
-  //   * <p> In case you're wondering why this function is needed: NodeSetDTM
-  //   * implements both DTMIterator and NodeList. If this method isn't
-  //   * provided, Java can't decide which of those to use when addNodes()
-  //   * is invoked. Providing the more-explicit match avoids that
-  //   * ambiguity.)</p>
-  //   *
-  //   * @param ns NodeSetDTM whose members should be merged into this NodeSetDTM.
-  //   * @throws RuntimeException thrown if this NodeSetDTM is not of
-  //   * a mutable type.
-  //   */
-  //  public void addNodes(NodeSetDTM ns)
-  //  {
+  // /**
+  // * <p>Copy NodeList members into this nodelist, adding in
+  // * document order. Only genuine node references will be copied;
+  // * nulls appearing in the source NodeSetDTM will
+  // * not be added to this one. </p>
+  // *
+  // * <p> In case you're wondering why this function is needed: NodeSetDTM
+  // * implements both DTMIterator and NodeList. If this method isn't
+  // * provided, Java can't decide which of those to use when addNodes()
+  // * is invoked. Providing the more-explicit match avoids that
+  // * ambiguity.)</p>
+  // *
+  // * @param ns NodeSetDTM whose members should be merged into this NodeSetDTM.
+  // * @throws RuntimeException thrown if this NodeSetDTM is not of
+  // * a mutable type.
+  // */
+  // public void addNodes(NodeSetDTM ns)
+  // {
   //
-  //    if (!m_mutable)
-  //      throw new RuntimeException("This NodeSetDTM is not mutable!");
+  // if (!m_mutable)
+  // throw new RuntimeException("This NodeSetDTM is not mutable!");
   //
-  //    addNodes((DTMIterator) ns);
-  //  }
+  // addNodes((DTMIterator) ns);
+  // }
 
   /**
    * Copy NodeList members into this nodelist, adding in document order. Null references are not
@@ -542,13 +534,6 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
   public void addNodes(DTMIterator iterator) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
     if (null != iterator) // defensive to fix a bug that Sanjiva reported.
     {
       int obj;
@@ -561,35 +546,6 @@ public class NodeSetDTM extends NodeVector
     // checkDups();
   }
 
-  // %TBD%
-  //  /**
-  //   * Copy NodeList members into this nodelist, adding in
-  //   * document order.  If a node is null, don't add it.
-  //   *
-  //   * @param nodelist List of nodes to be added
-  //   * @param support The XPath runtime context.
-  //   * @throws RuntimeException thrown if this NodeSetDTM is not of
-  //   * a mutable type.
-  //   */
-  //  public void addNodesInDocOrder(NodeList nodelist, XPathContext support)
-  //  {
-  //
-  //    if (!m_mutable)
-  //      throw new RuntimeException("This NodeSetDTM is not mutable!");
-  //
-  //    int nChildren = nodelist.getLength();
-  //
-  //    for (int i = 0; i < nChildren; i++)
-  //    {
-  //      int node = nodelist.item(i);
-  //
-  //      if (null != node)
-  //      {
-  //        addNodeInDocOrder(node, support);
-  //      }
-  //    }
-  //  }
-
   /**
    * Copy NodeList members into this nodelist, adding in document order. If a node is null, don't
    * add it.
@@ -599,84 +555,12 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
   public void addNodesInDocOrder(DTMIterator iterator, XPathContext support) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
     int node;
 
     while (DTM.NULL != (node = iterator.nextNode())) {
       addNodeInDocOrder(node, support);
     }
   }
-
-  // %TBD%
-  //  /**
-  //   * Add the node list to this node set in document order.
-  //   *
-  //   * @param start index.
-  //   * @param end index.
-  //   * @param testIndex index.
-  //   * @param nodelist The nodelist to add.
-  //   * @param support The XPath runtime context.
-  //   *
-  //   * @return false always.
-  //   * @throws RuntimeException thrown if this NodeSetDTM is not of
-  //   * a mutable type.
-  //   */
-  //  private boolean addNodesInDocOrder(int start, int end, int testIndex,
-  //                                     NodeList nodelist, XPathContext support)
-  //  {
-  //
-  //    if (!m_mutable)
-  //      throw new RuntimeException("This NodeSetDTM is not mutable!");
-  //
-  //    boolean foundit = false;
-  //    int i;
-  //    int node = nodelist.item(testIndex);
-  //
-  //    for (i = end; i >= start; i--)
-  //    {
-  //      int child = elementAt(i);
-  //
-  //      if (child == node)
-  //      {
-  //        i = -2;  // Duplicate, suppress insert
-  //
-  //        break;
-  //      }
-  //
-  //      if (!support.getDOMHelper().isNodeAfter(node, child))
-  //      {
-  //        insertElementAt(node, i + 1);
-  //
-  //        testIndex--;
-  //
-  //        if (testIndex > 0)
-  //        {
-  //          boolean foundPrev = addNodesInDocOrder(0, i, testIndex, nodelist,
-  //                                                 support);
-  //
-  //          if (!foundPrev)
-  //          {
-  //            addNodesInDocOrder(i, size() - 1, testIndex, nodelist, support);
-  //          }
-  //        }
-  //
-  //        break;
-  //      }
-  //    }
-  //
-  //    if (i == -1)
-  //    {
-  //      insertElementAt(node, 0);
-  //    }
-  //
-  //    return foundit;
-  //  }
 
   /**
    * Add the node into a vector of nodes where it should occur in document order.
@@ -688,13 +572,6 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
   public int addNodeInDocOrder(int node, boolean test, XPathContext support) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
     int insertIndex = -1;
 
     if (test) {
@@ -753,155 +630,8 @@ public class NodeSetDTM extends NodeVector
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
   public int addNodeInDocOrder(int node, XPathContext support) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
     return addNodeInDocOrder(node, true, support);
   } // end addNodeInDocOrder(Vector v, Object obj)
-
-  /**
-   * Append a Node onto the vector.
-   *
-   * @param value The node to be added.
-   * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
-   */
-  @Override
-  public void addElement(int value) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
-    super.addElement(value);
-  }
-
-  /**
-   * Inserts the specified node in this vector at the specified index. Each component in this vector
-   * with an index greater or equal to the specified index is shifted upward to have an index one
-   * greater than the value it had previously.
-   *
-   * @param value The node to be inserted.
-   * @param at The index where the insert should occur.
-   * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
-   */
-  @Override
-  public void insertElementAt(int value, int at) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
-    super.insertElementAt(value, at);
-  }
-
-  /**
-   * Append the nodes to the list.
-   *
-   * @param nodes The nodes to be appended to this node set.
-   * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
-   */
-  @Override
-  public void appendNodes(NodeVector nodes) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
-    super.appendNodes(nodes);
-  }
-
-  /**
-   * Inserts the specified node in this vector at the specified index. Each component in this vector
-   * with an index greater or equal to the specified index is shifted upward to have an index one
-   * greater than the value it had previously.
-   *
-   * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
-   */
-  @Override
-  public void removeAllElements() {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
-    super.removeAllElements();
-  }
-
-  /**
-   * Removes the first occurrence of the argument from this vector. If the object is found in this
-   * vector, each component in the vector with an index greater or equal to the object's index is
-   * shifted downward to have an index one smaller than the value it had previously.
-   *
-   * @param s The node to be removed.
-   * @return True if the node was successfully removed
-   * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
-   */
-  @Override
-  public boolean removeElement(int s) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
-    return super.removeElement(s);
-  }
-
-  /**
-   * Deletes the component at the specified index. Each component in this vector with an index
-   * greater or equal to the specified index is shifted downward to have an index one smaller than
-   * the value it had previously.
-   *
-   * @param i The index of the node to be removed.
-   * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
-   */
-  @Override
-  public void removeElementAt(int i) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
-    super.removeElementAt(i);
-  }
-
-  /**
-   * Sets the component at the specified index of this vector to be the specified object. The
-   * previous component at that position is discarded.
-   *
-   * <p>The index must be a value greater than or equal to 0 and less than the current size of the
-   * vector.
-   *
-   * @param node The node to be set.
-   * @param index The index of the node to be replaced.
-   * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
-   */
-  @Override
-  public void setElementAt(int node, int index) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
-    super.setElementAt(node, index);
-  }
 
   /**
    * Same as setElementAt.
@@ -912,13 +642,6 @@ public class NodeSetDTM extends NodeVector
    */
   @Override
   public void setItem(int node, int index) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_NOT_MUTABLE,
-              null)); // "This NodeSetDTM is not mutable!");
-
     super.setElementAt(node, index);
   }
 
@@ -1010,8 +733,12 @@ public class NodeSetDTM extends NodeVector
     if (!m_cacheNodes)
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX,
-              null)); // "This NodeSetDTM can not do indexing or counting
+              XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null)); // "This
+    // NodeSetDTM
+    // can not do
+    // indexing
+    // or
+    // counting
     // functions!");
 
     m_next = i;
@@ -1036,12 +763,9 @@ public class NodeSetDTM extends NodeVector
     // have nextNode called on it.
     int current = (m_next > 0) ? m_next - 1 : m_next;
     int n = (current < m_firstFree) ? elementAt(current) : DTM.NULL;
-    m_next = saved; // HACK: I think this is a bit of a hack.  -sb
+    m_next = saved; // HACK: I think this is a bit of a hack. -sb
     return n;
   }
-
-  /** True if this list can be mutated. */
-  protected transient boolean m_mutable = true;
 
   /**
    * True if this list is cached.
@@ -1077,23 +801,17 @@ public class NodeSetDTM extends NodeVector
     if (!isFresh())
       throw new RuntimeException(
           XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_CANNOT_CALL_SETSHOULDCACHENODE,
-              null)); // "Can not call setShouldCacheNodes after nextNode has been
+              XPATHErrorResources.ER_CANNOT_CALL_SETSHOULDCACHENODE, null)); // "Can
+    // not
+    // call
+    // setShouldCacheNodes
+    // after
+    // nextNode
+    // has
+    // been
     // called!");
 
     m_cacheNodes = b;
-    m_mutable = true;
-  }
-
-  /**
-   * Tells if this iterator can have nodes added to it or set via the <code>
-   * setItem(int node, int index)</code> method.
-   *
-   * @return True if the nodelist can be mutated.
-   */
-  @Override
-  public boolean isMutable() {
-    return m_mutable;
   }
 
   private transient int m_last = 0;

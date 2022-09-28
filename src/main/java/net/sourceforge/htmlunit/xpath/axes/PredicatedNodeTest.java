@@ -89,7 +89,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     return clone;
   }
 
-  // Only for clones for findLastPos.  See bug4638.
+  // Only for clones for findLastPos. See bug4638.
   protected int m_predCount = -1;
 
   /**
@@ -159,7 +159,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    */
   public int getProximityPosition() {
 
-    // System.out.println("getProximityPosition - m_predicateIndex: "+m_predicateIndex);
+    // System.out.println("getProximityPosition - m_predicateIndex:
+    // "+m_predicateIndex);
     return getProximityPosition(m_predicateIndex);
   }
 
@@ -275,7 +276,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
         // System.out.println("Executing predicate expression - waiting count:
         // "+m_lpi.getWaitingCount());
         XObject pred = m_predicates[i].execute(xctxt);
-        // System.out.println("\nBack from executing predicate expression - waiting count:
+        // System.out.println("\nBack from executing predicate expression - waiting
+        // count:
         // "+m_lpi.getWaitingCount());
         // System.out.println("pred.getType(): "+pred.getType());
         if (XObject.CLASS_NUMBER == pred.getType()) {
@@ -284,7 +286,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
             System.out.println("\n===== start predicate count ========");
             System.out.println("m_predicateIndex: " + m_predicateIndex);
             // System.out.println("getProximityPosition(m_predicateIndex): "
-            //                   + getProximityPosition(m_predicateIndex));
+            // + getProximityPosition(m_predicateIndex));
             System.out.println("pred.num(): " + pred.num());
           }
 

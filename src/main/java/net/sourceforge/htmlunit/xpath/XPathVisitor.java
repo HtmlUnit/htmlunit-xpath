@@ -116,17 +116,17 @@ public class XPathVisitor {
     return true;
   }
 
-  //  /**
-  //   * Visit a variable reference.
-  //   * @param owner The owner of the expression, to which the expression can
-  //   *              be reset if rewriting takes place.
-  //   * @param var The variable reference object.
-  //   * @return true if the sub expressions should be traversed.
-  //   */
-  //  public boolean visitVariableRef(ExpressionOwner owner, Variable var)
-  //  {
-  //    return true;
-  //  }
+  // /**
+  // * Visit a variable reference.
+  // * @param owner The owner of the expression, to which the expression can
+  // * be reset if rewriting takes place.
+  // * @param var The variable reference object.
+  // * @return true if the sub expressions should be traversed.
+  // */
+  // public boolean visitVariableRef(ExpressionOwner owner, Variable var)
+  // {
+  // return true;
+  // }
 
   /**
    * Visit a function.

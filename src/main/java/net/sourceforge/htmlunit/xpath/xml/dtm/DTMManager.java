@@ -146,8 +146,8 @@ public abstract class DTMManager {
    * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    *
    * @param xpathString Must be a valid string expressing a <a
-   *     href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a
-   *     href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
+   *     href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a href=
+   *     "http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    * @param presolver An object that can resolve prefixes to namespace URLs.
    * @return The newly created <code>DTMIterator</code>.
    */
@@ -164,7 +164,7 @@ public abstract class DTMManager {
    * @param whatToShow This flag specifies which node types may appear in the logical view of the
    *     tree presented by the iterator. See the description of <code>NodeFilter</code> for the set
    *     of possible <code>SHOW_</code> values.These flags can be combined using <code>OR
-   *     </code>.
+   *     </code> .
    * @param filter The <code>NodeFilter</code> to be used with this <code>DTMFilter</code>, or
    *     <code>null</code> to indicate no filter.
    * @param entityReferenceExpansion The value of this flag determines whether entity reference
@@ -186,10 +186,9 @@ public abstract class DTMManager {
   public boolean m_incremental = false;
 
   /*
-   * Flag set by FEATURE_SOURCE_LOCATION.
-   * This feature specifies whether the transformation phase should
-   * keep track of line and column numbers for the input source
-   * document.
+   * Flag set by FEATURE_SOURCE_LOCATION. This feature specifies whether the
+   * transformation phase should keep track of line and column numbers for the
+   * input source document.
    */
   public boolean m_source_location = false;
 

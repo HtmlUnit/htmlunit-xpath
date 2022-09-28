@@ -45,7 +45,7 @@ public class FuncTranslate extends Function3Args {
     int theFirstStringLength = theFirstString.length();
     int theThirdStringLength = theThirdString.length();
 
-    // A vector to contain the new characters.  We'll use it to construct
+    // A vector to contain the new characters. We'll use it to construct
     // the result string.
     StringBuilder sbuffer = new StringBuilder();
 
@@ -67,7 +67,7 @@ public class FuncTranslate extends Function3Args {
 
         // There's no corresponding character in the
         // third string, since it's shorter than the
-        // second string.  In this case, the character
+        // second string. In this case, the character
         // is removed from the output string, so don't
         // do anything.
       }

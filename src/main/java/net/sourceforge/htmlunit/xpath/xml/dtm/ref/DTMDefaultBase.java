@@ -784,7 +784,7 @@ public abstract class DTMDefaultBase implements DTM {
 
     if (m_mgrDefault != null) {
       // Optimization: use the DTMManagerDefault's fast DTMID-to-offsets
-      // table.  I'm not wild about this solution but this operation
+      // table. I'm not wild about this solution but this operation
       // needs need extreme speed.
 
       int whichDTMindex = nodeHandle >>> DTMManager.IDENT_DTM_NODE_BITS;
@@ -1389,8 +1389,8 @@ public abstract class DTMDefaultBase implements DTM {
     // %TBD%
     error(
         XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_METHOD_NOT_SUPPORTED,
-            null)); // ("getStringValueChunkCount not yet supported!");
+            XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // ("getStringValueChunkCount
+    // not yet supported!");
 
     return 0;
   }
@@ -1412,8 +1412,8 @@ public abstract class DTMDefaultBase implements DTM {
     // %TBD%
     error(
         XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_METHOD_NOT_SUPPORTED,
-            null)); // "getStringValueChunk not yet supported!");
+            XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "getStringValueChunk
+    // not yet supported!");
 
     return null;
   }
@@ -1426,7 +1426,8 @@ public abstract class DTMDefaultBase implements DTM {
    */
   @Override
   public int getExpandedTypeID(int nodeHandle) {
-    // %REVIEW% This _should_ only be null if someone asked the wrong DTM about the node...
+    // %REVIEW% This _should_ only be null if someone asked the wrong DTM about the
+    // node...
     // which one would hope would never happen...
     int id = makeNodeIdentity(nodeHandle);
     if (id == NULL) return NULL;
@@ -1651,7 +1652,7 @@ public abstract class DTMDefaultBase implements DTM {
   @Override
   public String getDocumentSystemIdentifier(int nodeHandle) {
 
-    // %REVIEW%  OK? -sb
+    // %REVIEW% OK? -sb
     return m_documentBaseURI;
   }
 
@@ -1665,7 +1666,7 @@ public abstract class DTMDefaultBase implements DTM {
   @Override
   public String getDocumentEncoding(int nodeHandle) {
 
-    // %REVIEW%  OK??  -sb
+    // %REVIEW% OK?? -sb
     return "UTF-8";
   }
 
@@ -1821,7 +1822,8 @@ public abstract class DTMDefaultBase implements DTM {
     return new DTMNodeProxy(this, nodeHandle);
   }
 
-  // ==== Construction methods (may not be supported by some implementations!) =====
+  // ==== Construction methods (may not be supported by some implementations!)
+  // =====
 
   /**
    * Append a child to the end of the document. Please note that the node is always cloned if it is
@@ -1839,7 +1841,8 @@ public abstract class DTMDefaultBase implements DTM {
   public void appendChild(int newChild, boolean clone, boolean cloneDepth) {
     error(
         XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "appendChild not yet supported!");
+            XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "appendChild not yet
+    // supported!");
   }
 
   /**
@@ -1854,8 +1857,8 @@ public abstract class DTMDefaultBase implements DTM {
   public void appendTextChild(String str) {
     error(
         XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_METHOD_NOT_SUPPORTED,
-            null)); // "appendTextChild not yet supported!");
+            XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "appendTextChild not
+    // yet supported!");
   }
 
   /**

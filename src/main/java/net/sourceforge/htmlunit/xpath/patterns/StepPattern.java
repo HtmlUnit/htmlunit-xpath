@@ -154,14 +154,14 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     return m_relativePathPattern;
   }
 
-  //  /**
-  //   * Set the list of predicate expressions for this pattern step.
-  //   * @param predicates List of expression objects.
-  //   */
-  //  public void setPredicates(Expression[] predicates)
-  //  {
-  //    m_predicates = predicates;
-  //  }
+  // /**
+  // * Set the list of predicate expressions for this pattern step.
+  // * @param predicates List of expression objects.
+  // */
+  // public void setPredicates(Expression[] predicates)
+  // {
+  // m_predicates = predicates;
+  // }
 
   /**
    * Set the list of predicate expressions for this pattern step.

@@ -304,8 +304,7 @@ public class XML11Char {
   } // isXML11ValidName(String):boolean
 
   /*
-   * from the namespace 1.1 rec
-   * [4] NCName ::= NCNameStartChar NCNameChar*
+   * from the namespace 1.1 rec [4] NCName ::= NCNameStartChar NCNameChar*
    */
   /**
    * Check to see if a string is a valid NCName according to [4] from the XML Namespaces 1.1

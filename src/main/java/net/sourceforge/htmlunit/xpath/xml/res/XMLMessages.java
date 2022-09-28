@@ -65,7 +65,8 @@ public class XMLMessages {
    * @return The formatted message string.
    */
   public static final String createMsg(
-      ListResourceBundle fResourceBundle, String msgKey, Object args[]) // throws Exception
+      ListResourceBundle fResourceBundle, String msgKey, Object args[]) // throws
+        // Exception
       {
 
     String fmsg = null;

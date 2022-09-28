@@ -136,8 +136,8 @@ public class Compiler extends OpMap {
       case OpCodes.OP_MOD:
         expr = mod(opPos);
         break;
-        //    case OpCodes.OP_QUO :
-        //      expr = quo(opPos); break;
+        // case OpCodes.OP_QUO :
+        // expr = quo(opPos); break;
       case OpCodes.OP_NEG:
         expr = neg(opPos);
         break;
@@ -156,8 +156,8 @@ public class Compiler extends OpMap {
       case OpCodes.OP_LITERAL:
         expr = literal(opPos);
         break;
-        //    case OpCodes.OP_VARIABLE :
-        //      expr = variable(opPos); break;
+        // case OpCodes.OP_VARIABLE :
+        // expr = variable(opPos); break;
       case OpCodes.OP_GROUP:
         expr = group(opPos);
         break;
@@ -167,8 +167,8 @@ public class Compiler extends OpMap {
       case OpCodes.OP_ARGUMENT:
         expr = arg(opPos);
         break;
-        //    case OpCodes.OP_EXTFUNCTION :
-        //      expr = compileExtension(opPos); break;
+        // case OpCodes.OP_EXTFUNCTION :
+        // expr = compileExtension(opPos); break;
       case OpCodes.OP_FUNCTION:
         expr = compileFunction(opPos);
         break;
@@ -187,14 +187,16 @@ public class Compiler extends OpMap {
       case OpCodes.OP_QUO:
         error(
             XPATHErrorResources.ER_UNKNOWN_OPCODE,
-            new Object[] {"quo"}); // "ERROR! Unknown op code: "+m_opMap[opPos]);
+            new Object[] {"quo"}); // "ERROR! Unknown op code:
+        // "+m_opMap[opPos]);
         break;
       default:
         error(
             XPATHErrorResources.ER_UNKNOWN_OPCODE,
-            new Object[] {
-              Integer.toString(getOp(opPos))
-            }); // "ERROR! Unknown op code: "+m_opMap[opPos]);
+            new Object[] {Integer.toString(getOp(opPos))}); // "ERROR!
+        // Unknown op
+        // code:
+        // "+m_opMap[opPos]);
     }
 
     return expr;
@@ -383,14 +385,15 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    *
-   * @return reference to {@link net.sourceforge.htmlunit.xpath.operations.Quo} instance.
+   * @return reference to {@link net.sourceforge.htmlunit.xpath.operations.Quo}
+   * instance.
    *
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  //  protected Expression quo(int opPos) throws TransformerException
-  //  {
-  //    return compileOperation(new Quo(), opPos);
-  //  }
+  // protected Expression quo(int opPos) throws TransformerException
+  // {
+  // return compileOperation(new Quo(), opPos);
+  // }
 
   /**
    * Compile a unary '-' operation.
@@ -621,12 +624,12 @@ public class Compiler extends OpMap {
       case OpCodes.NODETYPE_COMMENT:
         return DTMFilter.SHOW_COMMENT;
       case OpCodes.NODETYPE_TEXT:
-        //      return DTMFilter.SHOW_TEXT | DTMFilter.SHOW_COMMENT;
+        // return DTMFilter.SHOW_TEXT | DTMFilter.SHOW_COMMENT;
         return DTMFilter.SHOW_TEXT | DTMFilter.SHOW_CDATA_SECTION;
       case OpCodes.NODETYPE_PI:
         return DTMFilter.SHOW_PROCESSING_INSTRUCTION;
       case OpCodes.NODETYPE_NODE:
-        //      return DTMFilter.SHOW_ALL;
+        // return DTMFilter.SHOW_ALL;
         switch (axesType) {
           case OpCodes.FROM_NAMESPACE:
             return DTMFilter.SHOW_NAMESPACE;
@@ -775,20 +778,17 @@ public class Compiler extends OpMap {
       // list, from where predicates are counted.
       // So, in order to calculate "foo[3]", it has to count from the
       // current node in the context list, so, from that current node,
-      // the full pattern is really "self::node()/child::foo[3]".  If you
+      // the full pattern is really "self::node()/child::foo[3]". If you
       // translate this to a select pattern from the node being tested,
       // which is really how we're treating match patterns, it works out to
       // self::foo/parent::node[child::foo[3]]", or close enough.
-      /*      if(addMagicSelf && pattern.getPredicateCount() > 0)
-          {
-            StepPattern selfPattern = new StepPattern(DTMFilter.SHOW_ALL,
-                                                      Axis.PARENT, Axis.CHILD);
-            // We need to keep the new nodetest from affecting the score...
-            XNumber score = pattern.getStaticScore();
-            pattern.setRelativePathPattern(selfPattern);
-            pattern.setStaticScore(score);
-            selfPattern.setStaticScore(score);
-      }*/
+      /*
+       * if(addMagicSelf && pattern.getPredicateCount() > 0) { StepPattern selfPattern
+       * = new StepPattern(DTMFilter.SHOW_ALL, Axis.PARENT, Axis.CHILD); // We need to
+       * keep the new nodetest from affecting the score... XNumber score =
+       * pattern.getStaticScore(); pattern.setRelativePathPattern(selfPattern);
+       * pattern.setStaticScore(score); selfPattern.setStaticScore(score); }
+       */
     } else {
       // System.out.println("Setting "+ancestorPattern+" as relative to "+pattern);
       pattern.setRelativePathPattern(ancestorPattern);
@@ -882,8 +882,8 @@ public class Compiler extends OpMap {
        * this table at compilation time for later usage
        */
 
-      //      if (func instanceof FuncExtFunctionAvailable)
-      //          ((FuncExtFunctionAvailable) func).setFunctionTable(m_functionTable);
+      // if (func instanceof FuncExtFunctionAvailable)
+      // ((FuncExtFunctionAvailable) func).setFunctionTable(m_functionTable);
 
       func.postCompileStep(this);
 

@@ -591,10 +591,11 @@ public class DTMNodeProxy
     int size = listVector.size();
     NodeSet nodeSet = new NodeSet(size);
     for (Node value : listVector) {
-      nodeSet.addNode((Node) value);
+      nodeSet.addNode(value);
     }
     return nodeSet;
   }
+
   /**
    * @param listVector
    * @param tempNode
@@ -690,10 +691,11 @@ public class DTMNodeProxy
     int size = listVector.size();
     NodeSet nodeSet = new NodeSet(size);
     for (Node value : listVector) {
-      nodeSet.addNode((Node) value);
+      nodeSet.addNode(value);
     }
     return nodeSet;
   }
+
   /**
    * @param listVector
    * @param tempNode
@@ -736,6 +738,7 @@ public class DTMNodeProxy
       }
     }
   }
+
   /**
    * @param elementId
    * @see org.w3c.dom.Document as of DOM Level 2
@@ -1097,6 +1100,7 @@ public class DTMNodeProxy
       // Could create a DTM... but why, when it'd have to be permanantly empty?
       throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
     }
+
     /**
      * Ask whether we support a given DOM feature.
      *
@@ -1426,23 +1430,21 @@ public class DTMNodeProxy
    * <th>Content</th>
    * </tr>
    * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * ELEMENT_NODE, ENTITY_NODE, ENTITY_REFERENCE_NODE,
-   * DOCUMENT_FRAGMENT_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>concatenation of the <code>textContent</code>
-   * attribute value of every child node, excluding COMMENT_NODE and
-   * PROCESSING_INSTRUCTION_NODE nodes</td>
+   * <td valign='top' rowspan='1' colspan='1'>ELEMENT_NODE, ENTITY_NODE,
+   * ENTITY_REFERENCE_NODE, DOCUMENT_FRAGMENT_NODE</td>
+   * <td valign='top' rowspan='1' colspan='1'>concatenation of the
+   * <code>textContent</code> attribute value of every child node, excluding
+   * COMMENT_NODE and PROCESSING_INSTRUCTION_NODE nodes</td>
    * </tr>
    * <tr>
    * <td valign='top' rowspan='1' colspan='1'>ATTRIBUTE_NODE, TEXT_NODE,
    * CDATA_SECTION_NODE, COMMENT_NODE, PROCESSING_INSTRUCTION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * <code>nodeValue</code></td>
+   * <td valign='top' rowspan='1' colspan='1'><code>nodeValue</code></td>
    * </tr>
    * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>DOCUMENT_NODE, DOCUMENT_TYPE_NODE, NOTATION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * null</td>
+   * <td valign='top' rowspan='1' colspan='1'>DOCUMENT_NODE, DOCUMENT_TYPE_NODE,
+   * NOTATION_NODE</td>
+   * <td valign='top' rowspan='1' colspan='1'>null</td>
    * </tr>
    * </table>
    *
@@ -1473,23 +1475,21 @@ public class DTMNodeProxy
    * <th>Content</th>
    * </tr>
    * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * ELEMENT_NODE, ENTITY_NODE, ENTITY_REFERENCE_NODE,
-   * DOCUMENT_FRAGMENT_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>concatenation of the <code>textContent</code>
-   * attribute value of every child node, excluding COMMENT_NODE and
-   * PROCESSING_INSTRUCTION_NODE nodes</td>
+   * <td valign='top' rowspan='1' colspan='1'>ELEMENT_NODE, ENTITY_NODE,
+   * ENTITY_REFERENCE_NODE, DOCUMENT_FRAGMENT_NODE</td>
+   * <td valign='top' rowspan='1' colspan='1'>concatenation of the
+   * <code>textContent</code> attribute value of every child node, excluding
+   * COMMENT_NODE and PROCESSING_INSTRUCTION_NODE nodes</td>
    * </tr>
    * <tr>
    * <td valign='top' rowspan='1' colspan='1'>ATTRIBUTE_NODE, TEXT_NODE,
    * CDATA_SECTION_NODE, COMMENT_NODE, PROCESSING_INSTRUCTION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * <code>nodeValue</code></td>
+   * <td valign='top' rowspan='1' colspan='1'><code>nodeValue</code></td>
    * </tr>
    * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>DOCUMENT_NODE, DOCUMENT_TYPE_NODE, NOTATION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * null</td>
+   * <td valign='top' rowspan='1' colspan='1'>DOCUMENT_NODE, DOCUMENT_TYPE_NODE,
+   * NOTATION_NODE</td>
+   * <td valign='top' rowspan='1' colspan='1'>null</td>
    * </tr>
    * </table>
    *

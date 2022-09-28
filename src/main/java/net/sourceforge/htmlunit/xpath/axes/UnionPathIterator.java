@@ -83,7 +83,7 @@ public class UnionPathIterator extends LocPathIterator
    */
   public void addIterator(DTMIterator expr) {
 
-    // Increase array size by only 1 at a time.  Fix this
+    // Increase array size by only 1 at a time. Fix this
     // if it looks to be a problem.
     if (null == m_iterators) {
       m_iterators = new DTMIterator[1];
@@ -147,7 +147,7 @@ public class UnionPathIterator extends LocPathIterator
   public static LocPathIterator createUnionIterator(Compiler compiler, int opPos)
       throws javax.xml.transform.TransformerException {
     // For the moment, I'm going to first create a full UnionPathIterator, and
-    // then see if I can reduce it to a UnionChildIterator.  It would obviously
+    // then see if I can reduce it to a UnionChildIterator. It would obviously
     // be more effecient to just test for the conditions for a UnionChildIterator,
     // and then create that directly.
     UnionPathIterator upi = new UnionPathIterator(compiler, opPos);
@@ -173,7 +173,7 @@ public class UnionPathIterator extends LocPathIterator
       for (int i = 0; i < nPaths; i++) {
         PredicatedNodeTest lpi = upi.m_exprs[i];
         // I could strip the lpi down to a pure PredicatedNodeTest, but
-        // I don't think it's worth it.  Note that the test can be used
+        // I don't think it's worth it. Note that the test can be used
         // as a static object... so it doesn't have to be cloned.
         uci.addNodeTest(lpi);
       }
@@ -405,7 +405,7 @@ public class UnionPathIterator extends LocPathIterator
     public void setExpression(Expression exp) {
 
       if (!(exp instanceof LocPathIterator)) {
-        // Yuck.  Need FilterExprIter.  Or make it so m_exprs can be just
+        // Yuck. Need FilterExprIter. Or make it so m_exprs can be just
         // plain expressions?
         WalkingIterator wi = new WalkingIterator(getPrefixResolver());
         FilterExprWalker few = new FilterExprWalker(wi);

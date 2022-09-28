@@ -31,37 +31,37 @@ public class XSLTErrorResources extends ListResourceBundle {
    * This file contains error and warning messages related to Xalan Error
    * Handling.
    *
-   *  General notes to translators:
+   * General notes to translators:
    *
-   *  1) Xalan (or more properly, Xalan-interpretive) and XSLTC are names of
-   *     components.
-   *     XSLT is an acronym for "XML Stylesheet Language: Transformations".
-   *     XSLTC is an acronym for XSLT Compiler.
+   * 1) Xalan (or more properly, Xalan-interpretive) and XSLTC are names of
+   * components. XSLT is an acronym for
+   * "XML Stylesheet Language: Transformations". XSLTC is an acronym for XSLT
+   * Compiler.
    *
-   *  2) A stylesheet is a description of how to transform an input XML document
-   *     into a resultant XML document (or HTML document or text).  The
-   *     stylesheet itself is described in the form of an XML document.
+   * 2) A stylesheet is a description of how to transform an input XML document
+   * into a resultant XML document (or HTML document or text). The stylesheet
+   * itself is described in the form of an XML document.
    *
-   *  3) A template is a component of a stylesheet that is used to match a
-   *     particular portion of an input document and specifies the form of the
-   *     corresponding portion of the output document.
+   * 3) A template is a component of a stylesheet that is used to match a
+   * particular portion of an input document and specifies the form of the
+   * corresponding portion of the output document.
    *
-   *  4) An element is a mark-up tag in an XML document; an attribute is a
-   *     modifier on the tag.  For example, in <elem attr='val' attr2='val2'>
-   *     "elem" is an element name, "attr" and "attr2" are attribute names with
-   *     the values "val" and "val2", respectively.
+   * 4) An element is a mark-up tag in an XML document; an attribute is a modifier
+   * on the tag. For example, in <elem attr='val' attr2='val2'> "elem" is an
+   * element name, "attr" and "attr2" are attribute names with the values "val"
+   * and "val2", respectively.
    *
-   *  5) A namespace declaration is a special attribute that is used to associate
-   *     a prefix with a URI (the namespace).  The meanings of element names and
-   *     attribute names that use that prefix are defined with respect to that
-   *     namespace.
+   * 5) A namespace declaration is a special attribute that is used to associate a
+   * prefix with a URI (the namespace). The meanings of element names and
+   * attribute names that use that prefix are defined with respect to that
+   * namespace.
    *
-   *  6) "Translet" is an invented term that describes the class file that
-   *     results from compiling an XML stylesheet into a Java class.
+   * 6) "Translet" is an invented term that describes the class file that results
+   * from compiling an XML stylesheet into a Java class.
    *
-   *  7) XPath is a specification that describes a notation for identifying
-   *     nodes in a tree-structured representation of an XML document.  An
-   *     instance of that notation is referred to as an XPath expression.
+   * 7) XPath is a specification that describes a notation for identifying nodes
+   * in a tree-structured representation of an XML document. An instance of that
+   * notation is referred to as an XPath expression.
    *
    */
 
@@ -356,9 +356,8 @@ public class XSLTErrorResources extends ListResourceBundle {
   public static final String NO_MODIFICATION_ALLOWED_ERR = "NO_MODIFICATION_ALLOWED_ERR";
 
   /*
-   * Now fill in the message text.
-   * Then fill in the message text for that message code in the
-   * array. Use the new error code as the index into the array.
+   * Now fill in the message text. Then fill in the message text for that message
+   * code in the array. Use the new error code as the index into the array.
    */
 
   // Error messages...
@@ -493,7 +492,7 @@ public class XSLTErrorResources extends ListResourceBundle {
       {ER_PROCESSSTYLESHEET_NOT_SUCCESSFUL, "processStylesheet not succesfull!"},
       {ER_SAX_EXCEPTION, "SAX Exception"},
 
-      //  add this message to fix bug 21478
+      // add this message to fix bug 21478
       {ER_FUNCTION_NOT_SUPPORTED, "Function not supported!"},
       {ER_XSLT_ERROR, "XSLT Error"},
       {ER_CURRENCY_SIGN_ILLEGAL, "currency sign is not allowed in format pattern string"},
@@ -611,9 +610,11 @@ public class XSLTErrorResources extends ListResourceBundle {
 
       // Earlier (JDK 1.4 XALAN 2.2-D11) at key code '204' the key name was
       // ER_PRIORITY_NOT_PARSABLE
-      // In latest Xalan code base key name is  ER_VALUE_SHOULD_BE_NUMBER. This should also be
+      // In latest Xalan code base key name is ER_VALUE_SHOULD_BE_NUMBER. This should
+      // also be
       // taken care
-      // in locale specific files like XSLTErrorResources_de.java, XSLTErrorResources_fr.java
+      // in locale specific files like XSLTErrorResources_de.java,
+      // XSLTErrorResources_fr.java
       // etc.
       // NOTE: Not only the key name but message has also been changed.
       {ER_VALUE_SHOULD_BE_NUMBER, "Value for {0} should contain a parsable number"},
@@ -646,24 +647,24 @@ public class XSLTErrorResources extends ListResourceBundle {
       {ER_INVALID_DRIVER_NAME, "Invalid Driver Name Specified!"},
       {ER_ERRORLISTENER, "ErrorListener"},
 
-      // Note to translators:  The following message should not normally be displayed
-      //   to users.  It describes a situation in which the processor has detected
-      //   an internal consistency problem in itself, and it provides this message
-      //   for the developer to help diagnose the problem.  The name
-      //   'ElemTemplateElement' is the name of a class, and should not be
-      //   translated.
+      // Note to translators: The following message should not normally be displayed
+      // to users. It describes a situation in which the processor has detected
+      // an internal consistency problem in itself, and it provides this message
+      // for the developer to help diagnose the problem. The name
+      // 'ElemTemplateElement' is the name of a class, and should not be
+      // translated.
       {
         ER_ASSERT_NO_TEMPLATE_PARENT,
         "Programmer's error! The expression has no ElemTemplateElement parent!"
       },
 
-      // Note to translators:  The following message should not normally be displayed
-      //   to users.  It describes a situation in which the processor has detected
-      //   an internal consistency problem in itself, and it provides this message
-      //   for the developer to help diagnose the problem.  The substitution text
-      //   provides further information in order to diagnose the problem.  The name
-      //   'RedundentExprEliminator' is the name of a class, and should not be
-      //   translated.
+      // Note to translators: The following message should not normally be displayed
+      // to users. It describes a situation in which the processor has detected
+      // an internal consistency problem in itself, and it provides this message
+      // for the developer to help diagnose the problem. The substitution text
+      // provides further information in order to diagnose the problem. The name
+      // 'RedundentExprEliminator' is the name of a class, and should not be
+      // translated.
       {
         ER_ASSERT_REDUNDENT_EXPR_ELIMINATOR,
         "Programmer''s assertion in RedundentExprEliminator: {0}"
@@ -681,97 +682,97 @@ public class XSLTErrorResources extends ListResourceBundle {
         "Illegal value: {1} used for CHAR attribute: {0}.  An attribute of type CHAR must be only 1 character!"
       },
 
-      // Note to translators:  The following message is used if the value of
-      // an attribute in a stylesheet is invalid.  "QNAME" is the XML data-type of
-      // the attribute, and should not be translated.  The substitution text {1} is
+      // Note to translators: The following message is used if the value of
+      // an attribute in a stylesheet is invalid. "QNAME" is the XML data-type of
+      // the attribute, and should not be translated. The substitution text {1} is
       // the attribute value and {0} is the attribute name.
       // The following codes are shared with the warning codes...
       {INVALID_QNAME, "Illegal value: {1} used for QNAME attribute: {0}"},
 
-      // Note to translators:  The following message is used if the value of
-      // an attribute in a stylesheet is invalid.  "ENUM" is the XML data-type of
-      // the attribute, and should not be translated.  The substitution text {1} is
+      // Note to translators: The following message is used if the value of
+      // an attribute in a stylesheet is invalid. "ENUM" is the XML data-type of
+      // the attribute, and should not be translated. The substitution text {1} is
       // the attribute value, {0} is the attribute name, and {2} is a list of valid
       // values.
       {INVALID_ENUM, "Illegal value: {1} used for ENUM attribute: {0}.  Valid values are: {2}."},
 
-      // Note to translators:  The following message is used if the value of
-      // an attribute in a stylesheet is invalid.  "NMTOKEN" is the XML data-type
-      // of the attribute, and should not be translated.  The substitution text {1} is
+      // Note to translators: The following message is used if the value of
+      // an attribute in a stylesheet is invalid. "NMTOKEN" is the XML data-type
+      // of the attribute, and should not be translated. The substitution text {1} is
       // the attribute value and {0} is the attribute name.
       {INVALID_NMTOKEN, "Illegal value: {1} used for NMTOKEN attribute: {0} "},
 
-      // Note to translators:  The following message is used if the value of
-      // an attribute in a stylesheet is invalid.  "NCNAME" is the XML data-type
-      // of the attribute, and should not be translated.  The substitution text {1} is
+      // Note to translators: The following message is used if the value of
+      // an attribute in a stylesheet is invalid. "NCNAME" is the XML data-type
+      // of the attribute, and should not be translated. The substitution text {1} is
       // the attribute value and {0} is the attribute name.
       {INVALID_NCNAME, "Illegal value: {1} used for NCNAME attribute: {0} "},
 
-      // Note to translators:  The following message is used if the value of
-      // an attribute in a stylesheet is invalid.  "boolean" is the XSLT data-type
-      // of the attribute, and should not be translated.  The substitution text {1} is
+      // Note to translators: The following message is used if the value of
+      // an attribute in a stylesheet is invalid. "boolean" is the XSLT data-type
+      // of the attribute, and should not be translated. The substitution text {1} is
       // the attribute value and {0} is the attribute name.
       {INVALID_BOOLEAN, "Illegal value: {1} used for boolean attribute: {0} "},
 
-      // Note to translators:  The following message is used if the value of
-      // an attribute in a stylesheet is invalid.  "number" is the XSLT data-type
-      // of the attribute, and should not be translated.  The substitution text {1} is
+      // Note to translators: The following message is used if the value of
+      // an attribute in a stylesheet is invalid. "number" is the XSLT data-type
+      // of the attribute, and should not be translated. The substitution text {1} is
       // the attribute value and {0} is the attribute name.
       {INVALID_NUMBER, "Illegal value: {1} used for number attribute: {0} "},
 
       // End of shared codes...
 
-      // Note to translators:  A "match pattern" is a special form of XPath expression
-      // that is used for matching patterns.  The substitution text is the name of
-      // a function.  The message indicates that when this function is referenced in
+      // Note to translators: A "match pattern" is a special form of XPath expression
+      // that is used for matching patterns. The substitution text is the name of
+      // a function. The message indicates that when this function is referenced in
       // a match pattern, its argument must be a string literal (or constant.)
       // ER_ARG_LITERAL - new error message for bugzilla //5202
       {ER_ARG_LITERAL, "Argument to {0} in match pattern must be a literal."},
 
-      // Note to translators:  The following message indicates that two definitions of
-      // a variable.  A "global variable" is a variable that is accessible everywher
+      // Note to translators: The following message indicates that two definitions of
+      // a variable. A "global variable" is a variable that is accessible everywher
       // in the stylesheet.
       // ER_DUPLICATE_GLOBAL_VAR - new error message for bugzilla #790
       {ER_DUPLICATE_GLOBAL_VAR, "Duplicate global variable declaration."},
 
-      // Note to translators:  The following message indicates that two definitions of
+      // Note to translators: The following message indicates that two definitions of
       // a variable were encountered.
       // ER_DUPLICATE_VAR - new error message for bugzilla #790
       {ER_DUPLICATE_VAR, "Duplicate variable declaration."},
 
-      // Note to translators:  "xsl:template, "name" and "match" are XSLT keywords
+      // Note to translators: "xsl:template, "name" and "match" are XSLT keywords
       // which must not be translated.
       // ER_TEMPLATE_NAME_MATCH - new error message for bugzilla #789
       {ER_TEMPLATE_NAME_MATCH, "xsl:template must have a name or match attribute (or both)"},
 
-      // Note to translators:  "exclude-result-prefixes" is an XSLT keyword which
-      // should not be translated.  The message indicates that a namespace prefix
+      // Note to translators: "exclude-result-prefixes" is an XSLT keyword which
+      // should not be translated. The message indicates that a namespace prefix
       // encountered as part of the value of the exclude-result-prefixes attribute
       // was in error.
       // ER_INVALID_PREFIX - new error message for bugzilla #788
       {ER_INVALID_PREFIX, "Prefix in exclude-result-prefixes is not valid: {0}"},
 
-      // Note to translators:  An "attribute set" is a set of attributes that can
-      // be added to an element in the output document as a group.  The message
+      // Note to translators: An "attribute set" is a set of attributes that can
+      // be added to an element in the output document as a group. The message
       // indicates that there was a reference to an attribute set named {0} that
       // was never defined.
       // ER_NO_ATTRIB_SET - new error message for bugzilla #782
       {ER_NO_ATTRIB_SET, "attribute-set named {0} does not exist"},
 
-      // Note to translators:  This message indicates that there was a reference
+      // Note to translators: This message indicates that there was a reference
       // to a function named {0} for which no function definition could be found.
       {ER_FUNCTION_NOT_FOUND, "The function named {0} does not exist"},
 
-      // Note to translators:  This message indicates that the XSLT instruction
+      // Note to translators: This message indicates that the XSLT instruction
       // that is named by the substitution text {0} must not contain other XSLT
-      // instructions (content) or a "select" attribute.  The word "select" is
+      // instructions (content) or a "select" attribute. The word "select" is
       // an XSLT keyword in this case and must not be translated.
       {
         ER_CANT_HAVE_CONTENT_AND_SELECT,
         "The {0} element must not have both content and a select attribute."
       },
 
-      // Note to translators:  This message indicates that the value argument
+      // Note to translators: This message indicates that the value argument
       // of setParameter must be a valid Java Object.
       {ER_INVALID_SET_PARAM_VALUE, "The value of param {0} must be a valid Java Object"},
       {
@@ -857,27 +858,28 @@ public class XSLTErrorResources extends ListResourceBundle {
         "Resulting nodeset from second argument of document function is empty. Return an empty node-set."
       },
 
-      // Following are the new WARNING keys added in XALAN code base after Jdk 1.4 (Xalan
+      // Following are the new WARNING keys added in XALAN code base after Jdk 1.4
+      // (Xalan
       // 2.2-D11)
 
-      // Note to translators:  "name" and "xsl:processing-instruction" are keywords
+      // Note to translators: "name" and "xsl:processing-instruction" are keywords
       // and must not be translated.
       {
         WG_PROCESSINGINSTRUCTION_NAME_CANT_BE_XML,
         "The value of the 'name' attribute of xsl:processing-instruction name must not be 'xml'"
       },
 
-      // Note to translators:  "name" and "xsl:processing-instruction" are keywords
-      // and must not be translated.  "NCName" is an XML data-type and must not be
+      // Note to translators: "name" and "xsl:processing-instruction" are keywords
+      // and must not be translated. "NCName" is an XML data-type and must not be
       // translated.
       {
         WG_PROCESSINGINSTRUCTION_NOTVALID_NCNAME,
         "The value of the ''name'' attribute of xsl:processing-instruction must be a valid NCName: {0}"
       },
 
-      // Note to translators:  This message is reported if the stylesheet that is
+      // Note to translators: This message is reported if the stylesheet that is
       // being processed attempted to construct an XML document with an attribute in a
-      // place other than on an element.  The substitution text specifies the name of
+      // place other than on an element. The substitution text specifies the name of
       // the attribute.
       {
         WG_ILLEGAL_ATTRIBUTE_POSITION,
@@ -888,7 +890,8 @@ public class XSLTErrorResources extends ListResourceBundle {
         "An attempt is made to modify an object where modifications are not allowed."
       },
 
-      // Check: WHY THERE IS A GAP B/W NUMBERS in the XSLTErrorResources properties file?
+      // Check: WHY THERE IS A GAP B/W NUMBERS in the XSLTErrorResources properties
+      // file?
 
       // Other miscellaneous text used inside the code...
       {"ui_language", "en"},
@@ -903,8 +906,8 @@ public class XSLTErrorResources extends ListResourceBundle {
       {"column", "Column #"},
       {"xsldone", "XSLProcessor: done"},
 
-      // Note to translators:  The following messages provide usage information
-      // for the Xalan Process command line.  "Process" is the name of a Java class,
+      // Note to translators: The following messages provide usage information
+      // for the Xalan Process command line. "Process" is the name of a Java class,
       // and should not be translated.
       {"xslProc_option", "Xalan-J command line Process class options:"},
       {"xslProc_option", "Xalan-J command line Process class options\u003a"},
@@ -920,7 +923,7 @@ public class XSLTErrorResources extends ListResourceBundle {
       {"xslProc_return_to_continue", "(press <return> to continue)"},
 
       // Note to translators: The option name and the parameter name do not need to
-      // be translated. Only translate the messages in parentheses.  Note also that
+      // be translated. Only translate the messages in parentheses. Note also that
       // leading whitespace in the messages is used to indent the usage information
       // for each option in the English messages.
       // Do not translate the keywords: XSLTC, SAX, DOM and DTM.
@@ -973,7 +976,8 @@ public class XSLTErrorResources extends ListResourceBundle {
       {"optionLINENUMBERS", "   [-L use line numbers for source document]"},
       {"optionSECUREPROCESSING", "   [-SECURE (set the secure processing feature to true.)]"},
 
-      // Following are the new options added in XSLTErrorResources.properties files after Jdk
+      // Following are the new options added in XSLTErrorResources.properties files
+      // after Jdk
       // 1.4 (Xalan 2.2-D11)
 
       {
@@ -983,7 +987,10 @@ public class XSLTErrorResources extends ListResourceBundle {
       {
         "optionFLAVOR",
         "   [-FLAVOR flavorName (Explicitly use s2s=SAX or d2d=DOM to do transform.)] "
-      }, // Added by sboag/scurcuru; experimental
+      }, // Added
+      // by
+      // sboag/scurcuru;
+      // experimental
       {"optionDIAG", "   [-DIAG (Print overall milliseconds transform took.)]"},
       {
         "optionINCREMENTAL",
@@ -1004,10 +1011,10 @@ public class XSLTErrorResources extends ListResourceBundle {
         "   [-XP package (specifies a package name prefix for all generated translet classes)]"
       },
 
-      // AddITIONAL  STRINGS that need L10n
-      // Note to translators:  The following message describes usage of a particular
+      // AddITIONAL STRINGS that need L10n
+      // Note to translators: The following message describes usage of a particular
       // command-line option that is used to enable the "template inlining"
-      // optimization.  The optimization involves making a copy of the code
+      // optimization. The optimization involves making a copy of the code
       // generated for a template in another template that refers to it.
       {"optionXN", "   [-XN (enables template inlining)]"},
       {"optionXX", "   [-XX (turns on additional debugging message output)]"},

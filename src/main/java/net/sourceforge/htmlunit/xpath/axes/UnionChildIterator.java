@@ -48,7 +48,7 @@ public class UnionChildIterator extends ChildTestIterator {
    */
   public void addNodeTest(PredicatedNodeTest test) {
 
-    // Increase array size by only 1 at a time.  Fix this
+    // Increase array size by only 1 at a time. Fix this
     // if it looks to be a problem.
     if (null == m_nodeTests) {
       m_nodeTests = new PredicatedNodeTest[1];

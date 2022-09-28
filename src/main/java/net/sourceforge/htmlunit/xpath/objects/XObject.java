@@ -158,7 +158,9 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     error(
         XPATHErrorResources.ER_CANT_CONVERT_TO_NUMBER,
-        new Object[] {getTypeString()}); // "Can not convert "+getTypeString()+" to a number");
+        new Object[] {getTypeString()}); // "Can not convert
+    // "+getTypeString()+"
+    // to a number");
 
     return 0.0;
   }
@@ -184,7 +186,9 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     error(
         XPATHErrorResources.ER_CANT_CONVERT_TO_NUMBER,
-        new Object[] {getTypeString()}); // "Can not convert "+getTypeString()+" to a number");
+        new Object[] {getTypeString()}); // "Can not convert
+    // "+getTypeString()+"
+    // to a number");
 
     return false;
   }
@@ -247,7 +251,9 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     error(
         XPATHErrorResources.ER_CANT_CONVERT_TO_NODELIST,
-        new Object[] {getTypeString()}); // "Can not convert "+getTypeString()+" to a NodeList!");
+        new Object[] {getTypeString()}); // "Can not convert
+    // "+getTypeString()+"
+    // to a NodeList!");
 
     return null;
   }
@@ -271,7 +277,9 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     error(
         XPATHErrorResources.ER_CANT_CONVERT_TO_NODELIST,
-        new Object[] {getTypeString()}); // "Can not convert "+getTypeString()+" to a NodeList!");
+        new Object[] {getTypeString()}); // "Can not convert
+    // "+getTypeString()+"
+    // to a NodeList!");
 
     return null;
   }
@@ -286,7 +294,9 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     error(
         XPATHErrorResources.ER_CANT_CONVERT_TO_NODELIST,
-        new Object[] {getTypeString()}); // "Can not convert "+getTypeString()+" to a NodeList!");
+        new Object[] {getTypeString()}); // "Can not convert
+    // "+getTypeString()+"
+    // to a NodeList!");
 
     return null;
   }
@@ -301,7 +311,11 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     error(
         XPATHErrorResources.ER_CANT_CONVERT_TO_MUTABLENODELIST,
-        new Object[] {getTypeString()}); // "Can not convert "+getTypeString()+" to a NodeSetDTM!");
+        new Object[] {getTypeString()}); // "Can not
+    // convert
+    // "+getTypeString()+"
+    // to a
+    // NodeSetDTM!");
 
     return (NodeSetDTM) m_obj;
   }
@@ -339,9 +353,13 @@ public class XObject extends Expression implements Serializable, Cloneable {
       default:
         error(
             XPATHErrorResources.ER_CANT_CONVERT_TO_TYPE,
-            new Object[] {
-              getTypeString(), Integer.toString(t)
-            }); // "Can not convert "+getTypeString()+" to a type#"+t);
+            new Object[] {getTypeString(), Integer.toString(t)}); // "Can
+        // not
+        // convert
+        // "+getTypeString()+"
+        // to
+        // a
+        // type#"+t);
 
         result = null;
     }
@@ -360,7 +378,7 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
-    // nodeset function.  Because the arguments
+    // nodeset function. Because the arguments
     // are backwards, we call the opposite comparison
     // function.
     if (obj2.getType() == XObject.CLASS_NODESET) return obj2.greaterThan(this);
@@ -379,7 +397,7 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
-    // nodeset function.  Because the arguments
+    // nodeset function. Because the arguments
     // are backwards, we call the opposite comparison
     // function.
     if (obj2.getType() == XObject.CLASS_NODESET) return obj2.greaterThanOrEqual(this);
@@ -398,7 +416,7 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
-    // nodeset function.  Because the arguments
+    // nodeset function. Because the arguments
     // are backwards, we call the opposite comparison
     // function.
     if (obj2.getType() == XObject.CLASS_NODESET) return obj2.lessThan(this);
@@ -417,7 +435,7 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
-    // nodeset function.  Because the arguments
+    // nodeset function. Because the arguments
     // are backwards, we call the opposite comparison
     // function.
     if (obj2.getType() == XObject.CLASS_NODESET) return obj2.lessThanOrEqual(this);
@@ -485,9 +503,9 @@ public class XObject extends Expression implements Serializable, Cloneable {
     String fmsg = XSLMessages.createXPATHMessage(msg, args);
 
     // boolean shouldThrow = support.problem(m_support.XPATHPROCESSOR,
-    //                                      m_support.ERROR,
-    //                                      null,
-    //                                      null, fmsg, 0, 0);
+    // m_support.ERROR,
+    // null,
+    // null, fmsg, 0, 0);
     // if(shouldThrow)
     {
       throw new XPathException(fmsg, this);
@@ -501,6 +519,7 @@ public class XObject extends Expression implements Serializable, Cloneable {
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     assertion(false, "callVisitors should not be called for this object!!!");
   }
+
   /** @see Expression#deepEquals(Expression) */
   @Override
   public boolean deepEquals(Expression expr) {
@@ -508,7 +527,7 @@ public class XObject extends Expression implements Serializable, Cloneable {
 
     // If equals at the expression level calls deepEquals, I think we're
     // still safe from infinite recursion since this object overrides
-    // equals.  I hope.
+    // equals. I hope.
     if (!this.equals((XObject) expr)) return false;
 
     return true;

@@ -91,13 +91,14 @@ public class XPathParser {
     m_ops.setOp(OpMap.MAPINDEX_LENGTH, 2);
 
     // Patch for Christine's gripe. She wants her errorHandler to return from
-    // a fatal error and continue trying to parse, rather than throwing an exception.
+    // a fatal error and continue trying to parse, rather than throwing an
+    // exception.
     // Without the patch, that put us into an endless loop.
     //
     // %REVIEW% Is there a better way of doing this?
     // %REVIEW% Are there any other cases which need the safety net?
-    //   (and if so do we care right now, or should we rewrite the XPath
-    //  grammar engine and can fix it at that time?)
+    // (and if so do we care right now, or should we rewrite the XPath
+    // grammar engine and can fix it at that time?)
     try {
 
       nextToken();
@@ -116,7 +117,10 @@ public class XPathParser {
 
         error(
             XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS,
-            new Object[] {extraTokens.toString()}); // "Extra illegal tokens: "+extraTokens);
+            new Object[] {extraTokens.toString()}); // "Extra
+        // illegal
+        // tokens:
+        // "+extraTokens);
       }
 
     } catch (net.sourceforge.htmlunit.xpath.XPathProcessorException e) {
@@ -171,7 +175,10 @@ public class XPathParser {
 
       error(
           XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS,
-          new Object[] {extraTokens.toString()}); // "Extra illegal tokens: "+extraTokens);
+          new Object[] {extraTokens.toString()}); // "Extra
+      // illegal
+      // tokens:
+      // "+extraTokens);
     }
 
     // Terminate for safety.
@@ -298,9 +305,11 @@ public class XPathParser {
     } else {
       error(
           XPATHErrorResources.ER_EXPECTED_BUT_FOUND,
-          new Object[] {
-            String.valueOf(expected), m_token
-          }); // "Expected "+expected+", but found: "+m_token);
+          new Object[] {String.valueOf(expected), m_token}); // "Expected
+      // "+expected+",
+      // but
+      // found:
+      // "+m_token);
 
       // Patch for Christina's gripe. She wants her errorHandler to return from
       // this error and continue trying to parse, rather than throwing an exception.
@@ -772,7 +781,8 @@ public class XPathParser {
     if (opLen == 2) {
       error(
           XPATHErrorResources.ER_BOOLEAN_ARG_NO_LONGER_OPTIONAL,
-          null); // "boolean(...) argument is no longer optional with 19990709 XPath
+          null); // "boolean(...) argument is no longer
+      // optional with 19990709 XPath
       // draft.");
     }
 
@@ -914,11 +924,8 @@ public class XPathParser {
     return filterMatch;
 
     /*
-     * if(tokenIs('['))
-     * {
-     *   Predicate();
-     *   m_ops.m_opMap[opPos + OpMap.MAPINDEX_LENGTH] = m_ops.m_opMap[OpMap.MAPINDEX_LENGTH] - opPos;
-     * }
+     * if(tokenIs('[')) { Predicate(); m_ops.m_opMap[opPos + OpMap.MAPINDEX_LENGTH]
+     * = m_ops.m_opMap[OpMap.MAPINDEX_LENGTH] - opPos; }
      */
   }
 
@@ -1017,7 +1024,9 @@ public class XPathParser {
       if (-1 == funcTok) {
         error(
             XPATHErrorResources.ER_COULDNOT_FIND_FUNCTION,
-            new Object[] {m_token}); // "Could not find function: "+m_token+"()");
+            new Object[] {m_token}); // "Could not find
+        // function:
+        // "+m_token+"()");
       }
 
       switch (funcTok) {
@@ -1042,7 +1051,8 @@ public class XPathParser {
       if (tokenIs(',')) {
         error(
             XPATHErrorResources.ER_FOUND_COMMA_BUT_NO_PRECEDING_ARG,
-            null); // "Found ',' but no preceding argument!");
+            null); // "Found ',' but no preceding
+        // argument!");
       }
 
       Argument();
@@ -1053,7 +1063,8 @@ public class XPathParser {
         if (tokenIs(')')) {
           error(
               XPATHErrorResources.ER_FOUND_COMMA_BUT_NO_FOLLOWING_ARG,
-              null); // "Found ',' but no following argument!");
+              null); // "Found ',' but no following
+          // argument!");
         }
       }
     }
@@ -1178,7 +1189,8 @@ public class XPathParser {
       if (tokenIs('[')) {
         error(
             XPATHErrorResources.ER_PREDICATE_ILLEGAL_SYNTAX,
-            null); // "'..[predicate]' or '.[predicate]' is illegal syntax.  Use
+            null); // "'..[predicate]' or '.[predicate]' is
+        // illegal syntax. Use
         // 'self::node()[predicate]' instead.");
       }
 
@@ -1272,8 +1284,8 @@ public class XPathParser {
 
     if (null == val) {
       error(
-          XPATHErrorResources.ER_ILLEGAL_AXIS_NAME,
-          new Object[] {m_token}); // "illegal axis name: "+m_token);
+          XPATHErrorResources.ER_ILLEGAL_AXIS_NAME, new Object[] {m_token}); // "illegal axis name:
+      // "+m_token);
     }
 
     int axesType = ((Integer) val).intValue();
@@ -1297,8 +1309,8 @@ public class XPathParser {
 
       if (null == nodeTestOp) {
         error(
-            XPATHErrorResources.ER_UNKNOWN_NODETYPE,
-            new Object[] {m_token}); // "Unknown nodetype: "+m_token);
+            XPATHErrorResources.ER_UNKNOWN_NODETYPE, new Object[] {m_token}); // "Unknown nodetype:
+        // "+m_token);
       } else {
         nextToken();
 
@@ -1466,7 +1478,10 @@ public class XPathParser {
     } else {
       error(
           XPATHErrorResources.ER_PATTERN_LITERAL_NEEDS_BE_QUOTED,
-          new Object[] {m_token}); // "Pattern literal ("+m_token+") needs to be quoted!");
+          new Object[] {m_token}); // "Pattern literal
+      // ("+m_token+")
+      // needs to be
+      // quoted!");
     }
   }
 
@@ -1493,7 +1508,10 @@ public class XPathParser {
 
         error(
             XPATHErrorResources.ER_COULDNOT_BE_FORMATTED_TO_NUMBER,
-            new Object[] {m_token}); // m_token+" could not be formatted to a number!");
+            new Object[] {m_token}); // m_token+"
+        // could not be
+        // formatted to
+        // a number!");
       }
 
       m_ops.m_tokenQueue.setElementAt(new XNumber(num), m_queueMark - 1);
@@ -1567,7 +1585,7 @@ public class XPathParser {
         appendOp(4, OpCodes.MATCH_ANY_ANCESTOR);
 
         // Added this to fix bug reported by Myriam for match="//x/a"
-        // patterns.  If you don't do this, the 'x' step will think it's part
+        // patterns. If you don't do this, the 'x' step will think it's part
         // of a '//' pattern, and so will cause 'a' to be matched when it has
         // any ancestor that is 'x'.
         nextToken();
@@ -1628,7 +1646,7 @@ public class XPathParser {
       nextToken();
 
       // StepPattern() may consume first slash of pair in "a//b" while
-      // processing StepPattern "a".  On next iteration, let StepPattern know
+      // processing StepPattern "a". On next iteration, let StepPattern know
       // that happened, so it doesn't match ill-formed patterns like "a///b".
       trailingSlashConsumed = StepPattern(!trailingSlashConsumed);
     }
@@ -1718,13 +1736,13 @@ public class XPathParser {
     boolean trailingSlashConsumed;
 
     // For "a//b", where "a" is current step, we need to mark operation of
-    // current step as "MATCH_ANY_ANCESTOR".  Then we'll consume the first
+    // current step as "MATCH_ANY_ANCESTOR". Then we'll consume the first
     // slash and subsequent step will be treated as a MATCH_IMMEDIATE_ANCESTOR
     // (unless it too is followed by '//'.)
     //
-    // %REVIEW%  Following is what happens today, but I'm not sure that's
-    // %REVIEW%  correct behaviour.  Perhaps no valid case could be constructed
-    // %REVIEW%  where it would matter?
+    // %REVIEW% Following is what happens today, but I'm not sure that's
+    // %REVIEW% correct behaviour. Perhaps no valid case could be constructed
+    // %REVIEW% where it would matter?
     //
     // If current step is on the attribute axis (e.g., "@x//b"), we won't
     // change the current step, and let following step be marked as

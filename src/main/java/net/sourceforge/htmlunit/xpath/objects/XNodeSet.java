@@ -35,6 +35,7 @@ import org.w3c.dom.traversal.NodeIterator;
  */
 public class XNodeSet extends NodeSequence {
   static final long serialVersionUID = 1916026368035639667L;
+
   /** Default constructor for derived objects. */
   protected XNodeSet() {}
 
@@ -256,16 +257,16 @@ public class XNodeSet extends NodeSequence {
     return nodelist;
   }
 
-  //  /**
-  //   * Return a java object that's closest to the representation
-  //   * that should be handed to an extension.
-  //   *
-  //   * @return The object that this class wraps
-  //   */
-  //  public Object object()
-  //  {
-  //    return new org.apache.xml.dtm.ref.DTMNodeList(iter());
-  //  }
+  // /**
+  // * Return a java object that's closest to the representation
+  // * that should be handed to an extension.
+  // *
+  // * @return The object that this class wraps
+  // */
+  // public Object object()
+  // {
+  // return new org.apache.xml.dtm.ref.DTMNodeList(iter());
+  // }
 
   /** Return the iterator without cloning, etc. */
   public DTMIterator iterRaw() {

@@ -547,7 +547,7 @@ public class NodeVector implements Serializable, Cloneable {
     } else if (lo == hi - 1) {
 
       /*
-       *  sort a two element list by swapping if necessary
+       * sort a two element list by swapping if necessary
        */
       if (a[lo] > a[hi]) {
         int T = a[lo];
@@ -560,7 +560,7 @@ public class NodeVector implements Serializable, Cloneable {
     }
 
     /*
-     *  Pick a pivot and move it out of the way
+     * Pick a pivot and move it out of the way
      */
     int mid = (lo + hi) >>> 1;
     int pivot = a[mid];
@@ -571,23 +571,23 @@ public class NodeVector implements Serializable, Cloneable {
     while (lo < hi) {
 
       /*
-       *  Search forward from a[lo] until an element is found that
-       *  is greater than the pivot or lo >= hi
+       * Search forward from a[lo] until an element is found that is greater than the
+       * pivot or lo >= hi
        */
       while (a[lo] <= pivot && lo < hi) {
         lo++;
       }
 
       /*
-       *  Search backward from a[hi] until element is found that
-       *  is less than the pivot, or lo >= hi
+       * Search backward from a[hi] until element is found that is less than the
+       * pivot, or lo >= hi
        */
       while (pivot <= a[hi] && lo < hi) {
         hi--;
       }
 
       /*
-       *  Swap elements a[lo] and a[hi]
+       * Swap elements a[lo] and a[hi]
        */
       if (lo < hi) {
         int T = a[lo];
@@ -599,20 +599,19 @@ public class NodeVector implements Serializable, Cloneable {
       }
 
       // if (stopRequested) {
-      //    return;
+      // return;
       // }
     }
 
     /*
-     *  Put the median in the "center" of the list
+     * Put the median in the "center" of the list
      */
     a[hi0] = a[hi];
     a[hi] = pivot;
 
     /*
-     *  Recursive calls, elements a[lo0] to a[lo-1] are less than or
-     *  equal to pivot, elements a[hi+1] to a[hi0] are greater than
-     *  pivot.
+     * Recursive calls, elements a[lo0] to a[lo-1] are less than or equal to pivot,
+     * elements a[hi+1] to a[hi0] are greater than pivot.
      */
     sort(a, lo0, lo - 1);
     sort(a, hi + 1, hi0);

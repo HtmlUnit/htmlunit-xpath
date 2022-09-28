@@ -88,15 +88,15 @@ public class ReverseAxesWalker extends AxesWalker {
     return true;
   }
 
-  //  /**
-  //   *  Set the root node of the TreeWalker.
-  //   *
-  //   * @param root The context node of this step.
-  //   */
-  //  public void setRoot(int root)
-  //  {
-  //    super.setRoot(root);
-  //  }
+  // /**
+  // * Set the root node of the TreeWalker.
+  // *
+  // * @param root The context node of this step.
+  // */
+  // public void setRoot(int root)
+  // {
+  // super.setRoot(root);
+  // }
 
   /**
    * Get the current sub-context position. In order to do the reverse axes count, for the moment

@@ -544,23 +544,21 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
    * <th>Content</th>
    * </tr>
    * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * ELEMENT_NODE, ENTITY_NODE, ENTITY_REFERENCE_NODE,
-   * DOCUMENT_FRAGMENT_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>concatenation of the <code>textContent</code>
-   * attribute value of every child node, excluding COMMENT_NODE and
-   * PROCESSING_INSTRUCTION_NODE nodes</td>
+   * <td valign='top' rowspan='1' colspan='1'>ELEMENT_NODE, ENTITY_NODE,
+   * ENTITY_REFERENCE_NODE, DOCUMENT_FRAGMENT_NODE</td>
+   * <td valign='top' rowspan='1' colspan='1'>concatenation of the
+   * <code>textContent</code> attribute value of every child node, excluding
+   * COMMENT_NODE and PROCESSING_INSTRUCTION_NODE nodes</td>
    * </tr>
    * <tr>
    * <td valign='top' rowspan='1' colspan='1'>ATTRIBUTE_NODE, TEXT_NODE,
    * CDATA_SECTION_NODE, COMMENT_NODE, PROCESSING_INSTRUCTION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * <code>nodeValue</code></td>
+   * <td valign='top' rowspan='1' colspan='1'><code>nodeValue</code></td>
    * </tr>
    * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>DOCUMENT_NODE, DOCUMENT_TYPE_NODE, NOTATION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * null</td>
+   * <td valign='top' rowspan='1' colspan='1'>DOCUMENT_NODE, DOCUMENT_TYPE_NODE,
+   * NOTATION_NODE</td>
+   * <td valign='top' rowspan='1' colspan='1'>null</td>
    * </tr>
    * </table>
    *
@@ -591,23 +589,21 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
    * <th>Content</th>
    * </tr>
    * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * ELEMENT_NODE, ENTITY_NODE, ENTITY_REFERENCE_NODE,
-   * DOCUMENT_FRAGMENT_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>concatenation of the <code>textContent</code>
-   * attribute value of every child node, excluding COMMENT_NODE and
-   * PROCESSING_INSTRUCTION_NODE nodes</td>
+   * <td valign='top' rowspan='1' colspan='1'>ELEMENT_NODE, ENTITY_NODE,
+   * ENTITY_REFERENCE_NODE, DOCUMENT_FRAGMENT_NODE</td>
+   * <td valign='top' rowspan='1' colspan='1'>concatenation of the
+   * <code>textContent</code> attribute value of every child node, excluding
+   * COMMENT_NODE and PROCESSING_INSTRUCTION_NODE nodes</td>
    * </tr>
    * <tr>
    * <td valign='top' rowspan='1' colspan='1'>ATTRIBUTE_NODE, TEXT_NODE,
    * CDATA_SECTION_NODE, COMMENT_NODE, PROCESSING_INSTRUCTION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * <code>nodeValue</code></td>
+   * <td valign='top' rowspan='1' colspan='1'><code>nodeValue</code></td>
    * </tr>
    * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>DOCUMENT_NODE, DOCUMENT_TYPE_NODE, NOTATION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>
-   * null</td>
+   * <td valign='top' rowspan='1' colspan='1'>DOCUMENT_NODE, DOCUMENT_TYPE_NODE,
+   * NOTATION_NODE</td>
+   * <td valign='top' rowspan='1' colspan='1'>null</td>
    * </tr>
    * </table>
    *

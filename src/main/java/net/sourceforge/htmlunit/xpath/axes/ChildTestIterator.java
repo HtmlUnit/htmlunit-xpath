@@ -35,9 +35,6 @@ public class ChildTestIterator extends BasicTestIterator {
   /** The traverser to use to navigate over the descendants. */
   protected transient DTMAxisTraverser m_traverser;
 
-  /** The extended type ID, not set until setRoot. */
-  //  protected int m_extendedTypeID;
-
   /**
    * Create a ChildTestIterator object.
    *

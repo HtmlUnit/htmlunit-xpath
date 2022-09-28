@@ -40,17 +40,17 @@ public class FuncCount extends FunctionOneArg {
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    //    DTMIterator nl = m_arg0.asIterator(xctxt, xctxt.getCurrentNode());
+    // DTMIterator nl = m_arg0.asIterator(xctxt, xctxt.getCurrentNode());
 
-    //    // We should probably make a function on the iterator for this,
-    //    // as a given implementation could optimize.
-    //    int i = 0;
+    // // We should probably make a function on the iterator for this,
+    // // as a given implementation could optimize.
+    // int i = 0;
     //
-    //    while (DTM.NULL != nl.nextNode())
-    //    {
-    //      i++;
-    //    }
-    //    nl.detach();
+    // while (DTM.NULL != nl.nextNode())
+    // {
+    // i++;
+    // }
+    // nl.detach();
     DTMIterator nl = m_arg0.asIterator(xctxt, xctxt.getCurrentNode());
     int i = nl.getLength();
     nl.detach();

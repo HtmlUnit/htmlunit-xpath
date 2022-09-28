@@ -57,7 +57,7 @@ public class FuncId extends FunctionOneArg {
 
     if (null != refval) {
       String ref = null;
-      //      DOMHelper dh = xctxt.getDOMHelper();
+      // DOMHelper dh = xctxt.getDOMHelper();
       StringTokenizer tokenizer = new StringTokenizer(refval);
       boolean hasMore = tokenizer.hasMoreTokens();
       DTM dtm = xctxt.getDTM(docContext);

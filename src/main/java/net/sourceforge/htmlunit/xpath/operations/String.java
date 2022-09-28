@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.operations;
 
 import net.sourceforge.htmlunit.xpath.objects.XObject;
-import net.sourceforge.htmlunit.xpath.objects.XString;
 
 /** The 'string()' operation expression executer. */
 public class String extends UnaryOperation {
@@ -33,6 +32,6 @@ public class String extends UnaryOperation {
    */
   @Override
   public XObject operate(XObject right) throws javax.xml.transform.TransformerException {
-    return (XString) right.xstr(); // semi-safe cast.
+    return right.xstr(); // semi-safe cast.
   }
 }

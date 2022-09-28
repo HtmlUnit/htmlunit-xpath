@@ -159,11 +159,11 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   @Override
   public DTM getDTM(int nodeHandle) {
     DTMManager mgr = getDTMManager();
-    if (null != mgr) return getDTMManager().getDTM(nodeHandle);
-    else {
-      assertion(false, "Can not get a DTM Unless a DTMManager has been set!");
-      return null;
+    if (null != mgr) {
+      return getDTMManager().getDTM(nodeHandle);
     }
+    assertion(false, "Can not get a DTM Unless a DTMManager has been set!");
+    return null;
   }
 
   /** @see DTMIterator#getDTMManager() */
@@ -175,13 +175,13 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /** @see DTMIterator#getRoot() */
   @Override
   public int getRoot() {
-    if (null != m_iter) return m_iter.getRoot();
-    else {
-      // NodeSetDTM will call this, and so it's not a good thing to throw
-      // an assertion here.
-      // assertion(false, "Can not get the root from a non-iterated NodeSequence!");
-      return DTM.NULL;
+    if (null != m_iter) {
+      return m_iter.getRoot();
     }
+    // NodeSetDTM will call this, and so it's not a good thing to throw
+    // an assertion here.
+    // assertion(false, "Can not get the root from a non-iterated NodeSequence!");
+    return DTM.NULL;
   }
 
   /** @see DTMIterator#setRoot(int, Object) */
@@ -217,8 +217,10 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /** @see DTMIterator#getExpandEntityReferences() */
   @Override
   public boolean getExpandEntityReferences() {
-    if (null != m_iter) return m_iter.getExpandEntityReferences();
-    else return true;
+    if (null != m_iter) {
+      return m_iter.getExpandEntityReferences();
+    }
+    return true;
   }
 
   /** @see DTMIterator#nextNode() */
@@ -270,16 +272,17 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   @Override
   public int previousNode() {
     if (hasCache()) {
-      if (m_next <= 0) return DTM.NULL;
-      else {
-        m_next--;
-        return item(m_next);
+      if (m_next <= 0) {
+        return DTM.NULL;
       }
-    } else {
-      m_iter.previousNode();
-      m_next = m_iter.getCurrentPos();
-      return m_next;
+
+      m_next--;
+      return item(m_next);
     }
+
+    m_iter.previousNode();
+    m_next = m_iter.getCurrentPos();
+    return m_next;
   }
 
   /** @see DTMIterator#detach() */
@@ -310,13 +313,16 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     if (hasCache()) {
       int currentIndex = m_next - 1;
       NodeVector vec = getVector();
-      if ((currentIndex >= 0) && (currentIndex < vec.size())) return vec.elementAt(currentIndex);
-      else return DTM.NULL;
+      if ((currentIndex >= 0) && (currentIndex < vec.size())) {
+        return vec.elementAt(currentIndex);
+      }
+      return DTM.NULL;
     }
 
     if (null != m_iter) {
       return m_iter.getCurrentNode();
-    } else return DTM.NULL;
+    }
+    return DTM.NULL;
   }
 
   /** @see DTMIterator#isFresh() */
@@ -332,15 +338,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       if (!hasCache()) {
         SetVector(new NodeVector());
       }
-      //    else
-      //      getVector().RemoveAllNoClear();  // Is this good?
+      // else
+      // getVector().RemoveAllNoClear(); // Is this good?
     } else SetVector(null);
-  }
-
-  /** @see DTMIterator#isMutable() */
-  @Override
-  public boolean isMutable() {
-    return hasCache(); // though may be surprising if it also has an iterator!
   }
 
   /** @see DTMIterator#getCurrentPos() */
@@ -388,12 +388,11 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     if (null != vec) {
       int oldNode = vec.elementAt(index);
       if (oldNode != node && m_cache.useCount() > 1) {
-        /* If we are going to set the node at the given index
-         * to a different value, and the cache is shared
-         * (has a use count greater than 1)
-         * then make a copy of the cache and use it
-         * so we don't overwrite the value for other
-         * users of the cache.
+        /*
+         * If we are going to set the node at the given index to a different value, and
+         * the cache is shared (has a use count greater than 1) then make a copy of the
+         * cache and use it so we don't overwrite the value for other users of the
+         * cache.
          */
         IteratorCache newCache = new IteratorCache();
         final NodeVector nv;
@@ -413,11 +412,10 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         // Keep our superclass informed of the current NodeVector
         super.setObject(nv);
 
-        /* When we get to here the new cache has
-         * a use count of 1 and when setting a
-         * bunch of values on the same NodeSequence,
-         * such as when sorting, we will keep setting
-         * values in that same copy which has a use count of 1.
+        /*
+         * When we get to here the new cache has a use count of 1 and when setting a
+         * bunch of values on the same NodeSequence, such as when sorting, we will keep
+         * setting values in that same copy which has a use count of 1.
          */
       }
       vec.setElementAt(node, index);
@@ -452,9 +450,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         m_next = pos;
       }
       return m_last;
-    } else {
-      return (-1 == m_last) ? (m_last = m_iter.getLength()) : m_last;
     }
+
+    return (-1 == m_last) ? (m_last = m_iter.getLength()) : m_last;
   }
 
   /**
@@ -504,26 +502,32 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /** @see DTMIterator#isDocOrdered() */
   @Override
   public boolean isDocOrdered() {
-    if (null != m_iter) return m_iter.isDocOrdered();
-    else return true; // can't be sure?
+    if (null != m_iter) {
+      return m_iter.isDocOrdered();
+    }
+
+    return true; // can't be sure?
   }
 
   /** @see DTMIterator#getAxis() */
   @Override
   public int getAxis() {
-    if (null != m_iter) return m_iter.getAxis();
-    else {
-      assertion(false, "Can not getAxis from a non-iterated node sequence!");
-      return 0;
+    if (null != m_iter) {
+      return m_iter.getAxis();
     }
+
+    assertion(false, "Can not getAxis from a non-iterated node sequence!");
+    return 0;
   }
 
   /** @see PathComponent#getAnalysisBits() */
   @Override
   public int getAnalysisBits() {
-    if ((null != m_iter) && (m_iter instanceof PathComponent))
+    if ((null != m_iter) && (m_iter instanceof PathComponent)) {
       return ((PathComponent) m_iter).getAnalysisBits();
-    else return 0;
+    }
+
+    return 0;
   }
 
   /**

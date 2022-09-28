@@ -108,8 +108,11 @@ public class DTMManagerDefault extends DTMManager {
     if (id >= IDENT_MAX_DTMS) {
       // TODO: %REVIEW% Not really the right error message.
       throw new DTMException(
-          XMLMessages.createXMLMessage(
-              XMLErrorResources.ER_NO_DTMIDS_AVAIL, null)); // "No more DTM IDs are available!");
+          XMLMessages.createXMLMessage(XMLErrorResources.ER_NO_DTMIDS_AVAIL, null)); // "No
+      // more
+      // DTM IDs
+      // are
+      // available!");
     }
 
     // We used to just allocate the array size to IDENT_MAX_DTMS.
@@ -202,8 +205,10 @@ public class DTMManagerDefault extends DTMManager {
     // made a mistake.
     throw new DTMException(
         XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_NOT_SUPPORTED,
-            new Object[] {source})); // "Not supported: " + source);
+            XMLErrorResources.ER_NOT_SUPPORTED, new Object[] {source})); // "Not
+    // supported:
+    // " +
+    // source);
   }
 
   /**
@@ -217,9 +222,12 @@ public class DTMManagerDefault extends DTMManager {
   public synchronized int getDTMHandleFromNode(org.w3c.dom.Node node) {
     if (null == node)
       throw new IllegalArgumentException(
-          XMLMessages.createXMLMessage(
-              XMLErrorResources.ER_NODE_NON_NULL,
-              null)); // "node must be non-null for getDTMHandleFromNode!");
+          XMLMessages.createXMLMessage(XMLErrorResources.ER_NODE_NON_NULL, null)); // "node
+    // must
+    // be
+    // non-null
+    // for
+    // getDTMHandleFromNode!");
 
     if (node instanceof net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy)
       return ((net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy) node).getDTMNodeNumber();
@@ -243,8 +251,8 @@ public class DTMManagerDefault extends DTMManager {
       // already examined. Ouch. But with the increased number of DTMs,
       // scanning back to check this is painful.
       // POSSIBLE SOLUTIONS:
-      //   Generate a list of _unique_ DTM objects?
-      //   Have each DTM cache last DOM node search?
+      // Generate a list of _unique_ DTM objects?
+      // Have each DTM cache last DOM node search?
       for (DTM thisDTM : m_dtms) {
         if ((null != thisDTM) && thisDTM instanceof DOM2DTM) {
           int handle = ((DOM2DTM) thisDTM).getHandleOfNode(node);
@@ -269,7 +277,7 @@ public class DTMManagerDefault extends DTMManager {
       // be managed DTMs.
 
       // Since the real root of our tree may be a DocumentFragment, we need to
-      // use getParent to find the root, instead of getOwnerDocument.  Otherwise
+      // use getParent to find the root, instead of getOwnerDocument. Otherwise
       // DOM2DTM#getHandleOfNode will be very unhappy.
       Node root = node;
       Node p =
@@ -299,8 +307,10 @@ public class DTMManagerDefault extends DTMManager {
       if (DTM.NULL == handle)
         throw new RuntimeException(
             XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_COULD_NOT_RESOLVE_NODE,
-                null)); // "Could not resolve the node to a handle!");
+                XMLErrorResources.ER_COULD_NOT_RESOLVE_NODE, null)); // "Could not
+      // resolve the
+      // node to a
+      // handle!");
 
       return handle;
     }

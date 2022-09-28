@@ -35,45 +35,45 @@ public class XPATHErrorResources extends ListResourceBundle {
    * This file contains error and warning messages related to XPath Error
    * Handling.
    *
-   *  1) Xalan (or more properly, Xalan-interpretive) and XSLTC are names of
-   *     components.
-   *     XSLT is an acronym for "XML Stylesheet Language: Transformations".
-   *     XSLTC is an acronym for XSLT Compiler.
+   * 1) Xalan (or more properly, Xalan-interpretive) and XSLTC are names of
+   * components. XSLT is an acronym for
+   * "XML Stylesheet Language: Transformations". XSLTC is an acronym for XSLT
+   * Compiler.
    *
-   *  2) A stylesheet is a description of how to transform an input XML document
-   *     into a resultant XML document (or HTML document or text).  The
-   *     stylesheet itself is described in the form of an XML document.
+   * 2) A stylesheet is a description of how to transform an input XML document
+   * into a resultant XML document (or HTML document or text). The stylesheet
+   * itself is described in the form of an XML document.
    *
-   *  3) A template is a component of a stylesheet that is used to match a
-   *     particular portion of an input document and specifies the form of the
-   *     corresponding portion of the output document.
+   * 3) A template is a component of a stylesheet that is used to match a
+   * particular portion of an input document and specifies the form of the
+   * corresponding portion of the output document.
    *
-   *  4) An element is a mark-up tag in an XML document; an attribute is a
-   *     modifier on the tag.  For example, in <elem attr='val' attr2='val2'>
-   *     "elem" is an element name, "attr" and "attr2" are attribute names with
-   *     the values "val" and "val2", respectively.
+   * 4) An element is a mark-up tag in an XML document; an attribute is a modifier
+   * on the tag. For example, in <elem attr='val' attr2='val2'> "elem" is an
+   * element name, "attr" and "attr2" are attribute names with the values "val"
+   * and "val2", respectively.
    *
-   *  5) A namespace declaration is a special attribute that is used to associate
-   *     a prefix with a URI (the namespace).  The meanings of element names and
-   *     attribute names that use that prefix are defined with respect to that
-   *     namespace.
+   * 5) A namespace declaration is a special attribute that is used to associate a
+   * prefix with a URI (the namespace). The meanings of element names and
+   * attribute names that use that prefix are defined with respect to that
+   * namespace.
    *
-   *  6) "Translet" is an invented term that describes the class file that
-   *     results from compiling an XML stylesheet into a Java class.
+   * 6) "Translet" is an invented term that describes the class file that results
+   * from compiling an XML stylesheet into a Java class.
    *
-   *  7) XPath is a specification that describes a notation for identifying
-   *     nodes in a tree-structured representation of an XML document.  An
-   *     instance of that notation is referred to as an XPath expression.
+   * 7) XPath is a specification that describes a notation for identifying nodes
+   * in a tree-structured representation of an XML document. An instance of that
+   * notation is referred to as an XPath expression.
    *
-   *  8) The context node is the node in the document with respect to which an
-   *     XPath expression is being evaluated.
+   * 8) The context node is the node in the document with respect to which an
+   * XPath expression is being evaluated.
    *
-   *  9) An iterator is an object that traverses nodes in the tree, one at a time.
+   * 9) An iterator is an object that traverses nodes in the tree, one at a time.
    *
-   *  10) NCName is an XML term used to describe a name that does not contain a
-   *     colon (a "no-colon name").
+   * 10) NCName is an XML term used to describe a name that does not contain a
+   * colon (a "no-colon name").
    *
-   *  11) QName is an XML term meaning "qualified name".
+   * 11) QName is an XML term meaning "qualified name".
    */
 
   /*
@@ -243,15 +243,17 @@ public class XPATHErrorResources extends ListResourceBundle {
   public static final String ER_CANT_CONVERT_TO_STRING = "ER_CANT_CONVERT_TO_STRING";
   public static final String ER_NON_SNAPSHOT_TYPE = "ER_NON_SNAPSHOT_TYPE";
   public static final String ER_WRONG_DOCUMENT = "ER_WRONG_DOCUMENT";
-  /* Note to translators:  The XPath expression cannot be evaluated with respect
-   * to this type of node.
+  /*
+   * Note to translators: The XPath expression cannot be evaluated with respect to
+   * this type of node.
    */
   /** Field ER_WRONG_NODETYPE */
   public static final String ER_WRONG_NODETYPE = "ER_WRONG_NODETYPE";
 
   public static final String ER_XPATH_ERROR = "ER_XPATH_ERROR";
 
-  // BEGIN: Keys needed for exception messages of  JAXP 1.3 XPath API implementation
+  // BEGIN: Keys needed for exception messages of JAXP 1.3 XPath API
+  // implementation
   public static final String ER_EXTENSION_FUNCTION_CANNOT_BE_INVOKED =
       "ER_EXTENSION_FUNCTION_CANNOT_BE_INVOKED";
   public static final String ER_RESOLVE_VARIABLE_RETURNS_NULL = "ER_RESOLVE_VARIABLE_RETURNS_NULL";
@@ -268,7 +270,7 @@ public class XPATHErrorResources extends ListResourceBundle {
   public static final String ER_GETTING_UNKNOWN_FEATURE = "ER_GETTING_UNKNOWN_FEATURE";
   public static final String ER_NULL_XPATH_FUNCTION_RESOLVER = "ER_NULL_XPATH_FUNCTION_RESOLVER";
   public static final String ER_NULL_XPATH_VARIABLE_RESOLVER = "ER_NULL_XPATH_VARIABLE_RESOLVER";
-  // END: Keys needed for exception messages of  JAXP 1.3 XPath API implementation
+  // END: Keys needed for exception messages of JAXP 1.3 XPath API implementation
 
   public static final String WG_LOCALE_NAME_NOT_HANDLED = "WG_LOCALE_NAME_NOT_HANDLED";
   public static final String WG_PROPERTY_NOT_SUPPORTED = "WG_PROPERTY_NOT_SUPPORTED";
@@ -471,7 +473,7 @@ public class XPATHErrorResources extends ListResourceBundle {
       {ER_ONLY_ALLOWS, "{0} only allows {1} arguments"},
       {ER_UNKNOWN_STEP, "Programmer''s assertion in getNextStepPos: unknown stepType: {0}"},
 
-      // Note to translators:  A relative location path is a form of XPath expression.
+      // Note to translators: A relative location path is a form of XPath expression.
       // The message indicates that such an expression was expected following the
       // characters '/' or '//', but was not found.
       {
@@ -479,7 +481,7 @@ public class XPATHErrorResources extends ListResourceBundle {
         "A relative location path was expected following the '/' or '//' token."
       },
 
-      // Note to translators:  A location path is a form of XPath expression.
+      // Note to translators: A location path is a form of XPath expression.
       // The message indicates that syntactically such an expression was expected,but
       // the characters specified by the substitution text were encountered instead.
       {
@@ -487,7 +489,7 @@ public class XPATHErrorResources extends ListResourceBundle {
         "A location path was expected, but the following token was encountered\u003a  {0}"
       },
 
-      // Note to translators:  A location path is a form of XPath expression.
+      // Note to translators: A location path is a form of XPath expression.
       // The message indicates that syntactically such a subexpression was expected,
       // but no more characters were found in the expression.
       {
@@ -495,18 +497,18 @@ public class XPATHErrorResources extends ListResourceBundle {
         "A location path was expected, but the end of the XPath expression was found instead."
       },
 
-      // Note to translators:  A location step is part of an XPath expression.
+      // Note to translators: A location step is part of an XPath expression.
       // The message indicates that syntactically such an expression was expected
       // following the specified characters.
       {ER_EXPECTED_LOC_STEP, "A location step was expected following the '/' or '//' token."},
 
-      // Note to translators:  A node test is part of an XPath expression that is
-      // used to test for particular kinds of nodes.  In this case, a node test that
+      // Note to translators: A node test is part of an XPath expression that is
+      // used to test for particular kinds of nodes. In this case, a node test that
       // consists of an NCName followed by a colon and an asterisk or that consists
       // of a QName was expected, but was not found.
       {ER_EXPECTED_NODE_TEST, "A node test that matches either NCName:* or QName was expected."},
 
-      // Note to translators:  A step pattern is part of an XPath expression.
+      // Note to translators: A step pattern is part of an XPath expression.
       // The message indicates that syntactically such an expression was expected,
       // but the specified character was found in the expression instead.
       {ER_EXPECTED_STEP_PATTERN, "A step pattern was expected, but '/' was encountered."},
@@ -516,7 +518,7 @@ public class XPATHErrorResources extends ListResourceBundle {
       // but was not found.
       {ER_EXPECTED_REL_PATH_PATTERN, "A relative path pattern was expected."},
 
-      // Note to translators:  The substitution text is the name of a data type.  The
+      // Note to translators: The substitution text is the name of a data type. The
       // message indicates that a value of a particular type could not be converted
       // to a value of type boolean.
       {
@@ -554,7 +556,7 @@ public class XPATHErrorResources extends ListResourceBundle {
       },
       {ER_NULL_RESOLVER, "Unable to resolve prefix with null prefix resolver."},
 
-      // Note to translators:  The substitution text is the name of a data type.  The
+      // Note to translators: The substitution text is the name of a data type. The
       // message indicates that a value of a particular type could not be converted
       // to a value of type string.
       {
@@ -569,7 +571,7 @@ public class XPATHErrorResources extends ListResourceBundle {
         "The method snapshotItem cannot be called on the XPathResult of XPath expression ''{0}'' because its XPathResultType is {1}. This method applies only to types UNORDERED_NODE_SNAPSHOT_TYPE and ORDERED_NODE_SNAPSHOT_TYPE."
       },
 
-      // Note to translators:  XPathEvaluator is a Java interface name.  An
+      // Note to translators: XPathEvaluator is a Java interface name. An
       // XPathEvaluator is created with respect to a particular XML document, and in
       // this case the expression represented by this object was being evaluated with
       // respect to a context node from a different document.
@@ -578,7 +580,7 @@ public class XPATHErrorResources extends ListResourceBundle {
         "Context node does not belong to the document that is bound to this XPathEvaluator."
       },
 
-      // Note to translators:  The XPath expression cannot be evaluated with respect
+      // Note to translators: The XPath expression cannot be evaluated with respect
       // to this type of node.
       {ER_WRONG_NODETYPE, "The context node type is not supported."},
       {ER_XPATH_ERROR, "Unknown error in XPath."},
@@ -587,7 +589,8 @@ public class XPATHErrorResources extends ListResourceBundle {
         "The XPathResult of XPath expression ''{0}'' has an XPathResultType of {1} which cannot be converted to a number"
       },
 
-      // BEGIN:  Definitions of error keys used  in exception messages of  JAXP 1.3 XPath API
+      // BEGIN: Definitions of error keys used in exception messages of JAXP 1.3 XPath
+      // API
       // implementation
 
       /** Field ER_EXTENSION_FUNCTION_CANNOT_BE_INVOKED */
@@ -649,7 +652,8 @@ public class XPATHErrorResources extends ListResourceBundle {
         "Attempting to set a null XPathVariableResolver:{0}#setXPathVariableResolver(null)"
       },
 
-      // END:  Definitions of error keys used  in exception messages of  JAXP 1.3 XPath API
+      // END: Definitions of error keys used in exception messages of JAXP 1.3 XPath
+      // API
       // implementation
 
       // Warnings...

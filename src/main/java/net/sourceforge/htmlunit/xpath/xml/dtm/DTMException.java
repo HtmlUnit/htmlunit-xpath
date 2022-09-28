@@ -76,14 +76,17 @@ public class DTMException extends RuntimeException {
     if ((this.containedException == null) && (cause != null)) {
       throw new IllegalStateException(
           XMLMessages.createXMLMessage(
-              XMLErrorResources.ER_CANNOT_OVERWRITE_CAUSE, null)); // "Can't overwrite cause");
+              XMLErrorResources.ER_CANNOT_OVERWRITE_CAUSE, null)); // "Can't
+      // overwrite
+      // cause");
     }
 
     if (cause == this) {
       throw new IllegalArgumentException(
           XMLMessages.createXMLMessage(
-              XMLErrorResources.ER_SELF_CAUSATION_NOT_PERMITTED,
-              null)); // "Self-causation not permitted");
+              XMLErrorResources.ER_SELF_CAUSATION_NOT_PERMITTED, null)); // "Self-causation
+      // not
+      // permitted");
     }
 
     this.containedException = cause;

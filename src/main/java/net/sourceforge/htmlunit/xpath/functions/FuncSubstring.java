@@ -46,39 +46,40 @@ public class FuncSubstring extends Function3Args {
     int lenOfS1 = s1.length();
     XString substr;
 
-    if (lenOfS1 <= 0) return XString.EMPTYSTRING;
-    else {
-      int startIndex;
-
-      if (Double.isNaN(start)) {
-
-        // Double.MIN_VALUE doesn't work with math below
-        // so just use a big number and hope I never get caught.
-        start = -1000000;
-        startIndex = 0;
-      } else {
-        start = Math.round(start);
-        startIndex = (start > 0) ? (int) start - 1 : 0;
-      }
-
-      if (null != m_arg2) {
-        double len = m_arg2.num(xctxt);
-        int end = (int) (Math.round(len) + start) - 1;
-
-        // Normalize end index.
-        if (end < 0) end = 0;
-        else if (end > lenOfS1) end = lenOfS1;
-
-        if (startIndex > lenOfS1) startIndex = lenOfS1;
-
-        substr = s1.substring(startIndex, end);
-      } else {
-        if (startIndex > lenOfS1) startIndex = lenOfS1;
-        substr = s1.substring(startIndex);
-      }
+    if (lenOfS1 <= 0) {
+      return XString.EMPTYSTRING;
     }
 
-    return (XString) substr; // cast semi-safe
+    int startIndex;
+
+    if (Double.isNaN(start)) {
+
+      // Double.MIN_VALUE doesn't work with math below
+      // so just use a big number and hope I never get caught.
+      start = -1000000;
+      startIndex = 0;
+    } else {
+      start = Math.round(start);
+      startIndex = (start > 0) ? (int) start - 1 : 0;
+    }
+
+    if (null != m_arg2) {
+      double len = m_arg2.num(xctxt);
+      int end = (int) (Math.round(len) + start) - 1;
+
+      // Normalize end index.
+      if (end < 0) end = 0;
+      else if (end > lenOfS1) end = lenOfS1;
+
+      if (startIndex > lenOfS1) startIndex = lenOfS1;
+
+      substr = s1.substring(startIndex, end);
+    } else {
+      if (startIndex > lenOfS1) startIndex = lenOfS1;
+      substr = s1.substring(startIndex);
+    }
+
+    return substr;
   }
 
   /**
@@ -101,6 +102,8 @@ public class FuncSubstring extends Function3Args {
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     throw new WrongNumberArgsException(
-        XSLMessages.createXPATHMessage(XPATHErrorResources.ER_TWO_OR_THREE, null)); // "2 or 3");
+        XSLMessages.createXPATHMessage(XPATHErrorResources.ER_TWO_OR_THREE, null)); // "2
+    // or
+    // 3");
   }
 }

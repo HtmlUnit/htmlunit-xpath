@@ -97,11 +97,12 @@ public class XString extends XObject {
    *     be converted.
    */
   public double toDouble() {
-    /* XMLCharacterRecognizer.isWhiteSpace(char c) methods treats the following
-     * characters as white space characters.
-     * ht - horizontal tab, nl - newline , cr - carriage return and sp - space
-     * trim() methods by default also takes care of these white space characters
-     * So trim() method is used to remove leading and trailing white spaces.
+    /*
+     * XMLCharacterRecognizer.isWhiteSpace(char c) methods treats the following
+     * characters as white space characters. ht - horizontal tab, nl - newline , cr
+     * - carriage return and sp - space trim() methods by default also takes care of
+     * these white space characters So trim() method is used to remove leading and
+     * trailing white spaces.
      */
     XString s = trim();
     double result = Double.NaN;
@@ -217,8 +218,10 @@ public class XString extends XObject {
       // to be compared is converted to a boolean as if by applying the
       // boolean function.
       else if (XObject.CLASS_BOOLEAN == t) return obj2.bool() == bool();
-      // Otherwise, if at least one object to be compared is a number, then each object
-      // to be compared is converted to a number as if by applying the number function.
+      // Otherwise, if at least one object to be compared is a number, then each
+      // object
+      // to be compared is converted to a number as if by applying the number
+      // function.
       else if (XObject.CLASS_NUMBER == t) return obj2.num() == num();
     } catch (javax.xml.transform.TransformerException te) {
       throw new net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
@@ -314,8 +317,8 @@ public class XString extends XObject {
    *     greater than the length of this <code>String</code> object; otherwise the result is the
    *     same as the result of the expression
    *     <pre>
-   *          this.subString(toffset).startsWith(prefix)
-   *          </pre>
+   *         this.subString(toffset).startsWith(prefix)
+   *         </pre>
    *
    * @exception java.lang.NullPointerException if <code>prefix</code> is <code>null</code>.
    */

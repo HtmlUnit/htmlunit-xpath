@@ -120,7 +120,7 @@ public class SuballocatedIntVector {
       // Growing the outer array should be rare. We initialize to a
       // total of m_blocksize squared elements, which at the default
       // size is 4M integers... and we grow by at least that much each
-      // time.  However, attempts to microoptimize for this (assume
+      // time. However, attempts to microoptimize for this (assume
       // long enough and catch exceptions) yield no noticable
       // improvement.
 
@@ -137,7 +137,7 @@ public class SuballocatedIntVector {
       if (null == block) block = m_map[index] = new int[m_blocksize];
       block[offset] = value;
 
-      // Cache the current row of m_map.  Next m_blocksize-1
+      // Cache the current row of m_map. Next m_blocksize-1
       // values added will go to this row.
       m_buildCache = block;
       m_buildCacheStartIndex = m_firstFree - offset;

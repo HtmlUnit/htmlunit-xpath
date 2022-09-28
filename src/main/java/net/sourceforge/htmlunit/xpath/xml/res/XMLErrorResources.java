@@ -31,37 +31,37 @@ public class XMLErrorResources extends ListResourceBundle {
    * This file contains error and warning messages related to Xalan Error
    * Handling.
    *
-   *  General notes to translators:
+   * General notes to translators:
    *
-   *  1) Xalan (or more properly, Xalan-interpretive) and XSLTC are names of
-   *     components.
-   *     XSLT is an acronym for "XML Stylesheet Language: Transformations".
-   *     XSLTC is an acronym for XSLT Compiler.
+   * 1) Xalan (or more properly, Xalan-interpretive) and XSLTC are names of
+   * components. XSLT is an acronym for
+   * "XML Stylesheet Language: Transformations". XSLTC is an acronym for XSLT
+   * Compiler.
    *
-   *  2) A stylesheet is a description of how to transform an input XML document
-   *     into a resultant XML document (or HTML document or text).  The
-   *     stylesheet itself is described in the form of an XML document.
+   * 2) A stylesheet is a description of how to transform an input XML document
+   * into a resultant XML document (or HTML document or text). The stylesheet
+   * itself is described in the form of an XML document.
    *
-   *  3) A template is a component of a stylesheet that is used to match a
-   *     particular portion of an input document and specifies the form of the
-   *     corresponding portion of the output document.
+   * 3) A template is a component of a stylesheet that is used to match a
+   * particular portion of an input document and specifies the form of the
+   * corresponding portion of the output document.
    *
-   *  4) An element is a mark-up tag in an XML document; an attribute is a
-   *     modifier on the tag.  For example, in <elem attr='val' attr2='val2'>
-   *     "elem" is an element name, "attr" and "attr2" are attribute names with
-   *     the values "val" and "val2", respectively.
+   * 4) An element is a mark-up tag in an XML document; an attribute is a modifier
+   * on the tag. For example, in <elem attr='val' attr2='val2'> "elem" is an
+   * element name, "attr" and "attr2" are attribute names with the values "val"
+   * and "val2", respectively.
    *
-   *  5) A namespace declaration is a special attribute that is used to associate
-   *     a prefix with a URI (the namespace).  The meanings of element names and
-   *     attribute names that use that prefix are defined with respect to that
-   *     namespace.
+   * 5) A namespace declaration is a special attribute that is used to associate a
+   * prefix with a URI (the namespace). The meanings of element names and
+   * attribute names that use that prefix are defined with respect to that
+   * namespace.
    *
-   *  6) "Translet" is an invented term that describes the class file that
-   *     results from compiling an XML stylesheet into a Java class.
+   * 6) "Translet" is an invented term that describes the class file that results
+   * from compiling an XML stylesheet into a Java class.
    *
-   *  7) XPath is a specification that describes a notation for identifying
-   *     nodes in a tree-structured representation of an XML document.  An
-   *     instance of that notation is referred to as an XPath expression.
+   * 7) XPath is a specification that describes a notation for identifying nodes
+   * in a tree-structured representation of an XML document. An instance of that
+   * notation is referred to as an XPath expression.
    *
    */
 
@@ -137,9 +137,8 @@ public class XMLErrorResources extends ListResourceBundle {
   public static final String ER_NAME_CANT_START_WITH_COLON = "ER_NAME_CANT_START_WITH_COLON";
 
   /*
-   * Now fill in the message text.
-   * Then fill in the message text for that message code in the
-   * array. Use the new error code as the index into the array.
+   * Now fill in the message text. Then fill in the message text for that message
+   * code in the array. Use the new error code as the index into the array.
    */
 
   // Error messages...
@@ -229,12 +228,12 @@ public class XMLErrorResources extends ListResourceBundle {
       {ER_CANT_HAVE_MORE_THAN_ONE_ROOT, "Can't have more than one root on a DOM!"},
       {ER_ARG_LOCALNAME_NULL, "Argument 'localName' is null"},
 
-      // Note to translators:  A QNAME has the syntactic form [NCName:]NCName
+      // Note to translators: A QNAME has the syntactic form [NCName:]NCName
       // The localname is the portion after the optional colon; the message indicates
       // that there is a problem with that part of the QNAME.
       {ER_ARG_LOCALNAME_INVALID, "Localname in QNAME should be a valid NCName"},
 
-      // Note to translators:  A QNAME has the syntactic form [NCName:]NCName
+      // Note to translators: A QNAME has the syntactic form [NCName:]NCName
       // The prefix is the portion before the optional colon; the message indicates
       // that there is a problem with that part of the QNAME.
       {ER_ARG_PREFIX_INVALID, "Prefix in QNAME should be a valid NCName"},
