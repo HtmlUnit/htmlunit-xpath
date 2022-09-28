@@ -468,15 +468,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   /** A stack of the current sub-expression nodes. */
   private IntStack m_currentExpressionNodes = new IntStack(RECURSIONLIMIT);
 
-  public IntStack getCurrentExpressionNodeStack() {
-    return m_currentExpressionNodes;
-  }
-
-  public void setCurrentExpressionNodeStack(IntStack nv) {
-    m_currentExpressionNodes = nv;
-  }
-
-  private IntStack m_predicatePos = new IntStack();
+  private Stack<Integer> m_predicatePos = new Stack<>();
 
   public final int getPredicatePos() {
     return m_predicatePos.peek();
@@ -488,15 +480,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
 
   public final void popPredicatePos() {
     m_predicatePos.pop();
-  }
-
-  /**
-   * Get the current node that is the expression's context (i.e. for current() support).
-   *
-   * @return The current sub-expression node.
-   */
-  public final int getCurrentExpressionNode() {
-    return m_currentExpressionNodes.peek();
   }
 
   /**
