@@ -40,9 +40,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  * @xsl.usage advanced
  */
 public class XPathContext extends DTMManager {
-  /** state of the secure processing feature. */
-  private boolean m_isSecureProcessing = false;
-
   /**
    * Though XPathContext context extends the DTMManager, it really is a proxy for this object, which
    * is the real DTMManager.
@@ -56,16 +53,6 @@ public class XPathContext extends DTMManager {
    */
   public DTMManager getDTMManager() {
     return m_dtmManager;
-  }
-
-  /** Set the state of the secure processing feature */
-  public void setSecureProcessing(boolean flag) {
-    m_isSecureProcessing = flag;
-  }
-
-  /** Return the state of the secure processing feature */
-  public boolean isSecureProcessing() {
-    return m_isSecureProcessing;
   }
 
   /**
