@@ -88,10 +88,7 @@ public abstract class DTMManager {
    * @return a non-null DTM reference.
    */
   public abstract DTM getDTM(
-      javax.xml.transform.Source source,
-      boolean unique,
-      boolean incremental,
-      boolean doIndexing);
+      javax.xml.transform.Source source, boolean unique, boolean incremental, boolean doIndexing);
 
   /**
    * Get the instance of DTM that "owns" a node handle.
@@ -108,23 +105,6 @@ public abstract class DTMManager {
    * @return a valid DTM handle.
    */
   public abstract int getDTMHandleFromNode(org.w3c.dom.Node node);
-
-  /**
-   * Creates a DTM representing an empty <code>DocumentFragment</code> object.
-   *
-   * @return a non-null DTM reference.
-   */
-  public abstract DTM createDocumentFragment();
-
-  /**
-   * Release a DTM either to a lru pool, or completely remove reference. DTMs without system IDs are
-   * always hard deleted. State: experimental.
-   *
-   * @param dtm The DTM to be released.
-   * @param shouldHardDelete True if the DTM should be removed no matter what.
-   * @return true if the DTM was removed, false if it was put back in a lru pool.
-   */
-  public abstract boolean release(DTM dtm, boolean shouldHardDelete);
 
   /**
    * Create a new <code>DTMIterator</code> based on an XPath <a
@@ -180,58 +160,6 @@ public abstract class DTMManager {
    */
   public abstract DTMIterator createDTMIterator(int node);
 
-  /* Flag indicating whether an incremental transform is desired */
-  public boolean m_incremental = false;
-
-  /*
-   * Flag set by FEATURE_SOURCE_LOCATION. This feature specifies whether the
-   * transformation phase should keep track of line and column numbers for the
-   * input source document.
-   */
-  public boolean m_source_location = false;
-
-  /**
-   * Get a flag indicating whether an incremental transform is desired
-   *
-   * @return incremental boolean.
-   */
-  public boolean getIncremental() {
-    return m_incremental;
-  }
-
-  /**
-   * Set a flag indicating whether an incremental transform is desired This flag should have the
-   * same value as the FEATURE_INCREMENTAL feature which is set by the
-   * TransformerFactory.setAttribut() method before a DTMManager is created
-   *
-   * @param incremental boolean to use to set m_incremental.
-   */
-  public void setIncremental(boolean incremental) {
-    m_incremental = incremental;
-  }
-
-  /**
-   * Get a flag indicating whether the transformation phase should keep track of line and column
-   * numbers for the input source document.
-   *
-   * @return source location boolean
-   */
-  public boolean getSource_location() {
-    return m_source_location;
-  }
-
-  /**
-   * Set a flag indicating whether the transformation phase should keep track of line and column
-   * numbers for the input source document. This flag should have the same value as the
-   * FEATURE_SOURCE_LOCATION feature which is set by the TransformerFactory.setAttribut() method
-   * before a DTMManager is created
-   *
-   * @param sourceLocation boolean to use to set m_source_location
-   */
-  public void setSource_location(boolean sourceLocation) {
-    m_source_location = sourceLocation;
-  }
-
   // -------------------- private methods --------------------
 
   /** Temp debug code - this will be removed after we test everything */
@@ -273,31 +201,4 @@ public abstract class DTMManager {
 
   /** This is the maximum number of DTMs available. The highest DTM is one less than this. */
   public static final int IDENT_MAX_DTMS = (IDENT_DTM_DEFAULT >>> IDENT_DTM_NODE_BITS) + 1;
-
-  /**
-   * %TBD% Doc
-   *
-   * <p>NEEDSDOC @param dtm
-   *
-   * <p>NEEDSDOC ($objectName$) @return
-   */
-  public abstract int getDTMIdentity(DTM dtm);
-
-  /**
-   * %TBD% Doc
-   *
-   * <p>NEEDSDOC ($objectName$) @return
-   */
-  public int getDTMIdentityMask() {
-    return IDENT_DTM_DEFAULT;
-  }
-
-  /**
-   * %TBD% Doc
-   *
-   * <p>NEEDSDOC ($objectName$) @return
-   */
-  public int getNodeIdentityMask() {
-    return IDENT_NODE_DEFAULT;
-  }
 }

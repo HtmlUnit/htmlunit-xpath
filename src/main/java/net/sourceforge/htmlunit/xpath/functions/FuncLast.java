@@ -22,7 +22,6 @@ import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.objects.XNumber;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /**
  * Execute the Last() function.
@@ -57,15 +56,11 @@ public class FuncLast extends Function {
     SubContextList iter = m_isTopLevel ? null : xctxt.getSubContextList();
 
     // System.out.println("iter: "+iter);
-    if (null != iter) return iter.getLastPos(xctxt);
+    if (null != iter) {
+      return iter.getLastPos(xctxt);
+    }
 
-    DTMIterator cnl = xctxt.getContextNodeList();
-    int count;
-    if (null != cnl) {
-      count = cnl.getLength();
-      // System.out.println("count: "+count);
-    } else count = 0;
-    return count;
+    return 0;
   }
 
   /**

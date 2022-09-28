@@ -24,9 +24,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.Vector;
-
 import javax.xml.transform.Source;
-
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
@@ -133,11 +131,7 @@ public abstract class DTMDefaultBase implements DTM {
    * @param dtmIdentity The DTM identity ID for this DTM.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
-  public DTMDefaultBase(
-      DTMManager mgr,
-      Source source,
-      int dtmIdentity,
-      boolean doIndexing) {
+  public DTMDefaultBase(DTMManager mgr, Source source, int dtmIdentity, boolean doIndexing) {
     this(mgr, source, dtmIdentity, doIndexing, DEFAULT_BLOCKSIZE, true, false);
   }
 

@@ -17,14 +17,8 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
@@ -34,6 +28,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm.DOM2DTM;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
+import org.w3c.dom.Node;
 
 /**
  * The default implementation for the DTMManager.
@@ -181,10 +176,7 @@ public class DTMManagerDefault extends DTMManager {
    */
   @Override
   public synchronized DTM getDTM(
-      Source source,
-      boolean unique,
-      boolean incremental,
-      boolean doIndexing) {
+      Source source, boolean unique, boolean incremental, boolean doIndexing) {
 
     if (DEBUG && null != source)
       System.out.println(
@@ -329,104 +321,6 @@ public class DTMManagerDefault extends DTMManager {
     } catch (java.lang.ArrayIndexOutOfBoundsException e) {
       if (nodeHandle == DTM.NULL) return null; // Accept as a special case.
       else throw e; // Programming error; want to know about it.
-    }
-  }
-
-  /**
-   * Given a DTM, find the ID number in the DTM tables which addresses the start of the document. If
-   * overflow addressing is in use, other DTM IDs may also be assigned to this DTM.
-   *
-   * @param dtm The DTM which (hopefully) contains this node.
-   * @return The DTM ID (as the high bits of a NodeHandle, not as our internal index), or -1 if the
-   *     DTM doesn't belong to this manager.
-   */
-  @Override
-  public synchronized int getDTMIdentity(DTM dtm) {
-    // Shortcut using DTMDefaultBase's extension hooks
-    // %REVIEW% Should the lookup be part of the basic DTM API?
-    if (dtm instanceof DTMDefaultBase) {
-      DTMDefaultBase dtmdb = (DTMDefaultBase) dtm;
-      if (dtmdb.getManager() == this) return dtmdb.getDTMIDs().elementAt(0);
-      else return -1;
-    }
-
-    int n = m_dtms.length;
-
-    for (int i = 0; i < n; i++) {
-      DTM tdtm = m_dtms[i];
-
-      if (tdtm == dtm && m_dtm_offsets[i] == 0) return i << IDENT_DTM_NODE_BITS;
-    }
-
-    return -1;
-  }
-
-  /**
-   * Release the DTMManager's reference(s) to a DTM, making it unmanaged. This is typically done as
-   * part of returning the DTM to the heap after we're done with it.
-   *
-   * @param dtm the DTM to be released.
-   * @param shouldHardDelete If false, this call is a suggestion rather than an order, and we may
-   *     not actually release the DTM. This is intended to support intelligent caching of
-   *     documents... which is not implemented in this version of the DTM manager.
-   * @return true if the DTM was released, false if shouldHardDelete was set and we decided not to.
-   */
-  @Override
-  public synchronized boolean release(DTM dtm, boolean shouldHardDelete) {
-    if (DEBUG) {
-      System.out.println(
-          "Releasing "
-              + (shouldHardDelete ? "HARD" : "soft")
-              + " dtm="
-              +
-              // Following shouldn't need a nodeHandle, but does...
-              // and doesn't seem to report the intended value
-              dtm.getDocumentBaseURI());
-    }
-
-    // Multiple DTM IDs may be assigned to a single DTM.
-    // The Right Answer is to ask which (if it supports
-    // extension, the DTM will need a list anyway). The
-    // Wrong Answer, applied if the DTM can't help us,
-    // is to linearly search them all; this may be very
-    // painful.
-    //
-    // %REVIEW% Should the lookup move up into the basic DTM API?
-    if (dtm instanceof DTMDefaultBase) {
-      net.sourceforge.htmlunit.xpath.xml.utils.SuballocatedIntVector ids =
-          ((DTMDefaultBase) dtm).getDTMIDs();
-      for (int i = ids.size() - 1; i >= 0; --i)
-        m_dtms[ids.elementAt(i) >>> DTMManager.IDENT_DTM_NODE_BITS] = null;
-    } else {
-      int i = getDTMIdentity(dtm);
-      if (i >= 0) {
-        m_dtms[i >>> DTMManager.IDENT_DTM_NODE_BITS] = null;
-      }
-    }
-
-    return true;
-  }
-
-  /**
-   * Method createDocumentFragment
-   *
-   * <p>NEEDSDOC (createDocumentFragment) @return
-   */
-  @Override
-  public synchronized DTM createDocumentFragment() {
-
-    try {
-      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-      dbf.setNamespaceAware(true);
-
-      DocumentBuilder db = dbf.newDocumentBuilder();
-      Document doc = db.newDocument();
-      Node df = doc.createDocumentFragment();
-
-      return getDTM(new DOMSource(df), true, false, false);
-    } catch (Exception e) {
-      throw new DTMException(e);
     }
   }
 

@@ -152,7 +152,7 @@ public class NodeSetDTM extends NodeVector
   public int getRoot() {
     if (DTM.NULL == m_root) {
       if (size() > 0) {
-          return item(0);
+        return item(0);
       }
       return DTM.NULL;
     }

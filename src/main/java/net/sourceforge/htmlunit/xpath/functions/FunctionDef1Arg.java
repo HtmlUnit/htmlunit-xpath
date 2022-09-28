@@ -69,13 +69,14 @@ public class FunctionDef1Arg extends FunctionOneArg {
       throws javax.xml.transform.TransformerException {
     if (null == m_arg0) {
       int currentNode = xctxt.getCurrentNode();
-      if (DTM.NULL == currentNode) return XString.EMPTYSTRING;
-      else {
-        DTM dtm = xctxt.getDTM(currentNode);
-        return dtm.getStringValue(currentNode);
+      if (DTM.NULL == currentNode) {
+        return XString.EMPTYSTRING;
       }
+      DTM dtm = xctxt.getDTM(currentNode);
+      return dtm.getStringValue(currentNode);
+    }
 
-    } else return m_arg0.execute(xctxt).xstr();
+    return m_arg0.execute(xctxt).xstr();
   }
 
   /**
@@ -93,14 +94,15 @@ public class FunctionDef1Arg extends FunctionOneArg {
 
     if (null == m_arg0) {
       int currentNode = xctxt.getCurrentNode();
-      if (DTM.NULL == currentNode) return 0;
-      else {
-        DTM dtm = xctxt.getDTM(currentNode);
-        XString str = dtm.getStringValue(currentNode);
-        return str.toDouble();
+      if (DTM.NULL == currentNode) {
+        return 0;
       }
+      DTM dtm = xctxt.getDTM(currentNode);
+      XString str = dtm.getStringValue(currentNode);
 
-    } else return m_arg0.execute(xctxt).num();
+      return str.toDouble();
+    }
+    return m_arg0.execute(xctxt).num();
   }
 
   /**

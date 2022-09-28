@@ -113,14 +113,17 @@ public class FunctionMultiArgs extends Function3Args {
   @Override
   public boolean canTraverseOutsideSubtree() {
 
-    if (super.canTraverseOutsideSubtree()) return true;
-    else {
-      for (Expression m_arg : m_args) {
-        if (m_arg.canTraverseOutsideSubtree()) return true;
-      }
-
-      return false;
+    if (super.canTraverseOutsideSubtree()) {
+      return true;
     }
+
+    for (Expression m_arg : m_args) {
+      if (m_arg.canTraverseOutsideSubtree()) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   class ArgMultiOwner implements ExpressionOwner {

@@ -22,8 +22,6 @@ import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.objects.XNumber;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /**
  * Execute the Position() function.
@@ -46,7 +44,7 @@ public class FuncPosition extends Function {
    * Get the position in the current context node list.
    *
    * @param xctxt Runtime XPath context.
-   * @return The current position of the itteration in the context node list, or -1 if there is no
+   * @return The current position of the iteration in the context node list, or -1 if there is no
    *     active context node list.
    */
   public int getPositionInContextNodeList(XPathContext xctxt) {
@@ -60,35 +58,6 @@ public class FuncPosition extends Function {
 
       // System.out.println("FuncPosition- prox: "+prox);
       return prox;
-    }
-
-    DTMIterator cnl = xctxt.getContextNodeList();
-
-    if (null != cnl) {
-      int n = cnl.getCurrentNode();
-      if (n == DTM.NULL) {
-        if (cnl.getCurrentPos() == 0) return 0;
-
-        // Then I think we're in a sort. See sort21.xsl. So the iterator has
-        // already been spent, and is not on the node we're processing.
-        // It's highly possible that this is an issue for other context-list
-        // functions. Shouldn't be a problem for last(), and it shouldn't be
-        // a problem for current().
-        try {
-          cnl = cnl.cloneWithReset();
-        } catch (CloneNotSupportedException cnse) {
-          throw new net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException(cnse);
-        }
-        int currentNode = xctxt.getContextNode();
-        // System.out.println("currentNode: "+currentNode);
-        while (DTM.NULL != (n = cnl.nextNode())) {
-          if (n == currentNode) break;
-        }
-      }
-      // System.out.println("n: "+n);
-      // System.out.println("FuncPosition- cnl.getCurrentPos():
-      // "+cnl.getCurrentPos());
-      return cnl.getCurrentPos();
     }
 
     // System.out.println("FuncPosition - out of guesses: -1");

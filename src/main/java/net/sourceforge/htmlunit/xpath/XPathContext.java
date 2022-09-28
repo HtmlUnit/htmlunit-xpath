@@ -19,10 +19,8 @@ package net.sourceforge.htmlunit.xpath;
 
 import java.lang.reflect.Method;
 import java.util.Stack;
-
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
-
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
@@ -90,10 +88,7 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    */
   @Override
   public DTM getDTM(
-      javax.xml.transform.Source source,
-      boolean unique,
-      boolean incremental,
-      boolean doIndexing) {
+      javax.xml.transform.Source source, boolean unique, boolean incremental, boolean doIndexing) {
     return m_dtmManager.getDTM(source, unique, incremental, doIndexing);
   }
 
@@ -117,44 +112,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   @Override
   public int getDTMHandleFromNode(org.w3c.dom.Node node) {
     return m_dtmManager.getDTMHandleFromNode(node);
-  }
-
-  //
-  //
-  /** %TBD% Doc */
-  @Override
-  public int getDTMIdentity(DTM dtm) {
-    return m_dtmManager.getDTMIdentity(dtm);
-  }
-
-  //
-  /**
-   * Creates an empty <code>DocumentFragment</code> object.
-   *
-   * @return A new <code>DocumentFragment handle</code>.
-   */
-  @Override
-  public DTM createDocumentFragment() {
-    return m_dtmManager.createDocumentFragment();
-  }
-
-  //
-  /**
-   * Release a DTM either to a lru pool, or completely remove reference. DTMs without system IDs are
-   * always hard deleted. State: experimental.
-   *
-   * @param dtm The DTM to be released.
-   * @param shouldHardDelete True if the DTM should be removed no matter what.
-   * @return true if the DTM was removed, false if it was put back in a lru pool.
-   */
-  @Override
-  public boolean release(DTM dtm, boolean shouldHardDelete) {
-    // %REVIEW% If it's a DTM which may contain multiple Result Tree
-    // Fragments, we can't discard it unless we know not only that it
-    // is empty, but that the XPathContext itself is going away. So do
-    // _not_ accept the request. (May want to do it as part of
-    // reset(), though.)
-    return m_dtmManager.release(dtm, shouldHardDelete);
   }
 
   /**
@@ -279,7 +236,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     m_dtmManager = DTMManager.newInstance();
 
     m_axesIteratorStack.removeAllElements();
-    m_contextNodeLists.removeAllElements();
     m_currentExpressionNodes.removeAllElements();
     m_currentNodes.removeAllElements();
     m_iteratorRoots.RemoveAllNoClear();
@@ -392,51 +348,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   // ==========================================================
   // SECTION: Execution context state tracking
   // ==========================================================
-
-  /** The current context node list. */
-  private Stack<DTMIterator> m_contextNodeLists = new Stack<>();
-
-  public Stack<DTMIterator> getContextNodeListsStack() {
-    return m_contextNodeLists;
-  }
-
-  public void setContextNodeListsStack(Stack<DTMIterator> s) {
-    m_contextNodeLists = s;
-  }
-
-  /**
-   * Get the current context node list.
-   *
-   * @return the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>,
-   *     also refered to here as a <term>context node list</term>.
-   */
-  public final DTMIterator getContextNodeList() {
-
-    if (m_contextNodeLists.size() > 0) return m_contextNodeLists.peek();
-    else return null;
-  }
-
-  /**
-   * Set the current context node list.
-   *
-   * @param nl the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>,
-   *     also refered to here as a <term>context node list</term>.
-   * @xsl.usage internal
-   */
-  public final void pushContextNodeList(DTMIterator nl) {
-    m_contextNodeLists.push(nl);
-  }
-
-  /**
-   * Pop the current context node list.
-   *
-   * @xsl.usage internal
-   */
-  public final void popContextNodeList() {
-    if (m_contextNodeLists.isEmpty())
-      System.err.println("Warning: popContextNodeList when stack is empty!");
-    else m_contextNodeLists.pop();
-  }
 
   /** The ammount to use for stacks that record information during the recursive execution. */
   public static final int RECURSIONLIMIT = 1024 * 4;
@@ -712,26 +623,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     return this.getCurrentNode();
   }
 
-  /**
-   * Get the current context node list.
-   *
-   * @return An iterator for the current context list, as defined in XSLT.
-   */
-  public final DTMIterator getContextNodes() {
-
-    try {
-      DTMIterator cnl = getContextNodeList();
-
-      if (null != cnl) {
-        return cnl.cloneWithReset();
-      }
-
-      return null; // for now... this might ought to be an empty iterator.
-    } catch (CloneNotSupportedException cnse) {
-      return null; // error reporting?
-    }
-  }
-
   XPathExpressionContext expressionContext = new XPathExpressionContext();
 
   public class XPathExpressionContext {
@@ -765,15 +656,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
       int context = getCurrentNode();
 
       return getDTM(context).getNode(context);
-    }
-
-    /**
-     * Get the current context node list.
-     *
-     * @return An iterator for the current context list, as defined in XSLT.
-     */
-    public org.w3c.dom.traversal.NodeIterator getContextNodes() {
-      return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeIterator(getContextNodeList());
     }
 
     /**

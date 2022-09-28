@@ -18,17 +18,7 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
 import java.util.Vector;
-
 import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
-import org.w3c.dom.Entity;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
@@ -39,6 +29,13 @@ import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.QName;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Element;
+import org.w3c.dom.Entity;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 /**
  * The <code>DOM2DTM</code> class serves up a DOM's contents via the DTM API.
@@ -95,11 +92,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    * @param dtmIdentity The DTM identity ID for this DTM.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
-  public DOM2DTM(
-      DTMManager mgr,
-      DOMSource domSource,
-      int dtmIdentity,
-      boolean doIndexing) {
+  public DOM2DTM(DTMManager mgr, DOMSource domSource, int dtmIdentity, boolean doIndexing) {
     super(mgr, domSource, dtmIdentity, doIndexing);
 
     // Initialize DOM navigation

@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
-
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
@@ -46,10 +45,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
   public DTMDefaultBaseTraversers(
-      DTMManager mgr,
-      Source source,
-      int dtmIdentity,
-      boolean doIndexing) {
+      DTMManager mgr, Source source, int dtmIdentity, boolean doIndexing) {
     super(mgr, source, dtmIdentity, doIndexing);
   }
 
@@ -72,14 +68,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       int blocksize,
       boolean usePrevsib,
       boolean newNameTable) {
-    super(
-        mgr,
-        source,
-        dtmIdentity,
-        doIndexing,
-        blocksize,
-        usePrevsib,
-        newNameTable);
+    super(mgr, source, dtmIdentity, doIndexing, blocksize, usePrevsib, newNameTable);
   }
 
   /**
