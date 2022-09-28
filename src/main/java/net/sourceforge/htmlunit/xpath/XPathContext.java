@@ -17,12 +17,10 @@
  */
 package net.sourceforge.htmlunit.xpath;
 
-import java.lang.reflect.Method;
 import java.util.Stack;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
-import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
@@ -41,8 +39,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  *
  * @xsl.usage advanced
  */
-public class XPathContext extends DTMManager // implements ExpressionContext
-{
+public class XPathContext extends DTMManager {
   /** state of the secure processing feature. */
   private boolean m_isSecureProcessing = false;
 
@@ -202,35 +199,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     m_currentExpressionNodes.push(DTM.NULL);
   }
 
-  /**
-   * Create an XPathContext instance. This is equivalent to calling the constructor {@link
-   * #XPathContext(java.lang.Object,boolean)} with the value of the second parameter set to <code>
-   * true</code>.
-   *
-   * @param owner Value that can be retrieved via the getOwnerObject() method.
-   * @see #getOwnerObject
-   */
-  public XPathContext(Object owner) {
-    this(owner, true);
-  }
-
-  /**
-   * Create an XPathContext instance.
-   *
-   * @param owner Value that can be retrieved via the getOwnerObject() method.
-   * @see #getOwnerObject
-   * @param recursiveVarContext A <code>boolean</code> value indicating whether the XPath context
-   *     needs to support pushing of scopes for variable resolution
-   */
-  public XPathContext(Object owner, boolean recursiveVarContext) {
-    this(recursiveVarContext);
-    m_owner = owner;
-    try {
-      m_ownerGetErrorListener = m_owner.getClass().getMethod("getErrorListener");
-    } catch (NoSuchMethodException nsme) {
-    }
-  }
-
   /** Reset for new run. */
   public void reset() {
     m_dtmManager = DTMManager.newInstance();
@@ -246,26 +214,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     m_prefixResolvers.push(null);
     m_currentNodes.push(DTM.NULL);
     m_currentExpressionNodes.push(DTM.NULL);
-  }
-
-  /**
-   * The owner context of this XPathContext. In the case of XSLT, this will be a Transformer object.
-   */
-  private Object m_owner;
-
-  /**
-   * The owner context of this XPathContext. In the case of XSLT, this will be a Transformer object.
-   */
-  private Method m_ownerGetErrorListener;
-
-  /**
-   * Get the "owner" context of this context, which should be, in the case of XSLT, the Transformer
-   * object. This is needed so that XSLT functions can get the Transformer.
-   *
-   * @return The owner object passed into the constructor, or null.
-   */
-  public Object getOwnerObject() {
-    return m_owner;
   }
 
   // =================================================
@@ -289,12 +237,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
     if (null != m_errorListener) return m_errorListener;
 
     ErrorListener retval = null;
-
-    try {
-      if (null != m_ownerGetErrorListener)
-        retval = (ErrorListener) m_ownerGetErrorListener.invoke(m_owner, new Object[] {});
-    } catch (Exception e) {
-    }
 
     if (null == retval) {
       if (null == m_defaultErrorListener)
@@ -359,16 +301,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    */
   private IntStack m_currentNodes = new IntStack(RECURSIONLIMIT);
 
-  // private NodeVector m_currentNodes = new NodeVector();
-
-  public IntStack getCurrentNodeStack() {
-    return m_currentNodes;
-  }
-
-  public void setCurrentNodeStack(IntStack nv) {
-    m_currentNodes = nv;
-  }
-
   /**
    * Get the current context node.
    *
@@ -393,26 +325,6 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   public final void popCurrentNodeAndExpression() {
     m_currentNodes.quickPop(1);
     m_currentExpressionNodes.quickPop(1);
-  }
-
-  /**
-   * Push the current context node, expression node, and prefix resolver.
-   *
-   * @param cn the <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a>.
-   * @param en the sub-expression context node.
-   * @param nc the namespace context (prefix resolver.
-   */
-  public final void pushExpressionState(int cn, int en, PrefixResolver nc) {
-    m_currentNodes.push(cn);
-    m_currentExpressionNodes.push(cn);
-    m_prefixResolvers.push(nc);
-  }
-
-  /** Pop the current context node, expression node, and prefix resolver. */
-  public final void popExpressionState() {
-    m_currentNodes.quickPop(1);
-    m_currentExpressionNodes.quickPop(1);
-    m_prefixResolvers.pop();
   }
 
   /**
@@ -604,78 +516,5 @@ public class XPathContext extends DTMManager // implements ExpressionContext
    */
   public final int getContextNode() {
     return this.getCurrentNode();
-  }
-
-  XPathExpressionContext expressionContext = new XPathExpressionContext();
-
-  public class XPathExpressionContext {
-    /**
-     * Return the XPathContext associated with this XPathExpressionContext. Extensions should use
-     * this judiciously and only when special processing requirements cannot be met another way.
-     * Consider requesting an enhancement to the ExpressionContext interface to avoid having to call
-     * this method.
-     *
-     * @return the XPathContext associated with this XPathExpressionContext.
-     */
-    public XPathContext getXPathContext() {
-      return XPathContext.this;
-    }
-
-    /**
-     * Return the DTMManager object. Though XPathContext context extends the DTMManager, it really
-     * is a proxy for the real DTMManager. If a caller needs to make a lot of calls to the
-     * DTMManager, it is faster if it gets the real one from this function.
-     */
-    public DTMManager getDTMManager() {
-      return m_dtmManager;
-    }
-
-    /**
-     * Get the current context node.
-     *
-     * @return The current context node.
-     */
-    public org.w3c.dom.Node getContextNode() {
-      int context = getCurrentNode();
-
-      return getDTM(context).getNode(context);
-    }
-
-    /**
-     * Get the error listener.
-     *
-     * @return The registered error listener.
-     */
-    public ErrorListener getErrorListener() {
-      return XPathContext.this.getErrorListener();
-    }
-
-    /**
-     * Get the value of a node as a number.
-     *
-     * @param n Node to be converted to a number. May be null.
-     * @return value of n as a number.
-     */
-    public double toNumber(org.w3c.dom.Node n) {
-      // %REVIEW% You can't get much uglier than this...
-      int nodeHandle = getDTMHandleFromNode(n);
-      DTM dtm = getDTM(nodeHandle);
-      XString xobj = dtm.getStringValue(nodeHandle);
-      return xobj.num();
-    }
-
-    /**
-     * Get the value of a node as a string.
-     *
-     * @param n Node to be converted to a string. May be null.
-     * @return value of n as a string, or an empty string if n is null.
-     */
-    public String toString(org.w3c.dom.Node n) {
-      // %REVIEW% You can't get much uglier than this...
-      int nodeHandle = getDTMHandleFromNode(n);
-      DTM dtm = getDTM(nodeHandle);
-      XString strVal = dtm.getStringValue(nodeHandle);
-      return strVal.toString();
-    }
   }
 }
