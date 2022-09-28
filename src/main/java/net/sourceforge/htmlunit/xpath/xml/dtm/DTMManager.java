@@ -83,7 +83,6 @@ public abstract class DTMManager {
    *     assumed that node construction will take by some other means.
    * @param unique true if the returned DTM must be unique, probably because it is going to be
    *     mutated.
-   * @param whiteSpaceFilter Enables filtering of whitespace nodes, and may be null.
    * @param incremental true if the DTM should be built incrementally, if possible.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    * @return a non-null DTM reference.
@@ -91,7 +90,6 @@ public abstract class DTMManager {
   public abstract DTM getDTM(
       javax.xml.transform.Source source,
       boolean unique,
-      DTMWSFilter whiteSpaceFilter,
       boolean incremental,
       boolean doIndexing);
 

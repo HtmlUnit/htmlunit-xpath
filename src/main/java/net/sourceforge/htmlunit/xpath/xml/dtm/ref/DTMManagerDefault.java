@@ -21,18 +21,19 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm.DOM2DTM;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 /**
  * The default implementation for the DTMManager.
@@ -174,7 +175,6 @@ public class DTMManagerDefault extends DTMManager {
    * @param source the specification of the source object.
    * @param unique true if the returned DTM must be unique, probably because it is going to be
    *     mutated.
-   * @param whiteSpaceFilter Enables filtering of whitespace nodes, and may be null.
    * @param incremental true if the DTM should be built incrementally, if possible.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    * @return a non-null DTM reference.
@@ -183,7 +183,6 @@ public class DTMManagerDefault extends DTMManager {
   public synchronized DTM getDTM(
       Source source,
       boolean unique,
-      DTMWSFilter whiteSpaceFilter,
       boolean incremental,
       boolean doIndexing) {
 
@@ -195,7 +194,7 @@ public class DTMManagerDefault extends DTMManager {
     int documentID = dtmPos << IDENT_DTM_NODE_BITS;
 
     if ((null != source) && source instanceof DOMSource) {
-      DOM2DTM dtm = new DOM2DTM(this, (DOMSource) source, documentID, whiteSpaceFilter, doIndexing);
+      DOM2DTM dtm = new DOM2DTM(this, (DOMSource) source, documentID, doIndexing);
 
       addDTM(dtm, dtmPos, 0);
       return dtm;
@@ -289,7 +288,7 @@ public class DTMManagerDefault extends DTMManager {
       }
 
       DOM2DTM dtm =
-          (DOM2DTM) getDTM(new javax.xml.transform.dom.DOMSource(root), false, null, true, true);
+          (DOM2DTM) getDTM(new javax.xml.transform.dom.DOMSource(root), false, true, true);
 
       int handle;
 
@@ -425,7 +424,7 @@ public class DTMManagerDefault extends DTMManager {
       Document doc = db.newDocument();
       Node df = doc.createDocumentFragment();
 
-      return getDTM(new DOMSource(df), true, null, false, false);
+      return getDTM(new DOMSource(df), true, false, false);
     } catch (Exception e) {
       throw new DTMException(e);
     }

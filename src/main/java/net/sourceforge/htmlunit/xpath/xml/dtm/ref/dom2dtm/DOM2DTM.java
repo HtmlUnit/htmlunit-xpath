@@ -18,18 +18,9 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
 import java.util.Vector;
+
 import javax.xml.transform.dom.DOMSource;
-import net.sourceforge.htmlunit.xpath.objects.XString;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
-import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMDefaultBaseIterators;
-import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault;
-import net.sourceforge.htmlunit.xpath.xml.dtm.ref.ExpandedNameTable;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
-import net.sourceforge.htmlunit.xpath.xml.utils.QName;
-import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
@@ -37,6 +28,17 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Entity;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import net.sourceforge.htmlunit.xpath.objects.XString;
+import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
+import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
+import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMDefaultBaseIterators;
+import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault;
+import net.sourceforge.htmlunit.xpath.xml.dtm.ref.ExpandedNameTable;
+import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
+import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
+import net.sourceforge.htmlunit.xpath.xml.utils.QName;
+import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 
 /**
  * The <code>DOM2DTM</code> class serves up a DOM's contents via the DTM API.
@@ -91,16 +93,14 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    * @param mgr The DTMManager who owns this DTM.
    * @param domSource the DOM source that this DTM will wrap.
    * @param dtmIdentity The DTM identity ID for this DTM.
-   * @param whiteSpaceFilter The white space filter for this DTM, which may be null.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
   public DOM2DTM(
       DTMManager mgr,
       DOMSource domSource,
       int dtmIdentity,
-      DTMWSFilter whiteSpaceFilter,
       boolean doIndexing) {
-    super(mgr, domSource, dtmIdentity, whiteSpaceFilter, doIndexing);
+    super(mgr, domSource, dtmIdentity, doIndexing);
 
     // Initialize DOM navigation
     m_pos = m_root = domSource.getNode();
@@ -311,15 +311,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         if (ENTITY_REFERENCE_NODE != pos.getNodeType()) {
           m_last_parent = m_last_kid;
           m_last_kid = NULL;
-          // Whitespace-handler context stacking
-          if (null != m_wsfilter) {
-            short wsv = m_wsfilter.getShouldStripSpace(makeNodeHandle(m_last_parent), this);
-            boolean shouldStrip =
-                (DTMWSFilter.INHERIT == wsv)
-                    ? getShouldStripWhitespace()
-                    : (DTMWSFilter.STRIP == wsv);
-            pushShouldStripWhitespace(shouldStrip);
-          } // if(m_wsfilter)
         }
       }
 
@@ -358,7 +349,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
             // Nothing needs doing
             if (JJK_DEBUG) System.out.println("***** DOM2DTM popping EntRef");
           } else {
-            popShouldStripWhitespace();
             // Fix and pop DTM
             if (m_last_kid == NULL)
               m_firstch.setElementAt(NULL, m_last_parent); // Popping from an element
@@ -417,7 +407,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // nexttype=pos.getNodeType();
     if (TEXT_NODE == nexttype || CDATA_SECTION_NODE == nexttype) {
       // If filtering, initially assume we're going to suppress the node
-      suppressNode = (null != m_wsfilter) && getShouldStripWhitespace();
+      suppressNode = false;
 
       // Scan logically contiguous text (siblings, plus "flattening"
       // of entity reference boundaries).

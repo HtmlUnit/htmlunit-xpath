@@ -18,13 +18,13 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
+
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 
@@ -37,16 +37,14 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
-   * @param whiteSpaceFilter The white space filter for this DTM, which may be null.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
   public DTMDefaultBaseIterators(
       DTMManager mgr,
       Source source,
       int dtmIdentity,
-      DTMWSFilter whiteSpaceFilter,
       boolean doIndexing) {
-    super(mgr, source, dtmIdentity, whiteSpaceFilter, doIndexing);
+    super(mgr, source, dtmIdentity, doIndexing);
   }
 
   /**
@@ -55,8 +53,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
-   * @param whiteSpaceFilter The white space filter for this DTM, which may be null.
-   * @param xstringfactory The factory to use for creating XMLStrings.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    * @param blocksize The block size of the DTM.
    * @param usePrevsib true if we want to build the previous sibling node array.
@@ -66,7 +62,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       DTMManager mgr,
       Source source,
       int dtmIdentity,
-      DTMWSFilter whiteSpaceFilter,
       boolean doIndexing,
       int blocksize,
       boolean usePrevsib,
@@ -75,7 +70,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         mgr,
         source,
         dtmIdentity,
-        whiteSpaceFilter,
         doIndexing,
         blocksize,
         usePrevsib,

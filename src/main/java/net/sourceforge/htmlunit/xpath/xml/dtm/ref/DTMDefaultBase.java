@@ -24,16 +24,16 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.Vector;
+
 import javax.xml.transform.Source;
+
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
-import net.sourceforge.htmlunit.xpath.xml.utils.BoolStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.SuballocatedIntVector;
 
 /**
@@ -116,15 +116,6 @@ public abstract class DTMDefaultBase implements DTM {
   /** The base URI for this document. */
   protected String m_documentBaseURI;
 
-  /** The whitespace filter that enables elements to strip whitespace or not. */
-  protected DTMWSFilter m_wsfilter;
-
-  /** Flag indicating whether to strip whitespace nodes */
-  protected boolean m_shouldStripWS = false;
-
-  /** Stack of flags indicating whether to strip whitespace nodes */
-  protected BoolStack m_shouldStripWhitespaceStack;
-
   /**
    * The table for exandedNameID lookups. This may or may not be the same table as is contained in
    * the DTMManagerDefault.
@@ -140,16 +131,14 @@ public abstract class DTMDefaultBase implements DTM {
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
-   * @param whiteSpaceFilter The white space filter for this DTM, which may be null.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
   public DTMDefaultBase(
       DTMManager mgr,
       Source source,
       int dtmIdentity,
-      DTMWSFilter whiteSpaceFilter,
       boolean doIndexing) {
-    this(mgr, source, dtmIdentity, whiteSpaceFilter, doIndexing, DEFAULT_BLOCKSIZE, true, false);
+    this(mgr, source, dtmIdentity, doIndexing, DEFAULT_BLOCKSIZE, true, false);
   }
 
   /**
@@ -158,7 +147,6 @@ public abstract class DTMDefaultBase implements DTM {
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
-   * @param whiteSpaceFilter The white space filter for this DTM, which may be null.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    * @param blocksize The block size of the DTM.
    * @param usePrevsib true if we want to build the previous sibling node array.
@@ -168,7 +156,6 @@ public abstract class DTMDefaultBase implements DTM {
       DTMManager mgr,
       Source source,
       int dtmIdentity,
-      DTMWSFilter whiteSpaceFilter,
       boolean doIndexing,
       int blocksize,
       boolean usePrevsib,
@@ -199,7 +186,6 @@ public abstract class DTMDefaultBase implements DTM {
 
     m_documentBaseURI = (null != source) ? source.getSystemId() : null;
     m_dtmIdent.setElementAt(dtmIdentity, 0);
-    m_wsfilter = whiteSpaceFilter;
     m_indexing = doIndexing;
 
     if (doIndexing) {
@@ -208,12 +194,6 @@ public abstract class DTMDefaultBase implements DTM {
       // Note that this fails if we aren't talking to an instance of
       // DTMManagerDefault
       m_expandedNameTable = m_mgrDefault.getExpandedNameTable(this);
-    }
-
-    if (null != whiteSpaceFilter) {
-      m_shouldStripWhitespaceStack = new BoolStack();
-
-      pushShouldStripWhitespace(false);
     }
   }
 
@@ -1868,47 +1848,6 @@ public abstract class DTMDefaultBase implements DTM {
    */
   protected void error(String msg) {
     throw new DTMException(msg);
-  }
-
-  /**
-   * Find out whether or not to strip whispace nodes.
-   *
-   * @return whether or not to strip whispace nodes.
-   */
-  protected boolean getShouldStripWhitespace() {
-    return m_shouldStripWS;
-  }
-
-  /**
-   * Set whether to strip whitespaces and push in current value of m_shouldStripWS in
-   * m_shouldStripWhitespaceStack.
-   *
-   * @param shouldStrip Flag indicating whether to strip whitespace nodes
-   */
-  protected void pushShouldStripWhitespace(boolean shouldStrip) {
-
-    m_shouldStripWS = shouldStrip;
-
-    if (null != m_shouldStripWhitespaceStack) m_shouldStripWhitespaceStack.push(shouldStrip);
-  }
-
-  /** Set whether to strip whitespaces at this point by popping out m_shouldStripWhitespaceStack. */
-  protected void popShouldStripWhitespace() {
-    if (null != m_shouldStripWhitespaceStack)
-      m_shouldStripWS = m_shouldStripWhitespaceStack.popAndTop();
-  }
-
-  /**
-   * Set whether to strip whitespaces and set the top of the stack to the current value of
-   * m_shouldStripWS.
-   *
-   * @param shouldStrip Flag indicating whether to strip whitespace nodes
-   */
-  protected void setShouldStripWhitespace(boolean shouldStrip) {
-
-    m_shouldStripWS = shouldStrip;
-
-    if (null != m_shouldStripWhitespaceStack) m_shouldStripWhitespaceStack.setTop(shouldStrip);
   }
 
   /**

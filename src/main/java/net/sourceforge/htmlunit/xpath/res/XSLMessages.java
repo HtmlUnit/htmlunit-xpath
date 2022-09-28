@@ -44,7 +44,8 @@ public class XSLMessages extends XPATHMessages {
 
     if (XSLTBundle != null) {
       return createMsg(XSLTBundle, msgKey, args);
-    } else return "Could not load any resource bundles.";
+    }
+    return "Could not load any resource bundles.";
   }
 
   /**
@@ -61,6 +62,7 @@ public class XSLMessages extends XPATHMessages {
 
     if (XSLTBundle != null) {
       return createMsg(XSLTBundle, msgKey, args);
-    } else return "Could not load any resource bundles.";
+    }
+    return "Could not load any resource bundles.";
   }
 }

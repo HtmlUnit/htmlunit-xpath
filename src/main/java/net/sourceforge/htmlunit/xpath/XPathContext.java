@@ -19,8 +19,10 @@ package net.sourceforge.htmlunit.xpath;
 
 import java.lang.reflect.Method;
 import java.util.Stack;
+
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
+
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
@@ -30,7 +32,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMWSFilter;
 import net.sourceforge.htmlunit.xpath.xml.utils.IntStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
@@ -91,10 +92,9 @@ public class XPathContext extends DTMManager // implements ExpressionContext
   public DTM getDTM(
       javax.xml.transform.Source source,
       boolean unique,
-      DTMWSFilter wsfilter,
       boolean incremental,
       boolean doIndexing) {
-    return m_dtmManager.getDTM(source, unique, wsfilter, incremental, doIndexing);
+    return m_dtmManager.getDTM(source, unique, incremental, doIndexing);
   }
 
   /**
