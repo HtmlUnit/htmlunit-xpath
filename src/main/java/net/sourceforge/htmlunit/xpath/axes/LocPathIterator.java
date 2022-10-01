@@ -43,8 +43,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  * will cache the nodes.
  */
 public abstract class LocPathIterator extends PredicatedNodeTest
-    implements Cloneable, DTMIterator, java.io.Serializable, PathComponent {
-  static final long serialVersionUID = -4602476357268405754L;
+    implements Cloneable, DTMIterator, PathComponent {
 
   /** Create a LocPathIterator object. */
   protected LocPathIterator() {}
@@ -98,23 +97,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     int axis = getAxis();
     int bit = WalkerFactory.getAnalysisBitFromAxes(axis);
     return bit;
-  }
-
-  /**
-   * Read the object from a serialization stream.
-   *
-   * @param stream Input stream to read from
-   * @throws java.io.IOException
-   * @throws javax.xml.transform.TransformerException
-   */
-  private void readObject(java.io.ObjectInputStream stream)
-      throws java.io.IOException, javax.xml.transform.TransformerException {
-    try {
-      stream.defaultReadObject();
-      m_clones = new IteratorPool(this);
-    } catch (ClassNotFoundException cnfe) {
-      throw new javax.xml.transform.TransformerException(cnfe);
-    }
   }
 
   /**

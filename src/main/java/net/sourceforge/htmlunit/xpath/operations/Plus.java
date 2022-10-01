@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The '+' operation expression executer. */
 public class Plus extends Operation {
-  static final long serialVersionUID = -4492072861616504256L;
 
   /**
    * Apply the operation to two operands, and return the result.

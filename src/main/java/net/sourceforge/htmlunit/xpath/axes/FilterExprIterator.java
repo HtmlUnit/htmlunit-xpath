@@ -24,7 +24,7 @@ import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
 public class FilterExprIterator extends BasicTestIterator {
-  static final long serialVersionUID = 2552176105165737614L;
+
   /**
    * The contained expression. Should be non-null.
    *

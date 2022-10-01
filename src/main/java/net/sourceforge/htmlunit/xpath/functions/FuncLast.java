@@ -25,8 +25,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** Execute the Last() function. */
 public class FuncLast extends Function {
-  static final long serialVersionUID = 9205812403085432943L;
-
   private boolean m_isTopLevel;
 
   /**

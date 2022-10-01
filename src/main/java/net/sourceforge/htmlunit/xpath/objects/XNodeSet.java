@@ -32,7 +32,6 @@ import org.w3c.dom.traversal.NodeIterator;
  * types, such as a string.
  */
 public class XNodeSet extends NodeSequence {
-  static final long serialVersionUID = 1916026368035639667L;
 
   /** Default constructor for derived objects. */
   protected XNodeSet() {}

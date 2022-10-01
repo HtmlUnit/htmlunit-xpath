@@ -27,7 +27,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
  * the conditions are right, it is much faster than using a UnionPathIterator.
  */
 public class UnionChildIterator extends ChildTestIterator {
-  static final long serialVersionUID = 3500298482193003495L;
+
   /**
    * Even though these may hold full LocPathIterators, this array does not have to be cloned, since
    * only the node test and predicate portion are used, and these only need static information.

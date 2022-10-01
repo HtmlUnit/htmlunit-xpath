@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The '=' operation expression executer. */
 public class Equals extends Operation {
-  static final long serialVersionUID = -2658315633903426134L;
 
   /**
    * Apply the operation to two operands, and return the result.

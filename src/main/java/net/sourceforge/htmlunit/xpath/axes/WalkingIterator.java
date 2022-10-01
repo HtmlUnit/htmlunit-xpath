@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /** Location path iterator that uses Walkers. */
 public class WalkingIterator extends LocPathIterator implements ExpressionOwner {
-  static final long serialVersionUID = 9110225941815665906L;
 
   /**
    * Create a WalkingIterator iterator, including creation of step walkers from the opcode list, and

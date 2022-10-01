@@ -48,7 +48,6 @@ import org.w3c.dom.traversal.NodeIterator;
  */
 public class NodeSetDTM extends NodeVector
     implements /* NodeList, NodeIterator, */ DTMIterator, Cloneable {
-  static final long serialVersionUID = 7686480133331317070L;
 
   /** Create an empty nodelist. */
   public NodeSetDTM(DTMManager dtmManager) {

@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** Execute the StartsWith() function. */
 public class FuncStartsWith extends Function2Args {
-  static final long serialVersionUID = 2194585774699567928L;
 
   /**
    * Execute the function. The function must return a valid object.

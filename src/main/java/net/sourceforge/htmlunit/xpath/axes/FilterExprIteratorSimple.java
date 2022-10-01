@@ -31,7 +31,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  * context.
  */
 public class FilterExprIteratorSimple extends LocPathIterator {
-  static final long serialVersionUID = -6978977187025375579L;
+
   /**
    * The contained expression. Should be non-null.
    *

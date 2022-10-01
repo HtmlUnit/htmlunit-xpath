@@ -29,7 +29,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 
 /** This is the basic node test class for both match patterns and location path steps. */
 public class NodeTest extends Expression {
-  static final long serialVersionUID = -5736721866747906182L;
 
   /**
    * The namespace or local name for node tests with a wildcard.

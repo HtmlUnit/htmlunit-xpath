@@ -22,7 +22,6 @@ import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 
 /** This class specifies an exceptional condition that occured in the DTM module. */
 public class DTMException extends RuntimeException {
-  static final long serialVersionUID = -775576419181334734L;
 
   /**
    * Field containedException specifies a wrapped exception. May be null.

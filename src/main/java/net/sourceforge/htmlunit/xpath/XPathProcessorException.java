@@ -21,7 +21,6 @@ package net.sourceforge.htmlunit.xpath;
  * Derived from XPathException in order that XPath processor exceptions may be specifically caught.
  */
 public class XPathProcessorException extends XPathException {
-  static final long serialVersionUID = 1215509418326642603L;
 
   /**
    * Create an XPathProcessorException object that holds an error message.

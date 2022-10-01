@@ -17,12 +17,10 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.utils;
 
-import java.io.Serializable;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
 /** A very simple table that stores a list of Nodes. */
-public class NodeVector implements Serializable, Cloneable {
-  static final long serialVersionUID = -713473092200731870L;
+public class NodeVector implements Cloneable {
 
   /**
    * Size of blocks to allocate.

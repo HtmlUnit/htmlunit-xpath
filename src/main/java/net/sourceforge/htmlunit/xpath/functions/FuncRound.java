@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** Execute the round() function. */
 public class FuncRound extends FunctionOneArg {
-  static final long serialVersionUID = -7970583902573826611L;
 
   /**
    * Execute the function. The function must return a valid object.

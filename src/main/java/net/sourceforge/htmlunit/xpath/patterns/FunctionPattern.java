@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /** Match pattern step that contains a function. */
 public class FunctionPattern extends StepPattern {
-  static final long serialVersionUID = -5426793413091209944L;
 
   /**
    * Construct a FunctionPattern from a {@link net.sourceforge.htmlunit.xpath.functions.Function

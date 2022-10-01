@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** Execute the Boolean() function. */
 public class FuncBoolean extends FunctionOneArg {
-  static final long serialVersionUID = 4328660760070034592L;
 
   /**
    * Execute the function. The function must return a valid object.

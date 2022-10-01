@@ -25,7 +25,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The baseclass for a binary operation. */
 public class Operation extends Expression implements ExpressionOwner {
-  static final long serialVersionUID = -3037139537171050430L;
 
   /**
    * The left operand expression.

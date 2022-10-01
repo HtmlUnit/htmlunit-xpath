@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The 'boolean()' operation expression executer. */
 public class Bool extends UnaryOperation {
-  static final long serialVersionUID = 44705375321914635L;
 
   /**
    * Apply the operation to two operands, and return the result.

@@ -34,8 +34,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
  * previousNode() can easily be done.
  */
 public class UnionPathIterator extends LocPathIterator
-    implements Cloneable, DTMIterator, java.io.Serializable, PathComponent {
-  static final long serialVersionUID = -3910351546843826781L;
+    implements Cloneable, DTMIterator, PathComponent {
 
   /** Constructor to create an instance which you can add location paths to. */
   public UnionPathIterator() {
@@ -197,23 +196,6 @@ public class UnionPathIterator extends LocPathIterator
     }
 
     return bits;
-  }
-
-  /**
-   * Read the object from a serialization stream.
-   *
-   * @param stream Input stream to read from
-   * @throws java.io.IOException
-   * @throws javax.xml.transform.TransformerException
-   */
-  private void readObject(java.io.ObjectInputStream stream)
-      throws java.io.IOException, javax.xml.transform.TransformerException {
-    try {
-      stream.defaultReadObject();
-      m_clones = new IteratorPool(this);
-    } catch (ClassNotFoundException cnfe) {
-      throw new javax.xml.transform.TransformerException(cnfe);
-    }
   }
 
   /**

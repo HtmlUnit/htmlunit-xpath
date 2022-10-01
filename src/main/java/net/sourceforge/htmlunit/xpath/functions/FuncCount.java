@@ -24,7 +24,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /** Execute the Count() function. */
 public class FuncCount extends FunctionOneArg {
-  static final long serialVersionUID = -7116225100474153751L;
 
   /**
    * Execute the function. The function must return a valid object.

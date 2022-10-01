@@ -24,7 +24,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
 /** Execute the LocalPart() function. */
 public class FuncLocalPart extends FunctionDef1Arg {
-  static final long serialVersionUID = 7591798770325814746L;
 
   /**
    * Execute the function. The function must return a valid object.

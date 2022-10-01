@@ -24,7 +24,6 @@ import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 
 /** Base class for functions that accept one argument. */
 public class FunctionOneArg extends Function implements ExpressionOwner {
-  static final long serialVersionUID = -5180174180765609758L;
 
   /**
    * The first argument passed to the function (at index 0).

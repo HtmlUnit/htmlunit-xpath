@@ -26,7 +26,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /** Execute the Sum() function. */
 public class FuncSum extends FunctionOneArg {
-  static final long serialVersionUID = -2719049259574677519L;
 
   /**
    * Execute the function. The function must return a valid object.

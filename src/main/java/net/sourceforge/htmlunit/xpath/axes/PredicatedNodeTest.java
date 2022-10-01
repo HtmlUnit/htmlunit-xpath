@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 public abstract class PredicatedNodeTest extends NodeTest implements SubContextList {
-  static final long serialVersionUID = -6193530757296377351L;
 
   /**
    * Construct an AxesWalker using a LocPathIterator.
@@ -41,24 +40,6 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
   /** Construct an AxesWalker. The location path iterator will have to be set before use. */
   PredicatedNodeTest() {}
-
-  /**
-   * Read the object from a serialization stream.
-   *
-   * @param stream Input stream to read from
-   * @throws java.io.IOException
-   * @throws javax.xml.transform.TransformerException
-   */
-  private void readObject(java.io.ObjectInputStream stream)
-      throws java.io.IOException, javax.xml.transform.TransformerException {
-    try {
-      stream.defaultReadObject();
-      m_predicateIndex = -1;
-      resetProximityPositions();
-    } catch (ClassNotFoundException cnfe) {
-      throw new javax.xml.transform.TransformerException(cnfe);
-    }
-  }
 
   /**
    * Get a cloned PrdicatedNodeTest.

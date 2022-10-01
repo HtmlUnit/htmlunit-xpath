@@ -24,7 +24,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
 /** Execute the Lang() function. */
 public class FuncLang extends FunctionOneArg {
-  static final long serialVersionUID = -7868705139354872185L;
 
   /**
    * Execute the function. The function must return a valid object.

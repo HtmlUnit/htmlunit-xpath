@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
  * @see net.sourceforge.htmlunit.xpath.axes.BasicTestIterator
  */
 public class ChildTestIterator extends BasicTestIterator {
-  static final long serialVersionUID = -7936835957960705722L;
   /** The traverser to use to navigate over the descendants. */
   protected transient DTMAxisTraverser m_traverser;
 

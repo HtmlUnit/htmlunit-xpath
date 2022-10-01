@@ -25,7 +25,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
 /** Base class for functions that accept one argument that can be defaulted if not specified. */
 public class FunctionDef1Arg extends FunctionOneArg {
-  static final long serialVersionUID = 2325189412814149264L;
 
   /**
    * Execute the first argument expression that is expected to return a nodeset. If the argument is

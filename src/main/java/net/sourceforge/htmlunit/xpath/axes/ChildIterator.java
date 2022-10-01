@@ -29,7 +29,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
  * @see net.sourceforge.htmlunit.xpath.axes.LocPathIterator
  */
 public class ChildIterator extends LocPathIterator {
-  static final long serialVersionUID = -6935428015142993583L;
 
   /**
    * Create a ChildIterator object.

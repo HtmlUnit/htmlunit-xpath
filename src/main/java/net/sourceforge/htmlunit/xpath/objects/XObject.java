@@ -17,7 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath.objects;
 
-import java.io.Serializable;
 import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.NodeSetDTM;
@@ -35,8 +34,7 @@ import org.w3c.dom.traversal.NodeIterator;
  * such as a string. This class acts as the base class to other XPath type objects, such as XString,
  * and provides polymorphic casting capabilities.
  */
-public class XObject extends Expression implements Serializable, Cloneable {
-  static final long serialVersionUID = -821887098985662951L;
+public class XObject extends Expression implements Cloneable {
 
   /**
    * The java object which this object wraps.

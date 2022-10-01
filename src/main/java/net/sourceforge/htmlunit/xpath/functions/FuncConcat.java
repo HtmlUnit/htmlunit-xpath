@@ -24,7 +24,6 @@ import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 
 /** Execute the Concat() function. */
 public class FuncConcat extends FunctionMultiArgs {
-  static final long serialVersionUID = 1737228885202314413L;
 
   /**
    * Execute the function. The function must return a valid object.

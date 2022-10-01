@@ -26,7 +26,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
  * @see net.sourceforge.htmlunit.xpath.axes#ChildTestIterator
  */
 public class AttributeIterator extends ChildTestIterator {
-  static final long serialVersionUID = -8417986700712229686L;
 
   /**
    * Create a AttributeIterator object.

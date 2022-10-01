@@ -17,7 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath;
 
-import java.io.Serializable;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
@@ -34,8 +33,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  * The XPath class wraps an expression object and provides general services for execution of that
  * expression.
  */
-public class XPath implements Serializable, ExpressionOwner {
-  static final long serialVersionUID = 3976493477939110553L;
+public class XPath implements ExpressionOwner {
 
   /**
    * The top of the expression tree.

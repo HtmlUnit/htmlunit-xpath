@@ -22,7 +22,6 @@ package net.sourceforge.htmlunit.xpath.xml.utils;
  * used with care, and in limited circumstances.
  */
 public class WrappedRuntimeException extends RuntimeException {
-  static final long serialVersionUID = 7140414456714658073L;
 
   /**
    * Primary checked exception.

@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
  * @see <a href="http://www.w3.org/TR/xpath#NT-FilterExpr">XPath FilterExpr descriptions</a>
  */
 public class FilterExprWalker extends AxesWalker {
-  static final long serialVersionUID = 5457182471424488375L;
 
   /**
    * Construct a FilterExprWalker using a LocPathIterator.

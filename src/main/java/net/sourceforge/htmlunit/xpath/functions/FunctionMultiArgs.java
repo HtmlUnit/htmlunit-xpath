@@ -25,7 +25,6 @@ import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 
 /** Base class for functions that accept an undetermined number of multiple arguments. */
 public class FunctionMultiArgs extends Function3Args {
-  static final long serialVersionUID = 7117257746138417181L;
 
   /**
    * Argument expressions that are at index 3 or greater.

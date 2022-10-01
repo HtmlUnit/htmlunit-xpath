@@ -26,7 +26,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
  * types, such as a number.
  */
 public class XString extends XObject {
-  static final long serialVersionUID = 2020470518395094525L;
 
   /** Empty string XString object */
   public static final XString EMPTYSTRING = new XString("");

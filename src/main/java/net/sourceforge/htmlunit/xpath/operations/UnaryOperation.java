@@ -25,7 +25,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The unary operation base class. */
 public abstract class UnaryOperation extends Expression implements ExpressionOwner {
-  static final long serialVersionUID = 6536083808424286166L;
 
   /**
    * The operand for the operation.

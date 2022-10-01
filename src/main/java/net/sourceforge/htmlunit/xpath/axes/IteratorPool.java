@@ -22,8 +22,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException;
 
 /** Pool of object of a given type to pick from to help memory usage */
-public final class IteratorPool implements java.io.Serializable {
-  static final long serialVersionUID = -460927331149566998L;
+public final class IteratorPool {
 
   /** Type of objects in this pool. */
   private final DTMIterator m_orig;

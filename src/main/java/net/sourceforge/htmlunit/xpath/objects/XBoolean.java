@@ -22,7 +22,6 @@ package net.sourceforge.htmlunit.xpath.objects;
  * types, such as a string.
  */
 public class XBoolean extends XObject {
-  static final long serialVersionUID = -2964933058866100881L;
 
   /** A true boolean object so we don't have to keep creating them. */
   public static final XBoolean S_TRUE = new XBooleanStatic(true);

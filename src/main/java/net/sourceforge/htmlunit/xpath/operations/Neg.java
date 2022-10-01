@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The unary '-' operation expression executer. */
 public class Neg extends UnaryOperation {
-  static final long serialVersionUID = -6280607702375702291L;
 
   /**
    * Apply the operation to two operands, and return the result.

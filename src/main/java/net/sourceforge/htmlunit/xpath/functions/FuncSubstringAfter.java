@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XString;
 
 /** Execute the SubstringAfter() function. */
 public class FuncSubstringAfter extends Function2Args {
-  static final long serialVersionUID = -8119731889862512194L;
 
   /**
    * Execute the function. The function must return a valid object.

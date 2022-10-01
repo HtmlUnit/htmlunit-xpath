@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** Execute the Contains() function. */
 public class FuncContains extends Function2Args {
-  static final long serialVersionUID = 5084753781887919723L;
 
   /**
    * Execute the function. The function must return a valid object.

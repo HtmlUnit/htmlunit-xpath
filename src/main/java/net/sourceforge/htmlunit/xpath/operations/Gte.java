@@ -22,7 +22,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The '>=' operation expression executer. */
 public class Gte extends Operation {
-  static final long serialVersionUID = 9142945909906680220L;
 
   /**
    * Apply the operation to two operands, and return the result.

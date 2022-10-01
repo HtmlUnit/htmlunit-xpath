@@ -37,7 +37,6 @@ import org.w3c.dom.DOMException;
  * @see net.sourceforge.htmlunit.xpath.axes.LocPathIterator
  */
 public class DescendantIterator extends LocPathIterator {
-  static final long serialVersionUID = -1190338607743976938L;
 
   /**
    * Create a DescendantIterator object.

@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** Execute the Floor() function. */
 public class FuncFloor extends FunctionOneArg {
-  static final long serialVersionUID = 2326752233236309265L;
 
   /**
    * Execute the function. The function must return a valid object.

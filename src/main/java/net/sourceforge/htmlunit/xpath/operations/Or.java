@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The 'or' operation expression executer. */
 public class Or extends Operation {
-  static final long serialVersionUID = -644107191353853079L;
 
   /**
    * OR two expressions and return the boolean result. Override superclass method for optimization

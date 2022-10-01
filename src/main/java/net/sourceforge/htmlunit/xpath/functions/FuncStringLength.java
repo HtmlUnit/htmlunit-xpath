@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** Execute the StringLength() function. */
 public class FuncStringLength extends FunctionDef1Arg {
-  static final long serialVersionUID = -159616417996519839L;
 
   /**
    * Execute the function. The function must return a valid object.

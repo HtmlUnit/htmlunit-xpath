@@ -22,7 +22,6 @@ package net.sourceforge.htmlunit.xpath.functions;
  * stylesheet.
  */
 public class WrongNumberArgsException extends Exception {
-  static final long serialVersionUID = -4551577097576242432L;
 
   /**
    * Constructor WrongNumberArgsException

@@ -24,7 +24,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
 /** Execute the Namespace() function. */
 public class FuncNamespace extends FunctionDef1Arg {
-  static final long serialVersionUID = -4695674566722321237L;
 
   /**
    * Execute the function. The function must return a valid object.

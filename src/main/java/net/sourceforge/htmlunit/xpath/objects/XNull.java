@@ -22,7 +22,6 @@ package net.sourceforge.htmlunit.xpath.objects;
  * such as a string.
  */
 public class XNull extends XNodeSet {
-  static final long serialVersionUID = -6841683711458983005L;
 
   /** Create an XObject. */
   public XNull() {

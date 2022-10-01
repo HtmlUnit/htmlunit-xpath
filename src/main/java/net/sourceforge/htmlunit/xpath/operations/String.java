@@ -21,7 +21,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The 'string()' operation expression executer. */
 public class String extends UnaryOperation {
-  static final long serialVersionUID = 2973374377453022888L;
 
   /**
    * Apply the operation to two operands, and return the result.

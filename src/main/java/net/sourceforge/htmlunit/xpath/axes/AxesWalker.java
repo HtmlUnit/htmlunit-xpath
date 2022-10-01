@@ -32,7 +32,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 /** Serves as common interface for axes Walkers, and stores common state variables. */
 public class AxesWalker extends PredicatedNodeTest
     implements Cloneable, PathComponent, ExpressionOwner {
-  static final long serialVersionUID = -2966031951306601247L;
 
   /**
    * Construct an AxesWalker using a LocPathIterator.

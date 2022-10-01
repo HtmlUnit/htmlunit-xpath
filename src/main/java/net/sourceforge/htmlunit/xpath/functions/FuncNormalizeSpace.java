@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XString;
 
 /** Execute the normalize-space() function. */
 public class FuncNormalizeSpace extends FunctionDef1Arg {
-  static final long serialVersionUID = -3377956872032190880L;
 
   /**
    * Execute the function. The function must return a valid object.

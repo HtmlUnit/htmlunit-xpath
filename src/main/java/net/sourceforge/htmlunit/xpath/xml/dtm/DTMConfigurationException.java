@@ -19,7 +19,6 @@ package net.sourceforge.htmlunit.xpath.xml.dtm;
 
 /** Indicates a serious configuration error. */
 public class DTMConfigurationException extends DTMException {
-  static final long serialVersionUID = -4607874078818418046L;
 
   /** Create a new <code>DTMConfigurationException</code> with no detail mesage. */
   public DTMConfigurationException() {

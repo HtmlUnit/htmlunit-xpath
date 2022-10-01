@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The binary '-' operation expression executer. */
 public class Minus extends Operation {
-  static final long serialVersionUID = -5297672838170871043L;
 
   /**
    * Apply the operation to two operands, and return the result.

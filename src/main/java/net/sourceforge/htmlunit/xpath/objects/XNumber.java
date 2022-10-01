@@ -26,7 +26,6 @@ import net.sourceforge.htmlunit.xpath.XPathVisitor;
  * such as a string.
  */
 public class XNumber extends XObject {
-  static final long serialVersionUID = -2720400709619020193L;
 
   /**
    * Value of the XNumber object.

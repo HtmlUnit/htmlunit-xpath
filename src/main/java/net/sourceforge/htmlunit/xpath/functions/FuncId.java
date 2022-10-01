@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /** Execute the Id() function. */
 public class FuncId extends FunctionOneArg {
-  static final long serialVersionUID = 8930573966143567310L;
 
   /**
    * Fill in a list with nodes that match a space delimited list if ID ID references.

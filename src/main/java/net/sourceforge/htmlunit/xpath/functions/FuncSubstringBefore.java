@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XString;
 
 /** Execute the SubstringBefore() function. */
 public class FuncSubstringBefore extends Function2Args {
-  static final long serialVersionUID = 4110547161672431775L;
 
   /**
    * Execute the function. The function must return a valid object.

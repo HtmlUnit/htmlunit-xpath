@@ -22,7 +22,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The '!=' operation expression executer. */
 public class NotEquals extends Operation {
-  static final long serialVersionUID = -7869072863070586900L;
 
   /**
    * Apply the operation to two operands, and return the result.

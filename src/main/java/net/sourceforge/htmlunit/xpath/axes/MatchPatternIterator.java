@@ -35,7 +35,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
  * that are complex paths whose steps probably criss-cross each other.
  */
 public class MatchPatternIterator extends LocPathIterator {
-  static final long serialVersionUID = -5201153767396296474L;
 
   /** This is the select pattern, translated into a match pattern. */
   protected StepPattern m_pattern;

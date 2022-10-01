@@ -22,7 +22,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The '>' operation expression executer. */
 public class Gt extends Operation {
-  static final long serialVersionUID = 8927078751014375950L;
 
   /**
    * Apply the operation to two operands, and return the result.

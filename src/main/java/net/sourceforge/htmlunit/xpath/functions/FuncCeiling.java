@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** Execute the Ceiling() function. */
 public class FuncCeiling extends FunctionOneArg {
-  static final long serialVersionUID = -1275988936390464739L;
 
   /**
    * Execute the function. The function must return a valid object.

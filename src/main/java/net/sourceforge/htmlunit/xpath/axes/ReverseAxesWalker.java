@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisIterator;
  * @see <a href="http://www.w3.org/TR/xpath#predicates">XPath 2.4 Predicates</a>
  */
 public class ReverseAxesWalker extends AxesWalker {
-  static final long serialVersionUID = 2847007647832768941L;
 
   /**
    * Construct an AxesWalker using a LocPathIterator.

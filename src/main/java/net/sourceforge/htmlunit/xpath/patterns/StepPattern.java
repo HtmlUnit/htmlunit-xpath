@@ -31,7 +31,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 
 /** This class represents a single pattern match step. */
 public class StepPattern extends NodeTest implements SubContextList, ExpressionOwner {
-  static final long serialVersionUID = 9071668960168152644L;
 
   /** The axis for this test. */
   protected int m_axis;

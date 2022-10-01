@@ -26,7 +26,6 @@ import javax.xml.transform.TransformerException;
  * of this object.
  */
 public class XPathException extends TransformerException {
-  static final long serialVersionUID = 4263549717619045963L;
 
   /**
    * A nested exception.

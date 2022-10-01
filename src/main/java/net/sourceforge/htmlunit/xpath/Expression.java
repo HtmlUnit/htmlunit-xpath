@@ -35,8 +35,8 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
  * is iterators and walkers, which must be cloned in order to be used -- the original must still be
  * immutable.
  */
-public abstract class Expression implements java.io.Serializable, ExpressionNode, XPathVisitable {
-  static final long serialVersionUID = 565665869777906902L;
+public abstract class Expression implements ExpressionNode, XPathVisitable {
+
   /**
    * The location where this expression was built from. Need for diagnostic messages. May be null.
    *

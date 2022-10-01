@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The 'div' operation expression executer. */
 public class Div extends Operation {
-  static final long serialVersionUID = 6220756595959798135L;
 
   /**
    * Apply the operation to two operands, and return the result.

@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XString;
 
 /** Execute the Translate() function. */
 public class FuncTranslate extends Function3Args {
-  static final long serialVersionUID = -1672834340026116482L;
 
   /**
    * Execute the function. The function must return a valid object.

@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 
 /** Special context node pattern matcher. */
 public class ContextMatchStepPattern extends StepPattern {
-  static final long serialVersionUID = -1888092779313211942L;
 
   /** Construct a ContextMatchStepPattern. */
   public ContextMatchStepPattern(int axis, int paxis) {

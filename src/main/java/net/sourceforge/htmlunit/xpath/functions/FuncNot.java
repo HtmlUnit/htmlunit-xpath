@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** Execute the Not() function. */
 public class FuncNot extends FunctionOneArg {
-  static final long serialVersionUID = 7299699961076329790L;
 
   /**
    * Execute the function. The function must return a valid object.

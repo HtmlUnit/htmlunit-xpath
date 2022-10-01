@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** Execute the Number() function. */
 public class FuncNumber extends FunctionDef1Arg {
-  static final long serialVersionUID = 7266745342264153076L;
 
   /**
    * Execute the function. The function must return a valid object.
