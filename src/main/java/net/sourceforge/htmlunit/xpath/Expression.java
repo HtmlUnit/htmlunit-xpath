@@ -167,7 +167,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
       throws javax.xml.transform.TransformerException {
 
     try {
-      xctxt.pushCurrentNodeAndExpression(contextNode, contextNode);
+      xctxt.pushCurrentNodeAndExpression(contextNode);
 
       return execute(xctxt).iter();
     } finally {
@@ -236,7 +236,6 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @param b If false, a runtime exception will be thrown.
    * @param msg The assertion message, which should be informative.
    * @throws RuntimeException if the b argument is false.
-   * @throws javax.xml.transform.TransformerException
    */
   public void assertion(boolean b, java.lang.String msg) {
 
@@ -296,24 +295,6 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
   @Override
   public ExpressionNode exprGetParent() {
     return m_parent;
-  }
-
-  /** This method tells the node to add its argument to the node's list of children. */
-  @Override
-  public void exprAddChild(ExpressionNode n, int i) {
-    assertion(false, "exprAddChild method not implemented!");
-  }
-
-  /** This method returns a child node. The children are numbered from zero, left to right. */
-  @Override
-  public ExpressionNode exprGetChild(int i) {
-    return null;
-  }
-
-  /** Return the number of children the node has. */
-  @Override
-  public int exprGetNumChildren() {
-    return 0;
   }
 
   /**

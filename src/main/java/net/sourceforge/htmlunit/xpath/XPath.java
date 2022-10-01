@@ -26,7 +26,6 @@ import net.sourceforge.htmlunit.xpath.compiler.XPathParser;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
@@ -86,15 +85,6 @@ public class XPath implements ExpressionOwner {
    * @serial
    */
   String m_patternString;
-
-  /**
-   * Return the XPath string associated with this object.
-   *
-   * @return the XPath string associated with this object.
-   */
-  public String getPatternString() {
-    return m_patternString;
-  }
 
   /** Represents a select type expression. */
   public static final int SELECT = 0;
@@ -244,7 +234,7 @@ public class XPath implements ExpressionOwner {
 
     xctxt.pushNamespaceContext(namespaceContext);
 
-    xctxt.pushCurrentNodeAndExpression(contextNode, contextNode);
+    xctxt.pushCurrentNodeAndExpression(contextNode);
 
     XObject xobj = null;
 
@@ -300,7 +290,7 @@ public class XPath implements ExpressionOwner {
 
     xctxt.pushNamespaceContext(namespaceContext);
 
-    xctxt.pushCurrentNodeAndExpression(contextNode, contextNode);
+    xctxt.pushCurrentNodeAndExpression(contextNode);
 
     try {
       return m_mainExp.bool(xctxt);
@@ -339,59 +329,17 @@ public class XPath implements ExpressionOwner {
     return false;
   }
 
-  /** Set to true to get diagnostic messages about the result of match pattern testing. */
-  private static final boolean DEBUG_MATCHES = false;
-
-  /**
-   * Get the match score of the given node.
-   *
-   * @param xctxt XPath runtime context.
-   * @param context The current source tree context node.
-   * @return score, one of {@link #MATCH_SCORE_NODETEST}, {@link #MATCH_SCORE_NONE}, {@link
-   *     #MATCH_SCORE_OTHER}, or {@link #MATCH_SCORE_QNAME}.
-   * @throws javax.xml.transform.TransformerException
-   */
-  public double getMatchScore(XPathContext xctxt, int context)
-      throws javax.xml.transform.TransformerException {
-
-    xctxt.pushCurrentNode(context);
-    xctxt.pushCurrentExpressionNode(context);
-
-    try {
-      XObject score = m_mainExp.execute(xctxt);
-
-      if (DEBUG_MATCHES) {
-        DTM dtm = xctxt.getDTM(context);
-        System.out.println(
-            "score: "
-                + score.num()
-                + " for "
-                + dtm.getNodeName(context)
-                + " for xpath "
-                + this.getPatternString());
-      }
-
-      return score.num();
-    } finally {
-      xctxt.popCurrentNode();
-      xctxt.popCurrentExpressionNode();
-    }
-
-    // return XPath.MATCH_SCORE_NONE;
-  }
-
   /**
    * Warn the user of an problem.
    *
    * @param xctxt The XPath runtime context.
-   * @param sourceNode Not used.
    * @param msg An error msgkey that corresponds to one of the constants found in {@link
    *     net.sourceforge.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
    *     string.
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
    */
-  public void warn(XPathContext xctxt, int sourceNode, String msg, Object[] args)
+  public void warn(XPathContext xctxt, String msg, Object[] args)
       throws javax.xml.transform.TransformerException {
 
     String fmsg = XSLMessages.createXPATHWarning(msg, args);
@@ -424,14 +372,13 @@ public class XPath implements ExpressionOwner {
    * Tell the user of an error, and probably throw an exception.
    *
    * @param xctxt The XPath runtime context.
-   * @param sourceNode Not used.
    * @param msg An error msgkey that corresponds to one of the constants found in {@link
    *     net.sourceforge.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
    *     string.
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
    */
-  public void error(XPathContext xctxt, int sourceNode, String msg, Object[] args)
+  public void error(XPathContext xctxt, String msg, Object[] args)
       throws javax.xml.transform.TransformerException {
 
     String fmsg = XSLMessages.createXPATHMessage(msg, args);
@@ -446,10 +393,9 @@ public class XPath implements ExpressionOwner {
    * This will traverse the heararchy, calling the visitor for each member. If the called visitor
    * method returns false, the subtree should not be called.
    *
-   * @param owner The owner of the visitor, where that path may be rewritten if needed.
    * @param visitor The visitor whose appropriate method will be called.
    */
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     m_mainExp.callVisitors(this, visitor);
   }
 

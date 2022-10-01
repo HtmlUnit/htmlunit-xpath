@@ -43,11 +43,6 @@ public class FilterExprIteratorSimple extends LocPathIterator {
   private transient XNodeSet m_exprObj;
 
   /** Create a FilterExprIteratorSimple object. */
-  public FilterExprIteratorSimple() {
-    super(null);
-  }
-
-  /** Create a FilterExprIteratorSimple object. */
   public FilterExprIteratorSimple(Expression expr) {
     super(null);
     m_expr = expr;
@@ -63,7 +58,7 @@ public class FilterExprIteratorSimple extends LocPathIterator {
     super.setRoot(context, environment);
     m_exprObj =
         executeFilterExpr(
-            context, m_execContext, getPrefixResolver(), getIsTopLevel(), m_stackFrame, m_expr);
+            context, m_execContext, getPrefixResolver(), getIsTopLevel(), m_expr);
   }
 
   /**
@@ -75,11 +70,10 @@ public class FilterExprIteratorSimple extends LocPathIterator {
       XPathContext xctxt,
       PrefixResolver prefixResolver,
       boolean isTopLevel,
-      int stackFrame,
       Expression expr)
       throws net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException {
     PrefixResolver savedResolver = xctxt.getNamespaceContext();
-    XNodeSet result = null;
+    XNodeSet result;
 
     try {
       xctxt.pushCurrentNode(context);
@@ -147,17 +141,6 @@ public class FilterExprIteratorSimple extends LocPathIterator {
       m_exprObj.detach();
       m_exprObj = null;
     }
-  }
-
-  /** Get the inner contained expression of this filter. */
-  public Expression getInnerExpression() {
-    return m_expr;
-  }
-
-  /** Set the inner contained expression of this filter. */
-  public void setInnerExpression(Expression expr) {
-    expr.exprSetParent(this);
-    m_expr = expr;
   }
 
   /**

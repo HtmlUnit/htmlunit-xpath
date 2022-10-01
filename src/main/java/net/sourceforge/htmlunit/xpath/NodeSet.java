@@ -202,18 +202,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   public void detach() {}
 
   /**
-   * Tells if this NodeSet is "fresh", in other words, if the first nextNode() that is called will
-   * return the first node in the set.
-   *
-   * @return true if nextNode() would return the first node in the set, false if it would return a
-   *     later one.
-   */
-  @Override
-  public boolean isFresh() {
-    return m_next == 0;
-  }
-
-  /**
    * If an index is requested, NodeSet will call this method to run the iterator to the index. By
    * default this sets m_next to the index. If the index argument is -1, this signals that the
    * iterator should be run to the end.
@@ -290,161 +278,8 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     this.addElement(n);
   }
 
-  /**
-   * Insert a node at a given position.
-   *
-   * @param n Node to be added
-   * @param pos Offset at which the node is to be inserted, with 0 being the first position.
-   * @throws RuntimeException thrown if this NodeSet is not of a mutable type.
-   */
-  public void insertNode(Node n, int pos) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
-    // is not
-    // mutable!");
-
-    insertElementAt(n, pos);
-  }
-
-  /**
-   * Remove a node.
-   *
-   * @param n Node to be added
-   * @throws RuntimeException thrown if this NodeSet is not of a mutable type.
-   */
-  public void removeNode(Node n) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
-    // is not
-    // mutable!");
-
-    this.removeElement(n);
-  }
-
-  /**
-   * Copy NodeList members into this nodelist, adding in document order. If a node is null, don't
-   * add it.
-   *
-   * @param nodelist List of nodes which should now be referenced by this NodeSet.
-   * @throws RuntimeException thrown if this NodeSet is not of a mutable type.
-   */
-  public void addNodes(NodeList nodelist) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
-    // is not
-    // mutable!");
-
-    if (null != nodelist) // defensive to fix a bug that Sanjiva reported.
-    {
-      int nChildren = nodelist.getLength();
-
-      for (int i = 0; i < nChildren; i++) {
-        Node obj = nodelist.item(i);
-
-        if (null != obj) {
-          addElement(obj);
-        }
-      }
-    }
-
-    // checkDups();
-  }
-
-  /**
-   * Copy NodeList members into this nodelist, adding in document order. Only genuine node
-   * references will be copied; nulls appearing in the source NodeSet will not be added to this one.
-   *
-   * <p>In case you're wondering why this function is needed: NodeSet implements both NodeIterator
-   * and NodeList. If this method isn't provided, Java can't decide which of those to use when
-   * addNodes() is invoked. Providing the more-explicit match avoids that ambiguity.)
-   *
-   * @param ns NodeSet whose members should be merged into this NodeSet.
-   * @throws RuntimeException thrown if this NodeSet is not of a mutable type.
-   */
-  public void addNodes(NodeSet ns) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
-    // is not
-    // mutable!");
-
-    addNodes((NodeIterator) ns);
-  }
-
-  /**
-   * Copy NodeList members into this nodelist, adding in document order. Null references are not
-   * added.
-   *
-   * @param iterator NodeIterator which yields the nodes to be added.
-   * @throws RuntimeException thrown if this NodeSet is not of a mutable type.
-   */
-  public void addNodes(NodeIterator iterator) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
-    // is not
-    // mutable!");
-
-    if (null != iterator) // defensive to fix a bug that Sanjiva reported.
-    {
-      Node obj;
-
-      while (null != (obj = iterator.nextNode())) {
-        addElement(obj);
-      }
-    }
-
-    // checkDups();
-  }
-
   /** If this node is being used as an iterator, the next index that nextNode() will return. */
   protected transient int m_next = 0;
-
-  /**
-   * Get the current position, which is one less than the next nextNode() call will retrieve. i.e.
-   * if you call getCurrentPos() and the return is 0, the next fetch will take place at index 1.
-   *
-   * @return The the current position index.
-   */
-  @Override
-  public int getCurrentPos() {
-    return m_next;
-  }
-
-  /**
-   * Set the current position in the node set.
-   *
-   * @param i Must be a valid index.
-   * @throws RuntimeException thrown if this NodeSet is not of a cached type, and thus doesn't
-   *     permit indexed access.
-   */
-  @Override
-  public void setCurrentPos(int i) {
-
-    if (!m_cacheNodes)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null)); // "This NodeSet
-    // can not do
-    // indexing or
-    // counting
-    // functions!");
-
-    m_next = i;
-  }
 
   /**
    * Return the last fetched node. Needed to support the UnionPathIterator.
@@ -481,35 +316,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
    */
   protected transient boolean m_cacheNodes = true;
 
-  /**
-   * If setShouldCacheNodes(true) is called, then nodes will be cached. They are not cached by
-   * default. This switch must be set before the first call to nextNode is made, to ensure that all
-   * nodes are cached.
-   *
-   * @param b true if this node set should be cached.
-   * @throws RuntimeException thrown if an attempt is made to request caching after we've already
-   *     begun stepping through the nodes in this set.
-   */
-  @Override
-  public void setShouldCacheNodes(boolean b) {
-
-    if (!isFresh())
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_CANNOT_CALL_SETSHOULDCACHENODE, null)); // "Can
-    // not
-    // call
-    // setShouldCacheNodes
-    // after
-    // nextNode
-    // has
-    // been
-    // called!");
-
-    m_cacheNodes = b;
-    m_mutable = true;
-  }
-
   private transient int m_last = 0;
 
   @Override
@@ -527,7 +333,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
    *
    * @serial
    */
-  private int m_blocksize;
+  private final int m_blocksize;
 
   /**
    * Array of nodes this points to.
@@ -611,109 +417,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     m_map[m_firstFree] = value;
 
     m_firstFree++;
-  }
-
-  /**
-   * Append a Node onto the vector.
-   *
-   * @param value Node to add to the vector
-   */
-  public final void push(Node value) {
-
-    int ff = m_firstFree;
-
-    if ((ff + 1) >= m_mapSize) {
-      if (null == m_map) {
-        m_map = new Node[m_blocksize];
-        m_mapSize = m_blocksize;
-      } else {
-        m_mapSize += m_blocksize;
-
-        Node newMap[] = new Node[m_mapSize];
-
-        System.arraycopy(m_map, 0, newMap, 0, ff + 1);
-
-        m_map = newMap;
-      }
-    }
-
-    m_map[ff] = value;
-
-    ff++;
-
-    m_firstFree = ff;
-  }
-
-  /**
-   * Inserts the specified node in this vector at the specified index. Each component in this vector
-   * with an index greater or equal to the specified index is shifted upward to have an index one
-   * greater than the value it had previously.
-   *
-   * @param value Node to insert
-   * @param at Position where to insert
-   */
-  public void insertElementAt(Node value, int at) {
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
-    // is not
-    // mutable!");
-
-    if (null == m_map) {
-      m_map = new Node[m_blocksize];
-      m_mapSize = m_blocksize;
-    } else if ((m_firstFree + 1) >= m_mapSize) {
-      m_mapSize += m_blocksize;
-
-      Node newMap[] = new Node[m_mapSize];
-
-      System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
-
-      m_map = newMap;
-    }
-
-    if (at <= (m_firstFree - 1)) {
-      System.arraycopy(m_map, at, m_map, at + 1, m_firstFree - at);
-    }
-
-    m_map[at] = value;
-
-    m_firstFree++;
-  }
-
-  /**
-   * Removes the first occurrence of the argument from this vector. If the object is found in this
-   * vector, each component in the vector with an index greater or equal to the object's index is
-   * shifted downward to have an index one smaller than the value it had previously.
-   *
-   * @param s Node to remove from the list
-   * @return True if the node was successfully removed
-   */
-  public boolean removeElement(Node s) {
-    if (!m_mutable)
-      throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
-    // is not
-    // mutable!");
-
-    if (null == m_map) return false;
-
-    for (int i = 0; i < m_firstFree; i++) {
-      Node node = m_map[i];
-
-      if ((null != node) && node.equals(s)) {
-        if (i < m_firstFree - 1) System.arraycopy(m_map, i + 1, m_map, i, m_firstFree - i - 1);
-
-        m_firstFree--;
-        m_map[m_firstFree] = null;
-
-        return true;
-      }
-    }
-
-    return false;
   }
 
   /**

@@ -87,16 +87,6 @@ public class ReverseAxesWalker extends AxesWalker {
     return true;
   }
 
-  // /**
-  // * Set the root node of the TreeWalker.
-  // *
-  // * @param root The context node of this step.
-  // */
-  // public void setRoot(int root)
-  // {
-  // super.setRoot(root);
-  // }
-
   /**
    * Get the current sub-context position. In order to do the reverse axes count, for the moment
    * this re-searches the axes up to the predicate. An optimization on this is to cache the nodes
@@ -191,17 +181,6 @@ public class ReverseAxesWalker extends AxesWalker {
     }
 
     return count;
-  }
-
-  /**
-   * Returns true if all the nodes in the iteration well be returned in document order. Warning:
-   * This can only be called after setRoot has been called!
-   *
-   * @return false.
-   */
-  @Override
-  public boolean isDocOrdered() {
-    return false; // I think.
   }
 
   /** The DTM inner traversal class, that corresponds to the super axis. */

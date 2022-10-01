@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.axes;
 
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
-import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 
 /** This class iterates over set of nodes that needs to be sorted. */
 public class WalkingIteratorSorted extends WalkingIterator {

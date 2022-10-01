@@ -233,7 +233,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       int result = _currentNode;
 
       /* The extended type ID that was requested. */
-      int _nodeType = -1;
 
       _currentNode = END;
 

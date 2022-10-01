@@ -50,7 +50,7 @@ public abstract class BasicTestIterator extends LocPathIterator {
    */
   protected BasicTestIterator(Compiler compiler, int opPos, int analysis)
       throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis);
+    super(analysis);
 
     int firstStepPos = OpMap.getFirstChildPos(opPos);
     int whatToShow = compiler.getWhatToShow(firstStepPos);

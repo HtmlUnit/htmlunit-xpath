@@ -32,7 +32,7 @@ public interface SubContextList {
    * @param xctxt The XPath runtime context.
    * @return the number of nodes in the node list.
    */
-  public int getLastPos(XPathContext xctxt);
+  int getLastPos(XPathContext xctxt);
 
   /**
    * Get the current sub-context position.
@@ -40,5 +40,5 @@ public interface SubContextList {
    * @param xctxt The XPath runtime context.
    * @return The position of the current node in the list.
    */
-  public int getProximityPosition(XPathContext xctxt);
+  int getProximityPosition(XPathContext xctxt);
 }

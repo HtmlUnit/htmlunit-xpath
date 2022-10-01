@@ -62,7 +62,6 @@ public class FilterExprWalker extends AxesWalker {
     switch (stepType) {
       case OpCodes.OP_FUNCTION:
       case OpCodes.OP_EXTFUNCTION:
-        m_mustHardReset = true;
       case OpCodes.OP_GROUP:
       case OpCodes.OP_VARIABLE:
         m_expr = compiler.compile(opPos);
@@ -102,6 +101,7 @@ public class FilterExprWalker extends AxesWalker {
   @Override
   public void detach() {
     super.detach();
+    boolean m_canDetachNodeset = true;
     if (m_canDetachNodeset) {
       m_exprObj.detach();
     }
@@ -124,8 +124,7 @@ public class FilterExprWalker extends AxesWalker {
             m_lpi.getXPathContext(),
             m_lpi.getPrefixResolver(),
             m_lpi.getIsTopLevel(),
-            m_lpi.m_stackFrame,
-            m_expr);
+                m_expr);
   }
 
   /**
@@ -181,8 +180,7 @@ public class FilterExprWalker extends AxesWalker {
   public int getNextNode() {
 
     if (null != m_exprObj) {
-      int next = m_exprObj.nextNode();
-      return next;
+      return m_exprObj.nextNode();
     } else return DTM.NULL;
   }
 
@@ -207,14 +205,6 @@ public class FilterExprWalker extends AxesWalker {
   /** The result of executing m_expr. Needs to be deep cloned on clone op. */
   private transient XNodeSet m_exprObj;
 
-  private boolean m_mustHardReset = false;
-  private boolean m_canDetachNodeset = true;
-
-  /** Get the inner contained expression of this filter. */
-  public Expression getInnerExpression() {
-    return m_expr;
-  }
-
   /** Set the inner contained expression of this filter. */
   public void setInnerExpression(Expression expr) {
     expr.exprSetParent(this);
@@ -234,18 +224,7 @@ public class FilterExprWalker extends AxesWalker {
     return WalkerFactory.BIT_FILTER;
   }
 
-  /**
-   * Returns true if all the nodes in the iteration well be returned in document order. Warning:
-   * This can only be called after setRoot has been called!
-   *
-   * @return true as a default.
-   */
-  @Override
-  public boolean isDocOrdered() {
-    return m_exprObj.isDocOrdered();
-  }
-
-  /**
+    /**
    * Returns the axis being iterated, if it is known.
    *
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.

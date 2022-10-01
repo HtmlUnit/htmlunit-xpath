@@ -33,7 +33,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 public class OneStepIterator extends ChildTestIterator {
 
   /** The traversal axis from where the nodes will be filtered. */
-  protected int m_axis = -1;
+  protected int m_axis;
 
   /** The DTM inner traversal class, that corresponds to the super axis. */
   protected DTMAxisIterator m_iterator;

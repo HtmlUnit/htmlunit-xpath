@@ -39,14 +39,6 @@ public class IntVector implements Cloneable {
   /** Size of array */
   protected int m_mapSize;
 
-  /** Default constructor. Note that the default block size is very small, for small lists. */
-  public IntVector() {
-
-    m_blocksize = 32;
-    m_mapSize = m_blocksize;
-    m_map = new int[m_blocksize];
-  }
-
   /**
    * Construct a IntVector, using the given block size.
    *

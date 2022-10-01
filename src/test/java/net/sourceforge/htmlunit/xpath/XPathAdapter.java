@@ -92,7 +92,7 @@ class XPathAdapter {
       throws TransformerException {
 
     xpathContext.pushNamespaceContext(namespaceContext);
-    xpathContext.pushCurrentNodeAndExpression(contextNode, contextNode);
+    xpathContext.pushCurrentNodeAndExpression(contextNode);
 
     XObject xobj = null;
 

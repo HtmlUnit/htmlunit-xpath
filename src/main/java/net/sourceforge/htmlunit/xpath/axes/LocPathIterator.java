@@ -20,7 +20,6 @@ package net.sourceforge.htmlunit.xpath.axes;
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
-import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
@@ -62,26 +61,22 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
    * call back into the Compiler to create predicate expressions.
    *
-   * @param compiler The Compiler which is creating this expression.
-   * @param opPos The position of this iterator in the opcode list from the compiler.
    * @throws javax.xml.transform.TransformerException
    */
-  protected LocPathIterator(Compiler compiler, int opPos, int analysis)
+  protected LocPathIterator(int analysis)
       throws javax.xml.transform.TransformerException {
-    this(compiler, opPos, analysis, true);
+    this(analysis, true);
   }
 
   /**
    * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
    * call back into the Compiler to create predicate expressions.
    *
-   * @param compiler The Compiler which is creating this expression.
-   * @param opPos The position of this iterator in the opcode list from the compiler.
    * @param shouldLoadWalkers True if walkers should be loaded, or false if this is a derived
    *     iterator and it doesn't wish to load child walkers.
    * @throws javax.xml.transform.TransformerException
    */
-  protected LocPathIterator(Compiler compiler, int opPos, int analysis, boolean shouldLoadWalkers)
+  protected LocPathIterator(int analysis, boolean shouldLoadWalkers)
       throws javax.xml.transform.TransformerException {
     setLocPathIterator(this);
   }

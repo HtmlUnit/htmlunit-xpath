@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.axes;
 
 import net.sourceforge.htmlunit.xpath.XPathContext;
-import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
 /**
@@ -32,15 +31,12 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
   /**
    * Create a SelfIteratorNoPredicate object.
    *
-   * @param compiler A reference to the Compiler that contains the op map.
-   * @param opPos The position within the op map, which contains the location path expression for
-   *     this itterator.
    * @param analysis Analysis bits.
    * @throws javax.xml.transform.TransformerException
    */
-  SelfIteratorNoPredicate(Compiler compiler, int opPos, int analysis)
+  SelfIteratorNoPredicate(int analysis)
       throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis);
+    super(analysis);
   }
 
   /**

@@ -41,7 +41,7 @@ public class ChildIterator extends LocPathIterator {
    */
   ChildIterator(Compiler compiler, int opPos, int analysis)
       throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis);
+    super(analysis);
 
     // This iterator matches all kinds of nodes
     initNodeTest(DTMFilter.SHOW_ALL);

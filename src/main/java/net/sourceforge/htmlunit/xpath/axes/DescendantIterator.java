@@ -49,7 +49,7 @@ public class DescendantIterator extends LocPathIterator {
   DescendantIterator(Compiler compiler, int opPos, int analysis)
       throws javax.xml.transform.TransformerException {
 
-    super(compiler, opPos, analysis);
+    super(analysis);
 
     int firstStepPos = OpMap.getFirstChildPos(opPos);
     int stepType = compiler.getOp(firstStepPos);

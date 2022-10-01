@@ -845,33 +845,6 @@ public abstract class DTMDefaultBase implements DTM {
   }
 
   /**
-   * Given a node handle and an expanded type ID, get the index of the node's attribute of that
-   * type, if any.
-   *
-   * @param nodeHandle int Handle of the node.
-   * @param attType int expanded type ID of the required attribute.
-   * @return Handle of attribute of the required type, or DTM.NULL to indicate none exists.
-   */
-  protected int getTypedAttribute(int nodeHandle, int attType) {
-    int type = getNodeType(nodeHandle);
-    if (DTM.ELEMENT_NODE == type) {
-      int identity = makeNodeIdentity(nodeHandle);
-
-      while (DTM.NULL != (identity = getNextNodeIdentity(identity))) {
-        type = _type(identity);
-
-        if (type == DTM.ATTRIBUTE_NODE) {
-          if (_exptype(identity) == attType) return makeNodeHandle(identity);
-        } else if (DTM.NAMESPACE_NODE != type) {
-          break;
-        }
-      }
-    }
-
-    return DTM.NULL;
-  }
-
-  /**
    * Given a node handle, advance to its next sibling. If not yet resolved, waits for more nodes to
    * be added to the document and tries again.
    *
@@ -1313,20 +1286,6 @@ public abstract class DTMDefaultBase implements DTM {
     ExpandedNameTable ent = m_expandedNameTable;
 
     return ent.getExpandedTypeID(namespace, localName, type);
-  }
-
-  /**
-   * Returns the namespace type of a specific node
-   *
-   * @param nodeHandle the id of the node.
-   * @return the ID of the namespace.
-   */
-  public int getNamespaceType(final int nodeHandle) {
-
-    int identity = makeNodeIdentity(nodeHandle);
-    int expandedNameID = _exptype(identity);
-
-    return m_expandedNameTable.getNamespaceID(expandedNameID);
   }
 
   /**

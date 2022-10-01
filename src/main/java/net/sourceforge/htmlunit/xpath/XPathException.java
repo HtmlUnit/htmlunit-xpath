@@ -54,20 +54,6 @@ public class XPathException extends TransformerException {
   }
 
   /**
-   * Create an XPathException object that holds an error message, and another exception that caused
-   * this exception.
-   *
-   * @param message The error message.
-   * @param e The exception that caused this exception.
-   */
-  public XPathException(String message, Exception e) {
-
-    super(message);
-
-    this.m_exception = e;
-  }
-
-  /**
    * Print the the trace of methods from where the error originated. This will trace all nested
    * exception objects, as well as this object.
    *

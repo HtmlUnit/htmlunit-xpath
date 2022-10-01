@@ -94,9 +94,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   public void setPredicateCount(int count) {
     if (count > 0) {
       Expression[] newPredicates = new Expression[count];
-      for (int i = 0; i < count; i++) {
-        newPredicates[i] = m_predicates[i];
-      }
+      System.arraycopy(m_predicates, 0, newPredicates, 0, count);
       m_predicates = newPredicates;
     } else m_predicates = null;
   }

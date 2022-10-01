@@ -21,7 +21,6 @@ import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.compiler.OpMap;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 
 /**
  * This class implements a general iterator for those LocationSteps with only one step, and perhaps
@@ -31,7 +30,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 public class OneStepIteratorForward extends ChildTestIterator {
 
   /** The traversal axis from where the nodes will be filtered. */
-  protected int m_axis = -1;
+  protected int m_axis;
 
   /**
    * Create a OneStepIterator object.
@@ -47,19 +46,6 @@ public class OneStepIteratorForward extends ChildTestIterator {
     int firstStepPos = OpMap.getFirstChildPos(opPos);
 
     m_axis = WalkerFactory.getAxisFromStep(compiler, firstStepPos);
-  }
-
-  /**
-   * Create a OneStepIterator object that will just traverse the self axes.
-   *
-   * @param axis One of the org.apache.xml.dtm.Axis integers.
-   */
-  public OneStepIteratorForward(int axis) {
-    super(null);
-
-    m_axis = axis;
-    int whatToShow = DTMFilter.SHOW_ALL;
-    initNodeTest(whatToShow);
   }
 
   /**

@@ -261,7 +261,7 @@ public class XPathContext extends DTMManager {
    * to be confused with the current node list. %REVIEW% Note that there are no bounds check and
    * resize for this stack, so if it is blown, it's all over.
    */
-  private IntStack m_currentNodes = new IntStack(RECURSIONLIMIT);
+  private final IntStack m_currentNodes = new IntStack(RECURSIONLIMIT);
 
   /**
    * Get the current context node.
@@ -276,9 +276,8 @@ public class XPathContext extends DTMManager {
    * Set the current context node and expression node.
    *
    * @param cn the <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a>.
-   * @param en the sub-expression context node.
    */
-  public final void pushCurrentNodeAndExpression(int cn, int en) {
+  public final void pushCurrentNodeAndExpression(int cn) {
     m_currentNodes.push(cn);
     m_currentExpressionNodes.push(cn);
   }
@@ -319,15 +318,15 @@ public class XPathContext extends DTMManager {
   }
 
   /** A stack of the current sub-expression nodes. */
-  private NodeVector m_iteratorRoots = new NodeVector();
+  private final NodeVector m_iteratorRoots = new NodeVector();
 
   /** A stack of the current sub-expression nodes. */
-  private NodeVector m_predicateRoots = new NodeVector();
+  private final NodeVector m_predicateRoots = new NodeVector();
 
   /** A stack of the current sub-expression nodes. */
-  private IntStack m_currentExpressionNodes = new IntStack(RECURSIONLIMIT);
+  private final IntStack m_currentExpressionNodes = new IntStack(RECURSIONLIMIT);
 
-  private Stack<Integer> m_predicatePos = new Stack<>();
+  private final Stack<Integer> m_predicatePos = new Stack<>();
 
   public final int getPredicatePos() {
     return m_predicatePos.peek();
@@ -355,7 +354,7 @@ public class XPathContext extends DTMManager {
     m_currentExpressionNodes.quickPop(1);
   }
 
-  private Stack<PrefixResolver> m_prefixResolvers = new Stack<>();
+  private final Stack<PrefixResolver> m_prefixResolvers = new Stack<>();
 
   /**
    * Get the current namespace context for the xpath.
@@ -395,7 +394,7 @@ public class XPathContext extends DTMManager {
   // ==========================================================
 
   /** Stack of AxesIterators. */
-  private Stack<SubContextList> m_axesIteratorStack = new Stack<>();
+  private final Stack<SubContextList> m_axesIteratorStack = new Stack<>();
 
   /**
    * Push a TreeWalker on the stack.
