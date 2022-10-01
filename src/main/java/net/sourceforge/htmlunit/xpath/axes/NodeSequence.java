@@ -54,8 +54,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
    * generic object.
    */
   protected NodeVector getVector() {
-    NodeVector nv = (m_cache != null) ? m_cache.getVector() : null;
-    return nv;
+    return (m_cache != null) ? m_cache.getVector() : null;
   }
 
   /**
@@ -112,15 +111,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
    */
   public final void setIter(DTMIterator iter) {
     m_iter = iter;
-  }
-
-  /**
-   * Get the functional iterator that fetches nodes.
-   *
-   * @return The contained iterator.
-   */
-  public final DTMIterator getContainedIter() {
-    return m_iter;
   }
 
   /**
@@ -401,8 +391,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         } catch (CloneNotSupportedException e) {
           // This should never happen
           e.printStackTrace();
-          RuntimeException rte = new RuntimeException(e.getMessage());
-          throw rte;
+          throw new RuntimeException(e.getMessage());
         }
         newCache.setVector(nv);
         newCache.setCacheComplete(true);

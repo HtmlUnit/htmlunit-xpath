@@ -874,9 +874,9 @@ public class Compiler extends OpMap {
     if (-1 != funcID) {
       Function func = m_functionTable.getFunction(funcID);
 
-      /**
-       * It is a trick for function-available. Since the function table is an instance field, insert
-       * this table at compilation time for later usage
+      /*
+        It is a trick for function-available. Since the function table is an instance field, insert
+        this table at compilation time for later usage
        */
 
       // if (func instanceof FuncExtFunctionAvailable)

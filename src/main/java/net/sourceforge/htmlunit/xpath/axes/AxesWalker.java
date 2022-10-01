@@ -73,8 +73,7 @@ public class AxesWalker extends PredicatedNodeTest
   public Object clone() throws CloneNotSupportedException {
     // Do not access the location path itterator during this operation!
 
-    AxesWalker clone = (AxesWalker) super.clone();
-    return clone;
+    return super.clone();
   }
 
   /**
@@ -163,8 +162,7 @@ public class AxesWalker extends PredicatedNodeTest
   @Override
   public int getAnalysisBits() {
     int axis = getAxis();
-    int bit = WalkerFactory.getAnalysisBitFromAxes(axis);
-    return bit;
+    return WalkerFactory.getAnalysisBitFromAxes(axis);
   }
 
   /**
@@ -233,15 +231,6 @@ public class AxesWalker extends PredicatedNodeTest
    */
   public void setPrevWalker(AxesWalker walker) {
     m_prevWalker = walker;
-  }
-
-  /**
-   * Get the previous walker reference in the location step chain.
-   *
-   * @return Reference to previous walker reference in the location step chain, or null.
-   */
-  public AxesWalker getPrevWalker() {
-    return m_prevWalker;
   }
 
   /**
@@ -370,15 +359,6 @@ public class AxesWalker extends PredicatedNodeTest
   private DTM m_dtm;
 
   /**
-   * Set the DTM for this walker.
-   *
-   * @param dtm Non-null reference to a DTM.
-   */
-  public void setDefaultDTM(DTM dtm) {
-    m_dtm = dtm;
-  }
-
-  /**
    * Get the DTM for this walker.
    *
    * @return Non-null reference to a DTM.
@@ -472,7 +452,7 @@ public class AxesWalker extends PredicatedNodeTest
   AxesWalker m_prevWalker;
 
   /** The traversal axis from where the nodes will be filtered. */
-  protected int m_axis = -1;
+  protected int m_axis;
 
   /** The DTM inner traversal class, that corresponds to the super axis. */
   protected DTMAxisTraverser m_traverser;

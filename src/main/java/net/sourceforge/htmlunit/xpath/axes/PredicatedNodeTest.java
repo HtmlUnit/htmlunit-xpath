@@ -196,9 +196,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * Init the proximity position to zero for a forward axes.
    *
    * @param i The index into the m_proximityPositions array.
-   * @throws javax.xml.transform.TransformerException
    */
-  public void initProximityPosition(int i) throws javax.xml.transform.TransformerException {
+  public void initProximityPosition(int i) {
     m_proximityPositions[i] = 0;
   }
 
@@ -221,15 +220,6 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    */
   public boolean isReverseAxes() {
     return false;
-  }
-
-  /**
-   * Get which predicate is executing.
-   *
-   * @return The current predicate index, or -1 if no predicate is executing.
-   */
-  public int getPredicateIndex() {
-    return m_predicateIndex;
   }
 
   /**
@@ -366,15 +356,6 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     }
 
     return DTMIterator.FILTER_SKIP;
-  }
-
-  /**
-   * Get the owning location path iterator.
-   *
-   * @return the owning location path iterator, which should not be null.
-   */
-  public LocPathIterator getLocPathIterator() {
-    return m_lpi;
   }
 
   /**

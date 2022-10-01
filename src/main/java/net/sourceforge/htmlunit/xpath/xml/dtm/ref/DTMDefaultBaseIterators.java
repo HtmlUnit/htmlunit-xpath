@@ -44,28 +44,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   }
 
   /**
-   * Construct a DTMDefaultBaseTraversers object from a DOM node.
-   *
-   * @param mgr The DTMManager who owns this DTM.
-   * @param source The object that is used to specify the construction source.
-   * @param dtmIdentity The DTM identity ID for this DTM.
-   * @param doIndexing true if the caller considers it worth it to use indexing schemes.
-   * @param blocksize The block size of the DTM.
-   * @param usePrevsib true if we want to build the previous sibling node array.
-   * @param newNameTable true if we want to use a new ExpandedNameTable for this DTM.
-   */
-  public DTMDefaultBaseIterators(
-      DTMManager mgr,
-      Source source,
-      int dtmIdentity,
-      boolean doIndexing,
-      int blocksize,
-      boolean usePrevsib,
-      boolean newNameTable) {
-    super(mgr, source, dtmIdentity, doIndexing, blocksize, usePrevsib, newNameTable);
-  }
-
-  /**
    * Get an iterator that can navigate over an XPath Axis, predicated by the extended type ID.
    * Returns an iterator that must be initialized with a start node (using iterator.setStartNode()).
    *
@@ -538,7 +516,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   } // end of TypedNamespaceIterator
 
   /**
-   * Iterator that returns the the root node as defined by the XPath data model for a given node.
+   * Iterator that returns the root node as defined by the XPath data model for a given node.
    */
   public class RootIterator extends InternalAxisIteratorBase {
 
@@ -1619,20 +1597,11 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   public class SingletonIterator extends InternalAxisIteratorBase {
 
     /** (not sure yet what this is. -sb) (sc & sb remove final to compile in JDK 1.1.8) */
-    private boolean _isConstant;
+    private final boolean _isConstant;
 
     /** Constructor SingletonIterator */
     public SingletonIterator() {
       this(Integer.MIN_VALUE, false);
-    }
-
-    /**
-     * Constructor SingletonIterator
-     *
-     * @param node The node handle to return.
-     */
-    public SingletonIterator(int node) {
-      this(node, false);
     }
 
     /**

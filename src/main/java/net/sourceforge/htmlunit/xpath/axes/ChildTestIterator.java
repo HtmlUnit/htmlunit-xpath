@@ -50,7 +50,6 @@ public class ChildTestIterator extends BasicTestIterator {
    * Create a ChildTestIterator object.
    *
    * @param traverser Traverser that tells how the KeyIterator is to be handled.
-   * @throws javax.xml.transform.TransformerException
    */
   public ChildTestIterator(DTMAxisTraverser traverser) {
 

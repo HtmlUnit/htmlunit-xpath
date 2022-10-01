@@ -87,7 +87,7 @@ public abstract class DTMDefaultBase implements DTM {
   /** The number of blocks used for small documents & RTFs */
   public static final int DEFAULT_NUMBLOCKS_SMALL = 4;
 
-  /** The block size of the node arrays */
+  /* The block size of the node arrays */
   // protected final int m_blocksize;
 
   /** The value to use when the information has not been built yet. */
@@ -105,9 +105,9 @@ public abstract class DTMDefaultBase implements DTM {
    */
   protected SuballocatedIntVector m_dtmIdent;
 
-  /**
-   * The mask for the identity. %REVIEW% Should this really be set to the _DEFAULT? What if a
-   * particular DTM wanted to use another value?
+  /*
+    The mask for the identity. %REVIEW% Should this really be set to the _DEFAULT? What if a
+    particular DTM wanted to use another value?
    */
   // protected final static int m_mask = DTMManager.IDENT_NODE_DEFAULT;
 
@@ -132,7 +132,7 @@ public abstract class DTMDefaultBase implements DTM {
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
   public DTMDefaultBase(DTMManager mgr, Source source, int dtmIdentity, boolean doIndexing) {
-    this(mgr, source, dtmIdentity, doIndexing, DEFAULT_BLOCKSIZE, true, false);
+    this(mgr, source, dtmIdentity, doIndexing, DEFAULT_BLOCKSIZE, true);
   }
 
   /**
@@ -144,7 +144,6 @@ public abstract class DTMDefaultBase implements DTM {
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    * @param blocksize The block size of the DTM.
    * @param usePrevsib true if we want to build the previous sibling node array.
-   * @param newNameTable true if we want to use a new ExpandedNameTable for this DTM.
    */
   public DTMDefaultBase(
       DTMManager mgr,
@@ -152,8 +151,7 @@ public abstract class DTMDefaultBase implements DTM {
       int dtmIdentity,
       boolean doIndexing,
       int blocksize,
-      boolean usePrevsib,
-      boolean newNameTable) {
+      boolean usePrevsib) {
     // Use smaller sizes for the internal node arrays if the block size
     // is small.
     int numblocks;
@@ -187,7 +185,7 @@ public abstract class DTMDefaultBase implements DTM {
     } else {
       // Note that this fails if we aren't talking to an instance of
       // DTMManagerDefault
-      m_expandedNameTable = m_mgrDefault.getExpandedNameTable(this);
+      m_expandedNameTable = m_mgrDefault.getExpandedNameTable();
     }
   }
 
@@ -341,13 +339,6 @@ public abstract class DTMDefaultBase implements DTM {
    * @return The true if a next node is found or false if there are no more nodes.
    */
   protected abstract boolean nextNode();
-
-  /**
-   * Get the number of nodes that have been added.
-   *
-   * @return the number of nodes that have been mapped.
-   */
-  protected abstract int getNumberOfNodes();
 
   /** Stateless axis traversers, lazely built. */
   protected DTMAxisTraverser[] m_traversers;
@@ -800,38 +791,6 @@ public abstract class DTMDefaultBase implements DTM {
   }
 
   /**
-   * Given a node handle, get the handle of the node's first child. If not yet resolved, waits for
-   * more nodes to be added to the document and tries again.
-   *
-   * @param nodeHandle int Handle of the node.
-   * @return int DTM node-number of first child, or DTM.NULL to indicate none exists.
-   */
-  public int getTypedFirstChild(int nodeHandle, int nodeType) {
-
-    int firstChild, eType;
-    if (nodeType < DTM.NTYPES) {
-      for (firstChild = _firstch(makeNodeIdentity(nodeHandle));
-          firstChild != DTM.NULL;
-          firstChild = _nextsib(firstChild)) {
-        eType = _exptype(firstChild);
-        if (eType == nodeType
-            || (eType >= DTM.NTYPES && m_expandedNameTable.getType(eType) == nodeType)) {
-          return makeNodeHandle(firstChild);
-        }
-      }
-    } else {
-      for (firstChild = _firstch(makeNodeIdentity(nodeHandle));
-          firstChild != DTM.NULL;
-          firstChild = _nextsib(firstChild)) {
-        if (_exptype(firstChild) == nodeType) {
-          return makeNodeHandle(firstChild);
-        }
-      }
-    }
-    return DTM.NULL;
-  }
-
-  /**
    * Given a node handle, advance to its last child. If not yet resolved, waits for more nodes to be
    * added to the document and tries again.
    *
@@ -943,25 +902,6 @@ public abstract class DTMDefaultBase implements DTM {
   public int getNextSibling(int nodeHandle) {
     if (nodeHandle == DTM.NULL) return DTM.NULL;
     return makeNodeHandle(_nextsib(makeNodeIdentity(nodeHandle)));
-  }
-
-  /**
-   * Given a node handle, advance to its next sibling. If not yet resolved, waits for more nodes to
-   * be added to the document and tries again.
-   *
-   * @param nodeHandle int Handle of the node.
-   * @return int Node-number of next sibling, or DTM.NULL to indicate none exists.
-   */
-  public int getTypedNextSibling(int nodeHandle, int nodeType) {
-    if (nodeHandle == DTM.NULL) return DTM.NULL;
-    int node = makeNodeIdentity(nodeHandle);
-    int eType;
-    while ((node = _nextsib(node)) != DTM.NULL
-        && ((eType = _exptype(node)) != nodeType && m_expandedNameTable.getType(eType) != nodeType))
-      ;
-    // _type(node) != nodeType));
-
-    return node == DTM.NULL ? DTM.NULL : makeNodeHandle(node);
   }
 
   /**
@@ -1116,10 +1056,14 @@ public abstract class DTMDefaultBase implements DTM {
       // (... It may be, in large docs with many NS decls.)
       int wouldBeAt =
           findInSortedSuballocatedIntVector(m_namespaceDeclSetElements, elementNodeIndex);
-      if (wouldBeAt >= 0) // Found it
-      return m_namespaceDeclSets.elementAt(wouldBeAt);
-      if (wouldBeAt == -1) // -1-wouldbeat == 0
-      return null; // Not after anything; definitely not found
+      if (wouldBeAt >= 0) {
+        // Found it
+        return m_namespaceDeclSets.elementAt(wouldBeAt);
+      }
+      if (wouldBeAt == -1) {
+        // -1-wouldbeat == 0
+        return null; // Not after anything; definitely not found
+      }
 
       // Not found, but we know where it should have been.
       // Search back until we find an ancestor or run out.
@@ -1345,7 +1289,8 @@ public abstract class DTMDefaultBase implements DTM {
   }
 
   /**
-   * Get the string-value of a node as a String object (see http://www.w3.org/TR/xpath#data-model
+   * Get the string-value of a node as a String object
+   * (see <a href="http://www.w3.org/TR/xpath#data-model">http://www.w3.org/TR/xpath#data-model</a>
    * for the definition of a node's string-value).
    *
    * @param nodeHandle The node ID.
@@ -1356,7 +1301,8 @@ public abstract class DTMDefaultBase implements DTM {
 
   /**
    * Get number of character array chunks in the string-value of a node. (see
-   * http://www.w3.org/TR/xpath#data-model for the definition of a node's string-value). Note that a
+   * <a href="http://www.w3.org/TR/xpath#data-model">http://www.w3.org/TR/xpath#data-model</a>
+   * for the definition of a node's string-value). Note that a
    * single text node may have multiple text chunks.
    *
    * @param nodeHandle The node ID.
@@ -1376,7 +1322,8 @@ public abstract class DTMDefaultBase implements DTM {
 
   /**
    * Get a character array chunk in the string-value of a node. (see
-   * http://www.w3.org/TR/xpath#data-model for the definition of a node's string-value). Note that a
+   * <a href="http://www.w3.org/TR/xpath#data-model">http://www.w3.org/TR/xpath#data-model</a>
+   * for the definition of a node's string-value). Note that a
    * single text node may have multiple text chunks.
    *
    * @param nodeHandle The node ID.
@@ -1490,7 +1437,7 @@ public abstract class DTMDefaultBase implements DTM {
   @Override
   public String getNodeNameX(int nodeHandle) {
 
-    /** @todo: implement this org.apache.xml.dtm.DTMDefaultBase abstract method */
+    /* @todo: implement this org.apache.xml.dtm.DTMDefaultBase abstract method */
     error(
         XMLMessages.createXMLMessage(
             XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "Not yet supported!");
@@ -1572,26 +1519,6 @@ public abstract class DTMDefaultBase implements DTM {
     // Apparently, the axis walker stuff requires levels to count from 1.
     int identity = makeNodeIdentity(nodeHandle);
     return (short) (_level(identity) + 1);
-  }
-
-  /**
-   * Get the identity of this node in the tree
-   *
-   * @param nodeHandle The node handle.
-   * @return the node identity
-   */
-  public int getNodeIdent(int nodeHandle) {
-    return makeNodeIdentity(nodeHandle);
-  }
-
-  /**
-   * Get the handle of this node in the tree
-   *
-   * @param nodeId The node identity.
-   * @return the node handle
-   */
-  public int getNodeHandle(int nodeId) {
-    return makeNodeHandle(nodeId);
   }
 
   // ============== Document query functions ==============
@@ -1867,17 +1794,5 @@ public abstract class DTMDefaultBase implements DTM {
    */
   public DTMManager getManager() {
     return m_mgr;
-  }
-
-  /**
-   * Query which DTMIDs this DTM is currently using within the DTMManager.
-   *
-   * <p>%REVEW% Should this become part of the base DTM API?
-   *
-   * @return an IntVector, or null if this is a "stand-alone" DTM.
-   */
-  public SuballocatedIntVector getDTMIDs() {
-    if (m_mgr == null) return null;
-    return m_dtmIdent;
   }
 }

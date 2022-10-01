@@ -38,13 +38,6 @@ public class NodeTest extends Expression {
   public static final String WILD = "*";
 
   /**
-   * The URL to pass to the Node#supports method, to see if the DOM has already been stripped of
-   * whitespace nodes.
-   */
-  public static final String SUPPORTS_PRE_STRIPPING =
-      "http://xml.apache.org/xpath/features/whitespace-pre-stripping";
-
-  /**
    * This attribute determines which node types are accepted.
    *
    * @serial
@@ -340,7 +333,7 @@ public class NodeTest extends Expression {
    * @param t target string, which may be {@link #WILD}.
    * @return true if the strings match according to the rules of this method.
    */
-  private static final boolean subPartMatch(String p, String t) {
+  private static boolean subPartMatch(String p, String t) {
 
     // boolean b = (p == t) || ((null != p) && ((t == WILD) || p.equals(t)));
     // System.out.println("subPartMatch - p: "+p+", t: "+t+", result: "+b);
@@ -354,7 +347,7 @@ public class NodeTest extends Expression {
    * @param t target string, which may be {@link #WILD}.
    * @return true if the strings match according to the rules of this method.
    */
-  private static final boolean subPartMatchNS(String p, String t) {
+  private static boolean subPartMatchNS(String p, String t) {
 
     return (p == t)
         || ((null != p) && ((p.length() > 0) ? ((t == WILD) || p.equals(t)) : null == t));

@@ -35,13 +35,6 @@ public abstract class BasicTestIterator extends LocPathIterator {
    *
    * @param nscontext The namespace context for this iterator, should be OK if null.
    */
-  protected BasicTestIterator() {}
-
-  /**
-   * Create a LocPathIterator object.
-   *
-   * @param nscontext The namespace context for this iterator, should be OK if null.
-   */
   protected BasicTestIterator(PrefixResolver nscontext) {
 
     super(nscontext);
@@ -57,7 +50,7 @@ public abstract class BasicTestIterator extends LocPathIterator {
    */
   protected BasicTestIterator(Compiler compiler, int opPos, int analysis)
       throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis, false);
+    super(compiler, opPos, analysis);
 
     int firstStepPos = OpMap.getFirstChildPos(opPos);
     int whatToShow = compiler.getWhatToShow(firstStepPos);
@@ -74,21 +67,6 @@ public abstract class BasicTestIterator extends LocPathIterator {
           whatToShow, compiler.getStepNS(firstStepPos), compiler.getStepLocalName(firstStepPos));
     }
     initPredicateInfo(compiler, firstStepPos);
-  }
-
-  /**
-   * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
-   * call back into the Compiler to create predicate expressions.
-   *
-   * @param compiler The Compiler which is creating this expression.
-   * @param opPos The position of this iterator in the opcode list from the compiler.
-   * @param shouldLoadWalkers True if walkers should be loaded, or false if this is a derived
-   *     iterator and it doesn't wish to load child walkers.
-   * @throws javax.xml.transform.TransformerException
-   */
-  protected BasicTestIterator(Compiler compiler, int opPos, int analysis, boolean shouldLoadWalkers)
-      throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis, shouldLoadWalkers);
   }
 
   /**

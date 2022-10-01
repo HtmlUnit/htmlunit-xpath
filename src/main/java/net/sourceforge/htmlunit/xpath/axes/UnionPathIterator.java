@@ -74,32 +74,6 @@ public class UnionPathIterator extends LocPathIterator
   }
 
   /**
-   * Add an iterator to the union list.
-   *
-   * @param expr non-null reference to a location path iterator.
-   */
-  public void addIterator(DTMIterator expr) {
-
-    // Increase array size by only 1 at a time. Fix this
-    // if it looks to be a problem.
-    if (null == m_iterators) {
-      m_iterators = new DTMIterator[1];
-      m_iterators[0] = expr;
-    } else {
-      DTMIterator[] exprs = m_iterators;
-      int len = m_iterators.length;
-
-      m_iterators = new DTMIterator[len + 1];
-
-      System.arraycopy(exprs, 0, m_iterators, 0, len);
-
-      m_iterators[len] = expr;
-    }
-    expr.nextNode();
-    if (expr instanceof Expression) ((Expression) expr).exprSetParent(this);
-  }
-
-  /**
    * Detaches the iterator from the set which it iterated over, releasing any computational
    * resources and placing the iterator in the INVALID state. After<code>detach</code> has been
    * invoked, calls to <code>nextNode</code> or<code>previousNode</code> will raise the exception
@@ -231,10 +205,8 @@ public class UnionPathIterator extends LocPathIterator
    */
   protected LocPathIterator createDTMIterator(Compiler compiler, int opPos)
       throws javax.xml.transform.TransformerException {
-    LocPathIterator lpi =
-        (LocPathIterator)
-            WalkerFactory.newDTMIterator(compiler, opPos, compiler.getLocationPathDepth() <= 0);
-    return lpi;
+    return (LocPathIterator)
+        WalkerFactory.newDTMIterator(compiler, opPos, compiler.getLocationPathDepth() <= 0);
   }
 
   /**

@@ -94,15 +94,6 @@ public class IntVector implements Cloneable {
   }
 
   /**
-   * Get the length of the list.
-   *
-   * @return length of the list
-   */
-  public final void setSize(int sz) {
-    m_firstFree = sz;
-  }
-
-  /**
    * Append a int onto the vector.
    *
    * @param value Int to add to the list

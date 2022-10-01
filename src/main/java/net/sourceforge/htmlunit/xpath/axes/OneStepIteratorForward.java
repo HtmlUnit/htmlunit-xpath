@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
  * This class implements a general iterator for those LocationSteps with only one step, and perhaps
  * a predicate, that only go forward (i.e. it can not be used with ancestors, preceding, etc.)
  *
- * @see net.sourceforge.htmlunit.xpath.axes#ChildTestIterator
  */
 public class OneStepIteratorForward extends ChildTestIterator {
 
@@ -54,7 +53,6 @@ public class OneStepIteratorForward extends ChildTestIterator {
    * Create a OneStepIterator object that will just traverse the self axes.
    *
    * @param axis One of the org.apache.xml.dtm.Axis integers.
-   * @throws javax.xml.transform.TransformerException
    */
   public OneStepIteratorForward(int axis) {
     super(null);

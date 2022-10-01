@@ -49,7 +49,7 @@ public class DescendantIterator extends LocPathIterator {
   DescendantIterator(Compiler compiler, int opPos, int analysis)
       throws javax.xml.transform.TransformerException {
 
-    super(compiler, opPos, analysis, false);
+    super(compiler, opPos, analysis);
 
     int firstStepPos = OpMap.getFirstChildPos(opPos);
     int stepType = compiler.getOp(firstStepPos);
@@ -100,14 +100,6 @@ public class DescendantIterator extends LocPathIterator {
           whatToShow, compiler.getStepNS(firstStepPos), compiler.getStepLocalName(firstStepPos));
     }
     initPredicateInfo(compiler, firstStepPos);
-  }
-
-  /** Create a DescendantIterator object. */
-  public DescendantIterator() {
-    super(null);
-    m_axis = Axis.DESCENDANTSORSELFFROMROOT;
-    int whatToShow = DTMFilter.SHOW_ALL;
-    initNodeTest(whatToShow);
   }
 
   /**

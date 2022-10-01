@@ -43,8 +43,8 @@ import org.w3c.dom.Node;
  * <p>State: In progress!!
  */
 public class DTMChildIterNodeList extends DTMNodeListBase {
-  private int m_firstChild;
-  private DTM m_parentDTM;
+  private final int m_firstChild;
+  private final DTM m_parentDTM;
 
   // ================================================================
   // Methods unique to this class

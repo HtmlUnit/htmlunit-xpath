@@ -56,12 +56,12 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   /** The current position in the DOM tree. Last node examined for possible copying to DTM. */
   private transient Node m_pos;
   /** The current position in the DTM tree. Who children get appended to. */
-  private int m_last_parent = 0;
+  private int m_last_parent;
   /** The current position in the DTM tree. Who children reference as their previous sib. */
-  private int m_last_kid = NULL;
+  private int m_last_kid;
 
   /** The top of the subtree. %REVIEW%: 'may not be the same as m_context if "//foo" pattern.' */
-  private transient Node m_root;
+  private final transient Node m_root;
 
   /**
    * True iff the first element has been processed. This is used to control synthesis of the implied
@@ -261,12 +261,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return nodeIndex;
   }
 
-  /** Get the number of nodes that have been added. */
-  @Override
-  public int getNumberOfNodes() {
-    return m_nodes.size();
-  }
-
   /**
    * This method iterates to the next node that will be added to the table. Each call to this method
    * adds a new node to the table, unless the end is reached, in which case it returns null.
@@ -399,7 +393,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // nexttype=pos.getNodeType();
     if (TEXT_NODE == nexttype || CDATA_SECTION_NODE == nexttype) {
       // If filtering, initially assume we're going to suppress the node
-      suppressNode = false;
 
       // Scan logically contiguous text (siblings, plus "flattening"
       // of entity reference boundaries).
@@ -711,33 +704,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       String s = (buf.length() > 0) ? buf.toString() : "";
       return new XString(s);
     } else return new XString(node.getNodeValue());
-  }
-
-  /**
-   * Determine if the string-value of a node is whitespace
-   *
-   * @param nodeHandle The node Handle.
-   * @return Return true if the given node is whitespace.
-   */
-  public boolean isWhitespace(int nodeHandle) {
-    int type = getNodeType(nodeHandle);
-    Node node = getNode(nodeHandle);
-    if (TEXT_NODE == type || CDATA_SECTION_NODE == type) {
-      // If this is a DTM text node, it may be made of multiple DOM text
-      // nodes -- including navigating into Entity References. DOM2DTM
-      // records the first node in the sequence and requires that we
-      // pick up the others when we retrieve the DTM node's value.
-      //
-      // %REVIEW% DOM Level 3 is expected to add a "whole text"
-      // retrieval method which performs this function for us.
-      StringBuilder buf = new StringBuilder();
-      while (node != null) {
-        buf.append(node.getNodeValue());
-        node = logicalNextDOMTextNode(node);
-      }
-      return XMLCharacterRecognizer.isWhiteSpace(buf);
-    }
-    return false;
   }
 
   /**

@@ -41,34 +41,10 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
-   * @param xstringfactory The factory to use for creating XMLStrings.
-   * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
   public DTMDefaultBaseTraversers(
       DTMManager mgr, Source source, int dtmIdentity, boolean doIndexing) {
     super(mgr, source, dtmIdentity, doIndexing);
-  }
-
-  /**
-   * Construct a DTMDefaultBaseTraversers object from a DOM node.
-   *
-   * @param mgr The DTMManager who owns this DTM.
-   * @param source The object that is used to specify the construction source.
-   * @param dtmIdentity The DTM identity ID for this DTM.
-   * @param doIndexing true if the caller considers it worth it to use indexing schemes.
-   * @param blocksize The block size of the DTM.
-   * @param usePrevsib true if we want to build the previous sibling node array.
-   * @param newNameTable true if we want to use a new ExpandedNameTable for this DTM.
-   */
-  public DTMDefaultBaseTraversers(
-      DTMManager mgr,
-      Source source,
-      int dtmIdentity,
-      boolean doIndexing,
-      int blocksize,
-      boolean usePrevsib,
-      boolean newNameTable) {
-    super(mgr, source, dtmIdentity, doIndexing, blocksize, usePrevsib, newNameTable);
   }
 
   /**
@@ -288,7 +264,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /**
      * Get the next indexed node that matches the expanded type ID. Before calling this function,
-     * one should first call {@link #isIndexed(int) isIndexed} to make sure that the index can
+     * one should first call  to make sure that the index can
      * contain nodes that match the given expanded type ID.
      *
      * @param axisRoot The root identity of the axis.
@@ -956,8 +932,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
      *
      * <p>This method needs to be overloaded only by those axis that process the self node. <\p>
      *
-     * @param context The context node of this traversal. This is the point of origin for the
-     *     traversal -- its "root node" or starting point.
+     * @param current current node
      * @param expandedTypeID The expanded type ID that must match.
      * @return the first node in the traversal.
      */

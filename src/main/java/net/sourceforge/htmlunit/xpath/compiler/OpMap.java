@@ -81,7 +81,7 @@ public class OpMap {
     return m_tokenQueue.elementAt(pos);
   }
 
-  /** The current size of the token queue. */
+  /* The current size of the token queue. */
   // public int m_tokenQueueSize = 0;
 
   /**

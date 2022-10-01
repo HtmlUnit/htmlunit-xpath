@@ -230,19 +230,9 @@ public class DTMNamedNodeMap implements NamedNodeMap {
   public static class DTMException extends org.w3c.dom.DOMException {
 
     /**
-     * Constructs a DOM/DTM exception.
-     *
-     * @param code
-     * @param message
-     */
-    public DTMException(short code, String message) {
-      super(code, message);
-    }
-
-    /**
      * Constructor DTMException
      *
-     * @param code
+     * @param code the code
      */
     public DTMException(short code) {
       super(code, "");

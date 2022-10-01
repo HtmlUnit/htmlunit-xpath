@@ -40,16 +40,7 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
    */
   SelfIteratorNoPredicate(Compiler compiler, int opPos, int analysis)
       throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis, false);
-  }
-
-  /**
-   * Create a SelfIteratorNoPredicate object.
-   *
-   * @throws javax.xml.transform.TransformerException
-   */
-  public SelfIteratorNoPredicate() throws javax.xml.transform.TransformerException {
-    super(null);
+    super(compiler, opPos, analysis);
   }
 
   /**
@@ -88,7 +79,7 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
    * @return the first node out of the nodeset, or DTM.NULL.
    */
   @Override
-  public int asNode(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public int asNode(XPathContext xctxt) {
     return xctxt.getCurrentNode();
   }
 

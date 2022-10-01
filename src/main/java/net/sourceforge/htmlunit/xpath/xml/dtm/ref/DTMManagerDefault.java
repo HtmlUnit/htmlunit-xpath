@@ -98,7 +98,7 @@ public class DTMManagerDefault extends DTMManager {
    * @param offset Integer addressing offset. The internal DTM Node ID is obtained by adding this
    *     offset to the node-number field of the public DTM Handle. For the first DTM ID accessing
    *     each DTM, this is 0; for overflow addressing it will be a multiple of
-   *     1<<IDENT_DTM_NODE_BITS.
+   *     1&lt;&lt;IDENT_DTM_NODE_BITS.
    */
   public synchronized void addDTM(DTM dtm, int id, int offset) {
     if (id >= IDENT_MAX_DTMS) {
@@ -151,7 +151,7 @@ public class DTMManagerDefault extends DTMManager {
   }
 
   /** The default table for exandedNameID lookups. */
-  private ExpandedNameTable m_expandedNameTable = new ExpandedNameTable();
+  private final ExpandedNameTable m_expandedNameTable = new ExpandedNameTable();
 
   /** Constructor DTMManagerDefault */
   public DTMManagerDefault() {}
@@ -335,7 +335,7 @@ public class DTMManagerDefault extends DTMManager {
   public synchronized DTMIterator createDTMIterator(
       int whatToShow, DTMFilter filter, boolean entityReferenceExpansion) {
 
-    /** @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
+    /* @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
     return null;
   }
 
@@ -349,7 +349,7 @@ public class DTMManagerDefault extends DTMManager {
   @Override
   public synchronized DTMIterator createDTMIterator(String xpathString, PrefixResolver presolver) {
 
-    /** @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
+    /* @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
     return null;
   }
 
@@ -363,7 +363,7 @@ public class DTMManagerDefault extends DTMManager {
   @Override
   public synchronized DTMIterator createDTMIterator(int node) {
 
-    /** @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
+    /* @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
     return null;
   }
 
@@ -377,7 +377,7 @@ public class DTMManagerDefault extends DTMManager {
   @Override
   public synchronized DTMIterator createDTMIterator(Object xpathCompiler, int pos) {
 
-    /** @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
+    /* @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
     return null;
   }
 
@@ -388,7 +388,7 @@ public class DTMManagerDefault extends DTMManager {
    *
    * <p>NEEDSDOC ($objectName$) @return
    */
-  public ExpandedNameTable getExpandedNameTable(DTM dtm) {
+  public ExpandedNameTable getExpandedNameTable() {
     return m_expandedNameTable;
   }
 }

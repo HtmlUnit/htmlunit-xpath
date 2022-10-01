@@ -155,7 +155,6 @@ public class XPathAPI {
    * @see net.sourceforge.htmlunit.xpath.objects.XBoolean
    * @see net.sourceforge.htmlunit.xpath.objects.XNumber
    * @see net.sourceforge.htmlunit.xpath.objects.XString
-   * @see net.sourceforge.htmlunit.xpath.objects.XRTreeFrag
    * @throws TransformerException
    */
   public static XObject eval(Node contextNode, String str) throws TransformerException {
@@ -178,7 +177,6 @@ public class XPathAPI {
    * @see net.sourceforge.htmlunit.xpath.objects.XBoolean
    * @see net.sourceforge.htmlunit.xpath.objects.XNumber
    * @see net.sourceforge.htmlunit.xpath.objects.XString
-   * @see net.sourceforge.htmlunit.xpath.objects.XRTreeFrag
    * @throws TransformerException
    */
   public static XObject eval(Node contextNode, String str, Node namespaceNode)
@@ -230,7 +228,6 @@ public class XPathAPI {
    * @see net.sourceforge.htmlunit.xpath.objects.XBoolean
    * @see net.sourceforge.htmlunit.xpath.objects.XNumber
    * @see net.sourceforge.htmlunit.xpath.objects.XString
-   * @see net.sourceforge.htmlunit.xpath.objects.XRTreeFrag
    * @throws TransformerException
    */
   public static XObject eval(Node contextNode, String str, PrefixResolver prefixResolver)

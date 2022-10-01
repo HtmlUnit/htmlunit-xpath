@@ -23,7 +23,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 /**
  * This class implements an optimized iterator for attribute axes patterns.
  *
- * @see net.sourceforge.htmlunit.xpath.axes#ChildTestIterator
+ * @see ChildTestIterator
  */
 public class AttributeIterator extends ChildTestIterator {
 
@@ -40,7 +40,7 @@ public class AttributeIterator extends ChildTestIterator {
     super(compiler, opPos, analysis);
   }
 
-  /** Get the next node via getFirstAttribute && getNextAttribute. */
+  /** Get the next node via getFirstAttribute &amp;&amp; getNextAttribute. */
   @Override
   protected int getNextNode() {
     m_lastFetched =

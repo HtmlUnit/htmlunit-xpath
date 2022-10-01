@@ -53,8 +53,7 @@ public final class IteratorPool {
       return (DTMIterator) m_orig.clone();
     } else {
       // Remove object from end of free pool.
-      DTMIterator result = m_freeStack.remove(m_freeStack.size() - 1);
-      return result;
+      return m_freeStack.remove(m_freeStack.size() - 1);
     }
   }
 
@@ -75,8 +74,7 @@ public final class IteratorPool {
       }
     } else {
       // Remove object from end of free pool.
-      DTMIterator result = m_freeStack.remove(m_freeStack.size() - 1);
-      return result;
+      return m_freeStack.remove(m_freeStack.size() - 1);
     }
   }
 

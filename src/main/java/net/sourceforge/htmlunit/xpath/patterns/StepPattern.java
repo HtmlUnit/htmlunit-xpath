@@ -110,17 +110,6 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   }
 
   /**
-   * Get the local name or psuedo name of the node that this pattern will test, for hash table
-   * lookup optimization.
-   *
-   * @return local name or psuedo name of the node.
-   * @see net.sourceforge.htmlunit.xpath.compiler.PseudoNames
-   */
-  public String getTargetString() {
-    return m_targetString;
-  }
-
-  /**
    * Reference to nodetest and predicate for parent or ancestor.
    *
    * @serial
@@ -508,14 +497,13 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
       throws javax.xml.transform.TransformerException {
 
     XObject score = NodeTest.SCORE_NONE;
-    int context = currentNode;
     DTMAxisTraverser traverser;
 
     traverser = dtm.getAxisTraverser(m_axis);
 
-    for (int relative = traverser.first(context);
-        DTM.NULL != relative;
-        relative = traverser.next(context, relative)) {
+    for (int relative = traverser.first(currentNode);
+         DTM.NULL != relative;
+         relative = traverser.next(currentNode, relative)) {
       try {
         xctxt.pushCurrentNode(relative);
 
@@ -657,36 +645,6 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     }
 
     return buf.toString();
-  }
-
-  /**
-   * Get the match score of the given node.
-   *
-   * @param xctxt The XPath runtime context.
-   * @param context The node to be tested.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
-  public double getMatchScore(XPathContext xctxt, int context)
-      throws javax.xml.transform.TransformerException {
-
-    xctxt.pushCurrentNode(context);
-    xctxt.pushCurrentExpressionNode(context);
-
-    try {
-      XObject score = execute(xctxt);
-
-      return score.num();
-    } finally {
-      xctxt.popCurrentNode();
-      xctxt.popCurrentExpressionNode();
-    }
-
-    // return XPath.MATCH_SCORE_NONE;
   }
 
   /**

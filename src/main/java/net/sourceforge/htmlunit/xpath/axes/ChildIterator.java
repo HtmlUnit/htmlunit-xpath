@@ -41,7 +41,7 @@ public class ChildIterator extends LocPathIterator {
    */
   ChildIterator(Compiler compiler, int opPos, int analysis)
       throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis, false);
+    super(compiler, opPos, analysis);
 
     // This iterator matches all kinds of nodes
     initNodeTest(DTMFilter.SHOW_ALL);
@@ -57,7 +57,7 @@ public class ChildIterator extends LocPathIterator {
    * @return the first node out of the nodeset, or DTM.NULL.
    */
   @Override
-  public int asNode(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public int asNode(XPathContext xctxt) {
     int current = xctxt.getCurrentNode();
 
     DTM dtm = xctxt.getDTM(current);

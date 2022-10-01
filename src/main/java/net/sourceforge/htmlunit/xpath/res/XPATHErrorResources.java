@@ -77,7 +77,6 @@ public class XPATHErrorResources extends ListResourceBundle {
   /*
    * static variables
    */
-  public static final String ERROR0000 = "ERROR0000";
   public static final String ER_CURRENT_NOT_ALLOWED_IN_MATCH = "ER_CURRENT_NOT_ALLOWED_IN_MATCH";
   public static final String ER_CURRENT_TAKES_NO_ARGS = "ER_CURRENT_TAKES_NO_ARGS";
   public static final String ER_DOCUMENT_REPLACED = "ER_DOCUMENT_REPLACED";
@@ -172,9 +171,6 @@ public class XPATHErrorResources extends ListResourceBundle {
   /** rtf() not supported by XRTreeFragSelectWrapper */
   public static final String ER_RTF_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER =
       "ER_RTF_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER";
-  /** asNodeIterator() not supported by XRTreeFragSelectWrapper */
-  public static final String ER_ASNODEITERATOR_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER =
-      "ER_ASNODEITERATOR_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER";
   /** fsb() not supported for XStringForChars */
   public static final String ER_FSB_NOT_SUPPORTED_XSTRINGFORCHARS =
       "ER_FSB_NOT_SUPPORTED_XSTRINGFORCHARS";
@@ -426,25 +422,25 @@ public class XPATHErrorResources extends ListResourceBundle {
         "asNodeIterator() not supported by XRTreeFragSelectWrapper"
       },
 
-      /** detach() not supported by XRTreeFragSelectWrapper */
+            /* detach() not supported by XRTreeFragSelectWrapper */
       {
         ER_DETACH_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER,
         "detach() not supported by XRTreeFragSelectWrapper"
       },
 
-      /** num() not supported by XRTreeFragSelectWrapper */
+            /* num() not supported by XRTreeFragSelectWrapper */
       {
         ER_NUM_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER,
         "num() not supported by XRTreeFragSelectWrapper"
       },
 
-      /** xstr() not supported by XRTreeFragSelectWrapper */
+            /* xstr() not supported by XRTreeFragSelectWrapper */
       {
         ER_XSTR_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER,
         "xstr() not supported by XRTreeFragSelectWrapper"
       },
 
-      /** str() not supported by XRTreeFragSelectWrapper */
+            /* str() not supported by XRTreeFragSelectWrapper */
       {
         ER_STR_NOT_SUPPORTED_XRTREEFRAGSELECTWRAPPER,
         "str() not supported by XRTreeFragSelectWrapper"
@@ -591,60 +587,60 @@ public class XPATHErrorResources extends ListResourceBundle {
       // API
       // implementation
 
-      /** Field ER_EXTENSION_FUNCTION_CANNOT_BE_INVOKED */
+            /* Field ER_EXTENSION_FUNCTION_CANNOT_BE_INVOKED */
       {
         ER_EXTENSION_FUNCTION_CANNOT_BE_INVOKED,
         "Extension function: ''{0}'' can not be invoked when the XMLConstants.FEATURE_SECURE_PROCESSING feature is set to true."
       },
 
-      /** Field ER_RESOLVE_VARIABLE_RETURNS_NULL */
+            /* Field ER_RESOLVE_VARIABLE_RETURNS_NULL */
       {ER_RESOLVE_VARIABLE_RETURNS_NULL, "resolveVariable for variable {0} returning null"},
 
-      /** Field ER_UNSUPPORTED_RETURN_TYPE */
+            /* Field ER_UNSUPPORTED_RETURN_TYPE */
       {ER_UNSUPPORTED_RETURN_TYPE, "UnSupported Return Type : {0}"},
 
-      /** Field ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL */
+            /* Field ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL */
       {ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL, "Source and/or Return Type can not be null"},
 
-      /** Field ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL */
+            /* Field ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL */
       {ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL, "Source and/or Return Type can not be null"},
 
-      /** Field ER_ARG_CANNOT_BE_NULL */
+            /* Field ER_ARG_CANNOT_BE_NULL */
       {ER_ARG_CANNOT_BE_NULL, "{0} argument can not be null"},
 
-      /** Field ER_OBJECT_MODEL_NULL */
+            /* Field ER_OBJECT_MODEL_NULL */
       {
         ER_OBJECT_MODEL_NULL,
         "{0}#isObjectModelSupported( String objectModel ) cannot be called with objectModel == null"
       },
 
-      /** Field ER_OBJECT_MODEL_EMPTY */
+            /* Field ER_OBJECT_MODEL_EMPTY */
       {
         ER_OBJECT_MODEL_EMPTY,
         "{0}#isObjectModelSupported( String objectModel ) cannot be called with objectModel == \"\""
       },
 
-      /** Field ER_OBJECT_MODEL_EMPTY */
+            /* Field ER_OBJECT_MODEL_EMPTY */
       {
         ER_FEATURE_NAME_NULL, "Trying to set a feature with a null name: {0}#setFeature( null, {1})"
       },
 
-      /** Field ER_FEATURE_UNKNOWN */
+            /* Field ER_FEATURE_UNKNOWN */
       {ER_FEATURE_UNKNOWN, "Trying to set the unknown feature \"{0}\":{1}#setFeature({0},{2})"},
 
-      /** Field ER_GETTING_NULL_FEATURE */
+            /* Field ER_GETTING_NULL_FEATURE */
       {ER_GETTING_NULL_FEATURE, "Trying to get a feature with a null name: {0}#getFeature(null)"},
 
-      /** Field ER_GETTING_NULL_FEATURE */
+            /* Field ER_GETTING_NULL_FEATURE */
       {ER_GETTING_UNKNOWN_FEATURE, "Trying to get the unknown feature \"{0}\":{1}#getFeature({0})"},
 
-      /** Field ER_NULL_XPATH_FUNCTION_RESOLVER */
+            /* Field ER_NULL_XPATH_FUNCTION_RESOLVER */
       {
         ER_NULL_XPATH_FUNCTION_RESOLVER,
         "Attempting to set a null XPathFunctionResolver:{0}#setXPathFunctionResolver(null)"
       },
 
-      /** Field ER_NULL_XPATH_VARIABLE_RESOLVER */
+            /* Field ER_NULL_XPATH_VARIABLE_RESOLVER */
       {
         ER_NULL_XPATH_VARIABLE_RESOLVER,
         "Attempting to set a null XPathVariableResolver:{0}#setXPathVariableResolver(null)"
@@ -715,26 +711,4 @@ public class XPATHErrorResources extends ListResourceBundle {
 
   /** Field FORMAT_FAILED */
   public static final String FORMAT_FAILED = "FORMAT_FAILED";
-
-  /** Field ERROR_RESOURCES */
-  public static final String ERROR_RESOURCES =
-      "net.sourceforge.htmlunit.xpath.res.XPATHErrorResources";
-
-  /** Field ERROR_STRING */
-  public static final String ERROR_STRING = "#error";
-
-  /** Field ERROR_HEADER */
-  public static final String ERROR_HEADER = "Error: ";
-
-  /** Field WARNING_HEADER */
-  public static final String WARNING_HEADER = "Warning: ";
-
-  /** Field XSL_HEADER */
-  public static final String XSL_HEADER = "XSL ";
-
-  /** Field XML_HEADER */
-  public static final String XML_HEADER = "XML ";
-
-  /** Field QUERY_HEADER */
-  public static final String QUERY_HEADER = "PATTERN ";
 }

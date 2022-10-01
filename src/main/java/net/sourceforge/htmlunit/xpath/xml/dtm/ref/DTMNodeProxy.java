@@ -143,21 +143,6 @@ public class DTMNodeProxy
     }
   }
 
-  /**
-   * FUTURE DOM: Test node identity, in lieu of Node==Node
-   *
-   * @param other
-   * @return true if the given node has the same handle as this node.
-   */
-  public final boolean sameNodeAs(Node other) {
-
-    if (!(other instanceof DTMNodeProxy)) return false;
-
-    DTMNodeProxy that = (DTMNodeProxy) other;
-
-    return this.dtm == that.dtm && this.node == that.node;
-  }
-
   /** @see org.w3c.dom.Node */
   @Override
   public final String getNodeName() {
@@ -168,7 +153,7 @@ public class DTMNodeProxy
    * A PI's "target" states what processor channel the PI's data should be directed to. It is
    * defined differently in HTML and XML.
    *
-   * <p>In XML, a PI's "target" is the first (whitespace-delimited) token following the "<?" token
+   * <p>In XML, a PI's "target" is the first (whitespace-delimited) token following the "&lt;?" token
    * that begins the PI.
    *
    * <p>In HTML, target is always null.
@@ -196,8 +181,8 @@ public class DTMNodeProxy
   }
 
   /**
-   * @param prefix
-   * @throws DOMException
+   * @param prefix the prefix
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Node as of DOM Level 2 -- DTMNodeProxy is read-only
    */
   @Override
@@ -209,25 +194,6 @@ public class DTMNodeProxy
   @Override
   public final String getNamespaceURI() {
     return dtm.getNamespaceURI(node);
-  }
-
-  /**
-   * Ask whether we support a given DOM feature. In fact, we do not _fully_ support any DOM feature
-   * -- we're a read-only subset -- so arguably we should always return false. Or we could say that
-   * we support DOM Core Level 2 but all nodes are read-only. Unclear which answer is least
-   * misleading.
-   *
-   * <p>NON-DOM method. This was present in early drafts of DOM Level 2, but was renamed
-   * isSupported. It's present here only because it's cheap, harmless, and might help some poor fool
-   * who is still trying to use an early Working Draft of the DOM.
-   *
-   * @param feature
-   * @param version
-   * @return false
-   */
-  public final boolean supports(String feature, String version) {
-    return implementation.hasFeature(feature, version);
-    // throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
   /**
@@ -246,7 +212,7 @@ public class DTMNodeProxy
   }
 
   /**
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Node
    */
   @Override
@@ -255,16 +221,8 @@ public class DTMNodeProxy
   }
 
   /**
-   * @return The string value of the node
-   * @throws DOMException
-   */
-  public final String getStringValue() throws DOMException {
-    return dtm.getStringValue(node).toString();
-  }
-
-  /**
    * @param nodeValue
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Node -- DTMNodeProxy is read-only
    */
   @Override
@@ -283,14 +241,6 @@ public class DTMNodeProxy
   public final Node getParentNode() {
 
     if (getNodeType() == Node.ATTRIBUTE_NODE) return null;
-
-    int newnode = dtm.getParent(node);
-
-    return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
-  }
-
-  /** @see org.w3c.dom.Node */
-  public final Node getOwnerNode() {
 
     int newnode = dtm.getParent(node);
 
@@ -388,7 +338,7 @@ public class DTMNodeProxy
   /**
    * @param newChild
    * @param refChild
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Node -- DTMNodeProxy is read-only
    */
   @Override
@@ -399,7 +349,7 @@ public class DTMNodeProxy
   /**
    * @param newChild
    * @param oldChild
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Node -- DTMNodeProxy is read-only
    */
   @Override
@@ -409,7 +359,7 @@ public class DTMNodeProxy
 
   /**
    * @param oldChild
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Node -- DTMNodeProxy is read-only
    */
   @Override
@@ -494,7 +444,7 @@ public class DTMNodeProxy
 
   /**
    * @param tagName
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Document
    */
   @Override
@@ -528,7 +478,7 @@ public class DTMNodeProxy
 
   /**
    * @param data
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Document
    */
   @Override
@@ -539,7 +489,7 @@ public class DTMNodeProxy
   /**
    * @param target
    * @param data
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Document
    */
   @Override
@@ -550,7 +500,7 @@ public class DTMNodeProxy
 
   /**
    * @param name
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Document
    */
   @Override
@@ -560,7 +510,7 @@ public class DTMNodeProxy
 
   /**
    * @param name
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Document
    */
   @Override
@@ -602,7 +552,7 @@ public class DTMNodeProxy
    * @param isTagNameWildCard
    *     <p>Private method to be used for recursive iterations to obtain elements by tag name.
    */
-  private final void traverseChildren(
+  private void traverseChildren(
       List<Node> listVector, Node tempNode, String tagname, boolean isTagNameWildCard) {
     if (tempNode == null) {
     } else {
@@ -645,7 +595,7 @@ public class DTMNodeProxy
   /**
    * @param namespaceURI
    * @param qualifiedName
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Document as of DOM Level 2
    */
   @Override
@@ -705,7 +655,7 @@ public class DTMNodeProxy
    *     <p>Private method to be used for recursive iterations to obtain elements by tag name and
    *     namespaceURI.
    */
-  private final void traverseChildren(
+  private void traverseChildren(
       List<Node> listVector,
       Node tempNode,
       String namespaceURI,
@@ -807,7 +757,7 @@ public class DTMNodeProxy
   /**
    * @param offset
    * @param arg
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.CharacterData
    */
   @Override
@@ -818,7 +768,7 @@ public class DTMNodeProxy
   /**
    * @param offset
    * @param count
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.CharacterData
    */
   @Override
@@ -830,7 +780,7 @@ public class DTMNodeProxy
    * @param offset
    * @param count
    * @param arg
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.CharacterData
    */
   @Override
@@ -859,7 +809,7 @@ public class DTMNodeProxy
   /**
    * @param name
    * @param value
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Element
    */
   @Override
@@ -869,7 +819,7 @@ public class DTMNodeProxy
 
   /**
    * @param name
-   * @throws DOMException
+   * @throws DOMException  in case of error
    * @see org.w3c.dom.Element
    */
   @Override
@@ -890,7 +840,7 @@ public class DTMNodeProxy
 
   /**
    * @param newAttr
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Element
    */
   @Override
@@ -900,7 +850,7 @@ public class DTMNodeProxy
 
   /**
    * @param oldAttr
-   * @throws DOMException
+   * @throws DOMException  in case of error
    * @see org.w3c.dom.Element
    */
   @Override
@@ -937,7 +887,7 @@ public class DTMNodeProxy
    * @param namespaceURI
    * @param qualifiedName
    * @param value
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Element
    */
   @Override
@@ -949,7 +899,7 @@ public class DTMNodeProxy
   /**
    * @param namespaceURI
    * @param localName
-   * @throws DOMException
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Element
    */
   @Override
@@ -1030,7 +980,7 @@ public class DTMNodeProxy
    *
    * <p>NEEDSDOC @param source
    *
-   * @throws DOMException
+   * @throws DOMException in case of error
    */
   @Override
   public Node adoptNode(Node source) throws DOMException {
@@ -1214,8 +1164,6 @@ public class DTMNodeProxy
    * data or event listeners registered on the nodes.
    *
    * @param arg The node to compare equality with.
-   * @param deep If <code>true</code>, recursively compare the subtrees; if <code>false</code>,
-   *     compare only the nodes themselves (and its attributes, if it is an <code>Element</code>).
    * @return If the nodes, and possibly subtrees are equal, <code>true</code> otherwise <code>
    *     false</code>.
    * @since DOM Level 3
@@ -1276,7 +1224,7 @@ public class DTMNodeProxy
    * DOM Level 3: Look up the namespace URI associated to the given prefix, starting from this node.
    * Use lookupNamespaceURI(null) to lookup the default namespace
    *
-   * @param namespaceURI
+   * @param specifiedPrefix
    * @return th URI for the namespace
    * @since DOM Level 3
    */
@@ -1422,8 +1370,8 @@ public class DTMNodeProxy
    * string is taken as pure textual content. <br>
    * The string returned is made of the text content of this node depending on its type, as defined
    * below:
-   *
-   * <table border='1'>
+   * <p>
+   * <table border='1' summary="">
    * <tr>
    * <th>Node type</th>
    * <th>Content</th>
@@ -1467,8 +1415,8 @@ public class DTMNodeProxy
    * string is taken as pure textual content. <br>
    * The string returned is made of the text content of this node depending on its type, as defined
    * below:
-   *
-   * <table border='1'>
+   * <p>
+   * <table border='1' summary="">
    * <tr>
    * <th>Node type</th>
    * <th>Content</th>
@@ -1595,16 +1543,6 @@ public class DTMNodeProxy
     return actualEncoding;
   }
 
-  /**
-   * DOM Level 3 An attribute specifying the actual encoding of this document. This is <code>null
-   * </code> otherwise. <br>
-   * This attribute represents the property [character encoding scheme] defined in .
-   *
-   * @since DOM Level 3
-   */
-  public void setActualEncoding(String value) {
-    actualEncoding = value;
-  }
 
   /** DOM Level 3 */
   @Override
@@ -1660,16 +1598,11 @@ public class DTMNodeProxy
     return false; // PENDING
   }
 
-  private String xmlEncoding;
-
   @Override
   public String getXmlEncoding() {
-    return xmlEncoding;
+    return null;
   }
 
-  public void setXmlEncoding(String xmlEncoding) {
-    this.xmlEncoding = xmlEncoding;
-  }
 
   private boolean xmlStandalone;
 

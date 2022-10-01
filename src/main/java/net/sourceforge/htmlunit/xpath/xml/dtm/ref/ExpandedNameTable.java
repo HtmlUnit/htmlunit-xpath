@@ -35,7 +35,7 @@ public class ExpandedNameTable {
   private ExtendedType[] m_extendedTypes;
 
   /** The initial size of the m_extendedTypes array */
-  private static int m_initialSize = 128;
+  private static final int m_initialSize = 128;
 
   /** Next available extended type */
   // %REVIEW% Since this is (should be) always equal
@@ -45,32 +45,22 @@ public class ExpandedNameTable {
   // These are all the types prerotated, for caller convenience.
   public static final int ELEMENT = DTM.ELEMENT_NODE;
   public static final int ATTRIBUTE = DTM.ATTRIBUTE_NODE;
-  public static final int TEXT = DTM.TEXT_NODE;
-  public static final int CDATA_SECTION = DTM.CDATA_SECTION_NODE;
-  public static final int ENTITY_REFERENCE = DTM.ENTITY_REFERENCE_NODE;
-  public static final int ENTITY = DTM.ENTITY_NODE;
-  public static final int PROCESSING_INSTRUCTION = DTM.PROCESSING_INSTRUCTION_NODE;
-  public static final int COMMENT = DTM.COMMENT_NODE;
-  public static final int DOCUMENT = DTM.DOCUMENT_NODE;
-  public static final int DOCUMENT_TYPE = DTM.DOCUMENT_TYPE_NODE;
-  public static final int DOCUMENT_FRAGMENT = DTM.DOCUMENT_FRAGMENT_NODE;
-  public static final int NOTATION = DTM.NOTATION_NODE;
   public static final int NAMESPACE = DTM.NAMESPACE_NODE;
 
   /** Workspace for lookup. NOT THREAD SAFE! */
   ExtendedType hashET = new ExtendedType(-1, "", "");
 
   /** The array to store the default extended types. */
-  private static ExtendedType[] m_defaultExtendedTypes;
+  private static final ExtendedType[] m_defaultExtendedTypes;
 
   /** The default load factor of the Hashtable. This is used to calcualte the threshold. */
-  private static float m_loadFactor = 0.75f;
+  private static final float m_loadFactor = 0.75f;
 
   /**
    * The initial capacity of the hash table. Use a bigger number to avoid the cost of expanding the
    * table.
    */
-  private static int m_initialCapacity = 203;
+  private static final int m_initialCapacity = 203;
 
   /** The capacity of the hash table, i.e. the size of the internal HashEntry array. */
   private int m_capacity;
@@ -86,7 +76,7 @@ public class ExpandedNameTable {
    */
   private HashEntry[] m_table;
 
-  /** Init default values */
+  /* Init default values */
   static {
     m_defaultExtendedTypes = new ExtendedType[DTM.NTYPES];
 
@@ -298,15 +288,6 @@ public class ExpandedNameTable {
    */
   public int getSize() {
     return m_nextType;
-  }
-
-  /**
-   * Return the array of extended types
-   *
-   * @return The array of extended types
-   */
-  public ExtendedType[] getExtendedTypes() {
-    return m_extendedTypes;
   }
 
   /**

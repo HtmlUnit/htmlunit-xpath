@@ -109,7 +109,6 @@ public class XPath implements ExpressionOwner {
    * expression.
    *
    * @param exprString The XPath expression.
-   * @param locator The location of the expression, may be null.
    * @param prefixResolver A prefix resolver to use to resolve prefixes to namespace URIs.
    * @param type one of {@link #SELECT} or {@link #MATCH}.
    * @param errorListener The error listener, or null if default should be used.

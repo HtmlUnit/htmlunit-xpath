@@ -207,17 +207,6 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
     throw new DTMException(NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * Non-DOM method, part of the temporary kluge %REVIEW% This would be a pruning problem, but since
-   * it will always be added to the root element and we prune on elements, we shouldn't have to
-   * worry.
-   */
-  public int getHandleOfNode() {
-    return handle;
-  }
-
-  // RAMESH: PENDING=> Add proper implementation for the below DOM L3 additions
-
   /** @see org.w3c.dom.TypeInfo#getTypeName() */
   @Override
   public String getTypeName() {
@@ -230,7 +219,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
     return null;
   }
 
-  /** @see or.gw3c.dom.TypeInfo#isDerivedFrom(String,String,int) */
+  /** @see org.w3c.dom.TypeInfo#isDerivedFrom(String,String,int) */
   @Override
   public boolean isDerivedFrom(String ns, String localName, int derivationMethod) {
     return false;
@@ -328,8 +317,6 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
    * data or event listeners registered on the nodes.
    *
    * @param arg The node to compare equality with.
-   * @param deep If <code>true</code>, recursively compare the subtrees; if <code>false</code>,
-   *     compare only the nodes themselves (and its attributes, if it is an <code>Element</code>).
    * @return If the nodes, and possibly subtrees are equal, <code>true</code> otherwise <code>
    *     false</code>.
    * @since DOM Level 3
@@ -390,7 +377,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
    * DOM Level 3 - Experimental: Look up the namespace URI associated to the given prefix, starting
    * from this node. Use lookupNamespaceURI(null) to lookup the default namespace
    *
-   * @param namespaceURI
+   * @param specifiedPrefix the prefix
    * @return th URI for the namespace
    * @since DOM Level 3
    */
@@ -474,7 +461,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
    * DOM Level 3 - Experimental: Look up the prefix associated to the given namespace URI, starting
    * from this node.
    *
-   * @param namespaceURI
+   * @param namespaceURI the namespace uri
    * @return the prefix for the namespace
    */
   @Override
@@ -537,7 +524,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
    * string is taken as pure textual content. <br>
    * The string returned is made of the text content of this node depending on its type, as defined
    * below:
-   *
+   * <p>
    * <table border='1'>
    * <tr>
    * <th>Node type</th>
@@ -582,7 +569,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
    * string is taken as pure textual content. <br>
    * The string returned is made of the text content of this node depending on its type, as defined
    * below:
-   *
+   * <p>
    * <table border='1'>
    * <tr>
    * <th>Node type</th>

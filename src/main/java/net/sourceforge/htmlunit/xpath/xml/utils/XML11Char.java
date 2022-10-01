@@ -375,8 +375,9 @@ public class XML11Char {
   } // isXML11ValidName(String):boolean
 
   /**
-   * Simple check to determine if qname is legal. If it returns false then <param>str</param> is
-   * illegal; if it returns true then <param>str</param> is legal.
+   * Simple check to determine if qname is legal. If it returns false then str is
+   * illegal; if it returns true then str is legal.
+   * @param str the value to check
    */
   public static boolean isXML11ValidQName(String str) {
 

@@ -95,8 +95,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   @Override
   public int getAnalysisBits() {
     int axis = getAxis();
-    int bit = WalkerFactory.getAnalysisBitFromAxes(axis);
-    return bit;
+    return WalkerFactory.getAnalysisBitFromAxes(axis);
   }
 
   /**
@@ -147,13 +146,9 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @param xctxt The execution context.
    * @param contextNode The node that "." expresses.
-   * @throws TransformerException thrown if the active ProblemListener decides the error condition
-   *     is severe enough to halt processing.
-   * @throws javax.xml.transform.TransformerException
    */
   @Override
-  public DTMIterator asIterator(XPathContext xctxt, int contextNode)
-      throws javax.xml.transform.TransformerException {
+  public DTMIterator asIterator(XPathContext xctxt, int contextNode) {
     XNodeSet iter = new XNodeSet(m_clones.getInstance());
 
     iter.setRoot(contextNode, xctxt);
@@ -248,16 +243,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     m_length = -1;
 
     // reset();
-  }
-
-  /**
-   * Set the next position index of this iterator.
-   *
-   * @param next A value greater than or equal to zero that indicates the next node position to
-   *     fetch.
-   */
-  protected void setNextPosition(int next) {
-    assertion(false, "setNextPosition not supported in this iterator!");
   }
 
   /**
@@ -628,15 +613,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   }
 
   /**
-   * Tells if we've found the last node yet.
-   *
-   * @return true if the last nextNode returned null.
-   */
-  public final boolean getFoundLast() {
-    return m_foundLast;
-  }
-
-  /**
    * The XPath execution context we are operating on.
    *
    * @return XPath execution context this iterator is operating on, or null if setRoot has not been
@@ -653,24 +629,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public final int getContext() {
     return m_context;
-  }
-
-  /**
-   * The node context from where the expression is being executed from (i.e. for current() support).
-   *
-   * @return The top-level node context of the entire expression.
-   */
-  public final int getCurrentContextNode() {
-    return m_currentContextNode;
-  }
-
-  /**
-   * Set the current context node for this iterator.
-   *
-   * @param n Must be a non-null reference to the node context.
-   */
-  public final void setCurrentContextNode(int n) {
-    m_currentContextNode = n;
   }
 
   // /**

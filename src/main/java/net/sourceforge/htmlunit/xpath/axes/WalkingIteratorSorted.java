@@ -19,7 +19,6 @@ package net.sourceforge.htmlunit.xpath.axes;
 
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
-import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /** This class iterates over set of nodes that needs to be sorted. */
 public class WalkingIteratorSorted extends WalkingIterator {
@@ -29,15 +28,6 @@ public class WalkingIteratorSorted extends WalkingIterator {
 
   /** True if the nodes will be found in document order, and this can be determined statically. */
   protected boolean m_inNaturalOrderStatic = false;
-
-  /**
-   * Create a WalkingIteratorSorted object.
-   *
-   * @param nscontext The namespace context for this iterator, should be OK if null.
-   */
-  public WalkingIteratorSorted(PrefixResolver nscontext) {
-    super(nscontext);
-  }
 
   /**
    * Create a WalkingIterator iterator, including creation of step walkers from the opcode list, and
@@ -64,41 +54,4 @@ public class WalkingIteratorSorted extends WalkingIterator {
     return m_inNaturalOrderStatic;
   }
 
-  /**
-   * Tell if the nodeset can be walked in doc order, via static analysis.
-   *
-   * @return true if the nodeset can be walked in doc order, without sorting.
-   */
-  boolean canBeWalkedInNaturalDocOrderStatic() {
-
-    if (null != m_firstWalker) {
-      AxesWalker walker = m_firstWalker;
-
-      while (null != walker) {
-        int axis = walker.getAxis();
-
-        if (walker.isDocOrdered()) {
-          boolean isSimpleDownAxis =
-              (axis == Axis.CHILD) || (axis == Axis.SELF) || (axis == Axis.ROOT);
-          // Catching the filtered list here is only OK because
-          // FilterExprWalker#isDocOrdered() did the right thing.
-          if (isSimpleDownAxis || (axis == -1)) walker = walker.getNextWalker();
-          else {
-            boolean isLastWalker = null == walker.getNextWalker();
-            if (isLastWalker) {
-              if (walker.isDocOrdered()
-                      && (axis == Axis.DESCENDANT
-                          || axis == Axis.DESCENDANTORSELF
-                          || axis == Axis.DESCENDANTSFROMROOT
-                          || axis == Axis.DESCENDANTSORSELFFROMROOT)
-                  || (axis == Axis.ATTRIBUTE)) return true;
-            }
-            return false;
-          }
-        } else return false;
-      }
-      return true;
-    }
-    return false;
-  }
 }

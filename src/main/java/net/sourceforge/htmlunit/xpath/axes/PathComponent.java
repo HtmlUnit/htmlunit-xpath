@@ -27,5 +27,5 @@ public interface PathComponent {
    *
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
-  public int getAnalysisBits();
+  int getAnalysisBits();
 }

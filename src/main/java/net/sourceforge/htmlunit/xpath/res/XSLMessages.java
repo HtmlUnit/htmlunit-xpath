@@ -36,7 +36,7 @@ public class XSLMessages extends XPATHMessages {
    * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted message string.
    */
-  public static final String createMessage(String msgKey, Object args[]) // throws Exception
+  public static String createMessage(String msgKey, Object args[]) // throws Exception
       {
     if (XSLTBundle == null) XSLTBundle = new XSLTErrorResources();
 
@@ -54,13 +54,12 @@ public class XSLMessages extends XPATHMessages {
    * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted warning string.
    */
-  public static final String createWarning(String msgKey, Object args[]) // throws Exception
+  public static String createWarning(String msgKey, Object args[]) // throws Exception
       {
-    if (XSLTBundle == null) XSLTBundle = new XSLTErrorResources();
-
-    if (XSLTBundle != null) {
-      return createMsg(XSLTBundle, msgKey, args);
+    if (XSLTBundle == null) {
+      XSLTBundle = new XSLTErrorResources();
     }
-    return "Could not load any resource bundles.";
+
+    return createMsg(XSLTBundle, msgKey, args);
   }
 }

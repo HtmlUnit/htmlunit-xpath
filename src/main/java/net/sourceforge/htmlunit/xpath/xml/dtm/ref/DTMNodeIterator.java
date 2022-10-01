@@ -46,7 +46,7 @@ import org.w3c.dom.traversal.NodeFilter;
  * <p>State: In progress!!
  */
 public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
-  private DTMIterator dtm_iter;
+  private final DTMIterator dtm_iter;
   private boolean valid = true;
 
   // ================================================================

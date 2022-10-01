@@ -62,7 +62,7 @@ public class MatchPatternIterator extends LocPathIterator {
   MatchPatternIterator(Compiler compiler, int opPos, int analysis)
       throws javax.xml.transform.TransformerException {
 
-    super(compiler, opPos, analysis, false);
+    super(compiler, opPos, analysis);
 
     int firstStepPos = OpMap.getFirstChildPos(opPos);
 

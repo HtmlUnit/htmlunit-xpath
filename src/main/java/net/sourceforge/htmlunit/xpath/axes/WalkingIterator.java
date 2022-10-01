@@ -40,7 +40,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
    */
   WalkingIterator(Compiler compiler, int opPos, int analysis, boolean shouldLoadWalkers)
       throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis, shouldLoadWalkers);
+    super(compiler, opPos, analysis);
 
     int firstStepPos = OpMap.getFirstChildPos(opPos);
 
@@ -151,17 +151,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
     if (-1 == m_stackFrame) {
       return returnNextNode(m_firstWalker.nextNode());
     }
-    int n = returnNextNode(m_firstWalker.nextNode());
-    return n;
-  }
-
-  /**
-   * Get the head of the walker list.
-   *
-   * @return The head of the walker list, or null if this iterator does not implement walkers.
-   */
-  public final AxesWalker getFirstWalker() {
-    return m_firstWalker;
+    return returnNextNode(m_firstWalker.nextNode());
   }
 
   /**

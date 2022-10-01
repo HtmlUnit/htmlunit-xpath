@@ -44,35 +44,6 @@ public class WalkerFactory {
    * This method is for building an array of possible levels where the target element(s) could be
    * found for a match.
    *
-   * @param lpi The owning location path iterator.
-   * @param compiler non-null reference to compiler object that has processed the XPath operations
-   *     into an opcode map.
-   * @param stepOpCodePos The opcode position for the step.
-   * @return non-null AxesWalker derivative.
-   * @throws javax.xml.transform.TransformerException
-   */
-  static AxesWalker loadOneWalker(WalkingIterator lpi, Compiler compiler, int stepOpCodePos)
-      throws javax.xml.transform.TransformerException {
-
-    AxesWalker firstWalker = null;
-    int stepType = compiler.getOp(stepOpCodePos);
-
-    if (stepType != OpCodes.ENDOP) {
-
-      // m_axesWalkers = new AxesWalker[1];
-      // As we unwind from the recursion, create the iterators.
-      firstWalker = createDefaultWalker(compiler, stepType, lpi, 0);
-
-      firstWalker.init(compiler, stepOpCodePos, stepType);
-    }
-
-    return firstWalker;
-  }
-
-  /**
-   * This method is for building an array of possible levels where the target element(s) could be
-   * found for a match.
-   *
    * @param lpi The owning location path iterator object.
    * @param compiler non-null reference to compiler object that has processed the XPath operations
    *     into an opcode map.
@@ -247,10 +218,8 @@ public class WalkerFactory {
    *     into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
    * @return 32 bits as an integer that give information about the location path as a whole.
-   * @throws javax.xml.transform.TransformerException
    */
-  public static int getAxisFromStep(Compiler compiler, int stepOpCodePos)
-      throws javax.xml.transform.TransformerException {
+  public static int getAxisFromStep(Compiler compiler, int stepOpCodePos) {
 
     int stepType = compiler.getOp(stepOpCodePos);
 
@@ -838,7 +807,6 @@ public class WalkerFactory {
    * Create a StepPattern that is contained within a LocationPath.
    *
    * @param compiler The compiler that holds the syntax tree/op map to construct from.
-   * @param stepOpCodePos The current op code position within the opmap.
    * @param mpi The MatchPatternIterator to which the steps will be attached.
    * @param analysis 32 bits of analysis, from which the type of AxesWalker may be influenced.
    * @param tail The step that is the first step analyzed, but the last step in the relative match
@@ -1190,10 +1158,6 @@ public class WalkerFactory {
     return 0 != (analysis & BIT_NODETEST_ANY);
   }
 
-  public static boolean walksAncestors(int analysis) {
-    return isSet(analysis, BIT_ANCESTOR | BIT_ANCESTOR_OR_SELF);
-  }
-
   public static boolean walksAttributes(int analysis) {
     return 0 != (analysis & BIT_ATTRIBUTE);
   }
@@ -1221,20 +1185,8 @@ public class WalkerFactory {
         && !walksSideways(analysis);
   }
 
-  public static boolean walksSubtreeOnly(int analysis) {
-    return walksSubtreeOnlyMaybeAbsolute(analysis) && !isAbsolute(analysis);
-  }
-
   public static boolean walksFilteredList(int analysis) {
     return isSet(analysis, BIT_FILTER);
-  }
-
-  public static boolean walksSubtreeOnlyFromRootOrContext(int analysis) {
-    return walksSubtree(analysis)
-        && !walksExtraNodes(analysis)
-        && !walksUp(analysis)
-        && !walksSideways(analysis)
-        && !isSet(analysis, BIT_FILTER);
   }
 
   public static boolean walksInDocOrder(int analysis) {
@@ -1325,14 +1277,6 @@ public class WalkerFactory {
         && !isAbsolute(analysis);
   }
 
-  public static boolean walksDownExtraOnly(int analysis) {
-    return walksSubtree(analysis)
-        && walksExtraNodes(analysis)
-        && !walksUp(analysis)
-        && !walksSideways(analysis)
-        && !isAbsolute(analysis);
-  }
-
   public static boolean canSkipSubtrees(int analysis) {
     return isSet(analysis, BIT_CHILD) | walksSideways(analysis);
   }
@@ -1356,7 +1300,6 @@ public class WalkerFactory {
    *
    * @param analysis The general analysis of the pattern.
    * @return true if the walk can be done in natural order.
-   * @throws javax.xml.transform.TransformerException
    */
   public static boolean isNaturalDocOrder(int analysis) {
     if (canCrissCross(analysis) || isSet(analysis, BIT_NAMESPACE) || walksFilteredList(analysis))
@@ -1377,11 +1320,9 @@ public class WalkerFactory {
    * @param stepIndex The top-level step index withing the iterator.
    * @param analysis The general analysis of the pattern.
    * @return true if the walk can be done in natural order.
-   * @throws javax.xml.transform.TransformerException
    */
   private static boolean isNaturalDocOrder(
-      Compiler compiler, int stepOpCodePos, int stepIndex, int analysis)
-      throws javax.xml.transform.TransformerException {
+      Compiler compiler, int stepOpCodePos, int stepIndex, int analysis) {
     if (canCrissCross(analysis)) return false;
 
     // Namespaces can present some problems, so just punt if we're looking for
