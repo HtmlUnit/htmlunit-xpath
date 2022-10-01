@@ -24,13 +24,7 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 /** Execute the Not() function. */
 public class FuncNot extends FunctionOneArg {
 
-  /**
-   * Execute the function. The function must return a valid object.
-   *
-   * @param xctxt The current execution context.
-   * @return A valid XObject.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return m_arg0.execute(xctxt).bool() ? XBoolean.S_FALSE : XBoolean.S_TRUE;

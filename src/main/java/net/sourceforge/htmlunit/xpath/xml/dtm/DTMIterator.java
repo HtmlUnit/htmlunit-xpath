@@ -26,7 +26,7 @@ package net.sourceforge.htmlunit.xpath.xml.dtm;
  *
  * <p>The DTMIterator's traversal semantics, i.e. how it walks the tree, are specified when it is
  * created, possibly and probably by an XPath <a
- * href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a
+ * href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
  * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
  *
  * <p>A DTMIterator is meant to be created once as a master static object, and then cloned many

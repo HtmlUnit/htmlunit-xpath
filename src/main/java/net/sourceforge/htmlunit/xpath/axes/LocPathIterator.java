@@ -63,8 +63,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @throws javax.xml.transform.TransformerException
    */
-  protected LocPathIterator(int analysis)
-      throws javax.xml.transform.TransformerException {
+  protected LocPathIterator(int analysis) throws javax.xml.transform.TransformerException {
     this(analysis, true);
   }
 
@@ -81,50 +80,27 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     setLocPathIterator(this);
   }
 
-  /**
-   * Get the analysis bits for this walker, as defined in the WalkerFactory.
-   *
-   * @return One of WalkerFactory#BIT_DESCENDANT, etc.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAnalysisBits() {
     int axis = getAxis();
     return WalkerFactory.getAnalysisBitFromAxes(axis);
   }
 
-  /**
-   * Get an instance of a DTM that "owns" a node handle. Since a node iterator may be passed without
-   * a DTMManager, this allows the caller to easily get the DTM using just the iterator.
-   *
-   * @param nodeHandle the nodeHandle.
-   * @return a non-null DTM reference.
-   */
+  /** {@inheritDoc} */
   @Override
   public DTM getDTM(int nodeHandle) {
     // %OPT%
     return m_execContext.getDTM(nodeHandle);
   }
 
-  /**
-   * Get an instance of the DTMManager. Since a node iterator may be passed without a DTMManager,
-   * this allows the caller to easily get the DTMManager using just the iterator.
-   *
-   * @return a non-null DTMManager reference.
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMManager getDTMManager() {
     return m_execContext.getDTMManager();
   }
 
-  /**
-   * Execute this iterator, meaning create a clone that can store state, and initialize it for fast
-   * execution from the current runtime state. When this is called, no actual query from the current
-   * context node is performed.
-   *
-   * @param xctxt The XPath execution context.
-   * @return An XNodeSet reference that holds this iterator.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
@@ -135,12 +111,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return iter;
   }
 
-  /**
-   * Given an select expression and a context, evaluate the XPath and return the resulting iterator.
-   *
-   * @param xctxt The execution context.
-   * @param contextNode The node that "." expresses.
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator asIterator(XPathContext xctxt, int contextNode) {
     XNodeSet iter = new XNodeSet(m_clones.getInstance());
@@ -150,24 +121,13 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return iter;
   }
 
-  /**
-   * Tell if the expression is a nodeset expression.
-   *
-   * @return true if the expression can be represented as a nodeset.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isNodesetExpr() {
     return true;
   }
 
-  /**
-   * Return the first node out of the nodeset, if this expression is a nodeset expression. This is
-   * the default implementation for nodesets. Derived classes should try and override this and
-   * return a value without having to do a clone operation.
-   *
-   * @param xctxt The XPath runtime context.
-   * @return the first node out of the nodeset, or DTM.NULL.
-   */
+  /** {@inheritDoc} */
   @Override
   public int asNode(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     DTMIterator iter = m_clones.getInstance();
@@ -182,13 +142,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return next;
   }
 
-  /**
-   * Evaluate this operation directly to a boolean.
-   *
-   * @param xctxt The runtime execution context.
-   * @return The result of the operation as a boolean.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean bool(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return asNode(xctxt) != DTM.NULL;
@@ -212,11 +166,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return m_isTopLevel;
   }
 
-  /**
-   * Initialize the context values for this expression after it is cloned.
-   *
-   * @param context The XPath runtime context for this transformation.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int context, Object environment) {
 
@@ -239,35 +189,20 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     // reset();
   }
 
-  /**
-   * Get the current position, which is one less than the next nextNode() call will retrieve. i.e.
-   * if you call getCurrentPos() and the return is 0, the next fetch will take place at index 1.
-   *
-   * @return A value greater than or equal to zero that indicates the next node position to fetch.
-   */
+  /** {@inheritDoc} */
   @Override
   public final int getCurrentPos() {
     return m_pos;
   }
 
-  /**
-   * If setShouldCacheNodes(true) is called, then nodes will be cached. They are not cached by
-   * default.
-   *
-   * @param b True if this iterator should cache nodes.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setShouldCacheNodes(boolean b) {
 
     assertion(false, "setShouldCacheNodes not supported by this iterater!");
   }
 
-  /**
-   * Set the current position in the node set.
-   *
-   * @param i Must be a valid index greater than or equal to zero and less than
-   *     m_cachedNodes.size().
-   */
+  /** {@inheritDoc} */
   @Override
   public void setCurrentPos(int i) {
     assertion(false, "setCurrentPos not supported by this iterator!");
@@ -292,43 +227,20 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return 0;
   }
 
-  /**
-   * Returns the <code>index</code> th item in the collection. If <code>index</code> is greater than
-   * or equal to the number of nodes in the list, this returns <code>null</code> .
-   *
-   * @param index Index into the collection.
-   * @return The node at the <code>index</code> th position in the <code>NodeList</code> , or <code>
-   *     null</code> if that is not a valid index.
-   */
+  /** {@inheritDoc} */
   @Override
   public int item(int index) {
     assertion(false, "item(int index) not supported by this iterator!");
     return 0;
   }
 
-  /**
-   * Sets the node at the specified index of this vector to be the specified node. The previous
-   * component at that position is discarded.
-   *
-   * <p>The index must be a value greater than or equal to 0 and less than the current size of the
-   * vector. The iterator must be in cached mode.
-   *
-   * <p>Meant to be used for sorted iterators.
-   *
-   * @param node Node to set
-   * @param index Index of where to set the node
-   */
+  /** {@inheritDoc} */
   @Override
   public void setItem(int node, int index) {
     assertion(false, "setItem not supported by this iterator!");
   }
 
-  /**
-   * The number of nodes in the list. The range of valid child node indices is 0 to <code>length-1
-   * </code> inclusive.
-   *
-   * @return The number of nodes in the list, always greater or equal to zero.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getLength() {
     // Tell if this is being called from within a predicate.
@@ -379,24 +291,13 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return pos;
   }
 
-  /**
-   * Tells if this NodeSetDTM is "fresh", in other words, if the first nextNode() that is called
-   * will return the first node in the set.
-   *
-   * @return true of nextNode has not been called.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isFresh() {
     return m_pos == 0;
   }
 
-  /**
-   * Returns the previous node in the set and moves the position of the iterator backwards in the
-   * set.
-   *
-   * @return The previous <code>Node</code> in the set being iterated over, or<code>null</code> if
-   *     there are no more members in that set.
-   */
+  /** {@inheritDoc} */
   @Override
   public int previousNode() {
     throw new RuntimeException(
@@ -409,16 +310,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     // node!");
   }
 
-  /**
-   * This attribute determines which node types are presented via the iterator. The available set of
-   * constants is defined in the <code>NodeFilter</code> interface.
-   *
-   * <p>This is somewhat useless at this time, since it doesn't really return information that tells
-   * what this iterator will show. It is here only to fullfill the DOM NodeIterator interface.
-   *
-   * @return For now, always NodeFilter.SHOW_ALL & ~NodeFilter.SHOW_ENTITY_REFERENCE.
-   * @see org.w3c.dom.traversal.NodeIterator
-   */
+  /** {@inheritDoc} */
   @Override
   public int getWhatToShow() {
 
@@ -437,28 +329,13 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return null;
   }
 
-  /**
-   * The root node of the Iterator, as specified when it was created.
-   *
-   * @return The "root" of this iterator, which, in XPath terms, is the node context for this
-   *     iterator.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getRoot() {
     return m_context;
   }
 
-  /**
-   * The value of this flag determines whether the children of entity reference nodes are visible to
-   * the iterator. If false, they will be skipped over. <br>
-   * To produce a view of the document that has entity references expanded and does not expose the
-   * entity reference node itself, use the whatToShow flags to hide the entity reference node and
-   * set expandEntityReferences to true when creating the iterator. To produce a view of the
-   * document that has entity reference nodes but no entity expansion, use the whatToShow flags to
-   * show the entity reference node and set expandEntityReferences to false.
-   *
-   * @return Always true, since entity reference nodes are not visible in the XPath model.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean getExpandEntityReferences() {
     return true;
@@ -467,22 +344,13 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   /** Control over whether it is OK for detach to reset the iterator. */
   protected boolean m_allowDetach = true;
 
-  /**
-   * Specify if it's OK for detach to release the iterator for reuse.
-   *
-   * @param allowRelease true if it is OK for detach to release this iterator for pooling.
-   */
+  /** {@inheritDoc} */
   @Override
   public void allowDetachToRelease(boolean allowRelease) {
     m_allowDetach = allowRelease;
   }
 
-  /**
-   * Detaches the iterator from the set which it iterated over, releasing any computational
-   * resources and placing the iterator in the INVALID state. After<code>detach</code> has been
-   * invoked, calls to <code>nextNode</code> or<code>previousNode</code> will raise the exception
-   * INVALID_STATE_ERR.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     if (m_allowDetach) {
@@ -501,18 +369,13 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     }
   }
 
-  /** Reset the iterator. */
+  /** {@inheritDoc} */
   @Override
   public void reset() {
     assertion(false, "This iterator can not reset!");
   }
 
-  /**
-   * Get a cloned Iterator that is reset to the beginning of the query.
-   *
-   * @return A cloned NodeIterator set of the start of the query.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
     LocPathIterator clone;
@@ -530,29 +393,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return clone;
   }
 
-  // /**
-  // * Get a cloned LocPathIterator that holds the same
-  // * position as this iterator.
-  // *
-  // * @return A clone of this iterator that holds the same node position.
-  // *
-  // * @throws CloneNotSupportedException
-  // */
-  // public Object clone() throws CloneNotSupportedException
-  // {
-  //
-  // LocPathIterator clone = (LocPathIterator) super.clone();
-  //
-  // return clone;
-  // }
-
-  /**
-   * Returns the next node in the set and advances the position of the iterator in the set. After a
-   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
-   *
-   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
-   *     there are no more members in that set.
-   */
+  /** {@inheritDoc} */
   @Override
   public abstract int nextNode();
 
@@ -575,23 +416,13 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return nextNode;
   }
 
-  /**
-   * Return the last fetched node. Needed to support the UnionPathIterator.
-   *
-   * @return The last fetched node, or null if the last fetch was null.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getCurrentNode() {
     return m_lastFetched;
   }
 
-  /**
-   * If an index is requested, NodeSetDTM will call this method to run the iterator to the index. By
-   * default this sets m_next to the index. If the index argument is -1, this signals that the
-   * iterator should be run to the end.
-   *
-   * @param index The index to run to, or -1 if the iterator should run to the end.
-   */
+  /** {@inheritDoc} */
   @Override
   public void runTo(int index) {
 
@@ -625,17 +456,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return m_context;
   }
 
-  // /**
-  // * Set the current context node for this iterator.
-  // *
-  // * @param n Must be a non-null reference to the node context.
-  // */
-  // public void setRoot(int n)
-  // {
-  // m_context = n;
-  // m_cdtm = m_execContext.getDTM(n);
-  // }
-
   /**
    * Return the saved reference to the prefix resolver that was in effect when this iterator was
    * created.
@@ -650,29 +470,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return m_prefixResolver;
   }
 
-  // /**
-  // * Get the analysis pattern built by the WalkerFactory.
-  // *
-  // * @return The analysis pattern built by the WalkerFactory.
-  // */
-  // int getAnalysis()
-  // {
-  // return m_analysis;
-  // }
-
-  // /**
-  // * Set the analysis pattern built by the WalkerFactory.
-  // *
-  // * @param a The analysis pattern built by the WalkerFactory.
-  // */
-  // void setAnalysis(int a)
-  // {
-  // m_analysis = a;
-  // }
-
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     if (visitor.visitLocationPath()) {
@@ -736,34 +534,19 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   /** The XPathContext reference, needed for execution of many operations. */
   protected transient XPathContext m_execContext;
 
-  /**
-   * Returns true if all the nodes in the iteration well be returned in document order.
-   *
-   * @return true as a default.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isDocOrdered() {
     return true;
   }
 
-  /**
-   * Returns the axis being iterated, if it is known.
-   *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAxis() {
     return -1;
   }
 
-  // /**
-  // * The analysis pattern built by the WalkerFactory.
-  // * TODO: Move to LocPathIterator.
-  // * @see net.sourceforge.htmlunit.xpath.axes.WalkerFactory
-  // * @serial
-  // */
-  // protected int m_analysis = 0x00000000;
-  /** @see PredicatedNodeTest#getLastPos(XPathContext) */
+  /** {@inheritDoc} */
   @Override
   public int getLastPos(XPathContext xctxt) {
     return getLength();

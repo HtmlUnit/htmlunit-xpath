@@ -163,13 +163,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    */
   Expression[] m_predicates;
 
-  /**
-   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
-   *
-   * <p>NOTE: Ancestors tests with predicates are problematic, and will require special treatment.
-   *
-   * @return true if traversal outside the context node's subtree can occur.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
 
@@ -218,7 +212,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     calcScore();
   }
 
-  /** Static calc of match score. */
+  /** {@inheritDoc} */
   @Override
   public void calcScore() {
 
@@ -229,18 +223,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     if (null == m_targetString) calcTargetString();
   }
 
-  /**
-   * Execute this pattern step, including predicates.
-   *
-   * @param xctxt XPath runtime context.
-   * @param currentNode The current node context.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt, int currentNode)
       throws javax.xml.transform.TransformerException {
@@ -256,32 +239,13 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     return NodeTest.SCORE_NONE;
   }
 
-  /**
-   * Execute this pattern step, including predicates.
-   *
-   * @param xctxt XPath runtime context.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return execute(xctxt, xctxt.getCurrentNode());
   }
 
-  /**
-   * Execute an expression in the XPath runtime context, and return the result of the expression.
-   *
-   * @param xctxt The XPath runtime context.
-   * @param currentNode The currentNode.
-   * @param dtm The DTM of the current node.
-   * @param expType The expanded type ID of the current node.
-   * @return The result of the expression in the form of a <code>XObject</code>.
-   * @throws javax.xml.transform.TransformerException if a runtime exception occurs.
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt, int currentNode, DTM dtm, int expType)
       throws javax.xml.transform.TransformerException {
@@ -456,25 +420,13 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     return pos;
   }
 
-  /**
-   * Get the proximity position index of the current node based on this node test.
-   *
-   * @param xctxt XPath runtime context.
-   * @return the proximity position index of the current node based on the node test.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getProximityPosition(XPathContext xctxt) {
     return getProximityPosition(xctxt, xctxt.getPredicatePos(), false);
   }
 
-  /**
-   * Get the count of the nodes that match the test, which is the proximity position of the last
-   * node that can pass this test in the sub context selection. In XSLT 1-based indexing, this count
-   * is the index of the last node.
-   *
-   * @param xctxt XPath runtime context.
-   * @return the count of the nodes that match the test.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getLastPos(XPathContext xctxt) {
     return getProximityPosition(xctxt, xctxt.getPredicatePos(), true);
@@ -491,7 +443,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
    *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
    *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected final XObject executeRelativePathPattern(XPathContext xctxt, DTM dtm, int currentNode)
       throws javax.xml.transform.TransformerException {
@@ -502,8 +454,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     traverser = dtm.getAxisTraverser(m_axis);
 
     for (int relative = traverser.first(currentNode);
-         DTM.NULL != relative;
-         relative = traverser.next(currentNode, relative)) {
+        DTM.NULL != relative;
+        relative = traverser.next(currentNode, relative)) {
       try {
         xctxt.pushCurrentNode(relative);
 
@@ -526,7 +478,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * @param dtm The DTM of the current node.
    * @param currentNode The current node context.
    * @return true if the node should be accepted, false otherwise.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected final boolean executePredicates(XPathContext xctxt, DTM dtm, int currentNode)
       throws javax.xml.transform.TransformerException {
@@ -581,11 +533,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     return result;
   }
 
-  /**
-   * Get the string represenentation of this step for diagnostic purposes.
-   *
-   * @return A string representation of this step, built by reverse-engineering the contained info.
-   */
+  /** {@inheritDoc} */
   @Override
   public String toString() {
 
@@ -672,13 +620,13 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
       m_index = index;
     }
 
-    /** @see ExpressionOwner#getExpression() */
+    /** {@inheritDoc} */
     @Override
     public Expression getExpression() {
       return m_predicates[m_index];
     }
 
-    /** @see ExpressionOwner#setExpression(Expression) */
+    /** {@inheritDoc} */
     @Override
     public void setExpression(Expression exp) {
       exp.exprSetParent(StepPattern.this);
@@ -686,9 +634,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     }
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     if (visitor.visitMatchPattern()) {
@@ -715,20 +661,20 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     }
   }
 
-  /** @see ExpressionOwner#getExpression() */
+  /** {@inheritDoc} */
   @Override
   public Expression getExpression() {
     return m_relativePathPattern;
   }
 
-  /** @see ExpressionOwner#setExpression(Expression) */
+  /** {@inheritDoc} */
   @Override
   public void setExpression(Expression exp) {
     exp.exprSetParent(this);
     m_relativePathPattern = (StepPattern) exp;
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;

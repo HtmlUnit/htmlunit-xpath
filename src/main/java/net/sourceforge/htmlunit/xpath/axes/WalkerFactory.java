@@ -51,8 +51,7 @@ public class WalkerFactory {
    * @return non-null AxesWalker derivative.
    * @throws javax.xml.transform.TransformerException
    */
-  static AxesWalker loadWalkers(
-      WalkingIterator lpi, Compiler compiler, int stepOpCodePos)
+  static AxesWalker loadWalkers(WalkingIterator lpi, Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
 
     int stepType;
@@ -434,14 +433,13 @@ public class WalkerFactory {
   /**
    * Special purpose function to see if we can optimize the pattern for a DescendantIterator.
    *
-   * @param compiler      non-null reference to compiler object that has processed the XPath operations
-   *                      into an opcode map.
+   * @param compiler non-null reference to compiler object that has processed the XPath operations
+   *     into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
    * @return 32 bits as an integer that give information about the location path as a whole.
    * @throws javax.xml.transform.TransformerException
    */
-  private static boolean isOptimizableForDescendantIterator(
-      Compiler compiler, int stepOpCodePos)
+  private static boolean isOptimizableForDescendantIterator(Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
 
     int stepType;
@@ -680,8 +678,7 @@ public class WalkerFactory {
    * @return A StepPattern object, which may contain relative StepPatterns.
    * @throws javax.xml.transform.TransformerException
    */
-  static StepPattern loadSteps(
-      Compiler compiler, int stepOpCodePos)
+  static StepPattern loadSteps(Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
     if (DEBUG_PATTERN_CREATION) {
       System.out.println("================");
@@ -805,9 +802,7 @@ public class WalkerFactory {
    * @return the head of the list.
    * @throws javax.xml.transform.TransformerException
    */
-  private static StepPattern createDefaultStepPattern(
-      Compiler compiler,
-      int opPos)
+  private static StepPattern createDefaultStepPattern(Compiler compiler, int opPos)
       throws javax.xml.transform.TransformerException {
 
     int stepType = compiler.getOp(opPos);
@@ -839,7 +834,6 @@ public class WalkerFactory {
         ai = new FunctionPattern(expr, axis, predicateAxis);
         break;
       case OpCodes.FROM_ROOT:
-
         axis = Axis.ROOT;
         predicateAxis = Axis.ROOT;
         ai =
@@ -1280,14 +1274,13 @@ public class WalkerFactory {
    * Tell if the pattern can be 'walked' with the iteration steps in natural document order, without
    * duplicates.
    *
-   * @param compiler      non-null reference to compiler object that has processed the XPath operations
-   *                      into an opcode map.
+   * @param compiler non-null reference to compiler object that has processed the XPath operations
+   *     into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
-   * @param analysis      The general analysis of the pattern.
+   * @param analysis The general analysis of the pattern.
    * @return true if the walk can be done in natural order.
    */
-  private static boolean isNaturalDocOrder(
-          Compiler compiler, int stepOpCodePos, int analysis) {
+  private static boolean isNaturalDocOrder(Compiler compiler, int stepOpCodePos, int analysis) {
     if (canCrissCross(analysis)) return false;
 
     // Namespaces can present some problems, so just punt if we're looking for

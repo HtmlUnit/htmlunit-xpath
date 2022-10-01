@@ -43,14 +43,9 @@ public class WalkingIteratorSorted extends WalkingIterator {
     super(compiler, opPos, analysis, shouldLoadWalkers);
   }
 
-  /**
-   * Returns true if all the nodes in the iteration well be returned in document order.
-   *
-   * @return true as a default.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isDocOrdered() {
     return m_inNaturalOrderStatic;
   }
-
 }

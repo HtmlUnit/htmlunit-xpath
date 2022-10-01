@@ -32,5 +32,4 @@ public interface ExpressionNode extends SourceLocator {
   void exprSetParent(ExpressionNode n);
 
   ExpressionNode exprGetParent();
-
 }

@@ -37,11 +37,7 @@ public class ReverseAxesWalker extends AxesWalker {
     super(locPathIterator, axis);
   }
 
-  /**
-   * Set the root node of the TreeWalker. (Not part of the DOM2 TreeWalker interface).
-   *
-   * @param root The context node of this step.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int root) {
     super.setRoot(root);
@@ -49,21 +45,14 @@ public class ReverseAxesWalker extends AxesWalker {
     m_iterator.setStartNode(root);
   }
 
-  /**
-   * Detaches the walker from the set which it iterated over, releasing any computational resources
-   * and placing the iterator in the INVALID state.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     m_iterator = null;
     super.detach();
   }
 
-  /**
-   * Get the next node in document order on the axes.
-   *
-   * @return the next node in document order on the axes, or null.
-   */
+  /** {@inheritDoc} */
   @Override
   protected int getNextNode() {
     if (m_foundLast) return DTM.NULL;
@@ -77,25 +66,13 @@ public class ReverseAxesWalker extends AxesWalker {
     return next;
   }
 
-  /**
-   * Tells if this is a reverse axes. Overrides AxesWalker#isReverseAxes.
-   *
-   * @return true for this class.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isReverseAxes() {
     return true;
   }
 
-  /**
-   * Get the current sub-context position. In order to do the reverse axes count, for the moment
-   * this re-searches the axes up to the predicate. An optimization on this is to cache the nodes
-   * searched, but, for the moment, this case is probably rare enough that the added complexity
-   * isn't worth it.
-   *
-   * @param predicateIndex The predicate index of the proximity position.
-   * @return The pridicate index, or -1.
-   */
+  /** {@inheritDoc} */
   @Override
   protected int getProximityPosition(int predicateIndex) {
     // A negative predicate index seems to occur with
@@ -137,22 +114,13 @@ public class ReverseAxesWalker extends AxesWalker {
     return count;
   }
 
-  /**
-   * Count backwards one proximity position.
-   *
-   * @param i The predicate index.
-   */
+  /** {@inheritDoc} */
   @Override
   protected void countProximityPosition(int i) {
     if (i < m_proximityPositions.length) m_proximityPositions[i]--;
   }
 
-  /**
-   * Get the number of nodes in this node list. The function is probably ill named?
-   *
-   * @param xctxt The XPath runtime context.
-   * @return the number of nodes in this node list.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getLastPos(XPathContext xctxt) {
 

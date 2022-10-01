@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
-import org.w3c.dom.DOMException;
 
 /**
  * This class implements an optimized iterator for descendant, descendant-or-self, or "//foo"
@@ -102,12 +101,7 @@ public class DescendantIterator extends LocPathIterator {
     initPredicateInfo(compiler, firstStepPos);
   }
 
-  /**
-   * Get a cloned Iterator that is reset to the beginning of the query.
-   *
-   * @return A cloned NodeIterator set of the start of the query.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
 
@@ -119,15 +113,7 @@ public class DescendantIterator extends LocPathIterator {
     return clone;
   }
 
-  /**
-   * Returns the next node in the set and advances the position of the iterator in the set. After a
-   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
-   *
-   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
-   *     there are no more members in that set.
-   * @throws DOMException INVALID_STATE_ERR: Raised if this method is called after the <code>
-   *     detach</code> method was invoked.
-   */
+  /** {@inheritDoc} */
   @Override
   public int nextNode() {
     if (m_foundLast) return DTM.NULL;
@@ -172,11 +158,7 @@ public class DescendantIterator extends LocPathIterator {
     }
   }
 
-  /**
-   * Initialize the context values for this expression after it is cloned.
-   *
-   * @param context The XPath runtime context for this transformation.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int context, Object environment) {
     super.setRoot(context, environment);
@@ -195,15 +177,7 @@ public class DescendantIterator extends LocPathIterator {
     }
   }
 
-  /**
-   * Return the first node out of the nodeset, if this expression is a nodeset expression. This is
-   * the default implementation for nodesets.
-   *
-   * <p>WARNING: Do not mutate this class from this function!
-   *
-   * @param xctxt The XPath runtime context.
-   * @return the first node out of the nodeset, or DTM.NULL.
-   */
+  /** {@inheritDoc} */
   @Override
   public int asNode(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     if (getPredicateCount() > 0) return super.asNode(xctxt);
@@ -225,12 +199,7 @@ public class DescendantIterator extends LocPathIterator {
     }
   }
 
-  /**
-   * Detaches the iterator from the set which it iterated over, releasing any computational
-   * resources and placing the iterator in the INVALID state. After<code>detach</code> has been
-   * invoked, calls to <code>nextNode</code> or<code>previousNode</code> will raise the exception
-   * INVALID_STATE_ERR.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     if (m_allowDetach) {
@@ -242,11 +211,7 @@ public class DescendantIterator extends LocPathIterator {
     }
   }
 
-  /**
-   * Returns the axis being iterated, if it is known.
-   *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAxis() {
     return m_axis;
@@ -261,7 +226,7 @@ public class DescendantIterator extends LocPathIterator {
   /** The extended type ID, not set until setRoot. */
   protected int m_extendedTypeID;
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;

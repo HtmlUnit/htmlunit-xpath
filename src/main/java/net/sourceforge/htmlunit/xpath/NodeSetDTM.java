@@ -212,7 +212,7 @@ public class NodeSetDTM extends NodeVector
    * XPath data model.
    *
    * @return integer used as a bit-array, containing flags defined in the DOM's DTMFilter class. The
-   *     value will be <code>SHOW_ALL & ~SHOW_ENTITY_REFERENCE</code>, meaning that only entity
+   *     value will be <code>SHOW_ALL &amp; ~SHOW_ENTITY_REFERENCE</code>, meaning that only entity
    *     references are suppressed.
    */
   @Override

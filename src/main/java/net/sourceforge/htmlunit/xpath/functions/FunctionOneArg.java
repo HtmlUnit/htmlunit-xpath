@@ -41,13 +41,7 @@ public class FunctionOneArg extends Function implements ExpressionOwner {
     return m_arg0;
   }
 
-  /**
-   * Set an argument expression for a function. This method is called by the XPath compiler.
-   *
-   * @param arg non-null expression that represents the argument.
-   * @param argNum The argument number index.
-   * @throws WrongNumberArgsException If the argNum parameter is greater than 0.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
 
@@ -57,60 +51,44 @@ public class FunctionOneArg extends Function implements ExpressionOwner {
     } else reportWrongNumberArgs();
   }
 
-  /**
-   * Check that the number of arguments passed to this function is correct.
-   *
-   * @param argNum The number of arguments that is being passed to the function.
-   * @throws WrongNumberArgsException
-   */
+  /** {@inheritDoc} */
   @Override
   public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
     if (argNum != 1) reportWrongNumberArgs();
   }
 
-  /**
-   * Constructs and throws a WrongNumberArgException with the appropriate message for this function
-   * object.
-   *
-   * @throws WrongNumberArgsException
-   */
+  /** {@inheritDoc} */
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("one", null));
   }
 
-  /**
-   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
-   *
-   * @return true if traversal outside the context node's subtree can occur.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
     return m_arg0.canTraverseOutsideSubtree();
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callArgVisitors(XPathVisitor visitor) {
     if (null != m_arg0) m_arg0.callVisitors(this, visitor);
   }
 
-  /** @see ExpressionOwner#getExpression() */
+  /** {@inheritDoc} */
   @Override
   public Expression getExpression() {
     return m_arg0;
   }
 
-  /** @see ExpressionOwner#setExpression(Expression) */
+  /** {@inheritDoc} */
   @Override
   public void setExpression(Expression exp) {
     exp.exprSetParent(this);
     m_arg0 = exp;
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;

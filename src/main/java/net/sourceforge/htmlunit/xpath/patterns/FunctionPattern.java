@@ -42,7 +42,7 @@ public class FunctionPattern extends StepPattern {
     m_functionExpr = expr;
   }
 
-  /** Static calc of match score. */
+  /** {@inheritDoc} */
   @Override
   public final void calcScore() {
 
@@ -58,17 +58,7 @@ public class FunctionPattern extends StepPattern {
    */
   Expression m_functionExpr;
 
-  /**
-   * Test a node to see if it matches the given node test.
-   *
-   * @param xctxt XPath runtime context.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt, int context)
       throws javax.xml.transform.TransformerException {
@@ -96,17 +86,7 @@ public class FunctionPattern extends StepPattern {
     return score;
   }
 
-  /**
-   * Test a node to see if it matches the given node test.
-   *
-   * @param xctxt XPath runtime context.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt, int context, DTM dtm, int expType)
       throws javax.xml.transform.TransformerException {
@@ -133,17 +113,7 @@ public class FunctionPattern extends StepPattern {
     return score;
   }
 
-  /**
-   * Test a node to see if it matches the given node test.
-   *
-   * @param xctxt XPath runtime context.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
@@ -171,13 +141,13 @@ public class FunctionPattern extends StepPattern {
   }
 
   class FunctionOwner implements ExpressionOwner {
-    /** @see ExpressionOwner#getExpression() */
+    /** {@inheritDoc} */
     @Override
     public Expression getExpression() {
       return m_functionExpr;
     }
 
-    /** @see ExpressionOwner#setExpression(Expression) */
+    /** {@inheritDoc} */
     @Override
     public void setExpression(Expression exp) {
       exp.exprSetParent(FunctionPattern.this);
@@ -185,7 +155,7 @@ public class FunctionPattern extends StepPattern {
     }
   }
 
-  /** Call the visitor for the function. */
+  /** {@inheritDoc} */
   @Override
   protected void callSubtreeVisitors(XPathVisitor visitor) {
     m_functionExpr.callVisitors(new FunctionOwner(), visitor);

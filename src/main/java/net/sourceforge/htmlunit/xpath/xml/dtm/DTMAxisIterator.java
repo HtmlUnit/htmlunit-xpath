@@ -67,5 +67,4 @@ public interface DTMAxisIterator extends Cloneable {
    * @return a deep copy of this iterator. The clone should not be reset from its current position.
    */
   DTMAxisIterator cloneIterator();
-
 }

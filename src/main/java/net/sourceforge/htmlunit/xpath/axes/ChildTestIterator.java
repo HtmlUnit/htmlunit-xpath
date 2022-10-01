@@ -58,11 +58,7 @@ public class ChildTestIterator extends BasicTestIterator {
     m_traverser = traverser;
   }
 
-  /**
-   * Get the next node via getNextXXX. Bottlenecked for derived class override.
-   *
-   * @return The next node on the axis, or DTM.NULL.
-   */
+  /** {@inheritDoc} */
   @Override
   protected int getNextNode() {
     if (true /* 0 == m_extendedTypeID */) {
@@ -74,12 +70,7 @@ public class ChildTestIterator extends BasicTestIterator {
     return m_lastFetched;
   }
 
-  /**
-   * Get a cloned Iterator that is reset to the beginning of the query.
-   *
-   * @return A cloned NodeIterator set of the start of the query.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
 
@@ -89,33 +80,20 @@ public class ChildTestIterator extends BasicTestIterator {
     return clone;
   }
 
-  /**
-   * Initialize the context values for this expression after it is cloned.
-   *
-   * @param context The XPath runtime context for this transformation.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int context, Object environment) {
     super.setRoot(context, environment);
     m_traverser = m_cdtm.getAxisTraverser(Axis.CHILD);
   }
 
-  /**
-   * Returns the axis being iterated, if it is known.
-   *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAxis() {
     return net.sourceforge.htmlunit.xpath.xml.dtm.Axis.CHILD;
   }
 
-  /**
-   * Detaches the iterator from the set which it iterated over, releasing any computational
-   * resources and placing the iterator in the INVALID state. After<code>detach</code> has been
-   * invoked, calls to <code>nextNode</code> or<code>previousNode</code> will raise the exception
-   * INVALID_STATE_ERR.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     if (m_allowDetach) {

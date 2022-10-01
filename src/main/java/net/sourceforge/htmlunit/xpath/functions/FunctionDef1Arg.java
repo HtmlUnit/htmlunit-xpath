@@ -100,23 +100,13 @@ public class FunctionDef1Arg extends FunctionOneArg {
     return m_arg0.execute(xctxt).num();
   }
 
-  /**
-   * Check that the number of arguments passed to this function is correct.
-   *
-   * @param argNum The number of arguments that is being passed to the function.
-   * @throws WrongNumberArgsException if the number of arguments is not 0 or 1.
-   */
+  /** {@inheritDoc} */
   @Override
   public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
     if (argNum > 1) reportWrongNumberArgs();
   }
 
-  /**
-   * Constructs and throws a WrongNumberArgException with the appropriate message for this function
-   * object.
-   *
-   * @throws WrongNumberArgsException
-   */
+  /** {@inheritDoc} */
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     throw new WrongNumberArgsException(
@@ -125,11 +115,7 @@ public class FunctionDef1Arg extends FunctionOneArg {
     // 1");
   }
 
-  /**
-   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
-   *
-   * @return true if traversal outside the context node's subtree can occur.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
     return (null == m_arg0) ? false : super.canTraverseOutsideSubtree();

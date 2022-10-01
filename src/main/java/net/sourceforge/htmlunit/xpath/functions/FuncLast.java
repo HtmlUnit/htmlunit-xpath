@@ -27,9 +27,7 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 public class FuncLast extends Function {
   private boolean m_isTopLevel;
 
-  /**
-   * Figure out if we're executing a toplevel expression. If so, we can't be inside of a predicate.
-   */
+  /** {@inheritDoc} */
   @Override
   public void postCompileStep(Compiler compiler) {
     m_isTopLevel = compiler.getLocationPathDepth() == -1;
@@ -40,7 +38,7 @@ public class FuncLast extends Function {
    *
    * @param xctxt non-null reference to XPath runtime context.
    * @return The number of nodes in the list.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public int getCountOfContextNodeList(XPathContext xctxt)
       throws javax.xml.transform.TransformerException {
@@ -57,13 +55,7 @@ public class FuncLast extends Function {
     return 0;
   }
 
-  /**
-   * Execute the function. The function must return a valid object.
-   *
-   * @param xctxt The current execution context.
-   * @return A valid XObject.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     XNumber xnum = new XNumber(getCountOfContextNodeList(xctxt));

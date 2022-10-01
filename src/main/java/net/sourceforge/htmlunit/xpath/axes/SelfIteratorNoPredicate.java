@@ -34,18 +34,11 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
    * @param analysis Analysis bits.
    * @throws javax.xml.transform.TransformerException
    */
-  SelfIteratorNoPredicate(int analysis)
-      throws javax.xml.transform.TransformerException {
+  SelfIteratorNoPredicate(int analysis) throws javax.xml.transform.TransformerException {
     super(analysis);
   }
 
-  /**
-   * Returns the next node in the set and advances the position of the iterator in the set. After a
-   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
-   *
-   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
-   *     there are no more members in that set.
-   */
+  /** {@inheritDoc} */
   @Override
   public int nextNode() {
     if (m_foundLast) return DTM.NULL;
@@ -66,26 +59,13 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
     }
   }
 
-  /**
-   * Return the first node out of the nodeset, if this expression is a nodeset expression. This is
-   * the default implementation for nodesets. Derived classes should try and override this and
-   * return a value without having to do a clone operation.
-   *
-   * @param xctxt The XPath runtime context.
-   * @return the first node out of the nodeset, or DTM.NULL.
-   */
+  /** {@inheritDoc} */
   @Override
   public int asNode(XPathContext xctxt) {
     return xctxt.getCurrentNode();
   }
 
-  /**
-   * Get the index of the last node that can be itterated to. This probably will need to be
-   * overridded by derived classes.
-   *
-   * @param xctxt XPath runtime context.
-   * @return the index of the last node that can be itterated to.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getLastPos(XPathContext xctxt) {
     return 1;

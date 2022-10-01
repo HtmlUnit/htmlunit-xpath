@@ -76,13 +76,7 @@ public abstract class BasicTestIterator extends LocPathIterator {
    */
   protected abstract int getNextNode();
 
-  /**
-   * Returns the next node in the set and advances the position of the iterator in the set. After a
-   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
-   *
-   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
-   *     there are no more members in that set.
-   */
+  /** {@inheritDoc} */
   @Override
   public int nextNode() {
     if (m_foundLast) {
@@ -116,12 +110,7 @@ public abstract class BasicTestIterator extends LocPathIterator {
     }
   }
 
-  /**
-   * Get a cloned Iterator that is reset to the beginning of the query.
-   *
-   * @return A cloned NodeIterator set of the start of the query.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
 

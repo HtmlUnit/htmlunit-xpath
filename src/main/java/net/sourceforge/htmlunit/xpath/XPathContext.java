@@ -96,7 +96,7 @@ public class XPathContext extends DTMManager {
 
   /**
    * Create a new <code>DTMIterator</code> based on an XPath <a
-   * href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a
+   * href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
    * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    *
    * @param xpathCompiler ??? Somehow we need to pass in a subpart of the expression. I hate to do
@@ -112,12 +112,12 @@ public class XPathContext extends DTMManager {
   //
   /**
    * Create a new <code>DTMIterator</code> based on an XPath <a
-   * href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a
+   * href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
    * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    *
    * @param xpathString Must be a valid string expressing a <a
-   *     href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a href=
-   *     "http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
+   *     href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
+   *     href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    * @param presolver An object that can resolve prefixes to namespace URLs.
    * @return The newly created <code>DTMIterator</code>.
    */
@@ -147,7 +147,7 @@ public class XPathContext extends DTMManager {
     return m_dtmManager.createDTMIterator(whatToShow, filter, entityReferenceExpansion);
   }
 
-    /**
+  /**
    * Create an XPathContext instance. This is equivalent to calling the {@link
    * #XPathContext(boolean)} constructor with the value <code>true</code>.
    */

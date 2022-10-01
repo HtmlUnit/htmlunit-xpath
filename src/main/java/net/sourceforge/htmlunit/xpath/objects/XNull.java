@@ -28,72 +28,37 @@ public class XNull extends XNodeSet {
     super();
   }
 
-  /**
-   * Tell what kind of class this is.
-   *
-   * @return type CLASS_NULL
-   */
+  /** {@inheritDoc} */
   @Override
   public int getType() {
     return CLASS_NULL;
   }
 
-  /**
-   * Given a request type, return the equivalent string. For diagnostic purposes.
-   *
-   * @return type string "#CLASS_NULL"
-   */
+  /** {@inheritDoc} */
   @Override
   public String getTypeString() {
     return "#CLASS_NULL";
   }
 
-  /**
-   * Cast result object to a number.
-   *
-   * @return 0.0
-   */
+  /** {@inheritDoc} */
   @Override
   public double num() {
     return 0.0;
   }
 
-  /**
-   * Cast result object to a boolean.
-   *
-   * @return false
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean bool() {
     return false;
   }
 
-  /**
-   * Cast result object to a string.
-   *
-   * @return empty string ""
-   */
+  /** {@inheritDoc} */
   @Override
   public String str() {
     return "";
   }
 
-  // /**
-  // * Cast result object to a nodelist.
-  // *
-  // * @return null
-  // */
-  // public DTMIterator iter()
-  // {
-  // return null;
-  // }
-
-  /**
-   * Tell if two objects are functionally equal.
-   *
-   * @param obj2 Object to compare this to
-   * @return True if the given object is of type CLASS_NULL
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean equals(XObject obj2) {
     return obj2.getType() == CLASS_NULL;

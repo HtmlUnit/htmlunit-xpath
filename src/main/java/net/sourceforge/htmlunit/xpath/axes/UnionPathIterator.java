@@ -47,11 +47,7 @@ public class UnionPathIterator extends LocPathIterator
     m_exprs = null;
   }
 
-  /**
-   * Initialize the context values for this expression after it is cloned.
-   *
-   * @param context The XPath runtime context for this transformation.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int context, Object environment) {
     super.setRoot(context, environment);
@@ -73,12 +69,7 @@ public class UnionPathIterator extends LocPathIterator
     }
   }
 
-  /**
-   * Detaches the iterator from the set which it iterated over, releasing any computational
-   * resources and placing the iterator in the INVALID state. After<code>detach</code> has been
-   * invoked, calls to <code>nextNode</code> or<code>previousNode</code> will raise the exception
-   * INVALID_STATE_ERR.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     if (m_allowDetach && null != m_iterators) {
@@ -153,11 +144,7 @@ public class UnionPathIterator extends LocPathIterator
     } else return upi;
   }
 
-  /**
-   * Get the analysis bits for this walker, as defined in the WalkerFactory.
-   *
-   * @return One of WalkerFactory#BIT_DESCENDANT, etc.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAnalysisBits() {
     int bits = 0;
@@ -172,12 +159,7 @@ public class UnionPathIterator extends LocPathIterator
     return bits;
   }
 
-  /**
-   * Get a cloned LocPathIterator that holds the same position as this iterator.
-   *
-   * @return A clone of this iterator that holds the same node position.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
 
@@ -256,13 +238,7 @@ public class UnionPathIterator extends LocPathIterator
     }
   }
 
-  /**
-   * Returns the next node in the set and advances the position of the iterator in the set. After a
-   * DTMIterator is created, the first call to nextNode() returns the first node in the set.
-   *
-   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
-   *     there are no more members in that set.
-   */
+  /** {@inheritDoc} */
   @Override
   public int nextNode() {
     if (m_foundLast) return DTM.NULL;
@@ -328,11 +304,7 @@ public class UnionPathIterator extends LocPathIterator
    */
   protected DTMIterator[] m_iterators;
 
-  /**
-   * Returns the axis being iterated, if it is known.
-   *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAxis() {
     // Could be smarter.
@@ -346,13 +318,13 @@ public class UnionPathIterator extends LocPathIterator
       m_index = index;
     }
 
-    /** @see ExpressionOwner#getExpression() */
+    /** {@inheritDoc} */
     @Override
     public Expression getExpression() {
       return m_exprs[m_index];
     }
 
-    /** @see ExpressionOwner#setExpression(Expression) */
+    /** {@inheritDoc} */
     @Override
     public void setExpression(Expression exp) {
 
@@ -372,9 +344,7 @@ public class UnionPathIterator extends LocPathIterator
     }
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     if (visitor.visitUnionPath()) {
@@ -387,7 +357,7 @@ public class UnionPathIterator extends LocPathIterator
     }
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;

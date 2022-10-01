@@ -362,16 +362,12 @@ public class XSLTErrorResources extends ListResourceBundle {
 
   // Error messages...
 
-  /**
-   * Get the lookup table for error messages.
-   *
-   * @return The int to message lookup table.
-   */
+  /** {@inheritDoc} */
   @Override
   public Object[][] getContents() {
     return new Object[][] {
 
-            /* Error message ID that has a null message, but takes in a single object. */
+      /* Error message ID that has a null message, but takes in a single object. */
       {"ER0000", "{0}"},
       {ER_NO_CURLYBRACE, "Error: Can not have '{' within expression"},
       {ER_ILLEGAL_ATTRIBUTE, "{0} has an illegal attribute: {1}"},

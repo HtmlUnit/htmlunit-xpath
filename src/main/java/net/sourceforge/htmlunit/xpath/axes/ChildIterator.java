@@ -47,15 +47,7 @@ public class ChildIterator extends LocPathIterator {
     initNodeTest(DTMFilter.SHOW_ALL);
   }
 
-  /**
-   * Return the first node out of the nodeset, if this expression is a nodeset expression. This is
-   * the default implementation for nodesets.
-   *
-   * <p>WARNING: Do not mutate this class from this function!
-   *
-   * @param xctxt The XPath runtime context.
-   * @return the first node out of the nodeset, or DTM.NULL.
-   */
+  /** {@inheritDoc} */
   @Override
   public int asNode(XPathContext xctxt) {
     int current = xctxt.getCurrentNode();
@@ -65,13 +57,7 @@ public class ChildIterator extends LocPathIterator {
     return dtm.getFirstChild(current);
   }
 
-  /**
-   * Returns the next node in the set and advances the position of the iterator in the set. After a
-   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
-   *
-   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
-   *     there are no more members in that set.
-   */
+  /** {@inheritDoc} */
   @Override
   public int nextNode() {
     if (m_foundLast) return DTM.NULL;
@@ -95,11 +81,7 @@ public class ChildIterator extends LocPathIterator {
     }
   }
 
-  /**
-   * Returns the axis being iterated, if it is known.
-   *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAxis() {
     return net.sourceforge.htmlunit.xpath.xml.dtm.Axis.CHILD;

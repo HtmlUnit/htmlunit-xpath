@@ -258,12 +258,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return nodeIndex;
   }
 
-  /**
-   * This method iterates to the next node that will be added to the table. Each call to this method
-   * adds a new node to the table, unless the end is reached, in which case it returns null.
-   *
-   * @return The true if a next node is found or false if there are no more nodes.
-   */
+  /** {@inheritDoc} */
   @Override
   protected boolean nextNode() {
     // Non-recursive one-fetch-at-a-time depth-first traversal with
@@ -488,12 +483,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return true;
   }
 
-  /**
-   * Return an DOM node for the given node.
-   *
-   * @param nodeHandle The node ID.
-   * @return A node representation of the DTM node.
-   */
+  /** {@inheritDoc} */
   @Override
   public Node getNode(int nodeHandle) {
 
@@ -513,13 +503,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return m_nodes.elementAt(nodeIdentity);
   }
 
-  /**
-   * Get the next node identity value in the list, and call the iterator if it hasn't been added
-   * yet.
-   *
-   * @param identity The node identity (index).
-   * @return identity+1, or DTM.NULL.
-   */
+  /** {@inheritDoc} */
   @Override
   protected int getNextNodeIdentity(int identity) {
 
@@ -610,15 +594,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return DTM.NULL;
   }
 
-  /**
-   * Retrieves an attribute node by by qualified name and namespace URI.
-   *
-   * @param nodeHandle int Handle of the node upon which to look up this attribute..
-   * @param namespaceURI The namespace URI of the attribute to retrieve, or null.
-   * @param name The local name of the attribute to retrieve.
-   * @return The attribute node handle with the specified name ( <code>nodeName</code>) or <code>
-   *     DTM.NULL</code> if there is no such attribute.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAttributeNode(int nodeHandle, String namespaceURI, String name) {
 
@@ -663,13 +639,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return DTM.NULL;
   }
 
-  /**
-   * Get the string-value of a node as a String object (see http://www.w3.org/TR/xpath#data-model
-   * for the definition of a node's string-value).
-   *
-   * @param nodeHandle The node ID.
-   * @return A string object that represents the string-value of the given node.
-   */
+  /** {@inheritDoc} */
   @Override
   public XString getStringValue(int nodeHandle) {
 
@@ -746,14 +716,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     }
   }
 
-  /**
-   * Given a node handle, return its DOM-style node name. This will include names such as #text or
-   * #document.
-   *
-   * @param nodeHandle the id of the node.
-   * @return String Name of this node, which may be an empty string. %REVIEW% Document when empty
-   *     string is possible... %REVIEW-COMMENT% It should never be empty, should it?
-   */
+  /** {@inheritDoc} */
   @Override
   public String getNodeName(int nodeHandle) {
 
@@ -763,13 +726,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return node.getNodeName();
   }
 
-  /**
-   * Given a node handle, return the XPath node name. This should be the name as described by the
-   * XPath data model, NOT the DOM-style name.
-   *
-   * @param nodeHandle the id of the node.
-   * @return String Name of this node, which may be an empty string.
-   */
+  /** {@inheritDoc} */
   @Override
   public String getNodeNameX(int nodeHandle) {
 
@@ -821,13 +778,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return (index < 0) ? qname : qname.substring(index + 1);
   }
 
-  /**
-   * Given a node handle, return its XPath-style localname. (As defined in Namespaces, this is the
-   * portion of the name after any colon character).
-   *
-   * @param nodeHandle the id of the node.
-   * @return String Local name of this node.
-   */
+  /** {@inheritDoc} */
   @Override
   public String getLocalName(int nodeHandle) {
     if (JJK_NEWCODE) {
@@ -878,17 +829,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return name;
   }
 
-  /**
-   * Given a namespace handle, return the prefix that the namespace decl is mapping. Given a node
-   * handle, return the prefix used to map to the namespace.
-   *
-   * <p>%REVIEW% Are you sure you want "" for no prefix?
-   *
-   * <p>%REVIEW-COMMENT% I think so... not totally sure. -sb
-   *
-   * @param nodeHandle the id of the node.
-   * @return String prefix of this node's name, or "" if no explicit namespace prefix was given.
-   */
+  /** {@inheritDoc} */
   @Override
   public String getPrefix(int nodeHandle) {
 
@@ -926,15 +867,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return prefix;
   }
 
-  /**
-   * Given a node handle, return its DOM-style namespace URI (As defined in Namespaces, this is the
-   * declared URI which this node's prefix -- or default in lieu thereof -- was mapped to.)
-   *
-   * <p>%REVIEW% Null or ""? -sb
-   *
-   * @param nodeHandle the id of the node.
-   * @return String URI value of this node's namespace, or null if no namespace was resolved.
-   */
+  /** {@inheritDoc} */
   @Override
   public String getNamespaceURI(int nodeHandle) {
     if (JJK_NEWCODE) {
@@ -1000,15 +933,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return n;
   }
 
-  /**
-   * Given a node handle, return its node value. This is mostly as defined by the DOM, but may
-   * ignore some conveniences.
-   *
-   * <p>
-   *
-   * @param nodeHandle The node id.
-   * @return String Value of this node, or null if not meaningful for this node type.
-   */
+  /** {@inheritDoc} */
   @Override
   public String getNodeValue(int nodeHandle) {
     // The _type(nodeHandle) call was taking the lion's share of our
@@ -1040,21 +965,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return s;
   }
 
-  /**
-   * Returns the <code>Element</code> whose <code>ID</code> is given by <code>elementId</code>. If
-   * no such element exists, returns <code>DTM.NULL</code>. Behavior is not defined if more than one
-   * element has this <code>ID</code>. Attributes (including those with the name "ID") are not of
-   * type ID unless so defined by DTD/Schema information available to the DTM implementation.
-   * Implementations that do not know whether attributes are of type ID or not are expected to
-   * return <code>DTM.NULL</code>.
-   *
-   * <p>%REVIEW% Presumably IDs are still scoped to a single document, and this operation searches
-   * only within a single document, right? Wouldn't want collisions between DTMs in the same
-   * process.
-   *
-   * @param elementId The unique <code>id</code> value for an element.
-   * @return The handle of the matching element.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getElementById(String elementId) {
 
@@ -1084,5 +995,4 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     }
     return DTM.NULL;
   }
-
 }

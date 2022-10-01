@@ -28,9 +28,9 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  * "org.apache.xml.utils.DTMFactory". This property names a concrete subclass of the DTMFactory
  * abstract class. If the property is not defined, a platform default is be used.
  *
- * <p>An instance of this class <emph>must</emph> be safe to use across thread instances. It is
- * expected that a client will create a single instance of a DTMManager to use across multiple
- * threads. This will allow sharing of DTMs across multiple processes.
+ * <p>An instance of this class must be safe to use across thread instances. It is expected that a
+ * client will create a single instance of a DTMManager to use across multiple threads. This will
+ * allow sharing of DTMs across multiple processes.
  *
  * <p>Note: this class is incomplete right now. It will be pretty much modeled after
  * javax.xml.transform.TransformerFactory in terms of its factory support.
@@ -107,7 +107,7 @@ public abstract class DTMManager {
 
   /**
    * Create a new <code>DTMIterator</code> based on an XPath <a
-   * href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a
+   * href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
    * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    *
    * @param xpathCompiler ??? Somehow we need to pass in a subpart of the expression. I hate to do
@@ -119,12 +119,12 @@ public abstract class DTMManager {
 
   /**
    * Create a new <code>DTMIterator</code> based on an XPath <a
-   * href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a
+   * href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
    * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    *
    * @param xpathString Must be a valid string expressing a <a
-   *     href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a> or a <a href=
-   *     "http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
+   *     href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
+   *     href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
    * @param presolver An object that can resolve prefixes to namespace URLs.
    * @return The newly created <code>DTMIterator</code>.
    */

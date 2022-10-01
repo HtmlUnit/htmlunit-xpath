@@ -189,7 +189,7 @@ public class NodeTest extends Expression {
     initNodeTest(whatToShow);
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!isSameClass(expr)) return false;
@@ -353,18 +353,7 @@ public class NodeTest extends Expression {
         || ((null != p) && ((p.length() > 0) ? ((t == WILD) || p.equals(t)) : null == t));
   }
 
-  /**
-   * Tell what the test score is for the given node.
-   *
-   * @param xctxt XPath runtime context.
-   * @param context The node being tested.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt, int context)
       throws javax.xml.transform.TransformerException {
@@ -424,18 +413,7 @@ public class NodeTest extends Expression {
     } // end switch(testType)
   }
 
-  /**
-   * Tell what the test score is for the given node.
-   *
-   * @param xctxt XPath runtime context.
-   * @param context The node being tested.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt, int context, DTM dtm, int expType)
       throws javax.xml.transform.TransformerException {
@@ -492,25 +470,13 @@ public class NodeTest extends Expression {
     } // end switch(testType)
   }
 
-  /**
-   * Test the current node to see if it matches the given node test.
-   *
-   * @param xctxt XPath runtime context.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return execute(xctxt, xctxt.getCurrentNode());
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     assertion(false, "callVisitors should not be called for this object!!!");

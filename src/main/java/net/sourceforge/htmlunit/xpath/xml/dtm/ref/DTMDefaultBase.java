@@ -84,7 +84,7 @@ public abstract class DTMDefaultBase implements DTM {
   /** The number of blocks for the node arrays */
   public static final int DEFAULT_NUMBLOCKS = 32;
 
-  /** The number of blocks used for small documents & RTFs */
+  /** The number of blocks used for small documents &amp; RTFs */
   public static final int DEFAULT_NUMBLOCKS_SMALL = 4;
 
   /* The block size of the node arrays */
@@ -106,9 +106,9 @@ public abstract class DTMDefaultBase implements DTM {
   protected SuballocatedIntVector m_dtmIdent;
 
   /*
-    The mask for the identity. %REVIEW% Should this really be set to the _DEFAULT? What if a
-    particular DTM wanted to use another value?
-   */
+   The mask for the identity. %REVIEW% Should this really be set to the _DEFAULT? What if a
+   particular DTM wanted to use another value?
+  */
   // protected final static int m_mask = DTMManager.IDENT_NODE_DEFAULT;
 
   /** The base URI for this document. */
@@ -754,13 +754,7 @@ public abstract class DTMDefaultBase implements DTM {
             + (nodeHandle & DTMManager.IDENT_NODE_DEFAULT);
   }
 
-  /**
-   * Given a node handle, get the handle of the node's first child. If not yet resolved, waits for
-   * more nodes to be added to the document and tries again.
-   *
-   * @param nodeHandle int Handle of the node.
-   * @return int DTM node-number of first child, or DTM.NULL to indicate none exists.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getFirstChild(int nodeHandle) {
 
@@ -770,13 +764,7 @@ public abstract class DTMDefaultBase implements DTM {
     return makeNodeHandle(firstChild);
   }
 
-  /**
-   * Given a node handle, advance to its last child. If not yet resolved, waits for more nodes to be
-   * added to the document and tries again.
-   *
-   * @param nodeHandle int Handle of the node.
-   * @return int Node-number of last child, or DTM.NULL to indicate none exists.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getLastChild(int nodeHandle) {
 
@@ -792,24 +780,11 @@ public abstract class DTMDefaultBase implements DTM {
     return makeNodeHandle(lastChild);
   }
 
-  /**
-   * Retrieves an attribute node by by qualified name and namespace URI.
-   *
-   * @param nodeHandle int Handle of the node upon which to look up this attribute..
-   * @param namespaceURI The namespace URI of the attribute to retrieve, or null.
-   * @param name The local name of the attribute to retrieve.
-   * @return The attribute node handle with the specified name ( <code>nodeName</code>) or <code>
-   *     DTM.NULL</code> if there is no such attribute.
-   */
+  /** {@inheritDoc} */
   @Override
   public abstract int getAttributeNode(int nodeHandle, String namespaceURI, String name);
 
-  /**
-   * Given a node handle, get the index of the node's first attribute.
-   *
-   * @param nodeHandle int Handle of the node.
-   * @return Handle of first attribute, or DTM.NULL to indicate none exists.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getFirstAttribute(int nodeHandle) {
     int nodeID = makeNodeIdentity(nodeHandle);
@@ -844,26 +819,14 @@ public abstract class DTMDefaultBase implements DTM {
     return DTM.NULL;
   }
 
-  /**
-   * Given a node handle, advance to its next sibling. If not yet resolved, waits for more nodes to
-   * be added to the document and tries again.
-   *
-   * @param nodeHandle int Handle of the node.
-   * @return int Node-number of next sibling, or DTM.NULL to indicate none exists.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getNextSibling(int nodeHandle) {
     if (nodeHandle == DTM.NULL) return DTM.NULL;
     return makeNodeHandle(_nextsib(makeNodeIdentity(nodeHandle)));
   }
 
-  /**
-   * Given a node handle, find its preceeding sibling. WARNING: DTM is asymmetric; this operation is
-   * resolved by search, and is relatively expensive.
-   *
-   * @param nodeHandle the id of the node.
-   * @return int Node-number of the previous sib, or DTM.NULL to indicate none exists.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getPreviousSibling(int nodeHandle) {
     if (nodeHandle == DTM.NULL) return DTM.NULL;
@@ -885,13 +848,7 @@ public abstract class DTMDefaultBase implements DTM {
     return makeNodeHandle(result);
   }
 
-  /**
-   * Given a node handle, advance to the next attribute. If an attr, we advance to the next attr on
-   * the same node. If not an attribute, we return NULL.
-   *
-   * @param nodeHandle int Handle of the node.
-   * @return int DTM node-number of the resolved attr, or DTM.NULL to indicate none exists.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getNextAttribute(int nodeHandle) {
     int nodeID = makeNodeIdentity(nodeHandle);
@@ -1103,15 +1060,7 @@ public abstract class DTMDefaultBase implements DTM {
     return -1 - i; // not-found has to be encoded.
   }
 
-  /**
-   * Given a node handle, get the index of the node's first child. If not yet resolved, waits for
-   * more nodes to be added to the document and tries again
-   *
-   * @param nodeHandle handle to node, which should probably be an element node, but need not be.
-   * @param inScope true if all namespaces in scope should be returned, false if only the namespace
-   *     declarations should be returned.
-   * @return handle of first namespace, or DTM.NULL to indicate none exists.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getFirstNamespaceNode(int nodeHandle, boolean inScope) {
     if (inScope) {
@@ -1142,16 +1091,7 @@ public abstract class DTMDefaultBase implements DTM {
     return NULL;
   }
 
-  /**
-   * Given a namespace handle, advance to the next namespace.
-   *
-   * @param baseHandle handle to original node from where the first namespace was relative to
-   *     (needed to return nodes in document order).
-   * @param nodeHandle A namespace handle for which we will find the next node.
-   * @param inScope true if all namespaces that are in scope should be processed, otherwise just
-   *     process the nodes in the given element handle.
-   * @return handle of next namespace, or DTM.NULL to indicate none exists.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getNextNamespaceNode(int baseHandle, int nodeHandle, boolean inScope) {
     if (inScope) {
@@ -1181,12 +1121,7 @@ public abstract class DTMDefaultBase implements DTM {
     return DTM.NULL;
   }
 
-  /**
-   * Given a node handle, find its parent node.
-   *
-   * @param nodeHandle the id of the node.
-   * @return int Node-number of parent, or DTM.NULL to indicate none exists.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getParent(int nodeHandle) {
 
@@ -1198,29 +1133,13 @@ public abstract class DTMDefaultBase implements DTM {
     return DTM.NULL;
   }
 
-  /**
-   * Find the Document node handle for the document currently under construction. PLEASE NOTE that
-   * most people should use getOwnerDocument(nodeHandle) instead; this version of the operation is
-   * primarily intended for use during negotiation with the DTM Manager.
-   *
-   * @return int Node handle of document, which should always be valid.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getDocument() {
     return m_dtmIdent.elementAt(0); // makeNodeHandle(0)
   }
 
-  /**
-   * Given a node handle, find the owning document node. This has the exact same semantics as the
-   * DOM Document method of the same name, in that if the nodeHandle is a document node, it will
-   * return NULL.
-   *
-   * <p>%REVIEW% Since this is DOM-specific, it may belong at the DOM binding layer. Included here
-   * as a convenience function and to aid porting of DOM code to DTM.
-   *
-   * @param nodeHandle the id of the node.
-   * @return int Node handle of owning document, or -1 if the node was a Docment
-   */
+  /** {@inheritDoc} */
   @Override
   public int getOwnerDocument(int nodeHandle) {
 
@@ -1229,35 +1148,17 @@ public abstract class DTMDefaultBase implements DTM {
     return getDocumentRoot(nodeHandle);
   }
 
-  /**
-   * Given a node handle, find the owning document node. Unlike the DOM, this considers the
-   * owningDocument of a Document to be itself.
-   *
-   * @param nodeHandle the id of the node.
-   * @return int Node handle of owning document, or the nodeHandle if it is a Document.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getDocumentRoot(int nodeHandle) {
     return getManager().getDTM(nodeHandle).getDocument();
   }
 
-  /**
-   * Get the string-value of a node as a String object
-   * (see <a href="http://www.w3.org/TR/xpath#data-model">http://www.w3.org/TR/xpath#data-model</a>
-   * for the definition of a node's string-value).
-   *
-   * @param nodeHandle The node ID.
-   * @return A string object that represents the string-value of the given node.
-   */
+  /** {@inheritDoc} */
   @Override
   public abstract XString getStringValue(int nodeHandle);
 
-  /**
-   * Given a node handle, return an ID that represents the node's expanded name.
-   *
-   * @param nodeHandle The handle to the node in question.
-   * @return the expanded-name id of the node.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getExpandedTypeID(int nodeHandle) {
     // %REVIEW% This _should_ only be null if someone asked the wrong DTM about the
@@ -1268,18 +1169,7 @@ public abstract class DTMDefaultBase implements DTM {
     return _exptype(id);
   }
 
-  /**
-   * Given an expanded name, return an ID. If the expanded-name does not exist in the internal
-   * tables, the entry will be created, and the ID will be returned. Any additional nodes that are
-   * created that have this expanded name will use this ID.
-   *
-   * @param type The simple type, i.e. one of ELEMENT, ATTRIBUTE, etc.
-   * @param namespace The namespace URI, which may be null, may be an empty string (which will be
-   *     the same as null), or may be a namespace URI.
-   * @param localName The local name string, which must be a valid <a
-   *     href="http://www.w3.org/TR/REC-xml-names/">NCName</a>.
-   * @return the expanded-name id of the node.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getExpandedTypeID(String namespace, String localName, int type) {
 
@@ -1288,24 +1178,11 @@ public abstract class DTMDefaultBase implements DTM {
     return ent.getExpandedTypeID(namespace, localName, type);
   }
 
-  /**
-   * Given a node handle, return its DOM-style node name. This will include names such as #text or
-   * #document.
-   *
-   * @param nodeHandle the id of the node.
-   * @return String Name of this node, which may be an empty string. %REVIEW% Document when empty
-   *     string is possible... %REVIEW-COMMENT% It should never be empty, should it?
-   */
+  /** {@inheritDoc} */
   @Override
   public abstract String getNodeName(int nodeHandle);
 
-  /**
-   * Given a node handle, return the XPath node name. This should be the name as described by the
-   * XPath data model, NOT the DOM-style name.
-   *
-   * @param nodeHandle the id of the node.
-   * @return String Name of this node, which may be an empty string.
-   */
+  /** {@inheritDoc} */
   @Override
   public String getNodeNameX(int nodeHandle) {
 
@@ -1317,104 +1194,34 @@ public abstract class DTMDefaultBase implements DTM {
     return null;
   }
 
-  /**
-   * Given a node handle, return its XPath-style localname. (As defined in Namespaces, this is the
-   * portion of the name after any colon character).
-   *
-   * @param nodeHandle the id of the node.
-   * @return String Local name of this node.
-   */
+  /** {@inheritDoc} */
   @Override
   public abstract String getLocalName(int nodeHandle);
 
-  /**
-   * Given a namespace handle, return the prefix that the namespace decl is mapping. Given a node
-   * handle, return the prefix used to map to the namespace.
-   *
-   * <p>%REVIEW% Are you sure you want "" for no prefix?
-   *
-   * <p>%REVIEW-COMMENT% I think so... not totally sure. -sb
-   *
-   * @param nodeHandle the id of the node.
-   * @return String prefix of this node's name, or "" if no explicit namespace prefix was given.
-   */
+  /** {@inheritDoc} */
   @Override
   public abstract String getPrefix(int nodeHandle);
 
-  /**
-   * Given a node handle, return its DOM-style namespace URI (As defined in Namespaces, this is the
-   * declared URI which this node's prefix -- or default in lieu thereof -- was mapped to.)
-   *
-   * <p>%REVIEW% Null or ""? -sb
-   *
-   * @param nodeHandle the id of the node.
-   * @return String URI value of this node's namespace, or null if no namespace was resolved.
-   */
+  /** {@inheritDoc} */
   @Override
   public abstract String getNamespaceURI(int nodeHandle);
 
-  /**
-   * Given a node handle, return its node value. This is mostly as defined by the DOM, but may
-   * ignore some conveniences.
-   *
-   * <p>
-   *
-   * @param nodeHandle The node id.
-   * @return String Value of this node, or null if not meaningful for this node type.
-   */
+  /** {@inheritDoc} */
   @Override
   public abstract String getNodeValue(int nodeHandle);
 
-  /**
-   * Given a node handle, return its DOM-style node type.
-   *
-   * <p>%REVIEW% Generally, returning short is false economy. Return int? %REVIEW% Make assumption
-   * that node has already arrived. Is OK?
-   *
-   * @param nodeHandle The node id.
-   * @return int Node type, as per the DOM's Node._NODE constants.
-   */
+  /** {@inheritDoc} */
   @Override
   public short getNodeType(int nodeHandle) {
     if (nodeHandle == DTM.NULL) return DTM.NULL;
     return m_expandedNameTable.getType(_exptype(makeNodeIdentity(nodeHandle)));
   }
 
-  // ============== Document query functions ==============
-
-  /**
-   * Returns the <code>Element</code> whose <code>ID</code> is given by <code>elementId</code>. If
-   * no such element exists, returns <code>DTM.NULL</code>. Behavior is not defined if more than one
-   * element has this <code>ID</code>. Attributes (including those with the name "ID") are not of
-   * type ID unless so defined by DTD/Schema information available to the DTM implementation.
-   * Implementations that do not know whether attributes are of type ID or not are expected to
-   * return <code>DTM.NULL</code>.
-   *
-   * <p>%REVIEW% Presumably IDs are still scoped to a single document, and this operation searches
-   * only within a single document, right? Wouldn't want collisions between DTMs in the same
-   * process.
-   *
-   * @param elementId The unique <code>id</code> value for an element.
-   * @return The handle of the matching element.
-   */
+  /** {@inheritDoc} */
   @Override
   public abstract int getElementById(String elementId);
 
-  // ============== Boolean methods ================
-
-  /**
-   * Figure out whether nodeHandle2 should be considered as being later in the document than
-   * nodeHandle1, in Document Order as defined by the XPath model. This may not agree with the
-   * ordering defined by other XML applications.
-   *
-   * <p>There are some cases where ordering isn't defined, and neither are the results of this
-   * function -- though we'll generally return false.
-   *
-   * @param nodeHandle1 Node handle to perform position comparison on.
-   * @param nodeHandle2 Second Node handle to perform position comparison on .
-   * @return true if node1 comes before node2, otherwise return false. You can think of this as
-   *     <code>(node1.documentOrderPosition &lt;= node2.documentOrderPosition)</code>.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isNodeAfter(int nodeHandle1, int nodeHandle2) {
     // These return NULL if the node doesn't belong to this document.
@@ -1424,19 +1231,11 @@ public abstract class DTMDefaultBase implements DTM {
     return index1 != NULL && index2 != NULL && index1 <= index2;
   }
 
-  /**
-   * Return an DOM node for the given node.
-   *
-   * @param nodeHandle The node ID.
-   * @return A node representation of the DTM node.
-   */
+  /** {@inheritDoc} */
   @Override
   public org.w3c.dom.Node getNode(int nodeHandle) {
     return new DTMNodeProxy(this, nodeHandle);
   }
-
-  // ==== Construction methods (may not be supported by some implementations!)
-  // =====
 
   /**
    * Simple error for asserts and the like.

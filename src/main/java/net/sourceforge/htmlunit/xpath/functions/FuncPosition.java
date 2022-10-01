@@ -28,9 +28,7 @@ public class FuncPosition extends Function {
 
   private boolean m_isTopLevel;
 
-  /**
-   * Figure out if we're executing a toplevel expression. If so, we can't be inside of a predicate.
-   */
+  /** {@inheritDoc} */
   @Override
   public void postCompileStep(Compiler compiler) {
     m_isTopLevel = compiler.getLocationPathDepth() == -1;
@@ -60,13 +58,7 @@ public class FuncPosition extends Function {
     return -1;
   }
 
-  /**
-   * Execute the function. The function must return a valid object.
-   *
-   * @param xctxt The current execution context.
-   * @return A valid XObject.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     double pos = getPositionInContextNodeList(xctxt);

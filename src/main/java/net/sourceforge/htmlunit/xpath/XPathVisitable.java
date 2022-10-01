@@ -18,8 +18,8 @@
 package net.sourceforge.htmlunit.xpath;
 
 /**
- * A class that implements this interface will call a XPathVisitor for itself and members within
- * its hierarchy. If the XPathVisitor's method returns false, the sub-member hierarchy will not be
+ * A class that implements this interface will call a XPathVisitor for itself and members within its
+ * hierarchy. If the XPathVisitor's method returns false, the sub-member hierarchy will not be
  * traversed.
  */
 public interface XPathVisitable {

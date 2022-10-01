@@ -113,5 +113,4 @@ public interface DTMFilter {
    * additional bits.
    */
   int SHOW_BYFUNCTION = 0x00010000;
-
 }

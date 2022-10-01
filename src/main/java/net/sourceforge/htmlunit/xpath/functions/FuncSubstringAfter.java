@@ -24,13 +24,7 @@ import net.sourceforge.htmlunit.xpath.objects.XString;
 /** Execute the SubstringAfter() function. */
 public class FuncSubstringAfter extends Function2Args {
 
-  /**
-   * Execute the function. The function must return a valid object.
-   *
-   * @param xctxt The current execution context.
-   * @return A valid XObject.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 

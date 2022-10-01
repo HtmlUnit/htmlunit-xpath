@@ -42,14 +42,7 @@ public class FunctionMultiArgs extends Function3Args {
     return m_args;
   }
 
-  /**
-   * Set an argument expression for a function. This method is called by the XPath compiler.
-   *
-   * @param arg non-null expression that represents the argument.
-   * @param argNum The argument number index.
-   * @throws WrongNumberArgsException If a derived class determines that the number of arguments is
-   *     incorrect.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
 
@@ -72,22 +65,11 @@ public class FunctionMultiArgs extends Function3Args {
     }
   }
 
-  /**
-   * Check that the number of arguments passed to this function is correct.
-   *
-   * @param argNum The number of arguments that is being passed to the function.
-   * @throws WrongNumberArgsException
-   */
+  /** {@inheritDoc} */
   @Override
   public void checkNumberArgs(int argNum) throws WrongNumberArgsException {}
 
-  /**
-   * Constructs and throws a WrongNumberArgException with the appropriate message for this function
-   * object. This class supports an arbitrary number of arguments, so this method must never be
-   * called.
-   *
-   * @throws WrongNumberArgsException
-   */
+  /** {@inheritDoc} */
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     String fMsg =
@@ -100,11 +82,7 @@ public class FunctionMultiArgs extends Function3Args {
     throw new RuntimeException(fMsg);
   }
 
-  /**
-   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
-   *
-   * @return true if traversal outside the context node's subtree can occur.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
 
@@ -128,13 +106,13 @@ public class FunctionMultiArgs extends Function3Args {
       m_argIndex = index;
     }
 
-    /** @see ExpressionOwner#getExpression() */
+    /** {@inheritDoc} */
     @Override
     public Expression getExpression() {
       return m_args[m_argIndex];
     }
 
-    /** @see ExpressionOwner#setExpression(Expression) */
+    /** {@inheritDoc} */
     @Override
     public void setExpression(Expression exp) {
       exp.exprSetParent(FunctionMultiArgs.this);
@@ -142,9 +120,7 @@ public class FunctionMultiArgs extends Function3Args {
     }
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callArgVisitors(XPathVisitor visitor) {
     super.callArgVisitors(visitor);
@@ -156,7 +132,7 @@ public class FunctionMultiArgs extends Function3Args {
     }
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;

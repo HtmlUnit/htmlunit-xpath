@@ -70,13 +70,7 @@ public abstract class Function extends Expression {
     throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("zero", null));
   }
 
-  /**
-   * Execute an XPath function object. The function must return a valid object.
-   *
-   * @param xctxt The execution current context.
-   * @return A valid XObject.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
@@ -89,9 +83,7 @@ public abstract class Function extends Expression {
   /** Call the visitors for the function arguments. */
   public void callArgVisitors(XPathVisitor visitor) {}
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     if (visitor.visitFunction(owner, this)) {
@@ -99,7 +91,7 @@ public abstract class Function extends Expression {
     }
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!isSameClass(expr)) return false;

@@ -95,21 +95,13 @@ public class XNodeSet extends NodeSequence {
     } else m_last = 0;
   }
 
-  /**
-   * Tell that this is a CLASS_NODESET.
-   *
-   * @return type CLASS_NODESET
-   */
+  /** {@inheritDoc} */
   @Override
   public int getType() {
     return CLASS_NODESET;
   }
 
-  /**
-   * Given a request type, return the equivalent string. For diagnostic purposes.
-   *
-   * @return type string "#NODESET"
-   */
+  /** {@inheritDoc} */
   @Override
   public String getTypeString() {
     return "#NODESET";
@@ -126,12 +118,7 @@ public class XNodeSet extends NodeSequence {
     return xstr.toDouble();
   }
 
-  /**
-   * Cast result object to a number.
-   *
-   * @return numeric value of the string conversion from the next node in the NodeSetDTM, or NAN if
-   *     no node was found
-   */
+  /** {@inheritDoc} */
   @Override
   public double num() {
 
@@ -139,13 +126,7 @@ public class XNodeSet extends NodeSequence {
     return (node != DTM.NULL) ? getNumberFromNode(node) : Double.NaN;
   }
 
-  /**
-   * Cast result object to a number, but allow side effects, such as the incrementing of an
-   * iterator.
-   *
-   * @return numeric value of the string conversion from the next node in the NodeSetDTM, or NAN if
-   *     no node was found
-   */
+  /** {@inheritDoc} */
   @Override
   public double numWithSideEffects() {
     int node = nextNode();
@@ -153,22 +134,13 @@ public class XNodeSet extends NodeSequence {
     return (node != DTM.NULL) ? getNumberFromNode(node) : Double.NaN;
   }
 
-  /**
-   * Cast result object to a boolean.
-   *
-   * @return True if there is a next node in the nodeset
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean bool() {
     return item(0) != DTM.NULL;
   }
 
-  /**
-   * Cast result object to a boolean, but allow side effects, such as the incrementing of an
-   * iterator.
-   *
-   * @return True if there is a next node in the nodeset
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean boolWithSideEffects() {
     return nextNode() != DTM.NULL;
@@ -189,59 +161,36 @@ public class XNodeSet extends NodeSequence {
     return net.sourceforge.htmlunit.xpath.objects.XString.EMPTYSTRING;
   }
 
-  /**
-   * Cast result object to an XMLString.
-   *
-   * @return The document fragment node data or the empty string.
-   */
+  /** {@inheritDoc} */
   @Override
   public XString xstr() {
     int node = item(0);
     return (node != DTM.NULL) ? getStringFromNode(node) : XString.EMPTYSTRING;
   }
 
-  /**
-   * Cast result object to a string.
-   *
-   * @return the string conversion from the next node in the nodeset or "" if there is no next node
-   */
+  /** {@inheritDoc} */
   @Override
   public String str() {
     int node = item(0);
     return (node != DTM.NULL) ? getStringFromNode(node).toString() : "";
   }
 
-  /**
-   * Return a java object that's closest to the representation that should be handed to an
-   * extension.
-   *
-   * @return The object that this class wraps
-   */
+  /** {@inheritDoc} */
   @Override
   public Object object() {
     if (null == m_obj) {
-        return this;
+      return this;
     }
     return m_obj;
   }
 
-  /**
-   * Cast result object to a nodelist.
-   *
-   * @return a NodeIterator.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public NodeIterator nodeset() throws javax.xml.transform.TransformerException {
     return new net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeIterator(iter());
   }
 
-  /**
-   * Cast result object to a nodelist.
-   *
-   * @return a NodeList.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public NodeList nodelist() throws javax.xml.transform.TransformerException {
     net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeList nodelist =
@@ -255,32 +204,17 @@ public class XNodeSet extends NodeSequence {
     return nodelist;
   }
 
-  // /**
-  // * Return a java object that's closest to the representation
-  // * that should be handed to an extension.
-  // *
-  // * @return The object that this class wraps
-  // */
-  // public Object object()
-  // {
-  // return new org.apache.xml.dtm.ref.DTMNodeList(iter());
-  // }
-
   /** Return the iterator without cloning, etc. */
   public DTMIterator iterRaw() {
     return this;
   }
 
-  /**
-   * Cast result object to a nodelist.
-   *
-   * @return The nodeset as a nodelist
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator iter() {
     try {
       if (hasCache()) {
-          return cloneWithReset();
+        return cloneWithReset();
       }
       return this; // don't bother to clone... won't do any good!
     } catch (CloneNotSupportedException cnse) {
@@ -288,11 +222,7 @@ public class XNodeSet extends NodeSequence {
     }
   }
 
-  /**
-   * Cast result object to a mutableNodeset.
-   *
-   * @return The nodeset as a mutableNodeset
-   */
+  /** {@inheritDoc} */
   @Override
   public NodeSetDTM mutableNodeset() {
     NodeSetDTM mnl;
@@ -332,7 +262,7 @@ public class XNodeSet extends NodeSequence {
    * @param obj2 Object to compare this nodeset to
    * @param comparator Comparator to use
    * @return See the comments below for each object type comparison
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public boolean compare(XObject obj2, Comparator comparator)
       throws javax.xml.transform.TransformerException {
@@ -468,60 +398,31 @@ public class XNodeSet extends NodeSequence {
     return result;
   }
 
-  /**
-   * Tell if one object is less than the other.
-   *
-   * @param obj2 object to compare this nodeset to
-   * @return see this.compare(...)
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean lessThan(XObject obj2) throws javax.xml.transform.TransformerException {
     return compare(obj2, S_LT);
   }
 
-  /**
-   * Tell if one object is less than or equal to the other.
-   *
-   * @param obj2 object to compare this nodeset to
-   * @return see this.compare(...)
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean lessThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException {
     return compare(obj2, S_LTE);
   }
 
-  /**
-   * Tell if one object is less than the other.
-   *
-   * @param obj2 object to compare this nodeset to
-   * @return see this.compare(...)
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean greaterThan(XObject obj2) throws javax.xml.transform.TransformerException {
     return compare(obj2, S_GT);
   }
 
-  /**
-   * Tell if one object is less than the other.
-   *
-   * @param obj2 object to compare this nodeset to
-   * @return see this.compare(...)
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean greaterThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException {
     return compare(obj2, S_GTE);
   }
 
-  /**
-   * Tell if two objects are functionally equal.
-   *
-   * @param obj2 object to compare this nodeset to
-   * @return see this.compare(...)
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean equals(XObject obj2) {
     try {
@@ -531,13 +432,7 @@ public class XNodeSet extends NodeSequence {
     }
   }
 
-  /**
-   * Tell if two objects are functionally not equal.
-   *
-   * @param obj2 object to compare this nodeset to
-   * @return see this.compare(...)
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean notEquals(XObject obj2) throws javax.xml.transform.TransformerException {
     return compare(obj2, S_NEQ);
@@ -569,26 +464,14 @@ abstract class Comparator {
 /** Compare strings or numbers for less than. */
 class LessThanComparator extends Comparator {
 
-  /**
-   * Compare two strings for less than.
-   *
-   * @param s1 First string to compare
-   * @param s2 Second String to compare
-   * @return True if s1 is less than s2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareStrings(XString s1, XString s2) {
     return s1.toDouble() < s2.toDouble();
     // return s1.compareTo(s2) < 0;
   }
 
-  /**
-   * Compare two numbers for less than.
-   *
-   * @param n1 First number to compare
-   * @param n2 Second number to compare
-   * @return true if n1 is less than n2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareNumbers(double n1, double n2) {
     return n1 < n2;
@@ -598,26 +481,14 @@ class LessThanComparator extends Comparator {
 /** Compare strings or numbers for less than or equal. */
 class LessThanOrEqualComparator extends Comparator {
 
-  /**
-   * Compare two strings for less than or equal.
-   *
-   * @param s1 First string to compare
-   * @param s2 Second String to compare
-   * @return true if s1 is less than or equal to s2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareStrings(XString s1, XString s2) {
     return s1.toDouble() <= s2.toDouble();
     // return s1.compareTo(s2) <= 0;
   }
 
-  /**
-   * Compare two numbers for less than or equal.
-   *
-   * @param n1 First number to compare
-   * @param n2 Second number to compare
-   * @return true if n1 is less than or equal to n2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareNumbers(double n1, double n2) {
     return n1 <= n2;
@@ -627,26 +498,14 @@ class LessThanOrEqualComparator extends Comparator {
 /** Compare strings or numbers for greater than. */
 class GreaterThanComparator extends Comparator {
 
-  /**
-   * Compare two strings for greater than.
-   *
-   * @param s1 First string to compare
-   * @param s2 Second String to compare
-   * @return true if s1 is greater than s2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareStrings(XString s1, XString s2) {
     return s1.toDouble() > s2.toDouble();
     // return s1.compareTo(s2) > 0;
   }
 
-  /**
-   * Compare two numbers for greater than.
-   *
-   * @param n1 First number to compare
-   * @param n2 Second number to compare
-   * @return true if n1 is greater than n2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareNumbers(double n1, double n2) {
     return n1 > n2;
@@ -656,26 +515,14 @@ class GreaterThanComparator extends Comparator {
 /** Compare strings or numbers for greater than or equal. */
 class GreaterThanOrEqualComparator extends Comparator {
 
-  /**
-   * Compare two strings for greater than or equal.
-   *
-   * @param s1 First string to compare
-   * @param s2 Second String to compare
-   * @return true if s1 is greater than or equal to s2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareStrings(XString s1, XString s2) {
     return s1.toDouble() >= s2.toDouble();
     // return s1.compareTo(s2) >= 0;
   }
 
-  /**
-   * Compare two numbers for greater than or equal.
-   *
-   * @param n1 First number to compare
-   * @param n2 Second number to compare
-   * @return true if n1 is greater than or equal to n2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareNumbers(double n1, double n2) {
     return n1 >= n2;
@@ -685,25 +532,13 @@ class GreaterThanOrEqualComparator extends Comparator {
 /** Compare strings or numbers for equality. */
 class EqualComparator extends Comparator {
 
-  /**
-   * Compare two strings for equality.
-   *
-   * @param s1 First string to compare
-   * @param s2 Second String to compare
-   * @return true if s1 is equal to s2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareStrings(XString s1, XString s2) {
     return s1.equals(s2);
   }
 
-  /**
-   * Compare two numbers for equality.
-   *
-   * @param n1 First number to compare
-   * @param n2 Second number to compare
-   * @return true if n1 is equal to n2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareNumbers(double n1, double n2) {
     return n1 == n2;
@@ -713,25 +548,13 @@ class EqualComparator extends Comparator {
 /** Compare strings or numbers for non-equality. */
 class NotEqualComparator extends Comparator {
 
-  /**
-   * Compare two strings for non-equality.
-   *
-   * @param s1 First string to compare
-   * @param s2 Second String to compare
-   * @return true if s1 is not equal to s2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareStrings(XString s1, XString s2) {
     return !s1.equals(s2);
   }
 
-  /**
-   * Compare two numbers for non-equality.
-   *
-   * @param n1 First number to compare
-   * @param n2 Second number to compare
-   * @return true if n1 is not equal to n2
-   */
+  /** {@inheritDoc} */
   @Override
   boolean compareNumbers(double n1, double n2) {
     return n1 != n2;

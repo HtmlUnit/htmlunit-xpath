@@ -24,15 +24,7 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 /** The 'or' operation expression executer. */
 public class Or extends Operation {
 
-  /**
-   * OR two expressions and return the boolean result. Override superclass method for optimization
-   * purposes.
-   *
-   * @param xctxt The runtime execution context.
-   * @return {@link net.sourceforge.htmlunit.xpath.objects.XBoolean#S_TRUE} or {@link
-   *     net.sourceforge.htmlunit.xpath.objects.XBoolean#S_FALSE}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
@@ -45,13 +37,7 @@ public class Or extends Operation {
     } else return XBoolean.S_TRUE;
   }
 
-  /**
-   * Evaluate this operation directly to a boolean.
-   *
-   * @param xctxt The runtime execution context.
-   * @return The result of the operation as a boolean.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean bool(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return m_left.bool(xctxt) || m_right.bool(xctxt);

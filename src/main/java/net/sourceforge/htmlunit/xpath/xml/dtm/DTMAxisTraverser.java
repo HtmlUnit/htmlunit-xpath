@@ -45,7 +45,7 @@ public abstract class DTMAxisTraverser {
    * will go into an infinate loop. So to traverse an axis, the first function must be used to get
    * the first node.
    *
-   * <p>This method needs to be overloaded only by those axis that process the self node. <\p>
+   * <p>This method needs to be overloaded only by those axis that process the self node.
    *
    * @param context The context node of this traversal. This is the point that the traversal starts
    *     from.
@@ -60,7 +60,7 @@ public abstract class DTMAxisTraverser {
    * will go into an infinate loop. So to traverse an axis, the first function must be used to get
    * the first node.
    *
-   * <p>This method needs to be overloaded only by those axis that process the self node. <\p>
+   * <p>This method needs to be overloaded only by those axis that process the self node.
    *
    * @param context The context node of this traversal. This is the point of origin for the
    *     traversal -- its "root node" or starting point.

@@ -152,7 +152,7 @@ public class XMLErrorResources extends ListResourceBundle {
   public Object[][] getContents() {
     return new Object[][] {
 
-            /* Error message ID that has a null message, but takes in a single object. */
+      /* Error message ID that has a null message, but takes in a single object. */
       {"ER0000", "{0}"},
       {ER_FUNCTION_NOT_SUPPORTED, "Function not supported!"},
       {ER_CANNOT_OVERWRITE_CAUSE, "Cannot overwrite cause"},

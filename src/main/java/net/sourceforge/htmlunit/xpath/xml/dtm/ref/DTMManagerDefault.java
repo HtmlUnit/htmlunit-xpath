@@ -144,24 +144,6 @@ public class DTMManagerDefault extends DTMManager {
   /** Constructor DTMManagerDefault */
   public DTMManagerDefault() {}
 
-  /**
-   * Get an instance of a DTM, loaded with the content from the specified source. If the unique flag
-   * is true, a new instance will always be returned. Otherwise it is up to the DTMManager to return
-   * a new instance or an instance that it already created and may be being used by someone else.
-   *
-   * <p>A bit of magic in this implementation: If the source is null, unique is true, and
-   * incremental and doIndexing are both false, we return an instance of SAX2RTFDTM, which see.
-   *
-   * <p>(I think more parameters will need to be added for error handling, and entity resolution,
-   * and more explicit control of the RTF situation).
-   *
-   * @param source the specification of the source object.
-   * @param unique true if the returned DTM must be unique, probably because it is going to be
-   *     mutated.
-   * @param incremental true if the DTM should be built incrementally, if possible.
-   * @param doIndexing true if the caller considers it worth it to use indexing schemes.
-   * @return a non-null DTM reference.
-   */
   @Override
   public synchronized DTM getDTM(
       Source source, boolean unique, boolean incremental, boolean doIndexing) {
@@ -190,13 +172,7 @@ public class DTMManagerDefault extends DTMManager {
     // source);
   }
 
-  /**
-   * Given a W3C DOM node, try and return a DTM handle. Note: calling this may be non-optimal, and
-   * there is no guarantee that the node will be found in any particular DTM.
-   *
-   * @param node Non-null reference to a DOM node.
-   * @return a valid DTM handle.
-   */
+  /** {@inheritDoc} */
   @Override
   public synchronized int getDTMHandleFromNode(org.w3c.dom.Node node) {
     if (null == node)
@@ -295,12 +271,7 @@ public class DTMManagerDefault extends DTMManager {
     }
   }
 
-  /**
-   * Return the DTM object containing a representation of this node.
-   *
-   * @param nodeHandle DTM Handle indicating which node to retrieve
-   * @return a reference to the DTM object containing this node.
-   */
+  /** {@inheritDoc} */
   @Override
   public synchronized DTM getDTM(int nodeHandle) {
     try {
@@ -312,46 +283,23 @@ public class DTMManagerDefault extends DTMManager {
     }
   }
 
-  /**
-   * NEEDSDOC Method createDTMIterator
-   *
-   * <p>NEEDSDOC @param whatToShow NEEDSDOC @param filter NEEDSDOC @param entityReferenceExpansion
-   *
-   * <p>NEEDSDOC (createDTMIterator) @return
-   */
+  /** {@inheritDoc} */
   @Override
   public synchronized DTMIterator createDTMIterator(
       int whatToShow, DTMFilter filter, boolean entityReferenceExpansion) {
 
-    /* @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
     return null;
   }
 
-  /**
-   * NEEDSDOC Method createDTMIterator
-   *
-   * <p>NEEDSDOC @param xpathString NEEDSDOC @param presolver
-   *
-   * <p>NEEDSDOC (createDTMIterator) @return
-   */
+  /** {@inheritDoc} */
   @Override
   public synchronized DTMIterator createDTMIterator(String xpathString, PrefixResolver presolver) {
-
-    /* @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
     return null;
   }
 
-    /**
-   * NEEDSDOC Method createDTMIterator
-   *
-   * <p>NEEDSDOC @param xpathCompiler NEEDSDOC @param pos
-   *
-   * <p>NEEDSDOC (createDTMIterator) @return
-   */
+  /** {@inheritDoc} */
   @Override
   public synchronized DTMIterator createDTMIterator(Object xpathCompiler, int pos) {
-
-    /* @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
     return null;
   }
 

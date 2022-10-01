@@ -66,15 +66,7 @@ public class UnionChildIterator extends ChildTestIterator {
     test.exprSetParent(this);
   }
 
-  /**
-   * Test whether a specified node is visible in the logical view of a TreeWalker or NodeIterator.
-   * This function will be called by the implementation of TreeWalker and NodeIterator; it is not
-   * intended to be called directly from user code.
-   *
-   * @param n The node to check to see if it passes the filter or not.
-   * @return a constant to determine whether the node is accepted, rejected, or skipped, as defined
-   *     above .
-   */
+  /** {@inheritDoc} */
   @Override
   public short acceptNode(int n) {
     XPathContext xctxt = getXPathContext();

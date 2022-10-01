@@ -69,13 +69,7 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
     return dtm_iter;
   }
 
-  // ================================================================
-  // org.w3c.dom.traversal.NodeFilter API follows
-
-  /**
-   * Detaches the NodeIterator from the set which it iterated over, releasing any computational
-   * resources and placing the iterator in the INVALID state.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     // Theoretically, we could release dtm_iter at this point. But
@@ -84,52 +78,32 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
     valid = false;
   }
 
-  /**
-   * The value of this flag determines whether the children of entity reference nodes are visible to
-   * the iterator.
-   *
-   * @return false, always (the DTM model flattens entity references)
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean getExpandEntityReferences() {
     return false;
   }
 
-  /**
-   * Return a handle to the filter used to screen nodes.
-   *
-   * <p>This is ill-defined in Xalan's usage of Nodeiterator, where we have built stateful
-   * XPath-based filtering directly into the traversal object. We could return something which
-   * supports the NodeFilter interface and allows querying whether a given node would be permitted
-   * if it appeared as our next node, but in the current implementation that would be very complex
-   * -- and just isn't all that useful.
-   *
-   * @throws DOMException -- NOT_SUPPORTED_ERROR because I can't think of anything more useful to do
-   *     in this case
-   */
+  /** {@inheritDoc} */
   @Override
   public NodeFilter getFilter() {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /** @return The root node of the NodeIterator, as specified when it was created. */
+  /** {@inheritDoc} */
   @Override
   public Node getRoot() {
     int handle = dtm_iter.getRoot();
     return dtm_iter.getDTM(handle).getNode(handle);
   }
 
-  /** Return a mask describing which node types are presented via the iterator. */
+  /** {@inheritDoc} */
   @Override
   public int getWhatToShow() {
     return dtm_iter.getWhatToShow();
   }
 
-  /**
-   * @return the next node in the set and advance the position of the iterator in the set.
-   * @throws DOMException - INVALID_STATE_ERR Raised if this method is called after the detach
-   *     method was invoked.
-   */
+  /** {@inheritDoc} */
   @Override
   public Node nextNode() throws DOMException {
     if (!valid) throw new DTMDOMException(DOMException.INVALID_STATE_ERR);
@@ -139,11 +113,7 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
     return dtm_iter.getDTM(handle).getNode(handle);
   }
 
-  /**
-   * @return the next previous in the set and advance the position of the iterator in the set.
-   * @throws DOMException - INVALID_STATE_ERR Raised if this method is called after the detach
-   *     method was invoked.
-   */
+  /** {@inheritDoc} */
   @Override
   public Node previousNode() {
     if (!valid) throw new DTMDOMException(DOMException.INVALID_STATE_ERR);

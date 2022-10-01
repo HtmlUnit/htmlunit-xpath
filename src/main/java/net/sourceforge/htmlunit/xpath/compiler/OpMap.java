@@ -29,11 +29,7 @@ public class OpMap {
   /** The current pattern string, for diagnostics purposes */
   protected String m_currentPattern;
 
-  /**
-   * Return the expression as a string for diagnostics.
-   *
-   * @return The expression string.
-   */
+  /** {@inheritDoc} */
   @Override
   public String toString() {
     return m_currentPattern;

@@ -121,23 +121,14 @@ public class MatchPatternIterator extends LocPathIterator {
     }
   }
 
-  /**
-   * Initialize the context values for this expression after it is cloned.
-   *
-   * @param context The XPath runtime context for this transformation.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int context, Object environment) {
     super.setRoot(context, environment);
     m_traverser = m_cdtm.getAxisTraverser(m_superAxis);
   }
 
-  /**
-   * Detaches the iterator from the set which it iterated over, releasing any computational
-   * resources and placing the iterator in the INVALID state. After<code>detach</code> has been
-   * invoked, calls to <code>nextNode</code> or<code>previousNode</code> will raise the exception
-   * INVALID_STATE_ERR.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     if (m_allowDetach) {
@@ -161,13 +152,7 @@ public class MatchPatternIterator extends LocPathIterator {
     return m_lastFetched;
   }
 
-  /**
-   * Returns the next node in the set and advances the position of the iterator in the set. After a
-   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
-   *
-   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
-   *     there are no more members in that set.
-   */
+  /** {@inheritDoc} */
   @Override
   public int nextNode() {
     if (m_foundLast) return DTM.NULL;

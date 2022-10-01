@@ -145,7 +145,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /** Create a new NodeSequence in an invalid (null) state. */
   public NodeSequence() {}
 
-  /** @see DTMIterator#getDTM(int) */
+  /** {@inheritDoc} */
   @Override
   public DTM getDTM(int nodeHandle) {
     DTMManager mgr = getDTMManager();
@@ -156,13 +156,13 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return null;
   }
 
-  /** @see DTMIterator#getDTMManager() */
+  /** {@inheritDoc} */
   @Override
   public DTMManager getDTMManager() {
     return m_dtmMgr;
   }
 
-  /** @see DTMIterator#getRoot() */
+  /** {@inheritDoc} */
   @Override
   public int getRoot() {
     if (null != m_iter) {
@@ -174,7 +174,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return DTM.NULL;
   }
 
-  /** @see DTMIterator#setRoot(int, Object) */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int nodeHandle, Object environment) {
     if (null != m_iter) {
@@ -189,14 +189,14 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     } else assertion(false, "Can not setRoot on a non-iterated NodeSequence!");
   }
 
-  /** @see DTMIterator#reset() */
+  /** {@inheritDoc} */
   @Override
   public void reset() {
     m_next = 0;
     // not resetting the iterator on purpose!!!
   }
 
-  /** @see DTMIterator#getWhatToShow() */
+  /** {@inheritDoc} */
   @Override
   public int getWhatToShow() {
     return hasCache()
@@ -204,7 +204,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         : m_iter.getWhatToShow();
   }
 
-  /** @see DTMIterator#getExpandEntityReferences() */
+  /** {@inheritDoc} */
   @Override
   public boolean getExpandEntityReferences() {
     if (null != m_iter) {
@@ -213,7 +213,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return true;
   }
 
-  /** @see DTMIterator#nextNode() */
+  /** {@inheritDoc} */
   @Override
   public int nextNode() {
     // If the cache is on, and the node has already been found, then
@@ -258,7 +258,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return next;
   }
 
-  /** @see DTMIterator#previousNode() */
+  /** {@inheritDoc} */
   @Override
   public int previousNode() {
     if (hasCache()) {
@@ -275,18 +275,14 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return m_next;
   }
 
-  /** @see DTMIterator#detach() */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     if (null != m_iter) m_iter.detach();
     super.detach();
   }
 
-  /**
-   * Calling this with a value of false will cause the nodeset to be cached.
-   *
-   * @see DTMIterator#allowDetachToRelease(boolean)
-   */
+  /** {@inheritDoc} */
   @Override
   public void allowDetachToRelease(boolean allowRelease) {
     if ((false == allowRelease) && !hasCache()) {
@@ -297,7 +293,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     super.allowDetachToRelease(allowRelease);
   }
 
-  /** @see DTMIterator#getCurrentNode() */
+  /** {@inheritDoc} */
   @Override
   public int getCurrentNode() {
     if (hasCache()) {
@@ -315,13 +311,13 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return DTM.NULL;
   }
 
-  /** @see DTMIterator#isFresh() */
+  /** {@inheritDoc} */
   @Override
   public boolean isFresh() {
     return 0 == m_next;
   }
 
-  /** @see DTMIterator#setShouldCacheNodes(boolean) */
+  /** {@inheritDoc} */
   @Override
   public void setShouldCacheNodes(boolean b) {
     if (b) {
@@ -333,13 +329,13 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     } else SetVector(null);
   }
 
-  /** @see DTMIterator#getCurrentPos() */
+  /** {@inheritDoc} */
   @Override
   public int getCurrentPos() {
     return m_next;
   }
 
-  /** @see DTMIterator#runTo(int) */
+  /** {@inheritDoc} */
   @Override
   public void runTo(int index) {
     if (-1 == index) {
@@ -356,13 +352,13 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     }
   }
 
-  /** @see DTMIterator#setCurrentPos(int) */
+  /** {@inheritDoc} */
   @Override
   public void setCurrentPos(int i) {
     runTo(i);
   }
 
-  /** @see DTMIterator#item(int) */
+  /** {@inheritDoc} */
   @Override
   public int item(int index) {
     setCurrentPos(index);
@@ -371,7 +367,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return n;
   }
 
-  /** @see DTMIterator#setItem(int, int) */
+  /** {@inheritDoc} */
   @Override
   public void setItem(int node, int index) {
     NodeVector vec = getVector();
@@ -412,7 +408,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     } else m_iter.setItem(node, index);
   }
 
-  /** @see DTMIterator#getLength() */
+  /** {@inheritDoc} */
   @Override
   public int getLength() {
     IteratorCache cache = getCache();
@@ -444,11 +440,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return (-1 == m_last) ? (m_last = m_iter.getLength()) : m_last;
   }
 
-  /**
-   * Note: Not a deep clone.
-   *
-   * @see DTMIterator#cloneWithReset()
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
     NodeSequence seq = (NodeSequence) super.clone();
@@ -465,13 +457,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return seq;
   }
 
-  /**
-   * Get a clone of this iterator, but don't reset the iteration in the process, so that it may be
-   * used from the current position. Note: Not a deep clone.
-   *
-   * @return A clone of this object.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
     NodeSequence clone = (NodeSequence) super.clone();
@@ -488,7 +474,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return clone;
   }
 
-  /** @see DTMIterator#isDocOrdered() */
+  /** {@inheritDoc} */
   @Override
   public boolean isDocOrdered() {
     if (null != m_iter) {
@@ -498,7 +484,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return true; // can't be sure?
   }
 
-  /** @see DTMIterator#getAxis() */
+  /** {@inheritDoc} */
   @Override
   public int getAxis() {
     if (null != m_iter) {
@@ -509,7 +495,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return 0;
   }
 
-  /** @see PathComponent#getAnalysisBits() */
+  /** {@inheritDoc} */
   @Override
   public int getAnalysisBits() {
     if ((null != m_iter) && (m_iter instanceof PathComponent)) {
@@ -563,15 +549,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     return insertIndex;
   } // end addNodeInDocOrder(Vector v, Object obj)
 
-  /**
-   * It used to be that many locations in the code simply did an assignment to this.m_obj directly,
-   * rather than calling the setObject(Object) method. The problem is that our super-class would be
-   * updated on what the cache associated with this NodeSequence, but we wouldn't know ourselves.
-   *
-   * <p>All setting of m_obj is done through setObject() now, and this method over-rides the
-   * super-class method. So now we are in the loop have an opportunity to update some caching
-   * information.
-   */
+  /** {@inheritDoc} */
   @Override
   protected void setObject(Object obj) {
     if (obj instanceof NodeVector) {

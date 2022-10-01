@@ -24,22 +24,17 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 /** Special context node pattern matcher. */
 public class ContextMatchStepPattern extends StepPattern {
 
-  /** Construct a ContextMatchStepPattern. */
+  /**
+   * Construct a ContextMatchStepPattern.
+   *
+   * @param axis the axis
+   * @param paxis the p axis
+   */
   public ContextMatchStepPattern(int axis, int paxis) {
     super(DTMFilter.SHOW_ALL, axis, paxis);
   }
 
-  /**
-   * Execute this pattern step, including predicates.
-   *
-   * @param xctxt XPath runtime context.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 

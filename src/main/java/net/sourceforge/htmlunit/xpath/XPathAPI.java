@@ -49,7 +49,7 @@ public class XPathAPI {
    * @param contextNode The node to start searching from.
    * @param str A valid XPath string.
    * @return The first node found that matches the XPath, or null.
-   * @throws TransformerException
+   * @throws TransformerException in case of error
    */
   public static Node selectSingleNode(Node contextNode, String str) throws TransformerException {
     return selectSingleNode(contextNode, str, contextNode);
@@ -63,7 +63,7 @@ public class XPathAPI {
    * @param str A valid XPath string.
    * @param namespaceNode The node from which prefixes in the XPath will be resolved to namespaces.
    * @return The first node found that matches the XPath, or null.
-   * @throws TransformerException
+   * @throws TransformerException in case of error
    */
   public static Node selectSingleNode(Node contextNode, String str, Node namespaceNode)
       throws TransformerException {
@@ -82,7 +82,7 @@ public class XPathAPI {
    * @param contextNode The node to start searching from.
    * @param str A valid XPath string.
    * @return A NodeIterator, should never be null.
-   * @throws TransformerException
+   * @throws TransformerException in case of error
    */
   public static NodeIterator selectNodeIterator(Node contextNode, String str)
       throws TransformerException {
@@ -97,7 +97,7 @@ public class XPathAPI {
    * @param str A valid XPath string.
    * @param namespaceNode The node from which prefixes in the XPath will be resolved to namespaces.
    * @return A NodeIterator, should never be null.
-   * @throws TransformerException
+   * @throws TransformerException in case of error
    */
   public static NodeIterator selectNodeIterator(Node contextNode, String str, Node namespaceNode)
       throws TransformerException {
@@ -116,7 +116,7 @@ public class XPathAPI {
    * @param contextNode The node to start searching from.
    * @param str A valid XPath string.
    * @return A NodeIterator, should never be null.
-   * @throws TransformerException
+   * @throws TransformerException in case of error
    */
   public static NodeList selectNodeList(Node contextNode, String str) throws TransformerException {
     return selectNodeList(contextNode, str, contextNode);
@@ -130,7 +130,7 @@ public class XPathAPI {
    * @param str A valid XPath string.
    * @param namespaceNode The node from which prefixes in the XPath will be resolved to namespaces.
    * @return A NodeIterator, should never be null.
-   * @throws TransformerException
+   * @throws TransformerException in case of error
    */
   public static NodeList selectNodeList(Node contextNode, String str, Node namespaceNode)
       throws TransformerException {
@@ -155,7 +155,7 @@ public class XPathAPI {
    * @see net.sourceforge.htmlunit.xpath.objects.XBoolean
    * @see net.sourceforge.htmlunit.xpath.objects.XNumber
    * @see net.sourceforge.htmlunit.xpath.objects.XString
-   * @throws TransformerException
+   * @throws TransformerException in case of error
    */
   public static XObject eval(Node contextNode, String str) throws TransformerException {
     return eval(contextNode, str, contextNode);
@@ -177,7 +177,7 @@ public class XPathAPI {
    * @see net.sourceforge.htmlunit.xpath.objects.XBoolean
    * @see net.sourceforge.htmlunit.xpath.objects.XNumber
    * @see net.sourceforge.htmlunit.xpath.objects.XString
-   * @throws TransformerException
+   * @throws TransformerException in case of error
    */
   public static XObject eval(Node contextNode, String str, Node namespaceNode)
       throws TransformerException {
@@ -228,7 +228,7 @@ public class XPathAPI {
    * @see net.sourceforge.htmlunit.xpath.objects.XBoolean
    * @see net.sourceforge.htmlunit.xpath.objects.XNumber
    * @see net.sourceforge.htmlunit.xpath.objects.XString
-   * @throws TransformerException
+   * @throws TransformerException in case of error
    */
   public static XObject eval(Node contextNode, String str, PrefixResolver prefixResolver)
       throws TransformerException {

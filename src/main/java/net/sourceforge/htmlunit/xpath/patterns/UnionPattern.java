@@ -35,11 +35,7 @@ public class UnionPattern extends Expression {
    */
   private StepPattern[] m_patterns;
 
-  /**
-   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
-   *
-   * @return true if traversal outside the context node's subtree can occur.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
     if (null != m_patterns) {
@@ -73,17 +69,7 @@ public class UnionPattern extends Expression {
     return m_patterns;
   }
 
-  /**
-   * Test a node to see if it matches any of the patterns in the union.
-   *
-   * @param xctxt XPath runtime context.
-   * @return {@link net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NODETEST}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NONE}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
-   *     net.sourceforge.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
@@ -125,9 +111,7 @@ public class UnionPattern extends Expression {
     }
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     visitor.visitUnionPattern();
@@ -139,7 +123,7 @@ public class UnionPattern extends Expression {
     }
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!isSameClass(expr)) return false;

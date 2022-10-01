@@ -41,13 +41,7 @@ public class Function3Args extends Function2Args {
     return m_arg2;
   }
 
-  /**
-   * Set an argument expression for a function. This method is called by the XPath compiler.
-   *
-   * @param arg non-null expression that represents the argument.
-   * @param argNum The argument number index.
-   * @throws WrongNumberArgsException If the argNum parameter is greater than 2.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
 
@@ -58,46 +52,32 @@ public class Function3Args extends Function2Args {
     } else reportWrongNumberArgs();
   }
 
-  /**
-   * Check that the number of arguments passed to this function is correct.
-   *
-   * @param argNum The number of arguments that is being passed to the function.
-   * @throws WrongNumberArgsException
-   */
+  /** {@inheritDoc} */
   @Override
   public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
     if (argNum != 3) reportWrongNumberArgs();
   }
 
-  /**
-   * Constructs and throws a WrongNumberArgException with the appropriate message for this function
-   * object.
-   *
-   * @throws WrongNumberArgsException
-   */
+  /** {@inheritDoc} */
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("three", null));
   }
 
-  /**
-   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
-   *
-   * @return true if traversal outside the context node's subtree can occur.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
     return super.canTraverseOutsideSubtree() ? true : m_arg2.canTraverseOutsideSubtree();
   }
 
   class Arg2Owner implements ExpressionOwner {
-    /** @see ExpressionOwner#getExpression() */
+    /** {@inheritDoc} */
     @Override
     public Expression getExpression() {
       return m_arg2;
     }
 
-    /** @see ExpressionOwner#setExpression(Expression) */
+    /** {@inheritDoc} */
     @Override
     public void setExpression(Expression exp) {
       exp.exprSetParent(Function3Args.this);
@@ -105,16 +85,14 @@ public class Function3Args extends Function2Args {
     }
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callArgVisitors(XPathVisitor visitor) {
     super.callArgVisitors(visitor);
     if (null != m_arg2) m_arg2.callVisitors(new Arg2Owner(), visitor);
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;

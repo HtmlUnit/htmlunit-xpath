@@ -59,7 +59,7 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
    */
   protected boolean _isRestartable = true;
 
-    /**
+  /**
    * @return A DTMAxisIterator which has been reset to the start node, which may or may not be the
    *     same as this iterator.
    */
@@ -204,5 +204,4 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
   public int getAxis() {
     return -1;
   }
-
 }

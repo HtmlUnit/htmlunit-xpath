@@ -63,17 +63,7 @@ public class DTMChildIterNodeList extends DTMNodeListBase {
     m_firstChild = parentDTM.getFirstChild(parentHandle);
   }
 
-  // ================================================================
-  // org.w3c.dom.NodeList API follows
-
-  /**
-   * Returns the <code>index</code>th item in the collection. If <code>index</code> is greater than
-   * or equal to the number of nodes in the list, this returns <code>null</code>.
-   *
-   * @param index Index into the collection.
-   * @return The node at the <code>index</code>th position in the <code>NodeList</code>, or <code>
-   *     null</code> if that is not a valid index.
-   */
+  /** {@inheritDoc} */
   @Override
   public Node item(int index) {
     int handle = m_firstChild;
@@ -86,10 +76,7 @@ public class DTMChildIterNodeList extends DTMNodeListBase {
     return m_parentDTM.getNode(handle);
   }
 
-  /**
-   * The number of nodes in the list. The range of valid child node indices is 0 to <code>length-1
-   * </code> inclusive.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getLength() {
     int count = 0;

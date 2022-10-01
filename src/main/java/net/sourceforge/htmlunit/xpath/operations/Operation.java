@@ -40,11 +40,7 @@ public class Operation extends Expression implements ExpressionOwner {
    */
   protected Expression m_right;
 
-  /**
-   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
-   *
-   * @return true if traversal outside the context node's subtree can occur.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
 
@@ -68,14 +64,7 @@ public class Operation extends Expression implements ExpressionOwner {
     r.exprSetParent(this);
   }
 
-  /**
-   * Execute a binary operation by calling execute on each of the operands, and then calling the
-   * operate method on the derived class.
-   *
-   * @param xctxt The runtime execution context.
-   * @return The XObject result of the operation.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
@@ -94,7 +83,7 @@ public class Operation extends Expression implements ExpressionOwner {
    * @param left non-null reference to the evaluated left operand.
    * @param right non-null reference to the evaluated right operand.
    * @return non-null reference to the XObject that represents the result of the operation.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public XObject operate(XObject left, XObject right)
       throws javax.xml.transform.TransformerException {
@@ -102,13 +91,13 @@ public class Operation extends Expression implements ExpressionOwner {
   }
 
   class LeftExprOwner implements ExpressionOwner {
-    /** @see ExpressionOwner#getExpression() */
+    /** {@inheritDoc} */
     @Override
     public Expression getExpression() {
       return m_left;
     }
 
-    /** @see ExpressionOwner#setExpression(Expression) */
+    /** {@inheritDoc} */
     @Override
     public void setExpression(Expression exp) {
       exp.exprSetParent(Operation.this);
@@ -116,9 +105,7 @@ public class Operation extends Expression implements ExpressionOwner {
     }
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     if (visitor.visitBinaryOperation()) {
@@ -127,20 +114,20 @@ public class Operation extends Expression implements ExpressionOwner {
     }
   }
 
-  /** @see ExpressionOwner#getExpression() */
+  /** {@inheritDoc} */
   @Override
   public Expression getExpression() {
     return m_right;
   }
 
-  /** @see ExpressionOwner#setExpression(Expression) */
+  /** {@inheritDoc} */
   @Override
   public void setExpression(Expression exp) {
     exp.exprSetParent(this);
     m_right = exp;
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!isSameClass(expr)) return false;

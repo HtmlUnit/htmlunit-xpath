@@ -48,17 +48,12 @@ public class FilterExprIteratorSimple extends LocPathIterator {
     m_expr = expr;
   }
 
-  /**
-   * Initialize the context values for this expression after it is cloned.
-   *
-   * @param context The XPath runtime context for this transformation.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int context, Object environment) {
     super.setRoot(context, environment);
     m_exprObj =
-        executeFilterExpr(
-            context, m_execContext, getPrefixResolver(), getIsTopLevel(), m_expr);
+        executeFilterExpr(context, m_execContext, getPrefixResolver(), getIsTopLevel(), m_expr);
   }
 
   /**
@@ -102,13 +97,7 @@ public class FilterExprIteratorSimple extends LocPathIterator {
     return result;
   }
 
-  /**
-   * Returns the next node in the set and advances the position of the iterator in the set. After a
-   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
-   *
-   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
-   *     there are no more members in that set.
-   */
+  /** {@inheritDoc} */
   @Override
   public int nextNode() {
     if (m_foundLast) return DTM.NULL;
@@ -130,10 +119,7 @@ public class FilterExprIteratorSimple extends LocPathIterator {
     }
   }
 
-  /**
-   * Detaches the walker from the set which it iterated over, releasing any computational resources
-   * and placing the iterator in the INVALID state.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     if (m_allowDetach) {
@@ -143,11 +129,7 @@ public class FilterExprIteratorSimple extends LocPathIterator {
     }
   }
 
-  /**
-   * Get the analysis bits for this walker, as defined in the WalkerFactory.
-   *
-   * @return One of WalkerFactory#BIT_DESCENDANT, etc.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAnalysisBits() {
     if (null != m_expr && m_expr instanceof PathComponent) {
@@ -156,25 +138,20 @@ public class FilterExprIteratorSimple extends LocPathIterator {
     return WalkerFactory.BIT_FILTER;
   }
 
-  /**
-   * Returns true if all the nodes in the iteration well be returned in document order. Warning:
-   * This can only be called after setRoot has been called!
-   *
-   * @return true as a default.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isDocOrdered() {
     return m_exprObj.isDocOrdered();
   }
 
   class filterExprOwner implements ExpressionOwner {
-    /** @see ExpressionOwner#getExpression() */
+    /** {@inheritDoc} */
     @Override
     public Expression getExpression() {
       return m_expr;
     }
 
-    /** @see ExpressionOwner#setExpression(Expression) */
+    /** {@inheritDoc} */
     @Override
     public void setExpression(Expression exp) {
       exp.exprSetParent(FilterExprIteratorSimple.this);
@@ -182,12 +159,7 @@ public class FilterExprIteratorSimple extends LocPathIterator {
     }
   }
 
-  /**
-   * This will traverse the heararchy, calling the visitor for each member. If the called visitor
-   * method returns false, the subtree should not be called.
-   *
-   * @param visitor The visitor whose appropriate method will be called.
-   */
+  /** {@inheritDoc} */
   @Override
   public void callPredicateVisitors(XPathVisitor visitor) {
     m_expr.callVisitors(new filterExprOwner(), visitor);
@@ -195,7 +167,7 @@ public class FilterExprIteratorSimple extends LocPathIterator {
     super.callPredicateVisitors(visitor);
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;
@@ -206,11 +178,7 @@ public class FilterExprIteratorSimple extends LocPathIterator {
     return true;
   }
 
-  /**
-   * Returns the axis being iterated, if it is known.
-   *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAxis() {
     if (null != m_exprObj) return m_exprObj.getAxis();

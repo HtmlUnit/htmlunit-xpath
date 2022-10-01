@@ -48,29 +48,14 @@ public class HasPositionalPredChecker extends XPathVisitor {
     return hppc.m_hasPositionalPred;
   }
 
-  /**
-   * Visit a function.
-   *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param func The function reference object.
-   * @return true if the sub expressions should be traversed.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean visitFunction(ExpressionOwner owner, Function func) {
     if ((func instanceof FuncPosition) || (func instanceof FuncLast)) m_hasPositionalPred = true;
     return true;
   }
 
-  /**
-   * Visit a predicate within a location path. Note that there isn't a proper unique component for
-   * predicates, and that the expression will be called also for whatever type Expression is.
-   *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param pred The predicate object.
-   * @return true if the sub expressions should be traversed.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean visitPredicate(ExpressionOwner owner, Expression pred) {
     m_predDepth++;

@@ -123,12 +123,7 @@ public class DTMNodeProxy
     }
   }
 
-  /**
-   * Test for equality based on node number.
-   *
-   * @param node A DTM node proxy reference.
-   * @return true if the given node has the same handle as this node.
-   */
+  /** {@inheritDoc} */
   @Override
   public final boolean equals(Object node) {
 
@@ -143,100 +138,68 @@ public class DTMNodeProxy
     }
   }
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final String getNodeName() {
     return dtm.getNodeName(node);
   }
 
-  /**
-   * A PI's "target" states what processor channel the PI's data should be directed to. It is
-   * defined differently in HTML and XML.
-   *
-   * <p>In XML, a PI's "target" is the first (whitespace-delimited) token following the "&lt;?" token
-   * that begins the PI.
-   *
-   * <p>In HTML, target is always null.
-   *
-   * <p>Note that getNodeName is aliased to getTarget.
-   */
+  /** {@inheritDoc} */
   @Override
   public final String getTarget() {
     return dtm.getNodeName(node);
   } // getTarget():String
 
-  /** @see org.w3c.dom.Node as of DOM Level 2 */
+  /** {@inheritDoc} */
   @Override
   public final String getLocalName() {
     return dtm.getLocalName(node);
   }
 
-  /**
-   * @return The prefix for this node.
-   * @see org.w3c.dom.Node as of DOM Level 2
-   */
+  /** {@inheritDoc} */
   @Override
   public final String getPrefix() {
     return dtm.getPrefix(node);
   }
 
-  /**
-   * @param prefix the prefix
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Node as of DOM Level 2 -- DTMNodeProxy is read-only
-   */
+  /** {@inheritDoc} */
   @Override
   public final void setPrefix(String prefix) throws DOMException {
     throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
-  /** @see org.w3c.dom.Node as of DOM Level 2 */
+  /** {@inheritDoc} */
   @Override
   public final String getNamespaceURI() {
     return dtm.getNamespaceURI(node);
   }
 
-  /**
-   * Ask whether we support a given DOM feature. In fact, we do not _fully_ support any DOM feature
-   * -- we're a read-only subset -- so arguably we should always return false.
-   *
-   * @param feature
-   * @param version
-   * @return false
-   * @see org.w3c.dom.Node as of DOM Level 2
-   */
+  /** {@inheritDoc} */
   @Override
   public final boolean isSupported(String feature, String version) {
     return implementation.hasFeature(feature, version);
     // throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Node
-   */
+  /** {@inheritDoc} */
   @Override
   public final String getNodeValue() throws DOMException {
     return dtm.getNodeValue(node);
   }
 
-  /**
-   * @param nodeValue
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Node -- DTMNodeProxy is read-only
-   */
+  /** {@inheritDoc} */
   @Override
   public final void setNodeValue(String nodeValue) throws DOMException {
     throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final short getNodeType() {
     return dtm.getNodeType(node);
   }
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final Node getParentNode() {
 
@@ -247,7 +210,7 @@ public class DTMNodeProxy
     return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
   }
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final NodeList getChildNodes() {
 
@@ -255,11 +218,9 @@ public class DTMNodeProxy
     // we can't just wap DTMNodeList around an Axis.CHILD iterator.
     // Instead, we've created a special-case operating mode for that object.
     return new DTMChildIterNodeList(dtm, node);
-
-    // throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final Node getFirstChild() {
 
@@ -268,7 +229,7 @@ public class DTMNodeProxy
     return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
   }
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final Node getLastChild() {
 
@@ -277,7 +238,7 @@ public class DTMNodeProxy
     return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
   }
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final Node getPreviousSibling() {
 
@@ -286,7 +247,7 @@ public class DTMNodeProxy
     return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
   }
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final Node getNextSibling() {
 
@@ -300,117 +261,81 @@ public class DTMNodeProxy
 
   // DTMNamedNodeMap m_attrs;
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final NamedNodeMap getAttributes() {
 
     return new DTMNamedNodeMap(dtm, node);
   }
 
-  /**
-   * Method hasAttribute
-   *
-   * @param name
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean hasAttribute(String name) {
     return DTM.NULL != dtm.getAttributeNode(node, null, name);
   }
 
-  /**
-   * Method hasAttributeNS
-   *
-   * @param namespaceURI
-   * @param localName
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean hasAttributeNS(String namespaceURI, String localName) {
     return DTM.NULL != dtm.getAttributeNode(node, namespaceURI, localName);
   }
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final Document getOwnerDocument() {
     // Note that this uses the DOM-compatable version of the call
     return (Document) (dtm.getNode(dtm.getOwnerDocument(node)));
   }
 
-  /**
-   * @param newChild
-   * @param refChild
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Node -- DTMNodeProxy is read-only
-   */
+  /** {@inheritDoc} */
   @Override
   public final Node insertBefore(Node newChild, Node refChild) throws DOMException {
     throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
-  /**
-   * @param newChild
-   * @param oldChild
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Node -- DTMNodeProxy is read-only
-   */
+  /** {@inheritDoc} */
   @Override
   public final Node replaceChild(Node newChild, Node oldChild) throws DOMException {
     throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
-  /**
-   * @param oldChild
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Node -- DTMNodeProxy is read-only
-   */
+  /** {@inheritDoc} */
   @Override
   public final Node removeChild(Node oldChild) throws DOMException {
     throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
-  /**
-   * @param newChild
-   * @throws DOMException
-   * @see org.w3c.dom.Node -- DTMNodeProxy is read-only
-   */
+  /** {@inheritDoc} */
   @Override
   public final Node appendChild(Node newChild) throws DOMException {
     throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
-  /** @see org.w3c.dom.Node */
+  /** {@inheritDoc} */
   @Override
   public final boolean hasChildNodes() {
     return DTM.NULL != dtm.getFirstChild(node);
   }
 
-  /**
-   * @param deep
-   * @see org.w3c.dom.Node -- DTMNodeProxy is read-only
-   */
+  /** {@inheritDoc} */
   @Override
   public final Node cloneNode(boolean deep) {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /** @see org.w3c.dom.Document */
+  /** {@inheritDoc} */
   @Override
   public final DocumentType getDoctype() {
     return null;
   }
 
-  /** @see org.w3c.dom.Document */
+  /** {@inheritDoc} */
   @Override
   public final DOMImplementation getImplementation() {
     return implementation;
   }
 
-  /**
-   * This is a bit of a problem in DTM, since a DTM may be a Document Fragment and hence not have a
-   * clear-cut Document Element. We can make it work in the well-formed cases but would that be
-   * confusing for others?
-   *
-   * @see org.w3c.dom.Document
-   */
+  /** {@inheritDoc} */
   @Override
   public final Element getDocumentElement() {
     int dochandle = dtm.getDocument();
@@ -442,35 +367,25 @@ public class DTMNodeProxy
     else return (Element) (dtm.getNode(elementhandle));
   }
 
-  /**
-   * @param tagName
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Document
-   */
+  /** {@inheritDoc} */
   @Override
   public final Element createElement(String tagName) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /** @see org.w3c.dom.Document */
+  /** {@inheritDoc} */
   @Override
   public final DocumentFragment createDocumentFragment() {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param data
-   * @see org.w3c.dom.Document
-   */
+  /** {@inheritDoc} */
   @Override
   public final Text createTextNode(String data) {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param data
-   * @see org.w3c.dom.Document
-   */
+  /** {@inheritDoc} */
   @Override
   public final Comment createComment(String data) {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
@@ -819,7 +734,7 @@ public class DTMNodeProxy
 
   /**
    * @param name
-   * @throws DOMException  in case of error
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Element
    */
   @Override
@@ -850,7 +765,7 @@ public class DTMNodeProxy
 
   /**
    * @param oldAttr
-   * @throws DOMException  in case of error
+   * @throws DOMException in case of error
    * @see org.w3c.dom.Element
    */
   @Override
@@ -1370,7 +1285,9 @@ public class DTMNodeProxy
    * string is taken as pure textual content. <br>
    * The string returned is made of the text content of this node depending on its type, as defined
    * below:
+   *
    * <p>
+   *
    * <table border='1' summary="">
    * <tr>
    * <th>Node type</th>
@@ -1415,7 +1332,9 @@ public class DTMNodeProxy
    * string is taken as pure textual content. <br>
    * The string returned is made of the text content of this node depending on its type, as defined
    * below:
+   *
    * <p>
+   *
    * <table border='1' summary="">
    * <tr>
    * <th>Node type</th>
@@ -1529,7 +1448,6 @@ public class DTMNodeProxy
     return fDocumentURI;
   }
 
-
   /** DOM Level 3 */
   @Override
   public Text replaceWholeText(String content) throws DOMException {
@@ -1588,7 +1506,6 @@ public class DTMNodeProxy
   public String getXmlEncoding() {
     return null;
   }
-
 
   private boolean xmlStandalone;
 

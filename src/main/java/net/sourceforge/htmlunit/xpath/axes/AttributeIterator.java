@@ -20,9 +20,7 @@ package net.sourceforge.htmlunit.xpath.axes;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
-/**
- * This class implements an optimized iterator for attribute axes patterns.
- */
+/** This class implements an optimized iterator for attribute axes patterns. */
 public class AttributeIterator extends ChildTestIterator {
 
   /**
@@ -38,7 +36,7 @@ public class AttributeIterator extends ChildTestIterator {
     super(compiler, opPos, analysis);
   }
 
-  /** Get the next node via getFirstAttribute &amp;&amp; getNextAttribute. */
+  /** {@inheritDoc} */
   @Override
   protected int getNextNode() {
     m_lastFetched =
@@ -48,11 +46,7 @@ public class AttributeIterator extends ChildTestIterator {
     return m_lastFetched;
   }
 
-  /**
-   * Returns the axis being iterated, if it is known.
-   *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAxis() {
     return net.sourceforge.htmlunit.xpath.xml.dtm.Axis.ATTRIBUTE;

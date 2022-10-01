@@ -29,7 +29,7 @@ public class FuncFalse extends Function {
    *
    * @param xctxt The current execution context.
    * @return A valid XObject.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {

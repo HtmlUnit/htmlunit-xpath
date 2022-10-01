@@ -60,11 +60,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
     super(nscontext);
   }
 
-  /**
-   * Get the analysis bits for this walker, as defined in the WalkerFactory.
-   *
-   * @return One of WalkerFactory#BIT_DESCENDANT, etc.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAnalysisBits() {
     int bits = 0;
@@ -80,12 +76,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
     return bits;
   }
 
-  /**
-   * Get a cloned WalkingIterator that holds the same position as this iterator.
-   *
-   * @return A clone of this iterator that holds the same node position.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
 
@@ -100,7 +91,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
     return clone;
   }
 
-  /** Reset the iterator. */
+  /** {@inheritDoc} */
   @Override
   public void reset() {
 
@@ -113,11 +104,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
     }
   }
 
-  /**
-   * Initialize the context values for this expression after it is cloned.
-   *
-   * @param context The XPath runtime context for this transformation.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int context, Object environment) {
 
@@ -129,13 +116,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
     }
   }
 
-  /**
-   * Returns the next node in the set and advances the position of the iterator in the set. After a
-   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
-   *
-   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
-   *     there are no more members in that set.
-   */
+  /** {@inheritDoc} */
   @Override
   public int nextNode() {
     if (m_foundLast) return DTM.NULL;
@@ -181,12 +162,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
     return m_lastUsedWalker;
   }
 
-  /**
-   * Detaches the iterator from the set which it iterated over, releasing any computational
-   * resources and placing the iterator in the INVALID state. After<code>detach</code> has been
-   * invoked, calls to <code>nextNode</code> or<code>previousNode</code> will raise the exception
-   * INVALID_STATE_ERR.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     if (m_allowDetach) {
@@ -203,9 +179,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
     }
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     if (visitor.visitLocationPath()) {
@@ -229,20 +203,20 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
    */
   protected AxesWalker m_firstWalker;
 
-  /** @see ExpressionOwner#getExpression() */
+  /** {@inheritDoc} */
   @Override
   public Expression getExpression() {
     return m_firstWalker;
   }
 
-  /** @see ExpressionOwner#setExpression(Expression) */
+  /** {@inheritDoc} */
   @Override
   public void setExpression(Expression exp) {
     exp.exprSetParent(this);
     m_firstWalker = (AxesWalker) exp;
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;

@@ -63,12 +63,7 @@ public class AxesWalker extends PredicatedNodeTest
     // int testType = compiler.getOp(nodeTestOpPos);
   }
 
-  /**
-   * Get a cloned AxesWalker.
-   *
-   * @return A new AxesWalker that can be used without mutating this one.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
     // Do not access the location path itterator during this operation!
@@ -154,11 +149,7 @@ public class AxesWalker extends PredicatedNodeTest
     return m_root;
   }
 
-  /**
-   * Get the analysis bits for this walker, as defined in the WalkerFactory.
-   *
-   * @return One of WalkerFactory#BIT_DESCENDANT, etc.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAnalysisBits() {
     int axis = getAxis();
@@ -307,12 +298,7 @@ public class AxesWalker extends PredicatedNodeTest
 
   // ============= End TreeWalker Implementation =============
 
-  /**
-   * Get the index of the last node that can be itterated to.
-   *
-   * @param xctxt XPath runtime context.
-   * @return the index of the last node that can be itterated to.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getLastPos(XPathContext xctxt) {
 
@@ -377,13 +363,7 @@ public class AxesWalker extends PredicatedNodeTest
     return m_axis;
   }
 
-  /**
-   * This will traverse the heararchy, calling the visitor for each member. If the called visitor
-   * method returns false, the subtree should not be called.
-   *
-   * @param owner The owner of the visitor, where that path may be rewritten if needed.
-   * @param visitor The visitor whose appropriate method will be called.
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     if (visitor.visitStep()) {
@@ -394,20 +374,20 @@ public class AxesWalker extends PredicatedNodeTest
     }
   }
 
-  /** @see ExpressionOwner#getExpression() */
+  /** {@inheritDoc} */
   @Override
   public Expression getExpression() {
     return m_nextWalker;
   }
 
-  /** @see ExpressionOwner#setExpression(Expression) */
+  /** {@inheritDoc} */
   @Override
   public void setExpression(Expression exp) {
     exp.exprSetParent(this);
     m_nextWalker = (AxesWalker) exp;
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;

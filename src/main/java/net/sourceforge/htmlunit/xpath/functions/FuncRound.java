@@ -24,13 +24,7 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 /** Execute the round() function. */
 public class FuncRound extends FunctionOneArg {
 
-  /**
-   * Execute the function. The function must return a valid object.
-   *
-   * @param xctxt The current execution context.
-   * @return A valid XObject.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     final XObject obj = m_arg0.execute(xctxt);

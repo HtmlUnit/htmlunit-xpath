@@ -25,7 +25,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 /**
  * This class implements a general iterator for those LocationSteps with only one step, and perhaps
  * a predicate, that only go forward (i.e. it can not be used with ancestors, preceding, etc.)
- *
  */
 public class OneStepIteratorForward extends ChildTestIterator {
 
@@ -48,18 +47,14 @@ public class OneStepIteratorForward extends ChildTestIterator {
     m_axis = WalkerFactory.getAxisFromStep(compiler, firstStepPos);
   }
 
-  /**
-   * Initialize the context values for this expression after it is cloned.
-   *
-   * @param context The XPath runtime context for this transformation.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int context, Object environment) {
     super.setRoot(context, environment);
     m_traverser = m_cdtm.getAxisTraverser(m_axis);
   }
 
-  /** Get the next node via getFirstAttribute && getNextAttribute. */
+  /** {@inheritDoc} */
   @Override
   protected int getNextNode() {
     m_lastFetched =
@@ -69,17 +64,13 @@ public class OneStepIteratorForward extends ChildTestIterator {
     return m_lastFetched;
   }
 
-  /**
-   * Returns the axis being iterated, if it is known.
-   *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAxis() {
     return m_axis;
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;

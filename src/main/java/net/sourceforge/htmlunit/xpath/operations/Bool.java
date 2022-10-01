@@ -24,13 +24,7 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 /** The 'boolean()' operation expression executer. */
 public class Bool extends UnaryOperation {
 
-  /**
-   * Apply the operation to two operands, and return the result.
-   *
-   * @param right non-null reference to the evaluated right operand.
-   * @return non-null reference to the XObject that represents the result of the operation.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject operate(XObject right) throws javax.xml.transform.TransformerException {
 
@@ -38,13 +32,7 @@ public class Bool extends UnaryOperation {
     else return right.bool() ? XBoolean.S_TRUE : XBoolean.S_FALSE;
   }
 
-  /**
-   * Evaluate this operation directly to a boolean.
-   *
-   * @param xctxt The runtime execution context.
-   * @return The result of the operation as a boolean.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean bool(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return m_right.bool(xctxt);

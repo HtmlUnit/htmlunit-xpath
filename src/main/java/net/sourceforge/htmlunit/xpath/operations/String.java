@@ -22,13 +22,7 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 /** The 'string()' operation expression executer. */
 public class String extends UnaryOperation {
 
-  /**
-   * Apply the operation to two operands, and return the result.
-   *
-   * @param right non-null reference to the evaluated right operand.
-   * @return non-null reference to the XObject that represents the result of the operation.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject operate(XObject right) throws javax.xml.transform.TransformerException {
     return right.xstr(); // semi-safe cast.

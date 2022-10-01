@@ -39,12 +39,7 @@ public class XBooleanStatic extends XBoolean {
     m_val = b;
   }
 
-  /**
-   * Tell if two objects are functionally equal.
-   *
-   * @param obj2 Object to compare to this
-   * @return True if the two objects are equal
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean equals(XObject obj2) {
     try {

@@ -48,21 +48,13 @@ public class XString extends XObject {
     super(val);
   }
 
-  /**
-   * Tell that this is a CLASS_STRING.
-   *
-   * @return type CLASS_STRING
-   */
+  /** {@inheritDoc} */
   @Override
   public int getType() {
     return CLASS_STRING;
   }
 
-  /**
-   * Given a request type, return the equivalent string. For diagnostic purposes.
-   *
-   * @return type string "#STRING"
-   */
+  /** {@inheritDoc} */
   @Override
   public String getTypeString() {
     return "#STRING";
@@ -77,11 +69,7 @@ public class XString extends XObject {
     return true;
   }
 
-  /**
-   * Cast result object to a number.
-   *
-   * @return 0.0 if this string is null, numeric value of this string or NaN
-   */
+  /** {@inheritDoc} */
   @Override
   public double num() {
     return toDouble();
@@ -119,31 +107,19 @@ public class XString extends XObject {
     return result;
   }
 
-  /**
-   * Cast result object to a boolean.
-   *
-   * @return True if the length of this string object is greater than 0.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean bool() {
     return str().length() > 0;
   }
 
-  /**
-   * Cast result object to a string.
-   *
-   * @return The string this wraps or the empty string if null
-   */
+  /** {@inheritDoc} */
   @Override
   public XString xstr() {
     return this;
   }
 
-  /**
-   * Cast result object to a string.
-   *
-   * @return The string this wraps or the empty string if null
-   */
+  /** {@inheritDoc} */
   @Override
   public String str() {
     return (null != m_obj) ? ((String) m_obj) : "";
@@ -195,12 +171,7 @@ public class XString extends XObject {
     str().getChars(srcBegin, srcEnd, dst, dstBegin);
   }
 
-  /**
-   * Tell if two objects are functionally equal.
-   *
-   * @param obj2 Object to compare this to
-   * @return true if the two objects are equal
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean equals(XObject obj2) {
 
@@ -263,16 +234,7 @@ public class XString extends XObject {
     return false;
   }
 
-  /**
-   * Compares this string to the specified object. The result is <code>true</code> if and only if
-   * the argument is not <code>null</code> and is a <code>String</code> object that represents the
-   * same sequence of characters as this object.
-   *
-   * @param obj2 the object to compare this <code>String</code> against.
-   * @return <code>true</code> if the <code>String </code>are equal; <code>false</code> otherwise.
-   * @see java.lang.String#compareTo(java.lang.String)
-   * @see java.lang.String#equalsIgnoreCase(java.lang.String)
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean equals(Object obj2) {
 
@@ -507,9 +469,7 @@ public class XString extends XObject {
     return edit ? new XString(new String(buf, start, d - start)) : this;
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     visitor.visitStringLiteral();

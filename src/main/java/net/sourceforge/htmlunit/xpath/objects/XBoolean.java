@@ -61,74 +61,44 @@ public class XBoolean extends XObject {
     setObject(b);
   }
 
-  /**
-   * Tell that this is a CLASS_BOOLEAN.
-   *
-   * @return type of CLASS_BOOLEAN
-   */
+  /** {@inheritDoc} */
   @Override
   public int getType() {
     return CLASS_BOOLEAN;
   }
 
-  /**
-   * Given a request type, return the equivalent string. For diagnostic purposes.
-   *
-   * @return type string "#BOOLEAN"
-   */
+  /** {@inheritDoc} */
   @Override
   public String getTypeString() {
     return "#BOOLEAN";
   }
 
-  /**
-   * Cast result object to a number.
-   *
-   * @return numeric value of the object value
-   */
+  /** {@inheritDoc} */
   @Override
   public double num() {
     return m_val ? 1.0 : 0.0;
   }
 
-  /**
-   * Cast result object to a boolean.
-   *
-   * @return The object value as a boolean
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean bool() {
     return m_val;
   }
 
-  /**
-   * Cast result object to a string.
-   *
-   * @return The object's value as a string
-   */
+  /** {@inheritDoc} */
   @Override
   public String str() {
     return m_val ? "true" : "false";
   }
 
-  /**
-   * Return a java object that's closest to the representation that should be handed to an
-   * extension.
-   *
-   * @return The object's value as a java object
-   */
+  /** {@inheritDoc} */
   @Override
   public Object object() {
     if (null == m_obj) setObject(m_val ? Boolean.TRUE : Boolean.FALSE);
     return m_obj;
   }
 
-  /**
-   * Tell if two objects are functionally equal.
-   *
-   * @param obj2 Object to compare to this
-   * @return True if the two objects are equal
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean equals(XObject obj2) {
 

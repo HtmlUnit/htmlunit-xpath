@@ -72,7 +72,7 @@ public class XPathParser {
    * @param compiler The compiler object.
    * @param expression A string conforming to the XPath grammar.
    * @param namespaceContext An object that is able to resolve prefixes in the XPath to namespaces.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public void initXPath(Compiler compiler, String expression, PrefixResolver namespaceContext)
       throws javax.xml.transform.TransformerException {
@@ -140,7 +140,7 @@ public class XPathParser {
    * @param compiler The XPath object to be initialized.
    * @param expression A String representing the XPath.
    * @param namespaceContext An object that is able to resolve prefixes in the XPath to namespaces.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public void initMatchPattern(
       Compiler compiler, String expression, PrefixResolver namespaceContext)
@@ -293,7 +293,7 @@ public class XPathParser {
    * Consume an expected token, throwing an exception if it isn't there.
    *
    * @param expected the character to be expected.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   private final void consumeExpected(char expected)
       throws javax.xml.transform.TransformerException {
@@ -455,7 +455,7 @@ public class XPathParser {
   /**
    * Expr ::= OrExpr
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void Expr() throws javax.xml.transform.TransformerException {
     OrExpr();
@@ -464,7 +464,7 @@ public class XPathParser {
   /**
    * OrExpr ::= AndExpr | OrExpr 'or' AndExpr
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void OrExpr() throws javax.xml.transform.TransformerException {
 
@@ -484,7 +484,7 @@ public class XPathParser {
   /**
    * AndExpr ::= EqualityExpr | AndExpr 'and' EqualityExpr
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void AndExpr() throws javax.xml.transform.TransformerException {
 
@@ -502,11 +502,11 @@ public class XPathParser {
   }
 
   /**
-   * @returns an Object which is either a String, a Number, a Boolean, or a vector of nodes.
+   * @return an Object which is either a String, a Number, a Boolean, or a vector of nodes.
    *     <p>EqualityExpr ::= RelationalExpr | EqualityExpr '=' RelationalExpr
    * @param addPos Position where expression is to be added, or -1 for append.
    * @return the position at the end of the equality expression.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected int EqualityExpr(int addPos) throws javax.xml.transform.TransformerException {
 
@@ -549,12 +549,12 @@ public class XPathParser {
   /**
    * .
    *
-   * @returns an Object which is either a String, a Number, a Boolean, or a vector of nodes.
+   * @return an Object which is either a String, a Number, a Boolean, or a vector of nodes.
    *     <p>RelationalExpr ::= AdditiveExpr | RelationalExpr '<' AdditiveExpr | RelationalExpr '>'
    *     AdditiveExpr | RelationalExpr '<=' AdditiveExpr | RelationalExpr '>=' AdditiveExpr
    * @param addPos Position where expression is to be added, or -1 for append.
    * @return the position at the end of the relational expression.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected int RelationalExpr(int addPos) throws javax.xml.transform.TransformerException {
 
@@ -614,7 +614,7 @@ public class XPathParser {
    *
    * @param addPos Position where expression is to be added, or -1 for append.
    * @return the position at the end of the equality expression.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected int AdditiveExpr(int addPos) throws javax.xml.transform.TransformerException {
 
@@ -663,7 +663,7 @@ public class XPathParser {
    *
    * @param addPos Position where expression is to be added, or -1 for append.
    * @return the position at the end of the equality expression.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected int MultiplicativeExpr(int addPos) throws javax.xml.transform.TransformerException {
 
@@ -727,7 +727,7 @@ public class XPathParser {
   /**
    * UnaryExpr ::= UnionExpr | '-' UnaryExpr
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void UnaryExpr() throws javax.xml.transform.TransformerException {
 
@@ -750,7 +750,7 @@ public class XPathParser {
   /**
    * StringExpr ::= Expr
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void StringExpr() throws javax.xml.transform.TransformerException {
 
@@ -765,7 +765,7 @@ public class XPathParser {
   /**
    * StringExpr ::= Expr
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void BooleanExpr() throws javax.xml.transform.TransformerException {
 
@@ -790,7 +790,7 @@ public class XPathParser {
   /**
    * NumberExpr ::= Expr
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void NumberExpr() throws javax.xml.transform.TransformerException {
 
@@ -809,7 +809,7 @@ public class XPathParser {
    *
    * <p>UnionExpr ::= PathExpr | UnionExpr '|' PathExpr
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void UnionExpr() throws javax.xml.transform.TransformerException {
 
@@ -842,7 +842,7 @@ public class XPathParser {
    * PathExpr ::= LocationPath | FilterExpr | FilterExpr '/' RelativeLocationPath | FilterExpr '//'
    * RelativeLocationPath
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void PathExpr() throws javax.xml.transform.TransformerException {
 
@@ -889,7 +889,7 @@ public class XPathParser {
    *     more Predicates; FILTER_MATCH_PRIMARY, if this method successfully matched a FilterExpr
    *     that was just a PrimaryExpr; or FILTER_MATCH_FAILED, if this method did not match a
    *     FilterExpr
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected int FilterExpr() throws javax.xml.transform.TransformerException {
 
@@ -927,7 +927,7 @@ public class XPathParser {
    * PrimaryExpr ::= VariableReference | '(' Expr ')' | Literal | Number | FunctionCall
    *
    * @return true if this method successfully matched a PrimaryExpr
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected boolean PrimaryExpr() throws javax.xml.transform.TransformerException {
 
@@ -979,7 +979,7 @@ public class XPathParser {
   /**
    * Argument ::= Expr
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void Argument() throws javax.xml.transform.TransformerException {
 
@@ -995,7 +995,7 @@ public class XPathParser {
    * FunctionCall ::= FunctionName '(' ( Argument ( ',' Argument)*)? ')'
    *
    * @return true if, and only if, a FunctionCall was matched
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected boolean FunctionCall() throws javax.xml.transform.TransformerException {
 
@@ -1078,7 +1078,7 @@ public class XPathParser {
   /**
    * LocationPath ::= RelativeLocationPath | AbsoluteLocationPath
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void LocationPath() throws javax.xml.transform.TransformerException {
 
@@ -1118,8 +1118,8 @@ public class XPathParser {
   /**
    * RelativeLocationPath ::= Step | RelativeLocationPath '/' Step | AbbreviatedRelativeLocationPath
    *
-   * @returns true if, and only if, a RelativeLocationPath was matched
-   * @throws javax.xml.transform.TransformerException
+   * @return true if, and only if, a RelativeLocationPath was matched
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected boolean RelativeLocationPath() throws javax.xml.transform.TransformerException {
     if (!Step()) {
@@ -1142,8 +1142,8 @@ public class XPathParser {
   /**
    * Step ::= Basis Predicate | AbbreviatedStep
    *
-   * @returns false if step was empty (or only a '/'); true, otherwise
-   * @throws javax.xml.transform.TransformerException
+   * @return false if step was empty (or only a '/'); true, otherwise
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected boolean Step() throws javax.xml.transform.TransformerException {
     int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
@@ -1233,7 +1233,7 @@ public class XPathParser {
   /**
    * Basis ::= AxisName '::' NodeTest | AbbreviatedBasis
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void Basis() throws javax.xml.transform.TransformerException {
 
@@ -1270,7 +1270,7 @@ public class XPathParser {
    * Basis ::= AxisName '::' NodeTest | AbbreviatedBasis
    *
    * @return FROM_XXX axes type, found in {@link net.sourceforge.htmlunit.xpath.compiler.Keywords}.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected int AxisName() throws javax.xml.transform.TransformerException {
 
@@ -1294,7 +1294,7 @@ public class XPathParser {
    *
    * @param axesType FROM_XXX axes type, found in {@link
    *     net.sourceforge.htmlunit.xpath.compiler.Keywords}.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void NodeTest(int axesType) throws javax.xml.transform.TransformerException {
 
@@ -1373,7 +1373,7 @@ public class XPathParser {
   /**
    * Predicate ::= '[' PredicateExpr ']'
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void Predicate() throws javax.xml.transform.TransformerException {
 
@@ -1387,7 +1387,7 @@ public class XPathParser {
   /**
    * PredicateExpr ::= Expr
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void PredicateExpr() throws javax.xml.transform.TransformerException {
 
@@ -1405,7 +1405,7 @@ public class XPathParser {
   /**
    * QName ::= (Prefix ':')? LocalPart Prefix ::= NCName LocalPart ::= NCName
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void QName() throws javax.xml.transform.TransformerException {
     // Namespace
@@ -1440,11 +1440,11 @@ public class XPathParser {
   }
 
   /**
-   * The value of the Literal is the sequence of characters inside the " or ' characters>.
+   * The value of the Literal is the sequence of characters inside the " or ' characters.
    *
    * <p>Literal ::= '"' [^"]* '"' | "'" [^']* "'"
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void Literal() throws javax.xml.transform.TransformerException {
 
@@ -1482,7 +1482,7 @@ public class XPathParser {
   /**
    * Number ::= [0-9]+('.'[0-9]+)? | '.'[0-9]+
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void Number() throws javax.xml.transform.TransformerException {
 
@@ -1521,7 +1521,7 @@ public class XPathParser {
   /**
    * Pattern ::= LocationPathPattern | Pattern '|' LocationPathPattern
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void Pattern() throws javax.xml.transform.TransformerException {
 
@@ -1540,7 +1540,7 @@ public class XPathParser {
    * LocationPathPattern ::= '/' RelativePathPattern? | IdKeyPattern (('/' | '//')
    * RelativePathPattern)? | '//'? RelativePathPattern
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void LocationPathPattern() throws javax.xml.transform.TransformerException {
 
@@ -1618,7 +1618,7 @@ public class XPathParser {
   /**
    * IdKeyPattern ::= 'id' '(' Literal ')' | 'key' '(' Literal ',' Literal ')' (Also handle doc())
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void IdKeyPattern() throws javax.xml.transform.TransformerException {
     FunctionCall();
@@ -1628,7 +1628,7 @@ public class XPathParser {
    * RelativePathPattern ::= StepPattern | RelativePathPattern '/' StepPattern | RelativePathPattern
    * '//' StepPattern
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void RelativePathPattern() throws javax.xml.transform.TransformerException {
 
@@ -1652,7 +1652,7 @@ public class XPathParser {
    * @param isLeadingSlashPermitted a boolean indicating whether a slash can appear at the start of
    *     this step
    * @return boolean indicating whether a slash following the step was consumed
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected boolean StepPattern(boolean isLeadingSlashPermitted)
       throws javax.xml.transform.TransformerException {
@@ -1665,7 +1665,7 @@ public class XPathParser {
    * @param isLeadingSlashPermitted a boolean indicating whether a slash can appear at the start of
    *     this step
    * @return boolean indicating whether a slash following the step was consumed
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected boolean AbbreviatedNodeTestStep(boolean isLeadingSlashPermitted)
       throws javax.xml.transform.TransformerException {

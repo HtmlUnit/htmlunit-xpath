@@ -25,13 +25,7 @@ import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 /** Execute the Concat() function. */
 public class FuncConcat extends FunctionMultiArgs {
 
-  /**
-   * Execute the function. The function must return a valid object.
-   *
-   * @param xctxt The current execution context.
-   * @return A valid XObject.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
@@ -52,23 +46,13 @@ public class FuncConcat extends FunctionMultiArgs {
     return new XString(sb.toString());
   }
 
-  /**
-   * Check that the number of arguments passed to this function is correct.
-   *
-   * @param argNum The number of arguments that is being passed to the function.
-   * @throws WrongNumberArgsException
-   */
+  /** {@inheritDoc} */
   @Override
   public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
     if (argNum < 2) reportWrongNumberArgs();
   }
 
-  /**
-   * Constructs and throws a WrongNumberArgException with the appropriate message for this function
-   * object.
-   *
-   * @throws WrongNumberArgsException
-   */
+  /** {@inheritDoc} */
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("gtone", null));

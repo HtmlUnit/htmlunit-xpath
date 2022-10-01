@@ -141,6 +141,7 @@ public class XPath implements ExpressionOwner {
    * @param prefixResolver A prefix resolver to use to resolve prefixes to namespace URIs.
    * @param type one of {@link #SELECT} or {@link #MATCH}.
    * @param errorListener The error listener, or null if default should be used.
+   * @param aTable the function table to be used
    * @throws javax.xml.transform.TransformerException if syntax or other error.
    */
   public XPath(
@@ -210,7 +211,7 @@ public class XPath implements ExpressionOwner {
    *     expanded.
    * @return The result of the XPath or null if callbacks are used.
    * @throws TransformerException thrown if the error condition is severe enough to halt processing.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public XObject execute(
       XPathContext xctxt, org.w3c.dom.Node contextNode, PrefixResolver namespaceContext)
@@ -227,7 +228,7 @@ public class XPath implements ExpressionOwner {
    *     expanded.
    * @throws TransformerException thrown if the active ProblemListener decides the error condition
    *     is severe enough to halt processing.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public XObject execute(XPathContext xctxt, int contextNode, PrefixResolver namespaceContext)
       throws javax.xml.transform.TransformerException {
@@ -281,9 +282,10 @@ public class XPath implements ExpressionOwner {
    * @param contextNode The node that "." expresses.
    * @param namespaceContext The context in which namespaces in the XPath are supposed to be
    *     expanded.
+   * @return the result
    * @throws TransformerException thrown if the active ProblemListener decides the error condition
    *     is severe enough to halt processing.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public boolean bool(XPathContext xctxt, int contextNode, PrefixResolver namespaceContext)
       throws javax.xml.transform.TransformerException {

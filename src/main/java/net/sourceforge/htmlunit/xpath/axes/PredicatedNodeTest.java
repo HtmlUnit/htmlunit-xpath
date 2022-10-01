@@ -41,12 +41,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /** Construct an AxesWalker. The location path iterator will have to be set before use. */
   PredicatedNodeTest() {}
 
-  /**
-   * Get a cloned PrdicatedNodeTest.
-   *
-   * @return A new PredicatedNodeTest that can be used without mutating this one.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
     // Do not access the location path itterator during this operation!
@@ -143,23 +138,13 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     return getProximityPosition(m_predicateIndex);
   }
 
-  /**
-   * Get the current sub-context position.
-   *
-   * @param xctxt The XPath runtime context.
-   * @return The node position of this walker in the sub-context node list.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getProximityPosition(XPathContext xctxt) {
     return getProximityPosition();
   }
 
-  /**
-   * Get the index of the last node that can be itterated to.
-   *
-   * @param xctxt XPath runtime context.
-   * @return the index of the last node that can be itterated to.
-   */
+  /** {@inheritDoc} */
   @Override
   public abstract int getLastPos(XPathContext xctxt);
 
@@ -367,11 +352,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     if (this != li) li.exprSetParent(this);
   }
 
-  /**
-   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
-   *
-   * @return true if traversal outside the context node's subtree can occur.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
     int n = getPredicateCount();
@@ -399,7 +380,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     }
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;
@@ -450,13 +431,13 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
       m_index = index;
     }
 
-    /** @see ExpressionOwner#getExpression() */
+    /** {@inheritDoc} */
     @Override
     public Expression getExpression() {
       return m_predicates[m_index];
     }
 
-    /** @see ExpressionOwner#setExpression(Expression) */
+    /** {@inheritDoc} */
     @Override
     public void setExpression(Expression exp) {
       exp.exprSetParent(PredicatedNodeTest.this);

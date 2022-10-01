@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 /**
  * This class implements a general iterator for those LocationSteps with only one step, and perhaps
  * a predicate.
- *
  */
 public class OneStepIterator extends ChildTestIterator {
 
@@ -54,11 +53,7 @@ public class OneStepIterator extends ChildTestIterator {
     m_axis = WalkerFactory.getAxisFromStep(compiler, firstStepPos);
   }
 
-  /**
-   * Initialize the context values for this expression after it is cloned.
-   *
-   * @param context The XPath runtime context for this transformation.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setRoot(int context, Object environment) {
     super.setRoot(context, environment);
@@ -66,12 +61,7 @@ public class OneStepIterator extends ChildTestIterator {
     m_iterator.setStartNode(m_context);
   }
 
-  /**
-   * Detaches the iterator from the set which it iterated over, releasing any computational
-   * resources and placing the iterator in the INVALID state. After<code>detach</code> has been
-   * invoked, calls to <code>nextNode</code> or<code>previousNode</code> will raise the exception
-   * INVALID_STATE_ERR.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {
     if (m_allowDetach) {
@@ -82,18 +72,13 @@ public class OneStepIterator extends ChildTestIterator {
     }
   }
 
-  /** Get the next node via getFirstAttribute && getNextAttribute. */
+  /** {@inheritDoc} */
   @Override
   protected int getNextNode() {
     return m_lastFetched = m_iterator.next();
   }
 
-  /**
-   * Get a cloned iterator.
-   *
-   * @return A new iterator that can be used without mutating this one.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
     // Do not access the location path itterator during this operation!
@@ -106,12 +91,7 @@ public class OneStepIterator extends ChildTestIterator {
     return clone;
   }
 
-  /**
-   * Get a cloned Iterator that is reset to the beginning of the query.
-   *
-   * @return A cloned NodeIterator set of the start of the query.
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
 
@@ -121,25 +101,13 @@ public class OneStepIterator extends ChildTestIterator {
     return clone;
   }
 
-  /**
-   * Tells if this is a reverse axes. Overrides AxesWalker#isReverseAxes.
-   *
-   * @return true for this class.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isReverseAxes() {
     return m_iterator.isReverse();
   }
 
-  /**
-   * Get the current sub-context position. In order to do the reverse axes count, for the moment
-   * this re-searches the axes up to the predicate. An optimization on this is to cache the nodes
-   * searched, but, for the moment, this case is probably rare enough that the added complexity
-   * isn't worth it.
-   *
-   * @param predicateIndex The predicate index of the proximity position.
-   * @return The pridicate index, or -1.
-   */
+  /** {@inheritDoc} */
   @Override
   protected int getProximityPosition(int predicateIndex) {
     if (!isReverseAxes()) return super.getProximityPosition(predicateIndex);
@@ -180,12 +148,7 @@ public class OneStepIterator extends ChildTestIterator {
     return m_proximityPositions[predicateIndex];
   }
 
-  /**
-   * The number of nodes in the list. The range of valid child node indices is 0 to <code>length-1
-   * </code> inclusive.
-   *
-   * @return The number of nodes in the list, always greater or equal to zero.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getLength() {
     if (!isReverseAxes()) return super.getLength();
@@ -223,18 +186,14 @@ public class OneStepIterator extends ChildTestIterator {
     return count;
   }
 
-  /**
-   * Count backwards one proximity position.
-   *
-   * @param i The predicate index.
-   */
+  /** {@inheritDoc} */
   @Override
   protected void countProximityPosition(int i) {
     if (!isReverseAxes()) super.countProximityPosition(i);
     else if (i < m_proximityPositions.length) m_proximityPositions[i]--;
   }
 
-  /** Reset the iterator. */
+  /** {@inheritDoc} */
   @Override
   public void reset() {
 
@@ -242,17 +201,13 @@ public class OneStepIterator extends ChildTestIterator {
     if (null != m_iterator) m_iterator.reset();
   }
 
-  /**
-   * Returns the axis being iterated, if it is known.
-   *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getAxis() {
     return m_axis;
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;

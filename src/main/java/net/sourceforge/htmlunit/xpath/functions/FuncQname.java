@@ -25,13 +25,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 /** Execute the Qname() function. */
 public class FuncQname extends FunctionDef1Arg {
 
-  /**
-   * Execute the function. The function must return a valid object.
-   *
-   * @param xctxt The current execution context.
-   * @return A valid XObject.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 

@@ -43,13 +43,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     super(mgr, source, dtmIdentity, doIndexing);
   }
 
-  /**
-   * This is a shortcut to the iterators that implement the XPath axes. Returns a bare-bones
-   * iterator that must be initialized with a start node (using iterator.setStartNode()).
-   *
-   * @param axis One of Axes.ANCESTORORSELF, etc.
-   * @return A DTMAxisIterator, or null if the given axis isn't supported.
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMAxisIterator getAxisIterator(final int axis) {
 
@@ -130,21 +124,13 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
      */
     protected int _currentNode;
 
-    /**
-     * Remembers the current node for the next call to gotoMark().
-     *
-     * <p>%REVIEW% Should this save _position too?
-     */
+    /** {@inheritDoc} */
     @Override
     public void setMark() {
       _markedNode = _currentNode;
     }
 
-    /**
-     * Restores the current node remembered by setMark().
-     *
-     * <p>%REVEIW% Should this restore _position too?
-     */
+    /** {@inheritDoc} */
     @Override
     public void gotoMark() {
       _currentNode = _markedNode;
@@ -154,16 +140,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   /** Iterator that returns all immediate children of a given node */
   public final class ChildrenIterator extends InternalAxisIteratorBase {
 
-    /**
-     * Setting start to END should 'close' the iterator, i.e. subsequent call to next() should
-     * return END.
-     *
-     * <p>If the iterator is not restartable, this has no effect. %REVIEW% Should it return/throw
-     * something in that case, or set current node to END, to indicate request-not-honored?
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -178,11 +155,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END if no more are available.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
       if (_currentNode != NULL) {
@@ -201,13 +174,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    */
   public final class ParentIterator extends InternalAxisIteratorBase {
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -222,12 +189,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Get the next node in the iteration. In this case, we return only the immediate parent, _if_
-     * it matches the requested nodeType.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
       int result = _currentNode;
@@ -251,13 +213,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       super();
     }
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -272,11 +228,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
 
@@ -288,9 +240,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     }
   } // end of NamespaceIterator
 
-  /**
-   * Iterator that returns the root node as defined by the XPath data model for a given node.
-   */
+  /** Iterator that returns the root node as defined by the XPath data model for a given node. */
   public class RootIterator extends InternalAxisIteratorBase {
 
     /** Constructor RootIterator */
@@ -299,13 +249,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       super();
     }
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
 
@@ -319,11 +263,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
       if (_startNode == _currentNode) return NULL;
@@ -337,13 +277,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   /** Iterator that returns all siblings of a given node. */
   public class FollowingSiblingIterator extends InternalAxisIteratorBase {
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -358,11 +292,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
       _currentNode = (_currentNode == DTM.NULL) ? DTM.NULL : _nextsib(_currentNode);
@@ -375,13 +305,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     // assumes caller will pass element nodes
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -396,11 +320,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
 
@@ -421,23 +341,13 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     /** The node identity of _startNode for this iterator */
     protected int _startNodeID;
 
-    /**
-     * True if this iterator has a reversed axis.
-     *
-     * @return true.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isReverse() {
       return true;
     }
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -467,11 +377,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
 
@@ -503,23 +409,13 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     protected int _markedsp, _markedNode, _markedDescendant;
 
-    /* _currentNode precedes candidates. This is the identity, not the handle! */
-
-    /**
-     * True if this iterator has a reversed axis.
-     *
-     * @return true since this iterator is a reversed axis.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isReverse() {
       return true;
     }
 
-    /**
-     * Returns a deep copy of this iterator. The cloned iterator is not reset.
-     *
-     * @return a deep copy of this iterator.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator cloneIterator() {
       _isRestartable = false;
@@ -543,13 +439,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       }
     }
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -586,11 +476,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
       // Bugzilla 8324: We were forgetting to skip Attrs and NS nodes.
@@ -607,11 +493,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     // redefine DTMAxisIteratorBase's reset
 
-    /**
-     * Resets the iterator to the last start node.
-     *
-     * @return A DTMAxisIterator, which may or may not be the same as this iterator.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator reset() {
 
@@ -620,6 +502,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return resetPosition();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setMark() {
       _markedsp = _sp;
@@ -627,6 +510,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       _markedDescendant = _stack[0];
     }
 
+    /** {@inheritDoc} */
     @Override
     public void gotoMark() {
       _sp = _markedsp;
@@ -642,13 +526,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       m_traverser = getAxisTraverser(Axis.FOLLOWING);
     }
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -664,11 +542,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
 
@@ -695,21 +569,13 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     /** The real start node for this axes, since _startNode will be adjusted. */
     int m_realStartNode;
 
-    /**
-     * True if this iterator has a reversed axis.
-     *
-     * @return true since this iterator is a reversed axis.
-     */
+    /** {@inheritDoc} */
     @Override
     public final boolean isReverse() {
       return true;
     }
 
-    /**
-     * Returns a deep copy of this iterator. The cloned iterator is not reset.
-     *
-     * @return a deep copy of this iterator.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator cloneIterator() {
       _isRestartable = false; // must set to false for any clone
@@ -731,13 +597,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       }
     }
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -769,11 +629,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Resets the iterator to the last start node.
-     *
-     * @return A DTMAxisIterator, which may or may not be the same as this iterator.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator reset() {
 
@@ -784,11 +640,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return resetPosition();
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
 
@@ -801,11 +653,13 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return returnNode(next);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setMark() {
       m_markedPos = m_ancestorsPos;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void gotoMark() {
       m_ancestorsPos = m_markedPos;
@@ -816,13 +670,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   /** Iterator that returns the descendants of a given node. */
   public class DescendantIterator extends InternalAxisIteratorBase {
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -857,11 +705,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return (_parent(identity) >= _startNode) || (_startNode == identity);
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
       if (_startNode == NULL) {
@@ -888,7 +732,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return returnNode(makeNodeHandle(node)); // make handle.
     }
 
-    /** Reset. */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator reset() {
 
@@ -926,13 +770,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       _isConstant = constant;
     }
 
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -950,11 +788,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Resets the iterator to the last start node.
-     *
-     * @return A DTMAxisIterator, which may or may not be the same as this iterator.
-     */
+    /** {@inheritDoc} */
     @Override
     public DTMAxisIterator reset() {
 
@@ -975,11 +809,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return this;
     }
 
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
+    /** {@inheritDoc} */
     @Override
     public int next() {
 
@@ -989,6 +819,5 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
       return returnNode(result);
     }
-  } // end of SingletonIterator
-
+  }
 }

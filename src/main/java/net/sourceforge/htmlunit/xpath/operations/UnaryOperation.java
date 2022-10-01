@@ -33,11 +33,7 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
    */
   protected Expression m_right;
 
-  /**
-   * Tell if this expression or it's subexpressions can traverse outside the current subtree.
-   *
-   * @return true if traversal outside the context node's subtree can occur.
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
 
@@ -56,14 +52,7 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
     r.exprSetParent(this);
   }
 
-  /**
-   * Execute the operand and apply the unary operation to the result.
-   *
-   * @param xctxt The runtime execution context.
-   * @return An XObject that represents the result of applying the unary operation to the evaluated
-   *     operand.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
@@ -75,7 +64,7 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
    *
    * @param right non-null reference to the evaluated right operand.
    * @return non-null reference to the XObject that represents the result of the operation.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public abstract XObject operate(XObject right) throws javax.xml.transform.TransformerException;
 
@@ -84,9 +73,7 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
     return m_right;
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     if (visitor.visitUnaryOperation()) {
@@ -94,20 +81,20 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
     }
   }
 
-  /** @see ExpressionOwner#getExpression() */
+  /** {@inheritDoc} */
   @Override
   public Expression getExpression() {
     return m_right;
   }
 
-  /** @see ExpressionOwner#setExpression(Expression) */
+  /** {@inheritDoc} */
   @Override
   public void setExpression(Expression exp) {
     exp.exprSetParent(this);
     m_right = exp;
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!isSameClass(expr)) return false;

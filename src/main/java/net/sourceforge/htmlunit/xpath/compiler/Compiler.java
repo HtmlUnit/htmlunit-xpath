@@ -875,9 +875,9 @@ public class Compiler extends OpMap {
       Function func = m_functionTable.getFunction(funcID);
 
       /*
-        It is a trick for function-available. Since the function table is an instance field, insert
-        this table at compilation time for later usage
-       */
+       It is a trick for function-available. Since the function table is an instance field, insert
+       this table at compilation time for later usage
+      */
 
       // if (func instanceof FuncExtFunctionAvailable)
       // ((FuncExtFunctionAvailable) func).setFunctionTable(m_functionTable);
@@ -949,15 +949,7 @@ public class Compiler extends OpMap {
     }
   }
 
-  /**
-   * Tell the user of an error, and probably throw an exception.
-   *
-   * @param msg An error msgkey that corresponds to one of the constants found in {@link
-   *     net.sourceforge.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
-   *     string.
-   * @param args An array of arguments represented in the format string, which may be null.
-   * @throws TransformerException if the current ErrorListoner determines to throw an exception.
-   */
+  /** {@inheritDoc} */
   @Override
   public void error(String msg, Object[] args) throws TransformerException {
 

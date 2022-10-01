@@ -59,13 +59,7 @@ public class XObject extends Expression implements Cloneable {
     m_obj = obj;
   }
 
-  /**
-   * For support of literal objects in xpaths.
-   *
-   * @param xctxt The XPath execution context.
-   * @return This object.
-   * @throws javax.xml.transform.TransformerException
-   */
+  /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return this;
@@ -134,7 +128,7 @@ public class XObject extends Expression implements Cloneable {
    * Cast result object to a number. Always issues an error.
    *
    * @return 0.0
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error in case of error
    */
   public double num() throws javax.xml.transform.TransformerException {
 
@@ -162,7 +156,7 @@ public class XObject extends Expression implements Cloneable {
    * Cast result object to a boolean. Always issues an error.
    *
    * @return false
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error in case of error
    */
   public boolean bool() throws javax.xml.transform.TransformerException {
 
@@ -203,11 +197,7 @@ public class XObject extends Expression implements Cloneable {
     return (m_obj != null) ? m_obj.toString() : "";
   }
 
-  /**
-   * Return the string representation of the object
-   *
-   * @return the string representation of the object
-   */
+  /** {@inheritDoc} */
   @Override
   public String toString() {
     return str();
@@ -227,7 +217,7 @@ public class XObject extends Expression implements Cloneable {
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return null
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error in case of error
    */
   public DTMIterator iter() throws javax.xml.transform.TransformerException {
 
@@ -244,7 +234,7 @@ public class XObject extends Expression implements Cloneable {
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return null
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error in case of error
    */
   public NodeIterator nodeset() throws javax.xml.transform.TransformerException {
 
@@ -261,7 +251,7 @@ public class XObject extends Expression implements Cloneable {
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return null
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error in case of error
    */
   public NodeList nodelist() throws javax.xml.transform.TransformerException {
 
@@ -278,7 +268,7 @@ public class XObject extends Expression implements Cloneable {
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return The object as a NodeSetDTM.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error in case of error
    */
   public NodeSetDTM mutableNodeset() throws javax.xml.transform.TransformerException {
 
@@ -298,7 +288,7 @@ public class XObject extends Expression implements Cloneable {
    *
    * @param obj2 Object to compare this to
    * @return True if this object is less than the given object
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error in case of error
    */
   public boolean lessThan(XObject obj2) throws javax.xml.transform.TransformerException {
 
@@ -317,7 +307,7 @@ public class XObject extends Expression implements Cloneable {
    *
    * @param obj2 Object to compare this to
    * @return True if this object is less than or equal to the given object
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public boolean lessThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException {
 
@@ -336,7 +326,7 @@ public class XObject extends Expression implements Cloneable {
    *
    * @param obj2 Object to compare this to
    * @return True if this object is greater than the given object
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public boolean greaterThan(XObject obj2) throws javax.xml.transform.TransformerException {
 
@@ -355,7 +345,7 @@ public class XObject extends Expression implements Cloneable {
    *
    * @param obj2 Object to compare this to
    * @return True if this object is greater than or equal to the given object
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public boolean greaterThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException {
 
@@ -394,7 +384,7 @@ public class XObject extends Expression implements Cloneable {
    *
    * @param obj2 Object to compare this to
    * @return True if this object is not equal to the given object
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public boolean notEquals(XObject obj2) throws javax.xml.transform.TransformerException {
 
@@ -410,7 +400,7 @@ public class XObject extends Expression implements Cloneable {
    * Tell the user of an error, and probably throw an exception.
    *
    * @param msg Error message to issue
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void error(String msg) throws javax.xml.transform.TransformerException {
     error(msg, null);
@@ -421,7 +411,7 @@ public class XObject extends Expression implements Cloneable {
    *
    * @param msg Error message to issue
    * @param args Arguments to use in the message
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void error(String msg, Object[] args) throws javax.xml.transform.TransformerException {
 
@@ -437,15 +427,13 @@ public class XObject extends Expression implements Cloneable {
     }
   }
 
-  /**
-   * @see net.sourceforge.htmlunit.xpath.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
-   */
+  /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
     assertion(false, "callVisitors should not be called for this object!!!");
   }
 
-  /** @see Expression#deepEquals(Expression) */
+  /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
     if (!isSameClass(expr)) return false;

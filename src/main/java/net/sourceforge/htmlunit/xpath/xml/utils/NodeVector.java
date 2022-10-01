@@ -306,5 +306,4 @@ public class NodeVector implements Cloneable {
 
     return -1;
   }
-
 }
