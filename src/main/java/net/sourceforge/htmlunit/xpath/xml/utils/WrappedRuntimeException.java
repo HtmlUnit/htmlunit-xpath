@@ -28,7 +28,7 @@ public class WrappedRuntimeException extends RuntimeException {
    *
    * @serial
    */
-  private Exception m_exception;
+  private final Exception m_exception;
 
   /**
    * Construct a WrappedRuntimeException from a checked exception.

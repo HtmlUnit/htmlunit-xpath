@@ -44,86 +44,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   }
 
   /**
-   * Get an iterator that can navigate over an XPath Axis, predicated by the extended type ID.
-   * Returns an iterator that must be initialized with a start node (using iterator.setStartNode()).
-   *
-   * @param axis One of Axes.ANCESTORORSELF, etc.
-   * @param type An extended type ID.
-   * @return A DTMAxisIterator, or null if the given axis isn't supported.
-   */
-  @Override
-  public DTMAxisIterator getTypedAxisIterator(int axis, int type) {
-
-    DTMAxisIterator iterator = null;
-
-    /*
-     * This causes an error when using patterns for elements that do not exist in
-     * the DOM (translet types which do not correspond to a DOM type are mapped to
-     * the DOM.ELEMENT type).
-     */
-
-    // if (type == NO_TYPE) {
-    // return(EMPTYITERATOR);
-    // }
-    // else if (type == ELEMENT) {
-    // iterator = new FilterIterator(getAxisIterator(axis),
-    // getElementFilter());
-    // }
-    // else
-    {
-      switch (axis) {
-        case Axis.SELF:
-          iterator = new TypedSingletonIterator(type);
-          break;
-        case Axis.CHILD:
-          iterator = new TypedChildrenIterator(type);
-          break;
-        case Axis.PARENT:
-          return new ParentIterator().setNodeType(type);
-        case Axis.ANCESTOR:
-          return new TypedAncestorIterator(type);
-        case Axis.ANCESTORORSELF:
-          return (new TypedAncestorIterator(type)).includeSelf();
-        case Axis.ATTRIBUTE:
-          return new TypedAttributeIterator(type);
-        case Axis.DESCENDANT:
-          iterator = new TypedDescendantIterator(type);
-          break;
-        case Axis.DESCENDANTORSELF:
-          iterator = (new TypedDescendantIterator(type)).includeSelf();
-          break;
-        case Axis.FOLLOWING:
-          iterator = new TypedFollowingIterator(type);
-          break;
-        case Axis.PRECEDING:
-          iterator = new TypedPrecedingIterator(type);
-          break;
-        case Axis.FOLLOWINGSIBLING:
-          iterator = new TypedFollowingSiblingIterator(type);
-          break;
-        case Axis.PRECEDINGSIBLING:
-          iterator = new TypedPrecedingSiblingIterator(type);
-          break;
-        case Axis.NAMESPACE:
-          iterator = new TypedNamespaceIterator(type);
-          break;
-        case Axis.ROOT:
-          iterator = new TypedRootIterator(type);
-          break;
-        default:
-          throw new DTMException(
-              XMLMessages.createXMLMessage(
-                  XMLErrorResources.ER_TYPED_ITERATOR_AXIS_NOT_IMPLEMENTED,
-                  new Object[] {Axis.getNames(axis)}));
-          // "Error: typed iterator for axis "
-          // + Axis.names[axis] + "not implemented");
-      }
-    }
-
-    return iterator;
-  }
-
-  /**
    * This is a shortcut to the iterators that implement the XPath axes. Returns a bare-bones
    * iterator that must be initialized with a start node (using iterator.setStartNode()).
    *
@@ -133,7 +53,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   @Override
   public DTMAxisIterator getAxisIterator(final int axis) {
 
-    DTMAxisIterator iterator = null;
+    DTMAxisIterator iterator;
 
     switch (axis) {
       case Axis.SELF:
@@ -281,9 +201,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    */
   public final class ParentIterator extends InternalAxisIteratorBase {
 
-    /** The extended type ID that was requested. */
-    private int _nodeType = -1;
-
     /**
      * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
      * END.
@@ -306,20 +223,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     }
 
     /**
-     * Set the node type of the parent that we're looking for. Note that this does _not_ mean "find
-     * the nearest ancestor of this type", but "yield the parent if it is of this type".
-     *
-     * @param type extended type ID.
-     * @return ParentIterator configured with the type filter set.
-     */
-    public DTMAxisIterator setNodeType(final int type) {
-
-      _nodeType = type;
-
-      return this;
-    }
-
-    /**
      * Get the next node in the iteration. In this case, we return only the immediate parent, _if_
      * it matches the requested nodeType.
      *
@@ -329,101 +232,14 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     public int next() {
       int result = _currentNode;
 
-      if (_nodeType >= DTM.NTYPES) {
-        if (_nodeType != getExpandedTypeID(_currentNode)) {
-          result = END;
-        }
-      } else if (_nodeType != NULL) {
-        if (_nodeType != getNodeType(_currentNode)) {
-          result = END;
-        }
-      }
+      /* The extended type ID that was requested. */
+      int _nodeType = -1;
 
       _currentNode = END;
 
       return returnNode(result);
     }
   } // end of ParentIterator
-
-  /**
-   * Iterator that returns children of a given type for a given node. The functionality chould be
-   * achieved by putting a filter on top of a basic child iterator, but a specialised iterator is
-   * used for efficiency (both speed and size of translet).
-   */
-  public final class TypedChildrenIterator extends InternalAxisIteratorBase {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedChildrenIterator
-     *
-     * @param nodeType The extended type ID being requested.
-     */
-    public TypedChildrenIterator(int nodeType) {
-      _nodeType = nodeType;
-    }
-
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
-    @Override
-    public DTMAxisIterator setStartNode(int node) {
-      // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
-      if (_isRestartable) {
-        _startNode = node;
-        _currentNode = (node == DTM.NULL) ? DTM.NULL : _firstch(makeNodeIdentity(_startNode));
-
-        return resetPosition();
-      }
-
-      return this;
-    }
-
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
-    @Override
-    public int next() {
-      int eType;
-      int node = _currentNode;
-
-      int nodeType = _nodeType;
-
-      if (nodeType >= DTM.NTYPES) {
-        while (node != DTM.NULL && _exptype(node) != nodeType) {
-          node = _nextsib(node);
-        }
-      } else {
-        while (node != DTM.NULL) {
-          eType = _exptype(node);
-          if (eType < DTM.NTYPES) {
-            if (eType == nodeType) {
-              break;
-            }
-          } else if (m_expandedNameTable.getType(eType) == nodeType) {
-            break;
-          }
-          node = _nextsib(node);
-        }
-      }
-
-      if (node == DTM.NULL) {
-        _currentNode = DTM.NULL;
-        return DTM.NULL;
-      } else {
-        _currentNode = _nextsib(node);
-        return returnNode(makeNodeHandle(node));
-      }
-    }
-  } // end of TypedChildrenIterator
 
   /**
    * Iterator that returns the namespace nodes as defined by the XPath data model for a given node.
@@ -474,48 +290,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   } // end of NamespaceIterator
 
   /**
-   * Iterator that returns the namespace nodes as defined by the XPath data model for a given node,
-   * filtered by extended type ID.
-   */
-  public class TypedNamespaceIterator extends NamespaceIterator {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedNamespaceIterator
-     *
-     * @param nodeType The extended type ID being requested.
-     */
-    public TypedNamespaceIterator(int nodeType) {
-      super();
-      _nodeType = nodeType;
-    }
-
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
-    @Override
-    public int next() {
-      int node;
-
-      for (node = _currentNode; node != END; node = getNextNamespaceNode(_startNode, node, true)) {
-        if (getExpandedTypeID(node) == _nodeType
-            || getNodeType(node) == _nodeType
-            || getNamespaceType(node) == _nodeType) {
-          _currentNode = node;
-
-          return returnNode(node);
-        }
-      }
-
-      return _currentNode = END;
-    }
-  } // end of TypedNamespaceIterator
-
-  /**
    * Iterator that returns the root node as defined by the XPath data model for a given node.
    */
   public class RootIterator extends InternalAxisIteratorBase {
@@ -561,60 +335,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     }
   } // end of RootIterator
 
-  /**
-   * Iterator that returns the namespace nodes as defined by the XPath data model for a given node,
-   * filtered by extended type ID.
-   */
-  public class TypedRootIterator extends RootIterator {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedRootIterator
-     *
-     * @param nodeType The extended type ID being requested.
-     */
-    public TypedRootIterator(int nodeType) {
-      super();
-      _nodeType = nodeType;
-    }
-
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
-    @Override
-    public int next() {
-      if (_startNode == _currentNode) return NULL;
-
-      int nodeType = _nodeType;
-      int node = _startNode;
-      int expType = getExpandedTypeID(node);
-
-      _currentNode = node;
-
-      if (nodeType >= DTM.NTYPES) {
-        if (nodeType == expType) {
-          return returnNode(node);
-        }
-      } else {
-        if (expType < DTM.NTYPES) {
-          if (expType == nodeType) {
-            return returnNode(node);
-          }
-        } else {
-          if (m_expandedNameTable.getType(expType) == nodeType) {
-            return returnNode(node);
-          }
-        }
-      }
-
-      return END;
-    }
-  } // end of TypedRootIterator
-
   /** Iterator that returns all siblings of a given node. */
   public class FollowingSiblingIterator extends InternalAxisIteratorBase {
 
@@ -650,59 +370,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return returnNode(makeNodeHandle(_currentNode));
     }
   } // end of FollowingSiblingIterator
-
-  /** Iterator that returns all following siblings of a given node. */
-  public final class TypedFollowingSiblingIterator extends FollowingSiblingIterator {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedFollowingSiblingIterator
-     *
-     * @param type The extended type ID being requested.
-     */
-    public TypedFollowingSiblingIterator(int type) {
-      _nodeType = type;
-    }
-
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
-    @Override
-    public int next() {
-      if (_currentNode == DTM.NULL) {
-        return DTM.NULL;
-      }
-
-      int node = _currentNode;
-      int eType;
-      int nodeType = _nodeType;
-
-      if (nodeType >= DTM.NTYPES) {
-        do {
-          node = _nextsib(node);
-        } while (node != DTM.NULL && _exptype(node) != nodeType);
-      } else {
-        while ((node = _nextsib(node)) != DTM.NULL) {
-          eType = _exptype(node);
-          if (eType < DTM.NTYPES) {
-            if (eType == nodeType) {
-              break;
-            }
-          } else if (m_expandedNameTable.getType(eType) == nodeType) {
-            break;
-          }
-        }
-      }
-
-      _currentNode = node;
-
-      return (_currentNode == DTM.NULL) ? DTM.NULL : returnNode(makeNodeHandle(_currentNode));
-    }
-  } // end of TypedFollowingSiblingIterator
 
   /** Iterator that returns attribute nodes (of what nodes?) */
   public final class AttributeIterator extends InternalAxisIteratorBase {
@@ -748,61 +415,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return NULL;
     }
   } // end of AttributeIterator
-
-  /** Iterator that returns attribute nodes of a given type */
-  public final class TypedAttributeIterator extends InternalAxisIteratorBase {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedAttributeIterator
-     *
-     * @param nodeType The extended type ID that is requested.
-     */
-    public TypedAttributeIterator(int nodeType) {
-      _nodeType = nodeType;
-    }
-
-    // assumes caller will pass element nodes
-
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
-    @Override
-    public DTMAxisIterator setStartNode(int node) {
-      if (_isRestartable) {
-        _startNode = node;
-
-        _currentNode = getTypedAttribute(node, _nodeType);
-
-        return resetPosition();
-      }
-
-      return this;
-    }
-
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
-    @Override
-    public int next() {
-
-      final int node = _currentNode;
-
-      // singleton iterator, since there can only be one attribute of
-      // a given type.
-      _currentNode = NULL;
-
-      return returnNode(node);
-    }
-  } // end of TypedAttributeIterator
 
   /** Iterator that returns preceding siblings of a given node */
   public class PrecedingSiblingIterator extends InternalAxisIteratorBase {
@@ -874,64 +486,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       }
     }
   } // end of PrecedingSiblingIterator
-
-  /** Iterator that returns preceding siblings of a given type for a given node */
-  public final class TypedPrecedingSiblingIterator extends PrecedingSiblingIterator {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedPrecedingSiblingIterator
-     *
-     * @param type The extended type ID being requested.
-     */
-    public TypedPrecedingSiblingIterator(int type) {
-      _nodeType = type;
-    }
-
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
-    @Override
-    public int next() {
-      int node = _currentNode;
-      int expType;
-
-      int nodeType = _nodeType;
-      int startID = _startNodeID;
-
-      if (nodeType >= DTM.NTYPES) {
-        while (node != NULL && node != startID && _exptype(node) != nodeType) {
-          node = _nextsib(node);
-        }
-      } else {
-        while (node != NULL && node != startID) {
-          expType = _exptype(node);
-          if (expType < DTM.NTYPES) {
-            if (expType == nodeType) {
-              break;
-            }
-          } else {
-            if (m_expandedNameTable.getType(expType) == nodeType) {
-              break;
-            }
-          }
-          node = _nextsib(node);
-        }
-      }
-
-      if (node == DTM.NULL || node == _startNodeID) {
-        _currentNode = NULL;
-        return NULL;
-      } else {
-        _currentNode = _nextsib(node);
-        return returnNode(makeNodeHandle(node));
-      }
-    }
-  } // end of TypedPrecedingSiblingIterator
 
   /**
    * Iterator that returns preceding nodes of a given node. This includes the node set {root+1,
@@ -1081,85 +635,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     }
   } // end of PrecedingIterator
 
-  /**
-   * Iterator that returns preceding nodes of agiven type for a given node. This includes the node
-   * set {root+1, start-1}, but excludes all ancestors.
-   */
-  public final class TypedPrecedingIterator extends PrecedingIterator {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedPrecedingIterator
-     *
-     * @param type The extended type ID being requested.
-     */
-    public TypedPrecedingIterator(int type) {
-      _nodeType = type;
-    }
-
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
-    @Override
-    public int next() {
-      int node = _currentNode;
-      int nodeType = _nodeType;
-
-      if (nodeType >= DTM.NTYPES) {
-        while (true) {
-          node = node + 1;
-
-          if (_sp < 0) {
-            node = NULL;
-            break;
-          } else if (node >= _stack[_sp]) {
-            if (--_sp < 0) {
-              node = NULL;
-              break;
-            }
-          } else if (_exptype(node) == nodeType) {
-            break;
-          }
-        }
-      } else {
-        int expType;
-
-        while (true) {
-          node = node + 1;
-
-          if (_sp < 0) {
-            node = NULL;
-            break;
-          } else if (node >= _stack[_sp]) {
-            if (--_sp < 0) {
-              node = NULL;
-              break;
-            }
-          } else {
-            expType = _exptype(node);
-            if (expType < DTM.NTYPES) {
-              if (expType == nodeType) {
-                break;
-              }
-            } else {
-              if (m_expandedNameTable.getType(expType) == nodeType) {
-                break;
-              }
-            }
-          }
-        }
-      }
-
-      _currentNode = node;
-
-      return (node == NULL) ? NULL : returnNode(makeNodeHandle(node));
-    }
-  } // end of TypedPrecedingIterator
-
   /** Iterator that returns following nodes of for a given node. */
   public class FollowingIterator extends InternalAxisIteratorBase {
     DTMAxisTraverser m_traverser; // easier for now
@@ -1206,43 +681,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     }
   } // end of FollowingIterator
 
-  /** Iterator that returns following nodes of a given type for a given node. */
-  public final class TypedFollowingIterator extends FollowingIterator {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedFollowingIterator
-     *
-     * @param type The extended type ID being requested.
-     */
-    public TypedFollowingIterator(int type) {
-      _nodeType = type;
-    }
-
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
-    @Override
-    public int next() {
-
-      int node;
-
-      do {
-        node = _currentNode;
-
-        _currentNode = m_traverser.next(_startNode, _currentNode);
-
-      } while (node != DTM.NULL
-          && (getExpandedTypeID(node) != _nodeType && getNodeType(node) != _nodeType));
-
-      return node == DTM.NULL ? DTM.NULL : returnNode(node);
-    }
-  } // end of TypedFollowingIterator
-
   /**
    * Iterator that returns the ancestors of a given node in document order. (NOTE! This was changed
    * from the XSLTC code!)
@@ -1257,17 +695,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     /** The real start node for this axes, since _startNode will be adjusted. */
     int m_realStartNode;
-
-    /**
-     * Get start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @return The root node of the iteration.
-     */
-    @Override
-    public int getStartNode() {
-      return m_realStartNode;
-    }
 
     /**
      * True if this iterator has a reversed axis.
@@ -1387,75 +814,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     }
   } // end of AncestorIterator
 
-  /** Typed iterator that returns the ancestors of a given node. */
-  public final class TypedAncestorIterator extends AncestorIterator {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedAncestorIterator
-     *
-     * @param type The extended type ID being requested.
-     */
-    public TypedAncestorIterator(int type) {
-      _nodeType = type;
-    }
-
-    /**
-     * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return
-     * END.
-     *
-     * @param node Sets the root of the iteration.
-     * @return A DTMAxisIterator set to the start of the iteration.
-     */
-    @Override
-    public DTMAxisIterator setStartNode(int node) {
-      // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
-      m_realStartNode = node;
-
-      if (_isRestartable) {
-        int nodeID = makeNodeIdentity(node);
-        int nodeType = _nodeType;
-
-        if (!_includeSelf && node != DTM.NULL) {
-          nodeID = _parent(nodeID);
-        }
-
-        _startNode = node;
-
-        if (nodeType >= DTM.NTYPES) {
-          while (nodeID != END) {
-            int eType = _exptype(nodeID);
-
-            if (eType == nodeType) {
-              m_ancestors.addElement(makeNodeHandle(nodeID));
-            }
-            nodeID = _parent(nodeID);
-          }
-        } else {
-          while (nodeID != END) {
-            int eType = _exptype(nodeID);
-
-            if ((eType >= DTM.NTYPES && m_expandedNameTable.getType(eType) == nodeType)
-                || (eType < DTM.NTYPES && eType == nodeType)) {
-              m_ancestors.addElement(makeNodeHandle(nodeID));
-            }
-            nodeID = _parent(nodeID);
-          }
-        }
-        m_ancestorsPos = m_ancestors.size() - 1;
-
-        _currentNode = (m_ancestorsPos >= 0) ? m_ancestors.elementAt(m_ancestorsPos) : DTM.NULL;
-
-        return resetPosition();
-      }
-
-      return this;
-    }
-  } // end of TypedAncestorIterator
-
   /** Iterator that returns the descendants of a given node. */
   public class DescendantIterator extends InternalAxisIteratorBase {
 
@@ -1547,52 +905,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     }
   } // end of DescendantIterator
 
-  /** Typed iterator that returns the descendants of a given node. */
-  public final class TypedDescendantIterator extends DescendantIterator {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedDescendantIterator
-     *
-     * @param nodeType Extended type ID being requested.
-     */
-    public TypedDescendantIterator(int nodeType) {
-      _nodeType = nodeType;
-    }
-
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
-    @Override
-    public int next() {
-      int node;
-      int type;
-
-      if (_startNode == NULL) {
-        return NULL;
-      }
-
-      node = _currentNode;
-
-      do {
-        node++;
-        type = _type(node);
-
-        if (NULL == type || !isDescendant(node)) {
-          _currentNode = NULL;
-          return END;
-        }
-      } while (type != _nodeType && _exptype(node) != _nodeType);
-
-      _currentNode = node;
-      return returnNode(makeNodeHandle(node));
-    }
-  } // end of TypedDescendantIterator
-
   /** Class SingletonIterator. */
   public class SingletonIterator extends InternalAxisIteratorBase {
 
@@ -1680,46 +992,4 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     }
   } // end of SingletonIterator
 
-  /** Iterator that returns a given node only if it is of a given type. */
-  public final class TypedSingletonIterator extends SingletonIterator {
-
-    /** The extended type ID that was requested. */
-    private final int _nodeType;
-
-    /**
-     * Constructor TypedSingletonIterator
-     *
-     * @param nodeType The extended type ID being requested.
-     */
-    public TypedSingletonIterator(int nodeType) {
-      _nodeType = nodeType;
-    }
-
-    /**
-     * Get the next node in the iteration.
-     *
-     * @return The next node handle in the iteration, or END.
-     */
-    @Override
-    public int next() {
-
-      // final int result = super.next();
-      final int result = _currentNode;
-      int nodeType = _nodeType;
-
-      _currentNode = END;
-
-      if (nodeType >= DTM.NTYPES) {
-        if (getExpandedTypeID(result) == nodeType) {
-          return returnNode(result);
-        }
-      } else {
-        if (getNodeType(result) == nodeType) {
-          return returnNode(result);
-        }
-      }
-
-      return NULL;
-    }
-  } // end of TypedSingletonIterator
 }

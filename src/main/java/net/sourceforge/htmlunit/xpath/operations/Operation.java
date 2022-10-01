@@ -101,16 +101,6 @@ public class Operation extends Expression implements ExpressionOwner {
     return null; // no-op
   }
 
-  /** @return the left operand of binary operation, as an Expression. */
-  public Expression getLeftOperand() {
-    return m_left;
-  }
-
-  /** @return the right operand of binary operation, as an Expression. */
-  public Expression getRightOperand() {
-    return m_right;
-  }
-
   class LeftExprOwner implements ExpressionOwner {
     /** @see ExpressionOwner#getExpression() */
     @Override
@@ -131,7 +121,7 @@ public class Operation extends Expression implements ExpressionOwner {
    */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
-    if (visitor.visitBinaryOperation(owner, this)) {
+    if (visitor.visitBinaryOperation()) {
       m_left.callVisitors(new LeftExprOwner(), visitor);
       m_right.callVisitors(this, visitor);
     }

@@ -130,7 +130,7 @@ public class UnionPattern extends Expression {
    */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
-    visitor.visitUnionPattern(owner, this);
+    visitor.visitUnionPattern();
     if (null != m_patterns) {
       int n = m_patterns.length;
       for (int i = 0; i < n; i++) {

@@ -28,11 +28,6 @@ import java.util.EmptyStackException;
  */
 public class IntStack extends IntVector {
 
-  /** Default constructor. Note that the default block size is very small, for small lists. */
-  public IntStack() {
-    super();
-  }
-
   /**
    * Construct a IntVector, using the given block size.
    *
@@ -40,15 +35,6 @@ public class IntStack extends IntVector {
    */
   public IntStack(int blocksize) {
     super(blocksize);
-  }
-
-  /**
-   * Copy constructor for IntStack
-   *
-   * @param v IntStack to copy
-   */
-  public IntStack(IntStack v) {
-    super(v);
   }
 
   /**
@@ -76,16 +62,6 @@ public class IntStack extends IntVector {
     return i;
   }
 
-  /**
-   * Removes the object at the top of this stack and returns that object as the value of this
-   * function.
-   *
-   * @return The object at the top of this stack.
-   */
-  public final int pop() {
-    return m_map[--m_firstFree];
-  }
-
   /** Quickly pops a number of items from the stack. */
   public final void quickPop(int n) {
     m_firstFree -= n;
@@ -100,21 +76,6 @@ public class IntStack extends IntVector {
   public final int peek() {
     try {
       return m_map[m_firstFree - 1];
-    } catch (ArrayIndexOutOfBoundsException e) {
-      throw new EmptyStackException();
-    }
-  }
-
-  /**
-   * Looks at the object at the position the stack counting down n items.
-   *
-   * @param n The number of items down, indexed from zero.
-   * @return the object at n items down.
-   * @throws EmptyStackException if this stack is empty.
-   */
-  public int peek(int n) {
-    try {
-      return m_map[m_firstFree - (1 + n)];
     } catch (ArrayIndexOutOfBoundsException e) {
       throw new EmptyStackException();
     }

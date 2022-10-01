@@ -353,7 +353,6 @@ public class XNumber extends XObject {
    *
    * @param obj2 Object to compare this to
    * @return true if the two objects are equal
-   * @throws javax.xml.transform.TransformerException
    */
   @Override
   public boolean equals(XObject obj2) {
@@ -388,6 +387,6 @@ public class XNumber extends XObject {
    */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
-    visitor.visitNumberLiteral(owner, this);
+    visitor.visitNumberLiteral();
   }
 }

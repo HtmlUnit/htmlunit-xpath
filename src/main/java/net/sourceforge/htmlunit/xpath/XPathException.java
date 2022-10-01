@@ -54,17 +54,6 @@ public class XPathException extends TransformerException {
   }
 
   /**
-   * Get the first non-Expression parent of this node.
-   *
-   * @return null or first ancestor that is not an Expression.
-   */
-  protected ExpressionNode getExpressionOwner(ExpressionNode ex) {
-    ExpressionNode parent = ex.exprGetParent();
-    while ((null != parent) && (parent instanceof Expression)) parent = parent.exprGetParent();
-    return parent;
-  }
-
-  /**
    * Create an XPathException object that holds an error message, and another exception that caused
    * this exception.
    *

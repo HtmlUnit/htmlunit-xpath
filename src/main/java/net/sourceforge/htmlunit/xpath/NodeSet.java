@@ -45,12 +45,6 @@ import org.w3c.dom.traversal.NodeIterator;
  */
 public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeList {
 
-  /** Create an empty nodelist. */
-  public NodeSet() {
-    m_blocksize = 32;
-    m_mapSize = 0;
-  }
-
   /**
    * Create an empty, using the given block size.
    *
@@ -59,54 +53,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   public NodeSet(int blocksize) {
     m_blocksize = blocksize;
     m_mapSize = 0;
-  }
-
-  /**
-   * Create a NodeSet, and copy the members of the given nodelist into it.
-   *
-   * @param nodelist List of Nodes to be made members of the new set.
-   */
-  public NodeSet(NodeList nodelist) {
-
-    this(32);
-
-    addNodes(nodelist);
-  }
-
-  /**
-   * Create a NodeSet, and copy the members of the given NodeSet into it.
-   *
-   * @param nodelist Set of Nodes to be made members of the new set.
-   */
-  public NodeSet(NodeSet nodelist) {
-
-    this(32);
-
-    addNodes((NodeIterator) nodelist);
-  }
-
-  /**
-   * Create a NodeSet, and copy the members of the given NodeIterator into it.
-   *
-   * @param ni Iterator which yields Nodes to be made members of the new set.
-   */
-  public NodeSet(NodeIterator ni) {
-
-    this(32);
-
-    addNodes(ni);
-  }
-
-  /**
-   * Create a NodeSet which contains the given Node.
-   *
-   * @param node Single node to be added to the new set.
-   */
-  public NodeSet(Node node) {
-
-    this(32);
-
-    addNode(node);
   }
 
   /**
@@ -536,15 +482,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   protected transient boolean m_cacheNodes = true;
 
   /**
-   * Get whether or not this is a cached node set.
-   *
-   * @return True if this list is cached.
-   */
-  public boolean getShouldCacheNodes() {
-    return m_cacheNodes;
-  }
-
-  /**
    * If setShouldCacheNodes(true) is called, then nodes will be cached. They are not cached by
    * default. This switch must be set before the first call to nextNode is made, to ensure that all
    * nodes are cached.
@@ -708,134 +645,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   }
 
   /**
-   * Pop a node from the tail of the vector and return the result.
-   *
-   * @return the node at the tail of the vector
-   */
-  public final Node pop() {
-
-    m_firstFree--;
-
-    Node n = m_map[m_firstFree];
-
-    m_map[m_firstFree] = null;
-
-    return n;
-  }
-
-  /**
-   * Pop a node from the tail of the vector and return the top of the stack after the pop.
-   *
-   * @return The top of the stack after it's been popped
-   */
-  public final Node popAndTop() {
-
-    m_firstFree--;
-
-    m_map[m_firstFree] = null;
-
-    return (m_firstFree == 0) ? null : m_map[m_firstFree - 1];
-  }
-
-  /** Pop a node from the tail of the vector. */
-  public final void popQuick() {
-
-    m_firstFree--;
-
-    m_map[m_firstFree] = null;
-  }
-
-  /**
-   * Return the node at the top of the stack without popping the stack. Special purpose method for
-   * TransformerImpl, pushElemTemplateElement. Performance critical.
-   *
-   * @return Node at the top of the stack or null if stack is empty.
-   */
-  public final Node peepOrNull() {
-    return ((null != m_map) && (m_firstFree > 0)) ? m_map[m_firstFree - 1] : null;
-  }
-
-  /**
-   * Push a pair of nodes into the stack. Special purpose method for TransformerImpl,
-   * pushElemTemplateElement. Performance critical.
-   *
-   * @param v1 First node to add to vector
-   * @param v2 Second node to add to vector
-   */
-  public final void pushPair(Node v1, Node v2) {
-
-    if (null == m_map) {
-      m_map = new Node[m_blocksize];
-      m_mapSize = m_blocksize;
-    } else {
-      if ((m_firstFree + 2) >= m_mapSize) {
-        m_mapSize += m_blocksize;
-
-        Node newMap[] = new Node[m_mapSize];
-
-        System.arraycopy(m_map, 0, newMap, 0, m_firstFree);
-
-        m_map = newMap;
-      }
-    }
-
-    m_map[m_firstFree] = v1;
-    m_map[m_firstFree + 1] = v2;
-    m_firstFree += 2;
-  }
-
-  /**
-   * Pop a pair of nodes from the tail of the stack. Special purpose method for TransformerImpl,
-   * pushElemTemplateElement. Performance critical.
-   */
-  public final void popPair() {
-
-    m_firstFree -= 2;
-    m_map[m_firstFree] = null;
-    m_map[m_firstFree + 1] = null;
-  }
-
-  /**
-   * Set the tail of the stack to the given node. Special purpose method for TransformerImpl,
-   * pushElemTemplateElement. Performance critical.
-   *
-   * @param n Node to set at the tail of vector
-   */
-  public final void setTail(Node n) {
-    m_map[m_firstFree - 1] = n;
-  }
-
-  /**
-   * Set the given node one position from the tail. Special purpose method for TransformerImpl,
-   * pushElemTemplateElement. Performance critical.
-   *
-   * @param n Node to set
-   */
-  public final void setTailSub1(Node n) {
-    m_map[m_firstFree - 2] = n;
-  }
-
-  /**
-   * Return the node at the tail of the vector without popping Special purpose method for
-   * TransformerImpl, pushElemTemplateElement. Performance critical.
-   *
-   * @return Node at the tail of the vector
-   */
-  public final Node peepTail() {
-    return m_map[m_firstFree - 1];
-  }
-
-  /**
-   * Return the node one position from the tail without popping. Special purpose method for
-   * TransformerImpl, pushElemTemplateElement. Performance critical.
-   *
-   * @return Node one away from the tail
-   */
-  public final Node peepTailSub1() {
-    return m_map[m_firstFree - 2];
-  }
-
-  /**
    * Inserts the specified node in this vector at the specified index. Each component in this vector
    * with an index greater or equal to the specified index is shifted upward to have an index one
    * greater than the value it had previously.
@@ -874,49 +683,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   }
 
   /**
-   * Append the nodes to the list.
-   *
-   * @param nodes NodeVector to append to this list
-   */
-  public void appendNodes(NodeSet nodes) {
-
-    int nNodes = nodes.size();
-
-    if (null == m_map) {
-      m_mapSize = nNodes + m_blocksize;
-      m_map = new Node[m_mapSize];
-    } else if ((m_firstFree + nNodes) >= m_mapSize) {
-      m_mapSize += nNodes + m_blocksize;
-
-      Node newMap[] = new Node[m_mapSize];
-
-      System.arraycopy(m_map, 0, newMap, 0, m_firstFree + nNodes);
-
-      m_map = newMap;
-    }
-
-    System.arraycopy(nodes.m_map, 0, m_map, m_firstFree, nNodes);
-
-    m_firstFree += nNodes;
-  }
-
-  /**
-   * Inserts the specified node in this vector at the specified index. Each component in this vector
-   * with an index greater or equal to the specified index is shifted upward to have an index one
-   * greater than the value it had previously.
-   */
-  public void removeAllElements() {
-
-    if (null == m_map) return;
-
-    for (int i = 0; i < m_firstFree; i++) {
-      m_map[i] = null;
-    }
-
-    m_firstFree = 0;
-  }
-
-  /**
    * Removes the first occurrence of the argument from this vector. If the object is found in this
    * vector, each component in the vector with an index greater or equal to the object's index is
    * shifted downward to have an index one smaller than the value it had previously.
@@ -948,26 +714,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     }
 
     return false;
-  }
-
-  /**
-   * Deletes the component at the specified index. Each component in this vector with an index
-   * greater or equal to the specified index is shifted downward to have an index one smaller than
-   * the value it had previously.
-   *
-   * @param i Index of node to remove
-   */
-  public void removeElementAt(int i) {
-
-    if (null == m_map) return;
-
-    if (i >= m_firstFree) throw new ArrayIndexOutOfBoundsException(i + " >= " + m_firstFree);
-    else if (i < 0) throw new ArrayIndexOutOfBoundsException(i);
-
-    if (i < m_firstFree - 1) System.arraycopy(m_map, i + 1, m_map, i, m_firstFree - i - 1);
-
-    m_firstFree--;
-    m_map[m_firstFree] = null;
   }
 
   /**

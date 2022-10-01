@@ -58,7 +58,7 @@ public final class ExtendedType {
    * Redefine this ExtendedType object to represent a different extended type. This is intended to
    * be used ONLY on the hashET object. Using it elsewhere will mess up existing hashtable entries!
    */
-  protected void redefine(int nodetype, String namespace, String localName, int hash) {
+  void redefine(int nodetype, String namespace, String localName, int hash) {
     this.nodetype = nodetype;
     this.namespace = namespace;
     this.localName = localName;

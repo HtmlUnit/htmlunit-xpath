@@ -31,14 +31,4 @@ public class XPathProcessorException extends XPathException {
     super(message);
   }
 
-  /**
-   * Create an XPathProcessorException object that holds an error message, and another exception
-   * that caused this exception.
-   *
-   * @param message The error message.
-   * @param e The exception that caused this exception.
-   */
-  public XPathProcessorException(String message, Exception e) {
-    super(message, e);
-  }
 }

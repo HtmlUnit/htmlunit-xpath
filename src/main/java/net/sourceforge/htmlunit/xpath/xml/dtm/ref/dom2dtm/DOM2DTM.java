@@ -28,11 +28,8 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.ref.ExpandedNameTable;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
-import org.w3c.dom.Entity;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
@@ -1044,59 +1041,6 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   }
 
   /**
-   * A document type declaration information item has the following properties:
-   *
-   * <p>1. [system identifier] The system identifier of the external subset, if it exists. Otherwise
-   * this property has no value.
-   *
-   * @return the system identifier String object, or null if there is none.
-   */
-  @Override
-  public String getDocumentTypeDeclarationSystemIdentifier() {
-
-    Document doc;
-
-    if (m_root.getNodeType() == Node.DOCUMENT_NODE) doc = (Document) m_root;
-    else doc = m_root.getOwnerDocument();
-
-    if (null != doc) {
-      DocumentType dtd = doc.getDoctype();
-
-      if (null != dtd) {
-        return dtd.getSystemId();
-      }
-    }
-
-    return null;
-  }
-
-  /**
-   * Return the public identifier of the external subset, normalized as described in 4.2.2 External
-   * Entities [XML]. If there is no external subset or if it has no public identifier, this property
-   * has no value.
-   *
-   * @return the public identifier String object, or null if there is none.
-   */
-  @Override
-  public String getDocumentTypeDeclarationPublicIdentifier() {
-
-    Document doc;
-
-    if (m_root.getNodeType() == Node.DOCUMENT_NODE) doc = (Document) m_root;
-    else doc = m_root.getOwnerDocument();
-
-    if (null != doc) {
-      DocumentType dtd = doc.getDoctype();
-
-      if (null != dtd) {
-        return dtd.getPublicId();
-      }
-    }
-
-    return null;
-  }
-
-  /**
    * Returns the <code>Element</code> whose <code>ID</code> is given by <code>elementId</code>. If
    * no such element exists, returns <code>DTM.NULL</code>. Behavior is not defined if more than one
    * element has this <code>ID</code>. Attributes (including those with the name "ID") are not of
@@ -1141,93 +1085,4 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     return DTM.NULL;
   }
 
-  /**
-   * The getUnparsedEntityURI function returns the URI of the unparsed entity with the specified
-   * name in the same document as the context node (see [3.3 Unparsed Entities]). It returns the
-   * empty string if there is no such entity.
-   *
-   * <p>XML processors may choose to use the System Identifier (if one is provided) to resolve the
-   * entity, rather than the URI in the Public Identifier. The details are dependent on the
-   * processor, and we would have to support some form of plug-in resolver to handle this properly.
-   * Currently, we simply return the System Identifier if present, and hope that it a usable URI or
-   * that our caller can map it to one. TODO: Resolve Public Identifiers... or consider changing
-   * function name.
-   *
-   * <p>If we find a relative URI reference, XML expects it to be resolved in terms of the base URI
-   * of the document. The DOM doesn't do that for us, and it isn't entirely clear whether that
-   * should be done here; currently that's pushed up to a higher level of our application. (Note
-   * that DOM Level 1 didn't store the document's base URI.) TODO: Consider resolving Relative URIs.
-   *
-   * <p>(The DOM's statement that "An XML processor may choose to completely expand entities before
-   * the structure model is passed to the DOM" refers only to parsed entities, not unparsed, and
-   * hence doesn't affect this function.)
-   *
-   * @param name A string containing the Entity Name of the unparsed entity.
-   * @return String containing the URI of the Unparsed Entity, or an empty string if no such entity
-   *     exists.
-   */
-  @Override
-  public String getUnparsedEntityURI(String name) {
-
-    String url = "";
-    Document doc =
-        (m_root.getNodeType() == Node.DOCUMENT_NODE)
-            ? (Document) m_root
-            : m_root.getOwnerDocument();
-
-    if (null != doc) {
-      DocumentType doctype = doc.getDoctype();
-
-      if (null != doctype) {
-        NamedNodeMap entities = doctype.getEntities();
-        if (null == entities) return url;
-        Entity entity = (Entity) entities.getNamedItem(name);
-        if (null == entity) return url;
-
-        String notationName = entity.getNotationName();
-
-        if (null != notationName) // then it's unparsed
-        {
-          // The draft says: "The XSLT processor may use the public
-          // identifier to generate a URI for the entity instead of the URI
-          // specified in the system identifier. If the XSLT processor does
-          // not use the public identifier to generate the URI, it must use
-          // the system identifier; if the system identifier is a relative
-          // URI, it must be resolved into an absolute URI using the URI of
-          // the resource containing the entity declaration as the base
-          // URI [RFC2396]."
-          // So I'm falling a bit short here.
-          url = entity.getSystemId();
-
-          if (null == url) {
-            url = entity.getPublicId();
-          } else {
-            // This should be resolved to an absolute URL, but that's hard
-            // to do from here.
-          }
-        }
-      }
-    }
-
-    return url;
-  }
-
-  /**
-   * 5. [specified] A flag indicating whether this attribute was actually specified in the start-tag
-   * of its element, or was defaulted from the DTD.
-   *
-   * @param attributeHandle the attribute handle
-   * @return <code>true</code> if the attribute was specified; <code>false</code> if it was
-   *     defaulted.
-   */
-  @Override
-  public boolean isAttributeSpecified(int attributeHandle) {
-    int type = getNodeType(attributeHandle);
-
-    if (DTM.ATTRIBUTE_NODE == type) {
-      Attr attr = (Attr) getNode(attributeHandle);
-      return attr.getSpecified();
-    }
-    return false;
-  }
 }

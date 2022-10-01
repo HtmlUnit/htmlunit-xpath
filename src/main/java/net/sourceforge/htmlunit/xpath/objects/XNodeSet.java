@@ -289,23 +289,6 @@ public class XNodeSet extends NodeSequence {
   }
 
   /**
-   * Get a fresh copy of the object. For use with variables.
-   *
-   * @return A fresh nodelist.
-   */
-  @Override
-  public XObject getFresh() {
-    try {
-      if (hasCache()) {
-          return (XObject) cloneWithReset();
-      }
-      return this; // don't bother to clone... won't do any good!
-    } catch (CloneNotSupportedException cnse) {
-      throw new RuntimeException(cnse.getMessage());
-    }
-  }
-
-  /**
    * Cast result object to a mutableNodeset.
    *
    * @return The nodeset as a mutableNodeset
@@ -538,7 +521,6 @@ public class XNodeSet extends NodeSequence {
    *
    * @param obj2 object to compare this nodeset to
    * @return see this.compare(...)
-   * @throws javax.xml.transform.TransformerException
    */
   @Override
   public boolean equals(XObject obj2) {

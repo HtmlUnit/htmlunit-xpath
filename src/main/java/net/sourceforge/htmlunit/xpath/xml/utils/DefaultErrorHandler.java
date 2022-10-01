@@ -17,7 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.utils;
 
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
@@ -30,17 +29,7 @@ public class DefaultErrorHandler implements ErrorListener {
    * if this flag is set to true, we will rethrow the exception on the error() and fatalError()
    * methods. If it is false, the errors are reported to System.err.
    */
-  boolean m_throwExceptionOnError = true;
-
-  /** Constructor DefaultErrorHandler */
-  public DefaultErrorHandler(PrintWriter pw) {
-    m_pw = pw;
-  }
-
-  /** Constructor DefaultErrorHandler */
-  public DefaultErrorHandler(PrintStream pw) {
-    m_pw = new PrintWriter(pw, true);
-  }
+  boolean m_throwExceptionOnError;
 
   /** Constructor DefaultErrorHandler */
   public DefaultErrorHandler() {

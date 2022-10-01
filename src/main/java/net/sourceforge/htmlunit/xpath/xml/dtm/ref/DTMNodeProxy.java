@@ -1529,20 +1529,6 @@ public class DTMNodeProxy
     return fDocumentURI;
   }
 
-  /** DOM Level 3 feature: Document actualEncoding */
-  protected String actualEncoding;
-
-  /**
-   * DOM Level 3 An attribute specifying the actual encoding of this document. This is <code>null
-   * </code> otherwise. <br>
-   * This attribute represents the property [character encoding scheme] defined in .
-   *
-   * @since DOM Level 3
-   */
-  public String getActualEncoding() {
-    return actualEncoding;
-  }
-
 
   /** DOM Level 3 */
   @Override

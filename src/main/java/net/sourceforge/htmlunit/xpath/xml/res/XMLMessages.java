@@ -18,13 +18,9 @@
 package net.sourceforge.htmlunit.xpath.xml.res;
 
 import java.util.ListResourceBundle;
-import java.util.Locale;
 
 /** A utility class for issuing XML error messages. */
 public class XMLMessages {
-
-  /** The local object to use. */
-  protected Locale fLocale = Locale.getDefault();
 
   /** The language specific resource object for XML messages. */
   private static ListResourceBundle XMLBundle = null;
@@ -43,12 +39,10 @@ public class XMLMessages {
    * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted message string.
    */
-  public static final String createXMLMessage(String msgKey, Object args[]) {
+  public static String createXMLMessage(String msgKey, Object args[]) {
     if (XMLBundle == null) XMLBundle = new XMLErrorResources();
 
-    if (XMLBundle != null) {
-      return createMsg(XMLBundle, msgKey, args);
-    } else return "Could not load any resource bundles.";
+    return createMsg(XMLBundle, msgKey, args);
   }
 
   /**
@@ -60,12 +54,12 @@ public class XMLMessages {
    * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted message string.
    */
-  public static final String createMsg(
+  public static String createMsg(
       ListResourceBundle fResourceBundle, String msgKey, Object args[]) // throws
         // Exception
       {
 
-    String fmsg = null;
+    String fmsg;
     boolean throwex = false;
     String msg = null;
 

@@ -26,16 +26,6 @@ package net.sourceforge.htmlunit.xpath.xml.dtm;
 public class DTMDOMException extends org.w3c.dom.DOMException {
 
   /**
-   * Constructs a DOM/DTM exception.
-   *
-   * @param code
-   * @param message
-   */
-  public DTMDOMException(short code, String message) {
-    super(code, message);
-  }
-
-  /**
    * Constructor DTMDOMException
    *
    * @param code

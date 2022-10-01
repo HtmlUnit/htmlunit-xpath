@@ -377,7 +377,7 @@ public class UnionPathIterator extends LocPathIterator
    */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
-    if (visitor.visitUnionPath(owner, this)) {
+    if (visitor.visitUnionPath()) {
       if (null != m_exprs) {
         int n = m_exprs.length;
         for (int i = 0; i < n; i++) {

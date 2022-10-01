@@ -20,15 +20,15 @@ package net.sourceforge.htmlunit.xpath.compiler;
 /** This is used to represent names of nodes that may not be named, like a comment node. */
 public class PseudoNames {
 
-  /** Psuedo name for a wild card pattern ('*'). */
+  /** Pseudo name for a wild card pattern ('*'). */
   public static final String PSEUDONAME_ANY = "*";
 
-  /** Psuedo name for the root node. */
+  /** Pseudo name for the root node. */
   public static final String PSEUDONAME_ROOT = "/";
 
-  /** Psuedo name for a text node. */
+  /** Pseudo name for a text node. */
   public static final String PSEUDONAME_TEXT = "#text";
 
-  /** Psuedo name for a comment node. */
+  /** Pseudo name for a comment node. */
   public static final String PSEUDONAME_COMMENT = "#comment";
 }

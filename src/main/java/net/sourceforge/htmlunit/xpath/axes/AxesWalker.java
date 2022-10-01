@@ -396,7 +396,7 @@ public class AxesWalker extends PredicatedNodeTest
    */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
-    if (visitor.visitStep(owner, this)) {
+    if (visitor.visitStep()) {
       callPredicateVisitors(visitor);
       if (null != m_nextWalker) {
         m_nextWalker.callVisitors(this, visitor);

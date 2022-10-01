@@ -842,8 +842,6 @@ public class XPathParser {
    * PathExpr ::= LocationPath | FilterExpr | FilterExpr '/' RelativeLocationPath | FilterExpr '//'
    * RelativeLocationPath
    *
-   * @throws XSLProcessorException thrown if the active ProblemListener and XPathContext decide the
-   *     error condition is severe enough to halt processing.
    * @throws javax.xml.transform.TransformerException
    */
   protected void PathExpr() throws javax.xml.transform.TransformerException {
@@ -887,8 +885,6 @@ public class XPathParser {
   /**
    * FilterExpr ::= PrimaryExpr | FilterExpr Predicate
    *
-   * @throws XSLProcessorException thrown if the active ProblemListener and XPathContext decide the
-   *     error condition is severe enough to halt processing.
    * @return FILTER_MATCH_PREDICATES, if this method successfully matched a FilterExpr with one or
    *     more Predicates; FILTER_MATCH_PRIMARY, if this method successfully matched a FilterExpr
    *     that was just a PrimaryExpr; or FILTER_MATCH_FAILED, if this method did not match a

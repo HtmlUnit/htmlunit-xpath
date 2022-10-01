@@ -79,18 +79,6 @@ public class DTMManagerDefault extends DTMManager {
   int m_dtm_offsets[] = new int[256];
 
   /**
-   * Add a DTM to the DTM table. This convenience call adds it as the "base DTM ID", with offset 0.
-   * The other version of addDTM should be used if you want to add "extended" DTM IDs with nonzero
-   * offsets.
-   *
-   * @param dtm Should be a valid reference to a DTM.
-   * @param id Integer DTM ID to be bound to this DTM
-   */
-  public synchronized void addDTM(DTM dtm, int id) {
-    addDTM(dtm, id, 0);
-  }
-
-  /**
    * Add a DTM to the DTM table.
    *
    * @param dtm Should be a valid reference to a DTM.
@@ -353,21 +341,7 @@ public class DTMManagerDefault extends DTMManager {
     return null;
   }
 
-  /**
-   * NEEDSDOC Method createDTMIterator
-   *
-   * <p>NEEDSDOC @param node
-   *
-   * <p>NEEDSDOC (createDTMIterator) @return
-   */
-  @Override
-  public synchronized DTMIterator createDTMIterator(int node) {
-
-    /* @todo: implement this org.apache.xml.dtm.DTMManager abstract method */
-    return null;
-  }
-
-  /**
+    /**
    * NEEDSDOC Method createDTMIterator
    *
    * <p>NEEDSDOC @param xpathCompiler NEEDSDOC @param pos

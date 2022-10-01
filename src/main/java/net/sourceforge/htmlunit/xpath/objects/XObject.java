@@ -88,17 +88,6 @@ public class XObject extends Expression implements Cloneable {
    */
   public void detach() {}
 
-  /** Forces the object to release it's resources. This is more harsh than detach(). */
-  public void destruct() {
-
-    if (null != m_obj) {
-      allowDetachToRelease(true);
-      detach();
-
-      setObject(null);
-    }
-  }
-
   /** Reset for fresh reuse. */
   public void reset() {}
 
@@ -122,9 +111,6 @@ public class XObject extends Expression implements Cloneable {
 
   /** Constant for RESULT TREE FRAGMENT object type */
   public static final int CLASS_RTREEFRAG = 5;
-
-  /** Represents an unresolved variable type as an integer. */
-  public static final int CLASS_UNRESOLVEDVARIABLE = 600;
 
   /**
    * Tell what kind of class this is.
@@ -255,15 +241,6 @@ public class XObject extends Expression implements Cloneable {
   }
 
   /**
-   * Get a fresh copy of the object. For use with variables.
-   *
-   * @return This object, unless overridden by subclass.
-   */
-  public XObject getFresh() {
-    return this;
-  }
-
-  /**
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return null
@@ -314,53 +291,6 @@ public class XObject extends Expression implements Cloneable {
     // NodeSetDTM!");
 
     return (NodeSetDTM) m_obj;
-  }
-
-  /**
-   * Cast object to type t.
-   *
-   * @param t Type of object to cast this to
-   * @param support XPath context to use for the conversion
-   * @return This object as the given type t
-   * @throws javax.xml.transform.TransformerException
-   */
-  public Object castToType(int t, XPathContext support)
-      throws javax.xml.transform.TransformerException {
-
-    Object result;
-
-    switch (t) {
-      case CLASS_STRING:
-        result = str();
-        break;
-      case CLASS_NUMBER:
-        result = new Double(num());
-        break;
-      case CLASS_NODESET:
-        result = iter();
-        break;
-      case CLASS_BOOLEAN:
-        result = bool() ? Boolean.TRUE : Boolean.FALSE;
-        break;
-      case CLASS_UNKNOWN:
-        result = m_obj;
-        break;
-
-      default:
-        error(
-            XPATHErrorResources.ER_CANT_CONVERT_TO_TYPE,
-            new Object[] {getTypeString(), Integer.toString(t)}); // "Can
-        // not
-        // convert
-        // "+getTypeString()+"
-        // to
-        // a
-        // type#"+t);
-
-        result = null;
-    }
-
-    return result;
   }
 
   /**
@@ -444,7 +374,6 @@ public class XObject extends Expression implements Cloneable {
    *
    * @param obj2 Object to compare this to
    * @return True if this object is equal to the given object
-   * @throws javax.xml.transform.TransformerException
    */
   public boolean equals(XObject obj2) {
 

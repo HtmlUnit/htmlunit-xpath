@@ -45,7 +45,7 @@ public class SuballocatedIntVector {
   protected static final int NUMBLOCKS_DEFAULT = 32;
 
   /** The number of blocks to (over)allocate by */
-  protected int m_numblocks = NUMBLOCKS_DEFAULT;
+  protected int m_numblocks;
 
   /** Array of arrays of ints */
   protected int m_map[][];

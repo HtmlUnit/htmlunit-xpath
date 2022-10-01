@@ -27,7 +27,7 @@ public class NodeVector implements Cloneable {
    *
    * @serial
    */
-  private int m_blocksize;
+  private final int m_blocksize;
 
   /**
    * Array of nodes this points to.
@@ -70,7 +70,6 @@ public class NodeVector implements Cloneable {
    * Get a cloned LocPathIterator.
    *
    * @return A clone of this
-   * @throws CloneNotSupportedException
    */
   @Override
   public Object clone() throws CloneNotSupportedException {
@@ -153,36 +152,6 @@ public class NodeVector implements Cloneable {
     m_firstFree = ff;
   }
 
-  /**
-   * Pop a node from the tail of the vector and return the result.
-   *
-   * @return the node at the tail of the vector
-   */
-  public final int pop() {
-
-    m_firstFree--;
-
-    int n = m_map[m_firstFree];
-
-    m_map[m_firstFree] = DTM.NULL;
-
-    return n;
-  }
-
-  /**
-   * Pop a node from the tail of the vector and return the top of the stack after the pop.
-   *
-   * @return The top of the stack after it's been popped
-   */
-  public final int popAndTop() {
-
-    m_firstFree--;
-
-    m_map[m_firstFree] = DTM.NULL;
-
-    return (m_firstFree == 0) ? DTM.NULL : m_map[m_firstFree - 1];
-  }
-
   /** Pop a node from the tail of the vector. */
   public final void popQuick() {
 
@@ -199,104 +168,6 @@ public class NodeVector implements Cloneable {
    */
   public final int peepOrNull() {
     return ((null != m_map) && (m_firstFree > 0)) ? m_map[m_firstFree - 1] : DTM.NULL;
-  }
-
-  /**
-   * Push a pair of nodes into the stack. Special purpose method for TransformerImpl,
-   * pushElemTemplateElement. Performance critical.
-   *
-   * @param v1 First node to add to vector
-   * @param v2 Second node to add to vector
-   */
-  public final void pushPair(int v1, int v2) {
-
-    if (null == m_map) {
-      m_map = new int[m_blocksize];
-      m_mapSize = m_blocksize;
-    } else {
-      if ((m_firstFree + 2) >= m_mapSize) {
-        m_mapSize += m_blocksize;
-
-        int newMap[] = new int[m_mapSize];
-
-        System.arraycopy(m_map, 0, newMap, 0, m_firstFree);
-
-        m_map = newMap;
-      }
-    }
-
-    m_map[m_firstFree] = v1;
-    m_map[m_firstFree + 1] = v2;
-    m_firstFree += 2;
-  }
-
-  /**
-   * Pop a pair of nodes from the tail of the stack. Special purpose method for TransformerImpl,
-   * pushElemTemplateElement. Performance critical.
-   */
-  public final void popPair() {
-
-    m_firstFree -= 2;
-    m_map[m_firstFree] = DTM.NULL;
-    m_map[m_firstFree + 1] = DTM.NULL;
-  }
-
-  /**
-   * Set the tail of the stack to the given node. Special purpose method for TransformerImpl,
-   * pushElemTemplateElement. Performance critical.
-   *
-   * @param n Node to set at the tail of vector
-   */
-  public final void setTail(int n) {
-    m_map[m_firstFree - 1] = n;
-  }
-
-  /**
-   * Set the given node one position from the tail. Special purpose method for TransformerImpl,
-   * pushElemTemplateElement. Performance critical.
-   *
-   * @param n Node to set
-   */
-  public final void setTailSub1(int n) {
-    m_map[m_firstFree - 2] = n;
-  }
-
-  /**
-   * Return the node at the tail of the vector without popping Special purpose method for
-   * TransformerImpl, pushElemTemplateElement. Performance critical.
-   *
-   * @return Node at the tail of the vector
-   */
-  public final int peepTail() {
-    return m_map[m_firstFree - 1];
-  }
-
-  /**
-   * Return the node one position from the tail without popping. Special purpose method for
-   * TransformerImpl, pushElemTemplateElement. Performance critical.
-   *
-   * @return Node one away from the tail
-   */
-  public final int peepTailSub1() {
-    return m_map[m_firstFree - 2];
-  }
-
-  /**
-   * Insert a node in order in the list.
-   *
-   * @param value Node to insert
-   */
-  public void insertInOrder(int value) {
-
-    for (int i = 0; i < m_firstFree; i++) {
-      if (value < m_map[i]) {
-        insertElementAt(value, i);
-
-        return;
-      }
-    }
-
-    addElement(value);
   }
 
   /**
@@ -331,98 +202,12 @@ public class NodeVector implements Cloneable {
     m_firstFree++;
   }
 
-  /**
-   * Append the nodes to the list.
-   *
-   * @param nodes NodeVector to append to this list
-   */
-  public void appendNodes(NodeVector nodes) {
-
-    int nNodes = nodes.size();
-
-    if (null == m_map) {
-      m_mapSize = nNodes + m_blocksize;
-      m_map = new int[m_mapSize];
-    } else if ((m_firstFree + nNodes) >= m_mapSize) {
-      m_mapSize += nNodes + m_blocksize;
-
-      int newMap[] = new int[m_mapSize];
-
-      System.arraycopy(m_map, 0, newMap, 0, m_firstFree + nNodes);
-
-      m_map = newMap;
-    }
-
-    System.arraycopy(nodes.m_map, 0, m_map, m_firstFree, nNodes);
-
-    m_firstFree += nNodes;
-  }
-
-  /**
-   * Inserts the specified node in this vector at the specified index. Each component in this vector
-   * with an index greater or equal to the specified index is shifted upward to have an index one
-   * greater than the value it had previously.
-   */
-  public void removeAllElements() {
-
-    if (null == m_map) return;
-
-    for (int i = 0; i < m_firstFree; i++) {
-      m_map[i] = DTM.NULL;
-    }
-
-    m_firstFree = 0;
-  }
-
   /** Set the length to zero, but don't clear the array. */
   public void RemoveAllNoClear() {
 
     if (null == m_map) return;
 
     m_firstFree = 0;
-  }
-
-  /**
-   * Removes the first occurrence of the argument from this vector. If the object is found in this
-   * vector, each component in the vector with an index greater or equal to the object's index is
-   * shifted downward to have an index one smaller than the value it had previously.
-   *
-   * @param s Node to remove from the list
-   * @return True if the node was successfully removed
-   */
-  public boolean removeElement(int s) {
-
-    if (null == m_map) return false;
-
-    for (int i = 0; i < m_firstFree; i++) {
-      int node = m_map[i];
-
-      if (node == s) {
-        if (i > m_firstFree) System.arraycopy(m_map, i + 1, m_map, i - 1, m_firstFree - i);
-        else m_map[i] = DTM.NULL;
-
-        m_firstFree--;
-
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  /**
-   * Deletes the component at the specified index. Each component in this vector with an index
-   * greater or equal to the specified index is shifted downward to have an index one smaller than
-   * the value it had previously.
-   *
-   * @param i Index of node to remove
-   */
-  public void removeElementAt(int i) {
-
-    if (null == m_map) return;
-
-    if (i > m_firstFree) System.arraycopy(m_map, i + 1, m_map, i - 1, m_firstFree - i);
-    else m_map[i] = DTM.NULL;
   }
 
   /**
@@ -522,101 +307,4 @@ public class NodeVector implements Cloneable {
     return -1;
   }
 
-  /**
-   * Sort an array using a quicksort algorithm.
-   *
-   * @param a The array to be sorted.
-   * @param lo0 The low index.
-   * @param hi0 The high index.
-   * @throws Exception
-   */
-  public void sort(int a[], int lo0, int hi0) throws Exception {
-
-    int lo = lo0;
-    int hi = hi0;
-
-    // pause(lo, hi);
-    if (lo >= hi) {
-      return;
-    } else if (lo == hi - 1) {
-
-      /*
-       * sort a two element list by swapping if necessary
-       */
-      if (a[lo] > a[hi]) {
-        int T = a[lo];
-
-        a[lo] = a[hi];
-        a[hi] = T;
-      }
-
-      return;
-    }
-
-    /*
-     * Pick a pivot and move it out of the way
-     */
-    int mid = (lo + hi) >>> 1;
-    int pivot = a[mid];
-
-    a[mid] = a[hi];
-    a[hi] = pivot;
-
-    while (lo < hi) {
-
-      /*
-       * Search forward from a[lo] until an element is found that is greater than the
-       * pivot or lo >= hi
-       */
-      while (a[lo] <= pivot && lo < hi) {
-        lo++;
-      }
-
-      /*
-       * Search backward from a[hi] until element is found that is less than the
-       * pivot, or lo >= hi
-       */
-      while (pivot <= a[hi] && lo < hi) {
-        hi--;
-      }
-
-      /*
-       * Swap elements a[lo] and a[hi]
-       */
-      if (lo < hi) {
-        int T = a[lo];
-
-        a[lo] = a[hi];
-        a[hi] = T;
-
-        // pause();
-      }
-
-      // if (stopRequested) {
-      // return;
-      // }
-    }
-
-    /*
-     * Put the median in the "center" of the list
-     */
-    a[hi0] = a[hi];
-    a[hi] = pivot;
-
-    /*
-     * Recursive calls, elements a[lo0] to a[lo-1] are less than or equal to pivot,
-     * elements a[hi+1] to a[hi0] are greater than pivot.
-     */
-    sort(a, lo0, lo - 1);
-    sort(a, hi + 1, hi0);
-  }
-
-  /**
-   * Sort an array using a quicksort algorithm.
-   *
-   * @throws Exception
-   */
-  public void sort() throws Exception {
-    sort(m_map, 0, m_firstFree - 1);
-  }
 }

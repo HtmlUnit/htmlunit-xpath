@@ -248,17 +248,6 @@ public class ExpandedNameTable {
   }
 
   /**
-   * Given an expanded-name ID, return the namespace URI part.
-   *
-   * @param ExpandedNameID an ID that represents an expanded-name.
-   * @return String URI value of this node's namespace, or null if no namespace was resolved.
-   */
-  public String getNamespace(int ExpandedNameID) {
-    String namespace = m_extendedTypes[ExpandedNameID].getNamespace();
-    return namespace.length() == 0 ? null : namespace;
-  }
-
-  /**
    * Given an expanded-name ID, return the namespace URI ID.
    *
    * @param ExpandedNameID an ID that represents an expanded-name.
@@ -300,7 +289,7 @@ public class ExpandedNameTable {
     int hash;
     HashEntry next;
 
-    protected HashEntry(ExtendedType key, int value, int hash, HashEntry next) {
+    private HashEntry(ExtendedType key, int value, int hash, HashEntry next) {
       this.key = key;
       this.value = value;
       this.hash = hash;

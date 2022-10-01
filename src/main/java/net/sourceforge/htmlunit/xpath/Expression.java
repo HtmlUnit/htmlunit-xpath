@@ -19,9 +19,8 @@ package net.sourceforge.htmlunit.xpath;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
-import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
+
 import net.sourceforge.htmlunit.xpath.objects.XObject;
-import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
@@ -133,17 +132,6 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
   }
 
   /**
-   * Cast result object to a string.
-   *
-   * @param xctxt The XPath runtime context.
-   * @return The string this wraps or the empty string if null
-   * @throws javax.xml.transform.TransformerException
-   */
-  public XString xstr(XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    return execute(xctxt).xstr();
-  }
-
-  /**
    * Tell if the expression is a nodeset expression. In other words, tell if you can execute {@link
    * #asNode(XPathContext) asNode} without an exception.
    *
@@ -182,30 +170,6 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
       xctxt.pushCurrentNodeAndExpression(contextNode, contextNode);
 
       return execute(xctxt).iter();
-    } finally {
-      xctxt.popCurrentNodeAndExpression();
-    }
-  }
-
-  /**
-   * Given an select expression and a context, evaluate the XPath and return the resulting iterator,
-   * but do not clone.
-   *
-   * @param xctxt The execution context.
-   * @param contextNode The node that "." expresses.
-   * @return A valid DTMIterator.
-   * @throws TransformerException thrown if the active ProblemListener decides the error condition
-   *     is severe enough to halt processing.
-   * @throws javax.xml.transform.TransformerException
-   */
-  public DTMIterator asIteratorRaw(XPathContext xctxt, int contextNode)
-      throws javax.xml.transform.TransformerException {
-
-    try {
-      xctxt.pushCurrentNodeAndExpression(contextNode, contextNode);
-
-      XNodeSet nodeset = (XNodeSet) execute(xctxt);
-      return nodeset.iterRaw();
     } finally {
       xctxt.popCurrentNodeAndExpression();
     }

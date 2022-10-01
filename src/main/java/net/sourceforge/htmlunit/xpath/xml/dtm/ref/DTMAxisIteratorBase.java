@@ -59,17 +59,7 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
    */
   protected boolean _isRestartable = true;
 
-  /**
-   * Get start to END should 'close' the iterator, i.e. subsequent call to next() should return END.
-   *
-   * @return The root node of the iteration.
-   */
-  @Override
-  public int getStartNode() {
-    return _startNode;
-  }
-
-  /**
+    /**
    * @return A DTMAxisIterator which has been reset to the start node, which may or may not be the
    *     same as this iterator.
    */
@@ -207,15 +197,6 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
   }
 
   /**
-   * Returns true if all the nodes in the iteration well be returned in document order.
-   *
-   * @return true as a default.
-   */
-  public boolean isDocOrdered() {
-    return true;
-  }
-
-  /**
    * Returns the axis being iterated, if it is known.
    *
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
@@ -224,28 +205,4 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
     return -1;
   }
 
-  @Override
-  public void setRestartable(boolean isRestartable) {
-    _isRestartable = isRestartable;
-  }
-
-  /**
-   * Return the node at the given position.
-   *
-   * @param position The position
-   * @return The node at the given position.
-   */
-  @Override
-  public int getNodeByPosition(int position) {
-    if (position > 0) {
-      final int pos = isReverse() ? getLast() - position + 1 : position;
-      int node;
-      while ((node = next()) != DTMAxisIterator.END) {
-        if (pos == getPosition()) {
-          return node;
-        }
-      }
-    }
-    return END;
-  }
 }

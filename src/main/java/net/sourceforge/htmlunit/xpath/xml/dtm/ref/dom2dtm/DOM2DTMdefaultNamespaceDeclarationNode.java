@@ -219,7 +219,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
     return null;
   }
 
-  /** @see org.w3c.dom.TypeInfo#isDerivedFrom(String,String,int) */
+  /** @see org.w3c.dom.TypeInfo#isDerivedFrom(String, String, int)  */
   @Override
   public boolean isDerivedFrom(String ns, String localName, int derivationMethod) {
     return false;

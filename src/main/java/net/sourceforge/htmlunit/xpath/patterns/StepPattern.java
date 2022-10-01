@@ -691,7 +691,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
-    if (visitor.visitMatchPattern(owner, this)) {
+    if (visitor.visitMatchPattern()) {
       callSubtreeVisitors(visitor);
     }
   }

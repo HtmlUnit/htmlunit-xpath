@@ -140,24 +140,6 @@ public final class Axis {
   /** A non-xpath axis, for functions. */
   public static final int FILTEREDLIST = 20;
 
-  /** A table to identify whether an axis is a reverse axis; */
-  private static final boolean[] isReverse = {
-    true, // ancestor
-    true, // ancestor-or-self
-    false, // attribute
-    false, // child
-    false, // descendant
-    false, // descendant-or-self
-    false, // following
-    false, // following-sibling
-    false, // namespace
-    false, // namespace-declarations
-    false, // parent (one node, has no order)
-    true, // preceding
-    true, // preceding-sibling
-    false // self (one node, has no order)
-  };
-
   /** The names of the axes for diagnostic purposes. */
   private static final String[] names = {
     "ancestor", // 0
@@ -182,10 +164,6 @@ public final class Axis {
     "root", // 19
     "filtered-list" // 20
   };
-
-  public static boolean isReverse(int axis) {
-    return isReverse[axis];
-  }
 
   public static String getNames(int index) {
     return names[index];

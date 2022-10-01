@@ -22,8 +22,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
 /**
  * This class implements an optimized iterator for attribute axes patterns.
- *
- * @see ChildTestIterator
  */
 public class AttributeIterator extends ChildTestIterator {
 

@@ -208,7 +208,7 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
    */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
-    if (visitor.visitLocationPath(owner, this)) {
+    if (visitor.visitLocationPath()) {
       if (null != m_firstWalker) {
         m_firstWalker.callVisitors(this, visitor);
       }

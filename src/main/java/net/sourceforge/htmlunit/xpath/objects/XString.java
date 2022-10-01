@@ -200,7 +200,6 @@ public class XString extends XObject {
    *
    * @param obj2 Object to compare this to
    * @return true if the two objects are equal
-   * @throws javax.xml.transform.TransformerException
    */
   @Override
   public boolean equals(XObject obj2) {
@@ -285,22 +284,6 @@ public class XString extends XObject {
     else if (obj2 instanceof XNodeSet) return obj2.equals(this);
     else if (obj2 instanceof XNumber) return obj2.equals(this);
     else return str().equals(obj2.toString());
-  }
-
-  /**
-   * Compares this <code>String</code> to another <code>String</code>, ignoring case considerations.
-   * Two strings are considered equal ignoring case if they are of the same length, and
-   * corresponding characters in the two strings are equal ignoring case.
-   *
-   * @param anotherString the <code>String</code> to compare this <code>String</code> against.
-   * @return <code>true</code> if the argument is not <code>null</code> and the <code>String
-   *     </code>s are equal, ignoring case; <code>false</code> otherwise.
-   * @see #equals(Object)
-   * @see java.lang.Character#toLowerCase(char)
-   * @see java.lang.Character#toUpperCase(char)
-   */
-  public boolean equalsIgnoreCase(String anotherString) {
-    return str().equalsIgnoreCase(anotherString);
   }
 
   /**
@@ -529,6 +512,6 @@ public class XString extends XObject {
    */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
-    visitor.visitStringLiteral(owner, this);
+    visitor.visitStringLiteral();
   }
 }

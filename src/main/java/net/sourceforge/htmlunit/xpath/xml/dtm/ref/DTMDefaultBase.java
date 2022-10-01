@@ -690,26 +690,6 @@ public abstract class DTMDefaultBase implements DTM {
   // ========= Document Navigation Functions =========
 
   /**
-   * Given a node handle, test if it has child nodes.
-   *
-   * <p>%REVIEW% This is obviously useful at the DOM layer, where it would permit testing this
-   * without having to create a proxy node. It's less useful in the DTM API, where
-   * (dtm.getFirstChild(nodeHandle)!=DTM.NULL) is just as fast and almost as self-evident. But it's
-   * a convenience, and eases porting of DOM code to DTM.
-   *
-   * @param nodeHandle int Handle of the node.
-   * @return int true if the given node has child nodes.
-   */
-  @Override
-  public boolean hasChildNodes(int nodeHandle) {
-
-    int identity = makeNodeIdentity(nodeHandle);
-    int firstChild = _firstch(identity);
-
-    return firstChild != DTM.NULL;
-  }
-
-  /**
    * Given a node identity, return a node handle. If extended addressing has been used (multiple DTM
    * IDs), we need to map the high bits of the identity into the proper DTM ID.
    *
@@ -1300,51 +1280,6 @@ public abstract class DTMDefaultBase implements DTM {
   public abstract XString getStringValue(int nodeHandle);
 
   /**
-   * Get number of character array chunks in the string-value of a node. (see
-   * <a href="http://www.w3.org/TR/xpath#data-model">http://www.w3.org/TR/xpath#data-model</a>
-   * for the definition of a node's string-value). Note that a
-   * single text node may have multiple text chunks.
-   *
-   * @param nodeHandle The node ID.
-   * @return number of character array chunks in the string-value of a node.
-   */
-  @Override
-  public int getStringValueChunkCount(int nodeHandle) {
-
-    // %TBD%
-    error(
-        XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // ("getStringValueChunkCount
-    // not yet supported!");
-
-    return 0;
-  }
-
-  /**
-   * Get a character array chunk in the string-value of a node. (see
-   * <a href="http://www.w3.org/TR/xpath#data-model">http://www.w3.org/TR/xpath#data-model</a>
-   * for the definition of a node's string-value). Note that a
-   * single text node may have multiple text chunks.
-   *
-   * @param nodeHandle The node ID.
-   * @param chunkIndex Which chunk to get.
-   * @param startAndLen An array of 2 where the start position and length of the chunk will be
-   *     returned.
-   * @return The character array reference where the chunk occurs.
-   */
-  @Override
-  public char[] getStringValueChunk(int nodeHandle, int chunkIndex, int[] startAndLen) {
-
-    // %TBD%
-    error(
-        XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "getStringValueChunk
-    // not yet supported!");
-
-    return null;
-  }
-
-  /**
    * Given a node handle, return an ID that represents the node's expanded name.
    *
    * @param nodeHandle The handle to the node in question.
@@ -1378,28 +1313,6 @@ public abstract class DTMDefaultBase implements DTM {
     ExpandedNameTable ent = m_expandedNameTable;
 
     return ent.getExpandedTypeID(namespace, localName, type);
-  }
-
-  /**
-   * Given an expanded-name ID, return the local name part.
-   *
-   * @param expandedNameID an ID that represents an expanded-name.
-   * @return String Local name of this node.
-   */
-  @Override
-  public String getLocalNameFromExpandedNameID(int expandedNameID) {
-    return m_expandedNameTable.getLocalName(expandedNameID);
-  }
-
-  /**
-   * Given an expanded-name ID, return the namespace URI part.
-   *
-   * @param expandedNameID an ID that represents an expanded-name.
-   * @return String URI value of this node's namespace, or null if no namespace was resolved.
-   */
-  @Override
-  public String getNamespaceFromExpandedNameID(int expandedNameID) {
-    return m_expandedNameTable.getNamespace(expandedNameID);
   }
 
   /**
@@ -1508,104 +1421,7 @@ public abstract class DTMDefaultBase implements DTM {
     return m_expandedNameTable.getType(_exptype(makeNodeIdentity(nodeHandle)));
   }
 
-  /**
-   * Get the depth level of this node in the tree (equals 1 for a parentless node).
-   *
-   * @param nodeHandle The node id.
-   * @return the number of ancestors, plus one
-   */
-  @Override
-  public short getLevel(int nodeHandle) {
-    // Apparently, the axis walker stuff requires levels to count from 1.
-    int identity = makeNodeIdentity(nodeHandle);
-    return (short) (_level(identity) + 1);
-  }
-
   // ============== Document query functions ==============
-
-  /**
-   * Return the base URI of the document entity. If it is not known (because the document was parsed
-   * from a socket connection or from standard input, for example), the value of this property is
-   * unknown.
-   *
-   * @return the document base URI String object or null if unknown.
-   */
-  @Override
-  public String getDocumentBaseURI() {
-    return m_documentBaseURI;
-  }
-
-  /**
-   * Set the base URI of the document entity.
-   *
-   * @param baseURI the document base URI String object or null if unknown.
-   */
-  @Override
-  public void setDocumentBaseURI(String baseURI) {
-    m_documentBaseURI = baseURI;
-  }
-
-  /**
-   * Return the system identifier of the document entity. If it is not known, the value of this
-   * property is unknown.
-   *
-   * @param nodeHandle The node id, which can be any valid node handle.
-   * @return the system identifier String object or null if unknown.
-   */
-  @Override
-  public String getDocumentSystemIdentifier(int nodeHandle) {
-
-    // %REVIEW% OK? -sb
-    return m_documentBaseURI;
-  }
-
-  /**
-   * Return the name of the character encoding scheme in which the document entity is expressed.
-   *
-   * @param nodeHandle The node id, which can be any valid node handle.
-   * @return the document encoding String object.
-   */
-  @Override
-  public String getDocumentEncoding(int nodeHandle) {
-
-    // %REVIEW% OK?? -sb
-    return "UTF-8";
-  }
-
-  /**
-   * Return an indication of whether the processor has read the complete DTD. Its value is a
-   * boolean. If it is false, then certain properties (indicated in their descriptions below) may be
-   * unknown. If it is true, those properties are never unknown.
-   *
-   * @return <code>true</code> if all declarations were processed; <code>false</code> otherwise.
-   */
-  @Override
-  public boolean getDocumentAllDeclarationsProcessed() {
-
-    // %REVIEW% OK?
-    return true;
-  }
-
-  /**
-   * A document type declaration information item has the following properties:
-   *
-   * <p>1. [system identifier] The system identifier of the external subset, if it exists. Otherwise
-   * this property has no value.
-   *
-   * @return the system identifier String object, or null if there is none.
-   */
-  @Override
-  public abstract String getDocumentTypeDeclarationSystemIdentifier();
-
-  /**
-   * Return the public identifier of the external subset, normalized as described in 4.2.2 External
-   * Entities [XML]. If there is no external subset or if it has no public identifier, this property
-   * has no value.
-   *
-   * @return the public identifier String object, or null if there is none.
-   */
-  @Override
-  public abstract String getDocumentTypeDeclarationPublicIdentifier();
 
   /**
    * Returns the <code>Element</code> whose <code>ID</code> is given by <code>elementId</code>. If
@@ -1625,46 +1441,7 @@ public abstract class DTMDefaultBase implements DTM {
   @Override
   public abstract int getElementById(String elementId);
 
-  /**
-   * The getUnparsedEntityURI function returns the URI of the unparsed entity with the specified
-   * name in the same document as the context node (see [3.3 Unparsed Entities]). It returns the
-   * empty string if there is no such entity.
-   *
-   * <p>XML processors may choose to use the System Identifier (if one is provided) to resolve the
-   * entity, rather than the URI in the Public Identifier. The details are dependent on the
-   * processor, and we would have to support some form of plug-in resolver to handle this properly.
-   * Currently, we simply return the System Identifier if present, and hope that it a usable URI or
-   * that our caller can map it to one. TODO: Resolve Public Identifiers... or consider changing
-   * function name.
-   *
-   * <p>If we find a relative URI reference, XML expects it to be resolved in terms of the base URI
-   * of the document. The DOM doesn't do that for us, and it isn't entirely clear whether that
-   * should be done here; currently that's pushed up to a higher level of our application. (Note
-   * that DOM Level 1 didn't store the document's base URI.) TODO: Consider resolving Relative URIs.
-   *
-   * <p>(The DOM's statement that "An XML processor may choose to completely expand entities before
-   * the structure model is passed to the DOM" refers only to parsed entities, not unparsed, and
-   * hence doesn't affect this function.)
-   *
-   * @param name A string containing the Entity Name of the unparsed entity.
-   * @return String containing the URI of the Unparsed Entity, or an empty string if no such entity
-   *     exists.
-   */
-  @Override
-  public abstract String getUnparsedEntityURI(String name);
-
   // ============== Boolean methods ================
-
-  /**
-   * Return true if the xsl:strip-space or xsl:preserve-space was processed during construction of
-   * the DTM document.
-   *
-   * @return true if this DTM supports prestripping.
-   */
-  @Override
-  public boolean supportsPreStripping() {
-    return true;
-  }
 
   /**
    * Figure out whether nodeHandle2 should be considered as being later in the document than
@@ -1689,31 +1466,6 @@ public abstract class DTMDefaultBase implements DTM {
   }
 
   /**
-   * 10. [all declarations processed] This property is not strictly speaking part of the infoset of
-   * the document. Rather it is an indication of whether the processor has read the complete DTD.
-   * Its value is a boolean. If it is false, then certain properties (indicated in their
-   * descriptions below) may be unknown. If it is true, those properties are never unknown.
-   *
-   * @param documentHandle A node handle that must identify a document.
-   * @return <code>true</code> if all declarations were processed; <code>false</code> otherwise.
-   */
-  @Override
-  public boolean isDocumentAllDeclarationsProcessed(int documentHandle) {
-    return true;
-  }
-
-  /**
-   * 5. [specified] A flag indicating whether this attribute was actually specified in the start-tag
-   * of its element, or was defaulted from the DTD.
-   *
-   * @param attributeHandle The attribute handle in question.
-   * @return <code>true</code> if the attribute was specified; <code>false</code> if it was
-   *     defaulted.
-   */
-  @Override
-  public abstract boolean isAttributeSpecified(int attributeHandle);
-
-  /**
    * Return an DOM node for the given node.
    *
    * @param nodeHandle The node ID.
@@ -1728,61 +1480,12 @@ public abstract class DTMDefaultBase implements DTM {
   // =====
 
   /**
-   * Append a child to the end of the document. Please note that the node is always cloned if it is
-   * owned by another document.
-   *
-   * <p>%REVIEW% "End of the document" needs to be defined more clearly. Does it become the last
-   * child of the Document? Of the root element?
-   *
-   * @param newChild Must be a valid new node handle.
-   * @param clone true if the child should be cloned into the document.
-   * @param cloneDepth if the clone argument is true, specifies that the clone should include all
-   *     it's children.
-   */
-  @Override
-  public void appendChild(int newChild, boolean clone, boolean cloneDepth) {
-    error(
-        XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "appendChild not yet
-    // supported!");
-  }
-
-  /**
-   * Append a text node child that will be constructed from a string, to the end of the document.
-   *
-   * <p>%REVIEW% "End of the document" needs to be defined more clearly. Does it become the last
-   * child of the Document? Of the root element?
-   *
-   * @param str Non-null reverence to a string.
-   */
-  @Override
-  public void appendTextChild(String str) {
-    error(
-        XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "appendTextChild not
-    // yet supported!");
-  }
-
-  /**
    * Simple error for asserts and the like.
    *
    * @param msg Error message to report.
    */
   protected void error(String msg) {
     throw new DTMException(msg);
-  }
-
-  /**
-   * Migrate a DTM built with an old DTMManager to a new DTMManager. After the migration, the new
-   * DTMManager will treat the DTM as one that is built by itself. This is used to support DTM
-   * sharing between multiple transformations.
-   *
-   * @param mgr the DTMManager
-   */
-  @Override
-  public void migrateTo(DTMManager mgr) {
-    m_mgr = mgr;
-    if (mgr instanceof DTMManagerDefault) m_mgrDefault = (DTMManagerDefault) mgr;
   }
 
   /**

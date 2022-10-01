@@ -178,9 +178,7 @@ public class NodeSetDTM extends NodeVector
   @Override
   public Object clone() throws CloneNotSupportedException {
 
-    NodeSetDTM clone = (NodeSetDTM) super.clone();
-
-    return clone;
+    return super.clone();
   }
 
   /**
@@ -442,27 +440,6 @@ public class NodeSetDTM extends NodeVector
     this.addElement(n);
   }
 
-  /**
-   * Insert a node at a given position.
-   *
-   * @param n Node to be added
-   * @param pos Offset at which the node is to be inserted, with 0 being the first position.
-   * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
-   */
-  public void insertNode(int n, int pos) {
-    insertElementAt(n, pos);
-  }
-
-  /**
-   * Remove a node.
-   *
-   * @param n Node to be added
-   * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
-   */
-  public void removeNode(int n) {
-    this.removeElement(n);
-  }
-
   // %TBD%
   // /**
   // * Copy NodeList members into this nodelist, adding in
@@ -541,22 +518,6 @@ public class NodeSetDTM extends NodeVector
     }
 
     // checkDups();
-  }
-
-  /**
-   * Copy NodeList members into this nodelist, adding in document order. If a node is null, don't
-   * add it.
-   *
-   * @param iterator DTMIterator which yields the nodes to be added.
-   * @param support The XPath runtime context.
-   * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
-   */
-  public void addNodesInDocOrder(DTMIterator iterator, XPathContext support) {
-    int node;
-
-    while (DTM.NULL != (node = iterator.nextNode())) {
-      addNodeInDocOrder(node, support);
-    }
   }
 
   /**
@@ -773,15 +734,6 @@ public class NodeSetDTM extends NodeVector
 
   /** The root of the iteration, if available. */
   protected int m_root = DTM.NULL;
-
-  /**
-   * Get whether or not this is a cached node set.
-   *
-   * @return True if this list is cached.
-   */
-  public boolean getShouldCacheNodes() {
-    return m_cacheNodes;
-  }
 
   /**
    * If setShouldCacheNodes(true) is called, then nodes will be cached. They are not cached by

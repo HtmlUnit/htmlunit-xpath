@@ -105,16 +105,6 @@ public class PrefixResolverDefault implements PrefixResolver {
     return namespace;
   }
 
-  /**
-   * Return the base identifier.
-   *
-   * @return null
-   */
-  @Override
-  public String getBaseIdentifier() {
-    return null;
-  }
-
   /** @see PrefixResolver#handlesNullPrefixes() */
   @Override
   public boolean handlesNullPrefixes() {

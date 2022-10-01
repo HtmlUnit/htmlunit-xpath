@@ -89,7 +89,7 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
    */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
-    if (visitor.visitUnaryOperation(owner, this)) {
+    if (visitor.visitUnaryOperation()) {
       m_right.callVisitors(this, visitor);
     }
   }

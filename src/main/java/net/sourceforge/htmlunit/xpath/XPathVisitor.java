@@ -17,16 +17,7 @@
  */
 package net.sourceforge.htmlunit.xpath;
 
-import net.sourceforge.htmlunit.xpath.axes.LocPathIterator;
-import net.sourceforge.htmlunit.xpath.axes.UnionPathIterator;
 import net.sourceforge.htmlunit.xpath.functions.Function;
-import net.sourceforge.htmlunit.xpath.objects.XNumber;
-import net.sourceforge.htmlunit.xpath.objects.XString;
-import net.sourceforge.htmlunit.xpath.operations.Operation;
-import net.sourceforge.htmlunit.xpath.operations.UnaryOperation;
-import net.sourceforge.htmlunit.xpath.patterns.NodeTest;
-import net.sourceforge.htmlunit.xpath.patterns.StepPattern;
-import net.sourceforge.htmlunit.xpath.patterns.UnionPattern;
 
 /**
  * A derivation from this class can be passed to a class that implements the XPathVisitable
@@ -46,36 +37,27 @@ public class XPathVisitor {
   /**
    * Visit a LocationPath.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param path The LocationPath object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitLocationPath(ExpressionOwner owner, LocPathIterator path) {
+  public boolean visitLocationPath() {
     return true;
   }
 
   /**
    * Visit a UnionPath.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param path The UnionPath object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitUnionPath(ExpressionOwner owner, UnionPathIterator path) {
+  public boolean visitUnionPath() {
     return true;
   }
 
   /**
    * Visit a step within a location path.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param step The Step object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitStep(ExpressionOwner owner, NodeTest step) {
+  public boolean visitStep() {
     return true;
   }
 
@@ -95,38 +77,20 @@ public class XPathVisitor {
   /**
    * Visit a binary operation.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param op The operation object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitBinaryOperation(ExpressionOwner owner, Operation op) {
+  public boolean visitBinaryOperation() {
     return true;
   }
 
   /**
    * Visit a unary operation.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param op The operation object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitUnaryOperation(ExpressionOwner owner, UnaryOperation op) {
+  public boolean visitUnaryOperation() {
     return true;
   }
-
-  // /**
-  // * Visit a variable reference.
-  // * @param owner The owner of the expression, to which the expression can
-  // * be reset if rewriting takes place.
-  // * @param var The variable reference object.
-  // * @return true if the sub expressions should be traversed.
-  // */
-  // public boolean visitVariableRef(ExpressionOwner owner, Variable var)
-  // {
-  // return true;
-  // }
 
   /**
    * Visit a function.
@@ -143,48 +107,30 @@ public class XPathVisitor {
   /**
    * Visit a match pattern.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param pattern The match pattern object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitMatchPattern(ExpressionOwner owner, StepPattern pattern) {
+  public boolean visitMatchPattern() {
     return true;
   }
 
   /**
    * Visit a union pattern.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param pattern The union pattern object.
-   * @return true if the sub expressions should be traversed.
    */
-  public boolean visitUnionPattern(ExpressionOwner owner, UnionPattern pattern) {
-    return true;
+  public void visitUnionPattern() {
   }
 
   /**
    * Visit a string literal.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param str The string literal object.
-   * @return true if the sub expressions should be traversed.
    */
-  public boolean visitStringLiteral(ExpressionOwner owner, XString str) {
-    return true;
+  public void visitStringLiteral() {
   }
 
   /**
    * Visit a number literal.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
-   * @param num The number literal object.
-   * @return true if the sub expressions should be traversed.
    */
-  public boolean visitNumberLiteral(ExpressionOwner owner, XNumber num) {
-    return true;
+  public void visitNumberLiteral() {
   }
 }

@@ -67,8 +67,7 @@ public abstract class DTMManager {
    *     instantiated.
    */
   public static DTMManager newInstance() throws DTMConfigurationException {
-    DTMManager factoryImpl = new DTMManagerDefault();
-    return factoryImpl;
+    return new DTMManagerDefault();
   }
 
   /**
@@ -152,22 +151,12 @@ public abstract class DTMManager {
   public abstract DTMIterator createDTMIterator(
       int whatToShow, DTMFilter filter, boolean entityReferenceExpansion);
 
-  /**
-   * Create a new <code>DTMIterator</code> that holds exactly one node.
-   *
-   * @param node The node handle that the DTMIterator will iterate to.
-   * @return The newly created <code>DTMIterator</code>.
-   */
-  public abstract DTMIterator createDTMIterator(int node);
-
   // -------------------- private methods --------------------
-
-  /** Temp debug code - this will be removed after we test everything */
-  private static boolean debug;
 
   static {
     try {
-      debug = System.getProperty("dtm.debug") != null;
+      /* Temp debug code - this will be removed after we test everything */
+      boolean debug = System.getProperty("dtm.debug") != null;
     } catch (SecurityException ex) {
     }
   }

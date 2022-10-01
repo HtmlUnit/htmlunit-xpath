@@ -46,16 +46,10 @@ public interface DTMIterator {
   // org.w3c.dom.traversal.NodeFilter.FILTER_ACCEPT?
 
   /** Accept the node. */
-  public static final short FILTER_ACCEPT = 1;
-
-  //  /**
-  //   * Reject the node. Same behavior as FILTER_SKIP. (In the DOM these differ when applied to a
-  //   * TreeWalker but have the same result when applied to a NodeIterator).
-  //   */
-  //  public static final short FILTER_REJECT = 2;
+  short FILTER_ACCEPT = 1;
 
   /** Skip this single node. */
-  public static final short FILTER_SKIP = 3;
+  short FILTER_SKIP = 3;
 
   /**
    * Get an instance of a DTM that "owns" a node handle. Since a node iterator may be passed without
@@ -64,7 +58,7 @@ public interface DTMIterator {
    * @param nodeHandle the nodeHandle.
    * @return a non-null DTM reference.
    */
-  public DTM getDTM(int nodeHandle);
+  DTM getDTM(int nodeHandle);
 
   /**
    * Get an instance of the DTMManager. Since a node iterator may be passed without a DTMManager,
@@ -72,7 +66,7 @@ public interface DTMIterator {
    *
    * @return a non-null DTMManager reference.
    */
-  public DTMManager getDTMManager();
+  DTMManager getDTMManager();
 
   /**
    * The root node of the <code>DTMIterator</code>, as specified when it was created. Note the root
@@ -81,7 +75,7 @@ public interface DTMIterator {
    *
    * @return nodeHandle int Handle of the context node.
    */
-  public int getRoot();
+  int getRoot();
 
   /**
    * Reset the root node of the <code>DTMIterator</code>, overriding the value specified when it was
@@ -101,14 +95,14 @@ public interface DTMIterator {
    *             <p>At this time the exact implementation of this environment is application
    *             dependent. Probably a proper interface will be created fairly soon.
    */
-  public void setRoot(int nodeHandle, Object environment);
+  void setRoot(int nodeHandle, Object environment);
 
   /**
    * Reset the iterator to the start. After resetting, the next node returned will be the root node
    * -- or, if that's filtered out, the first node within the root's subtree which is _not_ skipped
    * by the filters.
    */
-  public void reset();
+  void reset();
 
   /**
    * This attribute determines which node types are presented via the iterator. The available set of
@@ -117,7 +111,7 @@ public interface DTMIterator {
    *
    * @return one of the SHOW_XXX constants, or several ORed together.
    */
-  public int getWhatToShow();
+  int getWhatToShow();
 
   /**
    * The value of this flag determines whether the children of entity reference nodes are visible to
@@ -136,7 +130,7 @@ public interface DTMIterator {
    *
    * @return true if entity references will be expanded.
    */
-  public boolean getExpandEntityReferences();
+  boolean getExpandEntityReferences();
 
   /**
    * Returns the next node in the set and advances the position of the iterator in the set. After a
@@ -147,7 +141,7 @@ public interface DTMIterator {
    * @return The next node handle in the set being iterated over, or <code>DTM.NULL</code> if there
    *     are no more members in that set.
    */
-  public int nextNode();
+  int nextNode();
 
   /**
    * Returns the previous node in the set and moves the position of the <code>DTMIterator</code>
@@ -156,7 +150,7 @@ public interface DTMIterator {
    * @return The previous node handle in the set being iterated over, or <code>DTM.NULL</code> if
    *     there are no more members in that set.
    */
-  public int previousNode();
+  int previousNode();
 
   /**
    * Detaches the <code>DTMIterator</code> from the set which it iterated over, releasing any
@@ -164,14 +158,14 @@ public interface DTMIterator {
    * </code> has been invoked, calls to <code>nextNode</code> or <code>previousNode</code> will
    * raise a runtime exception.
    */
-  public void detach();
+  void detach();
 
   /**
    * Specify if it's OK for detach to release the iterator for reuse.
    *
    * @param allowRelease true if it is OK for detach to release this iterator for pooling.
    */
-  public void allowDetachToRelease(boolean allowRelease);
+  void allowDetachToRelease(boolean allowRelease);
 
   /**
    * Get the current node in the iterator. Note that this differs from the DOM's NodeIterator, where
@@ -180,7 +174,7 @@ public interface DTMIterator {
    *
    * @return The current node handle, or -1.
    */
-  public int getCurrentNode();
+  int getCurrentNode();
 
   /**
    * Tells if this NodeSetDTM is "fresh", in other words, if the first nextNode() that is called
@@ -188,7 +182,7 @@ public interface DTMIterator {
    *
    * @return true if the iteration of this list has not yet begun.
    */
-  public boolean isFresh();
+  boolean isFresh();
 
   // ========= Random Access ==========
 
@@ -201,7 +195,7 @@ public interface DTMIterator {
    *
    * @param b true if the nodes should be cached.
    */
-  public void setShouldCacheNodes(boolean b);
+  void setShouldCacheNodes(boolean b);
 
   /**
    * Get the current position within the cached list, which is one less than the next nextNode()
@@ -210,7 +204,7 @@ public interface DTMIterator {
    *
    * @return The position of the iteration.
    */
-  public int getCurrentPos();
+  int getCurrentPos();
 
   /**
    * If an index is requested, NodeSetDTM will call this method to run the iterator to the index. By
@@ -219,14 +213,14 @@ public interface DTMIterator {
    *
    * @param index The index to run to, or -1 if the iterator should be run to the end.
    */
-  public void runTo(int index);
+  void runTo(int index);
 
   /**
    * Set the current position in the node set.
    *
    * @param i Must be a valid index.
    */
-  public void setCurrentPos(int i);
+  void setCurrentPos(int i);
 
   /**
    * Returns the <code>node handle</code> of an item in the collection. If <code>index</code> is
@@ -236,7 +230,7 @@ public interface DTMIterator {
    * @return The node handle at the <code>index</code>th position in the <code>DTMIterator</code>,
    *     or <code>-1</code> if that is not a valid index.
    */
-  public int item(int index);
+  int item(int index);
 
   /**
    * Sets the node at the specified index of this vector to be the specified node. The previous
@@ -250,7 +244,7 @@ public interface DTMIterator {
    * @param node Node to set
    * @param index Index of where to set the node
    */
-  public void setItem(int node, int index);
+  void setItem(int node, int index);
 
   /**
    * The number of nodes in the list. The range of valid child node indices is 0 to <code>length-1
@@ -259,7 +253,7 @@ public interface DTMIterator {
    *
    * @return The number of nodes in the list.
    */
-  public int getLength();
+  int getLength();
 
   // =========== Cloning operations. ============
 
@@ -269,7 +263,7 @@ public interface DTMIterator {
    * @return A clone of this iteration that has been reset.
    * @throws CloneNotSupportedException
    */
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException;
+  DTMIterator cloneWithReset() throws CloneNotSupportedException;
 
   /**
    * Get a clone of this iterator, but don't reset the iteration in the process, so that it may be
@@ -278,19 +272,19 @@ public interface DTMIterator {
    * @return A clone of this object.
    * @throws CloneNotSupportedException
    */
-  public Object clone() throws CloneNotSupportedException;
+  Object clone() throws CloneNotSupportedException;
 
   /**
    * Returns true if all the nodes in the iteration well be returned in document order.
    *
    * @return true if all the nodes in the iteration well be returned in document order.
    */
-  public boolean isDocOrdered();
+  boolean isDocOrdered();
 
   /**
    * Returns the axis being iterated, if it is known.
    *
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
    */
-  public int getAxis();
+  int getAxis();
 }

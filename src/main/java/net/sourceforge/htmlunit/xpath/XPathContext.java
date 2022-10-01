@@ -23,7 +23,6 @@ import javax.xml.transform.URIResolver;
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
-import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
@@ -63,7 +62,6 @@ public class XPathContext extends DTMManager {
    *     assumed that node construction will take by some other means.
    * @param unique true if the returned DTM must be unique, probably because it is going to be
    *     mutated.
-   * @param wsfilter Enables filtering of whitespace nodes, and may be null.
    * @param incremental true if the construction should try and be incremental.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    * @return a non-null DTM reference.
@@ -149,22 +147,7 @@ public class XPathContext extends DTMManager {
     return m_dtmManager.createDTMIterator(whatToShow, filter, entityReferenceExpansion);
   }
 
-  /**
-   * Create a new <code>DTMIterator</code> that holds exactly one node.
-   *
-   * @param node The node handle that the DTMIterator will iterate to.
-   * @return The newly created <code>DTMIterator</code>.
-   */
-  @Override
-  public DTMIterator createDTMIterator(int node) {
-    // DescendantIterator iter = new DescendantIterator();
-    DTMIterator iter = new net.sourceforge.htmlunit.xpath.axes.OneStepIteratorForward(Axis.SELF);
-    iter.setRoot(node, this);
-    return iter;
-    // return m_dtmManager.createDTMIterator(node);
-  }
-
-  /**
+    /**
    * Create an XPathContext instance. This is equivalent to calling the {@link
    * #XPathContext(boolean)} constructor with the value <code>true</code>.
    */
@@ -320,21 +303,6 @@ public class XPathContext extends DTMManager {
     m_currentNodes.quickPop(1);
   }
 
-  /** Set the current predicate root. */
-  public final void pushPredicateRoot(int n) {
-    m_predicateRoots.push(n);
-  }
-
-  /** Pop the current predicate root. */
-  public final void popPredicateRoot() {
-    m_predicateRoots.popQuick();
-  }
-
-  /** Get the current predicate root. */
-  public final int getPredicateRoot() {
-    return m_predicateRoots.peepOrNull();
-  }
-
   /** Set the current location path iterator root. */
   public final void pushIteratorRoot(int n) {
     m_iteratorRoots.push(n);
@@ -417,14 +385,6 @@ public class XPathContext extends DTMManager {
     m_prefixResolvers.push(pr);
   }
 
-  /**
-   * Just increment the namespace contest stack, so that setNamespaceContext can be used on the
-   * slot.
-   */
-  public final void pushNamespaceContextNull() {
-    m_prefixResolvers.push(null);
-  }
-
   /** Pop the current namespace context for the xpath. */
   public final void popNamespaceContext() {
     m_prefixResolvers.pop();
@@ -436,14 +396,6 @@ public class XPathContext extends DTMManager {
 
   /** Stack of AxesIterators. */
   private Stack<SubContextList> m_axesIteratorStack = new Stack<>();
-
-  public Stack<SubContextList> getAxesIteratorStackStacks() {
-    return m_axesIteratorStack;
-  }
-
-  public void setAxesIteratorStackStacks(Stack<SubContextList> s) {
-    m_axesIteratorStack = s;
-  }
 
   /**
    * Push a TreeWalker on the stack.
@@ -468,25 +420,8 @@ public class XPathContext extends DTMManager {
     return m_axesIteratorStack.isEmpty() ? null : m_axesIteratorStack.peek();
   }
 
-  /**
-   * Get the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a> as
-   * defined by the XSLT spec.
-   *
-   * @return the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>.
-   */
-  public net.sourceforge.htmlunit.xpath.axes.SubContextList getCurrentNodeList() {
-    return m_axesIteratorStack.isEmpty() ? null : m_axesIteratorStack.elementAt(0);
-  }
   // ==========================================================
   // SECTION: Implementation of ExpressionContext interface
   // ==========================================================
 
-  /**
-   * Get the current context node.
-   *
-   * @return The current context node.
-   */
-  public final int getContextNode() {
-    return this.getCurrentNode();
-  }
 }

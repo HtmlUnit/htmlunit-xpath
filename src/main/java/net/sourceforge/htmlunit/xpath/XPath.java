@@ -205,7 +205,6 @@ public class XPath implements ExpressionOwner {
    * Construct an XPath object.
    *
    * @param expr The Expression object.
-   * @throws javax.xml.transform.TransformerException if syntax or other error.
    */
   public XPath(Expression expr) {
     this.setExpression(expr);

@@ -44,7 +44,6 @@ public class XBooleanStatic extends XBoolean {
    *
    * @param obj2 Object to compare to this
    * @return True if the two objects are equal
-   * @throws javax.xml.transform.TransformerException
    */
   @Override
   public boolean equals(XObject obj2) {

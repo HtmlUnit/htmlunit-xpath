@@ -60,18 +60,6 @@ public class IntVector implements Cloneable {
   }
 
   /**
-   * Construct a IntVector, using the given block size.
-   *
-   * @param blocksize Size of block to allocate
-   */
-  public IntVector(int blocksize, int increaseSize) {
-
-    m_blocksize = increaseSize;
-    m_mapSize = blocksize;
-    m_map = new int[blocksize];
-  }
-
-  /**
    * Copy constructor for IntVector
    *
    * @param v Existing IntVector to copy
@@ -116,78 +104,6 @@ public class IntVector implements Cloneable {
   }
 
   /**
-   * Append several int values onto the vector.
-   *
-   * @param value Int to add to the list
-   */
-  public final void addElements(int value, int numberOfElements) {
-
-    if ((m_firstFree + numberOfElements) >= m_mapSize) {
-      m_mapSize += m_blocksize + numberOfElements;
-
-      int newMap[] = new int[m_mapSize];
-
-      System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
-
-      m_map = newMap;
-    }
-
-    for (int i = 0; i < numberOfElements; i++) {
-      m_map[m_firstFree] = value;
-      m_firstFree++;
-    }
-  }
-
-  /**
-   * Append several slots onto the vector, but do not set the values.
-   *
-   * @param numberOfElements Int to add to the list
-   */
-  public final void addElements(int numberOfElements) {
-
-    if ((m_firstFree + numberOfElements) >= m_mapSize) {
-      m_mapSize += m_blocksize + numberOfElements;
-
-      int newMap[] = new int[m_mapSize];
-
-      System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
-
-      m_map = newMap;
-    }
-
-    m_firstFree += numberOfElements;
-  }
-
-  /**
-   * Inserts the specified node in this vector at the specified index. Each component in this vector
-   * with an index greater or equal to the specified index is shifted upward to have an index one
-   * greater than the value it had previously.
-   *
-   * @param value Int to insert
-   * @param at Index of where to insert
-   */
-  public final void insertElementAt(int value, int at) {
-
-    if ((m_firstFree + 1) >= m_mapSize) {
-      m_mapSize += m_blocksize;
-
-      int newMap[] = new int[m_mapSize];
-
-      System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
-
-      m_map = newMap;
-    }
-
-    if (at <= (m_firstFree - 1)) {
-      System.arraycopy(m_map, at, m_map, at + 1, m_firstFree - at);
-    }
-
-    m_map[at] = value;
-
-    m_firstFree++;
-  }
-
-  /**
    * Inserts the specified node in this vector at the specified index. Each component in this vector
    * with an index greater or equal to the specified index is shifted upward to have an index one
    * greater than the value it had previously.
@@ -199,45 +115,6 @@ public class IntVector implements Cloneable {
     }
 
     m_firstFree = 0;
-  }
-
-  /**
-   * Removes the first occurrence of the argument from this vector. If the object is found in this
-   * vector, each component in the vector with an index greater or equal to the object's index is
-   * shifted downward to have an index one smaller than the value it had previously.
-   *
-   * @param s Int to remove from array
-   * @return True if the int was removed, false if it was not found
-   */
-  public final boolean removeElement(int s) {
-
-    for (int i = 0; i < m_firstFree; i++) {
-      if (m_map[i] == s) {
-        if ((i + 1) < m_firstFree) System.arraycopy(m_map, i + 1, m_map, i - 1, m_firstFree - i);
-        else m_map[i] = java.lang.Integer.MIN_VALUE;
-
-        m_firstFree--;
-
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  /**
-   * Deletes the component at the specified index. Each component in this vector with an index
-   * greater or equal to the specified index is shifted downward to have an index one smaller than
-   * the value it had previously.
-   *
-   * @param i index of where to remove and int
-   */
-  public final void removeElementAt(int i) {
-
-    if (i > m_firstFree) System.arraycopy(m_map, i + 1, m_map, i, m_firstFree);
-    else m_map[i] = java.lang.Integer.MIN_VALUE;
-
-    m_firstFree--;
   }
 
   /**

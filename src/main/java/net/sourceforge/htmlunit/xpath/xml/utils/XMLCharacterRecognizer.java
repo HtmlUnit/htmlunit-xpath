@@ -42,6 +42,6 @@ public class XMLCharacterRecognizer {
    * @return True if characters in buffer are XML whitespace, false otherwise
    */
   public static boolean isWhiteSpace(CharSequence chars) {
-    return !chars.chars().anyMatch(i -> !XMLCharacterRecognizer.isWhiteSpace((char) i));
+    return chars.chars().allMatch(i -> XMLCharacterRecognizer.isWhiteSpace((char) i));
   }
 }
