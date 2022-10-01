@@ -131,11 +131,9 @@ public abstract class BasicTestIterator extends LocPathIterator {
       if (DTM.NULL != next) {
         m_pos++;
         return next;
-      } else {
-        m_foundLast = true;
-
-        return DTM.NULL;
       }
+      m_foundLast = true;
+      return DTM.NULL;
     } finally {
     }
   }

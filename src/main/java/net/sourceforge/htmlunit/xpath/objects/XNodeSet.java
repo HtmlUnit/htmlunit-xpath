@@ -185,9 +185,8 @@ public class XNodeSet extends NodeSequence {
     // I guess we'll have to get a static instance of the DTM manager...
     if (DTM.NULL != n) {
       return m_dtmMgr.getDTM(n).getStringValue(n);
-    } else {
-      return net.sourceforge.htmlunit.xpath.objects.XString.EMPTYSTRING;
     }
+    return net.sourceforge.htmlunit.xpath.objects.XString.EMPTYSTRING;
   }
 
   /**
@@ -220,8 +219,10 @@ public class XNodeSet extends NodeSequence {
    */
   @Override
   public Object object() {
-    if (null == m_obj) return this;
-    else return m_obj;
+    if (null == m_obj) {
+        return this;
+    }
+    return m_obj;
   }
 
   /**
@@ -278,8 +279,10 @@ public class XNodeSet extends NodeSequence {
   @Override
   public DTMIterator iter() {
     try {
-      if (hasCache()) return cloneWithReset();
-      else return this; // don't bother to clone... won't do any good!
+      if (hasCache()) {
+          return cloneWithReset();
+      }
+      return this; // don't bother to clone... won't do any good!
     } catch (CloneNotSupportedException cnse) {
       throw new RuntimeException(cnse.getMessage());
     }
@@ -293,8 +296,10 @@ public class XNodeSet extends NodeSequence {
   @Override
   public XObject getFresh() {
     try {
-      if (hasCache()) return (XObject) cloneWithReset();
-      else return this; // don't bother to clone... won't do any good!
+      if (hasCache()) {
+          return (XObject) cloneWithReset();
+      }
+      return this; // don't bother to clone... won't do any good!
     } catch (CloneNotSupportedException cnse) {
       throw new RuntimeException(cnse.getMessage());
     }

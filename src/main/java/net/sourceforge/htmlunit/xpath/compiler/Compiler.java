@@ -906,11 +906,9 @@ public class Compiler extends OpMap {
       }
 
       return func;
-    } else {
-      error(XPATHErrorResources.ER_FUNCTION_TOKEN_NOT_FOUND, null); // "function token not found.");
-
-      return null;
     }
+    error(XPATHErrorResources.ER_FUNCTION_TOKEN_NOT_FOUND, null); // "function token not found.");
+    return null;
   }
 
   /**
