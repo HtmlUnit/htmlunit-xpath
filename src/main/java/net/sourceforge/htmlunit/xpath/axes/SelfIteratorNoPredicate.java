@@ -26,7 +26,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
  * predicates.
  *
  * @see net.sourceforge.htmlunit.xpath.axes.LocPathIterator
- * @xsl.usage advanced
  */
 public class SelfIteratorNoPredicate extends LocPathIterator {
   static final long serialVersionUID = -4226887905279814201L;

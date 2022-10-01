@@ -33,8 +33,6 @@ import org.w3c.dom.Node;
  * <p>***** Also note that there's no fastpath for the by-name query; we search linearly until we
  * find it or fail to find it. Again, that could be optimized at some cost in object
  * creation/storage.
- *
- * @xsl.usage internal
  */
 public class DTMNamedNodeMap implements NamedNodeMap {
 
@@ -228,11 +226,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
     throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
-  /**
-   * Simple implementation of DOMException.
-   *
-   * @xsl.usage internal
-   */
+  /** Simple implementation of DOMException. */
   public static class DTMException extends org.w3c.dom.DOMException {
     static final long serialVersionUID = -8290238117162437678L;
 

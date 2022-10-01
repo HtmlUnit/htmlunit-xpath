@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
  * possibly a predicate.
  *
  * @see net.sourceforge.htmlunit.xpath.axes.BasicTestIterator
- * @xsl.usage advanced
  */
 public class ChildTestIterator extends BasicTestIterator {
   static final long serialVersionUID = -7936835957960705722L;

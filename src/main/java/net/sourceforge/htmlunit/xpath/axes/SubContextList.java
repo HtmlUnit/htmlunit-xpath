@@ -22,8 +22,6 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 /**
  * A class that implements this interface is a sub context node list, meaning it is a node list for
  * a location path step for a predicate.
- *
- * @xsl.usage advanced
  */
 public interface SubContextList {
 

@@ -429,7 +429,6 @@ public interface DTM {
    *
    * @param nodeHandle The node id.
    * @return the number of ancestors, plus one
-   * @xsl.usage internal
    */
   public short getLevel(int nodeHandle);
 

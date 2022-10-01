@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XBoolean;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * Execute the True() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the True() function. */
 public class FuncTrue extends Function {
   static final long serialVersionUID = 5663314547346339447L;
 

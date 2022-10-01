@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XBoolean;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * Execute the Boolean() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Boolean() function. */
 public class FuncBoolean extends FunctionOneArg {
   static final long serialVersionUID = 4328660760070034592L;
 

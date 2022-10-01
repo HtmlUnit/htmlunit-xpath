@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XNumber;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * Execute the round() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the round() function. */
 public class FuncRound extends FunctionOneArg {
   static final long serialVersionUID = -7970583902573826611L;
 

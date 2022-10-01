@@ -22,11 +22,7 @@ import java.io.PrintWriter;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 
-/**
- * Implement SAX error handler for default reporting.
- *
- * @xsl.usage general
- */
+/** Implement SAX error handler for default reporting. */
 public class DefaultErrorHandler implements ErrorListener {
   PrintWriter m_pw;
 

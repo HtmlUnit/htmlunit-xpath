@@ -45,8 +45,6 @@ import org.w3c.dom.traversal.NodeIterator;
  * specific subclasses of it which do so? The advantage of doing it all here is that all NodeSetDTMs
  * will respond to the same calls; the disadvantage is that some of them may return
  * less-than-enlightening results when you do so.
- *
- * @xsl.usage advanced
  */
 public class NodeSetDTM extends NodeVector
     implements /* NodeList, NodeIterator, */ DTMIterator, Cloneable {

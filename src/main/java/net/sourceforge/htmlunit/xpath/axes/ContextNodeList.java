@@ -24,8 +24,6 @@ import org.w3c.dom.traversal.NodeIterator;
  * Classes who implement this interface can be a <a
  * href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>, also refered to here
  * as a <term>context node list</term>.
- *
- * @xsl.usage advanced
  */
 public interface ContextNodeList {
 

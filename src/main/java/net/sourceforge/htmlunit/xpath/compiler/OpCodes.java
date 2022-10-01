@@ -31,29 +31,19 @@ package net.sourceforge.htmlunit.xpath.compiler;
  */
 public class OpCodes {
 
-  /**
-   * [ENDOP] Some operators may like to have a terminator.
-   *
-   * @xsl.usage advanced
-   */
+  /** [ENDOP] Some operators may like to have a terminator. */
   public static final int ENDOP = -1;
 
   /** [EMPTY] Empty slot to indicate NULL. */
   public static final int EMPTY = -2;
 
-  /**
-   * [ELEMWILDCARD] Means ELEMWILDCARD ("*"), used instead of string index in some places.
-   *
-   * @xsl.usage advanced
-   */
+  /** [ELEMWILDCARD] Means ELEMWILDCARD ("*"), used instead of string index in some places. */
   public static final int ELEMWILDCARD = -3;
 
   /**
    * [OP_XPATH] [length] {expression}
    *
    * <p>returns: XNodeSet XNumber XString XBoolean XRTree XObject
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_XPATH = 1;
 
@@ -61,8 +51,6 @@ public class OpCodes {
    * [OP_OR] [length] {boolean expression} {boolean expression}
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_OR = 2;
 
@@ -70,8 +58,6 @@ public class OpCodes {
    * [OP_AND] [length] {boolean expression} {boolean expression}
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_AND = 3;
 
@@ -79,8 +65,6 @@ public class OpCodes {
    * [OP_NOTEQUALS] [length] {expression} {expression}
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_NOTEQUALS = 4;
 
@@ -88,8 +72,6 @@ public class OpCodes {
    * [OP_EQUALS] [length] {expression} {expression}
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_EQUALS = 5;
 
@@ -97,8 +79,6 @@ public class OpCodes {
    * [OP_LTE] (less-than-or-equals) [length] {number expression} {number expression}
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_LTE = 6;
 
@@ -106,8 +86,6 @@ public class OpCodes {
    * [OP_LT] (less-than) [length] {number expression} {number expression}
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_LT = 7;
 
@@ -115,8 +93,6 @@ public class OpCodes {
    * [OP_GTE] (greater-than-or-equals) [length] {number expression} {number expression}
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_GTE = 8;
 
@@ -124,8 +100,6 @@ public class OpCodes {
    * [OP_GT] (greater-than) [length] {number expression} {number expression}
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_GT = 9;
 
@@ -133,8 +107,6 @@ public class OpCodes {
    * [OP_PLUS] [length] {number expression} {number expression}
    *
    * <p>returns: XNumber
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_PLUS = 10;
 
@@ -142,8 +114,6 @@ public class OpCodes {
    * [OP_MINUS] [length] {number expression} {number expression}
    *
    * <p>returns: XNumber
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_MINUS = 11;
 
@@ -151,8 +121,6 @@ public class OpCodes {
    * [OP_MULT] [length] {number expression} {number expression}
    *
    * <p>returns: XNumber
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_MULT = 12;
 
@@ -160,8 +128,6 @@ public class OpCodes {
    * [OP_DIV] [length] {number expression} {number expression}
    *
    * <p>returns: XNumber
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_DIV = 13;
 
@@ -169,8 +135,6 @@ public class OpCodes {
    * [OP_MOD] [length] {number expression} {number expression}
    *
    * <p>returns: XNumber
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_MOD = 14;
 
@@ -178,8 +142,6 @@ public class OpCodes {
    * [OP_QUO] [length] {number expression} {number expression}
    *
    * <p>returns: XNumber
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_QUO = 15;
 
@@ -187,8 +149,6 @@ public class OpCodes {
    * [OP_NEG] [length] {number expression}
    *
    * <p>returns: XNumber
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_NEG = 16;
 
@@ -196,8 +156,6 @@ public class OpCodes {
    * [OP_STRING] (cast operation) [length] {expression}
    *
    * <p>returns: XString
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_STRING = 17;
 
@@ -205,8 +163,6 @@ public class OpCodes {
    * [OP_BOOL] (cast operation) [length] {expression}
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_BOOL = 18;
 
@@ -214,8 +170,6 @@ public class OpCodes {
    * [OP_NUMBER] (cast operation) [length] {expression}
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_NUMBER = 19;
 
@@ -223,8 +177,6 @@ public class OpCodes {
    * [OP_UNION] [length] {PathExpr}+
    *
    * <p>returns: XNodeSet
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_UNION = 20;
 
@@ -232,8 +184,6 @@ public class OpCodes {
    * [OP_LITERAL] [3] [index to token]
    *
    * <p>returns: XString
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_LITERAL = 21;
 
@@ -244,8 +194,6 @@ public class OpCodes {
    * [OP_VARIABLE] [4] [index to namespace token, or EMPTY] [index to function name token]
    *
    * <p>returns: XString
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_VARIABLE = 22;
 
@@ -253,8 +201,6 @@ public class OpCodes {
    * [OP_GROUP] [length] {expression}
    *
    * <p>returns: XNodeSet XNumber XString XBoolean XRTree XObject
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_GROUP = 23;
 
@@ -263,8 +209,6 @@ public class OpCodes {
    * name token] {OP_ARGUMENT}
    *
    * <p>returns: XNodeSet XNumber XString XBoolean XRTree XObject
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_EXTFUNCTION = 24;
 
@@ -272,8 +216,6 @@ public class OpCodes {
    * [OP_FUNCTION] [length] [FUNC_name] {OP_ARGUMENT} [ENDOP]
    *
    * <p>returns: XNodeSet XNumber XString XBoolean XRTree XObject
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_FUNCTION = 25;
 
@@ -284,8 +226,6 @@ public class OpCodes {
    * [OP_ARGUMENT] (Function argument.) [length] {expression}
    *
    * <p>returns: XNodeSet XNumber XString XBoolean XRTree XObject
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_ARGUMENT = 26;
 
@@ -293,8 +233,6 @@ public class OpCodes {
    * [OP_NUMBERLIT] (Number literal.) [3] [index to token]
    *
    * <p>returns: XString
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_NUMBERLIT = 27;
 
@@ -304,8 +242,6 @@ public class OpCodes {
    * <p>(Note that element and attribute namespaces and names can be wildcarded '*'.)
    *
    * <p>returns: XNodeSet
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_LOCATIONPATH = 28;
 
@@ -317,8 +253,6 @@ public class OpCodes {
    * [OP_PREDICATE] [length] {expression} [ENDOP] (For safety)
    *
    * <p>returns: XBoolean or XNumber
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_PREDICATE = 29;
 
@@ -326,16 +260,12 @@ public class OpCodes {
    * [OP_MATCHPATTERN] [length] {PathExpr}+
    *
    * <p>returns: XNodeSet
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_MATCHPATTERN = 30;
 
   /**
    * [OP_LOCATIONPATHPATTERN] [length] {FROM_stepType} | {function}{predicate} [ENDOP] returns:
    * XNodeSet
-   *
-   * @xsl.usage advanced
    */
   public static final int OP_LOCATIONPATHPATTERN = 31;
 
@@ -343,8 +273,6 @@ public class OpCodes {
    * [NODETYPE_COMMENT] No size or arguments. Note: must not overlap function OP number!
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int NODETYPE_COMMENT = 1030;
 
@@ -352,8 +280,6 @@ public class OpCodes {
    * [NODETYPE_TEXT] No size or arguments. Note: must not overlap function OP number!
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int NODETYPE_TEXT = 1031;
 
@@ -361,8 +287,6 @@ public class OpCodes {
    * [NODETYPE_PI] [index to token] Note: must not overlap function OP number!
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int NODETYPE_PI = 1032;
 
@@ -370,8 +294,6 @@ public class OpCodes {
    * [NODETYPE_NODE] No size or arguments. Note: must not overlap function OP number!
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int NODETYPE_NODE = 1033;
 
@@ -379,8 +301,6 @@ public class OpCodes {
    * [NODENAME] [index to ns token or EMPTY] [index to name token]
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int NODENAME = 34;
 
@@ -388,8 +308,6 @@ public class OpCodes {
    * [NODETYPE_ROOT] No size or arguments.
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int NODETYPE_ROOT = 35;
 
@@ -397,8 +315,6 @@ public class OpCodes {
    * [NODETYPE_ANY] No size or arguments.
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int NODETYPE_ANYELEMENT = 36;
 
@@ -406,8 +322,6 @@ public class OpCodes {
    * [NODETYPE_ANY] No size or arguments.
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int NODETYPE_FUNCTEST = 1034;
 
@@ -416,8 +330,6 @@ public class OpCodes {
    * predicates] {node test} {predicates}?
    *
    * <p>returns: XBoolean
-   *
-   * @xsl.usage advanced
    */
   public static final int AXES_START_TYPES = 37;
 
@@ -463,25 +375,13 @@ public class OpCodes {
   /** '/' axes opcode. */
   public static final int FROM_ROOT = 50;
 
-  /**
-   * For match patterns.
-   *
-   * @xsl.usage advanced
-   */
+  /** For match patterns. */
   public static final int MATCH_ATTRIBUTE = 51;
 
-  /**
-   * For match patterns.
-   *
-   * @xsl.usage advanced
-   */
+  /** For match patterns. */
   public static final int MATCH_ANY_ANCESTOR = 52;
 
-  /**
-   * For match patterns.
-   *
-   * @xsl.usage advanced
-   */
+  /** For match patterns. */
   public static final int MATCH_IMMEDIATE_ANCESTOR = 53;
 
   /** The end of the axes types. */

@@ -56,11 +56,7 @@ public class SuballocatedIntVector {
   /** "Shortcut" handle to m_map[0]. Surprisingly helpful for short vectors. */
   protected int m_map0[];
 
-  /**
-   * "Shortcut" handle to most recently added row of m_map. Very helpful during construction.
-   *
-   * @xsl.usage internal
-   */
+  /** "Shortcut" handle to most recently added row of m_map. Very helpful during construction. */
   protected int m_buildCache[];
 
   protected int m_buildCacheStartIndex;

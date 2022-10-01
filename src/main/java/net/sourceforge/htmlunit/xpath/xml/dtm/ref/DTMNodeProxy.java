@@ -52,7 +52,6 @@ import org.w3c.dom.UserDataHandler;
  * <p>DTMNodeProxy may be subclassed further to present specific DOM node types.
  *
  * @see org.w3c.dom
- * @xsl.usage internal
  */
 public class DTMNodeProxy
     implements Node,

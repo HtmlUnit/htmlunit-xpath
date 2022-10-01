@@ -29,8 +29,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 /**
  * Tokenizes and parses XPath expressions. This should really be named XPathParserImpl, and may be
  * renamed in the future.
- *
- * @xsl.usage general
  */
 public class XPathParser {
   // %REVIEW% Is there a better way of doing this?

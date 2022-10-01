@@ -36,8 +36,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  * Default class for the runtime execution context for XPath.
  *
  * <p>This class extends DTMManager but does not directly implement it.
- *
- * @xsl.usage advanced
  */
 public class XPathContext extends DTMManager {
   /**
@@ -451,17 +449,12 @@ public class XPathContext extends DTMManager {
    * Push a TreeWalker on the stack.
    *
    * @param iter A sub-context AxesWalker.
-   * @xsl.usage internal
    */
   public final void pushSubContextList(SubContextList iter) {
     m_axesIteratorStack.push(iter);
   }
 
-  /**
-   * Pop the last pushed axes iterator.
-   *
-   * @xsl.usage internal
-   */
+  /** Pop the last pushed axes iterator. */
   public final void popSubContextList() {
     m_axesIteratorStack.pop();
   }
@@ -470,7 +463,6 @@ public class XPathContext extends DTMManager {
    * Get the current axes iterator, or return null if none.
    *
    * @return the sub-context node list.
-   * @xsl.usage internal
    */
   public SubContextList getSubContextList() {
     return m_axesIteratorStack.isEmpty() ? null : m_axesIteratorStack.peek();
@@ -481,7 +473,6 @@ public class XPathContext extends DTMManager {
    * defined by the XSLT spec.
    *
    * @return the <a href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>.
-   * @xsl.usage internal
    */
   public net.sourceforge.htmlunit.xpath.axes.SubContextList getCurrentNodeList() {
     return m_axesIteratorStack.isEmpty() ? null : m_axesIteratorStack.elementAt(0);

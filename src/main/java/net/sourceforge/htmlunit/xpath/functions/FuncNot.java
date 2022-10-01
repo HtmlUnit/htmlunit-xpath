@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XBoolean;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * Execute the Not() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Not() function. */
 public class FuncNot extends FunctionOneArg {
   static final long serialVersionUID = 7299699961076329790L;
 

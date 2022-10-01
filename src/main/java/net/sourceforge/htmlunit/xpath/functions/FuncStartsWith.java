@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XBoolean;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * Execute the StartsWith() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the StartsWith() function. */
 public class FuncStartsWith extends Function2Args {
   static final long serialVersionUID = 2194585774699567928L;
 

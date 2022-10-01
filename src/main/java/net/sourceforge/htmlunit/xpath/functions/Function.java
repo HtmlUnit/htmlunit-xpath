@@ -30,8 +30,6 @@ import net.sourceforge.htmlunit.xpath.res.XSLMessages;
  * method is that the super class processes the arguments and hands the results to the derived
  * class, the other method is that the derived class may process it's own arguments, which is faster
  * since the arguments don't have to be added to an array, but causes a larger code footprint.
- *
- * @xsl.usage advanced
  */
 public abstract class Function extends Expression {
   static final long serialVersionUID = 6927661240854599768L;

@@ -31,7 +31,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
  * a predicate.
  *
  * @see net.sourceforge.htmlunit.xpath.axes#LocPathIterator
- * @xsl.usage advanced
  */
 public class OneStepIterator extends ChildTestIterator {
   static final long serialVersionUID = 4623710779664998283L;

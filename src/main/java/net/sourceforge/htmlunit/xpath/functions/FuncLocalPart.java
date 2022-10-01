@@ -22,11 +22,7 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
-/**
- * Execute the LocalPart() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the LocalPart() function. */
 public class FuncLocalPart extends FunctionDef1Arg {
   static final long serialVersionUID = 7591798770325814746L;
 

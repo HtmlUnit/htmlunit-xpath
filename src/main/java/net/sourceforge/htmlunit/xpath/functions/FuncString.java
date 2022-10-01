@@ -20,11 +20,7 @@ package net.sourceforge.htmlunit.xpath.functions;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * Execute the String() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the String() function. */
 public class FuncString extends FunctionDef1Arg {
   static final long serialVersionUID = -2206677149497712883L;
 

@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
-/**
- * This class iterates over set of nodes that needs to be sorted.
- *
- * @xsl.usage internal
- */
+/** This class iterates over set of nodes that needs to be sorted. */
 public class WalkingIteratorSorted extends WalkingIterator {
   static final long serialVersionUID = -4512512007542368213L;
 

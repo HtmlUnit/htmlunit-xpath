@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XBoolean;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * Execute the False() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the False() function. */
 public class FuncFalse extends Function {
   static final long serialVersionUID = 6150918062759769887L;
 

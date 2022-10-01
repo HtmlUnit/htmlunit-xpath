@@ -22,11 +22,7 @@ import net.sourceforge.htmlunit.xpath.objects.XBoolean;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
-/**
- * Execute the Lang() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Lang() function. */
 public class FuncLang extends FunctionOneArg {
   static final long serialVersionUID = -7868705139354872185L;
 

@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XNumber;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * Execute the StringLength() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the StringLength() function. */
 public class FuncStringLength extends FunctionDef1Arg {
   static final long serialVersionUID = -159616417996519839L;
 

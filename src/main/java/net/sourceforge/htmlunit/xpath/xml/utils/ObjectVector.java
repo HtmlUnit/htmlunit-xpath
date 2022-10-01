@@ -23,8 +23,6 @@ package net.sourceforge.htmlunit.xpath.xml.utils;
  * <p>This version is based on a "realloc" strategy -- a simle array is used, and when more storage
  * is needed, a larger array is obtained and all existing data is recopied into it. As a result,
  * read/write access to existing nodes is O(1) fast but appending may be O(N**2) slow.
- *
- * @xsl.usage internal
  */
 public class ObjectVector implements Cloneable {
 

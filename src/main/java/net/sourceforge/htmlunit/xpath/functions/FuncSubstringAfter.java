@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 
-/**
- * Execute the SubstringAfter() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the SubstringAfter() function. */
 public class FuncSubstringAfter extends Function2Args {
   static final long serialVersionUID = -8119731889862512194L;
 

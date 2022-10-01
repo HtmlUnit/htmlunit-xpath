@@ -19,11 +19,7 @@ package net.sourceforge.htmlunit.xpath.xml.utils;
 
 import java.util.EmptyStackException;
 
-/**
- * Simple stack for boolean values.
- *
- * @xsl.usage internal
- */
+/** Simple stack for boolean values. */
 public final class BoolStack implements Cloneable {
 
   /** Array of boolean values */

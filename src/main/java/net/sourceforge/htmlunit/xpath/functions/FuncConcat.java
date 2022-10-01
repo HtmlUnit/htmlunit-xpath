@@ -22,11 +22,7 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 
-/**
- * Execute the Concat() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Concat() function. */
 public class FuncConcat extends FunctionMultiArgs {
   static final long serialVersionUID = 1737228885202314413L;
 

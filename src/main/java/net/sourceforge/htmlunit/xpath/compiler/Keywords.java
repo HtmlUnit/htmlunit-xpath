@@ -19,11 +19,7 @@ package net.sourceforge.htmlunit.xpath.compiler;
 
 import java.util.Hashtable;
 
-/**
- * Table of strings to operation code lookups.
- *
- * @xsl.usage internal
- */
+/** Table of strings to operation code lookups. */
 public class Keywords {
 
   /** Table of keywords to opcode associations. */

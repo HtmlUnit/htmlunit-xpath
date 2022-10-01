@@ -151,17 +151,15 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
     // from the execute method.
     if (-1 == m_stackFrame) {
       return returnNextNode(m_firstWalker.nextNode());
-    } else {
-      int n = returnNextNode(m_firstWalker.nextNode());
-      return n;
     }
+    int n = returnNextNode(m_firstWalker.nextNode());
+    return n;
   }
 
   /**
    * Get the head of the walker list.
    *
    * @return The head of the walker list, or null if this iterator does not implement walkers.
-   * @xsl.usage advanced
    */
   public final AxesWalker getFirstWalker() {
     return m_firstWalker;
@@ -171,7 +169,6 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
    * Set the head of the walker list.
    *
    * @param walker Should be a valid AxesWalker.
-   * @xsl.usage advanced
    */
   public final void setFirstWalker(AxesWalker walker) {
     m_firstWalker = walker;
@@ -181,7 +178,6 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
    * Set the last used walker.
    *
    * @param walker The last used walker, or null.
-   * @xsl.usage advanced
    */
   public final void setLastUsedWalker(AxesWalker walker) {
     m_lastUsedWalker = walker;
@@ -191,7 +187,6 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
    * Get the last used walker.
    *
    * @return The last used walker, or null.
-   * @xsl.usage advanced
    */
   public final AxesWalker getLastUsedWalker() {
     return m_lastUsedWalker;

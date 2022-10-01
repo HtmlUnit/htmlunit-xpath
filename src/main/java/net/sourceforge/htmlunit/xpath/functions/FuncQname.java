@@ -22,11 +22,7 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
-/**
- * Execute the Qname() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Qname() function. */
 public class FuncQname extends FunctionDef1Arg {
   static final long serialVersionUID = -1532307875532617380L;
 

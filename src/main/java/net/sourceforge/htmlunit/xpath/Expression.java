@@ -174,7 +174,6 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    * @throws TransformerException thrown if the active ProblemListener decides the error condition
    *     is severe enough to halt processing.
    * @throws javax.xml.transform.TransformerException
-   * @xsl.usage experimental
    */
   public DTMIterator asIterator(XPathContext xctxt, int contextNode)
       throws javax.xml.transform.TransformerException {
@@ -198,7 +197,6 @@ public abstract class Expression implements java.io.Serializable, ExpressionNode
    * @throws TransformerException thrown if the active ProblemListener decides the error condition
    *     is severe enough to halt processing.
    * @throws javax.xml.transform.TransformerException
-   * @xsl.usage experimental
    */
   public DTMIterator asIteratorRaw(XPathContext xctxt, int contextNode)
       throws javax.xml.transform.TransformerException {

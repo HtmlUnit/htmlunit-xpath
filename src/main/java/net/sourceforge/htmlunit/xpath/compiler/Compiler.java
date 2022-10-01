@@ -57,8 +57,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  * An instance of this class compiles an XPath string expression into a Expression object. This
  * class compiles the string into a sequence of operation codes (op map) and then builds from that
  * into an Expression tree.
- *
- * @xsl.usage advanced
  */
 public class Compiler extends OpMap {
 
@@ -85,7 +83,6 @@ public class Compiler extends OpMap {
    * @param opPos The current position in the xpath.m_opMap array.
    * @return The result of the XPath.
    * @throws TransformerException if there is a syntax or other error.
-   * @xsl.usage advanced
    */
   public Expression compile(int opPos) throws TransformerException {
 

@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
  * a predicate, that only go forward (i.e. it can not be used with ancestors, preceding, etc.)
  *
  * @see net.sourceforge.htmlunit.xpath.axes#ChildTestIterator
- * @xsl.usage advanced
  */
 public class OneStepIteratorForward extends ChildTestIterator {
   static final long serialVersionUID = -1576936606178190566L;

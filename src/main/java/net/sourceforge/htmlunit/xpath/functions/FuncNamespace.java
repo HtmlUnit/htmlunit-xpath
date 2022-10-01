@@ -22,11 +22,7 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
-/**
- * Execute the Namespace() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Namespace() function. */
 public class FuncNamespace extends FunctionDef1Arg {
   static final long serialVersionUID = -4695674566722321237L;
 

@@ -24,8 +24,6 @@ import java.util.ListResourceBundle;
  * order to add a new message here, you need to first add a Static string constant for the Key and
  * update the contents array with Key, Value pair Also you need to update the count of
  * messages(MAX_CODE)or the count of warnings(MAX_WARNING) [ Information purpose only]
- *
- * @xsl.usage advanced
  */
 public class XPATHErrorResources extends ListResourceBundle {
 

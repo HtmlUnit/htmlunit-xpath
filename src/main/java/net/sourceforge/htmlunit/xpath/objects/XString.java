@@ -24,8 +24,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 /**
  * This class represents an XPath string object, and is capable of converting the string to other
  * types, such as a number.
- *
- * @xsl.usage general
  */
 public class XString extends XObject {
   static final long serialVersionUID = 2020470518395094525L;

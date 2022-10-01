@@ -28,11 +28,7 @@ import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
-/**
- * Execute the Id() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Id() function. */
 public class FuncId extends FunctionOneArg {
   static final long serialVersionUID = 8930573966143567310L;
 

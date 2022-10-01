@@ -24,8 +24,6 @@ import net.sourceforge.htmlunit.xpath.XPathVisitor;
 /**
  * This class represents an XPath number, and is capable of converting the number to other types,
  * such as a string.
- *
- * @xsl.usage general
  */
 public class XNumber extends XObject {
   static final long serialVersionUID = -2720400709619020193L;

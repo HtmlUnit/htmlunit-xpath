@@ -24,7 +24,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
  * This class implements an optimized iterator for attribute axes patterns.
  *
  * @see net.sourceforge.htmlunit.xpath.axes#ChildTestIterator
- * @xsl.usage advanced
  */
 public class AttributeIterator extends ChildTestIterator {
   static final long serialVersionUID = -8417986700712229686L;

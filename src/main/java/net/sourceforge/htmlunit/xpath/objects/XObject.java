@@ -34,8 +34,6 @@ import org.w3c.dom.traversal.NodeIterator;
  * This class represents an XPath object, and is capable of converting the object to various types,
  * such as a string. This class acts as the base class to other XPath type objects, such as XString,
  * and provides polymorphic casting capabilities.
- *
- * @xsl.usage general
  */
 public class XObject extends Expression implements Serializable, Cloneable {
   static final long serialVersionUID = -821887098985662951L;

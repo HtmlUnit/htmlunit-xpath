@@ -32,8 +32,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
  * document order based on a XPath <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
  * As each node is iterated via nextNode(), the node is also stored in the NodeVector, so that
  * previousNode() can easily be done.
- *
- * @xsl.usage advanced
  */
 public class UnionPathIterator extends LocPathIterator
     implements Cloneable, DTMIterator, java.io.Serializable, PathComponent {

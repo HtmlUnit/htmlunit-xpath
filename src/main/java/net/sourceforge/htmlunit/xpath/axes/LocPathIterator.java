@@ -41,8 +41,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  * also stored in the NodeVector, so that previousNode() can easily be done, except in the case
  * where the LocPathIterator is "owned" by a UnionPathIterator, in which case the UnionPathIterator
  * will cache the nodes.
- *
- * @xsl.usage advanced
  */
 public abstract class LocPathIterator extends PredicatedNodeTest
     implements Cloneable, DTMIterator, java.io.Serializable, PathComponent {
@@ -170,7 +168,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @throws TransformerException thrown if the active ProblemListener decides the error condition
    *     is severe enough to halt processing.
    * @throws javax.xml.transform.TransformerException
-   * @xsl.usage experimental
    */
   @Override
   public DTMIterator asIterator(XPathContext xctxt, int contextNode)
@@ -230,7 +227,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * Set if this is an iterator at the upper level of the XPath.
    *
    * @param b true if this location path is at the top level of the expression.
-   * @xsl.usage advanced
    */
   public void setIsTopLevel(boolean b) {
     m_isTopLevel = b;
@@ -240,7 +236,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * Get if this is an iterator at the upper level of the XPath.
    *
    * @return true if this location path is at the top level of the expression.
-   * @xsl.usage advanced
    */
   public boolean getIsTopLevel() {
     return m_isTopLevel;

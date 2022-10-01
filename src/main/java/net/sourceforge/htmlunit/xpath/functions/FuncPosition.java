@@ -23,11 +23,7 @@ import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.objects.XNumber;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * Execute the Position() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Position() function. */
 public class FuncPosition extends Function {
   static final long serialVersionUID = -9092846348197271582L;
   private boolean m_isTopLevel;

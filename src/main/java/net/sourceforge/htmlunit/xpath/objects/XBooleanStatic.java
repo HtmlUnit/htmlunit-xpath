@@ -17,11 +17,7 @@
  */
 package net.sourceforge.htmlunit.xpath.objects;
 
-/**
- * This class doesn't have any XPathContext, so override whatever to ensure it works OK.
- *
- * @xsl.usage internal
- */
+/** This class doesn't have any XPathContext, so override whatever to ensure it works OK. */
 public class XBooleanStatic extends XBoolean {
   static final long serialVersionUID = -8064147275772687409L;
 

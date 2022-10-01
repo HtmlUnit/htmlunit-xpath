@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XBoolean;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/**
- * Execute the Contains() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Contains() function. */
 public class FuncContains extends Function2Args {
   static final long serialVersionUID = 5084753781887919723L;
 

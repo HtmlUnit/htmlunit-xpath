@@ -20,8 +20,6 @@ package net.sourceforge.htmlunit.xpath.functions;
 /**
  * An exception that is thrown if the wrong number of arguments to an exception are specified by the
  * stylesheet.
- *
- * @xsl.usage advanced
  */
 public class WrongNumberArgsException extends Exception {
   static final long serialVersionUID = -4551577097576242432L;

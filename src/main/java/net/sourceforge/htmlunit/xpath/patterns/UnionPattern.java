@@ -25,8 +25,6 @@ import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /**
  * This class represents a union pattern, which can have multiple individual StepPattern patterns.
- *
- * @xsl.usage advanced
  */
 public class UnionPattern extends Expression {
   static final long serialVersionUID = -6670449967116905820L;

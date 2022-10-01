@@ -29,11 +29,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 
-/**
- * This class represents a single pattern match step.
- *
- * @xsl.usage advanced
- */
+/** This class represents a single pattern match step. */
 public class StepPattern extends NodeTest implements SubContextList, ExpressionOwner {
   static final long serialVersionUID = 9071668960168152644L;
 

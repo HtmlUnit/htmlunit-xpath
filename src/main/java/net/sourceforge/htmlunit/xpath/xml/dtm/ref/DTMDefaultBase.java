@@ -1566,7 +1566,6 @@ public abstract class DTMDefaultBase implements DTM {
    *
    * @param nodeHandle The node id.
    * @return the number of ancestors, plus one
-   * @xsl.usage internal
    */
   @Override
   public short getLevel(int nodeHandle) {
@@ -1580,7 +1579,6 @@ public abstract class DTMDefaultBase implements DTM {
    *
    * @param nodeHandle The node handle.
    * @return the node identity
-   * @xsl.usage internal
    */
   public int getNodeIdent(int nodeHandle) {
     return makeNodeIdentity(nodeHandle);
@@ -1591,7 +1589,6 @@ public abstract class DTMDefaultBase implements DTM {
    *
    * @param nodeId The node identity.
    * @return the node handle
-   * @xsl.usage internal
    */
   public int getNodeHandle(int nodeId) {
     return makeNodeHandle(nodeId);
@@ -1640,7 +1637,6 @@ public abstract class DTMDefaultBase implements DTM {
    *
    * @param nodeHandle The node id, which can be any valid node handle.
    * @return the document encoding String object.
-   * @xsl.usage internal
    */
   @Override
   public String getDocumentEncoding(int nodeHandle) {

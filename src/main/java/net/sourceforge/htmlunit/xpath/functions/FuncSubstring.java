@@ -23,11 +23,7 @@ import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 
-/**
- * Execute the Substring() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Substring() function. */
 public class FuncSubstring extends Function3Args {
   static final long serialVersionUID = -5996676095024715502L;
 

@@ -22,8 +22,6 @@ package net.sourceforge.htmlunit.xpath.xml.dtm;
  *
  * <p>%REVIEW% Several classes were implementing this internally; it makes more sense to have one
  * shared version.
- *
- * @xsl.usage internal
  */
 public class DTMDOMException extends org.w3c.dom.DOMException {
   static final long serialVersionUID = 1895654266613192414L;

@@ -50,7 +50,6 @@ public class WalkerFactory {
    * @param stepOpCodePos The opcode position for the step.
    * @return non-null AxesWalker derivative.
    * @throws javax.xml.transform.TransformerException
-   * @xsl.usage advanced
    */
   static AxesWalker loadOneWalker(WalkingIterator lpi, Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
@@ -81,7 +80,6 @@ public class WalkerFactory {
    * @param stepIndex The top-level step index withing the iterator.
    * @return non-null AxesWalker derivative.
    * @throws javax.xml.transform.TransformerException
-   * @xsl.usage advanced
    */
   static AxesWalker loadWalkers(
       WalkingIterator lpi, Compiler compiler, int stepOpCodePos, int stepIndex)

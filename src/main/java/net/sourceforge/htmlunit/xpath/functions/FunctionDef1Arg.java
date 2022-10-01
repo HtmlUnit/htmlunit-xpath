@@ -23,11 +23,7 @@ import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
-/**
- * Base class for functions that accept one argument that can be defaulted if not specified.
- *
- * @xsl.usage advanced
- */
+/** Base class for functions that accept one argument that can be defaulted if not specified. */
 public class FunctionDef1Arg extends FunctionOneArg {
   static final long serialVersionUID = 2325189412814149264L;
 

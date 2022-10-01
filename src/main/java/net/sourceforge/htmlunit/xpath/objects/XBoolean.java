@@ -20,24 +20,14 @@ package net.sourceforge.htmlunit.xpath.objects;
 /**
  * This class represents an XPath boolean object, and is capable of converting the boolean to other
  * types, such as a string.
- *
- * @xsl.usage advanced
  */
 public class XBoolean extends XObject {
   static final long serialVersionUID = -2964933058866100881L;
 
-  /**
-   * A true boolean object so we don't have to keep creating them.
-   *
-   * @xsl.usage internal
-   */
+  /** A true boolean object so we don't have to keep creating them. */
   public static final XBoolean S_TRUE = new XBooleanStatic(true);
 
-  /**
-   * A true boolean object so we don't have to keep creating them.
-   *
-   * @xsl.usage internal
-   */
+  /** A true boolean object so we don't have to keep creating them. */
   public static final XBoolean S_FALSE = new XBooleanStatic(false);
 
   /**

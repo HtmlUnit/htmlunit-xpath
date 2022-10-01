@@ -33,8 +33,6 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 /**
  * The XPath class wraps an expression object and provides general services for execution of that
  * expression.
- *
- * @xsl.usage advanced
  */
 public class XPath implements Serializable, ExpressionOwner {
   static final long serialVersionUID = 3976493477939110553L;
@@ -227,7 +225,6 @@ public class XPath implements Serializable, ExpressionOwner {
    * @return The result of the XPath or null if callbacks are used.
    * @throws TransformerException thrown if the error condition is severe enough to halt processing.
    * @throws javax.xml.transform.TransformerException
-   * @xsl.usage experimental
    */
   public XObject execute(
       XPathContext xctxt, org.w3c.dom.Node contextNode, PrefixResolver namespaceContext)
@@ -245,7 +242,6 @@ public class XPath implements Serializable, ExpressionOwner {
    * @throws TransformerException thrown if the active ProblemListener decides the error condition
    *     is severe enough to halt processing.
    * @throws javax.xml.transform.TransformerException
-   * @xsl.usage experimental
    */
   public XObject execute(XPathContext xctxt, int contextNode, PrefixResolver namespaceContext)
       throws javax.xml.transform.TransformerException {
@@ -302,7 +298,6 @@ public class XPath implements Serializable, ExpressionOwner {
    * @throws TransformerException thrown if the active ProblemListener decides the error condition
    *     is severe enough to halt processing.
    * @throws javax.xml.transform.TransformerException
-   * @xsl.usage experimental
    */
   public boolean bool(XPathContext xctxt, int contextNode, PrefixResolver namespaceContext)
       throws javax.xml.transform.TransformerException {
@@ -462,39 +457,23 @@ public class XPath implements Serializable, ExpressionOwner {
     m_mainExp.callVisitors(this, visitor);
   }
 
-  /**
-   * The match score if no match is made.
-   *
-   * @xsl.usage advanced
-   */
+  /** The match score if no match is made. */
   public static final double MATCH_SCORE_NONE = Double.NEGATIVE_INFINITY;
 
   /**
    * The match score if the pattern has the form of a QName optionally preceded by an @ character.
-   *
-   * @xsl.usage advanced
    */
   public static final double MATCH_SCORE_QNAME = 0.0;
 
-  /**
-   * The match score if the pattern pattern has the form NCName:*.
-   *
-   * @xsl.usage advanced
-   */
+  /** The match score if the pattern pattern has the form NCName:*. */
   public static final double MATCH_SCORE_NSWILD = -0.25;
 
-  /**
-   * The match score if the pattern consists of just a NodeTest.
-   *
-   * @xsl.usage advanced
-   */
+  /** The match score if the pattern consists of just a NodeTest. */
   public static final double MATCH_SCORE_NODETEST = -0.5;
 
   /**
    * The match score if the pattern consists of something other than just a NodeTest or just a
    * qname.
-   *
-   * @xsl.usage advanced
    */
   public static final double MATCH_SCORE_OTHER = 0.5;
 }

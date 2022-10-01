@@ -21,11 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 
-/**
- * Execute the Translate() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Translate() function. */
 public class FuncTranslate extends Function3Args {
   static final long serialVersionUID = -1672834340026116482L;
 

@@ -20,11 +20,7 @@ package net.sourceforge.htmlunit.xpath.xml.res;
 import java.util.ListResourceBundle;
 import java.util.Locale;
 
-/**
- * A utility class for issuing XML error messages.
- *
- * @xsl.usage internal
- */
+/** A utility class for issuing XML error messages. */
 public class XMLMessages {
 
   /** The local object to use. */

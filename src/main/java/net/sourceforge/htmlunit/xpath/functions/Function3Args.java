@@ -22,11 +22,7 @@ import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.res.XSLMessages;
 
-/**
- * Base class for functions that accept three arguments.
- *
- * @xsl.usage advanced
- */
+/** Base class for functions that accept three arguments. */
 public class Function3Args extends Function2Args {
   static final long serialVersionUID = 7915240747161506646L;
 

@@ -22,11 +22,7 @@ import net.sourceforge.htmlunit.xpath.objects.XNumber;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
-/**
- * Execute the Count() function.
- *
- * @xsl.usage advanced
- */
+/** Execute the Count() function. */
 public class FuncCount extends FunctionOneArg {
   static final long serialVersionUID = -7116225100474153751L;
 
