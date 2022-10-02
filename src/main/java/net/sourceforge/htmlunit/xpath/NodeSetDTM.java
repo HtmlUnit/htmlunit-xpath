@@ -17,17 +17,16 @@
  */
 package net.sourceforge.htmlunit.xpath;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.traversal.NodeIterator;
-
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.traversal.NodeIterator;
 
 /**
  * The NodeSetDTM class can act as either a NodeVector, NodeList, or NodeIterator. However, in order
@@ -247,7 +246,7 @@ public class NodeSetDTM extends NodeVector
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null)); // "This
     // NodeSetDTM
     // can not
@@ -285,7 +284,7 @@ public class NodeSetDTM extends NodeVector
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null)); // "This
     // NodeSetDTM
     // can not do
@@ -468,7 +467,7 @@ public class NodeSetDTM extends NodeVector
   /**
    * Add the node into a vector of nodes where it should occur in document order.
    *
-   * @param node    The node to be added.
+   * @param node The node to be added.
    * @param support The XPath runtime context.
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
@@ -533,7 +532,7 @@ public class NodeSetDTM extends NodeVector
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null)); // "This
     // NodeSetDTM
     // can not do
@@ -578,7 +577,7 @@ public class NodeSetDTM extends NodeVector
 
     if (!isFresh())
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_CANNOT_CALL_SETSHOULDCACHENODE, null)); // "Can
     // not
     // call

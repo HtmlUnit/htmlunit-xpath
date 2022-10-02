@@ -24,7 +24,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
@@ -173,7 +173,7 @@ public class AxesWalker extends PredicatedNodeTest
 
     if (DTM.NULL == root) {
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_SETTING_WALKER_ROOT_TO_NULL,
               null)); // "\n !!!! Error! Setting the root of a walker to null!!!");
     }

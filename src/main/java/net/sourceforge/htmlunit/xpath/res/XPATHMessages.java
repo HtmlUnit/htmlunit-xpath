@@ -39,7 +39,8 @@ public class XPATHMessages extends XMLMessages {
 
     if (XPATHBundle != null) {
       return createXPATHMsg(XPATHBundle, msgKey, args);
-    } else return "Could not load any resource bundles.";
+    }
+    return "Could not load any resource bundles.";
   }
 
   /**
@@ -101,7 +102,9 @@ public class XPATHMessages extends XMLMessages {
         fmsg = fResourceBundle.getString(XPATHErrorResources.FORMAT_FAILED);
         fmsg += " " + msg;
       }
-    } else fmsg = msg;
+    } else {
+      fmsg = msg;
+    }
 
     if (throwex) {
       throw new RuntimeException(fmsg);

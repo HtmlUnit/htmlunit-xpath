@@ -20,7 +20,7 @@ package net.sourceforge.htmlunit.xpath.functions;
 import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /** Base class for functions that accept one argument. */
 public class FunctionOneArg extends Function implements ExpressionOwner {
@@ -60,7 +60,7 @@ public class FunctionOneArg extends Function implements ExpressionOwner {
   /** {@inheritDoc} */
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
-    throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("one", null));
+    throw new WrongNumberArgsException(XPATHMessages.createXPATHMessage("one", null));
   }
 
   /** {@inheritDoc} */

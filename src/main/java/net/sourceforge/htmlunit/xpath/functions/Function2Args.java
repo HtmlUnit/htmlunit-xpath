@@ -20,7 +20,7 @@ package net.sourceforge.htmlunit.xpath.functions;
 import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /** Base class for functions that accept two arguments. */
 public class Function2Args extends FunctionOneArg {
@@ -62,7 +62,7 @@ public class Function2Args extends FunctionOneArg {
   /** {@inheritDoc} */
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
-    throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("two", null));
+    throw new WrongNumberArgsException(XPATHMessages.createXPATHMessage("two", null));
   }
 
   /** {@inheritDoc} */

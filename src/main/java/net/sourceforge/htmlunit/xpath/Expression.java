@@ -21,7 +21,7 @@ import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
@@ -221,7 +221,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
   public void warn(XPathContext xctxt, String msg, Object[] args)
       throws javax.xml.transform.TransformerException {
 
-    java.lang.String fmsg = XSLMessages.createXPATHWarning(msg, args);
+    java.lang.String fmsg = XPATHMessages.createXPATHWarning(msg, args);
 
     if (null != xctxt) {
       ErrorListener eh = xctxt.getErrorListener();
@@ -240,7 +240,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
 
     if (!b) {
       java.lang.String fMsg =
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_INCORRECT_PROGRAMMER_ASSERTION, new Object[] {msg});
 
       throw new RuntimeException(fMsg);
@@ -261,7 +261,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
   public void error(XPathContext xctxt, String msg, Object[] args)
       throws javax.xml.transform.TransformerException {
 
-    java.lang.String fmsg = XSLMessages.createXPATHMessage(msg, args);
+    java.lang.String fmsg = XPATHMessages.createXPATHMessage(msg, args);
 
     if (null != xctxt) {
       ErrorListener eh = xctxt.getErrorListener();

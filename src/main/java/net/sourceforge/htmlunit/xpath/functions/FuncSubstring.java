@@ -21,7 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /** Execute the Substring() function. */
 public class FuncSubstring extends Function3Args {
@@ -81,7 +81,7 @@ public class FuncSubstring extends Function3Args {
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     throw new WrongNumberArgsException(
-        XSLMessages.createXPATHMessage(XPATHErrorResources.ER_TWO_OR_THREE, null)); // "2
+        XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_TWO_OR_THREE, null)); // "2
     // or
     // 3");
   }

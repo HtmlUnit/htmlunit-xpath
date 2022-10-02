@@ -21,7 +21,7 @@ import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /** Base class for functions that accept an undetermined number of multiple arguments. */
 public class FunctionMultiArgs extends Function3Args {
@@ -73,7 +73,7 @@ public class FunctionMultiArgs extends Function3Args {
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     String fMsg =
-        XSLMessages.createXPATHMessage(
+        XPATHMessages.createXPATHMessage(
             XPATHErrorResources.ER_INCORRECT_PROGRAMMER_ASSERTION,
             new Object[] {
               "Programmer's assertion:  the method FunctionMultiArgs.reportWrongNumberArgs() should never be called."

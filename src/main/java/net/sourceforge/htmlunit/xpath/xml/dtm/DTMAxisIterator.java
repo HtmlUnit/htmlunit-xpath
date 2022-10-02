@@ -30,9 +30,7 @@ public interface DTMAxisIterator extends Cloneable {
    */
   int next();
 
-  /**
-   * Resets the iterator to the last start node.
-   */
+  /** Resets the iterator to the last start node. */
   void reset();
 
   /**

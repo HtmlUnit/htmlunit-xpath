@@ -20,7 +20,7 @@ package net.sourceforge.htmlunit.xpath.functions;
 import net.sourceforge.htmlunit.xpath.Expression;
 import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /** Base class for functions that accept three arguments. */
 public class Function3Args extends Function2Args {
@@ -61,7 +61,7 @@ public class Function3Args extends Function2Args {
   /** {@inheritDoc} */
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
-    throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("three", null));
+    throw new WrongNumberArgsException(XPATHMessages.createXPATHMessage("three", null));
   }
 
   /** {@inheritDoc} */

@@ -20,7 +20,7 @@ package net.sourceforge.htmlunit.xpath.compiler;
 import javax.xml.transform.TransformerException;
 import net.sourceforge.htmlunit.xpath.patterns.NodeTest;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.ObjectVector;
 
 /** This class represents the data structure basics of the XPath object. */
@@ -191,7 +191,7 @@ public class OpMap {
       return newOpPos;
     } else {
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_UNKNOWN_STEP, new Object[] {String.valueOf(stepType)}));
       // "Programmer's assertion in getNextStepPos: unknown stepType: " + stepType);
     }
@@ -246,8 +246,7 @@ public class OpMap {
    */
   public void error(String msg, Object[] args) throws javax.xml.transform.TransformerException {
 
-    java.lang.String fmsg =
-        net.sourceforge.htmlunit.xpath.res.XSLMessages.createXPATHMessage(msg, args);
+    java.lang.String fmsg = XPATHMessages.createXPATHMessage(msg, args);
 
     throw new javax.xml.transform.TransformerException(fmsg);
   }

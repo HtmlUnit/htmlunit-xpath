@@ -140,9 +140,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   /** Iterator that returns all immediate children of a given node */
   public final class ChildrenIterator extends InternalAxisIteratorBase {
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -153,7 +151,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
     /** {@inheritDoc} */
@@ -175,9 +172,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    */
   public final class ParentIterator extends InternalAxisIteratorBase {
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -188,7 +183,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
     /** {@inheritDoc} */
@@ -215,9 +209,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       super();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -228,7 +220,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
     /** {@inheritDoc} */
@@ -252,9 +243,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       super();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
 
@@ -264,7 +253,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
     /** {@inheritDoc} */
@@ -281,9 +269,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   /** Iterator that returns all siblings of a given node. */
   public class FollowingSiblingIterator extends InternalAxisIteratorBase {
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -294,7 +280,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
     /** {@inheritDoc} */
@@ -310,9 +295,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     // assumes caller will pass element nodes
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -323,7 +306,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
     /** {@inheritDoc} */
@@ -353,9 +335,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -382,7 +362,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
     /** {@inheritDoc} */
@@ -447,9 +426,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -482,7 +459,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
     /** {@inheritDoc} */
@@ -502,9 +478,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     // redefine DTMAxisIteratorBase's reset
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void reset() {
 
@@ -537,9 +511,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       m_traverser = getAxisTraverser(Axis.FOLLOWING);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -551,7 +523,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         // _currentNode precedes possible following(node) nodes
         resetPosition();
       }
-
     }
 
     /** {@inheritDoc} */
@@ -609,9 +580,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -639,12 +608,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void reset() {
 
@@ -685,9 +651,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   /** Iterator that returns the descendants of a given node. */
   public class DescendantIterator extends InternalAxisIteratorBase {
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -702,7 +666,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
     /**
@@ -748,9 +711,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return returnNode(makeNodeHandle(node)); // make handle.
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void reset() {
 
@@ -761,7 +722,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       setStartNode(makeNodeHandle(_startNode));
 
       _isRestartable = temp;
-
     }
   } // end of DescendantIterator
 
@@ -787,9 +747,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       _isConstant = constant;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
@@ -803,12 +761,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         resetPosition();
       }
-
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void reset() {
 
@@ -825,7 +780,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         _isRestartable = temp;
       }
-
     }
 
     /** {@inheritDoc} */

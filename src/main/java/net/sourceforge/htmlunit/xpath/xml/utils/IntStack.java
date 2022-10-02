@@ -57,11 +57,11 @@ public class IntStack extends IntVector {
     m_map[m_firstFree] = i;
 
     m_firstFree++;
-
   }
 
   /**
    * Quickly pops a number of items from the stack.
+   *
    * @param n the number of items to pop
    */
   public final void quickPop(int n) {

@@ -47,7 +47,7 @@ import net.sourceforge.htmlunit.xpath.patterns.NodeTest;
 import net.sourceforge.htmlunit.xpath.patterns.StepPattern;
 import net.sourceforge.htmlunit.xpath.patterns.UnionPattern;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
@@ -900,7 +900,7 @@ public class Compiler extends OpMap {
 
         m_errorHandler.fatalError(
             new TransformerException(
-                XSLMessages.createXPATHMessage(
+                XPATHMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ONLY_ALLOWS, new Object[] {name, wnae.getMessage()})));
         // "name + " only allows " + wnae.getMessage() + " arguments", m_locator));
       }
@@ -922,7 +922,7 @@ public class Compiler extends OpMap {
    */
   public void warn(String msg, Object[] args) throws TransformerException {
 
-    java.lang.String fmsg = XSLMessages.createXPATHWarning(msg, args);
+    java.lang.String fmsg = XPATHMessages.createXPATHWarning(msg, args);
 
     if (null != m_errorHandler) {
       m_errorHandler.warning(new TransformerException(fmsg));
@@ -942,7 +942,7 @@ public class Compiler extends OpMap {
 
     if (!b) {
       java.lang.String fMsg =
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_INCORRECT_PROGRAMMER_ASSERTION, new Object[] {msg});
 
       throw new RuntimeException(fMsg);
@@ -953,7 +953,7 @@ public class Compiler extends OpMap {
   @Override
   public void error(String msg, Object[] args) throws TransformerException {
 
-    java.lang.String fmsg = XSLMessages.createXPATHMessage(msg, args);
+    java.lang.String fmsg = XPATHMessages.createXPATHMessage(msg, args);
 
     if (null != m_errorHandler) {
       m_errorHandler.fatalError(new TransformerException(fmsg));

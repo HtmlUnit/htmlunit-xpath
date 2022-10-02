@@ -22,7 +22,7 @@ import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
@@ -160,7 +160,7 @@ public class XPathContext extends DTMManager {
   public void setErrorListener(ErrorListener listener) throws IllegalArgumentException {
     if (listener == null)
       throw new IllegalArgumentException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_NULL_ERROR_HANDLER, null)); // "Null error
     // handler");
     m_errorListener = listener;

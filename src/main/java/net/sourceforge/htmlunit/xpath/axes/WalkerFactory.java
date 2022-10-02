@@ -28,7 +28,7 @@ import net.sourceforge.htmlunit.xpath.patterns.FunctionPattern;
 import net.sourceforge.htmlunit.xpath.patterns.NodeTest;
 import net.sourceforge.htmlunit.xpath.patterns.StepPattern;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
@@ -258,7 +258,7 @@ public class WalkerFactory {
     }
 
     throw new RuntimeException(
-        XSLMessages.createXPATHMessage(
+        XPATHMessages.createXPATHMessage(
             XPATHErrorResources.ER_NULL_ERROR_HANDLER,
             new Object[] {
               Integer.toString(stepType)
@@ -498,7 +498,7 @@ public class WalkerFactory {
           break;
         default:
           throw new RuntimeException(
-              XSLMessages.createXPATHMessage(
+              XPATHMessages.createXPATHMessage(
                   XPATHErrorResources.ER_NULL_ERROR_HANDLER,
                   new Object[] {
                     Integer.toString(stepType)
@@ -620,7 +620,7 @@ public class WalkerFactory {
           break;
         default:
           throw new RuntimeException(
-              XSLMessages.createXPATHMessage(
+              XPATHMessages.createXPATHMessage(
                   XPATHErrorResources.ER_NULL_ERROR_HANDLER,
                   new Object[] {
                     Integer.toString(stepType)
@@ -896,7 +896,7 @@ public class WalkerFactory {
         break;
       default:
         throw new RuntimeException(
-            XSLMessages.createXPATHMessage(
+            XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_NULL_ERROR_HANDLER,
                 new Object[] {
                   Integer.toString(stepType)
@@ -1032,7 +1032,7 @@ public class WalkerFactory {
         break;
       default:
         throw new RuntimeException(
-            XSLMessages.createXPATHMessage(
+            XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_NULL_ERROR_HANDLER,
                 new Object[] {
                   Integer.toString(stepType)
@@ -1350,7 +1350,7 @@ public class WalkerFactory {
           break;
         default:
           throw new RuntimeException(
-              XSLMessages.createXPATHMessage(
+              XPATHMessages.createXPATHMessage(
                   XPATHErrorResources.ER_NULL_ERROR_HANDLER,
                   new Object[] {
                     Integer.toString(stepType)

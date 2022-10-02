@@ -218,6 +218,7 @@ public class ExpandedNameTable {
   /**
    * Given a type, return an expanded name ID.Any additional nodes that are created that have this
    * expanded name will use this ID.
+   *
    * @param type the given type
    * @return the expanded-name id of the node.
    */

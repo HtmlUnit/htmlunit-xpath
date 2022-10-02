@@ -40,7 +40,8 @@ public class SuballocatedIntVector {
 
   /** Bitwise addressing (much faster than div/remainder */
   protected int m_SHIFT;
-    protected final int m_MASK;
+
+  protected final int m_MASK;
 
   /** The default number of blocks to (over)allocate by */
   protected static final int NUMBLOCKS_DEFAULT = 32;

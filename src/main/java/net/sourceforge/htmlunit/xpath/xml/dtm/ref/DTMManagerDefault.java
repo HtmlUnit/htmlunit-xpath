@@ -305,10 +305,8 @@ public class DTMManagerDefault extends DTMManager {
 
   /**
    * @return the expanded name table.
-   *
-   * <p>NEEDSDOC @param dtm
-   *
-   * <p>NEEDSDOC ($objectName$) @return
+   *     <p>NEEDSDOC @param dtm
+   *     <p>NEEDSDOC ($objectName$) @return
    */
   public ExpandedNameTable getExpandedNameTable() {
     return m_expandedNameTable;

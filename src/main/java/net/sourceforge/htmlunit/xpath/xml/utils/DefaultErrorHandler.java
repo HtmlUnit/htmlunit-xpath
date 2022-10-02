@@ -38,6 +38,7 @@ public class DefaultErrorHandler implements ErrorListener {
 
   /**
    * Constructor DefaultErrorHandler
+   *
    * @param throwExceptionOnError boolean for throwExceptionOnError
    */
   public DefaultErrorHandler(boolean throwExceptionOnError) {

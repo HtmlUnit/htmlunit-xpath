@@ -19,7 +19,7 @@ package net.sourceforge.htmlunit.xpath;
 
 import net.sourceforge.htmlunit.xpath.axes.ContextNodeList;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -115,7 +115,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_NODESET_CANNOT_ITERATE, null)); // "This
     // NodeSet can
     // not iterate
@@ -127,7 +127,8 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
       m_next--;
 
       return this.elementAt(m_next);
-    } else return null;
+    }
+    return null;
   }
 
   /** {@inheritDoc} */
@@ -140,7 +141,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null)); // "This NodeSet
     // can not do
     // indexing or
@@ -179,7 +180,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
 
     if (!m_mutable)
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
     // is not
     // mutable!");
@@ -196,7 +197,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null)); // "This NodeSet
     // can not do
     // indexing or
@@ -290,7 +291,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   public void addElement(Node value) {
     if (!m_mutable)
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
     // is not
     // mutable!");
@@ -328,7 +329,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   public void setElementAt(Node node, int index) {
     if (!m_mutable)
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
     // is not
     // mutable!");

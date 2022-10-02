@@ -23,7 +23,7 @@ import net.sourceforge.htmlunit.xpath.XPathProcessorException;
 import net.sourceforge.htmlunit.xpath.objects.XNumber;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
@@ -295,8 +295,7 @@ public class XPathParser {
    * @param expected the character to be expected.
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  private void consumeExpected(char expected)
-      throws javax.xml.transform.TransformerException {
+  private void consumeExpected(char expected) throws javax.xml.transform.TransformerException {
 
     if (tokenIs(expected)) {
       nextToken();
@@ -327,7 +326,7 @@ public class XPathParser {
    */
   void warn(String msg, Object[] args) throws TransformerException {
 
-    String fmsg = XSLMessages.createXPATHWarning(msg, args);
+    String fmsg = XPATHMessages.createXPATHWarning(msg, args);
     ErrorListener ehandler = this.getErrorListener();
 
     if (null != ehandler) {
@@ -349,7 +348,7 @@ public class XPathParser {
    */
   void error(String msg, Object[] args) throws TransformerException {
 
-    String fmsg = XSLMessages.createXPATHMessage(msg, args);
+    String fmsg = XPATHMessages.createXPATHMessage(msg, args);
     ErrorListener ehandler = this.getErrorListener();
 
     TransformerException te = new TransformerException(fmsg);

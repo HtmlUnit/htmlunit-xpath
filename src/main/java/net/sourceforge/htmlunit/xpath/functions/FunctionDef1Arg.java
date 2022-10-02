@@ -20,7 +20,7 @@ package net.sourceforge.htmlunit.xpath.functions;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 
 /** Base class for functions that accept one argument that can be defaulted if not specified. */
@@ -110,7 +110,7 @@ public class FunctionDef1Arg extends FunctionOneArg {
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     throw new WrongNumberArgsException(
-        XSLMessages.createXPATHMessage(XPATHErrorResources.ER_ZERO_OR_ONE, null)); // "0
+        XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_ZERO_OR_ONE, null)); // "0
     // or
     // 1");
   }

@@ -25,7 +25,7 @@ import net.sourceforge.htmlunit.xpath.compiler.FunctionTable;
 import net.sourceforge.htmlunit.xpath.compiler.XPathParser;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
@@ -112,7 +112,7 @@ public class XPath implements ExpressionOwner {
     else if (MATCH == type) parser.initMatchPattern(compiler, exprString, prefixResolver);
     else
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_CANNOT_DEAL_XPATH_TYPE,
               new Object[] {Integer.toString(type)})); // "Can not deal with XPath type: " + type);
 
@@ -156,7 +156,7 @@ public class XPath implements ExpressionOwner {
     else if (MATCH == type) parser.initMatchPattern(compiler, exprString, prefixResolver);
     else
       throw new RuntimeException(
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_CANNOT_DEAL_XPATH_TYPE,
               new Object[] {Integer.toString(type)}));
     // "Can not deal with XPath type: " + type);
@@ -249,7 +249,7 @@ public class XPath implements ExpressionOwner {
       String msg = e.getMessage();
 
       if (msg == null || msg.length() == 0) {
-        msg = XSLMessages.createXPATHMessage(XPATHErrorResources.ER_XPATH_ERROR, null);
+        msg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_XPATH_ERROR, null);
       }
       TransformerException te = new TransformerException(msg, getLocator(), e);
       ErrorListener el = xctxt.getErrorListener();
@@ -304,7 +304,7 @@ public class XPath implements ExpressionOwner {
       String msg = e.getMessage();
 
       if (msg == null || msg.length() == 0) {
-        msg = XSLMessages.createXPATHMessage(XPATHErrorResources.ER_XPATH_ERROR, null);
+        msg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_XPATH_ERROR, null);
       }
 
       TransformerException te = new TransformerException(msg, getLocator(), e);
@@ -336,7 +336,7 @@ public class XPath implements ExpressionOwner {
   public void warn(XPathContext xctxt, String msg, Object[] args)
       throws javax.xml.transform.TransformerException {
 
-    String fmsg = XSLMessages.createXPATHWarning(msg, args);
+    String fmsg = XPATHMessages.createXPATHWarning(msg, args);
     ErrorListener ehandler = xctxt.getErrorListener();
 
     if (null != ehandler) {
@@ -355,7 +355,7 @@ public class XPath implements ExpressionOwner {
 
     if (!b) {
       String fMsg =
-          XSLMessages.createXPATHMessage(
+          XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_INCORRECT_PROGRAMMER_ASSERTION, new Object[] {msg});
 
       throw new RuntimeException(fMsg);
@@ -375,7 +375,7 @@ public class XPath implements ExpressionOwner {
   public void error(XPathContext xctxt, String msg, Object[] args)
       throws javax.xml.transform.TransformerException {
 
-    String fmsg = XSLMessages.createXPATHMessage(msg, args);
+    String fmsg = XPATHMessages.createXPATHMessage(msg, args);
     ErrorListener ehandler = xctxt.getErrorListener();
 
     if (null != ehandler) {

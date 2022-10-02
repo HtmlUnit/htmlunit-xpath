@@ -23,7 +23,7 @@ import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
@@ -301,7 +301,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   @Override
   public int previousNode() {
     throw new RuntimeException(
-        XSLMessages.createXPATHMessage(
+        XPATHMessages.createXPATHMessage(
             XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null)); // "This
     // NodeSetDTM
     // can not

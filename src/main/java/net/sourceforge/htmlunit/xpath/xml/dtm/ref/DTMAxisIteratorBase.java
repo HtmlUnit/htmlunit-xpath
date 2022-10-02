@@ -59,9 +59,7 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
    */
   protected boolean _isRestartable = true;
 
-  /**
-   *
-   */
+  /** */
   @Override
   public void reset() {
 
@@ -72,7 +70,6 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
     setStartNode(_startNode);
 
     _isRestartable = temp;
-
   }
 
   /**

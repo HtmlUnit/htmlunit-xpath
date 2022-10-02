@@ -24,7 +24,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathException;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.NodeIterator;
@@ -415,7 +415,7 @@ public class XObject extends Expression implements Cloneable {
    */
   protected void error(String msg, Object[] args) throws javax.xml.transform.TransformerException {
 
-    String fmsg = XSLMessages.createXPATHMessage(msg, args);
+    String fmsg = XPATHMessages.createXPATHMessage(msg, args);
 
     // boolean shouldThrow = support.problem(m_support.XPATHPROCESSOR,
     // m_support.ERROR,

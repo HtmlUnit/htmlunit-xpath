@@ -20,7 +20,7 @@ package net.sourceforge.htmlunit.xpath.functions;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.objects.XString;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /** Execute the Concat() function. */
 public class FuncConcat extends FunctionMultiArgs {
@@ -55,6 +55,6 @@ public class FuncConcat extends FunctionMultiArgs {
   /** {@inheritDoc} */
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
-    throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("gtone", null));
+    throw new WrongNumberArgsException(XPATHMessages.createXPATHMessage("gtone", null));
   }
 }

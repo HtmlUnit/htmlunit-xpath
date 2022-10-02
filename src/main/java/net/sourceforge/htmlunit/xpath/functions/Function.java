@@ -23,7 +23,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
-import net.sourceforge.htmlunit.xpath.res.XSLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /**
  * This is a superclass of all XPath functions. This allows two ways for the class to be called. One
@@ -67,7 +67,7 @@ public abstract class Function extends Expression {
    * @throws WrongNumberArgsException
    */
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
-    throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("zero", null));
+    throw new WrongNumberArgsException(XPATHMessages.createXPATHMessage("zero", null));
   }
 
   /** {@inheritDoc} */
