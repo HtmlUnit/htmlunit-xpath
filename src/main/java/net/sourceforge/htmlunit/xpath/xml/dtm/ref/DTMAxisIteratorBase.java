@@ -185,7 +185,6 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
   protected final void resetPosition() {
 
     _position = 0;
-
   }
 
   /**

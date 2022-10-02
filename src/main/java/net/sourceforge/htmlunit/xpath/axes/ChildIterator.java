@@ -35,8 +35,7 @@ public class ChildIterator extends LocPathIterator {
    * @param analysis Analysis bits of the entire pattern.
    * @throws javax.xml.transform.TransformerException
    */
-  ChildIterator(int analysis)
-      throws javax.xml.transform.TransformerException {
+  ChildIterator(int analysis) throws javax.xml.transform.TransformerException {
     super(analysis);
 
     // This iterator matches all kinds of nodes

@@ -318,8 +318,8 @@ public class NodeSetDTM extends NodeVector
   /**
    * Add the node into a vector of nodes where it should occur in document order.
    *
-   * @param node    The node to be added.
-   * @param test    true if we should test for doc order
+   * @param node The node to be added.
+   * @param test true if we should test for doc order
    * @param support The XPath runtime context.
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
