@@ -218,7 +218,7 @@ public class NodeSetDTM extends NodeVector
   }
 
   /* An instance of the DTMManager. */
-  DTMManager m_manager;
+  final DTMManager m_manager;
 
   /** {@inheritDoc} */
   @Override
@@ -468,13 +468,12 @@ public class NodeSetDTM extends NodeVector
   /**
    * Add the node into a vector of nodes where it should occur in document order.
    *
-   * @param node The node to be added.
+   * @param node    The node to be added.
    * @param support The XPath runtime context.
-   * @return The index where it was inserted.
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
-  public int addNodeInDocOrder(int node, XPathContext support) {
-    return addNodeInDocOrder(node, true, support);
+  public void addNodeInDocOrder(int node, XPathContext support) {
+    addNodeInDocOrder(node, true, support);
   } // end addNodeInDocOrder(Vector v, Object obj)
 
   /** {@inheritDoc} */

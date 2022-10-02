@@ -41,9 +41,8 @@ public class IntStack extends IntVector {
    * Pushes an item onto the top of this stack.
    *
    * @param i the int to be pushed onto this stack.
-   * @return the <code>item</code> argument.
    */
-  public int push(int i) {
+  public void push(int i) {
 
     if ((m_firstFree + 1) >= m_mapSize) {
       m_mapSize += m_blocksize;
@@ -59,7 +58,6 @@ public class IntStack extends IntVector {
 
     m_firstFree++;
 
-    return i;
   }
 
   /**

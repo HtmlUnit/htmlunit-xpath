@@ -28,7 +28,7 @@ package net.sourceforge.htmlunit.xpath.xml.utils;
 public class IntVector implements Cloneable {
 
   /** Size of blocks to allocate */
-  protected int m_blocksize;
+  protected final int m_blocksize;
 
   /** Array of ints */
   protected int m_map[]; // IntStack is trying to see this directly

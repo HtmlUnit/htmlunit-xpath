@@ -32,10 +32,8 @@ public interface DTMAxisIterator extends Cloneable {
 
   /**
    * Resets the iterator to the last start node.
-   *
-   * @return A DTMAxisIterator, which may or may not be the same as this iterator.
    */
-  DTMAxisIterator reset();
+  void reset();
 
   /**
    * @return the number of nodes in this iterator. This may be an expensive operation when called
@@ -56,9 +54,8 @@ public interface DTMAxisIterator extends Cloneable {
    * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return END.
    *
    * @param node Sets the root of the iteration.
-   * @return A DTMAxisIterator set to the start of the iteration.
    */
-  DTMAxisIterator setStartNode(int node);
+  void setStartNode(int node);
 
   /** @return true if this iterator has a reversed axis, else false. */
   boolean isReverse();

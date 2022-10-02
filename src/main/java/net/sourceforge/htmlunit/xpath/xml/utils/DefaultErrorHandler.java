@@ -29,7 +29,7 @@ public class DefaultErrorHandler implements ErrorListener {
    * if this flag is set to true, we will rethrow the exception on the error() and fatalError()
    * methods. If it is false, the errors are reported to System.err.
    */
-  boolean m_throwExceptionOnError;
+  final boolean m_throwExceptionOnError;
 
   /** Constructor DefaultErrorHandler */
   public DefaultErrorHandler() {

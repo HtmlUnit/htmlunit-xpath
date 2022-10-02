@@ -425,7 +425,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   static final boolean DEBUG_PREDICATECOUNTING = false;
 
   class PredOwner implements ExpressionOwner {
-    int m_index;
+    final int m_index;
 
     PredOwner(int index) {
       m_index = index;

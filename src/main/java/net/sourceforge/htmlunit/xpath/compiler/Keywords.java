@@ -23,16 +23,16 @@ import java.util.Hashtable;
 public class Keywords {
 
   /** Table of keywords to opcode associations. */
-  private static Hashtable<String, Integer> m_keywords = new Hashtable<>();
+  private static final Hashtable<String, Integer> m_keywords = new Hashtable<>();
 
   /** Table of axes names to opcode associations. */
-  private static Hashtable<String, Integer> m_axisnames = new Hashtable<>();
+  private static final Hashtable<String, Integer> m_axisnames = new Hashtable<>();
 
   /** Table of function name to function ID associations. */
-  private static Hashtable<String, Integer> m_nodetests = new Hashtable<>();
+  private static final Hashtable<String, Integer> m_nodetests = new Hashtable<>();
 
   /** Table of node type strings to opcode associations. */
-  private static Hashtable<String, Integer> m_nodetypes = new Hashtable<>();
+  private static final Hashtable<String, Integer> m_nodetypes = new Hashtable<>();
 
   /** ancestor axes string. */
   private static final String FROM_ANCESTORS_STRING = "ancestor";

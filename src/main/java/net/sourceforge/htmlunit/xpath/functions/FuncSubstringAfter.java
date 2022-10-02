@@ -32,6 +32,6 @@ public class FuncSubstringAfter extends Function2Args {
     XString s2 = m_arg1.execute(xctxt).xstr();
     int index = s1.indexOf(s2);
 
-    return (-1 == index) ? XString.EMPTYSTRING : (XString) s1.substring(index + s2.length());
+    return (-1 == index) ? XString.EMPTYSTRING : s1.substring(index + s2.length());
   }
 }

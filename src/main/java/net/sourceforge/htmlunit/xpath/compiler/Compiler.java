@@ -987,7 +987,7 @@ public class Compiler extends OpMap {
    * The error listener where errors will be sent. If this is null, errors and warnings will be sent
    * to System.err. May be null.
    */
-  ErrorListener m_errorHandler;
+  final ErrorListener m_errorHandler;
 
   /** The FunctionTable for all xpath build-in functions */
   private FunctionTable m_functionTable;

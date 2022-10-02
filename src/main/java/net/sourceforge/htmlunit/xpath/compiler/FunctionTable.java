@@ -109,16 +109,16 @@ public class FunctionTable {
   public static final int FUNC_LANG = 32;
 
   /** The function table. */
-  private static Class<?> m_functions[];
+  private static final Class<?>[] m_functions;
 
   /** Table of function name to function ID associations. */
-  private static HashMap<String, Integer> m_functionID = new HashMap<>();
+  private static final HashMap<String, Integer> m_functionID = new HashMap<>();
 
   /** The function table contains customized functions */
-  private Class<?> m_functions_customer[] = new Class[NUM_ALLOWABLE_ADDINS];
+  private final Class<?>[] m_functions_customer = new Class[NUM_ALLOWABLE_ADDINS];
 
   /** Table of function name to function ID associations for customized functions */
-  private HashMap<String, Integer> m_functionID_customer = new HashMap<>();
+  private final HashMap<String, Integer> m_functionID_customer = new HashMap<>();
 
   /** Number of built in functions. Be sure to update this as built-in functions are added. */
   private static final int NUM_BUILT_IN_FUNCS = 37;

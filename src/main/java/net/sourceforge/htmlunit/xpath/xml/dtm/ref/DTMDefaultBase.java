@@ -51,19 +51,19 @@ public abstract class DTMDefaultBase implements DTM {
   protected int m_size = 0;
 
   /** The expanded names, one array element for each node. */
-  protected SuballocatedIntVector m_exptype;
+  protected final SuballocatedIntVector m_exptype;
 
   /** First child values, one array element for each node. */
-  protected SuballocatedIntVector m_firstch;
+  protected final SuballocatedIntVector m_firstch;
 
   /** Next sibling values, one array element for each node. */
-  protected SuballocatedIntVector m_nextsib;
+  protected final SuballocatedIntVector m_nextsib;
 
   /** Previous sibling values, one array element for each node. */
   protected SuballocatedIntVector m_prevsib;
 
   /** Previous sibling values, one array element for each node. */
-  protected SuballocatedIntVector m_parent;
+  protected final SuballocatedIntVector m_parent;
 
   /** Vector of SuballocatedIntVectors of NS decl sets */
   protected Vector<SuballocatedIntVector> m_namespaceDeclSets = null;
@@ -94,7 +94,7 @@ public abstract class DTMDefaultBase implements DTM {
   protected static final int NOTPROCESSED = DTM.NULL - 1;
 
   /** The DTM manager who "owns" this DTM. */
-  public DTMManager m_mgr;
+  public final DTMManager m_mgr;
 
   /** m_mgr cast to DTMManagerDefault, or null if it isn't an instance (Efficiency hook) */
   protected DTMManagerDefault m_mgrDefault = null;
@@ -103,7 +103,7 @@ public abstract class DTMDefaultBase implements DTM {
    * The document identity number(s). If we have overflowed the addressing range of the first that
    * was assigned to us, we may add others.
    */
-  protected SuballocatedIntVector m_dtmIdent;
+  protected final SuballocatedIntVector m_dtmIdent;
 
   /*
    The mask for the identity. %REVIEW% Should this really be set to the _DEFAULT? What if a
@@ -112,16 +112,16 @@ public abstract class DTMDefaultBase implements DTM {
   // protected final static int m_mask = DTMManager.IDENT_NODE_DEFAULT;
 
   /** The base URI for this document. */
-  protected String m_documentBaseURI;
+  protected final String m_documentBaseURI;
 
   /**
    * The table for exandedNameID lookups. This may or may not be the same table as is contained in
    * the DTMManagerDefault.
    */
-  protected ExpandedNameTable m_expandedNameTable;
+  protected final ExpandedNameTable m_expandedNameTable;
 
   /** true if indexing is turned on. */
-  protected boolean m_indexing;
+  protected final boolean m_indexing;
 
   /**
    * Construct a DTMDefaultBase object using the default block size.

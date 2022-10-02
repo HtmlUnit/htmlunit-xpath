@@ -37,10 +37,10 @@ import org.w3c.dom.Node;
 public class DTMNamedNodeMap implements NamedNodeMap {
 
   /** The DTM for this node. */
-  DTM dtm;
+  final DTM dtm;
 
   /** The DTM element handle. */
-  int element;
+  final int element;
 
   /** The number of nodes in this map. */
   short m_count = -1;

@@ -64,10 +64,10 @@ public class DTMNodeProxy
         DocumentFragment {
 
   /** The DTM for this node. */
-  public DTM dtm;
+  public final DTM dtm;
 
   /** The DTM node handle. */
-  int node;
+  final int node;
 
   /** The return value as Empty String. */
   private static final String EMPTYSTRING = "";

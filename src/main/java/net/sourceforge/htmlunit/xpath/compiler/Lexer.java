@@ -25,13 +25,13 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 class Lexer {
 
   /** The target XPath. */
-  private Compiler m_compiler;
+  private final Compiler m_compiler;
 
   /** The prefix resolver to map prefixes to namespaces in the XPath. */
-  PrefixResolver m_namespaceContext;
+  final PrefixResolver m_namespaceContext;
 
   /** The XPath processor object. */
-  XPathParser m_processor;
+  final XPathParser m_processor;
 
   /**
    * This value is added to each element name in the TARGETEXTRA that is a 'target' (right-most
@@ -355,7 +355,7 @@ class Lexer {
    *
    * @param mark The new position.
    */
-  private final void resetTokenMark(int mark) {
+  private void resetTokenMark(int mark) {
 
     int qsz = m_compiler.getTokenQueueSize();
 
@@ -448,7 +448,7 @@ class Lexer {
    *
    * @param s The token.
    */
-  private final void addToTokenQueue(String s) {
+  private void addToTokenQueue(String s) {
     m_compiler.getTokenQueue().addElement(s);
   }
 

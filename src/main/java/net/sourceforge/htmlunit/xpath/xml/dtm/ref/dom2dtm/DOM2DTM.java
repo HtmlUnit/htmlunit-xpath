@@ -78,7 +78,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    * Text/CDATASection nodes in the DOM have been coalesced into a single DTM Text node); this table
    * points only to the first in that sequence.
    */
-  protected Vector<Node> m_nodes = new Vector<>();
+  protected final Vector<Node> m_nodes = new Vector<>();
 
   /**
    * Construct a DOM2DTM object from a DOM node.
@@ -961,8 +961,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       buf.append(n.getNodeValue());
       n = logicalNextDOMTextNode(n);
     }
-    String s = (buf.length() > 0) ? buf.toString() : "";
-    return s;
+    return (buf.length() > 0) ? buf.toString() : "";
   }
 
   /** {@inheritDoc} */

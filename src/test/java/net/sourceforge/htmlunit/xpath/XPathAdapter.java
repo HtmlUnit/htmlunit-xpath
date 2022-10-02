@@ -73,8 +73,7 @@ class XPathAdapter {
 
     parser.initXPath(compiler, exprString, prefixResolver);
 
-    final Expression expr = compiler.compile(0);
-    mainExp_ = expr;
+    mainExp_ = compiler.compile(0);
   }
 
   /**

@@ -284,7 +284,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    *     m_predicates[predPos].execute(xctxt).
    * @return true of the position of the context matches pos, false otherwise.
    */
-  private final boolean checkProximityPosition(
+  private boolean checkProximityPosition(
       XPathContext xctxt, int predPos, DTM dtm, int context, int pos) {
 
     try {
@@ -351,7 +351,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * @param findLast If true, don't terminate when the context node is found.
    * @return the proximity position index of the current node based on the node test.
    */
-  private final int getProximityPosition(XPathContext xctxt, int predPos, boolean findLast) {
+  private int getProximityPosition(XPathContext xctxt, int predPos, boolean findLast) {
 
     int pos = 0;
     int context = xctxt.getCurrentNode();
@@ -614,7 +614,7 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   }
 
   class PredOwner implements ExpressionOwner {
-    int m_index;
+    final int m_index;
 
     PredOwner(int index) {
       m_index = index;

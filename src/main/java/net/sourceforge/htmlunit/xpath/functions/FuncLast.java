@@ -58,8 +58,6 @@ public class FuncLast extends Function {
   /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    XNumber xnum = new XNumber(getCountOfContextNodeList(xctxt));
-    // System.out.println("last: "+xnum.num());
-    return xnum;
+    return new XNumber(getCountOfContextNodeList(xctxt));
   }
 }

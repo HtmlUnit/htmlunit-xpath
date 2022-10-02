@@ -24,7 +24,7 @@ package net.sourceforge.htmlunit.xpath.compiler;
 public class OpMapVector {
 
   /** Size of blocks to allocate */
-  protected int m_blocksize;
+  protected final int m_blocksize;
 
   /** Array of ints */
   protected int m_map[]; // IntStack is trying to see this directly

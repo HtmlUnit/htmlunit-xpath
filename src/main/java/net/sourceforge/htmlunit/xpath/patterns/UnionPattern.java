@@ -91,7 +91,7 @@ public class UnionPattern extends Expression {
   }
 
   class UnionPathPartOwner implements ExpressionOwner {
-    int m_index;
+    final int m_index;
 
     UnionPathPartOwner(int index) {
       m_index = index;

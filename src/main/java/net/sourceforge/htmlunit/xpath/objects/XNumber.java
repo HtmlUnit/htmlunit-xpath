@@ -32,7 +32,7 @@ public class XNumber extends XObject {
    *
    * @serial
    */
-  double m_val;
+  final double m_val;
 
   /**
    * Construct a XNodeSet object.

@@ -27,7 +27,7 @@ package net.sourceforge.htmlunit.xpath.xml.utils;
 public class ObjectVector implements Cloneable {
 
   /** Size of blocks to allocate */
-  protected int m_blocksize;
+  protected final int m_blocksize;
 
   /** Array of objects */
   protected Object m_map[];

@@ -262,7 +262,7 @@ public class XPathParser {
    * @param n number of tokens to lookahead. Must be greater than 1.
    * @return true if the token behind the current token matches the string argument.
    */
-  private final boolean lookahead(String s, int n) {
+  private boolean lookahead(String s, int n) {
 
     boolean isToken;
 
@@ -278,7 +278,7 @@ public class XPathParser {
   }
 
   /** Retrieve the next token from the command and store it in m_token string. */
-  private final void nextToken() {
+  private void nextToken() {
 
     if (m_queueMark < m_ops.getTokenQueueSize()) {
       m_token = (String) m_ops.m_tokenQueue.elementAt(m_queueMark++);
@@ -295,7 +295,7 @@ public class XPathParser {
    * @param expected the character to be expected.
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  private final void consumeExpected(char expected)
+  private void consumeExpected(char expected)
       throws javax.xml.transform.TransformerException {
 
     if (tokenIs(expected)) {

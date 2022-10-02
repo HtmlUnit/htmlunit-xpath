@@ -485,7 +485,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * The pool for cloned iterators. Iterators need to be cloned because the hold running state, and
    * thus the original iterator expression from the stylesheet pool can not be used.
    */
-  protected transient IteratorPool m_clones = new IteratorPool(this);
+  protected final transient IteratorPool m_clones = new IteratorPool(this);
 
   /**
    * The dtm of the context node. Careful about using this... it may not be the dtm of the current

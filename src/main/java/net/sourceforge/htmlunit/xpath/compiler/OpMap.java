@@ -56,7 +56,7 @@ public class OpMap {
    * TokenStack is the queue of used tokens. The current token is the token at the end of the
    * m_tokenQueue. The idea is that the queue can be marked and a sequence of tokens can be reused.
    */
-  ObjectVector m_tokenQueue = new ObjectVector(MAXTOKENQUEUESIZE, BLOCKTOKENQUEUESIZE);
+  final ObjectVector m_tokenQueue = new ObjectVector(MAXTOKENQUEUESIZE, BLOCKTOKENQUEUESIZE);
 
   /**
    * Get the XPath as a list of tokens.

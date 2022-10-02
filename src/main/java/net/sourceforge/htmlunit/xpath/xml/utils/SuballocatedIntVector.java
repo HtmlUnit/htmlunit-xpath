@@ -36,16 +36,17 @@ package net.sourceforge.htmlunit.xpath.xml.utils;
  */
 public class SuballocatedIntVector {
   /** Size of blocks to allocate */
-  protected int m_blocksize;
+  protected final int m_blocksize;
 
   /** Bitwise addressing (much faster than div/remainder */
-  protected int m_SHIFT, m_MASK;
+  protected int m_SHIFT;
+    protected final int m_MASK;
 
   /** The default number of blocks to (over)allocate by */
   protected static final int NUMBLOCKS_DEFAULT = 32;
 
   /** The number of blocks to (over)allocate by */
-  protected int m_numblocks;
+  protected final int m_numblocks;
 
   /** Array of arrays of ints */
   protected int m_map[][];
@@ -54,7 +55,7 @@ public class SuballocatedIntVector {
   protected int m_firstFree = 0;
 
   /** "Shortcut" handle to m_map[0]. Surprisingly helpful for short vectors. */
-  protected int m_map0[];
+  protected final int[] m_map0;
 
   /** "Shortcut" handle to most recently added row of m_map. Very helpful during construction. */
   protected int m_buildCache[];

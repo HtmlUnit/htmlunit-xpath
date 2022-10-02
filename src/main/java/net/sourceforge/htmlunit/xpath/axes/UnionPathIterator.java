@@ -312,7 +312,7 @@ public class UnionPathIterator extends LocPathIterator
   }
 
   class iterOwner implements ExpressionOwner {
-    int m_index;
+    final int m_index;
 
     iterOwner(int index) {
       m_index = index;

@@ -140,19 +140,20 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   /** Iterator that returns all immediate children of a given node */
   public final class ChildrenIterator extends InternalAxisIteratorBase {
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isRestartable) {
         _startNode = node;
         _currentNode = (node == DTM.NULL) ? DTM.NULL : _firstch(makeNodeIdentity(node));
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
     /** {@inheritDoc} */
@@ -174,19 +175,20 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    */
   public final class ParentIterator extends InternalAxisIteratorBase {
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isRestartable) {
         _startNode = node;
         _currentNode = getParent(node);
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
     /** {@inheritDoc} */
@@ -213,19 +215,20 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       super();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isRestartable) {
         _startNode = node;
         _currentNode = getFirstNamespaceNode(node, true);
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
     /** {@inheritDoc} */
@@ -249,18 +252,19 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       super();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
 
       if (_isRestartable) {
         _startNode = getDocumentRoot(node);
         _currentNode = NULL;
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
     /** {@inheritDoc} */
@@ -277,19 +281,20 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   /** Iterator that returns all siblings of a given node. */
   public class FollowingSiblingIterator extends InternalAxisIteratorBase {
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isRestartable) {
         _startNode = node;
         _currentNode = makeNodeIdentity(node);
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
     /** {@inheritDoc} */
@@ -305,19 +310,20 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     // assumes caller will pass element nodes
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isRestartable) {
         _startNode = node;
         _currentNode = getFirstAttributeIdentity(makeNodeIdentity(node));
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
     /** {@inheritDoc} */
@@ -347,9 +353,11 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return true;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isRestartable) {
@@ -358,7 +366,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         if (node == NULL) {
           _currentNode = node;
-          return resetPosition();
+          resetPosition();
+          return;
         }
 
         int type = m_expandedNameTable.getType(_exptype(node));
@@ -371,10 +380,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
           else _currentNode = node;
         }
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
     /** {@inheritDoc} */
@@ -439,9 +447,11 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isRestartable) {
@@ -470,10 +480,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         _oldsp = _sp = index;
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
     /** {@inheritDoc} */
@@ -493,13 +502,15 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     // redefine DTMAxisIteratorBase's reset
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator reset() {
+    public void reset() {
 
       _sp = _oldsp;
 
-      return resetPosition();
+      resetPosition();
     }
 
     /** {@inheritDoc} */
@@ -520,15 +531,17 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
   /** Iterator that returns following nodes of for a given node. */
   public class FollowingIterator extends InternalAxisIteratorBase {
-    DTMAxisTraverser m_traverser; // easier for now
+    final DTMAxisTraverser m_traverser; // easier for now
 
     public FollowingIterator() {
       m_traverser = getAxisTraverser(Axis.FOLLOWING);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isRestartable) {
@@ -536,10 +549,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         _currentNode = m_traverser.first(node);
 
         // _currentNode precedes possible following(node) nodes
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
     /** {@inheritDoc} */
@@ -559,7 +571,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    * from the XSLTC code!)
    */
   public class AncestorIterator extends InternalAxisIteratorBase {
-    net.sourceforge.htmlunit.xpath.xml.utils.NodeVector m_ancestors =
+    final net.sourceforge.htmlunit.xpath.xml.utils.NodeVector m_ancestors =
         new net.sourceforge.htmlunit.xpath.xml.utils.NodeVector();
 
     int m_ancestorsPos;
@@ -597,9 +609,11 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       m_realStartNode = node;
@@ -623,21 +637,22 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         _currentNode = (m_ancestorsPos >= 0) ? m_ancestors.elementAt(m_ancestorsPos) : DTM.NULL;
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator reset() {
+    public void reset() {
 
       m_ancestorsPos = m_ancestors.size() - 1;
 
       _currentNode = (m_ancestorsPos >= 0) ? m_ancestors.elementAt(m_ancestorsPos) : DTM.NULL;
 
-      return resetPosition();
+      resetPosition();
     }
 
     /** {@inheritDoc} */
@@ -670,9 +685,11 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   /** Iterator that returns the descendants of a given node. */
   public class DescendantIterator extends InternalAxisIteratorBase {
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isRestartable) {
@@ -683,10 +700,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         _currentNode = node;
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
     /**
@@ -732,9 +748,11 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return returnNode(makeNodeHandle(node)); // make handle.
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator reset() {
+    public void reset() {
 
       final boolean temp = _isRestartable;
 
@@ -744,7 +762,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
       _isRestartable = temp;
 
-      return this;
     }
   } // end of DescendantIterator
 
@@ -770,32 +787,35 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       _isConstant = constant;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator setStartNode(int node) {
+    public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
       if (_isConstant) {
         _currentNode = _startNode;
 
-        return resetPosition();
+        resetPosition();
       } else if (_isRestartable) {
         _currentNode = _startNode = node;
 
-        return resetPosition();
+        resetPosition();
       }
 
-      return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DTMAxisIterator reset() {
+    public void reset() {
 
       if (_isConstant) {
         _currentNode = _startNode;
 
-        return resetPosition();
+        resetPosition();
       } else {
         final boolean temp = _isRestartable;
 
@@ -806,7 +826,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         _isRestartable = temp;
       }
 
-      return this;
     }
 
     /** {@inheritDoc} */

@@ -48,10 +48,7 @@ public class FuncPosition extends Function {
     SubContextList iter = m_isTopLevel ? null : xctxt.getSubContextList();
 
     if (null != iter) {
-      int prox = iter.getProximityPosition(xctxt);
-
-      // System.out.println("FuncPosition- prox: "+prox);
-      return prox;
+      return iter.getProximityPosition(xctxt);
     }
 
     // System.out.println("FuncPosition - out of guesses: -1");

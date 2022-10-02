@@ -46,9 +46,11 @@ import org.w3c.dom.UserDataHandler;
 public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   static final String NOT_SUPPORTED_ERR = "Unsupported operation on pseudonode";
 
-  Element pseudoparent;
-  String prefix, uri, nodename;
-  int handle;
+  final Element pseudoparent;
+  final String prefix;
+  final String uri;
+  final String nodename;
+  final int handle;
 
   DOM2DTMdefaultNamespaceDeclarationNode(
       Element pseudoparent, String prefix, String uri, int handle) {

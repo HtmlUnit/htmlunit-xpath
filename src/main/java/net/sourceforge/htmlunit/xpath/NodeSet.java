@@ -210,14 +210,14 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   }
 
   /** True if this list can be mutated. */
-  protected transient boolean m_mutable = true;
+  protected final transient boolean m_mutable = true;
 
   /**
    * True if this list is cached.
    *
    * @serial
    */
-  protected transient boolean m_cacheNodes = true;
+  protected final transient boolean m_cacheNodes = true;
 
   private transient int m_last = 0;
 

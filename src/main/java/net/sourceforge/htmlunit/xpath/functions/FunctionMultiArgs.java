@@ -100,7 +100,7 @@ public class FunctionMultiArgs extends Function3Args {
   }
 
   class ArgMultiOwner implements ExpressionOwner {
-    int m_argIndex;
+    final int m_argIndex;
 
     ArgMultiOwner(int index) {
       m_argIndex = index;

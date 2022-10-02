@@ -422,7 +422,7 @@ public class AxesWalker extends PredicatedNodeTest
   AxesWalker m_prevWalker;
 
   /** The traversal axis from where the nodes will be filtered. */
-  protected int m_axis;
+  protected final int m_axis;
 
   /** The DTM inner traversal class, that corresponds to the super axis. */
   protected DTMAxisTraverser m_traverser;

@@ -27,7 +27,7 @@ import org.w3c.dom.Node;
 public class PrefixResolverDefault implements PrefixResolver {
 
   /** The context to resolve the prefix from, if the context is not given. */
-  Node m_context;
+  final Node m_context;
 
   /**
    * Construct a PrefixResolverDefault object.

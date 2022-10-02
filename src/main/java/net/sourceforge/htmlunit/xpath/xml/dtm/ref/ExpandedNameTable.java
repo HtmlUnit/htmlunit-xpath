@@ -48,7 +48,7 @@ public class ExpandedNameTable {
   public static final int NAMESPACE = DTM.NAMESPACE_NODE;
 
   /** Workspace for lookup. NOT THREAD SAFE! */
-  ExtendedType hashET = new ExtendedType(-1, "", "");
+  final ExtendedType hashET = new ExtendedType(-1, "", "");
 
   /** The array to store the default extended types. */
   private static final ExtendedType[] m_defaultExtendedTypes;
@@ -284,9 +284,9 @@ public class ExpandedNameTable {
    * is hashed into the same bucket in the case of "hash collision".
    */
   private static final class HashEntry {
-    ExtendedType key;
-    int value;
-    int hash;
+    final ExtendedType key;
+    final int value;
+    final int hash;
     HashEntry next;
 
     private HashEntry(ExtendedType key, int value, int hash, HashEntry next) {

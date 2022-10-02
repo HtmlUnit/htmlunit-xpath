@@ -790,7 +790,7 @@ public class WalkerFactory {
     if (DEBUG_PATTERN_CREATION) {
       System.out.println("Done loading steps: " + step.toString());
 
-      System.out.println("");
+      System.out.println();
     }
     return step; // start from last pattern?? //firstStep;
   }

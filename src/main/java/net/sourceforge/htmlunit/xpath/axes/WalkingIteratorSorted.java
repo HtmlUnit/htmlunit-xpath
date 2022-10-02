@@ -26,7 +26,7 @@ public class WalkingIteratorSorted extends WalkingIterator {
   // protected boolean m_inNaturalOrder = false;
 
   /** True if the nodes will be found in document order, and this can be determined statically. */
-  protected boolean m_inNaturalOrderStatic = false;
+  protected final boolean m_inNaturalOrderStatic = false;
 
   /**
    * Create a WalkingIterator iterator, including creation of step walkers from the opcode list, and
