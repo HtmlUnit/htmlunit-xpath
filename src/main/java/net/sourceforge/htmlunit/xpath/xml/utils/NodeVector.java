@@ -66,11 +66,7 @@ public class NodeVector implements Cloneable {
     m_mapSize = 0;
   }
 
-  /**
-   * Get a cloned LocPathIterator.
-   *
-   * @return A clone of this
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
 

@@ -284,83 +284,41 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
 
   // =============== ExpressionNode methods ================
 
-  /** This pair of methods are used to inform the node of its parent. */
+  /** {@inheritDoc} */
   @Override
   public void exprSetParent(ExpressionNode n) {
     assertion(n != this, "Can not parent an expression to itself!");
     m_parent = n;
   }
 
+  /** {@inheritDoc} */
   @Override
   public ExpressionNode exprGetParent() {
     return m_parent;
   }
 
-  /**
-   * Return the public identifier for the current document event.
-   *
-   * <p>The return value is the public identifier of the document entity or of the external parsed
-   * entity in which the markup that triggered the event appears.
-   *
-   * @return A string containing the public identifier, or null if none is available.
-   * @see #getSystemId
-   */
+  /** {@inheritDoc} */
   @Override
   public String getPublicId() {
     if (null == m_parent) return null;
     return m_parent.getPublicId();
   }
 
-  /**
-   * Return the system identifier for the current document event.
-   *
-   * <p>The return value is the system identifier of the document entity or of the external parsed
-   * entity in which the markup that triggered the event appears.
-   *
-   * <p>If the system identifier is a URL, the parser must resolve it fully before passing it to the
-   * application.
-   *
-   * @return A string containing the system identifier, or null if none is available.
-   * @see #getPublicId
-   */
+  /** {@inheritDoc} */
   @Override
   public String getSystemId() {
     if (null == m_parent) return null;
     return m_parent.getSystemId();
   }
 
-  /**
-   * Return the line number where the current document event ends.
-   *
-   * <p><strong>Warning:</strong> The return value from the method is intended only as an
-   * approximation for the sake of error reporting; it is not intended to provide sufficient
-   * information to edit the character content of the original XML document.
-   *
-   * <p>The return value is an approximation of the line number in the document entity or external
-   * parsed entity where the markup that triggered the event appears.
-   *
-   * @return The line number, or -1 if none is available.
-   * @see #getColumnNumber
-   */
+  /** {@inheritDoc} */
   @Override
   public int getLineNumber() {
     if (null == m_parent) return 0;
     return m_parent.getLineNumber();
   }
 
-  /**
-   * Return the character position where the current document event ends.
-   *
-   * <p><strong>Warning:</strong> The return value from the method is intended only as an
-   * approximation for the sake of error reporting; it is not intended to provide sufficient
-   * information to edit the character content of the original XML document.
-   *
-   * <p>The return value is an approximation of the column number in the document entity or external
-   * parsed entity where the markup that triggered the event appears.
-   *
-   * @return The column number, or -1 if none is available.
-   * @see #getLineNumber
-   */
+  /** {@inheritDoc} */
   @Override
   public int getColumnNumber() {
     if (null == m_parent) return 0;

@@ -200,11 +200,7 @@ public class IntVector implements Cloneable {
     return java.lang.Integer.MIN_VALUE;
   }
 
-  /**
-   * Returns clone of current IntVector
-   *
-   * @return clone of current IntVector
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
     return new IntVector(this);

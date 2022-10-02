@@ -40,35 +40,14 @@ public class DTMException extends RuntimeException {
     return containedException;
   }
 
-  /**
-   * Returns the cause of this throwable or <code>null</code> if the cause is nonexistent or
-   * unknown. (The cause is the throwable that caused this throwable to get thrown.)
-   */
+  /** {@inheritDoc} */
   @Override
   public Throwable getCause() {
 
     return (containedException == this) ? null : containedException;
   }
 
-  /**
-   * Initializes the <i>cause</i> of this throwable to the specified value. (The cause is the
-   * throwable that caused this throwable to get thrown.)
-   *
-   * <p>This method can be called at most once. It is generally called from within the constructor,
-   * or immediately after creating the throwable. If this throwable was created with {@link
-   * #DTMException(Throwable)} or {@link #DTMException(String,Throwable)}, this method cannot be
-   * called even once.
-   *
-   * @param cause the cause (which is saved for later retrieval by the {@link #getCause()} method).
-   *     (A <tt>null</tt> value is permitted, and indicates that the cause is nonexistent or
-   *     unknown.)
-   * @return a reference to this <code>Throwable</code> instance.
-   * @throws IllegalArgumentException if <code>cause</code> is this throwable. (A throwable cannot
-   *     be its own cause.)
-   * @throws IllegalStateException if this throwable was created with {@link
-   *     #DTMException(Throwable)} or {@link #DTMException(String,Throwable)}, or this method has
-   *     already been called on this throwable.
-   */
+  /** {@inheritDoc} */
   @Override
   public synchronized Throwable initCause(Throwable cause) {
 
@@ -133,21 +112,13 @@ public class DTMException extends RuntimeException {
     this.containedException = e;
   }
 
-  /**
-   * Print the the trace of methods from where the error originated. This will trace all nested
-   * exception objects, as well as this object.
-   */
+  /** {@inheritDoc} */
   @Override
   public void printStackTrace() {
     printStackTrace(new java.io.PrintWriter(System.err, true));
   }
 
-  /**
-   * Print the the trace of methods from where the error originated. This will trace all nested
-   * exception objects, as well as this object.
-   *
-   * @param s The stream where the dump will be sent to.
-   */
+  /** {@inheritDoc} */
   @Override
   public void printStackTrace(java.io.PrintStream s) {
     printStackTrace(new java.io.PrintWriter(s));

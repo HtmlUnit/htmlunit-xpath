@@ -52,95 +52,38 @@ public class XPathContext extends DTMManager {
     return m_dtmManager;
   }
 
-  /**
-   * Get an instance of a DTM, loaded with the content from the specified source. If the unique flag
-   * is true, a new instance will always be returned. Otherwise it is up to the DTMManager to return
-   * a new instance or an instance that it already created and may be being used by someone else. (I
-   * think more parameters will need to be added for error handling, and entity resolution).
-   *
-   * @param source the specification of the source object, which may be null, in which case it is
-   *     assumed that node construction will take by some other means.
-   * @param unique true if the returned DTM must be unique, probably because it is going to be
-   *     mutated.
-   * @param incremental true if the construction should try and be incremental.
-   * @param doIndexing true if the caller considers it worth it to use indexing schemes.
-   * @return a non-null DTM reference.
-   */
+  /** {@inheritDoc} */
   @Override
   public DTM getDTM(
       javax.xml.transform.Source source, boolean unique, boolean incremental, boolean doIndexing) {
     return m_dtmManager.getDTM(source, unique, incremental, doIndexing);
   }
 
-  /**
-   * Get an instance of a DTM that "owns" a node handle.
-   *
-   * @param nodeHandle the nodeHandle.
-   * @return a non-null DTM reference.
-   */
+  /** {@inheritDoc} */
   @Override
   public DTM getDTM(int nodeHandle) {
     return m_dtmManager.getDTM(nodeHandle);
   }
 
-  /**
-   * Given a W3C DOM node, try and return a DTM handle. Note: calling this may be non-optimal.
-   *
-   * @param node Non-null reference to a DOM node.
-   * @return a valid DTM handle.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getDTMHandleFromNode(org.w3c.dom.Node node) {
     return m_dtmManager.getDTMHandleFromNode(node);
   }
 
-  /**
-   * Create a new <code>DTMIterator</code> based on an XPath <a
-   * href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
-   * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
-   *
-   * @param xpathCompiler ??? Somehow we need to pass in a subpart of the expression. I hate to do
-   *     this with strings, since the larger expression has already been parsed.
-   * @param pos The position in the expression.
-   * @return The newly created <code>DTMIterator</code>.
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator createDTMIterator(Object xpathCompiler, int pos) {
     return m_dtmManager.createDTMIterator(xpathCompiler, pos);
   }
 
-  //
-  /**
-   * Create a new <code>DTMIterator</code> based on an XPath <a
-   * href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
-   * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
-   *
-   * @param xpathString Must be a valid string expressing a <a
-   *     href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
-   *     href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
-   * @param presolver An object that can resolve prefixes to namespace URLs.
-   * @return The newly created <code>DTMIterator</code>.
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator createDTMIterator(String xpathString, PrefixResolver presolver) {
     return m_dtmManager.createDTMIterator(xpathString, presolver);
   }
 
-  //
-  /**
-   * Create a new <code>DTMIterator</code> based only on a whatToShow and a DTMFilter. The traversal
-   * semantics are defined as the descendant access.
-   *
-   * @param whatToShow This flag specifies which node types may appear in the logical view of the
-   *     tree presented by the iterator. See the description of <code>NodeFilter</code> for the set
-   *     of possible <code>SHOW_</code> values.These flags can be combined using <code>OR
-   *     </code> .
-   * @param filter The <code>NodeFilter</code> to be used with this <code>TreeWalker</code>, or
-   *     <code>null</code> to indicate no filter.
-   * @param entityReferenceExpansion The value of this flag determines whether entity reference
-   *     nodes are expanded.
-   * @return The newly created <code>NodeIterator</code>.
-   */
+  /** {@inheritDoc} */
   @Override
   public DTMIterator createDTMIterator(
       int whatToShow, DTMFilter filter, boolean entityReferenceExpansion) {

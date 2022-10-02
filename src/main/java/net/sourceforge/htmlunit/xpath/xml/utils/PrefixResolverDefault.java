@@ -40,27 +40,13 @@ public class PrefixResolverDefault implements PrefixResolver {
     m_context = xpathExpressionContext;
   }
 
-  /**
-   * Given a namespace, get the corrisponding prefix. This assumes that the PrevixResolver hold's
-   * it's own namespace context, or is a namespace context itself.
-   *
-   * @param prefix Prefix to resolve.
-   * @return Namespace that prefix resolves to, or null if prefix is not bound.
-   */
+  /** {@inheritDoc} */
   @Override
   public String getNamespaceForPrefix(String prefix) {
     return getNamespaceForPrefix(prefix, m_context);
   }
 
-  /**
-   * Given a namespace, get the corrisponding prefix. Warning: This will not work correctly if
-   * namespaceContext is an attribute node.
-   *
-   * @param prefix Prefix to resolve.
-   * @param namespaceContext Node from which to start searching for a xmlns attribute that binds a
-   *     prefix to a namespace.
-   * @return Namespace that prefix resolves to, or null if prefix is not bound.
-   */
+  /** {@inheritDoc} */
   @Override
   public String getNamespaceForPrefix(String prefix, org.w3c.dom.Node namespaceContext) {
 
@@ -105,7 +91,7 @@ public class PrefixResolverDefault implements PrefixResolver {
     return namespace;
   }
 
-  /** @see PrefixResolver#handlesNullPrefixes() */
+  /** {@inheritDoc} */
   @Override
   public boolean handlesNullPrefixes() {
     return false;

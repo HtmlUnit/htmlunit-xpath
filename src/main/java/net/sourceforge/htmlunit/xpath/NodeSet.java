@@ -55,23 +55,13 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     m_mapSize = 0;
   }
 
-  /**
-   * @return The root node of the Iterator, as specified when it was created. For non-Iterator
-   *     NodeSets, this will be null.
-   */
+  /** {@inheritDoc} */
   @Override
   public Node getRoot() {
     return null;
   }
 
-  /**
-   * Get a cloned Iterator, and reset its state to the beginning of the iteration.
-   *
-   * @return a new NodeSet of the same type, having the same state... except that the reset()
-   *     operation has been called.
-   * @throws CloneNotSupportedException if this subclass of NodeSet does not support the clone()
-   *     operation.
-   */
+  /** {@inheritDoc} */
   @Override
   public NodeIterator cloneWithReset() throws CloneNotSupportedException {
 
@@ -82,70 +72,31 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     return clone;
   }
 
-  /** Reset the iterator. May have no effect on non-iterator Nodesets. */
+  /** {@inheritDoc} */
   @Override
   public void reset() {
     m_next = 0;
   }
 
-  /**
-   * This attribute determines which node types are presented via the iterator. The available set of
-   * constants is defined in the <code>NodeFilter</code> interface. For NodeSets, the mask has been
-   * hardcoded to show all nodes except EntityReference nodes, which have no equivalent in the XPath
-   * data model.
-   *
-   * @return integer used as a bit-array, containing flags defined in the DOM's NodeFilter class.
-   *     The value will be <code>SHOW_ALL & ~SHOW_ENTITY_REFERENCE</code>, meaning that only entity
-   *     references are suppressed.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getWhatToShow() {
     return NodeFilter.SHOW_ALL & ~NodeFilter.SHOW_ENTITY_REFERENCE;
   }
 
-  /**
-   * The filter object used to screen nodes. Filters are applied to further reduce (and restructure)
-   * the NodeIterator's view of the document. In our case, we will be using hardcoded filters built
-   * into our iterators... but getFilter() is part of the DOM's NodeIterator interface, so we have
-   * to support it.
-   *
-   * @return null, which is slightly misleading. True, there is no user-written filter object, but
-   *     in fact we are doing some very sophisticated custom filtering. A DOM purist might suggest
-   *     returning a placeholder object just to indicate that this is not going to return all nodes
-   *     selected by whatToShow.
-   */
+  /** {@inheritDoc} */
   @Override
   public NodeFilter getFilter() {
     return null;
   }
 
-  /**
-   * The value of this flag determines whether the children of entity reference nodes are visible to
-   * the iterator. If false, they will be skipped over. <br>
-   * To produce a view of the document that has entity references expanded and does not expose the
-   * entity reference node itself, use the whatToShow flags to hide the entity reference node and
-   * set expandEntityReferences to true when creating the iterator. To produce a view of the
-   * document that has entity reference nodes but no entity expansion, use the whatToShow flags to
-   * show the entity reference node and set expandEntityReferences to false.
-   *
-   * @return true for all iterators based on NodeSet, meaning that the contents of EntityRefrence
-   *     nodes may be returned (though whatToShow says that the EntityReferences themselves are not
-   *     shown.)
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean getExpandEntityReferences() {
     return true;
   }
 
-  /**
-   * Returns the next node in the set and advances the position of the iterator in the set. After a
-   * NodeIterator is created, the first call to nextNode() returns the first node in the set.
-   *
-   * @return The next <code>Node</code> in the set being iterated over, or <code>null</code> if
-   *     there are no more members in that set.
-   * @throws DOMException INVALID_STATE_ERR: Raised if this method is called after the <code>
-   *     detach</code> method was invoked.
-   */
+  /** {@inheritDoc} */
   @Override
   public Node nextNode() throws DOMException {
 
@@ -158,17 +109,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     } else return null;
   }
 
-  /**
-   * Returns the previous node in the set and moves the position of the iterator backwards in the
-   * set.
-   *
-   * @return The previous <code>Node</code> in the set being iterated over, or<code>null</code> if
-   *     there are no more members in that set.
-   * @throws DOMException INVALID_STATE_ERR: Raised if this method is called after the <code>
-   *     detach</code> method was invoked.
-   * @throws RuntimeException thrown if this NodeSet is not of a cached type, and hence doesn't know
-   *     what the previous node was.
-   */
+  /** {@inheritDoc} */
   @Override
   public Node previousNode() throws DOMException {
 
@@ -189,28 +130,11 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     } else return null;
   }
 
-  /**
-   * Detaches the iterator from the set which it iterated over, releasing any computational
-   * resources and placing the iterator in the INVALID state. After<code>detach</code> has been
-   * invoked, calls to <code>nextNode</code> or<code>previousNode</code> will raise the exception
-   * INVALID_STATE_ERR.
-   *
-   * <p>This operation is a no-op in NodeSet, and will not cause INVALID_STATE_ERR to be raised by
-   * later operations.
-   */
+  /** {@inheritDoc} */
   @Override
   public void detach() {}
 
-  /**
-   * If an index is requested, NodeSet will call this method to run the iterator to the index. By
-   * default this sets m_next to the index. If the index argument is -1, this signals that the
-   * iterator should be run to the end.
-   *
-   * @param index Position to advance (or retreat) to, with 0 requesting the reset ("fresh")
-   *     position and -1 (or indeed any out-of-bounds value) requesting the final position.
-   * @throws RuntimeException thrown if this NodeSet is not one of the types which supports
-   *     indexing/counting.
-   */
+  /** {@inheritDoc} */
   @Override
   public void runTo(int index) {
 
@@ -227,16 +151,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     else m_next = m_firstFree - 1;
   }
 
-  /**
-   * Returns the <code>index</code>th item in the collection. If <code>index</code> is greater than
-   * or equal to the number of nodes in the list, this returns <code>null</code>.
-   *
-   * <p>TODO: What happens if index is out of range?
-   *
-   * @param index Index into the collection.
-   * @return The node at the <code>index</code>th position in the <code>NodeList</code>, or <code>
-   *     null</code> if that is not a valid index.
-   */
+  /** {@inheritDoc} */
   @Override
   public Node item(int index) {
 
@@ -245,13 +160,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     return this.elementAt(index);
   }
 
-  /**
-   * The number of nodes in the list. The range of valid child node indices is 0 to <code>length-1
-   * </code> inclusive. Note that this operation requires finding all the matching nodes, which may
-   * defeat attempts to defer that work.
-   *
-   * @return integer indicating how many nodes are represented by this list.
-   */
+  /** {@inheritDoc} */
   @Override
   public int getLength() {
 
@@ -281,13 +190,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   /** If this node is being used as an iterator, the next index that nextNode() will return. */
   protected transient int m_next = 0;
 
-  /**
-   * Return the last fetched node. Needed to support the UnionPathIterator.
-   *
-   * @return the last fetched node.
-   * @throws RuntimeException thrown if this NodeSet is not of a cached type, and thus doesn't
-   *     permit indexed access.
-   */
+  /** {@inheritDoc} */
   @Override
   public Node getCurrentNode() {
 
@@ -318,11 +221,13 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
 
   private transient int m_last = 0;
 
+  /** {@inheritDoc} */
   @Override
   public int getLast() {
     return m_last;
   }
 
+  /** {@inheritDoc} */
   @Override
   public void setLast(int last) {
     m_last = last;
@@ -356,12 +261,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
    */
   private int m_mapSize; // lazy initialization
 
-  /**
-   * Get a cloned LocPathIterator.
-   *
-   * @return A clone of this
-   * @throws CloneNotSupportedException
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
 
@@ -376,11 +276,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     return clone;
   }
 
-  /**
-   * Get the length of the list.
-   *
-   * @return Number of nodes in this NodeVector
-   */
+  /** {@inheritDoc} */
   @Override
   public int size() {
     return m_firstFree;

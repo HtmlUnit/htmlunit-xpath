@@ -391,52 +391,32 @@ public class DTMNodeProxy
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param data
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Document
-   */
+  /** {@inheritDoc} */
   @Override
   public final CDATASection createCDATASection(String data) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param target
-   * @param data
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Document
-   */
+  /** {@inheritDoc} */
   @Override
   public final ProcessingInstruction createProcessingInstruction(String target, String data)
       throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param name
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Document
-   */
+  /** {@inheritDoc} */
   @Override
   public final Attr createAttribute(String name) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param name
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Document
-   */
+  /** {@inheritDoc} */
   @Override
   public final EntityReference createEntityReference(String name) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param tagname
-   * @see org.w3c.dom.Document
-   */
+  /** {@inheritDoc} */
   @Override
   public final NodeList getElementsByTagName(String tagname) {
     List<Node> listVector = new ArrayList<>();
@@ -460,13 +440,6 @@ public class DTMNodeProxy
     return nodeSet;
   }
 
-  /**
-   * @param listVector
-   * @param tempNode
-   * @param tagname
-   * @param isTagNameWildCard
-   *     <p>Private method to be used for recursive iterations to obtain elements by tag name.
-   */
   private void traverseChildren(
       List<Node> listVector, Node tempNode, String tagname, boolean isTagNameWildCard) {
     if (tempNode == null) {
@@ -484,46 +457,27 @@ public class DTMNodeProxy
     }
   }
 
-  /**
-   * @param importedNode
-   * @param deep
-   * @throws DOMException
-   * @see org.w3c.dom.Document as of DOM Level 2 -- DTMNodeProxy is read-only
-   */
+  /** {@inheritDoc} */
   @Override
   public final Node importNode(Node importedNode, boolean deep) throws DOMException {
     throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
-  /**
-   * @param namespaceURI
-   * @param qualifiedName
-   * @throws DOMException
-   * @see org.w3c.dom.Document as of DOM Level 2
-   */
+  /** {@inheritDoc} */
   @Override
   public final Element createElementNS(String namespaceURI, String qualifiedName)
       throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param namespaceURI
-   * @param qualifiedName
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Document as of DOM Level 2
-   */
+  /** {@inheritDoc} */
   @Override
   public final Attr createAttributeNS(String namespaceURI, String qualifiedName)
       throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param namespaceURI
-   * @param localName
-   * @see org.w3c.dom.Document as of DOM Level 2
-   */
+  /** {@inheritDoc} */
   @Override
   public final NodeList getElementsByTagNameNS(String namespaceURI, String localName) {
     List<Node> listVector = new ArrayList<>();
@@ -603,116 +557,74 @@ public class DTMNodeProxy
     }
   }
 
-  /**
-   * @param elementId
-   * @see org.w3c.dom.Document as of DOM Level 2
-   */
+  /** {@inheritDoc} */
   @Override
   public final Element getElementById(String elementId) {
     return (Element) dtm.getNode(dtm.getElementById(elementId));
   }
 
-  /**
-   * @param offset
-   * @throws DOMException
-   * @see org.w3c.dom.Text
-   */
+  /** {@inheritDoc} */
   @Override
   public final Text splitText(int offset) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @throws DOMException
-   * @see org.w3c.dom.CharacterData
-   */
+  /** {@inheritDoc} */
   @Override
   public final String getData() throws DOMException {
     return dtm.getNodeValue(node);
   }
 
-  /**
-   * @param data
-   * @throws DOMException
-   * @see org.w3c.dom.CharacterData
-   */
+  /** {@inheritDoc} */
   @Override
   public final void setData(String data) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /** @see org.w3c.dom.CharacterData */
+  /** {@inheritDoc} */
   @Override
   public final int getLength() {
     // %OPT% This should do something smarter?
     return dtm.getNodeValue(node).length();
   }
 
-  /**
-   * @param offset
-   * @param count
-   * @throws DOMException
-   * @see org.w3c.dom.CharacterData
-   */
+  /** {@inheritDoc} */
   @Override
   public final String substringData(int offset, int count) throws DOMException {
     return getData().substring(offset, offset + count);
   }
 
-  /**
-   * @param arg
-   * @throws DOMException
-   * @see org.w3c.dom.CharacterData
-   */
+  /** {@inheritDoc} */
   @Override
   public final void appendData(String arg) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param offset
-   * @param arg
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.CharacterData
-   */
+  /** {@inheritDoc} */
   @Override
   public final void insertData(int offset, String arg) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param offset
-   * @param count
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.CharacterData
-   */
+  /** {@inheritDoc} */
   @Override
   public final void deleteData(int offset, int count) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param offset
-   * @param count
-   * @param arg
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.CharacterData
-   */
+  /** {@inheritDoc} */
   @Override
   public final void replaceData(int offset, int count, String arg) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /** @see org.w3c.dom.Element */
+  /** {@inheritDoc} */
   @Override
   public final String getTagName() {
     return dtm.getNodeName(node);
   }
 
-  /**
-   * @param name
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final String getAttribute(String name) {
 
@@ -721,31 +633,19 @@ public class DTMNodeProxy
     return (null == node) ? EMPTYSTRING : node.getNodeValue();
   }
 
-  /**
-   * @param name
-   * @param value
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final void setAttribute(String name, String value) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param name
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final void removeAttribute(String name) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param name
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final Attr getAttributeNode(String name) {
 
@@ -753,43 +653,31 @@ public class DTMNodeProxy
     return (Attr) map.getNamedItem(name);
   }
 
-  /**
-   * @param newAttr
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final Attr setAttributeNode(Attr newAttr) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param oldAttr
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final Attr removeAttributeNode(Attr oldAttr) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /** Introduced in DOM Level 2. */
+  /** {@inheritDoc} */
   @Override
   public boolean hasAttributes() {
     return DTM.NULL != dtm.getFirstAttribute(node);
   }
 
-  /** @see org.w3c.dom.Element */
+  /** {@inheritDoc} */
   @Override
   public final void normalize() {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param namespaceURI
-   * @param localName
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final String getAttributeNS(String namespaceURI, String localName) {
     Node retNode = null;
@@ -798,35 +686,20 @@ public class DTMNodeProxy
     return (null == retNode) ? EMPTYSTRING : retNode.getNodeValue();
   }
 
-  /**
-   * @param namespaceURI
-   * @param qualifiedName
-   * @param value
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final void setAttributeNS(String namespaceURI, String qualifiedName, String value)
       throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param namespaceURI
-   * @param localName
-   * @throws DOMException in case of error
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final void removeAttributeNS(String namespaceURI, String localName) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * @param namespaceURI
-   * @param localName
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final Attr getAttributeNodeNS(String namespaceURI, String localName) {
     Attr retAttr = null;
@@ -835,23 +708,19 @@ public class DTMNodeProxy
     return retAttr;
   }
 
-  /**
-   * @param newAttr
-   * @throws DOMException
-   * @see org.w3c.dom.Element
-   */
+  /** {@inheritDoc} */
   @Override
   public final Attr setAttributeNodeNS(Attr newAttr) throws DOMException {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /** @see org.w3c.dom.Attr */
+  /** {@inheritDoc} */
   @Override
   public final String getName() {
     return dtm.getNodeName(node);
   }
 
-  /** @see org.w3c.dom.Attr */
+  /** {@inheritDoc} */
   @Override
   public final boolean getSpecified() {
     // We really don't know which attributes might have come from the
@@ -861,26 +730,19 @@ public class DTMNodeProxy
     return true;
   }
 
-  /** @see org.w3c.dom.Attr */
+  /** {@inheritDoc} */
   @Override
   public final String getValue() {
     return dtm.getNodeValue(node);
   }
 
-  /**
-   * @param value
-   * @see org.w3c.dom.Attr
-   */
+  /** {@inheritDoc} */
   @Override
   public final void setValue(String value) {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * Get the owner element of an attribute.
-   *
-   * @see org.w3c.dom.Attr as of DOM Level 2
-   */
+  /** {@inheritDoc} */
   @Override
   public final Element getOwnerElement() {
     if (getNodeType() != Node.ATTRIBUTE_NODE) return null;
@@ -890,63 +752,28 @@ public class DTMNodeProxy
     return (newnode == DTM.NULL) ? null : (Element) (dtm.getNode(newnode));
   }
 
-  /**
-   * NEEDSDOC Method adoptNode
-   *
-   * <p>NEEDSDOC @param source
-   *
-   * @throws DOMException in case of error
-   */
+  /** {@inheritDoc} */
   @Override
   public Node adoptNode(Node source) throws DOMException {
 
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * Based on the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'>Document Object
-   * Model (DOM) Level 3 Core Specification of 07 April 2004.</a>.
-   *
-   * <p>An attribute specifying, as part of the XML declaration, the encoding of this document. This
-   * is <code>null</code> when unspecified.
-   *
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public String getInputEncoding() {
 
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * Based on the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'>Document Object
-   * Model (DOM) Level 3 Core Specification of 07 April 2004.</a>.
-   *
-   * <p>An attribute specifying whether errors checking is enforced or not. When set to <code>
-   * false</code>, the implementation is free to not test every possible error case normally defined
-   * on DOM operations, and not raise any <code>DOMException</code>. In case of error, the behavior
-   * is undefined. This attribute is <code>true</code> by defaults.
-   *
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean getStrictErrorChecking() {
 
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  /**
-   * Based on the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'>Document Object
-   * Model (DOM) Level 3 Core Specification of 07 April 2004.</a>.
-   *
-   * <p>An attribute specifying whether errors checking is enforced or not. When set to <code>
-   * false</code>, the implementation is free to not test every possible error case normally defined
-   * on DOM operations, and not raise any <code>DOMException</code>. In case of error, the behavior
-   * is undefined. This attribute is <code>true</code> by defaults.
-   *
-   * @since DOM Level 3
-   *     <p>NEEDSDOC @param strictErrorChecking
-   */
+  /** {@inheritDoc} */
   @Override
   public void setStrictErrorChecking(boolean strictErrorChecking) {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
@@ -954,25 +781,20 @@ public class DTMNodeProxy
 
   /** Inner class to support getDOMImplementation. */
   static class DTMNodeProxyImplementation implements DOMImplementation {
+    /** {@inheritDoc} */
     @Override
     public DocumentType createDocumentType(String qualifiedName, String publicId, String systemId) {
       throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Document createDocument(String namespaceURI, String qualfiedName, DocumentType doctype) {
       // Could create a DTM... but why, when it'd have to be permanantly empty?
       throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
     }
 
-    /**
-     * Ask whether we support a given DOM feature.
-     *
-     * <p>In fact, we do not _fully_ support any DOM feature -- we're a read-only subset -- so
-     * arguably we should always return false. On the other hand, it may be more practically useful
-     * to return true and simply treat the whole DOM as read-only, failing on the methods we can't
-     * support. I'm not sure which would be more useful to the caller.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean hasFeature(String feature, String version) {
       if (("CORE".equalsIgnoreCase(feature) || "XML".equalsIgnoreCase(feature))
@@ -980,24 +802,7 @@ public class DTMNodeProxy
       return false;
     }
 
-    /**
-     * This method returns a specialized object which implements the specialized APIs of the
-     * specified feature and version. The specialized object may also be obtained by using
-     * binding-specific casting methods but is not necessarily expected to, as discussed in Mixed
-     * DOM implementations .
-     *
-     * @param feature The name of the feature requested (case-insensitive).
-     * @param version This is the version number of the feature to test. If the version is <code>
-     *     null</code> or the empty string, supporting any version of the feature will cause the
-     *     method to return an object that supports at least one version of the feature.
-     * @return Returns an object which implements the specialized APIs of the specified feature and
-     *     version, if any, or <code>null</code> if there is no object which implements interfaces
-     *     associated with that feature. If the <code>DOMObject</code> returned by this method
-     *     implements the <code>Node</code> interface, it must delegate to the primary core <code>
-     *     Node</code> and not return results inconsistent with the primary core <code>Node</code>
-     *     such as attributes, childNodes, etc.
-     * @since DOM Level 3
-     */
+    /** {@inheritDoc} */
     @Override
     public Object getFeature(String feature, String version) {
       // we don't have any alternate node, either this node does the job
@@ -1007,44 +812,19 @@ public class DTMNodeProxy
     }
   }
 
-  // RAMESH : Pending proper implementation of DOM Level 3
-
+  /** {@inheritDoc} */
   @Override
   public Object setUserData(String key, Object data, UserDataHandler handler) {
     return getOwnerDocument().setUserData(key, data, handler);
   }
 
-  /**
-   * Retrieves the object associated to a key on a this node. The object must first have been set to
-   * this node by calling <code>setUserData</code> with the same key.
-   *
-   * @param key The key the object is associated to.
-   * @return Returns the <code>DOMObject</code> associated to the given key on this node, or <code>
-   *     null</code> if there was none.
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public Object getUserData(String key) {
     return getOwnerDocument().getUserData(key);
   }
 
-  /**
-   * This method returns a specialized object which implements the specialized APIs of the specified
-   * feature and version. The specialized object may also be obtained by using binding-specific
-   * casting methods but is not necessarily expected to, as discussed in Mixed DOM implementations.
-   *
-   * @param feature The name of the feature requested (case-insensitive).
-   * @param version This is the version number of the feature to test. If the version is <code>
-   *     null</code> or the empty string, supporting any version of the feature will cause the
-   *     method to return an object that supports at least one version of the feature.
-   * @return Returns an object which implements the specialized APIs of the specified feature and
-   *     version, if any, or <code>null</code> if there is no object which implements interfaces
-   *     associated with that feature. If the <code>DOMObject</code> returned by this method
-   *     implements the <code>Node</code> interface, it must delegate to the primary core <code>
-   *     Node</code> and not return results inconsistent with the primary core <code>Node</code>
-   *     such as attributes, childNodes, etc.
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public Object getFeature(String feature, String version) {
     // we don't have any alternate node, either this node does the job
@@ -1052,37 +832,7 @@ public class DTMNodeProxy
     return isSupported(feature, version) ? this : null;
   }
 
-  /**
-   * Tests whether two nodes are equal. <br>
-   * This method tests for equality of nodes, not sameness (i.e., whether the two nodes are
-   * references to the same object) which can be tested with <code>Node.isSameNode</code>. All nodes
-   * that are the same will also be equal, though the reverse may not be true. <br>
-   * Two nodes are equal if and only if the following conditions are satisfied: The two nodes are of
-   * the same type.The following string attributes are equal: <code>nodeName</code>, <code>
-   * localName</code>, <code>namespaceURI</code>, <code>prefix</code>, <code>nodeValue</code> ,
-   * <code>baseURI</code>. This is: they are both <code>null</code>, or they have the same length
-   * and are character for character identical. The <code>attributes</code> <code>NamedNodeMaps
-   * </code> are equal. This is: they are both <code>null</code>, or they have the same length and
-   * for each node that exists in one map there is a node that exists in the other map and is equal,
-   * although not necessarily at the same index.The <code>childNodes</code> <code>NodeLists
-   * </code> are equal. This is: they are both <code>null</code>, or they have the same length and
-   * contain equal nodes at the same index. This is true for <code>Attr</code> nodes as for any
-   * other type of node. Note that normalization can affect equality; to avoid this, nodes should be
-   * normalized before being compared. <br>
-   * For two <code>DocumentType</code> nodes to be equal, the following conditions must also be
-   * satisfied: The following string attributes are equal: <code>publicId</code>, <code>systemId
-   * </code>, <code>internalSubset</code>.The <code>entities</code> <code>NamedNodeMaps</code> are
-   * equal.The <code>notations</code> <code>NamedNodeMaps</code> are equal. <br>
-   * On the other hand, the following do not affect equality: the <code>ownerDocument</code>
-   * attribute, the <code>specified</code> attribute for <code>Attr</code> nodes, the <code>
-   * isWhitespaceInElementContent</code> attribute for <code>Text</code> nodes, as well as any user
-   * data or event listeners registered on the nodes.
-   *
-   * @param arg The node to compare equality with.
-   * @return If the nodes, and possibly subtrees are equal, <code>true</code> otherwise <code>
-   *     false</code>.
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isEqualNode(Node arg) {
     if (arg == this) {
@@ -1135,14 +885,7 @@ public class DTMNodeProxy
     return true;
   }
 
-  /**
-   * DOM Level 3: Look up the namespace URI associated to the given prefix, starting from this node.
-   * Use lookupNamespaceURI(null) to lookup the default namespace
-   *
-   * @param specifiedPrefix
-   * @return th URI for the namespace
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public String lookupNamespaceURI(String specifiedPrefix) {
     short type = this.getNodeType();
@@ -1205,26 +948,13 @@ public class DTMNodeProxy
     }
   }
 
-  /**
-   * DOM Level 3: This method checks if the specified <code>namespaceURI</code> is the default
-   * namespace or not.
-   *
-   * @param namespaceURI The namespace URI to look for.
-   * @return <code>true</code> if the specified <code>namespaceURI</code> is the default namespace,
-   *     <code>false</code> otherwise.
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isDefaultNamespace(String namespaceURI) {
     return false;
   }
 
-  /**
-   * DOM Level 3: Look up the prefix associated to the given namespace URI, starting from this node.
-   *
-   * @param namespaceURI
-   * @return the prefix for the namespace
-   */
+  /** {@inheritDoc} */
   @Override
   public String lookupPrefix(String namespaceURI) {
 
@@ -1257,251 +987,118 @@ public class DTMNodeProxy
     }
   }
 
-  /**
-   * Returns whether this node is the same node as the given one. <br>
-   * This method provides a way to determine whether two <code>Node</code> references returned by
-   * the implementation reference the same object. When two <code>Node</code> references are
-   * references to the same object, even if through a proxy, the references may be used completely
-   * interchangably, such that all attributes have the same values and calling the same DOM method
-   * on either reference always has exactly the same effect.
-   *
-   * @param other The node to test against.
-   * @return Returns <code>true</code> if the nodes are the same, <code>false</code> otherwise.
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isSameNode(Node other) {
     // we do not use any wrapper so the answer is obvious
     return this == other;
   }
 
-  /**
-   * This attribute returns the text content of this node and its descendants. When it is defined to
-   * be null, setting it has no effect. When set, any possible children this node may have are
-   * removed and replaced by a single <code>Text</code> node containing the string this attribute is
-   * set to. On getting, no serialization is performed, the returned string does not contain any
-   * markup. No whitespace normalization is performed, the returned string does not contain the
-   * element content whitespaces . Similarly, on setting, no parsing is performed either, the input
-   * string is taken as pure textual content. <br>
-   * The string returned is made of the text content of this node depending on its type, as defined
-   * below:
-   *
-   * <p>
-   *
-   * <table border='1' summary="">
-   * <tr>
-   * <th>Node type</th>
-   * <th>Content</th>
-   * </tr>
-   * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>ELEMENT_NODE, ENTITY_NODE,
-   * ENTITY_REFERENCE_NODE, DOCUMENT_FRAGMENT_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>concatenation of the
-   * <code>textContent</code> attribute value of every child node, excluding
-   * COMMENT_NODE and PROCESSING_INSTRUCTION_NODE nodes</td>
-   * </tr>
-   * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>ATTRIBUTE_NODE, TEXT_NODE,
-   * CDATA_SECTION_NODE, COMMENT_NODE, PROCESSING_INSTRUCTION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'><code>nodeValue</code></td>
-   * </tr>
-   * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>DOCUMENT_NODE, DOCUMENT_TYPE_NODE,
-   * NOTATION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>null</td>
-   * </tr>
-   * </table>
-   *
-   * @exception DOMException NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.
-   * @exception DOMException DOMSTRING_SIZE_ERR: Raised when it would return more characters than
-   *     fit in a <code>DOMString</code> variable on the implementation platform.
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public void setTextContent(String textContent) throws DOMException {
     setNodeValue(textContent);
   }
 
-  /**
-   * This attribute returns the text content of this node and its descendants. When it is defined to
-   * be null, setting it has no effect. When set, any possible children this node may have are
-   * removed and replaced by a single <code>Text</code> node containing the string this attribute is
-   * set to. On getting, no serialization is performed, the returned string does not contain any
-   * markup. No whitespace normalization is performed, the returned string does not contain the
-   * element content whitespaces . Similarly, on setting, no parsing is performed either, the input
-   * string is taken as pure textual content. <br>
-   * The string returned is made of the text content of this node depending on its type, as defined
-   * below:
-   *
-   * <p>
-   *
-   * <table border='1' summary="">
-   * <tr>
-   * <th>Node type</th>
-   * <th>Content</th>
-   * </tr>
-   * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>ELEMENT_NODE, ENTITY_NODE,
-   * ENTITY_REFERENCE_NODE, DOCUMENT_FRAGMENT_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>concatenation of the
-   * <code>textContent</code> attribute value of every child node, excluding
-   * COMMENT_NODE and PROCESSING_INSTRUCTION_NODE nodes</td>
-   * </tr>
-   * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>ATTRIBUTE_NODE, TEXT_NODE,
-   * CDATA_SECTION_NODE, COMMENT_NODE, PROCESSING_INSTRUCTION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'><code>nodeValue</code></td>
-   * </tr>
-   * <tr>
-   * <td valign='top' rowspan='1' colspan='1'>DOCUMENT_NODE, DOCUMENT_TYPE_NODE,
-   * NOTATION_NODE</td>
-   * <td valign='top' rowspan='1' colspan='1'>null</td>
-   * </tr>
-   * </table>
-   *
-   * @exception DOMException NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.
-   * @exception DOMException DOMSTRING_SIZE_ERR: Raised when it would return more characters than
-   *     fit in a <code>DOMString</code> variable on the implementation platform.
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public String getTextContent() throws DOMException {
     return dtm.getStringValue(node).toString();
   }
 
-  /**
-   * Compares a node with this node with regard to their position in the document.
-   *
-   * @param other The node to compare against this node.
-   * @return Returns how the given node is positioned relatively to this node.
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public short compareDocumentPosition(Node other) throws DOMException {
     return 0;
   }
 
-  /**
-   * The absolute base URI of this node or <code>null</code> if undefined. This value is computed
-   * according to . However, when the <code>Document</code> supports the feature "HTML" , the base
-   * URI is computed using first the value of the href attribute of the HTML BASE element if any,
-   * and the value of the <code>documentURI</code> attribute from the <code>Document</code>
-   * interface otherwise. <br>
-   * When the node is an <code>Element</code>, a <code>Document</code> or a a <code>
-   * ProcessingInstruction</code>, this attribute represents the properties [base URI] defined in .
-   * When the node is a <code>Notation</code>, an <code>Entity</code>, or an <code>
-   * EntityReference</code>, this attribute represents the properties [declaration base URI] in the
-   * . How will this be affected by resolution of relative namespace URIs issue?It's not.Should this
-   * only be on Document, Element, ProcessingInstruction, Entity, and Notation nodes, according to
-   * the infoset? If not, what is it equal to on other nodes? Null? An empty string? I think it
-   * should be the parent's.No.Should this be read-only and computed or and actual read-write
-   * attribute?Read-only and computed (F2F 19 Jun 2000 and teleconference 30 May 2001).If the base
-   * HTML element is not yet attached to a document, does the insert change the Document.baseURI?
-   * Yes. (F2F 26 Sep 2001)
-   *
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public String getBaseURI() {
     return null;
   }
 
-  /** DOM Level 3 Renaming node */
+  /** {@inheritDoc} */
   @Override
   public Node renameNode(Node n, String namespaceURI, String name) throws DOMException {
     return n;
   }
 
-  /** DOM Level 3 Normalize document. */
+  /** {@inheritDoc} */
   @Override
   public void normalizeDocument() {}
 
-  /**
-   * The configuration used when <code>Document.normalizeDocument</code> is invoked.
-   *
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public DOMConfiguration getDomConfig() {
     return null;
   }
 
-  /** DOM Level 3 feature: documentURI */
+  /** {@inheritDoc} */
   protected String fDocumentURI;
 
-  /** DOM Level 3 */
+  /** {@inheritDoc} */
   @Override
   public void setDocumentURI(String documentURI) {
 
     fDocumentURI = documentURI;
   }
 
-  /**
-   * DOM Level 3 The location of the document or <code>null</code> if undefined. <br>
-   * Beware that when the <code>Document</code> supports the feature "HTML" , the href attribute of
-   * the HTML BASE element takes precedence over this attribute.
-   *
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public String getDocumentURI() {
     return fDocumentURI;
   }
 
-  /** DOM Level 3 */
+  /** {@inheritDoc} */
   @Override
   public Text replaceWholeText(String content) throws DOMException {
     return null; // Pending
   }
 
-  /**
-   * DOM Level 3 Returns all text of <code>Text</code> nodes logically-adjacent text nodes to this
-   * node, concatenated in document order.
-   *
-   * @since DOM Level 3
-   */
+  /** {@inheritDoc} */
   @Override
   public String getWholeText() {
     return null; // PENDING
   }
 
-  /**
-   * DOM Level 3 Returns whether this text node contains whitespace in element content, often
-   * abusively called "ignorable whitespace".
-   */
+  /** {@inheritDoc} */
   @Override
   public boolean isElementContentWhitespace() {
     return false;
   }
 
-  /** DOM Level 3: register the given attribute node as an ID attribute */
+  /** {@inheritDoc} */
   @Override
   public void setIdAttribute(String name, boolean makeId) {
     // PENDING
   }
 
-  /** DOM Level 3: register the given attribute node as an ID attribute */
+  /** {@inheritDoc} */
   @Override
   public void setIdAttributeNode(Attr at, boolean makeId) {
     // PENDING
   }
 
-  /** DOM Level 3: register the given attribute node as an ID attribute */
+  /** {@inheritDoc} */
   @Override
   public void setIdAttributeNS(String namespaceURI, String localName, boolean makeId) {
     // PENDING
   }
 
+  /** {@inheritDoc} */
   @Override
   public TypeInfo getSchemaTypeInfo() {
     return null; // PENDING
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean isId() {
     return false; // PENDING
   }
 
+  /** {@inheritDoc} */
   @Override
   public String getXmlEncoding() {
     return null;
@@ -1509,11 +1106,13 @@ public class DTMNodeProxy
 
   private boolean xmlStandalone;
 
+  /** {@inheritDoc} */
   @Override
   public boolean getXmlStandalone() {
     return xmlStandalone;
   }
 
+  /** {@inheritDoc} */
   @Override
   public void setXmlStandalone(boolean xmlStandalone) throws DOMException {
     this.xmlStandalone = xmlStandalone;
@@ -1521,11 +1120,13 @@ public class DTMNodeProxy
 
   private String xmlVersion;
 
+  /** {@inheritDoc} */
   @Override
   public String getXmlVersion() {
     return xmlVersion;
   }
 
+  /** {@inheritDoc} */
   @Override
   public void setXmlVersion(String xmlVersion) throws DOMException {
     this.xmlVersion = xmlVersion;

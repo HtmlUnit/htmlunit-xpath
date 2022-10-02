@@ -65,7 +65,7 @@ public final class ExtendedType {
     this.hash = hash;
   }
 
-  /** Override the hashCode() method in the Object class */
+  /** {@inheritDoc} */
   @Override
   public int hashCode() {
     return hash;

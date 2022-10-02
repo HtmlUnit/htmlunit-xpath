@@ -53,12 +53,7 @@ public class XPathException extends TransformerException {
     super(message);
   }
 
-  /**
-   * Print the the trace of methods from where the error originated. This will trace all nested
-   * exception objects, as well as this object.
-   *
-   * @param s The stream where the dump will be sent to.
-   */
+  /** {@inheritDoc} */
   @Override
   public void printStackTrace(java.io.PrintStream s) {
 
@@ -88,11 +83,7 @@ public class XPathException extends TransformerException {
     }
   }
 
-  /**
-   * Find the most contained message.
-   *
-   * @return The error message of the originating exception.
-   */
+  /** {@inheritDoc} */
   @Override
   public String getMessage() {
 
@@ -119,12 +110,7 @@ public class XPathException extends TransformerException {
     return (null != lastMessage) ? lastMessage : "";
   }
 
-  /**
-   * Print the the trace of methods from where the error originated. This will trace all nested
-   * exception objects, as well as this object.
-   *
-   * @param s The writer where the dump will be sent to.
-   */
+  /** {@inheritDoc} */
   @Override
   public void printStackTrace(java.io.PrintWriter s) {
 
@@ -136,12 +122,7 @@ public class XPathException extends TransformerException {
     }
   }
 
-  /**
-   * Return the embedded exception, if any. Overrides
-   * javax.xml.transform.TransformerException.getException().
-   *
-   * @return The embedded exception, or null if there is none.
-   */
+  /** {@inheritDoc} */
   @Override
   public Throwable getException() {
     return m_exception;

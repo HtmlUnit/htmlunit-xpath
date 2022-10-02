@@ -133,11 +133,7 @@ public class ObjectVector implements Cloneable {
     m_map = newMap;
   }
 
-  /**
-   * Returns clone of current ObjectVector
-   *
-   * @return clone of current ObjectVector
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
     return new ObjectVector(this);

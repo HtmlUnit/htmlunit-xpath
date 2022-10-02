@@ -124,11 +124,7 @@ public class IntStack extends IntVector {
     return -1;
   }
 
-  /**
-   * Returns clone of current IntStack
-   *
-   * @return clone of current IntStack
-   */
+  /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
     return super.clone();

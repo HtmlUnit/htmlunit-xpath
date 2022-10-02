@@ -49,21 +49,13 @@ public class XPath implements ExpressionOwner {
     m_funcTable = new FunctionTable();
   }
 
-  /**
-   * Get the raw Expression object that this class wraps.
-   *
-   * @return the raw Expression object, which should not normally be null.
-   */
+  /** {@inheritDoc} */
   @Override
   public Expression getExpression() {
     return m_mainExp;
   }
 
-  /**
-   * Set the raw expression object for this object.
-   *
-   * @param exp the raw Expression object, which should not normally be null.
-   */
+  /** {@inheritDoc} */
   @Override
   public void setExpression(Expression exp) {
     if (null != m_mainExp) exp.exprSetParent(m_mainExp.exprGetParent()); // a bit bogus

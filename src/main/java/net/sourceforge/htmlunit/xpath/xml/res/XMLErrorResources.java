@@ -143,11 +143,7 @@ public class XMLErrorResources extends ListResourceBundle {
 
   // Error messages...
 
-  /**
-   * Get the lookup table for error messages
-   *
-   * @return The association list.
-   */
+  /** {@inheritDoc} */
   @Override
   public Object[][] getContents() {
     return new Object[][] {
