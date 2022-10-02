@@ -127,7 +127,7 @@ public class DTMManagerDefault extends DTMManager {
     // Do we need to allow for adopting DTMs _not_ created by this manager?
   }
 
-  /** Get the first free DTM ID available. %OPT% Linear search is inefficient! */
+  /** @return the first free DTM ID available. %OPT% Linear search is inefficient! */
   public synchronized int getFirstFreeDTMID() {
     int n = m_dtms.length;
     for (int i = 1; i < n; i++) {
@@ -304,7 +304,7 @@ public class DTMManagerDefault extends DTMManager {
   }
 
   /**
-   * return the expanded name table.
+   * @return the expanded name table.
    *
    * <p>NEEDSDOC @param dtm
    *

@@ -1034,7 +1034,6 @@ public class DTMNodeProxy
     return null;
   }
 
-  /** {@inheritDoc} */
   protected String fDocumentURI;
 
   /** {@inheritDoc} */

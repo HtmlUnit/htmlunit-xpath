@@ -87,17 +87,17 @@ public final class ExtendedType {
     }
   }
 
-  /** Return the node type */
+  /** @return the node type */
   public int getNodeType() {
     return nodetype;
   }
 
-  /** Return the local name */
+  /** @return the local name */
   public String getLocalName() {
     return localName;
   }
 
-  /** Return the namespace */
+  /** @return the namespace */
   public String getNamespace() {
     return namespace;
   }

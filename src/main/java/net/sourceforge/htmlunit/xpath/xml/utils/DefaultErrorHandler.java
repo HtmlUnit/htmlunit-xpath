@@ -36,7 +36,10 @@ public class DefaultErrorHandler implements ErrorListener {
     this(true);
   }
 
-  /** Constructor DefaultErrorHandler */
+  /**
+   * Constructor DefaultErrorHandler
+   * @param throwExceptionOnError boolean for throwExceptionOnError
+   */
   public DefaultErrorHandler(boolean throwExceptionOnError) {
     // Defer creation of a PrintWriter until it's actually needed
     m_throwExceptionOnError = throwExceptionOnError;

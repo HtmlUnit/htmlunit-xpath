@@ -62,7 +62,10 @@ public class IntStack extends IntVector {
     return i;
   }
 
-  /** Quickly pops a number of items from the stack. */
+  /**
+   * Quickly pops a number of items from the stack.
+   * @param n the number of items to pop
+   */
   public final void quickPop(int n) {
     m_firstFree -= n;
   }

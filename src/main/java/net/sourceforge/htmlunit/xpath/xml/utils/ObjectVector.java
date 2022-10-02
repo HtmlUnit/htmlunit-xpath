@@ -42,6 +42,7 @@ public class ObjectVector implements Cloneable {
    * Construct a IntVector, using the given block size.
    *
    * @param blocksize Size of block to allocate
+   * @param increaseSize the size to inc
    */
   public ObjectVector(int blocksize, int increaseSize) {
 

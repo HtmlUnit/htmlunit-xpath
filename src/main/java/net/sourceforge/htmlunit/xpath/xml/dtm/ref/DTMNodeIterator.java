@@ -52,7 +52,10 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
   // ================================================================
   // Methods unique to this class
 
-  /** Public constructor: Wrap a DTMNodeIterator around an existing and preconfigured DTMIterator */
+  /**
+   * Public constructor: Wrap a DTMNodeIterator around an existing and preconfigured DTMIterator
+   * @param dtmIterator the iterator to be cloned
+   */
   public DTMNodeIterator(DTMIterator dtmIterator) {
     try {
       dtm_iter = (DTMIterator) dtmIterator.clone();
@@ -62,8 +65,9 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
   }
 
   /**
-   * Access the wrapped DTMIterator. I'm not sure whether anyone will need this or not, but let's
-   * write it and think about it.
+   * Access the wrapped DTMIterator.
+   * I'm not sure whether anyone will need this or not, but let's write it and think about it.
+   * @return the wrapped DTMIterator
    */
   public DTMIterator getDTMIterator() {
     return dtm_iter;

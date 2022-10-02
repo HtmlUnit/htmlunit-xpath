@@ -1027,7 +1027,8 @@ public abstract class DTMDefaultBase implements DTM {
    * which preceeds it in document order
    *
    * <p>%REVIEW% Inlne this into findNamespaceContext? Create SortedSuballocatedIntVector type?
-   *
+   * @param vector the vector
+   * @param lookfor the lookfor
    * @return If positive or zero, the index of the found item. If negative, index of the point at
    *     which it would have appeared, encoded as -1-index and hence reconvertable by subtracting it
    *     from -1. (Encoding because I don't want to recompare the strings but don't want to burn

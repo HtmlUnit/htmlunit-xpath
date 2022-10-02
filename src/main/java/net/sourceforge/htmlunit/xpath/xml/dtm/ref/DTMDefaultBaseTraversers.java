@@ -41,6 +41,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
    * @param mgr The DTMManager who owns this DTM.
    * @param source The object that is used to specify the construction source.
    * @param dtmIdentity The DTM identity ID for this DTM.
+   * @param doIndexing flag
    */
   public DTMDefaultBaseTraversers(
       DTMManager mgr, Source source, int dtmIdentity, boolean doIndexing) {
