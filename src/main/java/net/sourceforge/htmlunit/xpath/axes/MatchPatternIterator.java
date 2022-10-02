@@ -18,12 +18,9 @@
 package net.sourceforge.htmlunit.xpath.axes;
 
 import net.sourceforge.htmlunit.xpath.XPathContext;
-import net.sourceforge.htmlunit.xpath.compiler.Compiler;
-import net.sourceforge.htmlunit.xpath.compiler.OpMap;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 import net.sourceforge.htmlunit.xpath.patterns.NodeTest;
 import net.sourceforge.htmlunit.xpath.patterns.StepPattern;
-import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
@@ -49,77 +46,6 @@ public class MatchPatternIterator extends LocPathIterator {
   private static final boolean DEBUG = false;
 
   // protected int m_nsElemBase = DTM.NULL;
-
-  /**
-   * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
-   * call back into the Compiler to create predicate expressions.
-   *
-   * @param compiler The Compiler which is creating this expression.
-   * @param opPos The position of this iterator in the opcode list from the compiler.
-   * @param analysis Analysis bits that give general information about the LocationPath.
-   * @throws javax.xml.transform.TransformerException
-   */
-  MatchPatternIterator(Compiler compiler, int opPos, int analysis)
-      throws javax.xml.transform.TransformerException {
-
-    super(analysis);
-
-    int firstStepPos = OpMap.getFirstChildPos(opPos);
-
-    m_pattern = WalkerFactory.loadSteps(compiler, firstStepPos);
-
-    boolean fromRoot = false;
-    boolean walkBack = false;
-    boolean walkDescendants = false;
-    boolean walkAttributes = false;
-
-    if (0 != (analysis & (WalkerFactory.BIT_ROOT | WalkerFactory.BIT_ANY_DESCENDANT_FROM_ROOT)))
-      fromRoot = true;
-
-    if (0
-        != (analysis
-            & (WalkerFactory.BIT_ANCESTOR
-                | WalkerFactory.BIT_ANCESTOR_OR_SELF
-                | WalkerFactory.BIT_PRECEDING
-                | WalkerFactory.BIT_PRECEDING_SIBLING
-                | WalkerFactory.BIT_FOLLOWING
-                | WalkerFactory.BIT_FOLLOWING_SIBLING
-                | WalkerFactory.BIT_PARENT
-                | WalkerFactory.BIT_FILTER))) walkBack = true;
-
-    if (0
-        != (analysis
-            & (WalkerFactory.BIT_DESCENDANT_OR_SELF
-                | WalkerFactory.BIT_DESCENDANT
-                | WalkerFactory.BIT_CHILD))) walkDescendants = true;
-
-    if (0 != (analysis & (WalkerFactory.BIT_ATTRIBUTE | WalkerFactory.BIT_NAMESPACE)))
-      walkAttributes = true;
-
-    if (false || DEBUG) {
-      System.out.print("analysis: " + Integer.toBinaryString(analysis));
-      System.out.println(", " + WalkerFactory.getAnalysisString(analysis));
-    }
-
-    if (fromRoot || walkBack) {
-      if (walkAttributes) {
-        m_superAxis = Axis.ALL;
-      } else {
-        m_superAxis = Axis.DESCENDANTSFROMROOT;
-      }
-    } else if (walkDescendants) {
-      if (walkAttributes) {
-        m_superAxis = Axis.ALLFROMNODE;
-      } else {
-        m_superAxis = Axis.DESCENDANTORSELF;
-      }
-    } else {
-      m_superAxis = Axis.ALL;
-    }
-    if (false || DEBUG) {
-      System.out.println("axis: " + Axis.getNames(m_superAxis));
-    }
-  }
 
   /** {@inheritDoc} */
   @Override

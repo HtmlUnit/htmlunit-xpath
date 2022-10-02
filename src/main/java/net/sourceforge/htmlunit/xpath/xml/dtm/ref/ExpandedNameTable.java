@@ -227,16 +227,6 @@ public class ExpandedNameTable {
   }
 
   /**
-   * Given an expanded-name ID, return the local name part.
-   *
-   * @param ExpandedNameID an ID that represents an expanded-name.
-   * @return String Local name of this node, or null if the node has no name.
-   */
-  public String getLocalName(int ExpandedNameID) {
-    return m_extendedTypes[ExpandedNameID].getLocalName();
-  }
-
-  /**
    * Given an expanded-name ID, return the local name ID.
    *
    * @param ExpandedNameID an ID that represents an expanded-name.
@@ -269,15 +259,6 @@ public class ExpandedNameTable {
   public final short getType(int ExpandedNameID) {
     // ExtendedType etype = m_extendedTypes[ExpandedNameID];
     return (short) m_extendedTypes[ExpandedNameID].getNodeType();
-  }
-
-  /**
-   * Return the size of the ExpandedNameTable
-   *
-   * @return The size of the ExpandedNameTable
-   */
-  public int getSize() {
-    return m_nextType;
   }
 
   /**

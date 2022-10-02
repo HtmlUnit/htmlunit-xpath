@@ -67,16 +67,6 @@ public class OpMap {
     return m_tokenQueue;
   }
 
-  /**
-   * Get the XPath as a list of tokens.
-   *
-   * @param pos index into token queue.
-   * @return The token, normally a string.
-   */
-  public Object getToken(int pos) {
-    return m_tokenQueue.elementAt(pos);
-  }
-
   /* The current size of the token queue. */
   // public int m_tokenQueueSize = 0;
 
@@ -95,17 +85,6 @@ public class OpMap {
    * on the number of objects created.
    */
   OpMapVector m_opMap = null;
-
-  /**
-   * Get the opcode list that describes the XPath operations. It contains operations codes and
-   * indexes into the m_tokenQueue. I use an array instead of a full parse tree in order to cut down
-   * on the number of objects created.
-   *
-   * @return An IntVector that is the opcode list that describes the XPath operations.
-   */
-  public OpMapVector getOpMap() {
-    return m_opMap;
-  }
 
   // Position indexes
 
@@ -198,17 +177,6 @@ public class OpMap {
   }
 
   /**
-   * Given an operation position, return the end position, i.e. the beginning of the next operation.
-   *
-   * @param opMap The operations map.
-   * @param opPos index to operation, for which there is a size entry following.
-   * @return position of next operation in m_opMap.
-   */
-  public static int getNextOpPos(int[] opMap, int opPos) {
-    return opPos + opMap[opPos + 1];
-  }
-
-  /**
    * Given an FROM_stepType position, return the position of the first predicate, if there is one,
    * or else this will point to the end of the FROM_stepType. Example: int posOfPredicate =
    * xpath.getNextOpPos(stepPos); boolean hasPredicates = OpCodes.OP_PREDICATE ==
@@ -259,16 +227,6 @@ public class OpMap {
    */
   public static int getFirstChildPos(int opPos) {
     return opPos + 2;
-  }
-
-  /**
-   * Get the length of an operation.
-   *
-   * @param opPos The position of the operation in the op map.
-   * @return The size of the operation.
-   */
-  public int getArgLength(int opPos) {
-    return m_opMap.elementAt(opPos + MAPINDEX_LENGTH);
   }
 
   /**

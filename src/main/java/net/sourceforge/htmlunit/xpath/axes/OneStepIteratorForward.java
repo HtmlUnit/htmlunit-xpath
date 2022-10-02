@@ -37,7 +37,7 @@ public class OneStepIteratorForward extends ChildTestIterator {
    * @param compiler A reference to the Compiler that contains the op map.
    * @param opPos The position within the op map, which contains the location path expression for
    *     this itterator.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   OneStepIteratorForward(Compiler compiler, int opPos, int analysis)
       throws javax.xml.transform.TransformerException {

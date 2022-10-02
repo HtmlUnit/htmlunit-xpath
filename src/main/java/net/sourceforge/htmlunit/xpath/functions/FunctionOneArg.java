@@ -32,15 +32,6 @@ public class FunctionOneArg extends Function implements ExpressionOwner {
    */
   Expression m_arg0;
 
-  /**
-   * Return the first argument passed to the function (at index 0).
-   *
-   * @return An expression that represents the first argument passed to the function.
-   */
-  public Expression getArg0() {
-    return m_arg0;
-  }
-
   /** {@inheritDoc} */
   @Override
   public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {

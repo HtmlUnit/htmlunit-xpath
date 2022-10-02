@@ -60,15 +60,6 @@ public class UnionPattern extends Expression {
     }
   }
 
-  /**
-   * Get the contained step patterns to be tested.
-   *
-   * @return an array of the contained step patterns to be tested.
-   */
-  public StepPattern[] getPatterns() {
-    return m_patterns;
-  }
-
   /** {@inheritDoc} */
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {

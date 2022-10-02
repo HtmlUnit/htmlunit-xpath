@@ -441,7 +441,6 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link net.sourceforge.htmlunit.xpath.objects.XString} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
    */
   protected Expression literal(int opPos) {
 
@@ -455,7 +454,6 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link net.sourceforge.htmlunit.xpath.objects.XNumber} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
    */
   protected Expression numberlit(int opPos) {
 
@@ -704,7 +702,7 @@ public class Compiler extends OpMap {
       case OpCodes.OP_FUNCTION:
         if (DEBUG) System.out.println("MATCH_FUNCTION: " + m_currentPattern);
         argLen = getOp(opPos + OpMap.MAPINDEX_LENGTH);
-        pattern = new FunctionPattern(compileFunction(opPos), Axis.PARENT, Axis.CHILD);
+        pattern = new FunctionPattern(compileFunction(opPos), Axis.PARENT);
         break;
       case OpCodes.FROM_ROOT:
         if (DEBUG) System.out.println("FROM_ROOT, " + m_currentPattern);
@@ -712,9 +710,7 @@ public class Compiler extends OpMap {
         opPos = getFirstChildPosOfStep(opPos);
         pattern =
             new StepPattern(
-                DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT,
-                Axis.PARENT,
-                Axis.CHILD);
+                DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT, Axis.PARENT);
         break;
       case OpCodes.MATCH_ATTRIBUTE:
         if (DEBUG)
@@ -727,8 +723,7 @@ public class Compiler extends OpMap {
                 DTMFilter.SHOW_ATTRIBUTE,
                 getStepNS(startOpPos),
                 getStepLocalName(startOpPos),
-                Axis.PARENT,
-                Axis.ATTRIBUTE);
+                Axis.PARENT);
         break;
       case OpCodes.MATCH_ANY_ANCESTOR:
         if (DEBUG)
@@ -742,8 +737,7 @@ public class Compiler extends OpMap {
                 getWhatToShow(startOpPos),
                 getStepNS(startOpPos),
                 getStepLocalName(startOpPos),
-                Axis.ANCESTOR,
-                Axis.CHILD);
+                Axis.ANCESTOR);
         break;
       case OpCodes.MATCH_IMMEDIATE_ANCESTOR:
         if (DEBUG)
@@ -759,8 +753,7 @@ public class Compiler extends OpMap {
                 getWhatToShow(startOpPos),
                 getStepNS(startOpPos),
                 getStepLocalName(startOpPos),
-                Axis.PARENT,
-                Axis.CHILD);
+                Axis.PARENT);
         break;
       default:
         error(XPATHErrorResources.ER_UNKNOWN_MATCH_OPERATION, null); // "unknown match operation!");
@@ -844,7 +837,7 @@ public class Compiler extends OpMap {
    * @param opPos The position of the first predicate the m_opMap array.
    * @param predicates An empty pre-determined array of {@link
    *     net.sourceforge.htmlunit.xpath.Expression}s, that will be filled in.
-   * @throws TransformerException
+   * @throws TransformerException if any
    */
   private void compilePredicates(int opPos, Expression[] predicates) throws TransformerException {
 

@@ -58,20 +58,6 @@ public class XNodeSet extends NodeSequence {
   }
 
   /**
-   * Construct a XNodeSet object.
-   *
-   * @param val Value of the XNodeSet object
-   */
-  public XNodeSet(XNodeSet val) {
-    super();
-    setIter(val.m_iter);
-    m_dtmMgr = val.m_dtmMgr;
-    m_last = val.m_last;
-    if (!val.hasCache()) val.setShouldCacheNodes(true);
-    setObject(val.m_obj);
-  }
-
-  /**
    * Construct an empty XNodeSet object. This is used to create a mutable nodeset to which random
    * nodes may be added.
    */

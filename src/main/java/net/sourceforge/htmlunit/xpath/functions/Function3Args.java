@@ -32,15 +32,6 @@ public class Function3Args extends Function2Args {
    */
   Expression m_arg2;
 
-  /**
-   * Return the third argument passed to the function (at index 2).
-   *
-   * @return An expression that represents the third argument passed to the function.
-   */
-  public Expression getArg2() {
-    return m_arg2;
-  }
-
   /** {@inheritDoc} */
   @Override
   public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {

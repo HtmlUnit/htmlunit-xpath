@@ -36,7 +36,7 @@ public class WalkingIteratorSorted extends WalkingIterator {
    * @param opPos The position of this iterator in the opcode list from the compiler.
    * @param shouldLoadWalkers True if walkers should be loaded, or false if this is a derived
    *     iterator and it doesn't wish to load child walkers.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   WalkingIteratorSorted(Compiler compiler, int opPos, int analysis, boolean shouldLoadWalkers)
       throws javax.xml.transform.TransformerException {

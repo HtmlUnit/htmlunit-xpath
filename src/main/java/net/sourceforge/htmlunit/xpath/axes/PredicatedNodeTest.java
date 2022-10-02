@@ -99,7 +99,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @param compiler The Compiler object that has information about this walker in the op map.
    * @param opPos The op code position of this location step.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   protected void initPredicateInfo(Compiler compiler, int opPos)
       throws javax.xml.transform.TransformerException {
@@ -211,7 +211,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @param context The current context node.
    * @param xctxt The XPath runtime context.
    * @return the result of executing the predicate expressions.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   boolean executePredicates(int context, XPathContext xctxt)
       throws javax.xml.transform.TransformerException {

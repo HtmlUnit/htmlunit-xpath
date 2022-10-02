@@ -218,9 +218,8 @@ public class XString extends XObject {
     if (obj2 != null) {
       if (!obj2.hasString()) {
         return obj2.equals(str());
-      } else {
-        return str().equals(obj2.toString());
       }
+      return str().equals(obj2.toString());
     }
     return false;
   }

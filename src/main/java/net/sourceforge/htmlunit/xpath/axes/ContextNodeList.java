@@ -57,7 +57,7 @@ public interface ContextNodeList {
    * Get a cloned Iterator that is reset to the start of the iteration.
    *
    * @return A clone of this iteration that has been reset.
-   * @throws CloneNotSupportedException
+   * @throws CloneNotSupportedException if any
    */
   NodeIterator cloneWithReset() throws CloneNotSupportedException;
 
@@ -65,7 +65,7 @@ public interface ContextNodeList {
    * Get a clone of this iterator. Be aware that this operation may be somewhat expensive.
    *
    * @return A clone of this object.
-   * @throws CloneNotSupportedException
+   * @throws CloneNotSupportedException if any
    */
   Object clone() throws CloneNotSupportedException;
 

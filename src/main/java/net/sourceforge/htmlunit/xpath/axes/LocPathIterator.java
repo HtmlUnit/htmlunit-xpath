@@ -61,7 +61,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
    * call back into the Compiler to create predicate expressions.
    *
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   protected LocPathIterator(int analysis) throws javax.xml.transform.TransformerException {
     this(analysis, true);
@@ -73,7 +73,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @param shouldLoadWalkers True if walkers should be loaded, or false if this is a derived
    *     iterator and it doesn't wish to load child walkers.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   protected LocPathIterator(int analysis, boolean shouldLoadWalkers)
       throws javax.xml.transform.TransformerException {
@@ -213,20 +213,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     m_pos++;
   }
 
-  /**
-   * Get the length of the cached nodes.
-   *
-   * <p>Note: for the moment at least, this only returns the size of the nodes that have been
-   * fetched to date, it doesn't attempt to run to the end to make sure we have found everything.
-   * This should be reviewed.
-   *
-   * @return The size of the current cache list.
-   */
-  public int size() {
-    assertion(false, "size() not supported by this iterator!");
-    return 0;
-  }
-
   /** {@inheritDoc} */
   @Override
   public int item(int index) {
@@ -316,17 +302,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
     // TODO: ??
     return DTMFilter.SHOW_ALL & ~DTMFilter.SHOW_ENTITY_REFERENCE;
-  }
-
-  /**
-   * The filter used to screen nodes. Not used at this time, this is here only to fullfill the DOM
-   * NodeIterator interface.
-   *
-   * @return Always null.
-   * @see org.w3c.dom.traversal.NodeIterator
-   */
-  public DTMFilter getFilter() {
-    return null;
   }
 
   /** {@inheritDoc} */
@@ -445,15 +420,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    */
   public final XPathContext getXPathContext() {
     return m_execContext;
-  }
-
-  /**
-   * The node context for the iterator.
-   *
-   * @return The node context, same as getRoot().
-   */
-  public final int getContext() {
-    return m_context;
   }
 
   /**

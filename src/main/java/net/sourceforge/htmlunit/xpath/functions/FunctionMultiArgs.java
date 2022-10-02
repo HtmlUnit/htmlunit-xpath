@@ -33,15 +33,6 @@ public class FunctionMultiArgs extends Function3Args {
    */
   Expression[] m_args;
 
-  /**
-   * Return an expression array containing arguments at index 3 or greater.
-   *
-   * @return An array that contains the arguments at index 3 or greater.
-   */
-  public Expression[] getArgs() {
-    return m_args;
-  }
-
   /** {@inheritDoc} */
   @Override
   public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {

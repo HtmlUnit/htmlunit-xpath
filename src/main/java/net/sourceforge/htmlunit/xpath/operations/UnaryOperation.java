@@ -68,11 +68,6 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
    */
   public abstract XObject operate(XObject right) throws javax.xml.transform.TransformerException;
 
-  /** @return the operand of unary operation, as an Expression. */
-  public Expression getOperand() {
-    return m_right;
-  }
-
   /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {

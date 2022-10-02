@@ -186,13 +186,4 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
 
     _position = 0;
   }
-
-  /**
-   * Returns the axis being iterated, if it is known.
-   *
-   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple types.
-   */
-  public int getAxis() {
-    return -1;
-  }
 }

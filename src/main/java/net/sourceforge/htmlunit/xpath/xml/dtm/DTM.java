@@ -261,8 +261,9 @@ public interface DTM {
   int getDocumentRoot(int nodeHandle);
 
   /**
-   * Get the string-value of a node as a String object (see http://www.w3.org/TR/xpath#data-model
-   * for the definition of a node's string-value).
+   * Get the string-value of a node as a String object (see <a
+   * href="http://www.w3.org/TR/xpath#data-model">...</a> for the definition of a node's
+   * string-value).
    *
    * @param nodeHandle The node ID.
    * @return A string object that represents the string-value of the given node.

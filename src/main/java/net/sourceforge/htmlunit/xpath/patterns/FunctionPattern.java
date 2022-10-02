@@ -35,9 +35,9 @@ public class FunctionPattern extends StepPattern {
    *
    * <p>NEEDSDOC @param expr
    */
-  public FunctionPattern(Expression expr, int axis, int predaxis) {
+  public FunctionPattern(Expression expr, int axis) {
 
-    super(0, null, null, axis, predaxis);
+    super(0, null, null, axis);
 
     m_functionExpr = expr;
   }

@@ -83,8 +83,10 @@ public class XNumber extends XObject {
     if (Double.isNaN(m_val)) {
       return "NaN";
     } else if (Double.isInfinite(m_val)) {
-      if (m_val > 0) return "Infinity";
-      else return "-Infinity";
+      if (m_val > 0) {
+        return "Infinity";
+      }
+      return "-Infinity";
     }
 
     double num = m_val;
@@ -102,8 +104,10 @@ public class XNumber extends XObject {
     int e = s.indexOf('E');
 
     if (e < 0) {
-      if (s.charAt(len - 1) == '0') return s.substring(0, len - 1);
-      else return s;
+      if (s.charAt(len - 1) == '0') {
+        return s.substring(0, len - 1);
+      }
+      return s;
     }
 
     int exp = Integer.parseInt(s.substring(e + 1));

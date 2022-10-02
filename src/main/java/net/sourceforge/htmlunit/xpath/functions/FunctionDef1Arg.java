@@ -42,15 +42,6 @@ public class FunctionDef1Arg extends FunctionOneArg {
   }
 
   /**
-   * Tell if the expression is a nodeset expression.
-   *
-   * @return true if the expression can be represented as a nodeset.
-   */
-  public boolean Arg0IsNodesetExpr() {
-    return (null == m_arg0) ? true : m_arg0.isNodesetExpr();
-  }
-
-  /**
    * Execute the first argument expression that is expected to return a string. If the argument is
    * null, then get the string value from the current context node.
    *

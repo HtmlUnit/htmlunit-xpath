@@ -32,7 +32,7 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
    * Create a SelfIteratorNoPredicate object.
    *
    * @param analysis Analysis bits.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   SelfIteratorNoPredicate(int analysis) throws javax.xml.transform.TransformerException {
     super(analysis);

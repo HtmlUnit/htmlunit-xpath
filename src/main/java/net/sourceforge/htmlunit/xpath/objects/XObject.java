@@ -34,7 +34,7 @@ import org.w3c.dom.traversal.NodeIterator;
  * such as a string. This class acts as the base class to other XPath type objects, such as XString,
  * and provides polymorphic casting capabilities.
  */
-public class XObject extends Expression implements Cloneable {
+public class XObject extends Expression {
 
   /**
    * The java object which this object wraps.
@@ -81,9 +81,6 @@ public class XObject extends Expression implements Cloneable {
    * raise a runtime exception.
    */
   public void detach() {}
-
-  /** Reset for fresh reuse. */
-  public void reset() {}
 
   /** Constant for NULL object type */
   public static final int CLASS_NULL = -1;
@@ -221,11 +218,7 @@ public class XObject extends Expression implements Cloneable {
    */
   public DTMIterator iter() throws javax.xml.transform.TransformerException {
 
-    error(
-        XPATHErrorResources.ER_CANT_CONVERT_TO_NODELIST,
-        new Object[] {getTypeString()}); // "Can not convert
-    // "+getTypeString()+"
-    // to a NodeList!");
+    error(XPATHErrorResources.ER_CANT_CONVERT_TO_NODELIST, new Object[] {getTypeString()});
 
     return null;
   }
@@ -374,9 +367,8 @@ public class XObject extends Expression implements Cloneable {
 
     if (null != m_obj) {
       return m_obj.equals(obj2.m_obj);
-    } else {
-      return obj2.m_obj == null;
     }
+    return obj2.m_obj == null;
   }
 
   /**

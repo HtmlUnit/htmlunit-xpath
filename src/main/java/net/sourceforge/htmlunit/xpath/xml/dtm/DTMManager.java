@@ -63,10 +63,8 @@ public abstract class DTMManager {
    * DTMManager</code> it can use the factory to configure and obtain parser instances.
    *
    * @return new DTMManager instance, never null.
-   * @throws DTMConfigurationException if the implementation is not available or cannot be
-   *     instantiated.
    */
-  public static DTMManager newInstance() throws DTMConfigurationException {
+  public static DTMManager newInstance() {
     return new DTMManagerDefault();
   }
 

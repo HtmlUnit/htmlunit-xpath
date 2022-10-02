@@ -113,7 +113,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    *
    * @param xctxt The XPath runtime context.
    * @return The expression evaluated as a double.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   public double num(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return execute(xctxt).num();
@@ -124,7 +124,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    *
    * @param xctxt The XPath runtime context.
    * @return false
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   public boolean bool(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return execute(xctxt).bool();
@@ -145,7 +145,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    *
    * @param xctxt The XPath runtime context.
    * @return the first node out of the nodeset, or DTM.NULL.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   public int asNode(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     DTMIterator iter = execute(xctxt).iter();
@@ -160,7 +160,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @return A valid DTMIterator.
    * @throws TransformerException thrown if the active ProblemListener decides the error condition
    *     is severe enough to halt processing.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   public DTMIterator asIterator(XPathContext xctxt, int contextNode)
       throws javax.xml.transform.TransformerException {
@@ -216,7 +216,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    *     string.
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   public void warn(XPathContext xctxt, String msg, Object[] args)
       throws javax.xml.transform.TransformerException {
@@ -256,7 +256,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    *     string.
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   public void error(XPathContext xctxt, String msg, Object[] args)
       throws javax.xml.transform.TransformerException {

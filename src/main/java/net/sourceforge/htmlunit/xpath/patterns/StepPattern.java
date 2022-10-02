@@ -42,10 +42,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * @param namespace The namespace to be tested.
    * @param name The local name to be tested.
    * @param axis The Axis for this test, one of of Axes.ANCESTORORSELF, etc.
-   * @param axisForPredicate No longer used.
    */
-  public StepPattern(
-      int whatToShow, String namespace, String name, int axis, int axisForPredicate) {
+  public StepPattern(int whatToShow, String namespace, String name, int axis) {
 
     super(whatToShow, namespace, name);
 
@@ -57,9 +55,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    *
    * @param whatToShow Bit set defined mainly by {@link org.w3c.dom.traversal.NodeFilter}.
    * @param axis The Axis for this test, one of of Axes.ANCESTORORSELF, etc.
-   * @param axisForPredicate No longer used.
    */
-  public StepPattern(int whatToShow, int axis, int axisForPredicate) {
+  public StepPattern(int whatToShow, int axis) {
 
     super(whatToShow);
 

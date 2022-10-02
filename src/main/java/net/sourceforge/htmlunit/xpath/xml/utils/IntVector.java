@@ -52,15 +52,6 @@ public class IntVector {
   }
 
   /**
-   * Get the length of the list.
-   *
-   * @return length of the list
-   */
-  public final int size() {
-    return m_firstFree;
-  }
-
-  /**
    * Inserts the specified node in this vector at the specified index. Each component in this vector
    * with an index greater or equal to the specified index is shifted upward to have an index one
    * greater than the value it had previously.
@@ -72,22 +63,5 @@ public class IntVector {
     }
 
     m_firstFree = 0;
-  }
-
-  /**
-   * Searches for the first occurence of the given argument, beginning the search at index, and
-   * testing for equality using the equals method.
-   *
-   * @param elem Object to look for
-   * @return the index of the first occurrence of the object argument in this vector at position
-   *     index or later in the vector; returns -1 if the object is not found.
-   */
-  public final int lastIndexOf(int elem) {
-
-    for (int i = m_firstFree - 1; i >= 0; i--) {
-      if (m_map[i] == elem) return i;
-    }
-
-    return java.lang.Integer.MIN_VALUE;
   }
 }

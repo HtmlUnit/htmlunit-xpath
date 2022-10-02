@@ -394,7 +394,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     /** (not sure yet... -sb) */
     protected int _sp, _oldsp;
 
-    protected int _markedsp, _markedNode, _markedDescendant;
+    protected int _markedsp;
+    protected int _markedNode;
 
     /** {@inheritDoc} */
     @Override
@@ -492,7 +493,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     public void setMark() {
       _markedsp = _sp;
       _markedNode = _currentNode;
-      _markedDescendant = _stack[0];
     }
 
     /** {@inheritDoc} */
@@ -549,9 +549,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     int m_markedPos;
 
-    /** The real start node for this axes, since _startNode will be adjusted. */
-    int m_realStartNode;
-
     /** {@inheritDoc} */
     @Override
     public final boolean isReverse() {
@@ -585,7 +582,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
       if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
-      m_realStartNode = node;
 
       if (_isRestartable) {
         int nodeID = makeNodeIdentity(node);

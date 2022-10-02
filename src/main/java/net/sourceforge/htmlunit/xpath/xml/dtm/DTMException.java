@@ -30,16 +30,6 @@ public class DTMException extends RuntimeException {
    */
   Throwable containedException;
 
-  /**
-   * This method retrieves an exception that this exception wraps.
-   *
-   * @return An Throwable object, or null.
-   * @see #getCause
-   */
-  public Throwable getException() {
-    return containedException;
-  }
-
   /** {@inheritDoc} */
   @Override
   public Throwable getCause() {
@@ -61,10 +51,7 @@ public class DTMException extends RuntimeException {
 
     if (cause == this) {
       throw new IllegalArgumentException(
-          XMLMessages.createXMLMessage(
-              XMLErrorResources.ER_SELF_CAUSATION_NOT_PERMITTED, null)); // "Self-causation
-      // not
-      // permitted");
+          XMLMessages.createXMLMessage(XMLErrorResources.ER_SELF_CAUSATION_NOT_PERMITTED, null));
     }
 
     this.containedException = cause;
@@ -82,18 +69,6 @@ public class DTMException extends RuntimeException {
     super(message);
 
     this.containedException = null;
-  }
-
-  /**
-   * Create a new DTMException wrapping an existing exception.
-   *
-   * @param e The exception to be wrapped.
-   */
-  public DTMException(Throwable e) {
-
-    super(e.getMessage());
-
-    this.containedException = e;
   }
 
   /**

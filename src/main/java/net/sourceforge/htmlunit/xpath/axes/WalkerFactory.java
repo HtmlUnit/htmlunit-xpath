@@ -49,7 +49,7 @@ public class WalkerFactory {
    *     into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
    * @return non-null AxesWalker derivative.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   static AxesWalker loadWalkers(WalkingIterator lpi, Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
@@ -106,7 +106,7 @@ public class WalkerFactory {
    *     into an opcode map.
    * @param opPos The position of the operation code for this itterator.
    * @return non-null reference to a LocPathIterator or derivative.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   public static DTMIterator newDTMIterator(Compiler compiler, int opPos, boolean isTopLevel)
       throws javax.xml.transform.TransformerException {
@@ -437,7 +437,7 @@ public class WalkerFactory {
    *     into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
    * @return 32 bits as an integer that give information about the location path as a whole.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   private static boolean isOptimizableForDescendantIterator(Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
@@ -532,7 +532,7 @@ public class WalkerFactory {
    *     into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
    * @return 32 bits as an integer that give information about the location path as a whole.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   private static int analyze(Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
@@ -676,7 +676,7 @@ public class WalkerFactory {
    * @param compiler The compiler that holds the syntax tree/op map to construct from.
    * @param stepOpCodePos The current op code position within the opmap.
    * @return A StepPattern object, which may contain relative StepPatterns.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   static StepPattern loadSteps(Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
@@ -746,8 +746,7 @@ public class WalkerFactory {
                   pat.getNamespace(),
                   pat.getLocalName(),
                   // newAxis, pat.getPredicateAxis);
-                  newAxis,
-                  0); // don't care about the predicate axis
+                  newAxis); // don't care about the predicate axis
           XNumber score = pat.getStaticScore();
           pat.setNamespace(null);
           pat.setLocalName(NodeTest.WILD);
@@ -800,7 +799,7 @@ public class WalkerFactory {
    *
    * @param compiler The compiler that holds the syntax tree/op map to construct from.
    * @return the head of the list.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   private static StepPattern createDefaultStepPattern(Compiler compiler, int opPos)
       throws javax.xml.transform.TransformerException {
@@ -831,14 +830,12 @@ public class WalkerFactory {
 
         axis = Axis.FILTEREDLIST;
         predicateAxis = Axis.FILTEREDLIST;
-        ai = new FunctionPattern(expr, axis, predicateAxis);
+        ai = new FunctionPattern(expr, axis);
         break;
       case OpCodes.FROM_ROOT:
         axis = Axis.ROOT;
         predicateAxis = Axis.ROOT;
-        ai =
-            new StepPattern(
-                DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT, axis, predicateAxis);
+        ai = new StepPattern(DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT, axis);
         break;
       case OpCodes.FROM_ATTRIBUTES:
         axis = Axis.PARENT;
@@ -907,11 +904,7 @@ public class WalkerFactory {
       whatToShow = compiler.getWhatToShow(opPos); // %REVIEW%
       ai =
           new StepPattern(
-              whatToShow,
-              compiler.getStepNS(opPos),
-              compiler.getStepLocalName(opPos),
-              axis,
-              predicateAxis);
+              whatToShow, compiler.getStepNS(opPos), compiler.getStepLocalName(opPos), axis);
     }
 
     int argLen = compiler.getFirstPredicateOpPos(opPos);
@@ -930,7 +923,7 @@ public class WalkerFactory {
    * @param opPos The opcode position for the step.
    * @param stepType The type of step, one of OP_GROUP, etc.
    * @return true if step has a predicate.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   static boolean analyzePredicate(Compiler compiler, int opPos, int stepType)
       throws javax.xml.transform.TransformerException {

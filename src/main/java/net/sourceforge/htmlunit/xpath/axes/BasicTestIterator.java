@@ -46,7 +46,7 @@ public abstract class BasicTestIterator extends LocPathIterator {
    *
    * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the opcode list from the compiler.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   protected BasicTestIterator(Compiler compiler, int opPos, int analysis)
       throws javax.xml.transform.TransformerException {

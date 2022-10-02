@@ -317,32 +317,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   }
 
   /**
-   * Sets the component at the specified index of this vector to be the specified object. The
-   * previous component at that position is discarded.
-   *
-   * <p>The index must be a value greater than or equal to 0 and less than the current size of the
-   * vector.
-   *
-   * @param node Node to set
-   * @param index Index of where to set the node
-   */
-  public void setElementAt(Node node, int index) {
-    if (!m_mutable)
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
-    // is not
-    // mutable!");
-
-    if (null == m_map) {
-      m_map = new Node[m_blocksize];
-      m_mapSize = m_blocksize;
-    }
-
-    m_map[index] = node;
-  }
-
-  /**
    * Get the nth element.
    *
    * @param i Index of node to get
@@ -353,70 +327,5 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     if (null == m_map) return null;
 
     return m_map[i];
-  }
-
-  /**
-   * Tell if the table contains the given node.
-   *
-   * @param s Node to look for
-   * @return True if the given node was found.
-   */
-  public boolean contains(Node s) {
-    runTo(-1);
-
-    if (null == m_map) return false;
-
-    for (int i = 0; i < m_firstFree; i++) {
-      Node node = m_map[i];
-
-      if ((null != node) && node.equals(s)) return true;
-    }
-
-    return false;
-  }
-
-  /**
-   * Searches for the first occurence of the given argument, beginning the search at index, and
-   * testing for equality using the equals method.
-   *
-   * @param elem Node to look for
-   * @param index Index of where to start the search
-   * @return the index of the first occurrence of the object argument in this vector at position
-   *     index or later in the vector; returns -1 if the object is not found.
-   */
-  public int indexOf(Node elem, int index) {
-    runTo(-1);
-
-    if (null == m_map) return -1;
-
-    for (int i = index; i < m_firstFree; i++) {
-      Node node = m_map[i];
-
-      if ((null != node) && node.equals(elem)) return i;
-    }
-
-    return -1;
-  }
-
-  /**
-   * Searches for the first occurence of the given argument, beginning the search at index, and
-   * testing for equality using the equals method.
-   *
-   * @param elem Node to look for
-   * @return the index of the first occurrence of the object argument in this vector at position
-   *     index or later in the vector; returns -1 if the object is not found.
-   */
-  public int indexOf(Node elem) {
-    runTo(-1);
-
-    if (null == m_map) return -1;
-
-    for (int i = 0; i < m_firstFree; i++) {
-      Node node = m_map[i];
-
-      if ((null != node) && node.equals(elem)) return i;
-    }
-
-    return -1;
   }
 }

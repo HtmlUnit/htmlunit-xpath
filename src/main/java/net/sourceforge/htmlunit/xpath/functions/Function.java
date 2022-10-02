@@ -53,7 +53,7 @@ public abstract class Function extends Expression {
    * type. This method is called by the compiler for static number of arguments checking.
    *
    * @param argNum The number of arguments that is being passed to the function.
-   * @throws WrongNumberArgsException
+   * @throws WrongNumberArgsException if any
    */
   public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
     if (argNum != 0) reportWrongNumberArgs();
@@ -64,7 +64,7 @@ public abstract class Function extends Expression {
    * object. This method is meant to be overloaded by derived classes so that the message will be as
    * specific as possible.
    *
-   * @throws WrongNumberArgsException
+   * @throws WrongNumberArgsException if any
    */
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     throw new WrongNumberArgsException(XPATHMessages.createXPATHMessage("zero", null));

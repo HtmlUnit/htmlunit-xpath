@@ -53,20 +53,18 @@ public class AxesWalker extends PredicatedNodeTest
    * @param compiler The Compiler object that has information about this walker in the op map.
    * @param opPos The op code position of this location step.
    * @param stepType The type of location step.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   public void init(Compiler compiler, int opPos, int stepType)
       throws javax.xml.transform.TransformerException {
 
     initPredicateInfo(compiler, opPos);
-
-    // int testType = compiler.getOp(nodeTestOpPos);
   }
 
   /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
-    // Do not access the location path itterator during this operation!
+    // Do not access the location path iterator during this operation!
 
     return super.clone();
   }

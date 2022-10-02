@@ -36,17 +36,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 public class UnionPathIterator extends LocPathIterator
     implements Cloneable, DTMIterator, PathComponent {
 
-  /** Constructor to create an instance which you can add location paths to. */
-  public UnionPathIterator() {
-
-    super();
-
-    // m_mutable = false;
-    // m_cacheNodes = false;
-    m_iterators = null;
-    m_exprs = null;
-  }
-
   /** {@inheritDoc} */
   @Override
   public void setRoot(int context, Object environment) {
@@ -86,7 +75,7 @@ public class UnionPathIterator extends LocPathIterator
    *
    * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the opcode list from the compiler.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   public UnionPathIterator(Compiler compiler, int opPos)
       throws javax.xml.transform.TransformerException {
@@ -104,7 +93,7 @@ public class UnionPathIterator extends LocPathIterator
    * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the opcode list from the compiler.
    * @return Object that is derived from LocPathIterator.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   public static LocPathIterator createUnionIterator(Compiler compiler, int opPos)
       throws javax.xml.transform.TransformerException {
@@ -183,7 +172,7 @@ public class UnionPathIterator extends LocPathIterator
    * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the
    * @return New location path iterator.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   protected LocPathIterator createDTMIterator(Compiler compiler, int opPos)
       throws javax.xml.transform.TransformerException {
@@ -197,7 +186,7 @@ public class UnionPathIterator extends LocPathIterator
    * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the opcode list from the compiler.
    * @param count The insert position of the iterator.
-   * @throws javax.xml.transform.TransformerException
+   * @throws javax.xml.transform.TransformerException if any
    */
   protected void loadLocationPaths(Compiler compiler, int opPos, int count)
       throws javax.xml.transform.TransformerException {

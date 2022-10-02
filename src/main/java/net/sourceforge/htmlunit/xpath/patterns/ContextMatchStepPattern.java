@@ -31,7 +31,7 @@ public class ContextMatchStepPattern extends StepPattern {
    * @param paxis the p axis
    */
   public ContextMatchStepPattern(int axis, int paxis) {
-    super(DTMFilter.SHOW_ALL, axis, paxis);
+    super(DTMFilter.SHOW_ALL, axis);
   }
 
   /** {@inheritDoc} */

@@ -48,19 +48,6 @@ public class XBoolean extends XObject {
     m_val = b;
   }
 
-  /**
-   * Construct a XBoolean object.
-   *
-   * @param b Value of the boolean object
-   */
-  public XBoolean(Boolean b) {
-
-    super();
-
-    m_val = b.booleanValue();
-    setObject(b);
-  }
-
   /** {@inheritDoc} */
   @Override
   public int getType() {

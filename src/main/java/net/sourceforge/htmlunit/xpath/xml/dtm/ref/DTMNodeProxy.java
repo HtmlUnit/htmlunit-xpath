@@ -87,15 +87,6 @@ public class DTMNodeProxy
   }
 
   /**
-   * NON-DOM: Return the DTM model
-   *
-   * @return The DTM that this proxy is a representative for.
-   */
-  public final DTM getDTM() {
-    return dtm;
-  }
-
-  /**
    * NON-DOM: Return the DTM node number
    *
    * @return The DTM node handle.

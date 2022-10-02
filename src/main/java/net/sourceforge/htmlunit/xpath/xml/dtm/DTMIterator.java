@@ -261,7 +261,7 @@ public interface DTMIterator {
    * Get a cloned Iterator that is reset to the start of the iteration.
    *
    * @return A clone of this iteration that has been reset.
-   * @throws CloneNotSupportedException
+   * @throws CloneNotSupportedException if any
    */
   DTMIterator cloneWithReset() throws CloneNotSupportedException;
 
@@ -270,7 +270,7 @@ public interface DTMIterator {
    * used from the current position.
    *
    * @return A clone of this object.
-   * @throws CloneNotSupportedException
+   * @throws CloneNotSupportedException if any
    */
   Object clone() throws CloneNotSupportedException;
 

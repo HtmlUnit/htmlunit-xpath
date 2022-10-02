@@ -501,8 +501,8 @@ public class XPathParser {
   }
 
   /**
-   * @return an Object which is either a String, a Number, a Boolean, or a vector of nodes.
-   *     <p>EqualityExpr ::= RelationalExpr | EqualityExpr '=' RelationalExpr
+   * EqualityExpr ::= RelationalExpr | EqualityExpr '=' RelationalExpr
+   *
    * @param addPos Position where expression is to be added, or -1 for append.
    * @return the position at the end of the equality expression.
    * @throws javax.xml.transform.TransformerException in case of error
@@ -546,11 +546,9 @@ public class XPathParser {
   }
 
   /**
-   * .
+   * RelationalExpr ::= AdditiveExpr | RelationalExpr '<' AdditiveExpr | RelationalExpr '>'
+   * AdditiveExpr | RelationalExpr '<=' AdditiveExpr | RelationalExpr '>=' AdditiveExpr
    *
-   * @return an Object which is either a String, a Number, a Boolean, or a vector of nodes.
-   *     <p>RelationalExpr ::= AdditiveExpr | RelationalExpr '<' AdditiveExpr | RelationalExpr '>'
-   *     AdditiveExpr | RelationalExpr '<=' AdditiveExpr | RelationalExpr '>=' AdditiveExpr
    * @param addPos Position where expression is to be added, or -1 for append.
    * @return the position at the end of the relational expression.
    * @throws javax.xml.transform.TransformerException in case of error
