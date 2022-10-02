@@ -181,14 +181,11 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
    * position number associated with that state.
    *
    * <p>%REVIEW% Document when this would be used?
-   *
-   * @return This instance.
    */
-  protected final DTMAxisIterator resetPosition() {
+  protected final void resetPosition() {
 
     _position = 0;
 
-    return this;
   }
 
   /**

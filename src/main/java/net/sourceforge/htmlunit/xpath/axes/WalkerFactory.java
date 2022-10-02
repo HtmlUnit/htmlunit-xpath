@@ -133,7 +133,7 @@ public class WalkerFactory {
         if (DEBUG_ITERATOR_CREATION) diagnoseIterator("ChildIterator", analysis, compiler);
 
         // Use simple child iteration without any test.
-        iter = new ChildIterator(compiler, opPos, analysis);
+        iter = new ChildIterator(analysis);
       } else {
         if (DEBUG_ITERATOR_CREATION) diagnoseIterator("ChildTestIterator", analysis, compiler);
 

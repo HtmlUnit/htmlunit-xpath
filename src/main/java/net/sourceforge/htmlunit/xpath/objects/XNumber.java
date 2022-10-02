@@ -45,19 +45,6 @@ public class XNumber extends XObject {
     m_val = d;
   }
 
-  /**
-   * Construct a XNodeSet object.
-   *
-   * @param num Value of the object
-   */
-  public XNumber(Number num) {
-
-    super();
-
-    m_val = num.doubleValue();
-    setObject(num);
-  }
-
   /** {@inheritDoc} */
   @Override
   public int getType() {

@@ -25,7 +25,7 @@ package net.sourceforge.htmlunit.xpath.xml.utils;
  * read/write access to existing nodes is O(1) fast but appending may be O(N**2) slow. See also
  * SuballocatedIntVector.
  */
-public class IntVector implements Cloneable {
+public class IntVector {
 
   /** Size of blocks to allocate */
   protected final int m_blocksize;
@@ -52,47 +52,12 @@ public class IntVector implements Cloneable {
   }
 
   /**
-   * Copy constructor for IntVector
-   *
-   * @param v Existing IntVector to copy
-   */
-  public IntVector(IntVector v) {
-    m_map = new int[v.m_mapSize];
-    m_mapSize = v.m_mapSize;
-    m_firstFree = v.m_firstFree;
-    m_blocksize = v.m_blocksize;
-    System.arraycopy(v.m_map, 0, m_map, 0, m_firstFree);
-  }
-
-  /**
    * Get the length of the list.
    *
    * @return length of the list
    */
   public final int size() {
     return m_firstFree;
-  }
-
-  /**
-   * Append a int onto the vector.
-   *
-   * @param value Int to add to the list
-   */
-  public final void addElement(int value) {
-
-    if ((m_firstFree + 1) >= m_mapSize) {
-      m_mapSize += m_blocksize;
-
-      int newMap[] = new int[m_mapSize];
-
-      System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
-
-      m_map = newMap;
-    }
-
-    m_map[m_firstFree] = value;
-
-    m_firstFree++;
   }
 
   /**
@@ -110,80 +75,6 @@ public class IntVector implements Cloneable {
   }
 
   /**
-   * Sets the component at the specified index of this vector to be the specified object. The
-   * previous component at that position is discarded.
-   *
-   * <p>The index must be a value greater than or equal to 0 and less than the current size of the
-   * vector.
-   *
-   * @param value object to set
-   * @param index Index of where to set the object
-   */
-  public final void setElementAt(int value, int index) {
-    m_map[index] = value;
-  }
-
-  /**
-   * Get the nth element.
-   *
-   * @param i index of object to get
-   * @return object at given index
-   */
-  public final int elementAt(int i) {
-    return m_map[i];
-  }
-
-  /**
-   * Tell if the table contains the given node.
-   *
-   * @param s object to look for
-   * @return true if the object is in the list
-   */
-  public final boolean contains(int s) {
-
-    for (int i = 0; i < m_firstFree; i++) {
-      if (m_map[i] == s) return true;
-    }
-
-    return false;
-  }
-
-  /**
-   * Searches for the first occurence of the given argument, beginning the search at index, and
-   * testing for equality using the equals method.
-   *
-   * @param elem object to look for
-   * @param index Index of where to begin search
-   * @return the index of the first occurrence of the object argument in this vector at position
-   *     index or later in the vector; returns -1 if the object is not found.
-   */
-  public final int indexOf(int elem, int index) {
-
-    for (int i = index; i < m_firstFree; i++) {
-      if (m_map[i] == elem) return i;
-    }
-
-    return java.lang.Integer.MIN_VALUE;
-  }
-
-  /**
-   * Searches for the first occurence of the given argument, beginning the search at index, and
-   * testing for equality using the equals method.
-   *
-   * @param elem object to look for
-   * @return the index of the first occurrence of the object argument in this vector at position
-   *     index or later in the vector; returns -1 if the object is not found.
-   */
-  public final int indexOf(int elem) {
-
-    for (int i = 0; i < m_firstFree; i++) {
-      if (m_map[i] == elem) return i;
-    }
-
-    return java.lang.Integer.MIN_VALUE;
-  }
-
-  /**
    * Searches for the first occurence of the given argument, beginning the search at index, and
    * testing for equality using the equals method.
    *
@@ -198,11 +89,5 @@ public class IntVector implements Cloneable {
     }
 
     return java.lang.Integer.MIN_VALUE;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Object clone() throws CloneNotSupportedException {
-    return new IntVector(this);
   }
 }

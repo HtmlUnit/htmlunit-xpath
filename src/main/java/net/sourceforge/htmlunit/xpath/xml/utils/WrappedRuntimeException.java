@@ -43,19 +43,6 @@ public class WrappedRuntimeException extends RuntimeException {
   }
 
   /**
-   * Constructor WrappedRuntimeException
-   *
-   * @param msg Exception information.
-   * @param e Primary checked exception
-   */
-  public WrappedRuntimeException(String msg, Exception e) {
-
-    super(msg);
-
-    m_exception = e;
-  }
-
-  /**
    * Get the checked exception that this runtime exception wraps.
    *
    * @return The primary checked exception

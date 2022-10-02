@@ -31,15 +31,6 @@ public class XString extends XObject {
   public static final XString EMPTYSTRING = new XString("");
 
   /**
-   * Construct a XString object. This constructor exists for derived classes.
-   *
-   * @param val String object this will wrap.
-   */
-  protected XString(Object val) {
-    super(val);
-  }
-
-  /**
    * Construct a XNodeSet object.
    *
    * @param val String object this will wrap.

@@ -24,9 +24,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.traversal.NodeIterator;
 
 /**
  * The NodeSetDTM class can act as either a NodeVector, NodeList, or NodeIterator. However, in order
@@ -55,31 +52,6 @@ public class NodeSetDTM extends NodeVector
   }
 
   /**
-   * Create an empty, using the given block size.
-   *
-   * @param blocksize Size of blocks to allocate
-   * @param dummy pass zero for right now...
-   */
-  public NodeSetDTM(int blocksize, int dummy, DTMManager dtmManager) {
-    super(blocksize);
-    m_manager = dtmManager;
-  }
-
-  /**
-   * Create a NodeSetDTM, and copy the members of the given NodeSetDTM into it.
-   *
-   * @param nodelist Set of Nodes to be made members of the new set.
-   */
-  public NodeSetDTM(NodeSetDTM nodelist) {
-
-    super();
-    m_manager = nodelist.getDTMManager();
-    m_root = nodelist.getRoot();
-
-    addNodes(nodelist);
-  }
-
-  /**
    * Create a NodeSetDTM, and copy the members of the given DTMIterator into it.
    *
    * @param ni Iterator which yields Nodes to be made members of the new set.
@@ -91,53 +63,6 @@ public class NodeSetDTM extends NodeVector
     m_manager = ni.getDTMManager();
     m_root = ni.getRoot();
     addNodes(ni);
-  }
-
-  /**
-   * Create a NodeSetDTM, and copy the members of the given DTMIterator into it.
-   *
-   * @param iterator Iterator which yields Nodes to be made members of the new set.
-   */
-  public NodeSetDTM(NodeIterator iterator, XPathContext xctxt) {
-
-    super();
-
-    Node node;
-    m_manager = xctxt.getDTMManager();
-
-    while (null != (node = iterator.nextNode())) {
-      int handle = xctxt.getDTMHandleFromNode(node);
-      addNodeInDocOrder(handle, xctxt);
-    }
-  }
-
-  /** Create a NodeSetDTM, and copy the members of the given DTMIterator into it. */
-  public NodeSetDTM(NodeList nodeList, XPathContext xctxt) {
-
-    super();
-
-    m_manager = xctxt.getDTMManager();
-
-    int n = nodeList.getLength();
-    for (int i = 0; i < n; i++) {
-      Node node = nodeList.item(i);
-      int handle = xctxt.getDTMHandleFromNode(node);
-      // Do not reorder or strip duplicate nodes from the given DOM nodelist
-      addNode(handle); // addNodeInDocOrder(handle, xctxt);
-    }
-  }
-
-  /**
-   * Create a NodeSetDTM which contains the given Node.
-   *
-   * @param node Single node to be added to the new set.
-   */
-  public NodeSetDTM(int node, DTMManager dtmManager) {
-
-    super();
-    m_manager = dtmManager;
-
-    addNode(node);
   }
 
   /** {@inheritDoc} */
@@ -186,21 +111,6 @@ public class NodeSetDTM extends NodeVector
   @Override
   public int getWhatToShow() {
     return DTMFilter.SHOW_ALL & ~DTMFilter.SHOW_ENTITY_REFERENCE;
-  }
-
-  /**
-   * The filter object used to screen nodes. Filters are applied to further reduce (and restructure)
-   * the DTMIterator's view of the document. In our case, we will be using hardcoded filters built
-   * into our iterators... but getFilter() is part of the DOM's DTMIterator interface, so we have to
-   * support it.
-   *
-   * @return null, which is slightly misleading. True, there is no user-written filter object, but
-   *     in fact we are doing some very sophisticated custom filtering. A DOM purist might suggest
-   *     returning a placeholder object just to indicate that this is not going to return all nodes
-   *     selected by whatToShow.
-   */
-  public DTMFilter getFilter() {
-    return null;
   }
 
   /** {@inheritDoc} */
@@ -408,13 +318,12 @@ public class NodeSetDTM extends NodeVector
   /**
    * Add the node into a vector of nodes where it should occur in document order.
    *
-   * @param node The node to be added.
-   * @param test true if we should test for doc order
+   * @param node    The node to be added.
+   * @param test    true if we should test for doc order
    * @param support The XPath runtime context.
-   * @return insertIndex.
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
-  public int addNodeInDocOrder(int node, boolean test, XPathContext support) {
+  public void addNodeInDocOrder(int node, boolean test, XPathContext support) {
     int insertIndex = -1;
 
     if (test) {
@@ -461,7 +370,6 @@ public class NodeSetDTM extends NodeVector
     }
 
     // checkDups();
-    return insertIndex;
   } // end addNodeInDocOrder(Vector v, Object obj)
 
   /**
@@ -578,27 +486,8 @@ public class NodeSetDTM extends NodeVector
     if (!isFresh())
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_CANNOT_CALL_SETSHOULDCACHENODE, null)); // "Can
-    // not
-    // call
-    // setShouldCacheNodes
-    // after
-    // nextNode
-    // has
-    // been
-    // called!");
-
+              XPATHErrorResources.ER_CANNOT_CALL_SETSHOULDCACHENODE, null));
     m_cacheNodes = b;
-  }
-
-  private transient int m_last = 0;
-
-  public int getLast() {
-    return m_last;
-  }
-
-  public void setLast(int last) {
-    m_last = last;
   }
 
   /** {@inheritDoc} */

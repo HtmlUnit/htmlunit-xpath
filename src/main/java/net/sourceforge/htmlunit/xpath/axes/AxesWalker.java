@@ -182,22 +182,6 @@ public class AxesWalker extends PredicatedNodeTest
   }
 
   /**
-   * The node at which the TreeWalker is currently positioned. <br>
-   * The value must not be null. Alterations to the DOM tree may cause the current node to no longer
-   * be accepted by the TreeWalker's associated filter. currentNode may also be explicitly set to
-   * any node, whether or not it is within the subtree specified by the root node or would be
-   * accepted by the filter and whatToShow flags. Further traversal occurs relative to currentNode
-   * even if it is not part of the current view by applying the filters in the requested direction
-   * (not changing currentNode where no traversal is possible).
-   *
-   * @return The node at which the TreeWalker is currently positioned, only null if setRoot has not
-   *     yet been called.
-   */
-  public final int getCurrentNode() {
-    return m_currentNode;
-  }
-
-  /**
    * Set the next walker in the location step chain.
    *
    * @param walker Reference to AxesWalker derivative, or may be null.

@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.axes;
 
 import net.sourceforge.htmlunit.xpath.XPathContext;
-import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 
@@ -33,13 +32,10 @@ public class ChildIterator extends LocPathIterator {
   /**
    * Create a ChildIterator object.
    *
-   * @param compiler A reference to the Compiler that contains the op map.
-   * @param opPos The position within the op map, which contains the location path expression for
-   *     this itterator.
    * @param analysis Analysis bits of the entire pattern.
    * @throws javax.xml.transform.TransformerException
    */
-  ChildIterator(Compiler compiler, int opPos, int analysis)
+  ChildIterator(int analysis)
       throws javax.xml.transform.TransformerException {
     super(analysis);
 
