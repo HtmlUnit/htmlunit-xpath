@@ -188,6 +188,27 @@
     </plugins>
   </build>
 
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/HtmlUnit/htmlunit-xpath/issues/</url>
+  </issueManagement>
+  <inceptionYear>2022</inceptionYear>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:https://github.com/HtmlUnit/htmlunit-xpath</connection>
+    <developerConnection>scm:git:https://github.com/HtmlUnit/htmlunit-xpath</developerConnection>
+    <url>https://github.com/HtmlUnit/htmlunit-xpath</url>
+  </scm>
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://jenkins.wetator.org/view/HtmlUnit/</url>
+  </ciManagement>
   <distributionManagement>
     <snapshotRepository>
       <id>sonatype-nexus-snapshots</id>
