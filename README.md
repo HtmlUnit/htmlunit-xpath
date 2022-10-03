@@ -14,7 +14,7 @@ unit test and the maven based build.
 ### Project News
 [HtmlUnit@Twitter][3]
 
-### Latest release Version 2.65.0 / October 02, 2022
+### Latest release Version 2.65.0 / October 03, 2022
 
 For maven, you would add:
 
