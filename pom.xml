@@ -232,4 +232,14 @@
       <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
     </repository>
   </repositories>
+  <developers>
+    <developer>
+      <name>Ronald Brill</name>
+      <id>rbri</id>
+      <email>rbri@rbri.de</email>
+      <url>http://www.wetator.org/</url>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+
 </project>
