@@ -135,15 +135,6 @@ public class WalkingIterator extends LocPathIterator {
   }
 
   /**
-   * Set the head of the walker list.
-   *
-   * @param walker Should be a valid AxesWalker.
-   */
-  public final void setFirstWalker(AxesWalker walker) {
-    m_firstWalker = walker;
-  }
-
-  /**
    * Set the last used walker.
    *
    * @param walker The last used walker, or null.

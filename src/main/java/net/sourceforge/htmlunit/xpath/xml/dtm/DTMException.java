@@ -71,22 +71,6 @@ public class DTMException extends RuntimeException {
     this.containedException = null;
   }
 
-  /**
-   * Wrap an existing exception in a DTMException.
-   *
-   * <p>This is used for throwing processor exceptions before the processing has started.
-   *
-   * @param message The error or warning message, or null to use the message from the embedded
-   *     exception.
-   * @param e Any exception
-   */
-  public DTMException(String message, Throwable e) {
-
-    super(((message == null) || (message.length() == 0)) ? e.getMessage() : message);
-
-    this.containedException = e;
-  }
-
   /** {@inheritDoc} */
   @Override
   public void printStackTrace() {

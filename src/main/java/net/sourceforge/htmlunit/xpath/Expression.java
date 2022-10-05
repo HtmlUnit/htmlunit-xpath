@@ -131,16 +131,6 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
   }
 
   /**
-   * Tell if the expression is a nodeset expression. In other words, tell if you can execute {@link
-   * #asNode(XPathContext) asNode} without an exception.
-   *
-   * @return true if the expression can be represented as a nodeset.
-   */
-  public boolean isNodesetExpr() {
-    return false;
-  }
-
-  /**
    * Return the first node out of the nodeset, if this expression is a nodeset expression.
    *
    * @param xctxt The XPath runtime context.

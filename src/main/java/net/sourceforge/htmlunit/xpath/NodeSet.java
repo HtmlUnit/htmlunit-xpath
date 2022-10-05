@@ -63,23 +63,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
 
   /** {@inheritDoc} */
   @Override
-  public NodeIterator cloneWithReset() throws CloneNotSupportedException {
-
-    NodeSet clone = (NodeSet) clone();
-
-    clone.reset();
-
-    return clone;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void reset() {
-    m_next = 0;
-  }
-
-  /** {@inheritDoc} */
-  @Override
   public int getWhatToShow() {
     return NodeFilter.SHOW_ALL & ~NodeFilter.SHOW_ENTITY_REFERENCE;
   }
@@ -191,25 +174,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   /** If this node is being used as an iterator, the next index that nextNode() will return. */
   protected transient int m_next = 0;
 
-  /** {@inheritDoc} */
-  @Override
-  public Node getCurrentNode() {
-
-    if (!m_cacheNodes)
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null)); // "This NodeSet
-    // can not do
-    // indexing or
-    // counting
-    // functions!");
-
-    int saved = m_next;
-    Node n = (m_next < m_firstFree) ? elementAt(m_next) : null;
-    m_next = saved; // HACK: I think this is a bit of a hack. -sb
-    return n;
-  }
-
   /** True if this list can be mutated. */
   protected final transient boolean m_mutable = true;
 
@@ -219,20 +183,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
    * @serial
    */
   protected final transient boolean m_cacheNodes = true;
-
-  private transient int m_last = 0;
-
-  /** {@inheritDoc} */
-  @Override
-  public int getLast() {
-    return m_last;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void setLast(int last) {
-    m_last = last;
-  }
 
   /**
    * Size of blocks to allocate.

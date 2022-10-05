@@ -17,25 +17,12 @@
  */
 package net.sourceforge.htmlunit.xpath.axes;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.traversal.NodeIterator;
-
 /**
  * Classes who implement this interface can be a <a
  * href="http://www.w3.org/TR/xslt#dt-current-node-list">current node list</a>, also refered to here
  * as a <term>context node list</term>.
  */
 public interface ContextNodeList {
-
-  /**
-   * Get the <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a>.
-   *
-   * @return The current node, or null.
-   */
-  Node getCurrentNode();
-
-  /** Reset the iterator. */
-  void reset();
 
   /**
    * If an index is requested, NodeSetDTM will call this method to run the iterator to the index. By
@@ -53,15 +40,7 @@ public interface ContextNodeList {
    */
   int size();
 
-  /**
-   * Get a cloned Iterator that is reset to the start of the iteration.
-   *
-   * @return A clone of this iteration that has been reset.
-   * @throws CloneNotSupportedException if any
-   */
-  NodeIterator cloneWithReset() throws CloneNotSupportedException;
-
-  /**
+    /**
    * Get a clone of this iterator. Be aware that this operation may be somewhat expensive.
    *
    * @return A clone of this object.
@@ -69,17 +48,4 @@ public interface ContextNodeList {
    */
   Object clone() throws CloneNotSupportedException;
 
-  /**
-   * Get the index of the last node in this list.
-   *
-   * @return the index of the last node in this list.
-   */
-  int getLast();
-
-  /**
-   * Set the index of the last node in this list.
-   *
-   * @param last the index of the last node in this list.
-   */
-  void setLast(int last);
 }

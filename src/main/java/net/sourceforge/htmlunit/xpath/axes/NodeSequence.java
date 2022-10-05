@@ -597,11 +597,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       m_useCount2 = 1;
     }
 
-    /** Returns count of how many NodeSequence objects share this IteratorCache object. */
-    private int useCount() {
-      return m_useCount2;
-    }
-
     /**
      * This method is called when yet another NodeSequence object uses, or shares this same cache.
      */

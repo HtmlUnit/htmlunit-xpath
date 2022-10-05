@@ -124,17 +124,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
      */
     protected int _currentNode;
 
-    /** {@inheritDoc} */
-    @Override
-    public void setMark() {
-      _markedNode = _currentNode;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void gotoMark() {
-      _currentNode = _markedNode;
-    }
   } // end of InternalAxisIteratorBase
 
   /** Iterator that returns all immediate children of a given node */
@@ -488,19 +477,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       resetPosition();
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public void setMark() {
-      _markedsp = _sp;
-      _markedNode = _currentNode;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void gotoMark() {
-      _sp = _markedsp;
-      _currentNode = _markedNode;
-    }
   } // end of PrecedingIterator
 
   /** Iterator that returns following nodes of for a given node. */
@@ -630,18 +606,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       return returnNode(next);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public void setMark() {
-      m_markedPos = m_ancestorsPos;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void gotoMark() {
-      m_ancestorsPos = m_markedPos;
-      _currentNode = m_ancestorsPos >= 0 ? m_ancestors.elementAt(m_ancestorsPos) : DTM.NULL;
-    }
   } // end of AncestorIterator
 
   /** Iterator that returns the descendants of a given node. */

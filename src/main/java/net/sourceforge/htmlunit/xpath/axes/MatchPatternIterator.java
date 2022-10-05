@@ -37,7 +37,7 @@ public class MatchPatternIterator extends LocPathIterator {
   protected StepPattern m_pattern;
 
   /** The traversal axis from where the nodes will be filtered. */
-  protected int m_superAxis = -1;
+  protected final int m_superAxis = -1;
 
   /** The DTM inner traversal class, that corresponds to the super axis. */
   protected DTMAxisTraverser m_traverser;

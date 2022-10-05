@@ -36,7 +36,7 @@ public class FilterExprIteratorSimple extends LocPathIterator {
    *
    * @serial
    */
-  private Expression m_expr;
+  private final Expression m_expr;
 
   /** The result of executing m_expr. Needs to be deep cloned on clone op. */
   private transient XNodeSet m_exprObj;

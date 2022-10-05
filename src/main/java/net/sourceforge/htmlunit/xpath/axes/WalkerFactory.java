@@ -201,7 +201,7 @@ public class WalkerFactory {
         // return new MatchPatternIterator(compiler, opPos, analysis);
         if (DEBUG_ITERATOR_CREATION) diagnoseIterator("WalkingIteratorSorted", analysis, compiler);
 
-        iter = new WalkingIteratorSorted(compiler, opPos, analysis, true);
+        iter = new WalkingIteratorSorted(compiler, opPos, analysis);
       }
     }
     if (iter instanceof LocPathIterator) iter.setIsTopLevel(isTopLevel);

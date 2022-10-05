@@ -165,12 +165,6 @@ public class FilterExprWalker extends AxesWalker {
   /** The result of executing m_expr. Needs to be deep cloned on clone op. */
   private transient XNodeSet m_exprObj;
 
-  /** Set the inner contained expression of this filter. */
-  public void setInnerExpression(Expression expr) {
-    expr.exprSetParent(this);
-    m_expr = expr;
-  }
-
   /** {@inheritDoc} */
   @Override
   public int getAnalysisBits() {

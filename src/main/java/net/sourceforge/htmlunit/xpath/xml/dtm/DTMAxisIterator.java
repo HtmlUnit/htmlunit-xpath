@@ -34,21 +34,6 @@ public interface DTMAxisIterator extends Cloneable {
   void reset();
 
   /**
-   * @return the number of nodes in this iterator. This may be an expensive operation when called
-   *     the first time.
-   */
-  int getLast();
-
-  /** @return The position of the current node in the set, as defined by XPath. */
-  int getPosition();
-
-  /** Remembers the current node for the next call to gotoMark(). */
-  void setMark();
-
-  /** Restores the current node remembered by setMark(). */
-  void gotoMark();
-
-  /**
    * Set start to END should 'close' the iterator, i.e. subsequent call to next() should return END.
    *
    * @param node Sets the root of the iteration.

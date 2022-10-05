@@ -23,13 +23,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisIterator;
 public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
 
   /**
-   * The position of the last node within the iteration, as defined by XPath. Note that this is
-   * _not_ the node's handle within the DTM. Also, don't confuse it with the current (most recently
-   * returned) position.
-   */
-  protected int _last = -1;
-
-  /**
    * The position of the current node within the iteration, as defined by XPath. Note that this is
    * _not_ the node's handle within the DTM!
    */
@@ -83,52 +76,6 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
     _includeSelf = true;
 
     return this;
-  }
-
-  /**
-   * Returns the position of the last node within the iteration, as defined by XPath. In a forward
-   * iterator, I believe this equals the number of nodes which this iterator will yield. In a
-   * reverse iterator, I believe it should return 1 (since the "last" is the first produced.)
-   *
-   * <p>This may be an expensive operation when called the first time, since it may have to iterate
-   * through a large part of the document to produce its answer.
-   *
-   * @return The number of nodes in this iterator (forward) or 1 (reverse).
-   */
-  @Override
-  public int getLast() {
-
-    if (_last == -1) // Not previously established
-    {
-      // Note that we're doing both setMark() -- which saves _currentChild
-      // -- and explicitly saving our position counter (number of nodes
-      // yielded so far).
-      //
-      // %REVIEW% Should position also be saved by setMark()?
-      // (It wasn't in the XSLTC version, but I don't understand why not.)
-
-      final int temp = _position; // Save state
-      setMark();
-
-      reset(); // Count the nodes found by this iterator
-      do {
-        _last++;
-      } while (next() != END);
-
-      gotoMark(); // Restore saved state
-      _position = temp;
-    }
-
-    return _last;
-  }
-
-  /**
-   * @return The position of the current node within the set, as defined by XPath. Note that this is
-   *     one-based, not zero-based.
-   */
-  @Override
-  public int getPosition() {
-    return _position == 0 ? 1 : _position;
   }
 
   /** @return true if this iterator has a reversed axis, else false */

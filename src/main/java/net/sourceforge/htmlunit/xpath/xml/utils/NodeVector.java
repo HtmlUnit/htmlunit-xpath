@@ -56,16 +56,6 @@ public class NodeVector implements Cloneable {
     m_mapSize = 0;
   }
 
-  /**
-   * Construct a NodeVector, using the given block size.
-   *
-   * @param blocksize Size of blocks to allocate
-   */
-  public NodeVector(int blocksize) {
-    m_blocksize = blocksize;
-    m_mapSize = 0;
-  }
-
   /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
@@ -204,28 +194,6 @@ public class NodeVector implements Cloneable {
     if (null == m_map) return;
 
     m_firstFree = 0;
-  }
-
-  /**
-   * Sets the component at the specified index of this vector to be the specified object. The
-   * previous component at that position is discarded.
-   *
-   * <p>The index must be a value greater than or equal to 0 and less than the current size of the
-   * vector.
-   *
-   * @param node Node to set
-   * @param index Index of where to set the node
-   */
-  public void setElementAt(int node, int index) {
-
-    if (null == m_map) {
-      m_map = new int[m_blocksize];
-      m_mapSize = m_blocksize;
-    }
-
-    if (index == -1) addElement(node);
-
-    m_map[index] = node;
   }
 
   /**

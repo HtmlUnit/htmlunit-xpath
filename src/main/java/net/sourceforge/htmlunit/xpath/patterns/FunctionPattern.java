@@ -55,7 +55,7 @@ public class FunctionPattern extends StepPattern {
    *
    * @serial
    */
-  Expression m_functionExpr;
+  final Expression m_functionExpr;
 
   /** {@inheritDoc} */
   @Override

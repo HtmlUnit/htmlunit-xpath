@@ -122,12 +122,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public boolean isNodesetExpr() {
-    return true;
-  }
-
-  /** {@inheritDoc} */
-  @Override
   public int asNode(XPathContext xctxt) throws javax.xml.transform.TransformerException {
     DTMIterator iter = m_clones.getInstance();
 
