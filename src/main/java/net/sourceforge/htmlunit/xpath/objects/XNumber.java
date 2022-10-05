@@ -17,7 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath.objects;
 
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 
@@ -183,7 +182,7 @@ public class XNumber extends XObject {
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     visitor.visitNumberLiteral();
   }
 }

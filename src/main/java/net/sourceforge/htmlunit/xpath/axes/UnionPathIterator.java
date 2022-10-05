@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.axes;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.compiler.OpCodes;
@@ -300,47 +299,14 @@ public class UnionPathIterator extends LocPathIterator
     return -1;
   }
 
-  class iterOwner implements ExpressionOwner {
-    final int m_index;
-
-    iterOwner(int index) {
-      m_index = index;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Expression getExpression() {
-      return m_exprs[m_index];
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void setExpression(Expression exp) {
-
-      if (!(exp instanceof LocPathIterator)) {
-        // Yuck. Need FilterExprIter. Or make it so m_exprs can be just
-        // plain expressions?
-        WalkingIterator wi = new WalkingIterator(getPrefixResolver());
-        FilterExprWalker few = new FilterExprWalker(wi);
-        wi.setFirstWalker(few);
-        few.setInnerExpression(exp);
-        wi.exprSetParent(UnionPathIterator.this);
-        few.exprSetParent(wi);
-        exp.exprSetParent(few);
-        exp = wi;
-      } else exp.exprSetParent(UnionPathIterator.this);
-      m_exprs[m_index] = (LocPathIterator) exp;
-    }
-  }
-
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     if (visitor.visitUnionPath()) {
       if (null != m_exprs) {
         int n = m_exprs.length;
         for (int i = 0; i < n; i++) {
-          m_exprs[i].callVisitors(new iterOwner(i), visitor);
+          m_exprs[i].callVisitors(visitor);
         }
       }
     }

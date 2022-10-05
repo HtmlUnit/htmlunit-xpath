@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.objects;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.NodeSetDTM;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathException;
@@ -413,7 +412,7 @@ public class XObject extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     assertion(false, "callVisitors should not be called for this object!!!");
   }
 

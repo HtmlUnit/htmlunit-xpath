@@ -17,7 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath.objects;
 
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
 
@@ -461,7 +460,7 @@ public class XString extends XObject {
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     visitor.visitStringLiteral();
   }
 }

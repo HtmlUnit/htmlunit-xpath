@@ -19,7 +19,6 @@ package net.sourceforge.htmlunit.xpath.axes;
 
 import java.util.Vector;
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
@@ -30,8 +29,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /** Serves as common interface for axes Walkers, and stores common state variables. */
-public class AxesWalker extends PredicatedNodeTest
-    implements Cloneable, PathComponent, ExpressionOwner {
+public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathComponent {
 
   /**
    * Construct an AxesWalker using a LocPathIterator.
@@ -347,26 +345,13 @@ public class AxesWalker extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     if (visitor.visitStep()) {
       callPredicateVisitors(visitor);
       if (null != m_nextWalker) {
-        m_nextWalker.callVisitors(this, visitor);
+        m_nextWalker.callVisitors(visitor);
       }
     }
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Expression getExpression() {
-    return m_nextWalker;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void setExpression(Expression exp) {
-    exp.exprSetParent(this);
-    m_nextWalker = (AxesWalker) exp;
   }
 
   /** {@inheritDoc} */

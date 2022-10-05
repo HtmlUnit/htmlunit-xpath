@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.patterns;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
@@ -81,35 +80,14 @@ public class UnionPattern extends Expression {
     return bestScore;
   }
 
-  class UnionPathPartOwner implements ExpressionOwner {
-    final int m_index;
-
-    UnionPathPartOwner(int index) {
-      m_index = index;
-    }
-
-    /** @see ExpressionOwner#getExpression() */
-    @Override
-    public Expression getExpression() {
-      return m_patterns[m_index];
-    }
-
-    /** @see ExpressionOwner#setExpression(Expression) */
-    @Override
-    public void setExpression(Expression exp) {
-      exp.exprSetParent(UnionPattern.this);
-      m_patterns[m_index] = (StepPattern) exp;
-    }
-  }
-
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     visitor.visitUnionPattern();
     if (null != m_patterns) {
       int n = m_patterns.length;
       for (int i = 0; i < n; i++) {
-        m_patterns[i].callVisitors(new UnionPathPartOwner(i), visitor);
+        m_patterns[i].callVisitors(visitor);
       }
     }
   }

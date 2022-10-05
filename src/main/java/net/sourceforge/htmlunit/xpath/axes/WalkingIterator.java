@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.axes;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.compiler.OpMap;
@@ -26,7 +25,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /** Location path iterator that uses Walkers. */
-public class WalkingIterator extends LocPathIterator implements ExpressionOwner {
+public class WalkingIterator extends LocPathIterator {
 
   /**
    * Create a WalkingIterator iterator, including creation of step walkers from the opcode list, and
@@ -181,10 +180,10 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     if (visitor.visitLocationPath()) {
       if (null != m_firstWalker) {
-        m_firstWalker.callVisitors(this, visitor);
+        m_firstWalker.callVisitors(visitor);
       }
     }
   }
@@ -202,19 +201,6 @@ public class WalkingIterator extends LocPathIterator implements ExpressionOwner 
    * @serial
    */
   protected AxesWalker m_firstWalker;
-
-  /** {@inheritDoc} */
-  @Override
-  public Expression getExpression() {
-    return m_firstWalker;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void setExpression(Expression exp) {
-    exp.exprSetParent(this);
-    m_firstWalker = (AxesWalker) exp;
-  }
 
   /** {@inheritDoc} */
   @Override

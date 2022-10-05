@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.axes;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.functions.FuncLast;
 import net.sourceforge.htmlunit.xpath.functions.FuncPosition;
@@ -44,7 +43,7 @@ public class HasPositionalPredChecker extends XPathVisitor {
    */
   public static boolean check(LocPathIterator path) {
     HasPositionalPredChecker hppc = new HasPositionalPredChecker();
-    path.callVisitors(null, hppc);
+    path.callVisitors(hppc);
     return hppc.m_hasPositionalPred;
   }
 
@@ -57,7 +56,7 @@ public class HasPositionalPredChecker extends XPathVisitor {
 
   /** {@inheritDoc} */
   @Override
-  public boolean visitPredicate(ExpressionOwner owner, Expression pred) {
+  public boolean visitPredicate(Expression pred) {
     m_predDepth++;
 
     if (m_predDepth == 1) {
@@ -69,7 +68,7 @@ public class HasPositionalPredChecker extends XPathVisitor {
           || (pred instanceof Mult)
           || (pred instanceof net.sourceforge.htmlunit.xpath.operations.Number)
           || (pred instanceof Function)) m_hasPositionalPred = true;
-      else pred.callVisitors(owner, this);
+      else pred.callVisitors(this);
     }
 
     m_predDepth--;

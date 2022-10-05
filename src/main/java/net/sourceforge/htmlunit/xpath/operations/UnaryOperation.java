@@ -18,13 +18,12 @@
 package net.sourceforge.htmlunit.xpath.operations;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The unary operation base class. */
-public abstract class UnaryOperation extends Expression implements ExpressionOwner {
+public abstract class UnaryOperation extends Expression {
 
   /**
    * The operand for the operation.
@@ -70,23 +69,10 @@ public abstract class UnaryOperation extends Expression implements ExpressionOwn
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     if (visitor.visitUnaryOperation()) {
-      m_right.callVisitors(this, visitor);
+      m_right.callVisitors(visitor);
     }
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Expression getExpression() {
-    return m_right;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void setExpression(Expression exp) {
-    exp.exprSetParent(this);
-    m_right = exp;
   }
 
   /** {@inheritDoc} */

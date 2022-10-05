@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  * The XPath class wraps an expression object and provides general services for execution of that
  * expression.
  */
-public class XPath implements ExpressionOwner {
+public class XPath {
 
   /**
    * The top of the expression tree.
@@ -47,19 +47,6 @@ public class XPath implements ExpressionOwner {
   /** initial the function table */
   private void initFunctionTable() {
     m_funcTable = new FunctionTable();
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Expression getExpression() {
-    return m_mainExp;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void setExpression(Expression exp) {
-    if (null != m_mainExp) exp.exprSetParent(m_mainExp.exprGetParent()); // a bit bogus
-    m_mainExp = exp;
   }
 
   /**
@@ -118,9 +105,7 @@ public class XPath implements ExpressionOwner {
 
     // System.out.println("----------------");
     Expression expr = compiler.compile(0);
-
-    // System.out.println("expr: "+expr);
-    this.setExpression(expr);
+    m_mainExp = expr;
   }
 
   /**
@@ -163,9 +148,7 @@ public class XPath implements ExpressionOwner {
 
     // System.out.println("----------------");
     Expression expr = compiler.compile(0);
-
-    // System.out.println("expr: "+expr);
-    this.setExpression(expr);
+    m_mainExp = expr;
   }
 
   /**
@@ -190,7 +173,7 @@ public class XPath implements ExpressionOwner {
    * @param expr The Expression object.
    */
   public XPath(Expression expr) {
-    this.setExpression(expr);
+    m_mainExp = expr;
     initFunctionTable();
   }
 
@@ -390,7 +373,7 @@ public class XPath implements ExpressionOwner {
    * @param visitor The visitor whose appropriate method will be called.
    */
   public void callVisitors(XPathVisitor visitor) {
-    m_mainExp.callVisitors(this, visitor);
+    m_mainExp.callVisitors(visitor);
   }
 
   /** The match score if no match is made. */

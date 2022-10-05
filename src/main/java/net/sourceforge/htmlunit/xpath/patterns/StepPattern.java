@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.patterns;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
@@ -30,7 +29,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 
 /** This class represents a single pattern match step. */
-public class StepPattern extends NodeTest implements SubContextList, ExpressionOwner {
+public class StepPattern extends NodeTest implements SubContextList {
 
   /** The axis for this test. */
   protected int m_axis;
@@ -610,30 +609,9 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     return m_axis;
   }
 
-  class PredOwner implements ExpressionOwner {
-    final int m_index;
-
-    PredOwner(int index) {
-      m_index = index;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Expression getExpression() {
-      return m_predicates[m_index];
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void setExpression(Expression exp) {
-      exp.exprSetParent(StepPattern.this);
-      m_predicates[m_index] = exp;
-    }
-  }
-
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     if (visitor.visitMatchPattern()) {
       callSubtreeVisitors(visitor);
     }
@@ -647,28 +625,14 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
     if (null != m_predicates) {
       int n = m_predicates.length;
       for (int i = 0; i < n; i++) {
-        ExpressionOwner predOwner = new PredOwner(i);
-        if (visitor.visitPredicate(predOwner, m_predicates[i])) {
-          m_predicates[i].callVisitors(predOwner, visitor);
+        if (visitor.visitPredicate(m_predicates[i])) {
+          m_predicates[i].callVisitors(visitor);
         }
       }
     }
     if (null != m_relativePathPattern) {
-      m_relativePathPattern.callVisitors(this, visitor);
+      m_relativePathPattern.callVisitors(visitor);
     }
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Expression getExpression() {
-    return m_relativePathPattern;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void setExpression(Expression exp) {
-    exp.exprSetParent(this);
-    m_relativePathPattern = (StepPattern) exp;
   }
 
   /** {@inheritDoc} */

@@ -65,12 +65,10 @@ public class XPathVisitor {
    * Visit a predicate within a location path. Note that there isn't a proper unique component for
    * predicates, and that the expression will be called also for whatever type Expression is.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
    * @param pred The predicate object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitPredicate(ExpressionOwner owner, Expression pred) {
+  public boolean visitPredicate(Expression pred) {
     return true;
   }
 

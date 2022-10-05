@@ -17,7 +17,6 @@
  */
 package net.sourceforge.htmlunit.xpath.axes;
 
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
@@ -438,7 +437,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     if (visitor.visitLocationPath()) {
       visitor.visitStep();
       callPredicateVisitors(visitor);

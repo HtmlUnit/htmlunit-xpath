@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.functions;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
@@ -85,7 +84,7 @@ public abstract class Function extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     if (visitor.visitFunction(this)) {
       callArgVisitors(visitor);
     }

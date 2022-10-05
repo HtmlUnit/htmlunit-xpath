@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.axes;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
@@ -187,25 +186,10 @@ public class FilterExprWalker extends AxesWalker {
     return m_exprObj.getAxis();
   }
 
-  class filterExprOwner implements ExpressionOwner {
-    /** {@inheritDoc} */
-    @Override
-    public Expression getExpression() {
-      return m_expr;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void setExpression(Expression exp) {
-      exp.exprSetParent(FilterExprWalker.this);
-      m_expr = exp;
-    }
-  }
-
   /** {@inheritDoc} */
   @Override
   public void callPredicateVisitors(XPathVisitor visitor) {
-    m_expr.callVisitors(new filterExprOwner(), visitor);
+    m_expr.callVisitors(visitor);
 
     super.callPredicateVisitors(visitor);
   }

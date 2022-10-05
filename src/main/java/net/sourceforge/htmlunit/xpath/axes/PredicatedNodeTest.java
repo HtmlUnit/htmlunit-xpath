@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.axes;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
@@ -372,9 +371,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     if (null != m_predicates) {
       int n = m_predicates.length;
       for (int i = 0; i < n; i++) {
-        ExpressionOwner predOwner = new PredOwner(i);
-        if (visitor.visitPredicate(predOwner, m_predicates[i])) {
-          m_predicates[i].callVisitors(predOwner, visitor);
+        if (visitor.visitPredicate(m_predicates[i])) {
+          m_predicates[i].callVisitors(visitor);
         }
       }
     }
@@ -423,25 +421,4 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
   /** If true, diagnostic messages about predicate execution will be posted. */
   static final boolean DEBUG_PREDICATECOUNTING = false;
-
-  class PredOwner implements ExpressionOwner {
-    final int m_index;
-
-    PredOwner(int index) {
-      m_index = index;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Expression getExpression() {
-      return m_predicates[m_index];
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void setExpression(Expression exp) {
-      exp.exprSetParent(PredicatedNodeTest.this);
-      m_predicates[m_index] = exp;
-    }
-  }
 }

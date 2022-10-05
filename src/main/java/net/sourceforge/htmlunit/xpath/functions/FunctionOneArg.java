@@ -18,12 +18,11 @@
 package net.sourceforge.htmlunit.xpath.functions;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /** Base class for functions that accept one argument. */
-public class FunctionOneArg extends Function implements ExpressionOwner {
+public class FunctionOneArg extends Function {
 
   /**
    * The first argument passed to the function (at index 0).
@@ -63,20 +62,7 @@ public class FunctionOneArg extends Function implements ExpressionOwner {
   /** {@inheritDoc} */
   @Override
   public void callArgVisitors(XPathVisitor visitor) {
-    if (null != m_arg0) m_arg0.callVisitors(this, visitor);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Expression getExpression() {
-    return m_arg0;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void setExpression(Expression exp) {
-    exp.exprSetParent(this);
-    m_arg0 = exp;
+    if (null != m_arg0) m_arg0.callVisitors(visitor);
   }
 
   /** {@inheritDoc} */

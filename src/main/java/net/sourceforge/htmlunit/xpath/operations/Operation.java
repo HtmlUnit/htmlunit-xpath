@@ -18,13 +18,12 @@
 package net.sourceforge.htmlunit.xpath.operations;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
 /** The baseclass for a binary operation. */
-public class Operation extends Expression implements ExpressionOwner {
+public class Operation extends Expression {
 
   /**
    * The left operand expression.
@@ -90,41 +89,13 @@ public class Operation extends Expression implements ExpressionOwner {
     return null; // no-op
   }
 
-  class LeftExprOwner implements ExpressionOwner {
-    /** {@inheritDoc} */
-    @Override
-    public Expression getExpression() {
-      return m_left;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void setExpression(Expression exp) {
-      exp.exprSetParent(Operation.this);
-      m_left = exp;
-    }
-  }
-
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
+  public void callVisitors(XPathVisitor visitor) {
     if (visitor.visitBinaryOperation()) {
-      m_left.callVisitors(new LeftExprOwner(), visitor);
-      m_right.callVisitors(this, visitor);
+      m_left.callVisitors(visitor);
+      m_right.callVisitors(visitor);
     }
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Expression getExpression() {
-    return m_right;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void setExpression(Expression exp) {
-    exp.exprSetParent(this);
-    m_right = exp;
   }
 
   /** {@inheritDoc} */

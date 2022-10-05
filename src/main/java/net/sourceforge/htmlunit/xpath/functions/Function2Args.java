@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.functions;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
@@ -62,26 +61,11 @@ public class Function2Args extends FunctionOneArg {
     return super.canTraverseOutsideSubtree() ? true : m_arg1.canTraverseOutsideSubtree();
   }
 
-  class Arg1Owner implements ExpressionOwner {
-    /** {@inheritDoc} */
-    @Override
-    public Expression getExpression() {
-      return m_arg1;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void setExpression(Expression exp) {
-      exp.exprSetParent(Function2Args.this);
-      m_arg1 = exp;
-    }
-  }
-
   /** {@inheritDoc} */
   @Override
   public void callArgVisitors(XPathVisitor visitor) {
     super.callArgVisitors(visitor);
-    if (null != m_arg1) m_arg1.callVisitors(new Arg1Owner(), visitor);
+    if (null != m_arg1) m_arg1.callVisitors(visitor);
   }
 
   /** {@inheritDoc} */

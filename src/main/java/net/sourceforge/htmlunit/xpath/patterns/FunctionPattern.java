@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.patterns;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.objects.XNumber;
@@ -140,25 +139,10 @@ public class FunctionPattern extends StepPattern {
     return score;
   }
 
-  class FunctionOwner implements ExpressionOwner {
-    /** {@inheritDoc} */
-    @Override
-    public Expression getExpression() {
-      return m_functionExpr;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void setExpression(Expression exp) {
-      exp.exprSetParent(FunctionPattern.this);
-      m_functionExpr = exp;
-    }
-  }
-
   /** {@inheritDoc} */
   @Override
   protected void callSubtreeVisitors(XPathVisitor visitor) {
-    m_functionExpr.callVisitors(new FunctionOwner(), visitor);
+    m_functionExpr.callVisitors(visitor);
     super.callSubtreeVisitors(visitor);
   }
 }

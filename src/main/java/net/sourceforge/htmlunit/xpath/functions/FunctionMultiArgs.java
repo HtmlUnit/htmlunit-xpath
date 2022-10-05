@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.functions;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionOwner;
 import net.sourceforge.htmlunit.xpath.XPathVisitor;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
@@ -90,27 +89,6 @@ public class FunctionMultiArgs extends Function3Args {
     return false;
   }
 
-  class ArgMultiOwner implements ExpressionOwner {
-    final int m_argIndex;
-
-    ArgMultiOwner(int index) {
-      m_argIndex = index;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Expression getExpression() {
-      return m_args[m_argIndex];
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void setExpression(Expression exp) {
-      exp.exprSetParent(FunctionMultiArgs.this);
-      m_args[m_argIndex] = exp;
-    }
-  }
-
   /** {@inheritDoc} */
   @Override
   public void callArgVisitors(XPathVisitor visitor) {
@@ -118,7 +96,7 @@ public class FunctionMultiArgs extends Function3Args {
     if (null != m_args) {
       int n = m_args.length;
       for (int i = 0; i < n; i++) {
-        m_args[i].callVisitors(new ArgMultiOwner(i), visitor);
+        m_args[i].callVisitors(visitor);
       }
     }
   }
