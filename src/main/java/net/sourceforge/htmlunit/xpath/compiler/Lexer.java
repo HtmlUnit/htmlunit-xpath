@@ -91,8 +91,7 @@ class Lexer {
     // needs about five time the length of the input path expression - to a
     // maximum of MAXTOKENQUEUESIZE*5. If the OpMapVector needs to grow, grow
     // it freely (second argument to constructor).
-    int initTokQueueSize =
-        ((pat.length() < OpMap.MAXTOKENQUEUESIZE) ? pat.length() : OpMap.MAXTOKENQUEUESIZE) * 5;
+    int initTokQueueSize = (Math.min(pat.length(), OpMap.MAXTOKENQUEUESIZE)) * 5;
     m_compiler.m_opMap =
         new OpMapVector(initTokQueueSize, OpMap.BLOCKTOKENQUEUESIZE * 5, OpMap.MAPINDEX_LENGTH);
 

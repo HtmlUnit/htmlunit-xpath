@@ -370,9 +370,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   public void callPredicateVisitors(XPathVisitor visitor) {
     if (null != m_predicates) {
       int n = m_predicates.length;
-      for (int i = 0; i < n; i++) {
-        if (visitor.visitPredicate(m_predicates[i])) {
-          m_predicates[i].callVisitors(visitor);
+      for (Expression m_predicate : m_predicates) {
+        if (visitor.visitPredicate(m_predicate)) {
+          m_predicate.callVisitors(visitor);
         }
       }
     }

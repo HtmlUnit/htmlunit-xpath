@@ -305,8 +305,8 @@ public class UnionPathIterator extends LocPathIterator
     if (visitor.visitUnionPath()) {
       if (null != m_exprs) {
         int n = m_exprs.length;
-        for (int i = 0; i < n; i++) {
-          m_exprs[i].callVisitors(visitor);
+        for (LocPathIterator m_expr : m_exprs) {
+          m_expr.callVisitors(visitor);
         }
       }
     }

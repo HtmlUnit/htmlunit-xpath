@@ -285,7 +285,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /** {@inheritDoc} */
   @Override
   public void allowDetachToRelease(boolean allowRelease) {
-    if ((!allowRelease) && !hasCache()) {
+    if (!allowRelease && !hasCache()) {
       setShouldCacheNodes(true);
     }
 
@@ -402,14 +402,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
     NodeSequence seq = (NodeSequence) super.clone();
     seq.m_next = 0;
-    if (m_cache != null) {
-      // In making this clone of an iterator we are making
-      // another NodeSequence object it has a reference
-      // to the same IteratorCache object as the original
-      // so we need to remember that more than one
-      // NodeSequence object shares the cache.
-      m_cache.increaseUseCount();
-    }
 
     return seq;
   }
@@ -419,14 +411,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   public Object clone() throws CloneNotSupportedException {
     NodeSequence clone = (NodeSequence) super.clone();
     if (null != m_iter) clone.m_iter = (DTMIterator) m_iter.clone();
-    if (m_cache != null) {
-      // In making this clone of an iterator we are making
-      // another NodeSequence object it has a reference
-      // to the same IteratorCache object as the original
-      // so we need to remember that more than one
-      // NodeSequence object shares the cache.
-      m_cache.increaseUseCount();
-    }
 
     return clone;
   }
@@ -525,7 +509,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     } else if (obj instanceof IteratorCache) {
       IteratorCache cache = (IteratorCache) obj;
       m_cache = cache;
-      m_cache.increaseUseCount();
 
       // Keep our superclass informed of the current NodeVector
       super.setObject(cache.getVector());
@@ -587,19 +570,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
      */
     private boolean m_isComplete2;
 
-    private int m_useCount2;
-
     IteratorCache() {
       m_vec2 = null;
       m_isComplete2 = false;
-      m_useCount2 = 1;
-    }
-
-    /**
-     * This method is called when yet another NodeSequence object uses, or shares this same cache.
-     */
-    private void increaseUseCount() {
-      if (m_vec2 != null) m_useCount2++;
     }
 
     /**
@@ -608,7 +581,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
      */
     private void setVector(NodeVector nv) {
       m_vec2 = nv;
-      m_useCount2 = 1;
     }
 
     /** Get the cached list of nodes obtained from the iterator so far. */

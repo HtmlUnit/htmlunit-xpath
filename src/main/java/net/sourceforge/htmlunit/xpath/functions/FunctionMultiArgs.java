@@ -95,8 +95,8 @@ public class FunctionMultiArgs extends Function3Args {
     super.callArgVisitors(visitor);
     if (null != m_args) {
       int n = m_args.length;
-      for (int i = 0; i < n; i++) {
-        m_args[i].callVisitors(visitor);
+      for (Expression m_arg : m_args) {
+        m_arg.callVisitors(visitor);
       }
     }
   }

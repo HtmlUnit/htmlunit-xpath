@@ -1300,8 +1300,10 @@ public class WalkerFactory {
       switch (stepType) {
         case OpCodes.FROM_ATTRIBUTES:
         case OpCodes.MATCH_ATTRIBUTE:
-          if (foundWildAttribute) // Maybe not needed, but be safe.
-          return false;
+          if (foundWildAttribute) {
+            // Maybe not needed, but be safe.
+            return false;
+          }
 
           // This doesn't seem to work as a test for wild card. Hmph.
           // int nodeTestType = compiler.getStepTestType(stepOpCodePos);

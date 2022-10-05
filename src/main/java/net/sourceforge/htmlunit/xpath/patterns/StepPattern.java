@@ -615,9 +615,9 @@ public class StepPattern extends NodeTest implements SubContextList {
   protected void callSubtreeVisitors(XPathVisitor visitor) {
     if (null != m_predicates) {
       int n = m_predicates.length;
-      for (int i = 0; i < n; i++) {
-        if (visitor.visitPredicate(m_predicates[i])) {
-          m_predicates[i].callVisitors(visitor);
+      for (Expression m_predicate : m_predicates) {
+        if (visitor.visitPredicate(m_predicate)) {
+          m_predicate.callVisitors(visitor);
         }
       }
     }

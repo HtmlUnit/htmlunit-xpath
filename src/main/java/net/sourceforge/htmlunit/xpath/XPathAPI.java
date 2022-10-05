@@ -151,7 +151,6 @@ public class XPathAPI {
    * @return An XObject, which can be used to obtain a string, number, nodelist, etc, should never
    *     be null.
    * @see net.sourceforge.htmlunit.xpath.objects.XObject
-   * @see net.sourceforge.htmlunit.xpath.objects.XNull
    * @see net.sourceforge.htmlunit.xpath.objects.XBoolean
    * @see net.sourceforge.htmlunit.xpath.objects.XNumber
    * @see net.sourceforge.htmlunit.xpath.objects.XString
@@ -173,7 +172,6 @@ public class XPathAPI {
    * @return An XObject, which can be used to obtain a string, number, nodelist, etc, should never
    *     be null.
    * @see net.sourceforge.htmlunit.xpath.objects.XObject
-   * @see net.sourceforge.htmlunit.xpath.objects.XNull
    * @see net.sourceforge.htmlunit.xpath.objects.XBoolean
    * @see net.sourceforge.htmlunit.xpath.objects.XNumber
    * @see net.sourceforge.htmlunit.xpath.objects.XString
@@ -224,7 +222,6 @@ public class XPathAPI {
    * @return An XObject, which can be used to obtain a string, number, nodelist, etc, should never
    *     be null.
    * @see net.sourceforge.htmlunit.xpath.objects.XObject
-   * @see net.sourceforge.htmlunit.xpath.objects.XNull
    * @see net.sourceforge.htmlunit.xpath.objects.XBoolean
    * @see net.sourceforge.htmlunit.xpath.objects.XNumber
    * @see net.sourceforge.htmlunit.xpath.objects.XString
