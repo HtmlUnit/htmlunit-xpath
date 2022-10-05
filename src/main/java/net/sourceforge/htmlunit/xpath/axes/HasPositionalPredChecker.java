@@ -50,7 +50,7 @@ public class HasPositionalPredChecker extends XPathVisitor {
 
   /** {@inheritDoc} */
   @Override
-  public boolean visitFunction(ExpressionOwner owner, Function func) {
+  public boolean visitFunction(Function func) {
     if ((func instanceof FuncPosition) || (func instanceof FuncLast)) m_hasPositionalPred = true;
     return true;
   }

@@ -86,7 +86,7 @@ public abstract class Function extends Expression {
   /** {@inheritDoc} */
   @Override
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor) {
-    if (visitor.visitFunction(owner, this)) {
+    if (visitor.visitFunction(this)) {
       callArgVisitors(visitor);
     }
   }

@@ -408,15 +408,7 @@ public class XObject extends Expression {
   protected void error(String msg, Object[] args) throws javax.xml.transform.TransformerException {
 
     String fmsg = XPATHMessages.createXPATHMessage(msg, args);
-
-    // boolean shouldThrow = support.problem(m_support.XPATHPROCESSOR,
-    // m_support.ERROR,
-    // null,
-    // null, fmsg, 0, 0);
-    // if(shouldThrow)
-    {
-      throw new XPathException(fmsg, this);
-    }
+    throw new XPathException(fmsg, this);
   }
 
   /** {@inheritDoc} */

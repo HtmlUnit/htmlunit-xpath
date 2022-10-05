@@ -95,12 +95,10 @@ public class XPathVisitor {
   /**
    * Visit a function.
    *
-   * @param owner The owner of the expression, to which the expression can be reset if rewriting
-   *     takes place.
    * @param func The function reference object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitFunction(ExpressionOwner owner, Function func) {
+  public boolean visitFunction(Function func) {
     return true;
   }
 

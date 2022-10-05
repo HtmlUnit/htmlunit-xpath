@@ -28,13 +28,6 @@ import javax.xml.transform.TransformerException;
 public class XPathException extends TransformerException {
 
   /**
-   * A nested exception.
-   *
-   * @serial
-   */
-  protected Exception m_exception;
-
-  /**
    * Create an XPathException object that holds an error message.
    *
    * @param message The error message.
@@ -63,50 +56,12 @@ public class XPathException extends TransformerException {
       super.printStackTrace(s);
     } catch (Exception e) {
     }
-
-    Throwable exception = m_exception;
-
-    for (int i = 0; (i < 10) && (null != exception); i++) {
-      s.println("---------");
-      exception.printStackTrace(s);
-
-      if (exception instanceof TransformerException) {
-        TransformerException se = (TransformerException) exception;
-        Throwable prev = exception;
-
-        exception = se.getException();
-
-        if (prev == exception) break;
-      } else {
-        exception = null;
-      }
-    }
   }
 
   /** {@inheritDoc} */
   @Override
   public String getMessage() {
-
     String lastMessage = super.getMessage();
-    Throwable exception = m_exception;
-
-    while (null != exception) {
-      String nextMessage = exception.getMessage();
-
-      if (null != nextMessage) lastMessage = nextMessage;
-
-      if (exception instanceof TransformerException) {
-        TransformerException se = (TransformerException) exception;
-        Throwable prev = exception;
-
-        exception = se.getException();
-
-        if (prev == exception) break;
-      } else {
-        exception = null;
-      }
-    }
-
     return (null != lastMessage) ? lastMessage : "";
   }
 
@@ -125,6 +80,6 @@ public class XPathException extends TransformerException {
   /** {@inheritDoc} */
   @Override
   public Throwable getException() {
-    return m_exception;
+    return null;
   }
 }
