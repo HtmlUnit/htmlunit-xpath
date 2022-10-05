@@ -39,7 +39,7 @@ public class XMLMessages {
    * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted message string.
    */
-  public static String createXMLMessage(String msgKey, Object args[]) {
+  public static String createXMLMessage(String msgKey, Object[] args) {
     if (XMLBundle == null) XMLBundle = new XMLErrorResources();
 
     return createMsg(XMLBundle, msgKey, args);
@@ -55,7 +55,7 @@ public class XMLMessages {
    * @return The formatted message string.
    */
   public static String createMsg(
-      ListResourceBundle fResourceBundle, String msgKey, Object args[]) // throws
+      ListResourceBundle fResourceBundle, String msgKey, Object[] args) // throws
         // Exception
       {
 

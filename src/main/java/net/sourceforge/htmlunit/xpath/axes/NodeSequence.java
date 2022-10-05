@@ -285,7 +285,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /** {@inheritDoc} */
   @Override
   public void allowDetachToRelease(boolean allowRelease) {
-    if ((false == allowRelease) && !hasCache()) {
+    if ((!allowRelease) && !hasCache()) {
       setShouldCacheNodes(true);
     }
 
@@ -324,8 +324,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       if (!hasCache()) {
         SetVector(new NodeVector());
       }
-      // else
-      // getVector().RemoveAllNoClear(); // Is this good?
     } else SetVector(null);
   }
 

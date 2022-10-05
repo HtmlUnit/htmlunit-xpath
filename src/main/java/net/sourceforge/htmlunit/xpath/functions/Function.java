@@ -41,8 +41,6 @@ public abstract class Function extends Expression {
    *     function.
    */
   public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
-    // throw new WrongNumberArgsException(XSLMessages.createXPATHMessage("zero",
-    // null));
     reportWrongNumberArgs();
   }
 

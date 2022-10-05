@@ -288,7 +288,7 @@ public class FunctionTable {
     if (null != tblEntry) return true;
     else {
       tblEntry = m_functionID_customer.get(methName);
-      return (null != tblEntry) ? true : false;
+      return null != tblEntry;
     }
   }
 }

@@ -22,9 +22,6 @@ import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 /** This class iterates over set of nodes that needs to be sorted. */
 public class WalkingIteratorSorted extends WalkingIterator {
 
-  // /** True if the nodes will be found in document order */
-  // protected boolean m_inNaturalOrder = false;
-
   /** True if the nodes will be found in document order, and this can be determined statically. */
   protected final boolean m_inNaturalOrderStatic = false;
 

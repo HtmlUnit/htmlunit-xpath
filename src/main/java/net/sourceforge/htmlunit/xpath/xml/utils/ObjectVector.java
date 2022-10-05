@@ -30,7 +30,7 @@ public class ObjectVector implements Cloneable {
   protected final int m_blocksize;
 
   /** Array of objects */
-  protected Object m_map[];
+  protected Object[] m_map;
 
   /** Number of ints in array */
   protected int m_firstFree = 0;
@@ -83,7 +83,7 @@ public class ObjectVector implements Cloneable {
     if ((m_firstFree + 1) >= m_mapSize) {
       m_mapSize += m_blocksize;
 
-      Object newMap[] = new Object[m_mapSize];
+      Object[] newMap = new Object[m_mapSize];
 
       System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
 
@@ -126,7 +126,7 @@ public class ObjectVector implements Cloneable {
    */
   public final void setToSize(int size) {
 
-    Object newMap[] = new Object[size];
+    Object[] newMap = new Object[size];
 
     System.arraycopy(m_map, 0, newMap, 0, m_firstFree);
     m_mapSize = size;

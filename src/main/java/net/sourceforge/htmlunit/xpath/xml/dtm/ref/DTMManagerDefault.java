@@ -62,7 +62,7 @@ public class DTMManagerDefault extends DTMManager {
    * <p>This array grows as necessary; see addDTM(). Growth is uncommon... but access needs to be
    * blindingly fast since it's used in node addressing.
    */
-  protected DTM m_dtms[] = new DTM[256];
+  protected DTM[] m_dtms = new DTM[256];
 
   /**
    * Map from DTM identifier numbers to offsets. For small DTMs with a single identifier, this will
@@ -76,7 +76,7 @@ public class DTMManagerDefault extends DTMManager {
    * blindingly fast since it's used in node addressing. (And at the moment, that includes accessing
    * it from DTMDefaultBase, which is why this is not Protected or Private.)
    */
-  int m_dtm_offsets[] = new int[256];
+  int[] m_dtm_offsets = new int[256];
 
   /**
    * Add a DTM to the DTM table.
@@ -113,10 +113,10 @@ public class DTMManagerDefault extends DTMManager {
       // %REVIEW% Should throw a more diagnostic error if we go over the max...
       int newlen = Math.min(id + 256, IDENT_MAX_DTMS);
 
-      DTM new_m_dtms[] = new DTM[newlen];
+      DTM[] new_m_dtms = new DTM[newlen];
       System.arraycopy(m_dtms, 0, new_m_dtms, 0, oldlen);
       m_dtms = new_m_dtms;
-      int new_m_dtm_offsets[] = new int[newlen];
+      int[] new_m_dtm_offsets = new int[newlen];
       System.arraycopy(m_dtm_offsets, 0, new_m_dtm_offsets, 0, oldlen);
       m_dtm_offsets = new_m_dtm_offsets;
     }

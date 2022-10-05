@@ -50,14 +50,11 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   final String prefix;
   final String uri;
   final String nodename;
-  final int handle;
 
-  DOM2DTMdefaultNamespaceDeclarationNode(
-      Element pseudoparent, String prefix, String uri, int handle) {
+  DOM2DTMdefaultNamespaceDeclarationNode(Element pseudoparent, String prefix, String uri) {
     this.pseudoparent = pseudoparent;
     this.prefix = prefix;
     this.uri = uri;
-    this.handle = handle;
     this.nodename = "xmlns:" + prefix;
   }
 

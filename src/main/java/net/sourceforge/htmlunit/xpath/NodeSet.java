@@ -196,7 +196,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
    *
    * @serial
    */
-  Node m_map[];
+  Node[] m_map;
 
   /**
    * Number of nodes in this NodeVector.
@@ -253,7 +253,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
       } else {
         m_mapSize += m_blocksize;
 
-        Node newMap[] = new Node[m_mapSize];
+        Node[] newMap = new Node[m_mapSize];
 
         System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
 

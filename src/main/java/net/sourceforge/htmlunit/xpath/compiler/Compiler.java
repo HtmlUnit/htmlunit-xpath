@@ -72,11 +72,6 @@ public class Compiler extends OpMap {
     m_functionTable = fTable;
   }
 
-  /** Construct a Compiler instance that has a null error listener and a null source locator. */
-  public Compiler() {
-    m_errorHandler = null;
-  }
-
   /**
    * Execute the XPath object from a given opcode position.
    *
@@ -376,21 +371,6 @@ public class Compiler extends OpMap {
   protected Expression mod(int opPos) throws TransformerException {
     return compileOperation(new Mod(), opPos);
   }
-
-  /*
-   * Compile a 'quo' operation.
-   *
-   * @param opPos The current position in the m_opMap array.
-   *
-   * @return reference to {@link net.sourceforge.htmlunit.xpath.operations.Quo}
-   * instance.
-   *
-   * @throws TransformerException if a error occurs creating the Expression.
-   */
-  // protected Expression quo(int opPos) throws TransformerException
-  // {
-  // return compileOperation(new Quo(), opPos);
-  // }
 
   /**
    * Compile a unary '-' operation.
@@ -924,24 +904,6 @@ public class Compiler extends OpMap {
     }
   }
 
-  /**
-   * Tell the user of an assertion error, and probably throw an exception.
-   *
-   * @param b If false, a runtime exception will be thrown.
-   * @param msg The assertion message, which should be informative.
-   * @throws RuntimeException if the b argument is false.
-   */
-  public void assertion(boolean b, java.lang.String msg) {
-
-    if (!b) {
-      java.lang.String fMsg =
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_INCORRECT_PROGRAMMER_ASSERTION, new Object[] {msg});
-
-      throw new RuntimeException(fMsg);
-    }
-  }
-
   /** {@inheritDoc} */
   @Override
   public void error(String msg, Object[] args) throws TransformerException {
@@ -983,5 +945,5 @@ public class Compiler extends OpMap {
   final ErrorListener m_errorHandler;
 
   /** The FunctionTable for all xpath build-in functions */
-  private FunctionTable m_functionTable;
+  private final FunctionTable m_functionTable;
 }

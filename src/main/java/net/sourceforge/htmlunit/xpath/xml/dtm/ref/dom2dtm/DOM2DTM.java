@@ -457,10 +457,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
           attrIndex =
               addNode(
                   new DOM2DTMdefaultNamespaceDeclarationNode(
-                      (Element) next,
-                      "xml",
-                      NAMESPACE_DECL_NS,
-                      makeNodeHandle(((attrIndex == NULL) ? nextindex : attrIndex) + 1)),
+                      (Element) next, "xml", NAMESPACE_DECL_NS),
                   nextindex,
                   attrIndex,
                   NULL);

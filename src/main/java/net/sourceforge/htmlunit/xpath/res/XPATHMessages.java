@@ -33,7 +33,7 @@ public class XPATHMessages extends XMLMessages {
    * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted message string.
    */
-  public static String createXPATHMessage(String msgKey, Object args[]) // throws Exception
+  public static String createXPATHMessage(String msgKey, Object[] args) // throws Exception
       {
     if (XPATHBundle == null) XPATHBundle = new XPATHErrorResources();
 
@@ -51,7 +51,7 @@ public class XPATHMessages extends XMLMessages {
    * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted warning string.
    */
-  public static String createXPATHWarning(String msgKey, Object args[]) // throws Exception
+  public static String createXPATHWarning(String msgKey, Object[] args) // throws Exception
       {
     if (XPATHBundle == null) {
       XPATHBundle = new XPATHErrorResources();
@@ -70,7 +70,7 @@ public class XPATHMessages extends XMLMessages {
    * @return The formatted message string.
    */
   public static String createXPATHMsg(
-      ListResourceBundle fResourceBundle, String msgKey, Object args[]) // throws
+      ListResourceBundle fResourceBundle, String msgKey, Object[] args) // throws
         // Exception
       {
 

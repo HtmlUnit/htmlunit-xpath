@@ -229,7 +229,7 @@ public class XPathParser {
    * @return If m_token is null, returns false, or return true if c matches the current token.
    */
   final boolean tokenIs(char c) {
-    return (m_token != null) ? (m_tokenChar == c) : false;
+    return m_token != null && (m_tokenChar == c);
   }
 
   /**
@@ -247,7 +247,7 @@ public class XPathParser {
     if ((pos <= m_ops.getTokenQueueSize()) && (pos > 0) && (m_ops.getTokenQueueSize() != 0)) {
       String tok = (String) m_ops.m_tokenQueue.elementAt(pos - 1);
 
-      b = (tok.length() == 1) ? (tok.charAt(0) == c) : false;
+      b = tok.length() == 1 && (tok.charAt(0) == c);
     } else {
       b = false;
     }
@@ -818,7 +818,7 @@ public class XPathParser {
       PathExpr();
 
       if (tokenIs('|')) {
-        if (false == foundUnion) {
+        if (!foundUnion) {
           foundUnion = true;
 
           insertOp(opPos, 2, OpCodes.OP_UNION);

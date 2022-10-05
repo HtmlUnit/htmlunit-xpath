@@ -47,7 +47,7 @@ public class IntStack extends IntVector {
     if ((m_firstFree + 1) >= m_mapSize) {
       m_mapSize += m_blocksize;
 
-      int newMap[] = new int[m_mapSize];
+      int[] newMap = new int[m_mapSize];
 
       System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
 

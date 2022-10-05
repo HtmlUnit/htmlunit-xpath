@@ -27,7 +27,7 @@ public class OpMapVector {
   protected final int m_blocksize;
 
   /** Array of ints */
-  protected int m_map[]; // IntStack is trying to see this directly
+  protected int[] m_map; // IntStack is trying to see this directly
 
   /** Position where size of array is kept */
   protected int m_lengthPos = 0;
@@ -74,7 +74,7 @@ public class OpMapVector {
 
       m_mapSize += m_blocksize;
 
-      int newMap[] = new int[m_mapSize];
+      int[] newMap = new int[m_mapSize];
 
       System.arraycopy(m_map, 0, newMap, 0, oldSize);
 
@@ -91,7 +91,7 @@ public class OpMapVector {
    */
   public final void setToSize(int size) {
 
-    int newMap[] = new int[size];
+    int[] newMap = new int[size];
 
     System.arraycopy(m_map, 0, newMap, 0, m_map[m_lengthPos]);
 

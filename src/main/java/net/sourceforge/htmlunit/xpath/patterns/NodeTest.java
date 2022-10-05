@@ -333,9 +333,6 @@ public class NodeTest extends Expression {
    * @return true if the strings match according to the rules of this method.
    */
   private static boolean subPartMatch(String p, String t) {
-
-    // boolean b = (p == t) || ((null != p) && ((t == WILD) || p.equals(t)));
-    // System.out.println("subPartMatch - p: "+p+", t: "+t+", result: "+b);
     return (p == t) || ((null != p) && ((t == WILD) || p.equals(t)));
   }
 
@@ -372,10 +369,6 @@ public class NodeTest extends Expression {
         return m_score;
       case DTMFilter.SHOW_CDATA_SECTION:
       case DTMFilter.SHOW_TEXT:
-
-        // was:
-        // return (!xctxt.getDOMHelper().shouldStripSourceNode(context))
-        // ? m_score : SCORE_NONE;
         return m_score;
       case DTMFilter.SHOW_PROCESSING_INSTRUCTION:
         return subPartMatch(dtm.getNodeName(context), m_name) ? m_score : SCORE_NONE;
@@ -429,10 +422,6 @@ public class NodeTest extends Expression {
         return m_score;
       case DTMFilter.SHOW_CDATA_SECTION:
       case DTMFilter.SHOW_TEXT:
-
-        // was:
-        // return (!xctxt.getDOMHelper().shouldStripSourceNode(context))
-        // ? m_score : SCORE_NONE;
         return m_score;
       case DTMFilter.SHOW_PROCESSING_INSTRUCTION:
         return subPartMatch(dtm.getNodeName(context), m_name) ? m_score : SCORE_NONE;

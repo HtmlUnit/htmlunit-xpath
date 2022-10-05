@@ -34,7 +34,7 @@ public class NodeVector implements Cloneable {
    *
    * @serial
    */
-  private int m_map[];
+  private int[] m_map;
 
   /**
    * Number of nodes in this NodeVector.
@@ -94,7 +94,7 @@ public class NodeVector implements Cloneable {
       } else {
         m_mapSize += m_blocksize;
 
-        int newMap[] = new int[m_mapSize];
+        int[] newMap = new int[m_mapSize];
 
         System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
 
@@ -123,7 +123,7 @@ public class NodeVector implements Cloneable {
       } else {
         m_mapSize += m_blocksize;
 
-        int newMap[] = new int[m_mapSize];
+        int[] newMap = new int[m_mapSize];
 
         System.arraycopy(m_map, 0, newMap, 0, ff + 1);
 
@@ -172,7 +172,7 @@ public class NodeVector implements Cloneable {
     } else if ((m_firstFree + 1) >= m_mapSize) {
       m_mapSize += m_blocksize;
 
-      int newMap[] = new int[m_mapSize];
+      int[] newMap = new int[m_mapSize];
 
       System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
 

@@ -58,7 +58,7 @@ public class Function2Args extends FunctionOneArg {
   /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
-    return super.canTraverseOutsideSubtree() ? true : m_arg1.canTraverseOutsideSubtree();
+    return super.canTraverseOutsideSubtree() || m_arg1.canTraverseOutsideSubtree();
   }
 
   /** {@inheritDoc} */

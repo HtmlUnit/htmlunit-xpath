@@ -31,7 +31,7 @@ public class IntVector {
   protected final int m_blocksize;
 
   /** Array of ints */
-  protected int m_map[]; // IntStack is trying to see this directly
+  protected int[] m_map; // IntStack is trying to see this directly
 
   /** Number of ints in array */
   protected int m_firstFree = 0;

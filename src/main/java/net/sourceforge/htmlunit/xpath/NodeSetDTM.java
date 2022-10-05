@@ -235,66 +235,6 @@ public class NodeSetDTM extends NodeVector
     this.addElement(n);
   }
 
-  // %TBD%
-  // /**
-  // * Copy NodeList members into this nodelist, adding in
-  // * document order. If a node is null, don't add it.
-  // *
-  // * @param nodelist List of nodes which should now be referenced by
-  // * this NodeSetDTM.
-  // * @throws RuntimeException thrown if this NodeSetDTM is not of
-  // * a mutable type.
-  // */
-  // public void addNodes(NodeList nodelist)
-  // {
-  //
-  // if (!m_mutable)
-  // throw new RuntimeException("This NodeSetDTM is not mutable!");
-  //
-  // if (null != nodelist) // defensive to fix a bug that Sanjiva reported.
-  // {
-  // int nChildren = nodelist.getLength();
-  //
-  // for (int i = 0; i < nChildren; i++)
-  // {
-  // int obj = nodelist.item(i);
-  //
-  // if (null != obj)
-  // {
-  // addElement(obj);
-  // }
-  // }
-  // }
-  //
-  // // checkDups();
-  // }
-
-  // %TBD%
-  // /**
-  // * <p>Copy NodeList members into this nodelist, adding in
-  // * document order. Only genuine node references will be copied;
-  // * nulls appearing in the source NodeSetDTM will
-  // * not be added to this one. </p>
-  // *
-  // * <p> In case you're wondering why this function is needed: NodeSetDTM
-  // * implements both DTMIterator and NodeList. If this method isn't
-  // * provided, Java can't decide which of those to use when addNodes()
-  // * is invoked. Providing the more-explicit match avoids that
-  // * ambiguity.)</p>
-  // *
-  // * @param ns NodeSetDTM whose members should be merged into this NodeSetDTM.
-  // * @throws RuntimeException thrown if this NodeSetDTM is not of
-  // * a mutable type.
-  // */
-  // public void addNodes(NodeSetDTM ns)
-  // {
-  //
-  // if (!m_mutable)
-  // throw new RuntimeException("This NodeSetDTM is not mutable!");
-  //
-  // addNodes((DTMIterator) ns);
-  // }
-
   /**
    * Copy NodeList members into this nodelist, adding in document order. Null references are not
    * added.

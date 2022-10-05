@@ -29,12 +29,6 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
   protected int _position = 0;
 
   /**
-   * The position of the marked node within the iteration; a saved itaration state that we may want
-   * to come back to. Note that only one mark is maintained; there is no stack.
-   */
-  protected int _markedNode;
-
-  /**
    * The handle to the start, or root, of the iteration. Set this to END to construct an empty
    * iterator.
    */

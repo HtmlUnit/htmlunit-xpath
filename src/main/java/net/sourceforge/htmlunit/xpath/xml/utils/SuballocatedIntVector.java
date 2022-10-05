@@ -50,7 +50,7 @@ public class SuballocatedIntVector {
   protected final int m_numblocks;
 
   /** Array of arrays of ints */
-  protected int m_map[][];
+  protected int[][] m_map;
 
   /** Number of ints in array */
   protected int m_firstFree = 0;
@@ -59,7 +59,7 @@ public class SuballocatedIntVector {
   protected final int[] m_map0;
 
   /** "Shortcut" handle to most recently added row of m_map. Very helpful during construction. */
-  protected int m_buildCache[];
+  protected int[] m_buildCache;
 
   protected int m_buildCacheStartIndex;
 

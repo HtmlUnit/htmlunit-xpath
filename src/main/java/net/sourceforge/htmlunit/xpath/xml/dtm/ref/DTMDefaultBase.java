@@ -1175,9 +1175,7 @@ public abstract class DTMDefaultBase implements DTM {
   @Override
   public int getExpandedTypeID(String namespace, String localName, int type) {
 
-    ExpandedNameTable ent = m_expandedNameTable;
-
-    return ent.getExpandedTypeID(namespace, localName, type);
+    return m_expandedNameTable.getExpandedTypeID(namespace, localName, type);
   }
 
   /** {@inheritDoc} */

@@ -123,7 +123,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
      * single node.
      */
     protected int _currentNode;
-
   } // end of InternalAxisIteratorBase
 
   /** Iterator that returns all immediate children of a given node */
@@ -383,9 +382,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     /** (not sure yet... -sb) */
     protected int _sp, _oldsp;
 
-    protected int _markedsp;
-    protected int _markedNode;
-
     /** {@inheritDoc} */
     @Override
     public boolean isReverse() {
@@ -476,7 +472,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
       resetPosition();
     }
-
   } // end of PrecedingIterator
 
   /** Iterator that returns following nodes of for a given node. */
@@ -522,8 +517,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         new net.sourceforge.htmlunit.xpath.xml.utils.NodeVector();
 
     int m_ancestorsPos;
-
-    int m_markedPos;
 
     /** {@inheritDoc} */
     @Override
@@ -605,7 +598,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
       return returnNode(next);
     }
-
   } // end of AncestorIterator
 
   /** Iterator that returns the descendants of a given node. */

@@ -109,6 +109,6 @@ public class FunctionDef1Arg extends FunctionOneArg {
   /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
-    return (null == m_arg0) ? false : super.canTraverseOutsideSubtree();
+    return null != m_arg0 && super.canTraverseOutsideSubtree();
   }
 }

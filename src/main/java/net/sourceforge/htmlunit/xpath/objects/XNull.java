@@ -23,11 +23,6 @@ package net.sourceforge.htmlunit.xpath.objects;
  */
 public class XNull extends XNodeSet {
 
-  /** Create an XObject. */
-  public XNull() {
-    super();
-  }
-
   /** {@inheritDoc} */
   @Override
   public int getType() {

@@ -544,12 +544,6 @@ public class WalkerFactory {
     while (OpCodes.ENDOP != (stepType = compiler.getOp(stepOpCodePos))) {
       stepCount++;
 
-      // String namespace = compiler.getStepNS(stepOpCodePos);
-      // boolean isNSWild = (null != namespace)
-      // ? namespace.equals(NodeTest.WILD) : false;
-      // String localname = compiler.getStepLocalName(stepOpCodePos);
-      // boolean isWild = (null != localname) ? localname.equals(NodeTest.WILD) :
-      // false;
       boolean predAnalysis = analyzePredicate(compiler, stepOpCodePos, stepType);
 
       if (predAnalysis) analysisResult |= BIT_PREDICATE;
@@ -940,7 +934,7 @@ public class WalkerFactory {
     int pos = compiler.getFirstPredicateOpPos(opPos);
     int nPredicates = compiler.countPredicates(pos);
 
-    return (nPredicates > 0) ? true : false;
+    return nPredicates > 0;
   }
 
   /**

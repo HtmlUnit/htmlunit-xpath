@@ -45,7 +45,7 @@ class Lexer {
    * backwards. Each element that is a 'target', (right-most top level element name) has TARGETEXTRA
    * added to it.
    */
-  private int m_patternMap[] = new int[100];
+  private int[] m_patternMap = new int[100];
 
   /** Ignore this, it is going away. The number of elements that m_patternMap maps; */
   private int m_patternMapSize;
@@ -318,7 +318,7 @@ class Lexer {
 
     if (0 == nesting) {
       if (m_patternMapSize >= m_patternMap.length) {
-        int patternMap[] = m_patternMap;
+        int[] patternMap = m_patternMap;
         int len = m_patternMap.length;
         m_patternMap = new int[m_patternMapSize + 100];
         System.arraycopy(patternMap, 0, m_patternMap, 0, len);

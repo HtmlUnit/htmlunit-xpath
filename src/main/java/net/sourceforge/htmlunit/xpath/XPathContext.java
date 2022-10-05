@@ -245,16 +245,6 @@ public class XPathContext extends DTMManager {
     m_currentNodes.quickPop(1);
   }
 
-  /** Set the current location path iterator root. */
-  public final void pushIteratorRoot(int n) {
-    m_iteratorRoots.push(n);
-  }
-
-  /** Pop the current location path iterator root. */
-  public final void popIteratorRoot() {
-    m_iteratorRoots.popQuick();
-  }
-
   /** Get the current location path iterator root. */
   public final int getIteratorRoot() {
     return m_iteratorRoots.peepOrNull();
@@ -281,20 +271,6 @@ public class XPathContext extends DTMManager {
 
   public final void popPredicatePos() {
     m_predicatePos.pop();
-  }
-
-  /**
-   * Set the current node that is the expression's context (i.e. for current() support).
-   *
-   * @param n The sub-expression node to be current.
-   */
-  public final void pushCurrentExpressionNode(int n) {
-    m_currentExpressionNodes.push(n);
-  }
-
-  /** Pop the current node that is the expression's context (i.e. for current() support). */
-  public final void popCurrentExpressionNode() {
-    m_currentExpressionNodes.quickPop(1);
   }
 
   private final Stack<PrefixResolver> m_prefixResolvers = new Stack<>();

@@ -157,7 +157,7 @@ public class XString extends XObject {
    *
    * @exception NullPointerException if <code>dst</code> is <code>null</code>
    */
-  public void getChars(int srcBegin, int srcEnd, char dst[], int dstBegin) {
+  public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
     str().getChars(srcBegin, srcEnd, dst, dstBegin);
   }
 

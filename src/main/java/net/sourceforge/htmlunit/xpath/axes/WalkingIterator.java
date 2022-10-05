@@ -80,9 +80,6 @@ public class WalkingIterator extends LocPathIterator {
   public Object clone() throws CloneNotSupportedException {
 
     WalkingIterator clone = (WalkingIterator) super.clone();
-
-    // clone.m_varStackPos = this.m_varStackPos;
-    // clone.m_varStackContext = this.m_varStackContext;
     if (null != m_firstWalker) {
       clone.m_firstWalker = m_firstWalker.cloneDeep(clone, null);
     }

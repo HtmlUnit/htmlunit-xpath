@@ -40,12 +40,11 @@ public interface ContextNodeList {
    */
   int size();
 
-    /**
+  /**
    * Get a clone of this iterator. Be aware that this operation may be somewhat expensive.
    *
    * @return A clone of this object.
    * @throws CloneNotSupportedException if any
    */
   Object clone() throws CloneNotSupportedException;
-
 }

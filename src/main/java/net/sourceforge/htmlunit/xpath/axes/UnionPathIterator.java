@@ -43,7 +43,7 @@ public class UnionPathIterator extends LocPathIterator
     try {
       if (null != m_exprs) {
         int n = m_exprs.length;
-        DTMIterator newIters[] = new DTMIterator[n];
+        DTMIterator[] newIters = new DTMIterator[n];
 
         for (int i = 0; i < n; i++) {
           DTMIterator iter = m_exprs[i].asIterator(m_execContext, context);

@@ -72,7 +72,7 @@ public class XNumber extends XObject {
   /** {@inheritDoc} */
   @Override
   public boolean bool() {
-    return (Double.isNaN(m_val) || (m_val == 0.0)) ? false : true;
+    return !Double.isNaN(m_val) && (m_val != 0.0);
   }
 
   /** {@inheritDoc} */
@@ -88,8 +88,7 @@ public class XNumber extends XObject {
       return "-Infinity";
     }
 
-    double num = m_val;
-    String s = Double.toString(num);
+    String s = Double.toString(m_val);
     int len = s.length();
 
     if (s.charAt(len - 2) == '.' && s.charAt(len - 1) == '0') {

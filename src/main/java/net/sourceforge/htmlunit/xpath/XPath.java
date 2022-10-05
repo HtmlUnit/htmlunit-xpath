@@ -39,7 +39,7 @@ public class XPath {
    *
    * @serial
    */
-  private Expression m_mainExp;
+  private final Expression m_mainExp;
 
   /** The function table for xpath build-in functions */
   private transient FunctionTable m_funcTable = null;
@@ -57,13 +57,6 @@ public class XPath {
   public SourceLocator getLocator() {
     return m_mainExp;
   }
-
-  /**
-   * The pattern string, mainly kept around for diagnostic purposes.
-   *
-   * @serial
-   */
-  String m_patternString;
 
   /** Represents a select type expression. */
   public static final int SELECT = 0;
@@ -90,8 +83,6 @@ public class XPath {
     if (null == errorListener)
       errorListener = new net.sourceforge.htmlunit.xpath.xml.utils.DefaultErrorHandler();
 
-    m_patternString = exprString;
-
     XPathParser parser = new XPathParser(errorListener);
     Compiler compiler = new Compiler(errorListener, m_funcTable);
 
@@ -104,8 +95,7 @@ public class XPath {
               new Object[] {Integer.toString(type)})); // "Can not deal with XPath type: " + type);
 
     // System.out.println("----------------");
-    Expression expr = compiler.compile(0);
-    m_mainExp = expr;
+    m_mainExp = compiler.compile(0);
   }
 
   /**
@@ -132,8 +122,6 @@ public class XPath {
     if (null == errorListener)
       errorListener = new net.sourceforge.htmlunit.xpath.xml.utils.DefaultErrorHandler();
 
-    m_patternString = exprString;
-
     XPathParser parser = new XPathParser(errorListener);
     Compiler compiler = new Compiler(errorListener, m_funcTable);
 
@@ -147,8 +135,7 @@ public class XPath {
     // "Can not deal with XPath type: " + type);
 
     // System.out.println("----------------");
-    Expression expr = compiler.compile(0);
-    m_mainExp = expr;
+    m_mainExp = compiler.compile(0);
   }
 
   /**
