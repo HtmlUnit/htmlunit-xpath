@@ -369,47 +369,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
   /** {@inheritDoc} */
   @Override
-  public void setItem(int node, int index) {
-    NodeVector vec = getVector();
-    if (null != vec) {
-      int oldNode = vec.elementAt(index);
-      if (oldNode != node && m_cache.useCount() > 1) {
-        /*
-         * If we are going to set the node at the given index to a different value, and
-         * the cache is shared (has a use count greater than 1) then make a copy of the
-         * cache and use it so we don't overwrite the value for other users of the
-         * cache.
-         */
-        IteratorCache newCache = new IteratorCache();
-        final NodeVector nv;
-        try {
-          nv = (NodeVector) vec.clone();
-        } catch (CloneNotSupportedException e) {
-          // This should never happen
-          e.printStackTrace();
-          throw new RuntimeException(e.getMessage());
-        }
-        newCache.setVector(nv);
-        newCache.setCacheComplete(true);
-        m_cache = newCache;
-        vec = nv;
-
-        // Keep our superclass informed of the current NodeVector
-        super.setObject(nv);
-
-        /*
-         * When we get to here the new cache has a use count of 1 and when setting a
-         * bunch of values on the same NodeSequence, such as when sorting, we will keep
-         * setting values in that same copy which has a use count of 1.
-         */
-      }
-      vec.setElementAt(node, index);
-      m_last = vec.size();
-    } else m_iter.setItem(node, index);
-  }
-
-  /** {@inheritDoc} */
-  @Override
   public int getLength() {
     IteratorCache cache = getCache();
 

@@ -385,12 +385,6 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public void setItem(int node, int index) {
-    super.setElementAt(node, index);
-  }
-
-  /** {@inheritDoc} */
-  @Override
   public int elementAt(int i) {
 
     runTo(i);

@@ -221,12 +221,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public void setItem(int node, int index) {
-    assertion(false, "setItem not supported by this iterator!");
-  }
-
-  /** {@inheritDoc} */
-  @Override
   public int getLength() {
     // Tell if this is being called from within a predicate.
     boolean isPredicateTest = this == m_execContext.getSubContextList();
