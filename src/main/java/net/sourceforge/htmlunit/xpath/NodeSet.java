@@ -17,14 +17,14 @@
  */
 package net.sourceforge.htmlunit.xpath;
 
-import net.sourceforge.htmlunit.xpath.axes.ContextNodeList;
-import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
+
+import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /**
  * The NodeSet class can act as either a NodeVector, NodeList, or NodeIterator. However, in order
@@ -43,7 +43,7 @@ import org.w3c.dom.traversal.NodeIterator;
  * will respond to the same calls; the disadvantage is that some of them may return
  * less-than-enlightening results when you do so.
  */
-public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeList {
+public class NodeSet implements NodeList, NodeIterator, Cloneable {
 
   /**
    * Create an empty, using the given block size.
@@ -118,18 +118,12 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
   @Override
   public void detach() {}
 
-  /** {@inheritDoc} */
-  @Override
   public void runTo(int index) {
 
     if (!m_cacheNodes)
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null)); // "This NodeSet
-    // can not do
-    // indexing or
-    // counting
-    // functions!");
+              XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null));
 
     if ((index >= 0) && (m_next < m_firstFree)) m_next = index;
     else m_next = m_firstFree - 1;
@@ -227,8 +221,6 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable, ContextNodeLi
     return clone;
   }
 
-  /** {@inheritDoc} */
-  @Override
   public int size() {
     return m_firstFree;
   }

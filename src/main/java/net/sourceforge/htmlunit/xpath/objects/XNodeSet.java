@@ -33,9 +33,6 @@ import org.w3c.dom.traversal.NodeIterator;
  */
 public class XNodeSet extends NodeSequence {
 
-  /** Default constructor for derived objects. */
-  protected XNodeSet() {}
-
   /**
    * Construct a XNodeSet object.
    *

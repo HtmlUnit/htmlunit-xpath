@@ -94,7 +94,6 @@ public class FunctionMultiArgs extends Function3Args {
   public void callArgVisitors(XPathVisitor visitor) {
     super.callArgVisitors(visitor);
     if (null != m_args) {
-      int n = m_args.length;
       for (Expression m_arg : m_args) {
         m_arg.callVisitors(visitor);
       }

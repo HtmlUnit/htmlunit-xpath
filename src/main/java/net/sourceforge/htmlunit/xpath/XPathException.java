@@ -17,6 +17,7 @@
  */
 package net.sourceforge.htmlunit.xpath;
 
+import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
 /**
@@ -32,7 +33,7 @@ public class XPathException extends TransformerException {
    *
    * @param message The error message.
    */
-  public XPathException(String message, ExpressionNode ex) {
+  public XPathException(String message, SourceLocator ex) {
     super(message);
     this.setLocator(ex);
   }

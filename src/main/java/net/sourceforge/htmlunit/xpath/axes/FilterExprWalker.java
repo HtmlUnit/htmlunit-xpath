@@ -26,6 +26,7 @@ import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
+import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * Walker for the OP_VARIABLE, or OP_EXTFUNCTION, or OP_FUNCTION, or OP_GROUP, op codes.
@@ -83,12 +84,53 @@ public class FilterExprWalker extends AxesWalker {
     super.setRoot(root);
 
     m_exprObj =
-        FilterExprIteratorSimple.executeFilterExpr(
+        executeFilterExpr(
             root,
             m_lpi.getXPathContext(),
             m_lpi.getPrefixResolver(),
             m_lpi.getIsTopLevel(),
             m_expr);
+  }
+
+  /**
+   * Execute the expression. Meant for reuse by other FilterExpr iterators that are not derived from
+   * this object.
+   */
+  public static XNodeSet executeFilterExpr(
+      int context,
+      XPathContext xctxt,
+      PrefixResolver prefixResolver,
+      boolean isTopLevel,
+      Expression expr)
+      throws net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException {
+    PrefixResolver savedResolver = xctxt.getNamespaceContext();
+    XNodeSet result;
+
+    try {
+      xctxt.pushCurrentNode(context);
+      xctxt.setNamespaceContext(prefixResolver);
+
+      // The setRoot operation can take place with a reset operation,
+      // and so we may not be in the context of LocPathIterator#nextNode,
+      // so we have to set up the variable context, execute the expression,
+      // and then restore the variable context.
+
+      if (isTopLevel) {
+        // System.out.println("calling m_expr.execute(getXPathContext())");
+
+        result = (net.sourceforge.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
+        result.setShouldCacheNodes(true);
+      } else result = (net.sourceforge.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
+
+    } catch (javax.xml.transform.TransformerException se) {
+
+      // TODO: Fix...
+      throw new net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException(se);
+    } finally {
+      xctxt.popCurrentNode();
+      xctxt.setNamespaceContext(savedResolver);
+    }
+    return result;
   }
 
   /** {@inheritDoc} */
@@ -125,7 +167,8 @@ public class FilterExprWalker extends AxesWalker {
 
     if (null != m_exprObj) {
       return m_exprObj.nextNode();
-    } else return DTM.NULL;
+    }
+    return DTM.NULL;
   }
 
   /** {@inheritDoc} */

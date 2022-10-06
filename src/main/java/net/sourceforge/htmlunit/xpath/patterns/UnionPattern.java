@@ -85,7 +85,6 @@ public class UnionPattern extends Expression {
   public void callVisitors(XPathVisitor visitor) {
     visitor.visitUnionPattern();
     if (null != m_patterns) {
-      int n = m_patterns.length;
       for (StepPattern m_pattern : m_patterns) {
         m_pattern.callVisitors(visitor);
       }

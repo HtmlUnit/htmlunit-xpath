@@ -108,45 +108,6 @@ public class NodeVector implements Cloneable {
   }
 
   /**
-   * Append a Node onto the vector.
-   *
-   * @param value Node to add to the vector
-   */
-  public final void push(int value) {
-
-    int ff = m_firstFree;
-
-    if ((ff + 1) >= m_mapSize) {
-      if (null == m_map) {
-        m_map = new int[m_blocksize];
-        m_mapSize = m_blocksize;
-      } else {
-        m_mapSize += m_blocksize;
-
-        int[] newMap = new int[m_mapSize];
-
-        System.arraycopy(m_map, 0, newMap, 0, ff + 1);
-
-        m_map = newMap;
-      }
-    }
-
-    m_map[ff] = value;
-
-    ff++;
-
-    m_firstFree = ff;
-  }
-
-  /** Pop a node from the tail of the vector. */
-  public final void popQuick() {
-
-    m_firstFree--;
-
-    m_map[m_firstFree] = DTM.NULL;
-  }
-
-  /**
    * Return the node at the top of the stack without popping the stack. Special purpose method for
    * TransformerImpl, pushElemTemplateElement. Performance critical.
    *

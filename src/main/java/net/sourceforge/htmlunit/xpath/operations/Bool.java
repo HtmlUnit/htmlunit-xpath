@@ -28,8 +28,10 @@ public class Bool extends UnaryOperation {
   @Override
   public XObject operate(XObject right) throws javax.xml.transform.TransformerException {
 
-    if (XObject.CLASS_BOOLEAN == right.getType()) return right;
-    else return right.bool() ? XBoolean.S_TRUE : XBoolean.S_FALSE;
+    if (XObject.CLASS_BOOLEAN == right.getType()) {
+      return right;
+    }
+    return right.bool() ? XBoolean.S_TRUE : XBoolean.S_FALSE;
   }
 
   /** {@inheritDoc} */

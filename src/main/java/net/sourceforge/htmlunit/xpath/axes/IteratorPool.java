@@ -51,10 +51,9 @@ public final class IteratorPool {
 
       // Create a new object if so.
       return (DTMIterator) m_orig.clone();
-    } else {
-      // Remove object from end of free pool.
-      return m_freeStack.remove(m_freeStack.size() - 1);
     }
+    // Remove object from end of free pool.
+    return m_freeStack.remove(m_freeStack.size() - 1);
   }
 
   /**
@@ -72,10 +71,9 @@ public final class IteratorPool {
       } catch (Exception ex) {
         throw new WrappedRuntimeException(ex);
       }
-    } else {
-      // Remove object from end of free pool.
-      return m_freeStack.remove(m_freeStack.size() - 1);
     }
+    // Remove object from end of free pool.
+    return m_freeStack.remove(m_freeStack.size() - 1);
   }
 
   /**

@@ -680,7 +680,7 @@ public class WalkerFactory {
     }
     StepPattern step = null;
     StepPattern firstStep = null, prevStep = null;
-    int analysis = analyze(compiler, stepOpCodePos);
+    analyze(compiler, stepOpCodePos);
 
     while (OpCodes.ENDOP != compiler.getOp(stepOpCodePos)) {
       step = createDefaultStepPattern(compiler, stepOpCodePos);
@@ -802,7 +802,7 @@ public class WalkerFactory {
 
     int whatToShow = compiler.getWhatToShow(opPos);
     StepPattern ai = null;
-    int axis, predicateAxis;
+    int axis;
 
     switch (stepType) {
       case OpCodes.OP_VARIABLE:
@@ -823,76 +823,56 @@ public class WalkerFactory {
         }
 
         axis = Axis.FILTEREDLIST;
-        predicateAxis = Axis.FILTEREDLIST;
         ai = new FunctionPattern(expr, axis);
         break;
       case OpCodes.FROM_ROOT:
         axis = Axis.ROOT;
-        predicateAxis = Axis.ROOT;
         ai = new StepPattern(DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT, axis);
         break;
       case OpCodes.FROM_ATTRIBUTES:
         axis = Axis.PARENT;
-        predicateAxis = Axis.ATTRIBUTE;
-        // ai = new StepPattern(whatToShow, Axis.SELF, Axis.SELF);
         break;
       case OpCodes.FROM_NAMESPACE:
         axis = Axis.PARENT;
-        predicateAxis = Axis.NAMESPACE;
-        // ai = new StepPattern(whatToShow, axis, predicateAxis);
         break;
       case OpCodes.FROM_ANCESTORS:
         axis = Axis.DESCENDANT;
-        predicateAxis = Axis.ANCESTOR;
         break;
       case OpCodes.FROM_CHILDREN:
         axis = Axis.PARENT;
-        predicateAxis = Axis.CHILD;
         break;
       case OpCodes.FROM_ANCESTORS_OR_SELF:
         axis = Axis.DESCENDANTORSELF;
-        predicateAxis = Axis.ANCESTORORSELF;
         break;
       case OpCodes.FROM_SELF:
         axis = Axis.SELF;
-        predicateAxis = Axis.SELF;
         break;
       case OpCodes.FROM_PARENT:
         axis = Axis.CHILD;
-        predicateAxis = Axis.PARENT;
         break;
       case OpCodes.FROM_PRECEDING_SIBLINGS:
         axis = Axis.FOLLOWINGSIBLING;
-        predicateAxis = Axis.PRECEDINGSIBLING;
         break;
       case OpCodes.FROM_PRECEDING:
         axis = Axis.FOLLOWING;
-        predicateAxis = Axis.PRECEDING;
         break;
       case OpCodes.FROM_FOLLOWING_SIBLINGS:
         axis = Axis.PRECEDINGSIBLING;
-        predicateAxis = Axis.FOLLOWINGSIBLING;
         break;
       case OpCodes.FROM_FOLLOWING:
         axis = Axis.PRECEDING;
-        predicateAxis = Axis.FOLLOWING;
         break;
       case OpCodes.FROM_DESCENDANTS_OR_SELF:
         axis = Axis.ANCESTORORSELF;
-        predicateAxis = Axis.DESCENDANTORSELF;
         break;
       case OpCodes.FROM_DESCENDANTS:
         axis = Axis.ANCESTOR;
-        predicateAxis = Axis.DESCENDANT;
         break;
       default:
         throw new RuntimeException(
             XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_NULL_ERROR_HANDLER,
-                new Object[] {
-                  Integer.toString(stepType)
-                })); // "Programmer's assertion: unknown opcode: "
-        // + stepType);
+                new Object[] {Integer.toString(stepType)}));
     }
     if (null == ai) {
       whatToShow = compiler.getWhatToShow(opPos); // %REVIEW%

@@ -128,8 +128,8 @@ public class UnionPathIterator extends LocPathIterator
         uci.addNodeTest(lpi);
       }
       return uci;
-
-    } else return upi;
+    }
+    return upi;
   }
 
   /** {@inheritDoc} */
@@ -304,7 +304,6 @@ public class UnionPathIterator extends LocPathIterator
   public void callVisitors(XPathVisitor visitor) {
     if (visitor.visitUnionPath()) {
       if (null != m_exprs) {
-        int n = m_exprs.length;
         for (LocPathIterator m_expr : m_exprs) {
           m_expr.callVisitors(visitor);
         }

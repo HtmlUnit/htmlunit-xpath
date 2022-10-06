@@ -34,7 +34,8 @@ public class Or extends Operation {
       XObject expr2 = m_right.execute(xctxt);
 
       return expr2.bool() ? XBoolean.S_TRUE : XBoolean.S_FALSE;
-    } else return XBoolean.S_TRUE;
+    }
+    return XBoolean.S_TRUE;
   }
 
   /** {@inheritDoc} */

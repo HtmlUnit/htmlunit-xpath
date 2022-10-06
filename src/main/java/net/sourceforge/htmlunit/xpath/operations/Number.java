@@ -28,8 +28,10 @@ public class Number extends UnaryOperation {
   @Override
   public XObject operate(XObject right) throws javax.xml.transform.TransformerException {
 
-    if (XObject.CLASS_NUMBER == right.getType()) return right;
-    else return new XNumber(right.num());
+    if (XObject.CLASS_NUMBER == right.getType()) {
+      return right;
+    }
+    return new XNumber(right.num());
   }
 
   /** {@inheritDoc} */
