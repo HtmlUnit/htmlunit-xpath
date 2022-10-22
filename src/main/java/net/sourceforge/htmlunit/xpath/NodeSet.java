@@ -17,14 +17,13 @@
  */
 package net.sourceforge.htmlunit.xpath;
 
+import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
-
-import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /**
  * The NodeSet class can act as either a NodeVector, NodeList, or NodeIterator. However, in order
@@ -122,8 +121,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable {
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null));
+          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null));
 
     if ((index >= 0) && (m_next < m_firstFree)) m_next = index;
     else m_next = m_firstFree - 1;

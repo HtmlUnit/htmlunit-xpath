@@ -77,82 +77,90 @@ public class XPATHErrorResources extends ListResourceBundle {
   /*
    * static variables
    */
-    public static final String ER_CONTEXT_HAS_NO_OWNERDOC = "ER_CONTEXT_HAS_NO_OWNERDOC";
-    public static final String ER_UNKNOWN_MATCH_OPERATION = "ER_UNKNOWN_MATCH_OPERATION";
-    public static final String ER_CANT_CONVERT_TO_NUMBER = "ER_CANT_CONVERT_TO_NUMBER";
-    public static final String ER_CANT_CONVERT_TO_NODELIST = "ER_CANT_CONVERT_TO_NODELIST";
-    public static final String ER_CANT_CONVERT_TO_MUTABLENODELIST = "ER_CANT_CONVERT_TO_MUTABLENODELIST";
-    public static final String ER_UNKNOWN_OPCODE = "ER_UNKNOWN_OPCODE";
-    public static final String ER_EXTRA_ILLEGAL_TOKENS = "ER_EXTRA_ILLEGAL_TOKENS";
-    public static final String ER_EXPECTED_DOUBLE_QUOTE = "ER_EXPECTED_DOUBLE_QUOTE";
-    public static final String ER_EXPECTED_SINGLE_QUOTE = "ER_EXPECTED_SINGLE_QUOTE";
-    public static final String ER_EMPTY_EXPRESSION = "ER_EMPTY_EXPRESSION";
-    public static final String ER_EXPECTED_BUT_FOUND = "ER_EXPECTED_BUT_FOUND";
-    public static final String ER_INCORRECT_PROGRAMMER_ASSERTION = "ER_INCORRECT_PROGRAMMER_ASSERTION";
-    public static final String ER_BOOLEAN_ARG_NO_LONGER_OPTIONAL = "ER_BOOLEAN_ARG_NO_LONGER_OPTIONAL";
-    public static final String ER_FOUND_COMMA_BUT_NO_PRECEDING_ARG = "ER_FOUND_COMMA_BUT_NO_PRECEDING_ARG";
-    public static final String ER_FOUND_COMMA_BUT_NO_FOLLOWING_ARG = "ER_FOUND_COMMA_BUT_NO_FOLLOWING_ARG";
-    public static final String ER_PREDICATE_ILLEGAL_SYNTAX = "ER_PREDICATE_ILLEGAL_SYNTAX";
-    public static final String ER_ILLEGAL_AXIS_NAME = "ER_ILLEGAL_AXIS_NAME";
-    public static final String ER_UNKNOWN_NODETYPE = "ER_UNKNOWN_NODETYPE";
-    public static final String ER_PATTERN_LITERAL_NEEDS_BE_QUOTED = "ER_PATTERN_LITERAL_NEEDS_BE_QUOTED";
-    public static final String ER_COULDNOT_BE_FORMATTED_TO_NUMBER = "ER_COULDNOT_BE_FORMATTED_TO_NUMBER";
-    public static final String ER_AXES_NOT_ALLOWED = "ER_AXES_NOT_ALLOWED";
-    public static final String ER_COULDNOT_FIND_FUNCTION = "ER_COULDNOT_FIND_FUNCTION";
-    public static final String ER_PREFIX_MUST_RESOLVE = "ER_PREFIX_MUST_RESOLVE";
-    public static final String ER_FUNCTION_TOKEN_NOT_FOUND = "ER_FUNCTION_TOKEN_NOT_FOUND";
-    public static final String ER_CANNOT_DEAL_XPATH_TYPE = "ER_CANNOT_DEAL_XPATH_TYPE";
-    public static final String ER_NODESET_NOT_MUTABLE = "ER_NODESET_NOT_MUTABLE";
-    /** Null error handler */
-    public static final String ER_NULL_ERROR_HANDLER = "ER_NULL_ERROR_HANDLER";
-    /** 0 or 1 */
-    public static final String ER_ZERO_OR_ONE = "ER_ZERO_OR_ONE";
-    /** 2 or 3 */
-    public static final String ER_TWO_OR_THREE = "ER_TWO_OR_THREE";
-    /** Error! Setting the root of a walker to null! */
-    public static final String ER_SETTING_WALKER_ROOT_TO_NULL = "ER_SETTING_WALKER_ROOT_TO_NULL";
-    /** This NodeSetDTM can not iterate to a previous node! */
-    public static final String ER_NODESETDTM_CANNOT_ITERATE = "ER_NODESETDTM_CANNOT_ITERATE";
-    /** This NodeSet can not iterate to a previous node! */
-    public static final String ER_NODESET_CANNOT_ITERATE = "ER_NODESET_CANNOT_ITERATE";
-    /** This NodeSetDTM can not do indexing or counting functions! */
-    public static final String ER_NODESETDTM_CANNOT_INDEX = "ER_NODESETDTM_CANNOT_INDEX";
-    /** This NodeSet can not do indexing or counting functions! */
-    public static final String ER_NODESET_CANNOT_INDEX = "ER_NODESET_CANNOT_INDEX";
-    /** Can not call setShouldCacheNodes after nextNode has been called! */
-    public static final String ER_CANNOT_CALL_SETSHOULDCACHENODE = "ER_CANNOT_CALL_SETSHOULDCACHENODE";
-    /** {0} only allows {1} arguments */
-    public static final String ER_ONLY_ALLOWS = "ER_ONLY_ALLOWS";
-    /** Programmer's assertion in getNextStepPos: unknown stepType: {0} */
-    public static final String ER_UNKNOWN_STEP = "ER_UNKNOWN_STEP";
-    /** Problem with RelativeLocationPath */
-    public static final String ER_EXPECTED_REL_LOC_PATH = "ER_EXPECTED_REL_LOC_PATH";
-    /** Problem with LocationPath */
-    public static final String ER_EXPECTED_LOC_PATH = "ER_EXPECTED_LOC_PATH";
+  public static final String ER_CONTEXT_HAS_NO_OWNERDOC = "ER_CONTEXT_HAS_NO_OWNERDOC";
+  public static final String ER_UNKNOWN_MATCH_OPERATION = "ER_UNKNOWN_MATCH_OPERATION";
+  public static final String ER_CANT_CONVERT_TO_NUMBER = "ER_CANT_CONVERT_TO_NUMBER";
+  public static final String ER_CANT_CONVERT_TO_NODELIST = "ER_CANT_CONVERT_TO_NODELIST";
+  public static final String ER_CANT_CONVERT_TO_MUTABLENODELIST =
+      "ER_CANT_CONVERT_TO_MUTABLENODELIST";
+  public static final String ER_UNKNOWN_OPCODE = "ER_UNKNOWN_OPCODE";
+  public static final String ER_EXTRA_ILLEGAL_TOKENS = "ER_EXTRA_ILLEGAL_TOKENS";
+  public static final String ER_EXPECTED_DOUBLE_QUOTE = "ER_EXPECTED_DOUBLE_QUOTE";
+  public static final String ER_EXPECTED_SINGLE_QUOTE = "ER_EXPECTED_SINGLE_QUOTE";
+  public static final String ER_EMPTY_EXPRESSION = "ER_EMPTY_EXPRESSION";
+  public static final String ER_EXPECTED_BUT_FOUND = "ER_EXPECTED_BUT_FOUND";
+  public static final String ER_INCORRECT_PROGRAMMER_ASSERTION =
+      "ER_INCORRECT_PROGRAMMER_ASSERTION";
+  public static final String ER_BOOLEAN_ARG_NO_LONGER_OPTIONAL =
+      "ER_BOOLEAN_ARG_NO_LONGER_OPTIONAL";
+  public static final String ER_FOUND_COMMA_BUT_NO_PRECEDING_ARG =
+      "ER_FOUND_COMMA_BUT_NO_PRECEDING_ARG";
+  public static final String ER_FOUND_COMMA_BUT_NO_FOLLOWING_ARG =
+      "ER_FOUND_COMMA_BUT_NO_FOLLOWING_ARG";
+  public static final String ER_PREDICATE_ILLEGAL_SYNTAX = "ER_PREDICATE_ILLEGAL_SYNTAX";
+  public static final String ER_ILLEGAL_AXIS_NAME = "ER_ILLEGAL_AXIS_NAME";
+  public static final String ER_UNKNOWN_NODETYPE = "ER_UNKNOWN_NODETYPE";
+  public static final String ER_PATTERN_LITERAL_NEEDS_BE_QUOTED =
+      "ER_PATTERN_LITERAL_NEEDS_BE_QUOTED";
+  public static final String ER_COULDNOT_BE_FORMATTED_TO_NUMBER =
+      "ER_COULDNOT_BE_FORMATTED_TO_NUMBER";
+  public static final String ER_AXES_NOT_ALLOWED = "ER_AXES_NOT_ALLOWED";
+  public static final String ER_COULDNOT_FIND_FUNCTION = "ER_COULDNOT_FIND_FUNCTION";
+  public static final String ER_PREFIX_MUST_RESOLVE = "ER_PREFIX_MUST_RESOLVE";
+  public static final String ER_FUNCTION_TOKEN_NOT_FOUND = "ER_FUNCTION_TOKEN_NOT_FOUND";
+  public static final String ER_CANNOT_DEAL_XPATH_TYPE = "ER_CANNOT_DEAL_XPATH_TYPE";
+  public static final String ER_NODESET_NOT_MUTABLE = "ER_NODESET_NOT_MUTABLE";
+  /** Null error handler */
+  public static final String ER_NULL_ERROR_HANDLER = "ER_NULL_ERROR_HANDLER";
+  /** 0 or 1 */
+  public static final String ER_ZERO_OR_ONE = "ER_ZERO_OR_ONE";
+  /** 2 or 3 */
+  public static final String ER_TWO_OR_THREE = "ER_TWO_OR_THREE";
+  /** Error! Setting the root of a walker to null! */
+  public static final String ER_SETTING_WALKER_ROOT_TO_NULL = "ER_SETTING_WALKER_ROOT_TO_NULL";
+  /** This NodeSetDTM can not iterate to a previous node! */
+  public static final String ER_NODESETDTM_CANNOT_ITERATE = "ER_NODESETDTM_CANNOT_ITERATE";
+  /** This NodeSet can not iterate to a previous node! */
+  public static final String ER_NODESET_CANNOT_ITERATE = "ER_NODESET_CANNOT_ITERATE";
+  /** This NodeSetDTM can not do indexing or counting functions! */
+  public static final String ER_NODESETDTM_CANNOT_INDEX = "ER_NODESETDTM_CANNOT_INDEX";
+  /** This NodeSet can not do indexing or counting functions! */
+  public static final String ER_NODESET_CANNOT_INDEX = "ER_NODESET_CANNOT_INDEX";
+  /** Can not call setShouldCacheNodes after nextNode has been called! */
+  public static final String ER_CANNOT_CALL_SETSHOULDCACHENODE =
+      "ER_CANNOT_CALL_SETSHOULDCACHENODE";
+  /** {0} only allows {1} arguments */
+  public static final String ER_ONLY_ALLOWS = "ER_ONLY_ALLOWS";
+  /** Programmer's assertion in getNextStepPos: unknown stepType: {0} */
+  public static final String ER_UNKNOWN_STEP = "ER_UNKNOWN_STEP";
+  /** Problem with RelativeLocationPath */
+  public static final String ER_EXPECTED_REL_LOC_PATH = "ER_EXPECTED_REL_LOC_PATH";
+  /** Problem with LocationPath */
+  public static final String ER_EXPECTED_LOC_PATH = "ER_EXPECTED_LOC_PATH";
 
-    public static final String ER_EXPECTED_LOC_PATH_AT_END_EXPR = "ER_EXPECTED_LOC_PATH_AT_END_EXPR";
-    /** Problem with Step */
-    public static final String ER_EXPECTED_LOC_STEP = "ER_EXPECTED_LOC_STEP";
-    /** Problem with NodeTest */
-    public static final String ER_EXPECTED_NODE_TEST = "ER_EXPECTED_NODE_TEST";
-    /** Expected step pattern */
-    public static final String ER_EXPECTED_STEP_PATTERN = "ER_EXPECTED_STEP_PATTERN";
-    /** Expected relative path pattern */
-    public static final String ER_EXPECTED_REL_PATH_PATTERN = "ER_EXPECTED_REL_PATH_PATTERN";
+  public static final String ER_EXPECTED_LOC_PATH_AT_END_EXPR = "ER_EXPECTED_LOC_PATH_AT_END_EXPR";
+  /** Problem with Step */
+  public static final String ER_EXPECTED_LOC_STEP = "ER_EXPECTED_LOC_STEP";
+  /** Problem with NodeTest */
+  public static final String ER_EXPECTED_NODE_TEST = "ER_EXPECTED_NODE_TEST";
+  /** Expected step pattern */
+  public static final String ER_EXPECTED_STEP_PATTERN = "ER_EXPECTED_STEP_PATTERN";
+  /** Expected relative path pattern */
+  public static final String ER_EXPECTED_REL_PATH_PATTERN = "ER_EXPECTED_REL_PATH_PATTERN";
 
-    public static final String ER_XPATH_ERROR = "ER_XPATH_ERROR";
+  public static final String ER_XPATH_ERROR = "ER_XPATH_ERROR";
 
-    public static final String ER_CANNOT_OVERWRITE_CAUSE = "ER_CANNOT_OVERWRITE_CAUSE";
-    public static final String ER_ITERATOR_AXIS_NOT_IMPLEMENTED = "ER_ITERATOR_AXIS_NOT_IMPLEMENTED";
-    public static final String ER_ITERATOR_CLONE_NOT_SUPPORTED = "ER_ITERATOR_CLONE_NOT_SUPPORTED";
-    public static final String ER_UNKNOWN_AXIS_TYPE = "ER_UNKNOWN_AXIS_TYPE";
-    public static final String ER_NO_DTMIDS_AVAIL = "ER_NO_DTMIDS_AVAIL";
-    public static final String ER_NOT_SUPPORTED = "ER_NOT_SUPPORTED";
-    public static final String ER_NODE_NON_NULL = "ER_NODE_NON_NULL";
-    public static final String ER_COULD_NOT_RESOLVE_NODE = "ER_COULD_NOT_RESOLVE_NODE";
-    public static final String ER_SELF_CAUSATION_NOT_PERMITTED = "ER_SELF_CAUSATION_NOT_PERMITTED";
-    public static final String ER_METHOD_NOT_SUPPORTED = "ER_METHOD_NOT_SUPPORTED";
-    public static final String ER_AXIS_TRAVERSER_NOT_SUPPORTED = "ER_AXIS_TRAVERSER_NOT_SUPPORTED";
+  public static final String ER_CANNOT_OVERWRITE_CAUSE = "ER_CANNOT_OVERWRITE_CAUSE";
+  public static final String ER_ITERATOR_AXIS_NOT_IMPLEMENTED = "ER_ITERATOR_AXIS_NOT_IMPLEMENTED";
+  public static final String ER_ITERATOR_CLONE_NOT_SUPPORTED = "ER_ITERATOR_CLONE_NOT_SUPPORTED";
+  public static final String ER_UNKNOWN_AXIS_TYPE = "ER_UNKNOWN_AXIS_TYPE";
+  public static final String ER_NO_DTMIDS_AVAIL = "ER_NO_DTMIDS_AVAIL";
+  public static final String ER_NOT_SUPPORTED = "ER_NOT_SUPPORTED";
+  public static final String ER_NODE_NON_NULL = "ER_NODE_NON_NULL";
+  public static final String ER_COULD_NOT_RESOLVE_NODE = "ER_COULD_NOT_RESOLVE_NODE";
+  public static final String ER_SELF_CAUSATION_NOT_PERMITTED = "ER_SELF_CAUSATION_NOT_PERMITTED";
+  public static final String ER_METHOD_NOT_SUPPORTED = "ER_METHOD_NOT_SUPPORTED";
+  public static final String ER_AXIS_TRAVERSER_NOT_SUPPORTED = "ER_AXIS_TRAVERSER_NOT_SUPPORTED";
 
   // Error messages...
 
@@ -254,7 +262,6 @@ public class XPATHErrorResources extends ListResourceBundle {
       // The message indicates that syntactically such an expression was expected,
       // but was not found.
       {ER_EXPECTED_REL_PATH_PATTERN, "A relative path pattern was expected."},
-
       {ER_CANNOT_OVERWRITE_CAUSE, "Cannot overwrite cause"},
       {ER_ITERATOR_AXIS_NOT_IMPLEMENTED, "Error: iterator for axis {0} not implemented "},
       {ER_ITERATOR_CLONE_NOT_SUPPORTED, "Iterator clone not supported"},

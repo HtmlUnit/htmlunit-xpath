@@ -68,7 +68,8 @@ public class XPATHMessages {
    * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted message string.
    */
-  private static String createXPATHMsg(ListResourceBundle fResourceBundle, String msgKey, Object[] args) {
+  private static String createXPATHMsg(
+      ListResourceBundle fResourceBundle, String msgKey, Object[] args) {
 
     String fmsg;
     boolean throwex = false;

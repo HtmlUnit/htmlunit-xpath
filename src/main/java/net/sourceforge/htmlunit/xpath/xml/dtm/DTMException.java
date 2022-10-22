@@ -43,13 +43,13 @@ public class DTMException extends RuntimeException {
 
     if ((this.containedException == null) && (cause != null)) {
       throw new IllegalStateException(
-              XPATHMessages.createXPATHMessage(
-                      XPATHErrorResources.ER_CANNOT_OVERWRITE_CAUSE, null));
+          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_CANNOT_OVERWRITE_CAUSE, null));
     }
 
     if (cause == this) {
       throw new IllegalArgumentException(
-              XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_SELF_CAUSATION_NOT_PERMITTED, null));
+          XPATHMessages.createXPATHMessage(
+              XPATHErrorResources.ER_SELF_CAUSATION_NOT_PERMITTED, null));
     }
 
     this.containedException = cause;

@@ -24,9 +24,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.Vector;
-
 import javax.xml.transform.Source;
-
 import net.sourceforge.htmlunit.xpath.objects.XString;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
@@ -1190,7 +1188,7 @@ public abstract class DTMDefaultBase implements DTM {
 
     /* @todo: implement this org.apache.xml.dtm.DTMDefaultBase abstract method */
     error(
-            XPATHMessages.createXPATHMessage(
+        XPATHMessages.createXPATHMessage(
             XPATHErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "Not yet supported!");
 
     return null;

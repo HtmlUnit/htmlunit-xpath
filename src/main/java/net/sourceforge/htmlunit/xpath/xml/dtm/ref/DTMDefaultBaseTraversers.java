@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
-
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
@@ -131,15 +130,15 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         return null; // Don't want to throw an exception for this one.
       default:
         throw new DTMException(
-                XPATHMessages.createXPATHMessage(
-                        XPATHErrorResources.ER_UNKNOWN_AXIS_TYPE,
+            XPATHMessages.createXPATHMessage(
+                XPATHErrorResources.ER_UNKNOWN_AXIS_TYPE,
                 new Object[] {Integer.toString(axis)})); // "Unknown axis traversal type: "+axis);
     }
 
     if (null == traverser)
       throw new DTMException(
           XPATHMessages.createXPATHMessage(
-                  XPATHErrorResources.ER_AXIS_TRAVERSER_NOT_SUPPORTED,
+              XPATHErrorResources.ER_AXIS_TRAVERSER_NOT_SUPPORTED,
               new Object[] {Axis.getNames(axis)}));
 
     m_traversers[axis] = traverser;
