@@ -2,10 +2,10 @@
 
 This is the code repository of the XPath support used by HtmlUnit.
 
-For a long time HtmlUnit uses Apache Xalan (https://xalan.apache.org/). But the development of Xalan
-has stopped in 2019. Because HtmlUnit only uses the XPath functionality we decide to make a fork
-and remove all no longer needed stuff. Additionally we did some code updated for JDK 8 and we add
-unit test and the maven based build.
+HtmlUnit used Apache Xalan (https://xalan.apache.org/) for a long time. But the development of Xalan
+was discontinued in 2019. Since HtmlUnit only uses XPath functionality, we decided to create a fork
+and remove all things that are no longer needed. In addition, we made some code updates for JDK 8 
+and we added unit tests and the maven-based build.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit-xpath/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit-xpath)
 
@@ -14,14 +14,14 @@ unit test and the maven based build.
 ### Project News
 [HtmlUnit@Twitter][3]
 
-### Latest release Version 2.65.0 / October 03, 2022
+### Latest release Version 2.66.0 / October 22, 2022
 
 For maven, you would add:
 
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit-cssparser</artifactId>
-        <version>2.65.0</version>
+        <version>2.66.0</version>
     </dependency>
 
 ### Last CI build
@@ -35,7 +35,7 @@ If you use maven please add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit-xpath</artifactId>
-        <version>2.66.0-SNAPSHOT</version>
+        <version>2.67.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom distributionManagement section also:
