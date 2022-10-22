@@ -69,10 +69,7 @@ public class XPATHMessages extends XMLMessages {
    * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted message string.
    */
-  public static String createXPATHMsg(
-      ListResourceBundle fResourceBundle, String msgKey, Object[] args) // throws
-        // Exception
-      {
+  private static String createXPATHMsg(ListResourceBundle fResourceBundle, String msgKey, Object[] args) {
 
     String fmsg;
     boolean throwex = false;

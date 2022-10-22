@@ -315,24 +315,6 @@ public class XPath {
   }
 
   /**
-   * Tell the user of an assertion error, and probably throw an exception.
-   *
-   * @param b If false, a runtime exception will be thrown.
-   * @param msg The assertion message, which should be informative.
-   * @throws RuntimeException if the b argument is false.
-   */
-  public void assertion(boolean b, String msg) {
-
-    if (!b) {
-      String fMsg =
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_INCORRECT_PROGRAMMER_ASSERTION, new Object[] {msg});
-
-      throw new RuntimeException(fMsg);
-    }
-  }
-
-  /**
    * Tell the user of an error, and probably throw an exception.
    *
    * @param xctxt The XPath runtime context.
