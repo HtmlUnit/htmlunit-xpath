@@ -18,10 +18,9 @@
 package net.sourceforge.htmlunit.xpath.res;
 
 import java.util.ListResourceBundle;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 
 /** A utility class for issuing XPath error messages. */
-public class XPATHMessages extends XMLMessages {
+public class XPATHMessages {
   /** The language specific resource object for XPath messages. */
   private static ListResourceBundle XPATHBundle = null;
 

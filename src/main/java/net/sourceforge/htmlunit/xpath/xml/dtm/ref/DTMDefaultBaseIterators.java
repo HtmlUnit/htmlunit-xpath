@@ -18,14 +18,15 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
+
+import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 
 /** This class implements the traversers for DTMDefaultBase. */
 public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
@@ -90,8 +91,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         break;
       default:
         throw new DTMException(
-            XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_ITERATOR_AXIS_NOT_IMPLEMENTED,
+                XPATHMessages.createXPATHMessage(
+                        XPATHErrorResources.ER_ITERATOR_AXIS_NOT_IMPLEMENTED,
                 new Object[] {Axis.getNames(axis)}));
         // "Error: iterator for axis '" + Axis.names[axis]
         // + "' not implemented");
@@ -358,12 +359,11 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
       if (_currentNode == _startNodeID || _currentNode == DTM.NULL) {
         return NULL;
-      } else {
+      }
         final int node = _currentNode;
         _currentNode = _nextsib(node);
 
         return returnNode(makeNodeHandle(node));
-      }
     }
   } // end of PrecedingSiblingIterator
 
@@ -404,11 +404,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         return clone;
       } catch (CloneNotSupportedException e) {
         throw new DTMException(
-            XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null)); // "Iterator
-        // clone
-        // not
-        // supported.");
+                XPATHMessages.createXPATHMessage(
+                        XPATHErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null));
       }
     }
 
@@ -538,11 +535,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         return clone;
       } catch (CloneNotSupportedException e) {
         throw new DTMException(
-            XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null)); // "Iterator
-        // clone
-        // not
-        // supported.");
+                XPATHMessages.createXPATHMessage(
+                        XPATHErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null));
       }
     }
 

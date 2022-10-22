@@ -18,13 +18,14 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
+
+import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.Axis;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 
 /**
  * This class implements the traversers for DTMDefaultBase.
@@ -130,18 +131,16 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         return null; // Don't want to throw an exception for this one.
       default:
         throw new DTMException(
-            XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_UNKNOWN_AXIS_TYPE,
+                XPATHMessages.createXPATHMessage(
+                        XPATHErrorResources.ER_UNKNOWN_AXIS_TYPE,
                 new Object[] {Integer.toString(axis)})); // "Unknown axis traversal type: "+axis);
     }
 
     if (null == traverser)
       throw new DTMException(
-          XMLMessages.createXMLMessage(
-              XMLErrorResources.ER_AXIS_TRAVERSER_NOT_SUPPORTED,
+          XPATHMessages.createXPATHMessage(
+                  XPATHErrorResources.ER_AXIS_TRAVERSER_NOT_SUPPORTED,
               new Object[] {Axis.getNames(axis)}));
-    // "Axis traverser not supported: "
-    // + Axis.names[axis]);
 
     m_traversers[axis] = traverser;
 

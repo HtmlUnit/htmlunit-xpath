@@ -19,16 +19,18 @@ package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
+
+import org.w3c.dom.Node;
+
+import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm.DOM2DTM;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import org.w3c.dom.Node;
 
 /**
  * The default implementation for the DTMManager.
@@ -90,13 +92,8 @@ public class DTMManagerDefault extends DTMManager {
    */
   public synchronized void addDTM(DTM dtm, int id, int offset) {
     if (id >= IDENT_MAX_DTMS) {
-      // TODO: %REVIEW% Not really the right error message.
       throw new DTMException(
-          XMLMessages.createXMLMessage(XMLErrorResources.ER_NO_DTMIDS_AVAIL, null)); // "No
-      // more
-      // DTM IDs
-      // are
-      // available!");
+              XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NO_DTMIDS_AVAIL, null));
     }
 
     // We used to just allocate the array size to IDENT_MAX_DTMS.
@@ -165,11 +162,8 @@ public class DTMManagerDefault extends DTMManager {
     // It should have been handled by a derived class or the caller
     // made a mistake.
     throw new DTMException(
-        XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_NOT_SUPPORTED, new Object[] {source})); // "Not
-    // supported:
-    // " +
-    // source);
+            XPATHMessages.createXPATHMessage(
+                    XPATHErrorResources.ER_NOT_SUPPORTED, new Object[] {source}));
   }
 
   /** {@inheritDoc} */
@@ -177,12 +171,7 @@ public class DTMManagerDefault extends DTMManager {
   public synchronized int getDTMHandleFromNode(org.w3c.dom.Node node) {
     if (null == node)
       throw new IllegalArgumentException(
-          XMLMessages.createXMLMessage(XMLErrorResources.ER_NODE_NON_NULL, null)); // "node
-    // must
-    // be
-    // non-null
-    // for
-    // getDTMHandleFromNode!");
+              XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODE_NON_NULL, null));
 
     if (node instanceof net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy)
       return ((net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy) node).getDTMNodeNumber();
@@ -261,11 +250,8 @@ public class DTMManagerDefault extends DTMManager {
 
       if (DTM.NULL == handle)
         throw new RuntimeException(
-            XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_COULD_NOT_RESOLVE_NODE, null)); // "Could not
-      // resolve the
-      // node to a
-      // handle!");
+                XPATHMessages.createXPATHMessage(
+                        XPATHErrorResources.ER_COULD_NOT_RESOLVE_NODE, null));
 
       return handle;
     }

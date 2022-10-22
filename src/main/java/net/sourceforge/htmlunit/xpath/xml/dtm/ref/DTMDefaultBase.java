@@ -24,14 +24,16 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.Vector;
+
 import javax.xml.transform.Source;
+
 import net.sourceforge.htmlunit.xpath.objects.XString;
+import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.SuballocatedIntVector;
 
 /**
@@ -1188,8 +1190,8 @@ public abstract class DTMDefaultBase implements DTM {
 
     /* @todo: implement this org.apache.xml.dtm.DTMDefaultBase abstract method */
     error(
-        XMLMessages.createXMLMessage(
-            XMLErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "Not yet supported!");
+            XPATHMessages.createXPATHMessage(
+            XPATHErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "Not yet supported!");
 
     return null;
   }

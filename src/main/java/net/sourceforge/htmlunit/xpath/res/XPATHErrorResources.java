@@ -142,13 +142,24 @@ public class XPATHErrorResources extends ListResourceBundle {
 
     public static final String ER_XPATH_ERROR = "ER_XPATH_ERROR";
 
+    public static final String ER_CANNOT_OVERWRITE_CAUSE = "ER_CANNOT_OVERWRITE_CAUSE";
+    public static final String ER_ITERATOR_AXIS_NOT_IMPLEMENTED = "ER_ITERATOR_AXIS_NOT_IMPLEMENTED";
+    public static final String ER_ITERATOR_CLONE_NOT_SUPPORTED = "ER_ITERATOR_CLONE_NOT_SUPPORTED";
+    public static final String ER_UNKNOWN_AXIS_TYPE = "ER_UNKNOWN_AXIS_TYPE";
+    public static final String ER_NO_DTMIDS_AVAIL = "ER_NO_DTMIDS_AVAIL";
+    public static final String ER_NOT_SUPPORTED = "ER_NOT_SUPPORTED";
+    public static final String ER_NODE_NON_NULL = "ER_NODE_NON_NULL";
+    public static final String ER_COULD_NOT_RESOLVE_NODE = "ER_COULD_NOT_RESOLVE_NODE";
+    public static final String ER_SELF_CAUSATION_NOT_PERMITTED = "ER_SELF_CAUSATION_NOT_PERMITTED";
+    public static final String ER_METHOD_NOT_SUPPORTED = "ER_METHOD_NOT_SUPPORTED";
+    public static final String ER_AXIS_TRAVERSER_NOT_SUPPORTED = "ER_AXIS_TRAVERSER_NOT_SUPPORTED";
+
   // Error messages...
 
   /** {@inheritDoc} */
   @Override
   public Object[][] getContents() {
     return new Object[][] {
-      {"ERROR0000", "{0}"},
       {ER_CONTEXT_HAS_NO_OWNERDOC, "context does not have an owner document!"},
       {ER_UNKNOWN_MATCH_OPERATION, "unknown match operation!"},
       {ER_CANT_CONVERT_TO_NUMBER, "Can not convert {0} to a number"},
@@ -244,28 +255,28 @@ public class XPATHErrorResources extends ListResourceBundle {
       // but was not found.
       {ER_EXPECTED_REL_PATH_PATTERN, "A relative path pattern was expected."},
 
-      // Other miscellaneous text used inside the code...
-      {"ui_language", "en"},
-      {"help_language", "en"},
-      {"language", "en"},
+      {ER_CANNOT_OVERWRITE_CAUSE, "Cannot overwrite cause"},
+      {ER_ITERATOR_AXIS_NOT_IMPLEMENTED, "Error: iterator for axis {0} not implemented "},
+      {ER_ITERATOR_CLONE_NOT_SUPPORTED, "Iterator clone not supported"},
+      {ER_UNKNOWN_AXIS_TYPE, "Unknown axis traversal type: {0}"},
+      {ER_NO_DTMIDS_AVAIL, "No more DTM IDs are available"},
+      {ER_NOT_SUPPORTED, "Not supported: {0}"},
+      {ER_NODE_NON_NULL, "Node must be non-null for getDTMHandleFromNode"},
+      {ER_COULD_NOT_RESOLVE_NODE, "Could not resolve the node to a handle"},
+      {ER_SELF_CAUSATION_NOT_PERMITTED, "Self-causation not permitted"},
+      {ER_METHOD_NOT_SUPPORTED, "Method not yet supported "},
+      {ER_AXIS_TRAVERSER_NOT_SUPPORTED, "Axis traverser not supported: {0}"},
       {"BAD_CODE", "Parameter to createMessage was out of bounds"},
       {"FORMAT_FAILED", "Exception thrown during messageFormat call"},
-      {"version", ">>>>>>> Xalan Version "},
-      {"version2", "<<<<<<<"},
+      {"line", "Line #"},
+      {"column", "Column #"},
+
+      // Other miscellaneous text used inside the code...
+      {"BAD_CODE", "Parameter to createMessage was out of bounds"},
+      {"FORMAT_FAILED", "Exception thrown during messageFormat call"},
       {"yes", "yes"},
       {"line", "Line #"},
       {"column", "Column #"},
-      {"xsldone", "XSLProcessor: done"},
-      {"xpath_option", "xpath options: "},
-      {"optionIN", "   [-in inputXMLURL]"},
-      {"optionSelect", "   [-select xpath expression]"},
-      {"optionMatch", "   [-match match pattern (for match diagnostics)]"},
-      {"optionAnyExpr", "Or just an xpath expression will do a diagnostic dump"},
-      {"noParsermsg1", "XSL Process was not successful."},
-      {"noParsermsg2", "** Could not find parser **"},
-      {"noParsermsg3", "Please check your classpath."},
-      {"noParsermsg4", "If you don't have IBM's XML Parser for Java, you can download it from"},
-      {"noParsermsg5", "IBM's AlphaWorks: http://www.alphaworks.ibm.com/formula/xml"},
       {"gtone", ">1"},
       {"zero", "0"},
       {"one", "1"},

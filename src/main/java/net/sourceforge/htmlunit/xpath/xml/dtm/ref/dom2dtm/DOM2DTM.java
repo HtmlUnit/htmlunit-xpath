@@ -18,20 +18,23 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
 import java.util.Vector;
+
 import javax.xml.transform.dom.DOMSource;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
 import net.sourceforge.htmlunit.xpath.objects.XString;
+import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMDefaultBaseIterators;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.ExpandedNameTable;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
 import net.sourceforge.htmlunit.xpath.xml.utils.XMLCharacterRecognizer;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 
 /**
  * The <code>DOM2DTM</code> class serves up a DOM's contents via the DTM API.
@@ -161,8 +164,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         // not to add messages right not for I18N reasons.
         // %REVIEW% Should this be a Fatal Error?
         error(
-            XMLMessages.createXMLMessage(
-                XMLErrorResources.ER_NO_DTMIDS_AVAIL, null)); // "No more DTM IDs are
+             XPATHMessages.createXPATHMessage(
+                XPATHErrorResources.ER_NO_DTMIDS_AVAIL, null)); // "No more DTM IDs are
         // available";
       }
     }

@@ -17,8 +17,8 @@
  */
 package net.sourceforge.htmlunit.xpath.xml.dtm;
 
-import net.sourceforge.htmlunit.xpath.xml.res.XMLErrorResources;
-import net.sourceforge.htmlunit.xpath.xml.res.XMLMessages;
+import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 
 /** This class specifies an exceptional condition that occured in the DTM module. */
 public class DTMException extends RuntimeException {
@@ -43,15 +43,13 @@ public class DTMException extends RuntimeException {
 
     if ((this.containedException == null) && (cause != null)) {
       throw new IllegalStateException(
-          XMLMessages.createXMLMessage(
-              XMLErrorResources.ER_CANNOT_OVERWRITE_CAUSE, null)); // "Can't
-      // overwrite
-      // cause");
+              XPATHMessages.createXPATHMessage(
+                      XPATHErrorResources.ER_CANNOT_OVERWRITE_CAUSE, null));
     }
 
     if (cause == this) {
       throw new IllegalArgumentException(
-          XMLMessages.createXMLMessage(XMLErrorResources.ER_SELF_CAUSATION_NOT_PERMITTED, null));
+              XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_SELF_CAUSATION_NOT_PERMITTED, null));
     }
 
     this.containedException = cause;
