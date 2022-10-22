@@ -302,28 +302,6 @@ public class XPathParser {
   }
 
   /**
-   * Warn the user of a problem.
-   *
-   * @param msg An error msgkey that corresponds to one of the constants found in {@link
-   *     net.sourceforge.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
-   *     string.
-   * @param args An array of arguments represented in the format string, which may be null.
-   * @throws TransformerException if the current ErrorListoner determines to throw an exception.
-   */
-  void warn(String msg, Object[] args) throws TransformerException {
-
-    String fmsg = XPATHMessages.createXPATHWarning(msg, args);
-    ErrorListener ehandler = this.getErrorListener();
-
-    if (null != ehandler) {
-      ehandler.warning(new TransformerException(fmsg));
-    } else {
-      // Should never happen.
-      System.err.println(fmsg);
-    }
-  }
-
-  /**
    * Notify the user of an error, and probably throw an exception.
    *
    * @param msg An error msgkey that corresponds to one of the constants found in {@link

@@ -46,23 +46,6 @@ public class XPATHMessages {
    * Creates a message from the specified key and replacement arguments, localized to the given
    * locale.
    *
-   * @param msgKey The key for the message text.
-   * @param args The arguments to be used as replacement text in the message created.
-   * @return The formatted warning string.
-   */
-  public static String createXPATHWarning(String msgKey, Object[] args) // throws Exception
-      {
-    if (XPATHBundle == null) {
-      XPATHBundle = new XPATHErrorResources();
-    }
-
-    return createXPATHMsg(XPATHBundle, msgKey, args);
-  }
-
-  /**
-   * Creates a message from the specified key and replacement arguments, localized to the given
-   * locale.
-   *
    * @param fResourceBundle The resource bundle to use.
    * @param msgKey The message key to use.
    * @param args The arguments to be used as replacement text in the message created.
@@ -84,7 +67,6 @@ public class XPATHMessages {
 
     if (args != null) {
       try {
-
         // Do this to keep format from crying.
         // This is better than making a bunch of conditional
         // code all over the place.

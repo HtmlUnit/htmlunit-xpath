@@ -198,28 +198,6 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
   }
 
   /**
-   * Warn the user of an problem.
-   *
-   * @param xctxt The XPath runtime context.
-   * @param msg An error msgkey that corresponds to one of the conststants found in {@link
-   *     net.sourceforge.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
-   *     string.
-   * @param args An array of arguments represented in the format string, which may be null.
-   * @throws TransformerException if the current ErrorListoner determines to throw an exception.
-   * @throws javax.xml.transform.TransformerException if any
-   */
-  public void warn(XPathContext xctxt, String msg, Object[] args)
-      throws javax.xml.transform.TransformerException {
-
-    java.lang.String fmsg = XPATHMessages.createXPATHWarning(msg, args);
-
-    if (null != xctxt) {
-      ErrorListener eh = xctxt.getErrorListener();
-      eh.warning(new TransformerException(fmsg));
-    }
-  }
-
-  /**
    * Tell the user of an assertion error, and probably throw an exception.
    *
    * @param b If false, a runtime exception will be thrown.

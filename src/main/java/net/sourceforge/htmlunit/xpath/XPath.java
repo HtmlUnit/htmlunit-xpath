@@ -291,27 +291,6 @@ public class XPath {
   }
 
   /**
-   * Warn the user of an problem.
-   *
-   * @param xctxt The XPath runtime context.
-   * @param msg An error msgkey that corresponds to one of the constants found in {@link
-   *     net.sourceforge.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
-   *     string.
-   * @param args An array of arguments represented in the format string, which may be null.
-   * @throws TransformerException if the current ErrorListoner determines to throw an exception.
-   */
-  public void warn(XPathContext xctxt, String msg, Object[] args)
-      throws javax.xml.transform.TransformerException {
-
-    String fmsg = XPATHMessages.createXPATHWarning(msg, args);
-    ErrorListener ehandler = xctxt.getErrorListener();
-
-    if (null != ehandler) {
-      ehandler.warning(new TransformerException(fmsg));
-    }
-  }
-
-  /**
    * Tell the user of an error, and probably throw an exception.
    *
    * @param xctxt The XPath runtime context.
