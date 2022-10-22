@@ -160,9 +160,7 @@ public class XPathContext extends DTMManager {
   public void setErrorListener(ErrorListener listener) throws IllegalArgumentException {
     if (listener == null)
       throw new IllegalArgumentException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NULL_ERROR_HANDLER, null)); // "Null error
-    // handler");
+          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NULL_ERROR_HANDLER, null));
     m_errorListener = listener;
   }
 

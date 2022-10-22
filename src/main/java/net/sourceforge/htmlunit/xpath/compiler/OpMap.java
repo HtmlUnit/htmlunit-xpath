@@ -172,7 +172,6 @@ public class OpMap {
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_UNKNOWN_STEP, new Object[] {String.valueOf(stepType)}));
-      // "Programmer's assertion in getNextStepPos: unknown stepType: " + stepType);
     }
   }
 
@@ -198,7 +197,7 @@ public class OpMap {
     } else {
       error(
           net.sourceforge.htmlunit.xpath.res.XPATHErrorResources.ER_UNKNOWN_OPCODE,
-          new Object[] {String.valueOf(stepType)}); // "ERROR! Unknown op code: "+m_opMap[opPos]);
+          new Object[] {String.valueOf(stepType)});
       return -1;
     }
   }

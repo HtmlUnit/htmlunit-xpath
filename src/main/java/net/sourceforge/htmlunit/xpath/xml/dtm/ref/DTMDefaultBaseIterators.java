@@ -93,8 +93,6 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
             XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_ITERATOR_AXIS_NOT_IMPLEMENTED,
                 new Object[] {Axis.getNames(axis)}));
-        // "Error: iterator for axis '" + Axis.names[axis]
-        // + "' not implemented");
     }
 
     return iterator;

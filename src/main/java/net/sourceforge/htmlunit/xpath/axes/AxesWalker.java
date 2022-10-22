@@ -170,8 +170,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
     if (DTM.NULL == root) {
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_SETTING_WALKER_ROOT_TO_NULL,
-              null)); // "\n !!!! Error! Setting the root of a walker to null!!!");
+              XPATHErrorResources.ER_SETTING_WALKER_ROOT_TO_NULL, null));
     }
 
     resetProximityPositions();

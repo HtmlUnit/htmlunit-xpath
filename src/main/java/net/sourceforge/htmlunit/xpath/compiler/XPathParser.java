@@ -113,12 +113,7 @@ public class XPathParser {
           if (null != m_token) extraTokens.append(", ");
         }
 
-        error(
-            XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS,
-            new Object[] {extraTokens.toString()}); // "Extra
-        // illegal
-        // tokens:
-        // "+extraTokens);
+        error(XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS, new Object[] {extraTokens.toString()});
       }
 
     } catch (net.sourceforge.htmlunit.xpath.XPathProcessorException e) {
@@ -171,12 +166,7 @@ public class XPathParser {
         if (null != m_token) extraTokens.append(", ");
       }
 
-      error(
-          XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS,
-          new Object[] {extraTokens.toString()}); // "Extra
-      // illegal
-      // tokens:
-      // "+extraTokens);
+      error(XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS, new Object[] {extraTokens.toString()});
     }
 
     // Terminate for safety.
@@ -302,11 +292,7 @@ public class XPathParser {
     } else {
       error(
           XPATHErrorResources.ER_EXPECTED_BUT_FOUND,
-          new Object[] {String.valueOf(expected), m_token}); // "Expected
-      // "+expected+",
-      // but
-      // found:
-      // "+m_token);
+          new Object[] {String.valueOf(expected), m_token});
 
       // Patch for Christina's gripe. She wants her errorHandler to return from
       // this error and continue trying to parse, rather than throwing an exception.
@@ -774,11 +760,7 @@ public class XPathParser {
     int opLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos;
 
     if (opLen == 2) {
-      error(
-          XPATHErrorResources.ER_BOOLEAN_ARG_NO_LONGER_OPTIONAL,
-          null); // "boolean(...) argument is no longer
-      // optional with 19990709 XPath
-      // draft.");
+      error(XPATHErrorResources.ER_BOOLEAN_ARG_NO_LONGER_OPTIONAL, null);
     }
 
     m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH, opLen);
@@ -863,7 +845,6 @@ public class XPathParser {
         }
 
         if (!RelativeLocationPath()) {
-          // "Relative location path expected following '/' or '//'"
           error(XPATHErrorResources.ER_EXPECTED_REL_LOC_PATH, null);
         }
       }
@@ -1013,11 +994,7 @@ public class XPathParser {
       int funcTok = getFunctionToken(m_token);
 
       if (-1 == funcTok) {
-        error(
-            XPATHErrorResources.ER_COULDNOT_FIND_FUNCTION,
-            new Object[] {m_token}); // "Could not find
-        // function:
-        // "+m_token+"()");
+        error(XPATHErrorResources.ER_COULDNOT_FIND_FUNCTION, new Object[] {m_token});
       }
 
       switch (funcTok) {
@@ -1040,10 +1017,7 @@ public class XPathParser {
 
     while (!tokenIs(')') && m_token != null) {
       if (tokenIs(',')) {
-        error(
-            XPATHErrorResources.ER_FOUND_COMMA_BUT_NO_PRECEDING_ARG,
-            null); // "Found ',' but no preceding
-        // argument!");
+        error(XPATHErrorResources.ER_FOUND_COMMA_BUT_NO_PRECEDING_ARG, null);
       }
 
       Argument();
@@ -1052,10 +1026,7 @@ public class XPathParser {
         consumeExpected(',');
 
         if (tokenIs(')')) {
-          error(
-              XPATHErrorResources.ER_FOUND_COMMA_BUT_NO_FOLLOWING_ARG,
-              null); // "Found ',' but no following
-          // argument!");
+          error(XPATHErrorResources.ER_FOUND_COMMA_BUT_NO_FOLLOWING_ARG, null);
         }
       }
     }
@@ -1100,8 +1071,6 @@ public class XPathParser {
 
     if (m_token != null) {
       if (!RelativeLocationPath() && !seenSlash) {
-        // Neither a '/' nor a RelativeLocationPath - i.e., matched nothing
-        // "Location path expected, but found "+m_token+" was encountered."
         error(XPATHErrorResources.ER_EXPECTED_LOC_PATH, new Object[] {m_token});
       }
     }
@@ -1127,8 +1096,6 @@ public class XPathParser {
       nextToken();
 
       if (!Step()) {
-        // RelativeLocationPath can't end with a trailing '/'
-        // "Location step expected following '/' or '//'"
         error(XPATHErrorResources.ER_EXPECTED_LOC_STEP, null);
       }
     }
@@ -1178,11 +1145,7 @@ public class XPathParser {
       nextToken();
 
       if (tokenIs('[')) {
-        error(
-            XPATHErrorResources.ER_PREDICATE_ILLEGAL_SYNTAX,
-            null); // "'..[predicate]' or '.[predicate]' is
-        // illegal syntax. Use
-        // 'self::node()[predicate]' instead.");
+        error(XPATHErrorResources.ER_PREDICATE_ILLEGAL_SYNTAX, null);
       }
 
       appendOp(4, OpCodes.FROM_SELF);
@@ -1217,7 +1180,6 @@ public class XPathParser {
     } else {
       // No Step matched - that's an error if previous thing was a '//'
       if (doubleSlash) {
-        // "Location step expected following '/' or '//'"
         error(XPATHErrorResources.ER_EXPECTED_LOC_STEP, null);
       }
 
@@ -1274,9 +1236,7 @@ public class XPathParser {
     Object val = Keywords.getAxisName(m_token);
 
     if (null == val) {
-      error(
-          XPATHErrorResources.ER_ILLEGAL_AXIS_NAME, new Object[] {m_token}); // "illegal axis name:
-      // "+m_token);
+      error(XPATHErrorResources.ER_ILLEGAL_AXIS_NAME, new Object[] {m_token});
     }
 
     int axesType = ((Integer) val).intValue();
@@ -1299,9 +1259,7 @@ public class XPathParser {
       Object nodeTestOp = Keywords.getNodeType(m_token);
 
       if (null == nodeTestOp) {
-        error(
-            XPATHErrorResources.ER_UNKNOWN_NODETYPE, new Object[] {m_token}); // "Unknown nodetype:
-        // "+m_token);
+        error(XPATHErrorResources.ER_UNKNOWN_NODETYPE, new Object[] {m_token});
       } else {
         nextToken();
 
@@ -1335,7 +1293,6 @@ public class XPathParser {
           // Minimalist check for an NCName - just check first character
           // to distinguish from other possible tokens
           if (!Character.isLetter(m_tokenChar) && !tokenIs('_')) {
-            // "Node test that matches either NCName:* or QName was expected."
             error(XPATHErrorResources.ER_EXPECTED_NODE_TEST, null);
           }
         }
@@ -1356,7 +1313,6 @@ public class XPathParser {
         // Minimalist check for an NCName - just check first character
         // to distinguish from other possible tokens
         if (!Character.isLetter(m_tokenChar) && !tokenIs('_')) {
-          // "Node test that matches either NCName:* or QName was expected."
           error(XPATHErrorResources.ER_EXPECTED_NODE_TEST, null);
         }
       }
@@ -1467,12 +1423,7 @@ public class XPathParser {
 
       nextToken();
     } else {
-      error(
-          XPATHErrorResources.ER_PATTERN_LITERAL_NEEDS_BE_QUOTED,
-          new Object[] {m_token}); // "Pattern literal
-      // ("+m_token+")
-      // needs to be
-      // quoted!");
+      error(XPATHErrorResources.ER_PATTERN_LITERAL_NEEDS_BE_QUOTED, new Object[] {m_token});
     }
   }
 
@@ -1601,7 +1552,6 @@ public class XPathParser {
       if (!tokenIs('|') && (null != m_token)) {
         RelativePathPattern();
       } else if (relativePathStatus == RELATIVE_PATH_REQUIRED) {
-        // "A relative path pattern was expected."
         error(XPATHErrorResources.ER_EXPECTED_REL_PATH_PATTERN, null);
       }
     }
@@ -1698,7 +1648,6 @@ public class XPathParser {
       nextToken();
     } else if (tokenIs('/')) {
       if (!isLeadingSlashPermitted) {
-        // "A step was expected in the pattern, but '/' was encountered."
         error(XPATHErrorResources.ER_EXPECTED_STEP_PATTERN, null);
       }
       axesType = OpCodes.MATCH_ANY_ANCESTOR;

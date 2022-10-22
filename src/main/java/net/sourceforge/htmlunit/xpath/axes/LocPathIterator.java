@@ -274,13 +274,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   @Override
   public int previousNode() {
     throw new RuntimeException(
-        XPATHMessages.createXPATHMessage(
-            XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null)); // "This
-    // NodeSetDTM
-    // can not
-    // iterate to a
-    // previous
-    // node!");
+        XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null));
   }
 
   /** {@inheritDoc} */

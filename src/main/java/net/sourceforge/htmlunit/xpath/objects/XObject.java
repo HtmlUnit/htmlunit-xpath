@@ -128,11 +128,7 @@ public class XObject extends Expression {
    */
   public double num() throws javax.xml.transform.TransformerException {
 
-    error(
-        XPATHErrorResources.ER_CANT_CONVERT_TO_NUMBER,
-        new Object[] {getTypeString()}); // "Can not convert
-    // "+getTypeString()+"
-    // to a number");
+    error(XPATHErrorResources.ER_CANT_CONVERT_TO_NUMBER, new Object[] {getTypeString()});
 
     return 0.0;
   }
@@ -156,11 +152,7 @@ public class XObject extends Expression {
    */
   public boolean bool() throws javax.xml.transform.TransformerException {
 
-    error(
-        XPATHErrorResources.ER_CANT_CONVERT_TO_NUMBER,
-        new Object[] {getTypeString()}); // "Can not convert
-    // "+getTypeString()+"
-    // to a number");
+    error(XPATHErrorResources.ER_CANT_CONVERT_TO_NUMBER, new Object[] {getTypeString()});
 
     return false;
   }
@@ -230,11 +222,7 @@ public class XObject extends Expression {
    */
   public NodeIterator nodeset() throws javax.xml.transform.TransformerException {
 
-    error(
-        XPATHErrorResources.ER_CANT_CONVERT_TO_NODELIST,
-        new Object[] {getTypeString()}); // "Can not convert
-    // "+getTypeString()+"
-    // to a NodeList!");
+    error(XPATHErrorResources.ER_CANT_CONVERT_TO_NODELIST, new Object[] {getTypeString()});
 
     return null;
   }
@@ -247,11 +235,7 @@ public class XObject extends Expression {
    */
   public NodeList nodelist() throws javax.xml.transform.TransformerException {
 
-    error(
-        XPATHErrorResources.ER_CANT_CONVERT_TO_NODELIST,
-        new Object[] {getTypeString()}); // "Can not convert
-    // "+getTypeString()+"
-    // to a NodeList!");
+    error(XPATHErrorResources.ER_CANT_CONVERT_TO_NODELIST, new Object[] {getTypeString()});
 
     return null;
   }
@@ -264,13 +248,7 @@ public class XObject extends Expression {
    */
   public NodeSetDTM mutableNodeset() throws javax.xml.transform.TransformerException {
 
-    error(
-        XPATHErrorResources.ER_CANT_CONVERT_TO_MUTABLENODELIST,
-        new Object[] {getTypeString()}); // "Can not
-    // convert
-    // "+getTypeString()+"
-    // to a
-    // NodeSetDTM!");
+    error(XPATHErrorResources.ER_CANT_CONVERT_TO_MUTABLENODELIST, new Object[] {getTypeString()});
 
     return (NodeSetDTM) m_obj;
   }

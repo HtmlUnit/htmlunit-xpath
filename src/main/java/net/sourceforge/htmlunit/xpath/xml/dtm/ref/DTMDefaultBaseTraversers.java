@@ -131,8 +131,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       default:
         throw new DTMException(
             XPATHMessages.createXPATHMessage(
-                XPATHErrorResources.ER_UNKNOWN_AXIS_TYPE,
-                new Object[] {Integer.toString(axis)})); // "Unknown axis traversal type: "+axis);
+                XPATHErrorResources.ER_UNKNOWN_AXIS_TYPE, new Object[] {Integer.toString(axis)}));
     }
 
     if (null == traverser)

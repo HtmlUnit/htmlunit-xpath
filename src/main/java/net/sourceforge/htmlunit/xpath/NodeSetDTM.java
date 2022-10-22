@@ -156,14 +156,7 @@ public class NodeSetDTM extends NodeVector
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null)); // "This
-    // NodeSetDTM
-    // can not
-    // iterate
-    // to a
-    // previous
-    // node!");
+          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null));
 
     if ((m_next - 1) > 0) {
       m_next--;
@@ -194,14 +187,7 @@ public class NodeSetDTM extends NodeVector
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null)); // "This
-    // NodeSetDTM
-    // can not do
-    // indexing
-    // or
-    // counting
-    // functions!");
+          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null));
 
     if ((index >= 0) && (m_next < m_firstFree)) m_next = index;
     else m_next = m_firstFree - 1;
@@ -374,14 +360,7 @@ public class NodeSetDTM extends NodeVector
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null)); // "This
-    // NodeSetDTM
-    // can not do
-    // indexing
-    // or
-    // counting
-    // functions!");
+          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null));
 
     m_next = i;
   }

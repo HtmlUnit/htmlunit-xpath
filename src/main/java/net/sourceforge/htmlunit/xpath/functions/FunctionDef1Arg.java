@@ -101,9 +101,7 @@ public class FunctionDef1Arg extends FunctionOneArg {
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     throw new WrongNumberArgsException(
-        XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_ZERO_OR_ONE, null)); // "0
-    // or
-    // 1");
+        XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_ZERO_OR_ONE, null));
   }
 
   /** {@inheritDoc} */

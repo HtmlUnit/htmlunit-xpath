@@ -1187,9 +1187,7 @@ public abstract class DTMDefaultBase implements DTM {
   public String getNodeNameX(int nodeHandle) {
 
     /* @todo: implement this org.apache.xml.dtm.DTMDefaultBase abstract method */
-    error(
-        XPATHMessages.createXPATHMessage(
-            XPATHErrorResources.ER_METHOD_NOT_SUPPORTED, null)); // "Not yet supported!");
+    error(XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_METHOD_NOT_SUPPORTED, null));
 
     return null;
   }

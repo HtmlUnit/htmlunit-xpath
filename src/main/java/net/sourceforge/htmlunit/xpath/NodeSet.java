@@ -97,13 +97,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable {
 
     if (!m_cacheNodes)
       throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_CANNOT_ITERATE, null)); // "This
-    // NodeSet can
-    // not iterate
-    // to a
-    // previous
-    // node!");
+          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESET_CANNOT_ITERATE, null));
 
     if ((m_next - 1) > 0) {
       m_next--;
@@ -155,10 +149,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable {
 
     if (!m_mutable)
       throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
-    // is not
-    // mutable!");
+          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null));
 
     this.addElement(n);
   }
@@ -231,10 +222,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable {
   public void addElement(Node value) {
     if (!m_mutable)
       throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null)); // "This NodeSet
-    // is not
-    // mutable!");
+          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null));
 
     if ((m_firstFree + 1) >= m_mapSize) {
       if (null == m_map) {

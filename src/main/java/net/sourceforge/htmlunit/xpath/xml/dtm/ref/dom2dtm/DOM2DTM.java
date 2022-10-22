@@ -160,10 +160,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         // %REVIEW% Wrong error message, but I've been told we're trying
         // not to add messages right not for I18N reasons.
         // %REVIEW% Should this be a Fatal Error?
-        error(
-            XPATHMessages.createXPATHMessage(
-                XPATHErrorResources.ER_NO_DTMIDS_AVAIL, null)); // "No more DTM IDs are
-        // available";
+        error(XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NO_DTMIDS_AVAIL, null));
       }
     }
 

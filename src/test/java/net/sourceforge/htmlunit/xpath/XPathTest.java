@@ -17,18 +17,20 @@
  */
 package net.sourceforge.htmlunit.xpath;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.io.IOUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 
 /** Unit test for simple App. */
 public class XPathTest {
+
   /** @throws Exception in case of problems */
   @Test
   public void simpleSearch() throws Exception {
@@ -209,5 +211,61 @@ public class XPathTest {
 
     List<?> hits = XPathHelper.getByXPath(doc, "//p[@name='test']", null, false);
     assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void attributeSearchDoubleQuotes() throws Exception {
+    final String input = "<root><p/><p name='test'/><p/><p/></root>";
+
+    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    final DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
+
+    List<?> hits = XPathHelper.getByXPath(doc, "//p[@name=\"test\"]", null, false);
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void errorMissingDoubleQuotes() throws Exception {
+    final String input = "<root><p/><p name='test'/><p/><p/></root>";
+
+    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    final DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
+
+    Exception exception =
+        Assertions.assertThrows(
+            RuntimeException.class,
+            () -> {
+              XPathHelper.getByXPath(doc, "//p[@name=\"test]", null, false);
+            });
+    Assertions.assertEquals(
+        "Could not retrieve XPath >//p[@name=\"test]< on [#document: null]",
+        exception.getMessage());
+    Assertions.assertEquals(
+        "misquoted literal... expected double quote!", exception.getCause().getMessage());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void errorMissingSingleQuotes() throws Exception {
+    final String input = "<root><p/><p name='test'/><p/><p/></root>";
+
+    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    final DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
+
+    Exception exception =
+        Assertions.assertThrows(
+            RuntimeException.class,
+            () -> {
+              XPathHelper.getByXPath(doc, "//p[@name=test']", null, false);
+            });
+    Assertions.assertEquals(
+        "Could not retrieve XPath >//p[@name=test']< on [#document: null]", exception.getMessage());
+    Assertions.assertEquals(
+        "misquoted literal... expected single quote!", exception.getCause().getMessage());
   }
 }

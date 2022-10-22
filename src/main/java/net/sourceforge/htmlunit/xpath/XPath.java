@@ -92,9 +92,8 @@ public class XPath {
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_CANNOT_DEAL_XPATH_TYPE,
-              new Object[] {Integer.toString(type)})); // "Can not deal with XPath type: " + type);
+              new Object[] {Integer.toString(type)}));
 
-    // System.out.println("----------------");
     m_mainExp = compiler.compile(0);
   }
 
@@ -132,9 +131,7 @@ public class XPath {
           XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_CANNOT_DEAL_XPATH_TYPE,
               new Object[] {Integer.toString(type)}));
-    // "Can not deal with XPath type: " + type);
 
-    // System.out.println("----------------");
     m_mainExp = compiler.compile(0);
   }
 

@@ -131,9 +131,6 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @return The node position of this walker in the sub-context node list.
    */
   public int getProximityPosition() {
-
-    // System.out.println("getProximityPosition - m_predicateIndex:
-    // "+m_predicateIndex);
     return getProximityPosition(m_predicateIndex);
   }
 
@@ -226,8 +223,6 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
       xctxt.pushCurrentNode(context);
 
       for (int i = 0; i < nPredicates; i++) {
-        // System.out.println("Executing predicate expression - waiting count:
-        // "+m_lpi.getWaitingCount());
         XObject pred = m_predicates[i].execute(xctxt);
         // System.out.println("\nBack from executing predicate expression - waiting
         // count:

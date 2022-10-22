@@ -134,9 +134,7 @@ class Lexer {
 
               startSubstring = -1;
             } else {
-              m_processor.error(
-                  XPATHErrorResources.ER_EXPECTED_DOUBLE_QUOTE, null); // "misquoted literal...
-              // expected double quote!");
+              m_processor.error(XPATHErrorResources.ER_EXPECTED_DOUBLE_QUOTE, null);
             }
           }
           break;
@@ -162,9 +160,7 @@ class Lexer {
 
             startSubstring = -1;
           } else {
-            m_processor.error(
-                XPATHErrorResources.ER_EXPECTED_SINGLE_QUOTE, null); // "misquoted literal...
-            // expected single quote!");
+            m_processor.error(XPATHErrorResources.ER_EXPECTED_SINGLE_QUOTE, null);
           }
           break;
         case 0x0A:
@@ -296,7 +292,7 @@ class Lexer {
     }
 
     if (0 == m_compiler.getTokenQueueSize()) {
-      m_processor.error(XPATHErrorResources.ER_EMPTY_EXPRESSION, null); // "Empty expression!");
+      m_processor.error(XPATHErrorResources.ER_EMPTY_EXPRESSION, null);
     } else if (null != targetStrings) {
       recordTokenString(targetStrings);
     }
@@ -506,10 +502,7 @@ class Lexer {
 
       if (s.length() > 0) addToTokenQueue(s);
     } else {
-      m_processor.error(
-          XPATHErrorResources.ER_PREFIX_MUST_RESOLVE, new String[] {prefix}); // "Prefix must
-      // resolve to a
-      // namespace: {0}";
+      m_processor.error(XPATHErrorResources.ER_PREFIX_MUST_RESOLVE, new String[] {prefix});
     }
 
     return -1;

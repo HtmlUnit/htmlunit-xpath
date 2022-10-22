@@ -259,11 +259,7 @@ public class WalkerFactory {
 
     throw new RuntimeException(
         XPATHMessages.createXPATHMessage(
-            XPATHErrorResources.ER_NULL_ERROR_HANDLER,
-            new Object[] {
-              Integer.toString(stepType)
-            })); // "Programmer's assertion: unknown opcode: "
-    // + stepType);
+            XPATHErrorResources.ER_NULL_ERROR_HANDLER, new Object[] {Integer.toString(stepType)}));
   }
 
   /**
@@ -500,10 +496,7 @@ public class WalkerFactory {
           throw new RuntimeException(
               XPATHMessages.createXPATHMessage(
                   XPATHErrorResources.ER_NULL_ERROR_HANDLER,
-                  new Object[] {
-                    Integer.toString(stepType)
-                  })); // "Programmer's assertion: unknown opcode: "
-          // + stepType);
+                  new Object[] {Integer.toString(stepType)}));
       }
 
       nodeTestType = compiler.getStepTestType(stepOpCodePos);
@@ -616,10 +609,7 @@ public class WalkerFactory {
           throw new RuntimeException(
               XPATHMessages.createXPATHMessage(
                   XPATHErrorResources.ER_NULL_ERROR_HANDLER,
-                  new Object[] {
-                    Integer.toString(stepType)
-                  })); // "Programmer's assertion: unknown opcode: "
-          // + stepType);
+                  new Object[] {Integer.toString(stepType)}));
       }
 
       if (OpCodes.NODETYPE_NODE == compiler.getOp(stepOpCodePos + 3)) // child::node()
@@ -1001,10 +991,7 @@ public class WalkerFactory {
         throw new RuntimeException(
             XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_NULL_ERROR_HANDLER,
-                new Object[] {
-                  Integer.toString(stepType)
-                })); // "Programmer's assertion: unknown opcode: "
-        // + stepType);
+                new Object[] {Integer.toString(stepType)}));
     }
 
     if (simpleInit) {
@@ -1321,10 +1308,7 @@ public class WalkerFactory {
           throw new RuntimeException(
               XPATHMessages.createXPATHMessage(
                   XPATHErrorResources.ER_NULL_ERROR_HANDLER,
-                  new Object[] {
-                    Integer.toString(stepType)
-                  })); // "Programmer's assertion: unknown opcode: "
-          // + stepType);
+                  new Object[] {Integer.toString(stepType)}));
       }
 
       int nextStepOpCodePos = compiler.getNextStepPos(stepOpCodePos);

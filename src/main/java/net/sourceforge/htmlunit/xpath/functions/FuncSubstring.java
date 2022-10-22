@@ -81,8 +81,6 @@ public class FuncSubstring extends Function3Args {
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
     throw new WrongNumberArgsException(
-        XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_TWO_OR_THREE, null)); // "2
-    // or
-    // 3");
+        XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_TWO_OR_THREE, null));
   }
 }

@@ -24,7 +24,7 @@ For maven, you would add:
         <version>2.65.0</version>
     </dependency>
 
-### Latest CI build
+### Last CI build
 The latest builds are available from our
 [Jenkins CI build server][2]
 

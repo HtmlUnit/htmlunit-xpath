@@ -177,18 +177,10 @@ public class Compiler extends OpMap {
         expr = locationPathPattern(opPos);
         break;
       case OpCodes.OP_QUO:
-        error(
-            XPATHErrorResources.ER_UNKNOWN_OPCODE,
-            new Object[] {"quo"}); // "ERROR! Unknown op code:
-        // "+m_opMap[opPos]);
+        error(XPATHErrorResources.ER_UNKNOWN_OPCODE, new Object[] {"quo"});
         break;
       default:
-        error(
-            XPATHErrorResources.ER_UNKNOWN_OPCODE,
-            new Object[] {Integer.toString(getOp(opPos))}); // "ERROR!
-        // Unknown op
-        // code:
-        // "+m_opMap[opPos]);
+        error(XPATHErrorResources.ER_UNKNOWN_OPCODE, new Object[] {Integer.toString(getOp(opPos))});
     }
 
     return expr;
@@ -736,7 +728,7 @@ public class Compiler extends OpMap {
                 Axis.PARENT);
         break;
       default:
-        error(XPATHErrorResources.ER_UNKNOWN_MATCH_OPERATION, null); // "unknown match operation!");
+        error(XPATHErrorResources.ER_UNKNOWN_MATCH_OPERATION, null);
 
         return null;
     }
@@ -875,33 +867,12 @@ public class Compiler extends OpMap {
             new TransformerException(
                 XPATHMessages.createXPATHMessage(
                     XPATHErrorResources.ER_ONLY_ALLOWS, new Object[] {name, wnae.getMessage()})));
-        // "name + " only allows " + wnae.getMessage() + " arguments", m_locator));
       }
 
       return func;
     }
-    error(XPATHErrorResources.ER_FUNCTION_TOKEN_NOT_FOUND, null); // "function token not found.");
+    error(XPATHErrorResources.ER_FUNCTION_TOKEN_NOT_FOUND, null);
     return null;
-  }
-
-  /**
-   * Warn the user of an problem.
-   *
-   * @param msg An error msgkey that corresponds to one of the constants found in {@link
-   *     net.sourceforge.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
-   *     string.
-   * @param args An array of arguments represented in the format string, which may be null.
-   * @throws TransformerException if the current ErrorListoner determines to throw an exception.
-   */
-  public void warn(String msg, Object[] args) throws TransformerException {
-
-    java.lang.String fmsg = XPATHMessages.createXPATHWarning(msg, args);
-
-    if (null != m_errorHandler) {
-      m_errorHandler.warning(new TransformerException(fmsg));
-    } else {
-      System.out.println(fmsg);
-    }
   }
 
   /** {@inheritDoc} */
