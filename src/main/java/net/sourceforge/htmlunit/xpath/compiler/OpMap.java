@@ -67,9 +67,6 @@ public class OpMap {
     return m_tokenQueue;
   }
 
-  /* The current size of the token queue. */
-  // public int m_tokenQueueSize = 0;
-
   /**
    * Get size of the token queue.
    *

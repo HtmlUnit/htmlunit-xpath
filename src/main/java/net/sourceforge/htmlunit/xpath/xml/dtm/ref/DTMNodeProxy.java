@@ -788,9 +788,8 @@ public class DTMNodeProxy
     /** {@inheritDoc} */
     @Override
     public boolean hasFeature(String feature, String version) {
-      if (("CORE".equalsIgnoreCase(feature) || "XML".equalsIgnoreCase(feature))
-          && ("1.0".equals(version) || "2.0".equals(version))) return true;
-      return false;
+      return ("CORE".equalsIgnoreCase(feature) || "XML".equalsIgnoreCase(feature))
+          && ("1.0".equals(version) || "2.0".equals(version));
     }
 
     /** {@inheritDoc} */
@@ -867,9 +866,7 @@ public class DTMNodeProxy
     }
 
     if (getNodeValue() == null) {
-      if (arg.getNodeValue() != null) {
-        return false;
-      }
+      return arg.getNodeValue() == null;
     } else if (!getNodeValue().equals(arg.getNodeValue())) {
       return false;
     }

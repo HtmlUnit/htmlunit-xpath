@@ -21,7 +21,7 @@ import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.objects.XBoolean;
 import net.sourceforge.htmlunit.xpath.objects.XObject;
 
-/** The 'and' operation expression executer. */
+/** The 'and' operation expression executor. */
 public class And extends Operation {
 
   /** {@inheritDoc} */

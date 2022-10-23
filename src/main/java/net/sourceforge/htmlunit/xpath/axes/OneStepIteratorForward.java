@@ -75,8 +75,6 @@ public class OneStepIteratorForward extends ChildTestIterator {
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
-    if (m_axis != ((OneStepIteratorForward) expr).m_axis) return false;
-
-    return true;
+    return m_axis == ((OneStepIteratorForward) expr).m_axis;
   }
 }

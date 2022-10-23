@@ -359,9 +359,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
     if (!super.deepEquals(expr)) return false;
 
     AxesWalker walker = (AxesWalker) expr;
-    if (this.m_axis != walker.m_axis) return false;
-
-    return true;
+    return this.m_axis == walker.m_axis;
   }
 
   /** The root node of the TreeWalker, as specified when it was created. */

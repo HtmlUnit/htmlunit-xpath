@@ -216,8 +216,6 @@ public class FilterExprWalker extends AxesWalker {
     if (!super.deepEquals(expr)) return false;
 
     FilterExprWalker walker = (FilterExprWalker) expr;
-    if (!m_expr.deepEquals(walker.m_expr)) return false;
-
-    return true;
+    return m_expr.deepEquals(walker.m_expr);
   }
 }

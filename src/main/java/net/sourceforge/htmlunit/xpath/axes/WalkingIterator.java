@@ -203,8 +203,6 @@ public class WalkingIterator extends LocPathIterator {
       walker2 = walker2.getNextWalker();
     }
 
-    if ((null != walker1) || (null != walker2)) return false;
-
-    return true;
+    return (null == walker1) && (null == walker2);
   }
 }

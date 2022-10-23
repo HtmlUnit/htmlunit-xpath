@@ -207,9 +207,7 @@ public class NodeTest extends Expression {
 
     if (m_whatToShow != nt.m_whatToShow) return false;
 
-    if (m_isTotallyWild != nt.m_isTotallyWild) return false;
-
-    return true;
+    return m_isTotallyWild == nt.m_isTotallyWild;
   }
 
   /** Null argument constructor. */

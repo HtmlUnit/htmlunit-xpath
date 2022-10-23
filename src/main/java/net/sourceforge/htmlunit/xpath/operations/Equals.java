@@ -37,7 +37,7 @@ public class Equals extends Operation {
     XObject left = m_left.execute(xctxt, true);
     XObject right = m_right.execute(xctxt, true);
 
-    boolean result = left.equals(right) ? true : false;
+    boolean result = left.equals(right);
     left.detach();
     right.detach();
     return result;

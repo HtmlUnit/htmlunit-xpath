@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
-import net.sourceforge.htmlunit.xpath.xml.utils.IntStack;
 import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
@@ -202,7 +201,7 @@ public class XPathContext extends DTMManager {
    * to be confused with the current node list. %REVIEW% Note that there are no bounds check and
    * resize for this stack, so if it is blown, it's all over.
    */
-  private final IntStack m_currentNodes = new IntStack(RECURSIONLIMIT);
+  private final Stack<Integer> m_currentNodes = new Stack<>();
 
   /**
    * Get the current context node.
@@ -225,8 +224,8 @@ public class XPathContext extends DTMManager {
 
   /** Set the current context node. */
   public final void popCurrentNodeAndExpression() {
-    m_currentNodes.quickPop(1);
-    m_currentExpressionNodes.quickPop(1);
+    m_currentNodes.pop();
+    m_currentExpressionNodes.pop();
   }
 
   /**
@@ -240,7 +239,7 @@ public class XPathContext extends DTMManager {
 
   /** Pop the current context node. */
   public final void popCurrentNode() {
-    m_currentNodes.quickPop(1);
+    m_currentNodes.pop();
   }
 
   /** Get the current location path iterator root. */
@@ -255,7 +254,7 @@ public class XPathContext extends DTMManager {
   private final NodeVector m_predicateRoots = new NodeVector();
 
   /** A stack of the current sub-expression nodes. */
-  private final IntStack m_currentExpressionNodes = new IntStack(RECURSIONLIMIT);
+  private final Stack<Integer> m_currentExpressionNodes = new Stack<>();
 
   private final Stack<Integer> m_predicatePos = new Stack<>();
 
