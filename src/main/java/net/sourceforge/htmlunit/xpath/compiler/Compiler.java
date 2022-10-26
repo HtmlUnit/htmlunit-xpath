@@ -863,10 +863,7 @@ public class Compiler extends OpMap {
       } catch (WrongNumberArgsException wnae) {
         java.lang.String name = m_functionTable.getFunctionName(funcID);
 
-        m_errorHandler.fatalError(
-            new TransformerException(
-                XPATHMessages.createXPATHMessage(
-                    XPATHErrorResources.ER_ONLY_ALLOWS, new Object[] {name, wnae.getMessage()})));
+        error(XPATHErrorResources.ER_ONLY_ALLOWS, new Object[] {name, wnae.getMessage()});
       }
 
       return func;
