@@ -17,255 +17,48 @@
  */
 package net.sourceforge.htmlunit.xpath;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 
-/** Unit test for simple App. */
+/** Parent for our tests */
 public class XPathTest {
 
-  /** @throws Exception in case of problems */
-  @Test
-  public void simpleSearch() throws Exception {
-    final String input = "<root><element/></root>";
-
+  public <T> List<T> getByXpath(final String xml, final String xPath) throws Exception {
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
+    Document doc = builder.parse(IOUtils.toInputStream(xml, StandardCharsets.UTF_8));
 
-    List<?> hits = XPathHelper.getByXPath(doc, "//element", null, false);
-    assertEquals(1, hits.size());
+    return XPathHelper.getByXPath(doc, xPath, null, false);
   }
 
-  /** @throws Exception in case of problems */
-  @Test
-  public void pipeSearch() throws Exception {
-    final String input = "<root><element/><element2/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//element | //element2", null, false);
-    assertEquals(2, hits.size());
+  public <T> List<T> getByXpath(final String xPath) throws Exception {
+    return getByXpath("<root></root>", xPath);
   }
 
-  /** @throws Exception in case of problems */
-  @Test
-  public void mathSearch() throws Exception {
-    final String input = "<root><p/><p/></root>";
-
+  public void assertGetByXpathException(
+      final String xml, final String xPath, final String exMsg, final String exCauseMsg)
+      throws Exception {
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[position()=(1+5-(2*2))div 2]", null, false);
-    assertEquals(1, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void gtSearch() throws Exception {
-    final String input = "<root><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[position()>1]", null, false);
-    assertEquals(1, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void gteSearch() throws Exception {
-    final String input = "<root><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[position()>=1]", null, false);
-    assertEquals(2, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void ltSearch() throws Exception {
-    final String input = "<root><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[position()<2]", null, false);
-    assertEquals(1, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void lteSearch() throws Exception {
-    final String input = "<root><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[position()<=2]", null, false);
-    assertEquals(2, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void eqSearch() throws Exception {
-    final String input = "<root><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[position()=2]", null, false);
-    assertEquals(1, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void neqSearch() throws Exception {
-    final String input = "<root><p/><p/><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[position()!=2]", null, false);
-    assertEquals(3, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void andSearch() throws Exception {
-    final String input = "<root><p a='1' b='2'/><p/><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[@a=1 and @b=2]", null, false);
-    assertEquals(1, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void orSearch() throws Exception {
-    final String input = "<root><p a='1'/><p b='2'/><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[@a=1 or @b=2]", null, false);
-    assertEquals(2, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void modSearch() throws Exception {
-    final String input = "<root><p a='1'/><p a='2'/><p a='3'/><p a='4'/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[@a mod 2 = 0]", null, false);
-    assertEquals(2, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void numberSearch() throws Exception {
-    final String input = "<root><p a='1'/><p a='2'/><p a='3'/><p a='4'/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[@a=number('  4\t')]", null, false);
-    assertEquals(1, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void attributeSearch() throws Exception {
-    final String input = "<root><p/><p name='test'/><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[@name='test']", null, false);
-    assertEquals(1, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void attributeSearchDoubleQuotes() throws Exception {
-    final String input = "<root><p/><p name='test'/><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    List<?> hits = XPathHelper.getByXPath(doc, "//p[@name=\"test\"]", null, false);
-    assertEquals(1, hits.size());
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void errorMissingDoubleQuotes() throws Exception {
-    final String input = "<root><p/><p name='test'/><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
+    Document doc = builder.parse(IOUtils.toInputStream(xml, StandardCharsets.UTF_8));
 
     Exception exception =
         Assertions.assertThrows(
             RuntimeException.class,
             () -> {
-              XPathHelper.getByXPath(doc, "//p[@name=\"test]", null, false);
+              XPathHelper.getByXPath(doc, xPath, null, false);
             });
-    Assertions.assertEquals(
-        "Could not retrieve XPath >//p[@name=\"test]< on [#document: null]",
-        exception.getMessage());
-    Assertions.assertEquals(
-        "misquoted literal... expected double quote!", exception.getCause().getMessage());
+    Assertions.assertEquals(exMsg, exception.getMessage());
+    Assertions.assertEquals(exCauseMsg, exception.getCause().getMessage());
   }
 
-  /** @throws Exception in case of problems */
-  @Test
-  public void errorMissingSingleQuotes() throws Exception {
-    final String input = "<root><p/><p name='test'/><p/><p/></root>";
-
-    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(input, StandardCharsets.UTF_8));
-
-    Exception exception =
-        Assertions.assertThrows(
-            RuntimeException.class,
-            () -> {
-              XPathHelper.getByXPath(doc, "//p[@name=test']", null, false);
-            });
-    Assertions.assertEquals(
-        "Could not retrieve XPath >//p[@name=test']< on [#document: null]", exception.getMessage());
-    Assertions.assertEquals(
-        "misquoted literal... expected single quote!", exception.getCause().getMessage());
+  public void assertGetByXpathException(
+      final String xPath, final String exMsg, final String exCauseMsg) throws Exception {
+    assertGetByXpathException("<root></root>", xPath, exMsg, exCauseMsg);
   }
 }

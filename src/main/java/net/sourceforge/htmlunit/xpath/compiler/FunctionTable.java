@@ -210,8 +210,10 @@ public class FunctionTable {
    * publicly available.
    */
   String getFunctionName(int funcID) {
-    if (funcID < NUM_BUILT_IN_FUNCS) return m_functions[funcID].getName();
-    else return m_functions_customer[funcID - NUM_BUILT_IN_FUNCS].getName();
+    if (funcID < NUM_BUILT_IN_FUNCS) {
+      return m_functions[funcID].getSimpleName();
+    }
+    return m_functions_customer[funcID - NUM_BUILT_IN_FUNCS].getName();
   }
 
   /**
