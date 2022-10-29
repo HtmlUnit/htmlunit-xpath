@@ -23,63 +23,56 @@ import java.util.List;
 import net.sourceforge.htmlunit.xpath.XPathTest;
 import org.junit.jupiter.api.Test;
 
-/** Unit test for false() function. */
-public class FalseTest extends XPathTest {
+/** Unit test for translate() function. */
+public class TranslateTest extends XPathTest {
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseLessThanOrEqualToFalse() throws Exception {
-    List<?> hits = getByXpath("false() <= false()");
+  public void translate() throws Exception {
+    List<?> hits = getByXpath("translate('abc', 'b', 'd')");
     assertEquals(1, hits.size());
-    assertEquals(Boolean.TRUE, hits.get(0));
+    assertEquals("adc", hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void emptyNodeSetLessThanOrEqualToFalse() throws Exception {
-    List<?> hits = getByXpath("/nonexistent<=false()");
+  public void translateIgnoresExtraArguments() throws Exception {
+    List<?> hits = getByXpath("translate('abc', 'b', 'dghf')");
     assertEquals(1, hits.size());
-    assertEquals(Boolean.TRUE, hits.get(0));
+    assertEquals("adc", hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void emptyNodeSetLessThanFalse() throws Exception {
-    List<?> hits = getByXpath("/nonexistent<false()");
+  public void translateStringThatContainsNonBMPChars() throws Exception {
+    List<?> hits = getByXpath("translate('ab\uD834\uDD00b', 'b', 'd')");
     assertEquals(1, hits.size());
-    assertEquals(Boolean.FALSE, hits.get(0));
+    assertEquals("ad\uD834\uDD00d", hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseLessThanOrEqualToEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("false()<=/nonexistent");
+  public void translateWithExtraCharsInReplacementString() throws Exception {
+    List<?> hits = getByXpath("translate('abc', 'c', 'def')");
     assertEquals(1, hits.size());
-    assertEquals(Boolean.TRUE, hits.get(0));
+    assertEquals("abd", hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseGreaterThanOrEqualToEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("false()>=/nonexistent");
-    assertEquals(1, hits.size());
-    assertEquals(Boolean.TRUE, hits.get(0));
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void falseGreaterThaEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("false()>/nonexistent");
-    assertEquals(1, hits.size());
-    assertEquals(Boolean.FALSE, hits.get(0));
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void falseFunctionRequiresNoArgument() throws Exception {
+  public void translateFunctionRequiresAtLeastThreeArguments() throws Exception {
     assertGetByXpathException(
-        "false(1)",
-        "Could not retrieve XPath >false(1)< on [#document: null]",
-        "FuncFalse only allows 0 arguments");
+        "translate('a', 'b')",
+        "Could not retrieve XPath >translate('a', 'b')< on [#document: null]",
+        "FuncTranslate only allows 3 arguments");
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void translateRequiresAtMostThreeArguments() throws Exception {
+    assertGetByXpathException(
+        "translate('a', 'a', 'a', 'a')",
+        "Could not retrieve XPath >translate('a', 'a', 'a', 'a')< on [#document: null]",
+        "FuncTranslate only allows 3 arguments");
   }
 }

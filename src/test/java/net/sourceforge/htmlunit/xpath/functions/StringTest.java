@@ -20,66 +20,68 @@ package net.sourceforge.htmlunit.xpath.functions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import net.sourceforge.htmlunit.xpath.XPathTest;
+
 import org.junit.jupiter.api.Test;
 
-/** Unit test for false() function. */
-public class FalseTest extends XPathTest {
+import net.sourceforge.htmlunit.xpath.XPathTest;
+
+/** Unit test for string() function. */
+public class StringTest extends XPathTest {
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseLessThanOrEqualToFalse() throws Exception {
-    List<?> hits = getByXpath("false() <= false()");
+  public void stringFunctionOperatesOnFirstNodeInDocumentOrder() throws Exception {
+    List<?> hits = getByXpath("<root><a><b><x>2</x><x>3</x></b><x>4</x></a></root>", "string(//x)");
     assertEquals(1, hits.size());
-    assertEquals(Boolean.TRUE, hits.get(0));
+    assertEquals("2", hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void emptyNodeSetLessThanOrEqualToFalse() throws Exception {
-    List<?> hits = getByXpath("/nonexistent<=false()");
+  public void stringOfInfinity() throws Exception {
+    List<?> hits = getByXpath("string(1 div 0)");
     assertEquals(1, hits.size());
-    assertEquals(Boolean.TRUE, hits.get(0));
+    assertEquals("Infinity", hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void emptyNodeSetLessThanFalse() throws Exception {
-    List<?> hits = getByXpath("/nonexistent<false()");
+  public void stringOfNegativeInfinity() throws Exception {
+    List<?> hits = getByXpath("string(-1 div 0)");
     assertEquals(1, hits.size());
-    assertEquals(Boolean.FALSE, hits.get(0));
+    assertEquals("-Infinity", hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseLessThanOrEqualToEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("false()<=/nonexistent");
+  public void stringOfNegativeZero() throws Exception {
+    List<?> hits = getByXpath("string(-0)");
     assertEquals(1, hits.size());
-    assertEquals(Boolean.TRUE, hits.get(0));
+    assertEquals("0", hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseGreaterThanOrEqualToEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("false()>=/nonexistent");
+  public void integersAreFormattedAsInts() throws Exception {
+    List<?> hits = getByXpath("string(12)");
     assertEquals(1, hits.size());
-    assertEquals(Boolean.TRUE, hits.get(0));
+    assertEquals("12", hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseGreaterThaEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("false()>/nonexistent");
+  public void stringWithoutParam() throws Exception {
+    List<?> hits = getByXpath("string()");
     assertEquals(1, hits.size());
-    assertEquals(Boolean.FALSE, hits.get(0));
+    assertEquals("", hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseFunctionRequiresNoArgument() throws Exception {
+  public void stringFunctionRequiresExactlyOneArgument() throws Exception {
     assertGetByXpathException(
-        "false(1)",
-        "Could not retrieve XPath >false(1)< on [#document: null]",
-        "FuncFalse only allows 0 arguments");
+        "string('', '')",
+        "Could not retrieve XPath >string('', '')< on [#document: null]",
+        "FuncString only allows 0 or 1 arguments");
   }
 }

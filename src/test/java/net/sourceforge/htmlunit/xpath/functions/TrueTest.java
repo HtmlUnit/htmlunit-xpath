@@ -23,63 +23,63 @@ import java.util.List;
 import net.sourceforge.htmlunit.xpath.XPathTest;
 import org.junit.jupiter.api.Test;
 
-/** Unit test for false() function. */
-public class FalseTest extends XPathTest {
+/** Unit test for true() function. */
+public class TrueTest extends XPathTest {
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseLessThanOrEqualToFalse() throws Exception {
-    List<?> hits = getByXpath("false() <= false()");
+  public void trueLessThanOrEqualToTrue() throws Exception {
+    List<?> hits = getByXpath("true() <= true()");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void emptyNodeSetLessThanOrEqualToFalse() throws Exception {
-    List<?> hits = getByXpath("/nonexistent<=false()");
+  public void emptyNodeSetLessThanOrEqualToTrue() throws Exception {
+    List<?> hits = getByXpath("/nonexistent<=true()");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void emptyNodeSetLessThanFalse() throws Exception {
-    List<?> hits = getByXpath("/nonexistent<false()");
+  public void emptyNodeSetLessThanTrue() throws Exception {
+    List<?> hits = getByXpath("/nonexistent<true()");
+    assertEquals(1, hits.size());
+    assertEquals(Boolean.TRUE, hits.get(0));
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void trueLessThanOrEqualToEmptyNodeSet() throws Exception {
+    List<?> hits = getByXpath("true()<=/nonexistent");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseLessThanOrEqualToEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("false()<=/nonexistent");
+  public void trueGreaterThanOrEqualToEmptyNodeSet() throws Exception {
+    List<?> hits = getByXpath("true()>=/nonexistent");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseGreaterThanOrEqualToEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("false()>=/nonexistent");
+  public void trueGreaterThaEmptyNodeSet() throws Exception {
+    List<?> hits = getByXpath("true()>/nonexistent");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void falseGreaterThaEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("false()>/nonexistent");
-    assertEquals(1, hits.size());
-    assertEquals(Boolean.FALSE, hits.get(0));
-  }
-
-  /** @throws Exception in case of problems */
-  @Test
-  public void falseFunctionRequiresNoArgument() throws Exception {
+  public void trueFunctionRequiresNoArgument() throws Exception {
     assertGetByXpathException(
-        "false(1)",
-        "Could not retrieve XPath >false(1)< on [#document: null]",
-        "FuncFalse only allows 0 arguments");
+        "true(1)",
+        "Could not retrieve XPath >true(1)< on [#document: null]",
+        "FuncTrue only allows 0 arguments");
   }
 }
