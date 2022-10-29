@@ -29,17 +29,17 @@ public class NormalizeSpaceTest extends XPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void normalizeSpaceEmpty() throws Exception {
-      List<?> hits = getByXpath("normalize-space('')");
-      assertEquals(1, hits.size());
-      assertEquals("", hits.get(0).toString());
+    List<?> hits = getByXpath("normalize-space('')");
+    assertEquals(1, hits.size());
+    assertEquals("", hits.get(0).toString());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void normalizeSpaceNoParam() throws Exception {
-      List<?> hits = getByXpath("normalize-space()");
-      assertEquals(1, hits.size());
-      assertEquals("", hits.get(0).toString());
+    List<?> hits = getByXpath("normalize-space()");
+    assertEquals(1, hits.size());
+    assertEquals("", hits.get(0).toString());
   }
 
   /** @throws Exception in case of problems */

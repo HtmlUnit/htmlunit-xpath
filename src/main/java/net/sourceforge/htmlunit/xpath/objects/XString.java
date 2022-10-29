@@ -92,6 +92,7 @@ public class XString extends XObject {
     try {
       result = Double.parseDouble(s.toString());
     } catch (NumberFormatException e) {
+      // ignore
     }
 
     return result;

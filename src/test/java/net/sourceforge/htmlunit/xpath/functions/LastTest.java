@@ -20,11 +20,9 @@ package net.sourceforge.htmlunit.xpath.functions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-
+import net.sourceforge.htmlunit.xpath.XPathTest;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
-
-import net.sourceforge.htmlunit.xpath.XPathTest;
 
 /** Unit test for last() function. */
 public class LastTest extends XPathTest {
@@ -32,7 +30,8 @@ public class LastTest extends XPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void last() throws Exception {
-    final String xml = "<root>"
+    final String xml =
+        "<root>"
             + "<a>"
             + "<x>2</x>"
             + "</a>"
@@ -43,8 +42,8 @@ public class LastTest extends XPathTest {
             + "</root>";
     List<?> hits = getByXpath(xml, "//x[position()=last()]");
     assertEquals(2, hits.size());
-    assertEquals("2", ((Node)hits.get(0)).getTextContent());
-    assertEquals("4", ((Node)hits.get(1)).getTextContent());
+    assertEquals("2", ((Node) hits.get(0)).getTextContent());
+    assertEquals("4", ((Node) hits.get(1)).getTextContent());
   }
 
   /** @throws Exception in case of problems */

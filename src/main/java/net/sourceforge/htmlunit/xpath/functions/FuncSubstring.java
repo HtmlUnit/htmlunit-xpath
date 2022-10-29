@@ -54,6 +54,10 @@ public class FuncSubstring extends Function3Args {
 
     if (null != m_arg2) {
       double len = m_arg2.num(xctxt);
+      if (len < 1) {
+        return XString.EMPTYSTRING;
+      }
+
       int end = (int) (Math.round(len) + start) - 1;
 
       // Normalize end index.

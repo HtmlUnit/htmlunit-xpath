@@ -23,41 +23,47 @@ import java.util.List;
 import net.sourceforge.htmlunit.xpath.XPathTest;
 import org.junit.jupiter.api.Test;
 
-/** Unit test for count() function. */
-public class CountTest extends XPathTest {
+/** Unit test for string-length() function. */
+public class StringLengthTest extends XPathTest {
 
   /** @throws Exception in case of problems */
   @Test
-  public void count() throws Exception {
-    List<?> hits = getByXpath("count(/*)");
+  public void stringLengthOfNumber() throws Exception {
+    List<?> hits = getByXpath("string-length(3)");
     assertEquals(1, hits.size());
-    assertEquals(1, ((Double) hits.get(0)).doubleValue(), 0.0001);
+    assertEquals(1, ((Double) hits.get(0)).intValue());
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void countFunctionRequiresNodeSet() throws Exception {
-    assertGetByXpathException(
-        "count(7)",
-        "Could not retrieve XPath >count(7)< on [#document: null]",
-        "Can not convert #NUMBER to a NodeList!");
+  public void stringLengthOfEmptyString() throws Exception {
+    List<?> hits = getByXpath("string-length('')");
+    assertEquals(1, hits.size());
+    assertEquals(0, ((Double) hits.get(0)).intValue());
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void containsFunctionRequiresAtLeastOneArguments() throws Exception {
-    assertGetByXpathException(
-        "count()",
-        "Could not retrieve XPath >count()< on [#document: null]",
-        "FuncCount only allows 1 arguments");
+  public void stringLengthOfString() throws Exception {
+    List<?> hits = getByXpath("string-length('0123456789')");
+    assertEquals(1, hits.size());
+    assertEquals(10, ((Double) hits.get(0)).intValue());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void stringLengthFunctionOperatesOnContextNode() throws Exception {
+    List<?> hits = getByXpath("string-length()");
+    assertEquals(1, hits.size());
+    assertEquals(0, ((Double) hits.get(0)).intValue());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void containsFunctionRequiresAtMostOneArguments() throws Exception {
     assertGetByXpathException(
-        "count('a', 7)",
-        "Could not retrieve XPath >count('a', 7)< on [#document: null]",
-        "FuncCount only allows 1 arguments");
+        "string-length('a', 7)",
+        "Could not retrieve XPath >string-length('a', 7)< on [#document: null]",
+        "FuncStringLength only allows 0 or 1 arguments");
   }
 }

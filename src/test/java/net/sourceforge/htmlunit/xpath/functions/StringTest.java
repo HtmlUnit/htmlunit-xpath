@@ -20,10 +20,8 @@ package net.sourceforge.htmlunit.xpath.functions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-
-import org.junit.jupiter.api.Test;
-
 import net.sourceforge.htmlunit.xpath.XPathTest;
+import org.junit.jupiter.api.Test;
 
 /** Unit test for string() function. */
 public class StringTest extends XPathTest {
