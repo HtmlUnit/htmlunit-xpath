@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Assertions;
 import org.w3c.dom.Document;
 
 /** Parent for our tests */
-public class XPathTest {
+public abstract class AbstractXPathTest {
 
   public <T> List<T> getByXpath(final String xml, final String xPath) throws Exception {
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

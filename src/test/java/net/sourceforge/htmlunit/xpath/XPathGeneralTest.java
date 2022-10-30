@@ -21,9 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.Element;
 
 /** Unit test for simple App. */
-public class XPathGeneralTest extends XPathTest {
+public class XPathGeneralTest extends AbstractXPathTest {
 
   /** @throws Exception in case of problems */
   @Test
@@ -131,6 +132,42 @@ public class XPathGeneralTest extends XPathTest {
   public void attributeSearchDoubleQuotes() throws Exception {
     List<?> hits = getByXpath("<root><p/><p name='test'/><p/><p/></root>", "//p[@name=\"test\"]");
     assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void parentOfSelection() throws Exception {
+    final String xml =
+        "<html>\n"
+            + "<a id='a1'><img src='1.gif'></img></a>"
+            + "<a id='a2'><img src='1.gif'></img></a>"
+            + "</html>";
+
+    List<?> hits = getByXpath(xml, "(/html/a/img[contains(@src,'gif')])[2]/..");
+    assertEquals(1, hits.size());
+    assertEquals("a2", ((Element) hits.get(0)).getAttribute("id"));
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void pathWithParentheses() throws Exception {
+    List<?> hits = getByXpath("<root><child></child></root>", "(/root)/child");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void evaluateWithMultiNodeAnswer() throws Exception {
+    List<?> hits = getByXpath("(/descendant-or-self::node())");
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void evaluateString() throws Exception {
+    List<?> hits = getByXpath("string(/*)");
+    assertEquals(1, hits.size());
+    assertEquals("", hits.get(0));
   }
 
   /** @throws Exception in case of problems */

@@ -20,11 +20,11 @@ package net.sourceforge.htmlunit.xpath.functions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import net.sourceforge.htmlunit.xpath.XPathTest;
+import net.sourceforge.htmlunit.xpath.AbstractXPathTest;
 import org.junit.jupiter.api.Test;
 
 /** Unit test for contains() function. */
-public class ContainsTest extends XPathTest {
+public class ContainsTest extends AbstractXPathTest {
 
   /** @throws Exception in case of problems */
   @Test

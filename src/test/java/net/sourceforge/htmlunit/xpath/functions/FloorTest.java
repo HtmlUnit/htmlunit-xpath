@@ -21,11 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-import net.sourceforge.htmlunit.xpath.XPathTest;
+import net.sourceforge.htmlunit.xpath.AbstractXPathTest;
 import org.junit.jupiter.api.Test;
 
 /** Unit test for floor() function. */
-public class FloorTest extends XPathTest {
+public class FloorTest extends AbstractXPathTest {
 
   /** @throws Exception in case of problems */
   @Test

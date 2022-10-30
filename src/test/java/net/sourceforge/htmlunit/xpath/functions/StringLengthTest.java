@@ -20,11 +20,11 @@ package net.sourceforge.htmlunit.xpath.functions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import net.sourceforge.htmlunit.xpath.XPathTest;
+import net.sourceforge.htmlunit.xpath.AbstractXPathTest;
 import org.junit.jupiter.api.Test;
 
 /** Unit test for string-length() function. */
-public class StringLengthTest extends XPathTest {
+public class StringLengthTest extends AbstractXPathTest {
 
   /** @throws Exception in case of problems */
   @Test
