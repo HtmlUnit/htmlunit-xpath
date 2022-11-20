@@ -565,7 +565,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
         if (NULL != first) {
           if (getExpandedTypeID(first) == expandedTypeID) return first;
-          else return next(context, first, expandedTypeID);
+          return next(context, first, expandedTypeID);
         }
       }
 
@@ -575,7 +575,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         if (NULL == first) context = getParent(context);
         else {
           if (getExpandedTypeID(first) == expandedTypeID) return first;
-          else return next(context, first, expandedTypeID);
+          return next(context, first, expandedTypeID);
         }
       } while (NULL == first && NULL != context);
 

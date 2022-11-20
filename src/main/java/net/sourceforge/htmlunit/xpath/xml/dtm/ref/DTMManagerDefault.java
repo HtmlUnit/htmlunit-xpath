@@ -262,7 +262,7 @@ public class DTMManagerDefault extends DTMManager {
       return m_dtms[nodeHandle >>> IDENT_DTM_NODE_BITS];
     } catch (java.lang.ArrayIndexOutOfBoundsException e) {
       if (nodeHandle == DTM.NULL) return null; // Accept as a special case.
-      else throw e; // Programming error; want to know about it.
+      throw e; // Programming error; want to know about it.
     }
   }
 

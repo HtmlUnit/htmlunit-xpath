@@ -74,7 +74,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    */
   public int getPredicateCount() {
     if (-1 == m_predCount) return (null == m_predicates) ? 0 : m_predicates.length;
-    else return m_predCount;
+    return m_predCount;
   }
 
   /**
@@ -289,9 +289,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     if (DTM.NULL != n) {
       DTM dtm = m_lpi.getXPathContext().getDTM(n);
       return dtm.getNodeName(n) + "{" + (n + 1) + "}";
-    } else {
-      return "null";
     }
+    return "null";
   }
 
   // =============== NodeFilter Implementation ===============

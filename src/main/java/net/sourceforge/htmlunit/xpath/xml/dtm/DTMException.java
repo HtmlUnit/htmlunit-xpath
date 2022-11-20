@@ -32,8 +32,7 @@ public class DTMException extends RuntimeException {
 
   /** {@inheritDoc} */
   @Override
-  public Throwable getCause() {
-
+  public synchronized Throwable getCause() {
     return (containedException == this) ? null : containedException;
   }
 

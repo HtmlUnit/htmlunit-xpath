@@ -229,7 +229,7 @@ public class FunctionTable {
   Function getFunction(int which) throws javax.xml.transform.TransformerException {
     try {
       if (which < NUM_BUILT_IN_FUNCS) return (Function) m_functions[which].newInstance();
-      else return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].newInstance();
+      return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].newInstance();
     } catch (IllegalAccessException | InstantiationException ex) {
       throw new TransformerException(ex.getMessage());
     }
@@ -288,9 +288,8 @@ public class FunctionTable {
   public boolean functionAvailable(String methName) {
     Object tblEntry = m_functionID.get(methName);
     if (null != tblEntry) return true;
-    else {
-      tblEntry = m_functionID_customer.get(methName);
-      return null != tblEntry;
-    }
+
+    tblEntry = m_functionID_customer.get(methName);
+    return null != tblEntry;
   }
 }

@@ -52,11 +52,10 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
       m_pos++;
 
       return next;
-    } else {
-      m_foundLast = true;
-
-      return DTM.NULL;
     }
+
+    m_foundLast = true;
+    return DTM.NULL;
   }
 
   /** {@inheritDoc} */

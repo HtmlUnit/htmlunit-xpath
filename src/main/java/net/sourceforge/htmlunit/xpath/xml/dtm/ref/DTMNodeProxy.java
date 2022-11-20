@@ -355,7 +355,7 @@ public class DTMNodeProxy
       }
     }
     if (elementhandle == DTM.NULL) throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
-    else return (Element) (dtm.getNode(elementhandle));
+    return (Element) (dtm.getNode(elementhandle));
   }
 
   /** {@inheritDoc} */

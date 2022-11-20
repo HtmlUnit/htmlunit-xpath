@@ -272,7 +272,8 @@ public class OpMap {
       if (index >= 0) return (String) m_tokenQueue.elementAt(index);
       else if (OpCodes.ELEMWILDCARD == index) return NodeTest.WILD;
       else return null;
-    } else return null;
+    }
+    return null;
   }
 
   /**

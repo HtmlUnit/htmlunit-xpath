@@ -149,11 +149,10 @@ public class DescendantIterator extends LocPathIterator {
       if (DTM.NULL != next) {
         m_pos++;
         return next;
-      } else {
-        m_foundLast = true;
-
-        return DTM.NULL;
       }
+
+      m_foundLast = true;
+      return DTM.NULL;
     } finally {
     }
   }
@@ -192,11 +191,10 @@ public class DescendantIterator extends LocPathIterator {
     int what = m_whatToShow;
     if (DTMFilter.SHOW_ALL == what || localName == NodeTest.WILD || namespace == NodeTest.WILD) {
       return traverser.first(current);
-    } else {
-      int type = getNodeTypeTest(what);
-      int extendedType = dtm.getExpandedTypeID(namespace, localName, type);
-      return traverser.first(current, extendedType);
     }
+    int type = getNodeTypeTest(what);
+    int extendedType = dtm.getExpandedTypeID(namespace, localName, type);
+    return traverser.first(current, extendedType);
   }
 
   /** {@inheritDoc} */

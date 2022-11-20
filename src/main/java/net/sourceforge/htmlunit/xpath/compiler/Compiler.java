@@ -612,7 +612,7 @@ public class Compiler extends OpMap {
               return ~DTMFilter.SHOW_ATTRIBUTE
                   & ~DTMFilter.SHOW_DOCUMENT
                   & ~DTMFilter.SHOW_DOCUMENT_FRAGMENT;
-            else return ~DTMFilter.SHOW_ATTRIBUTE;
+            return ~DTMFilter.SHOW_ATTRIBUTE;
         }
       case OpCodes.NODETYPE_ROOT:
         return DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT;
