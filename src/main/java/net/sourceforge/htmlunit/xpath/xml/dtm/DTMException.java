@@ -68,16 +68,4 @@ public class DTMException extends RuntimeException {
 
     this.containedException = null;
   }
-
-  /** {@inheritDoc} */
-  @Override
-  public void printStackTrace() {
-    printStackTrace(new java.io.PrintWriter(System.err, true));
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void printStackTrace(java.io.PrintStream s) {
-    printStackTrace(new java.io.PrintWriter(s));
-  }
 }

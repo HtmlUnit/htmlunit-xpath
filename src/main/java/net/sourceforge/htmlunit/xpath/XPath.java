@@ -211,7 +211,6 @@ public class XPath {
       while (e instanceof net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException) {
         e = ((net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException) e).getException();
       }
-      // e.printStackTrace();
 
       String msg = e.getMessage();
 
@@ -220,7 +219,6 @@ public class XPath {
       }
       TransformerException te = new TransformerException(msg, getLocator(), e);
       ErrorListener el = xctxt.getErrorListener();
-      // te.printStackTrace();
       if (null != el) // defensive, should never happen.
       {
         el.fatalError(te);
@@ -232,62 +230,6 @@ public class XPath {
     }
 
     return xobj;
-  }
-
-  /**
-   * Given an expression and a context, evaluate the XPath and return the result.
-   *
-   * @param xctxt The execution context.
-   * @param contextNode The node that "." expresses.
-   * @param namespaceContext The context in which namespaces in the XPath are supposed to be
-   *     expanded.
-   * @return the result
-   * @throws TransformerException thrown if the active ProblemListener decides the error condition
-   *     is severe enough to halt processing.
-   * @throws javax.xml.transform.TransformerException in case of error
-   */
-  public boolean bool(XPathContext xctxt, int contextNode, PrefixResolver namespaceContext)
-      throws javax.xml.transform.TransformerException {
-
-    xctxt.pushNamespaceContext(namespaceContext);
-
-    xctxt.pushCurrentNodeAndExpression(contextNode);
-
-    try {
-      return m_mainExp.bool(xctxt);
-    } catch (TransformerException te) {
-      te.setLocator(this.getLocator());
-      ErrorListener el = xctxt.getErrorListener();
-      if (null != el) // defensive, should never happen.
-      {
-        el.error(te);
-      } else throw te;
-    } catch (Exception e) {
-      while (e instanceof net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException) {
-        e = ((net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException) e).getException();
-      }
-      // e.printStackTrace();
-
-      String msg = e.getMessage();
-
-      if (msg == null || msg.length() == 0) {
-        msg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_XPATH_ERROR, null);
-      }
-
-      TransformerException te = new TransformerException(msg, getLocator(), e);
-      ErrorListener el = xctxt.getErrorListener();
-      // te.printStackTrace();
-      if (null != el) // defensive, should never happen.
-      {
-        el.fatalError(te);
-      } else throw te;
-    } finally {
-      xctxt.popNamespaceContext();
-
-      xctxt.popCurrentNodeAndExpression();
-    }
-
-    return false;
   }
 
   /**

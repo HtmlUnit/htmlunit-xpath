@@ -49,33 +49,9 @@ public class XPathException extends TransformerException {
 
   /** {@inheritDoc} */
   @Override
-  public void printStackTrace(java.io.PrintStream s) {
-
-    if (s == null) s = System.err;
-
-    try {
-      super.printStackTrace(s);
-    } catch (Exception e) {
-    }
-  }
-
-  /** {@inheritDoc} */
-  @Override
   public String getMessage() {
     String lastMessage = super.getMessage();
     return (null != lastMessage) ? lastMessage : "";
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void printStackTrace(java.io.PrintWriter s) {
-
-    if (s == null) s = new java.io.PrintWriter(System.err);
-
-    try {
-      super.printStackTrace(s);
-    } catch (Exception e) {
-    }
   }
 
   /** {@inheritDoc} */

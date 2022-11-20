@@ -496,7 +496,7 @@ public abstract class DTMDefaultBase implements DTM {
         System.err.println("Dumping... " + f.getAbsolutePath());
         os = Files.newOutputStream(f.toPath());
       }
-      PrintStream ps = new PrintStream(os);
+      PrintStream ps = new PrintStream(os, false, "UTF-8");
 
       while (nextNode()) {}
 
