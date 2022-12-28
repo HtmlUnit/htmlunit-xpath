@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sourceforge.htmlunit</groupId>
   <artifactId>htmlunit-xpath</artifactId>
-  <version>2.68.0-SNAPSHOT</version>
+  <version>2.68.0</version>
   <name>HtmlUnit-XPath</name>
   <packaging>jar</packaging>
   <description>
@@ -188,11 +188,6 @@
     </plugins>
   </build>
 
-  <issueManagement>
-    <system>GitHub</system>
-    <url>https://github.com/HtmlUnit/htmlunit-xpath/issues/</url>
-  </issueManagement>
-  <inceptionYear>2022</inceptionYear>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -200,15 +195,22 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/HtmlUnit/htmlunit-xpath/issues/</url>
+  </issueManagement>
+  <inceptionYear>2022</inceptionYear>
   <scm>
     <connection>scm:git:https://github.com/HtmlUnit/htmlunit-xpath</connection>
     <developerConnection>scm:git:https://github.com/HtmlUnit/htmlunit-xpath</developerConnection>
     <url>https://github.com/HtmlUnit/htmlunit-xpath</url>
   </scm>
+
   <ciManagement>
     <system>Jenkins</system>
     <url>https://jenkins.wetator.org/view/HtmlUnit/</url>
   </ciManagement>
+
   <distributionManagement>
     <snapshotRepository>
       <id>sonatype-nexus-snapshots</id>
@@ -232,6 +234,7 @@
       <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
     </repository>
   </repositories>
+
   <developers>
     <developer>
       <name>Ronald Brill</name>
