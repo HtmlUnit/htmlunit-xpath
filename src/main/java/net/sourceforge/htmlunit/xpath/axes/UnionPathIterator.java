@@ -204,7 +204,6 @@ public class UnionPathIterator extends LocPathIterator
       // doesn't handle.
       switch (steptype) {
         case OpCodes.OP_VARIABLE:
-        case OpCodes.OP_EXTFUNCTION:
         case OpCodes.OP_FUNCTION:
         case OpCodes.OP_GROUP:
           loadLocationPaths(compiler, compiler.getNextOpPos(opPos), count + 1);

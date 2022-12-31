@@ -159,8 +159,6 @@ public class Compiler extends OpMap {
       case OpCodes.OP_ARGUMENT:
         expr = arg(opPos);
         break;
-        // case OpCodes.OP_EXTFUNCTION :
-        // expr = compileExtension(opPos); break;
       case OpCodes.OP_FUNCTION:
         expr = compileFunction(opPos);
         break;

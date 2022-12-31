@@ -957,39 +957,26 @@ public class XPathParser {
 
     int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    if (lookahead(':', 1)) {
-      appendOp(4, OpCodes.OP_EXTFUNCTION);
+    int funcTok = getFunctionToken(m_token);
 
-      m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH + 1, m_queueMark - 1);
-
-      nextToken();
-      consumeExpected(':');
-
-      m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH + 2, m_queueMark - 1);
-
-      nextToken();
-    } else {
-      int funcTok = getFunctionToken(m_token);
-
-      if (-1 == funcTok) {
-        error(XPATHErrorResources.ER_COULDNOT_FIND_FUNCTION, new Object[] {m_token});
-      }
-
-      switch (funcTok) {
-        case OpCodes.NODETYPE_PI:
-        case OpCodes.NODETYPE_COMMENT:
-        case OpCodes.NODETYPE_TEXT:
-        case OpCodes.NODETYPE_NODE:
-          // Node type tests look like function calls, but they're not
-          return false;
-        default:
-          appendOp(3, OpCodes.OP_FUNCTION);
-
-          m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH + 1, funcTok);
-      }
-
-      nextToken();
+    if (-1 == funcTok) {
+      error(XPATHErrorResources.ER_COULDNOT_FIND_FUNCTION, new Object[] {m_token});
     }
+
+    switch (funcTok) {
+      case OpCodes.NODETYPE_PI:
+      case OpCodes.NODETYPE_COMMENT:
+      case OpCodes.NODETYPE_TEXT:
+      case OpCodes.NODETYPE_NODE:
+        // Node type tests look like function calls, but they're not
+        return false;
+      default:
+        appendOp(3, OpCodes.OP_FUNCTION);
+
+        m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH + 1, funcTok);
+    }
+
+    nextToken();
 
     consumeExpected('(');
 
@@ -1428,10 +1415,7 @@ public class XPathParser {
 
         error(
             XPATHErrorResources.ER_COULDNOT_BE_FORMATTED_TO_NUMBER,
-            new Object[] {m_token}); // m_token+"
-        // could not be
-        // formatted to
-        // a number!");
+            new Object[] {m_token});
       }
 
       m_ops.m_tokenQueue.setElementAt(new XNumber(num), m_queueMark - 1);

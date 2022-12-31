@@ -29,7 +29,7 @@ import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
- * Walker for the OP_VARIABLE, or OP_EXTFUNCTION, or OP_FUNCTION, or OP_GROUP, op codes.
+ * Walker for the OP_VARIABLE, or OP_FUNCTION, or OP_GROUP, op codes.
  *
  * @see <a href="http://www.w3.org/TR/xpath#NT-FilterExpr">XPath FilterExpr descriptions</a>
  */
@@ -54,7 +54,6 @@ public class FilterExprWalker extends AxesWalker {
     // Smooth over an anomily in the opcode map...
     switch (stepType) {
       case OpCodes.OP_FUNCTION:
-      case OpCodes.OP_EXTFUNCTION:
       case OpCodes.OP_GROUP:
       case OpCodes.OP_VARIABLE:
         m_expr = compiler.compile(opPos);

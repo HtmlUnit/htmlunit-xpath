@@ -205,22 +205,14 @@ public class OpCodes {
   public static final int OP_GROUP = 23;
 
   /**
-   * [OP_EXTFUNCTION] (Extension function.) [length] [index to namespace token] [index to function
-   * name token] {OP_ARGUMENT}
-   *
-   * <p>returns: XNodeSet XNumber XString XBoolean XRTree XObject
-   */
-  public static final int OP_EXTFUNCTION = 24;
-
-  /**
    * [OP_FUNCTION] [length] [FUNC_name] {OP_ARGUMENT} [ENDOP]
    *
    * <p>returns: XNodeSet XNumber XString XBoolean XRTree XObject
    */
-  public static final int OP_FUNCTION = 25;
+  public static final int OP_FUNCTION = 24;
 
   /** The last opcode for stuff that can be a nodeset. */
-  static final int LAST_NODESET_OP = 25;
+  static final int LAST_NODESET_OP = 24;
 
   /**
    * [OP_ARGUMENT] (Function argument.) [length] {expression}

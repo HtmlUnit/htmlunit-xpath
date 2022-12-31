@@ -250,7 +250,6 @@ public class WalkerFactory {
         return Axis.DESCENDANT;
       case OpCodes.FROM_SELF:
         return Axis.SELF;
-      case OpCodes.OP_EXTFUNCTION:
       case OpCodes.OP_FUNCTION:
       case OpCodes.OP_GROUP:
       case OpCodes.OP_VARIABLE:
@@ -378,7 +377,6 @@ public class WalkerFactory {
 
     switch (stepType) {
       case OpCodes.OP_VARIABLE:
-      case OpCodes.OP_EXTFUNCTION:
       case OpCodes.OP_FUNCTION:
       case OpCodes.OP_GROUP:
         break;
@@ -465,7 +463,6 @@ public class WalkerFactory {
         case OpCodes.FROM_PRECEDING_SIBLINGS:
         case OpCodes.FROM_PARENT:
         case OpCodes.OP_VARIABLE:
-        case OpCodes.OP_EXTFUNCTION:
         case OpCodes.OP_FUNCTION:
         case OpCodes.OP_GROUP:
         case OpCodes.FROM_NAMESPACE:
@@ -543,7 +540,6 @@ public class WalkerFactory {
 
       switch (stepType) {
         case OpCodes.OP_VARIABLE:
-        case OpCodes.OP_EXTFUNCTION:
         case OpCodes.OP_FUNCTION:
         case OpCodes.OP_GROUP:
           analysisResult |= BIT_FILTER;
@@ -796,14 +792,12 @@ public class WalkerFactory {
 
     switch (stepType) {
       case OpCodes.OP_VARIABLE:
-      case OpCodes.OP_EXTFUNCTION:
       case OpCodes.OP_FUNCTION:
       case OpCodes.OP_GROUP:
         Expression expr;
 
         switch (stepType) {
           case OpCodes.OP_VARIABLE:
-          case OpCodes.OP_EXTFUNCTION:
           case OpCodes.OP_FUNCTION:
           case OpCodes.OP_GROUP:
             expr = compiler.compile(opPos);
@@ -894,7 +888,6 @@ public class WalkerFactory {
 
     switch (stepType) {
       case OpCodes.OP_VARIABLE:
-      case OpCodes.OP_EXTFUNCTION:
       case OpCodes.OP_FUNCTION:
       case OpCodes.OP_GROUP:
         break;
@@ -936,7 +929,6 @@ public class WalkerFactory {
 
     switch (stepType) {
       case OpCodes.OP_VARIABLE:
-      case OpCodes.OP_EXTFUNCTION:
       case OpCodes.OP_FUNCTION:
       case OpCodes.OP_GROUP:
         if (DEBUG_WALKER_CREATION)
@@ -1287,7 +1279,6 @@ public class WalkerFactory {
         case OpCodes.FROM_PRECEDING_SIBLINGS:
         case OpCodes.FROM_PARENT:
         case OpCodes.OP_VARIABLE:
-        case OpCodes.OP_EXTFUNCTION:
         case OpCodes.OP_FUNCTION:
         case OpCodes.OP_GROUP:
         case OpCodes.FROM_NAMESPACE:
