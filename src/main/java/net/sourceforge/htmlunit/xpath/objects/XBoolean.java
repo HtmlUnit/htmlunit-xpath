@@ -24,10 +24,10 @@ package net.sourceforge.htmlunit.xpath.objects;
 public class XBoolean extends XObject {
 
   /** A true boolean object so we don't have to keep creating them. */
-  public static final XBoolean S_TRUE = new XBooleanStatic(true);
+  public static final XBoolean S_TRUE = new XBoolean(true);
 
   /** A true boolean object so we don't have to keep creating them. */
-  public static final XBoolean S_FALSE = new XBooleanStatic(false);
+  public static final XBoolean S_FALSE = new XBoolean(false);
 
   /**
    * Value of the object.
@@ -88,6 +88,10 @@ public class XBoolean extends XObject {
   /** {@inheritDoc} */
   @Override
   public boolean equals(XObject obj2) {
+    if (this == obj2) {
+      return true;
+    }
+    ;
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the

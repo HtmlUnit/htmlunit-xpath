@@ -19,11 +19,8 @@ package net.sourceforge.htmlunit.xpath;
 
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.traversal.NodeFilter;
-import org.w3c.dom.traversal.NodeIterator;
 
 /**
  * The NodeSet class can act as either a NodeVector, NodeList, or NodeIterator. However, in order
@@ -42,7 +39,7 @@ import org.w3c.dom.traversal.NodeIterator;
  * will respond to the same calls; the disadvantage is that some of them may return
  * less-than-enlightening results when you do so.
  */
-public class NodeSet implements NodeList, NodeIterator, Cloneable {
+public class NodeSet implements NodeList, Cloneable {
 
   /**
    * Create an empty, using the given block size.
@@ -54,65 +51,7 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable {
     m_mapSize = 0;
   }
 
-  /** {@inheritDoc} */
-  @Override
-  public Node getRoot() {
-    return null;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int getWhatToShow() {
-    return NodeFilter.SHOW_ALL & ~NodeFilter.SHOW_ENTITY_REFERENCE;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public NodeFilter getFilter() {
-    return null;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean getExpandEntityReferences() {
-    return true;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Node nextNode() throws DOMException {
-
-    if (m_next < this.size()) {
-      Node next = this.elementAt(m_next);
-
-      m_next++;
-
-      return next;
-    } else return null;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Node previousNode() throws DOMException {
-
-    if (!m_cacheNodes)
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESET_CANNOT_ITERATE, null));
-
-    if ((m_next - 1) > 0) {
-      m_next--;
-
-      return this.elementAt(m_next);
-    }
-    return null;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void detach() {}
-
-  public void runTo(int index) {
-
+  private void runTo(int index) {
     if (!m_cacheNodes)
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null));
@@ -127,7 +66,9 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable {
 
     runTo(index);
 
-    return this.elementAt(index);
+    if (null == m_map) return null;
+
+    return m_map[index];
   }
 
   /** {@inheritDoc} */
@@ -151,7 +92,24 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable {
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null));
 
-    this.addElement(n);
+    if ((m_firstFree + 1) >= m_mapSize) {
+      if (null == m_map) {
+        m_map = new Node[m_blocksize];
+        m_mapSize = m_blocksize;
+      } else {
+        m_mapSize += m_blocksize;
+
+        Node[] newMap = new Node[m_mapSize];
+
+        System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
+
+        m_map = newMap;
+      }
+    }
+
+    m_map[m_firstFree] = n;
+
+    m_firstFree++;
   }
 
   /** If this node is being used as an iterator, the next index that nextNode() will return. */
@@ -212,48 +170,5 @@ public class NodeSet implements NodeList, NodeIterator, Cloneable {
 
   public int size() {
     return m_firstFree;
-  }
-
-  /**
-   * Append a Node onto the vector.
-   *
-   * @param value Node to add to the vector
-   */
-  public void addElement(Node value) {
-    if (!m_mutable)
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null));
-
-    if ((m_firstFree + 1) >= m_mapSize) {
-      if (null == m_map) {
-        m_map = new Node[m_blocksize];
-        m_mapSize = m_blocksize;
-      } else {
-        m_mapSize += m_blocksize;
-
-        Node[] newMap = new Node[m_mapSize];
-
-        System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
-
-        m_map = newMap;
-      }
-    }
-
-    m_map[m_firstFree] = value;
-
-    m_firstFree++;
-  }
-
-  /**
-   * Get the nth element.
-   *
-   * @param i Index of node to get
-   * @return Node at specified index
-   */
-  public Node elementAt(int i) {
-
-    if (null == m_map) return null;
-
-    return m_map[i];
   }
 }

@@ -1413,9 +1413,7 @@ public class XPathParser {
       } catch (NumberFormatException nfe) {
         num = 0.0; // to shut up compiler.
 
-        error(
-            XPATHErrorResources.ER_COULDNOT_BE_FORMATTED_TO_NUMBER,
-            new Object[] {m_token});
+        error(XPATHErrorResources.ER_COULDNOT_BE_FORMATTED_TO_NUMBER, new Object[] {m_token});
       }
 
       m_ops.m_tokenQueue.setElementAt(new XNumber(num), m_queueMark - 1);

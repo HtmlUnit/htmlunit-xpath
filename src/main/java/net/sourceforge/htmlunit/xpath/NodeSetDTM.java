@@ -42,8 +42,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
  * will respond to the same calls; the disadvantage is that some of them may return
  * less-than-enlightening results when you do so.
  */
-public class NodeSetDTM extends NodeVector
-    implements /* NodeList, NodeIterator, */ DTMIterator, Cloneable {
+public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
 
   /** Create an empty nodelist. */
   public NodeSetDTM(DTMManager dtmManager) {
