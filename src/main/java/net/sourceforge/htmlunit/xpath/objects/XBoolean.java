@@ -91,7 +91,6 @@ public class XBoolean extends XObject {
     if (this == obj2) {
       return true;
     }
-    ;
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
