@@ -124,7 +124,7 @@ public class XObject extends Expression {
    * Cast result object to a number. Always issues an error.
    *
    * @return 0.0
-   * @throws javax.xml.transform.TransformerException in case of error in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public double num() throws javax.xml.transform.TransformerException {
 
@@ -148,7 +148,7 @@ public class XObject extends Expression {
    * Cast result object to a boolean. Always issues an error.
    *
    * @return false
-   * @throws javax.xml.transform.TransformerException in case of error in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public boolean bool() throws javax.xml.transform.TransformerException {
 
@@ -205,7 +205,7 @@ public class XObject extends Expression {
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return null
-   * @throws javax.xml.transform.TransformerException in case of error in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public DTMIterator iter() throws javax.xml.transform.TransformerException {
 
@@ -218,7 +218,7 @@ public class XObject extends Expression {
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return null
-   * @throws javax.xml.transform.TransformerException in case of error in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public NodeIterator nodeset() throws javax.xml.transform.TransformerException {
 
@@ -231,7 +231,7 @@ public class XObject extends Expression {
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return null
-   * @throws javax.xml.transform.TransformerException in case of error in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public NodeList nodelist() throws javax.xml.transform.TransformerException {
 
@@ -244,7 +244,7 @@ public class XObject extends Expression {
    * Cast result object to a nodelist. Always issues an error.
    *
    * @return The object as a NodeSetDTM.
-   * @throws javax.xml.transform.TransformerException in case of error in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public NodeSetDTM mutableNodeset() throws javax.xml.transform.TransformerException {
 
@@ -258,7 +258,7 @@ public class XObject extends Expression {
    *
    * @param obj2 Object to compare this to
    * @return True if this object is less than the given object
-   * @throws javax.xml.transform.TransformerException in case of error in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public boolean lessThan(XObject obj2) throws javax.xml.transform.TransformerException {
 
