@@ -19,16 +19,15 @@ package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
+
+import org.w3c.dom.Node;
+
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm.DOM2DTM;
-import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import org.w3c.dom.Node;
 
 /**
  * The default implementation for the DTMManager.
@@ -264,26 +263,6 @@ public class DTMManagerDefault extends DTMManager {
       if (nodeHandle == DTM.NULL) return null; // Accept as a special case.
       throw e; // Programming error; want to know about it.
     }
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public synchronized DTMIterator createDTMIterator(
-      int whatToShow, DTMFilter filter, boolean entityReferenceExpansion) {
-
-    return null;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public synchronized DTMIterator createDTMIterator(String xpathString, PrefixResolver presolver) {
-    return null;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public synchronized DTMIterator createDTMIterator(Object xpathCompiler, int pos) {
-    return null;
   }
 
   /**

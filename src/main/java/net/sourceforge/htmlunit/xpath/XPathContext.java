@@ -18,14 +18,14 @@
 package net.sourceforge.htmlunit.xpath;
 
 import java.util.Stack;
+
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
+
 import net.sourceforge.htmlunit.xpath.axes.SubContextList;
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMFilter;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.utils.NodeVector;
 import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
@@ -68,25 +68,6 @@ public class XPathContext extends DTMManager {
   @Override
   public int getDTMHandleFromNode(org.w3c.dom.Node node) {
     return m_dtmManager.getDTMHandleFromNode(node);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public DTMIterator createDTMIterator(Object xpathCompiler, int pos) {
-    return m_dtmManager.createDTMIterator(xpathCompiler, pos);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public DTMIterator createDTMIterator(String xpathString, PrefixResolver presolver) {
-    return m_dtmManager.createDTMIterator(xpathString, presolver);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public DTMIterator createDTMIterator(
-      int whatToShow, DTMFilter filter, boolean entityReferenceExpansion) {
-    return m_dtmManager.createDTMIterator(whatToShow, filter, entityReferenceExpansion);
   }
 
   /**

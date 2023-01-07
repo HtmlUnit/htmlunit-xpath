@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm;
 
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault;
-import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * A DTMManager instance can be used to create DTM and DTMIterator objects, and manage the DTM
@@ -103,51 +102,7 @@ public abstract class DTMManager {
    */
   public abstract int getDTMHandleFromNode(org.w3c.dom.Node node);
 
-  /**
-   * Create a new <code>DTMIterator</code> based on an XPath <a
-   * href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
-   * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
-   *
-   * @param xpathCompiler ??? Somehow we need to pass in a subpart of the expression. I hate to do
-   *     this with strings, since the larger expression has already been parsed.
-   * @param pos The position in the expression.
-   * @return The newly created <code>DTMIterator</code>.
-   */
-  public abstract DTMIterator createDTMIterator(Object xpathCompiler, int pos);
 
-  /**
-   * Create a new <code>DTMIterator</code> based on an XPath <a
-   * href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
-   * href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
-   *
-   * @param xpathString Must be a valid string expressing a <a
-   *     href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a> or a <a
-   *     href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a>.
-   * @param presolver An object that can resolve prefixes to namespace URLs.
-   * @return The newly created <code>DTMIterator</code>.
-   */
-  public abstract DTMIterator createDTMIterator(String xpathString, PrefixResolver presolver);
-
-  /**
-   * Create a new <code>DTMIterator</code> based only on a whatToShow and a DTMFilter. The traversal
-   * semantics are defined as the descendant access.
-   *
-   * <p>Note that DTMIterators may not be an exact match to DOM NodeIterators. They are initialized
-   * and used in much the same way as a NodeIterator, but their response to document mutation is not
-   * currently defined.
-   *
-   * @param whatToShow This flag specifies which node types may appear in the logical view of the
-   *     tree presented by the iterator. See the description of <code>NodeFilter</code> for the set
-   *     of possible <code>SHOW_</code> values.These flags can be combined using <code>OR
-   *     </code> .
-   * @param filter The <code>NodeFilter</code> to be used with this <code>DTMFilter</code>, or
-   *     <code>null</code> to indicate no filter.
-   * @param entityReferenceExpansion The value of this flag determines whether entity reference
-   *     nodes are expanded.
-   * @return The newly created <code>DTMIterator</code>.
-   */
-  public abstract DTMIterator createDTMIterator(
-      int whatToShow, DTMFilter filter, boolean entityReferenceExpansion);
 
   // -------------------- private methods --------------------
 
