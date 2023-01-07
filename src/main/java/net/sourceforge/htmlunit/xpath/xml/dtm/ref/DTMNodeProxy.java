@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.htmlunit.xpath.NodeSet;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMDOMException;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -156,7 +155,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final void setPrefix(String prefix) throws DOMException {
-    throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
+    throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -169,7 +168,7 @@ public class DTMNodeProxy
   @Override
   public final boolean isSupported(String feature, String version) {
     return implementation.hasFeature(feature, version);
-    // throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    // throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -181,7 +180,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final void setNodeValue(String nodeValue) throws DOMException {
-    throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
+    throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -281,25 +280,25 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final Node insertBefore(Node newChild, Node refChild) throws DOMException {
-    throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
+    throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final Node replaceChild(Node newChild, Node oldChild) throws DOMException {
-    throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
+    throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final Node removeChild(Node oldChild) throws DOMException {
-    throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
+    throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final Node appendChild(Node newChild) throws DOMException {
-    throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
+    throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -311,7 +310,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final Node cloneNode(boolean deep) {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -354,57 +353,57 @@ public class DTMNodeProxy
           break;
       }
     }
-    if (elementhandle == DTM.NULL) throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    if (elementhandle == DTM.NULL) throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
     return (Element) (dtm.getNode(elementhandle));
   }
 
   /** {@inheritDoc} */
   @Override
   public final Element createElement(String tagName) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final DocumentFragment createDocumentFragment() {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final Text createTextNode(String data) {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final Comment createComment(String data) {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final CDATASection createCDATASection(String data) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final ProcessingInstruction createProcessingInstruction(String target, String data)
       throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final Attr createAttribute(String name) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final EntityReference createEntityReference(String name) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -451,21 +450,21 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final Node importNode(Node importedNode, boolean deep) throws DOMException {
-    throw new DTMDOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
+    throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final Element createElementNS(String namespaceURI, String qualifiedName)
       throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final Attr createAttributeNS(String namespaceURI, String qualifiedName)
       throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -557,7 +556,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final Text splitText(int offset) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -569,7 +568,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final void setData(String data) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -588,25 +587,25 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final void appendData(String arg) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final void insertData(int offset, String arg) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final void deleteData(int offset, int count) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final void replaceData(int offset, int count, String arg) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -627,13 +626,13 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final void setAttribute(String name, String value) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final void removeAttribute(String name) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -647,13 +646,13 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final Attr setAttributeNode(Attr newAttr) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final Attr removeAttributeNode(Attr oldAttr) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -665,7 +664,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final void normalize() {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -681,13 +680,13 @@ public class DTMNodeProxy
   @Override
   public final void setAttributeNS(String namespaceURI, String qualifiedName, String value)
       throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public final void removeAttributeNS(String namespaceURI, String localName) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -702,7 +701,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final Attr setAttributeNodeNS(Attr newAttr) throws DOMException {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -730,7 +729,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final void setValue(String value) {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -747,27 +746,27 @@ public class DTMNodeProxy
   @Override
   public Node adoptNode(Node source) throws DOMException {
 
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public String getInputEncoding() {
 
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean getStrictErrorChecking() {
 
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
   public void setStrictErrorChecking(boolean strictErrorChecking) {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** Inner class to support getDOMImplementation. */
@@ -775,14 +774,14 @@ public class DTMNodeProxy
     /** {@inheritDoc} */
     @Override
     public DocumentType createDocumentType(String qualifiedName, String publicId, String systemId) {
-      throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+      throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
     }
 
     /** {@inheritDoc} */
     @Override
     public Document createDocument(String namespaceURI, String qualfiedName, DocumentType doctype) {
       // Could create a DTM... but why, when it'd have to be permanantly empty?
-      throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+      throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
     }
 
     /** {@inheritDoc} */

@@ -102,8 +102,6 @@ public abstract class DTMManager {
    */
   public abstract int getDTMHandleFromNode(org.w3c.dom.Node node);
 
-
-
   // -------------------- private methods --------------------
 
   static {

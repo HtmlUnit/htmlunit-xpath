@@ -19,15 +19,13 @@ package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Node;
-
 import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
 import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMManager;
 import net.sourceforge.htmlunit.xpath.xml.dtm.ref.dom2dtm.DOM2DTM;
+import org.w3c.dom.Node;
 
 /**
  * The default implementation for the DTMManager.

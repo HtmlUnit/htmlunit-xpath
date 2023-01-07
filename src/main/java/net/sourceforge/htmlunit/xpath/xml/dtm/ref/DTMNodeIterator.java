@@ -18,7 +18,6 @@
 package net.sourceforge.htmlunit.xpath.xml.dtm.ref;
 
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTM;
-import net.sourceforge.htmlunit.xpath.xml.dtm.DTMDOMException;
 import net.sourceforge.htmlunit.xpath.xml.dtm.DTMIterator;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
@@ -83,7 +82,7 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
   /** {@inheritDoc} */
   @Override
   public NodeFilter getFilter() {
-    throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
@@ -102,7 +101,7 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
   /** {@inheritDoc} */
   @Override
   public Node nextNode() throws DOMException {
-    if (!valid) throw new DTMDOMException(DOMException.INVALID_STATE_ERR);
+    if (!valid) throw new DOMException(DOMException.INVALID_STATE_ERR, "");
 
     int handle = dtm_iter.nextNode();
     if (handle == DTM.NULL) return null;
@@ -112,7 +111,7 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
   /** {@inheritDoc} */
   @Override
   public Node previousNode() {
-    if (!valid) throw new DTMDOMException(DOMException.INVALID_STATE_ERR);
+    if (!valid) throw new DOMException(DOMException.INVALID_STATE_ERR, "");
 
     int handle = dtm_iter.previousNode();
     if (handle == DTM.NULL) return null;
