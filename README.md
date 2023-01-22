@@ -14,14 +14,14 @@ and we added unit tests and the maven-based build.
 ### Project News
 [HtmlUnit@Twitter][3]
 
-### Latest release Version 2.69.0 / January 05, 2023
+### Latest release Version 2.70.0 / January 22, 2023
 
 For maven, you would add:
 
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit-cssparser</artifactId>
-        <version>2.69.0</version>
+        <version>2.70.0</version>
     </dependency>
 
 ### Last CI build
@@ -35,7 +35,7 @@ If you use maven please add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit-xpath</artifactId>
-        <version>2.70.0-SNAPSHOT</version>
+        <version>2.71.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom distributionManagement section also:
