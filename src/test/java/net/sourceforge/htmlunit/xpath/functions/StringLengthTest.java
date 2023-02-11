@@ -60,7 +60,7 @@ public class StringLengthTest extends AbstractXPathTest {
 
   /** @throws Exception in case of problems */
   @Test
-  public void containsFunctionRequiresAtMostOneArguments() throws Exception {
+  public void stringLengthFunctionRequiresAtMostOneArguments() throws Exception {
     assertGetByXpathException(
         "string-length('a', 7)",
         "Could not retrieve XPath >string-length('a', 7)< on [#document: null]",
