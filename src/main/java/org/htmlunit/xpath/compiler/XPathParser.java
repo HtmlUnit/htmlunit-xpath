@@ -83,7 +83,7 @@ public class XPathParser {
 
     Lexer lexer = new Lexer(compiler, namespaceContext, this);
 
-    lexer.tokenize(expression);
+    lexer.tokenize(expression, null);
 
     m_ops.setOp(0, OpCodes.OP_XPATH);
     m_ops.setOp(OpMap.MAPINDEX_LENGTH, 2);
@@ -147,7 +147,7 @@ public class XPathParser {
 
     Lexer lexer = new Lexer(compiler, namespaceContext, this);
 
-    lexer.tokenize(expression);
+    lexer.tokenize(expression, null);
 
     m_ops.setOp(0, OpCodes.OP_MATCHPATTERN);
     m_ops.setOp(OpMap.MAPINDEX_LENGTH, 2);
@@ -235,7 +235,7 @@ public class XPathParser {
     boolean b;
 
     if ((pos <= m_ops.getTokenQueueSize()) && (pos > 0) && (m_ops.getTokenQueueSize() != 0)) {
-      String tok = (String) m_ops.m_tokenQueue.elementAt(pos - 1);
+      String tok = (String) m_ops.m_tokenQueue.get(pos - 1);
 
       b = tok.length() == 1 && (tok.charAt(0) == c);
     } else {
@@ -257,7 +257,7 @@ public class XPathParser {
     boolean isToken;
 
     if ((m_queueMark + n) <= m_ops.getTokenQueueSize()) {
-      String lookahead = (String) m_ops.m_tokenQueue.elementAt(m_queueMark + (n - 1));
+      String lookahead = (String) m_ops.m_tokenQueue.get(m_queueMark + (n - 1));
 
       isToken = (lookahead != null) ? lookahead.equals(s) : (s == null);
     } else {
@@ -271,7 +271,7 @@ public class XPathParser {
   private void nextToken() {
 
     if (m_queueMark < m_ops.getTokenQueueSize()) {
-      m_token = (String) m_ops.m_tokenQueue.elementAt(m_queueMark++);
+      m_token = (String) m_ops.m_tokenQueue.get(m_queueMark++);
       m_tokenChar = m_token.charAt(0);
     } else {
       m_token = null;
@@ -336,7 +336,7 @@ public class XPathParser {
       StringBuilder msg = new StringBuilder("\n Remaining tokens: (");
 
       while (q < m_ops.getTokenQueueSize()) {
-        String t = (String) m_ops.m_tokenQueue.elementAt(q++);
+        String t = (String) m_ops.m_tokenQueue.get(q++);
 
         msg.append(" '").append(t).append("'");
       }
@@ -1374,11 +1374,11 @@ public class XPathParser {
       // already made.
       int tokenQueuePos = m_queueMark - 1;
 
-      m_ops.m_tokenQueue.setElementAt(null, tokenQueuePos);
+      m_ops.m_tokenQueue.set(tokenQueuePos, null);
 
       Object obj = new XString(m_token.substring(1, last));
 
-      m_ops.m_tokenQueue.setElementAt(obj, tokenQueuePos);
+      m_ops.m_tokenQueue.set(tokenQueuePos, obj);
 
       // lit = m_token.substring(1, last);
       m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), tokenQueuePos);
@@ -1414,7 +1414,7 @@ public class XPathParser {
         error(XPATHErrorResources.ER_COULDNOT_BE_FORMATTED_TO_NUMBER, new Object[] {m_token});
       }
 
-      m_ops.m_tokenQueue.setElementAt(new XNumber(num), m_queueMark - 1);
+      m_ops.m_tokenQueue.set(m_queueMark - 1, new XNumber(num));
       m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), m_queueMark - 1);
       m_ops.setOp(OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) + 1);
 

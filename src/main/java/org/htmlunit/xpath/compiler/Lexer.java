@@ -68,16 +68,6 @@ class Lexer {
    * Walk through the expression and build a token queue, and a map of the top-level elements.
    *
    * @param pat XSLT Expression.
-   * @throws javax.xml.transform.TransformerException if any
-   */
-  void tokenize(String pat) throws javax.xml.transform.TransformerException {
-    tokenize(pat, null);
-  }
-
-  /**
-   * Walk through the expression and build a token queue, and a map of the top-level elements.
-   *
-   * @param pat XSLT Expression.
    * @param targetStrings Vector to hold Strings, may be null.
    * @throws javax.xml.transform.TransformerException if any
    */
@@ -357,8 +347,7 @@ class Lexer {
     m_processor.m_queueMark = (mark > 0) ? ((mark <= qsz) ? mark - 1 : mark) : 0;
 
     if (m_processor.m_queueMark < qsz) {
-      m_processor.m_token =
-          (String) m_compiler.getTokenQueue().elementAt(m_processor.m_queueMark++);
+      m_processor.m_token = (String) m_compiler.getTokenQueue().get(m_processor.m_queueMark++);
       m_processor.m_tokenChar = m_processor.m_token.charAt(0);
     } else {
       m_processor.m_token = null;
@@ -434,7 +423,7 @@ class Lexer {
         tokPos += 2;
       }
 
-      targetStrings.add((String) m_compiler.getTokenQueue().elementAt(tokPos));
+      targetStrings.add((String) m_compiler.getTokenQueue().get(tokPos));
     }
   }
 
@@ -444,7 +433,7 @@ class Lexer {
    * @param s The token.
    */
   private void addToTokenQueue(String s) {
-    m_compiler.getTokenQueue().addElement(s);
+    m_compiler.getTokenQueue().add(s);
   }
 
   /**

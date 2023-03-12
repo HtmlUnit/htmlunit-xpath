@@ -488,7 +488,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
     // checkDups();
     return insertIndex;
-  } // end addNodeInDocOrder(Vector v, Object obj)
+  }
 
   /** {@inheritDoc} */
   @Override

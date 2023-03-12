@@ -19,6 +19,7 @@ package org.htmlunit.xpath.patterns;
 
 import org.htmlunit.xpath.XPathContext;
 import org.htmlunit.xpath.objects.XObject;
+import org.htmlunit.xpath.xml.dtm.DTM;
 import org.htmlunit.xpath.xml.dtm.DTMFilter;
 
 /** Special context node pattern matcher. */
@@ -38,7 +39,7 @@ public class ContextMatchStepPattern extends StepPattern {
   @Override
   public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    if (xctxt.getIteratorRoot() == xctxt.getCurrentNode()) {
+    if (DTM.NULL == xctxt.getCurrentNode()) {
       return getStaticScore();
     }
     return SCORE_NONE;

@@ -25,7 +25,6 @@ import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
 import org.htmlunit.xpath.xml.dtm.DTM;
 import org.htmlunit.xpath.xml.dtm.DTMManager;
-import org.htmlunit.xpath.xml.utils.NodeVector;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
@@ -95,9 +94,7 @@ public class XPathContext extends DTMManager {
     m_axesIteratorStack.removeAllElements();
     m_currentExpressionNodes.removeAllElements();
     m_currentNodes.removeAllElements();
-    m_iteratorRoots.RemoveAllNoClear();
     m_predicatePos.removeAllElements();
-    m_predicateRoots.RemoveAllNoClear();
     m_prefixResolvers.removeAllElements();
 
     m_prefixResolvers.push(null);
@@ -220,17 +217,6 @@ public class XPathContext extends DTMManager {
   public final void popCurrentNode() {
     m_currentNodes.pop();
   }
-
-  /** Get the current location path iterator root. */
-  public final int getIteratorRoot() {
-    return m_iteratorRoots.peepOrNull();
-  }
-
-  /** A stack of the current sub-expression nodes. */
-  private final NodeVector m_iteratorRoots = new NodeVector();
-
-  /** A stack of the current sub-expression nodes. */
-  private final NodeVector m_predicateRoots = new NodeVector();
 
   /** A stack of the current sub-expression nodes. */
   private final Stack<Integer> m_currentExpressionNodes = new Stack<>();

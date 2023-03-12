@@ -17,11 +17,11 @@
  */
 package org.htmlunit.xpath.compiler;
 
+import java.util.ArrayList;
 import javax.xml.transform.TransformerException;
 import org.htmlunit.xpath.patterns.NodeTest;
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
-import org.htmlunit.xpath.xml.utils.ObjectVector;
 
 /** This class represents the data structure basics of the XPath object. */
 public class OpMap {
@@ -56,14 +56,14 @@ public class OpMap {
    * TokenStack is the queue of used tokens. The current token is the token at the end of the
    * m_tokenQueue. The idea is that the queue can be marked and a sequence of tokens can be reused.
    */
-  final ObjectVector m_tokenQueue = new ObjectVector(MAXTOKENQUEUESIZE, BLOCKTOKENQUEUESIZE);
+  final ArrayList<Object> m_tokenQueue = new ArrayList<>();
 
   /**
    * Get the XPath as a list of tokens.
    *
    * @return ObjectVector of tokens.
    */
-  public ObjectVector getTokenQueue() {
+  public ArrayList<Object> getTokenQueue() {
     return m_tokenQueue;
   }
 
@@ -102,11 +102,10 @@ public class OpMap {
     m_opMap.setElementAt(0, n + 2);
 
     n = m_tokenQueue.size();
-    m_tokenQueue.setToSize(n + 4);
 
-    m_tokenQueue.setElementAt(null, n);
-    m_tokenQueue.setElementAt(null, n + 1);
-    m_tokenQueue.setElementAt(null, n + 2);
+    m_tokenQueue.add(null);
+    m_tokenQueue.add(null);
+    m_tokenQueue.add(null);
   }
 
   /**
@@ -268,7 +267,7 @@ public class OpMap {
     if (argLenOfStep == 3) {
       int index = m_opMap.elementAt(opPosOfStep + 4);
 
-      if (index >= 0) return (String) m_tokenQueue.elementAt(index);
+      if (index >= 0) return (String) m_tokenQueue.get(index);
       else if (OpCodes.ELEMWILDCARD == index) return NodeTest.WILD;
       else return null;
     }
@@ -306,9 +305,7 @@ public class OpMap {
         break; // Should assert error
     }
 
-    // int index = (argLenOfStep == 3) ? m_opMap[opPosOfStep+5]
-    // : ((argLenOfStep == 1) ? -3 : -2);
-    if (index >= 0) return m_tokenQueue.elementAt(index).toString();
+    if (index >= 0) return m_tokenQueue.get(index).toString();
     else if (OpCodes.ELEMWILDCARD == index) return NodeTest.WILD;
     else return null;
   }

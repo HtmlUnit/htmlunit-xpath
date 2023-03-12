@@ -17,6 +17,7 @@
  */
 package org.htmlunit.xpath.xml.dtm.ref;
 
+import java.util.ArrayList;
 import javax.xml.transform.Source;
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
@@ -507,8 +508,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    * from the XSLTC code!)
    */
   public class AncestorIterator extends InternalAxisIteratorBase {
-    final org.htmlunit.xpath.xml.utils.NodeVector m_ancestors =
-        new org.htmlunit.xpath.xml.utils.NodeVector();
+    final ArrayList<Integer> m_ancestors = new ArrayList<>();
 
     int m_ancestorsPos;
 
@@ -554,13 +554,13 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         _startNode = node;
 
         while (nodeID != END) {
-          m_ancestors.addElement(node);
+          m_ancestors.add(node);
           nodeID = _parent(nodeID);
           node = makeNodeHandle(nodeID);
         }
         m_ancestorsPos = m_ancestors.size() - 1;
 
-        _currentNode = (m_ancestorsPos >= 0) ? m_ancestors.elementAt(m_ancestorsPos) : DTM.NULL;
+        _currentNode = (m_ancestorsPos >= 0) ? m_ancestors.get(m_ancestorsPos) : DTM.NULL;
 
         resetPosition();
       }
@@ -572,7 +572,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
       m_ancestorsPos = m_ancestors.size() - 1;
 
-      _currentNode = (m_ancestorsPos >= 0) ? m_ancestors.elementAt(m_ancestorsPos) : DTM.NULL;
+      _currentNode = (m_ancestorsPos >= 0) ? m_ancestors.get(m_ancestorsPos) : DTM.NULL;
 
       resetPosition();
     }
@@ -585,7 +585,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
       int pos = --m_ancestorsPos;
 
-      _currentNode = (pos >= 0) ? m_ancestors.elementAt(m_ancestorsPos) : DTM.NULL;
+      _currentNode = (pos >= 0) ? m_ancestors.get(m_ancestorsPos) : DTM.NULL;
 
       return returnNode(next);
     }

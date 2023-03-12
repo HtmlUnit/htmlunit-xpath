@@ -416,7 +416,7 @@ public class Compiler extends OpMap {
 
     opPos = getFirstChildPos(opPos);
 
-    return (XString) getTokenQueue().elementAt(getOp(opPos));
+    return (XString) getTokenQueue().get(getOp(opPos));
   }
 
   /**
@@ -429,7 +429,7 @@ public class Compiler extends OpMap {
 
     opPos = getFirstChildPos(opPos);
 
-    return (XNumber) getTokenQueue().elementAt(getOp(opPos));
+    return (XNumber) getTokenQueue().get(getOp(opPos));
   }
 
   /**
