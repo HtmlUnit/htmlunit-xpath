@@ -200,13 +200,11 @@ public class DescendantIterator extends LocPathIterator {
   /** {@inheritDoc} */
   @Override
   public void detach() {
-    if (m_allowDetach) {
-      m_traverser = null;
-      m_extendedTypeID = 0;
+    m_traverser = null;
+    m_extendedTypeID = 0;
 
-      // Always call the superclass detach last!
-      super.detach();
-    }
+    // Always call the superclass detach last!
+    super.detach();
   }
 
   /** {@inheritDoc} */

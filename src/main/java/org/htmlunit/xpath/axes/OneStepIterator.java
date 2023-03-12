@@ -64,12 +64,10 @@ public class OneStepIterator extends ChildTestIterator {
   /** {@inheritDoc} */
   @Override
   public void detach() {
-    if (m_allowDetach) {
-      if (m_axis > -1) m_iterator = null;
+    if (m_axis > -1) m_iterator = null;
 
-      // Always call the superclass detach last!
-      super.detach();
-    }
+    // Always call the superclass detach last!
+    super.detach();
   }
 
   /** {@inheritDoc} */

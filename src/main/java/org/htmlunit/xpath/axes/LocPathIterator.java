@@ -130,7 +130,6 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     iter.setRoot(current, xctxt);
 
     int next = iter.nextNode();
-    // m_clones.freeInstance(iter);
     iter.detach();
     return next;
   }
@@ -297,32 +296,21 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     return true;
   }
 
-  /** Control over whether it is OK for detach to reset the iterator. */
-  protected boolean m_allowDetach = true;
-
-  /** {@inheritDoc} */
-  @Override
-  public void allowDetachToRelease(boolean allowRelease) {
-    m_allowDetach = allowRelease;
-  }
-
   /** {@inheritDoc} */
   @Override
   public void detach() {
-    if (m_allowDetach) {
-      // sb: allow reusing of cached nodes when possible?
-      // m_cachedNodes = null;
-      m_execContext = null;
-      // m_prefixResolver = null; sb: Why would this ever want to be null?
-      m_cdtm = null;
-      m_length = -1;
-      m_pos = 0;
-      m_lastFetched = DTM.NULL;
-      m_context = DTM.NULL;
-      m_currentContextNode = DTM.NULL;
+    // sb: allow reusing of cached nodes when possible?
+    // m_cachedNodes = null;
+    m_execContext = null;
+    // m_prefixResolver = null; sb: Why would this ever want to be null?
+    m_cdtm = null;
+    m_length = -1;
+    m_pos = 0;
+    m_lastFetched = DTM.NULL;
+    m_context = DTM.NULL;
+    m_currentContextNode = DTM.NULL;
 
-      m_clones.freeInstance(this);
-    }
+    m_clones.freeInstance(this);
   }
 
   /** {@inheritDoc} */

@@ -22,9 +22,6 @@ import org.htmlunit.xpath.compiler.Compiler;
 /** This class iterates over set of nodes that needs to be sorted. */
 public class WalkingIteratorSorted extends WalkingIterator {
 
-  /** True if the nodes will be found in document order, and this can be determined statically. */
-  protected final boolean m_inNaturalOrderStatic = false;
-
   /**
    * Create a WalkingIterator iterator, including creation of step walkers from the opcode list, and
    * call back into the Compiler to create predicate expressions.
@@ -41,6 +38,6 @@ public class WalkingIteratorSorted extends WalkingIterator {
   /** {@inheritDoc} */
   @Override
   public boolean isDocOrdered() {
-    return m_inNaturalOrderStatic;
+    return false;
   }
 }

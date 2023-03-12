@@ -117,26 +117,6 @@ public class ExpandedNameTable {
    * @return the expanded-name id of the node.
    */
   public int getExpandedTypeID(String namespace, String localName, int type) {
-    return getExpandedTypeID(namespace, localName, type, false);
-  }
-
-  /**
-   * Given an expanded name represented by namespace, local name and node type, return an ID. If the
-   * expanded-name does not exist in the internal tables, the entry will be created, and the ID will
-   * be returned. Any additional nodes that are created that have this expanded name will use this
-   * ID.
-   *
-   * <p>If searchOnly is true, we will return -1 if the name is not found in the table, otherwise
-   * the name is added to the table and the expanded name id of the new entry is returned.
-   *
-   * @param namespace The namespace
-   * @param localName The local name
-   * @param type The node type
-   * @param searchOnly If it is true, we will only search for the expanded name. -1 is return is the
-   *     name is not found.
-   * @return the expanded-name id of the node.
-   */
-  public int getExpandedTypeID(String namespace, String localName, int type, boolean searchOnly) {
     if (null == namespace) namespace = "";
     if (null == localName) localName = "";
 
@@ -154,10 +134,6 @@ public class ExpandedNameTable {
     // the expanded name is already in the hash table.
     for (HashEntry e = m_table[index]; e != null; e = e.next) {
       if (e.hash == hash && e.key.equals(hashET)) return e.value;
-    }
-
-    if (searchOnly) {
-      return DTM.NULL;
     }
 
     // Expand the internal HashEntry array if necessary.
@@ -216,49 +192,35 @@ public class ExpandedNameTable {
   }
 
   /**
-   * Given a type, return an expanded name ID.Any additional nodes that are created that have this
-   * expanded name will use this ID.
-   *
-   * @param type the given type
-   * @return the expanded-name id of the node.
-   */
-  public int getExpandedTypeID(int type) {
-    return type;
-  }
-
-  /**
    * Given an expanded-name ID, return the local name ID.
    *
-   * @param ExpandedNameID an ID that represents an expanded-name.
+   * @param expandedNameID an ID that represents an expanded-name.
    * @return The id of this local name.
    */
-  public final int getLocalNameID(int ExpandedNameID) {
-    // ExtendedType etype = m_extendedTypes[ExpandedNameID];
-    if (m_extendedTypes[ExpandedNameID].getLocalName().length() == 0) return 0;
-    return ExpandedNameID;
+  public final int getLocalNameID(int expandedNameID) {
+    if (m_extendedTypes[expandedNameID].getLocalName().length() == 0) return 0;
+    return expandedNameID;
   }
 
   /**
    * Given an expanded-name ID, return the namespace URI ID.
    *
-   * @param ExpandedNameID an ID that represents an expanded-name.
+   * @param expandedNameID an ID that represents an expanded-name.
    * @return The id of this namespace.
    */
-  public final int getNamespaceID(int ExpandedNameID) {
-    // ExtendedType etype = m_extendedTypes[ExpandedNameID];
-    if (m_extendedTypes[ExpandedNameID].getNamespace().length() == 0) return 0;
-    return ExpandedNameID;
+  public final int getNamespaceID(int expandedNameID) {
+    if (m_extendedTypes[expandedNameID].getNamespace().length() == 0) return 0;
+    return expandedNameID;
   }
 
   /**
    * Given an expanded-name ID, return the local name ID.
    *
-   * @param ExpandedNameID an ID that represents an expanded-name.
+   * @param expandedNameID an ID that represents an expanded-name.
    * @return The id of this local name.
    */
-  public final short getType(int ExpandedNameID) {
-    // ExtendedType etype = m_extendedTypes[ExpandedNameID];
-    return (short) m_extendedTypes[ExpandedNameID].getNodeType();
+  public final short getType(int expandedNameID) {
+    return (short) m_extendedTypes[expandedNameID].getNodeType();
   }
 
   /**

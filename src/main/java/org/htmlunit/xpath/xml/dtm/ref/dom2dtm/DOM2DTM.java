@@ -239,9 +239,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     }
 
     int expandedNameID =
-        (null != localName)
-            ? exnt.getExpandedTypeID(nsURI, localName, type)
-            : exnt.getExpandedTypeID(type);
+        (null != localName) ? exnt.getExpandedTypeID(nsURI, localName, type) : type;
 
     m_exptype.setElementAt(expandedNameID, nodeIndex);
 

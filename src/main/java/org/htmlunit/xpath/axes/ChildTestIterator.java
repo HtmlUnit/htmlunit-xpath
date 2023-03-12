@@ -96,11 +96,9 @@ public class ChildTestIterator extends BasicTestIterator {
   /** {@inheritDoc} */
   @Override
   public void detach() {
-    if (m_allowDetach) {
-      m_traverser = null;
+    m_traverser = null;
 
-      // Always call the superclass detach last!
-      super.detach();
-    }
+    // Always call the superclass detach last!
+    super.detach();
   }
 }

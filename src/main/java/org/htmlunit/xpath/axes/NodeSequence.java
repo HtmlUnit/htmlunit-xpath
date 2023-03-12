@@ -284,17 +284,6 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
   /** {@inheritDoc} */
   @Override
-  public void allowDetachToRelease(boolean allowRelease) {
-    if (!allowRelease && !hasCache()) {
-      setShouldCacheNodes(true);
-    }
-
-    if (null != m_iter) m_iter.allowDetachToRelease(allowRelease);
-    super.allowDetachToRelease(allowRelease);
-  }
-
-  /** {@inheritDoc} */
-  @Override
   public int getCurrentNode() {
     if (hasCache()) {
       int currentIndex = m_next - 1;

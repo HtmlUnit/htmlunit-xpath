@@ -65,15 +65,6 @@ public class XObject extends Expression {
   }
 
   /**
-   * Specify if it's OK for detach to release the iterator for reuse. This function should be called
-   * with a value of false for objects that are stored in variables. Calling this with a value of
-   * false on a XNodeSet will cause the nodeset to be cached.
-   *
-   * @param allowRelease true if it is OK for detach to release this iterator for pooling.
-   */
-  public void allowDetachToRelease(boolean allowRelease) {}
-
-  /**
    * Detaches the <code>DTMIterator</code> from the set which it iterated over, releasing any
    * computational resources and placing the iterator in the INVALID state. After <code>detach
    * </code> has been invoked, calls to <code>nextNode</code> or <code>previousNode</code> will

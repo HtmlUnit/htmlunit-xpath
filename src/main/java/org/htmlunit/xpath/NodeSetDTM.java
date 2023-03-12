@@ -170,12 +170,6 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
 
   /** {@inheritDoc} */
   @Override
-  public void allowDetachToRelease(boolean allowRelease) {
-    // no action for right now.
-  }
-
-  /** {@inheritDoc} */
-  @Override
   public boolean isFresh() {
     return m_next == 0;
   }

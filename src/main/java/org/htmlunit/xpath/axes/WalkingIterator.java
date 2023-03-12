@@ -152,18 +152,16 @@ public class WalkingIterator extends LocPathIterator {
   /** {@inheritDoc} */
   @Override
   public void detach() {
-    if (m_allowDetach) {
-      AxesWalker walker = m_firstWalker;
-      while (null != walker) {
-        walker.detach();
-        walker = walker.getNextWalker();
-      }
-
-      m_lastUsedWalker = null;
-
-      // Always call the superclass detach last!
-      super.detach();
+    AxesWalker walker = m_firstWalker;
+    while (null != walker) {
+      walker.detach();
+      walker = walker.getNextWalker();
     }
+
+    m_lastUsedWalker = null;
+
+    // Always call the superclass detach last!
+    super.detach();
   }
 
   /** {@inheritDoc} */

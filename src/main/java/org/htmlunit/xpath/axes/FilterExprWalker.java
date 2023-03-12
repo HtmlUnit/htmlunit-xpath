@@ -69,10 +69,8 @@ public class FilterExprWalker extends AxesWalker {
   @Override
   public void detach() {
     super.detach();
-    boolean m_canDetachNodeset = true;
-    if (m_canDetachNodeset) {
-      m_exprObj.detach();
-    }
+
+    m_exprObj.detach();
     m_exprObj = null;
   }
 

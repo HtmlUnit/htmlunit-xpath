@@ -60,7 +60,7 @@ public class UnionPathIterator extends LocPathIterator
   /** {@inheritDoc} */
   @Override
   public void detach() {
-    if (m_allowDetach && null != m_iterators) {
+    if (null != m_iterators) {
       for (DTMIterator m_iterator : m_iterators) {
         m_iterator.detach();
       }
