@@ -18,7 +18,6 @@
 package org.htmlunit.xpath;
 
 import javax.xml.transform.TransformerException;
-
 import org.htmlunit.xpath.objects.XObject;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.htmlunit.xpath.xml.utils.PrefixResolverDefault;

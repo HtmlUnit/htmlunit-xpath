@@ -17,8 +17,8 @@
  */
 package org.htmlunit.xpath;
 
-import org.htmlunit.xpath.res.XPATHErrorResources;
-import org.htmlunit.xpath.res.XPATHMessages;
+import java.util.ArrayList;
+import java.util.List;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -39,136 +39,24 @@ import org.w3c.dom.NodeList;
  * will respond to the same calls; the disadvantage is that some of them may return
  * less-than-enlightening results when you do so.
  */
-public class NodeSet implements NodeList, Cloneable {
+public class NodeSet implements NodeList {
 
-  /**
-   * Create an empty, using the given block size.
-   *
-   * @param blocksize Size of blocks to allocate
-   */
-  public NodeSet(int blocksize) {
-    m_blocksize = blocksize;
-    m_mapSize = 0;
-  }
+  private final ArrayList<Node> nodes;
 
-  private void runTo(int index) {
-    if (!m_cacheNodes)
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESET_CANNOT_INDEX, null));
-
-    if ((index >= 0) && (m_next < m_firstFree)) m_next = index;
-    else m_next = m_firstFree - 1;
+  /** Create an empty, using the given block size. */
+  public NodeSet(List<Node> nodes) {
+    this.nodes = new ArrayList<>(nodes);
   }
 
   /** {@inheritDoc} */
   @Override
   public Node item(int index) {
-
-    runTo(index);
-
-    if (null == m_map) return null;
-
-    return m_map[index];
+    return nodes.get(index);
   }
 
   /** {@inheritDoc} */
   @Override
   public int getLength() {
-
-    runTo(-1);
-
-    return this.size();
-  }
-
-  /**
-   * Add a node to the NodeSet. Not all types of NodeSets support this operation
-   *
-   * @param n Node to be added
-   * @throws RuntimeException thrown if this NodeSet is not of a mutable type.
-   */
-  public void addNode(Node n) {
-
-    if (!m_mutable)
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESET_NOT_MUTABLE, null));
-
-    if ((m_firstFree + 1) >= m_mapSize) {
-      if (null == m_map) {
-        m_map = new Node[m_blocksize];
-        m_mapSize = m_blocksize;
-      } else {
-        m_mapSize += m_blocksize;
-
-        Node[] newMap = new Node[m_mapSize];
-
-        System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
-
-        m_map = newMap;
-      }
-    }
-
-    m_map[m_firstFree] = n;
-
-    m_firstFree++;
-  }
-
-  /** If this node is being used as an iterator, the next index that nextNode() will return. */
-  protected transient int m_next = 0;
-
-  /** True if this list can be mutated. */
-  protected final transient boolean m_mutable = true;
-
-  /**
-   * True if this list is cached.
-   *
-   * @serial
-   */
-  protected final transient boolean m_cacheNodes = true;
-
-  /**
-   * Size of blocks to allocate.
-   *
-   * @serial
-   */
-  private final int m_blocksize;
-
-  /**
-   * Array of nodes this points to.
-   *
-   * @serial
-   */
-  Node[] m_map;
-
-  /**
-   * Number of nodes in this NodeVector.
-   *
-   * @serial
-   */
-  protected int m_firstFree = 0;
-
-  /**
-   * Size of the array this points to.
-   *
-   * @serial
-   */
-  private int m_mapSize; // lazy initialization
-
-  /** {@inheritDoc} */
-  @Override
-  public Object clone() throws CloneNotSupportedException {
-
-    NodeSet clone = (NodeSet) super.clone();
-
-    if ((null != this.m_map) && (this.m_map == clone.m_map)) {
-      clone.m_map = new Node[this.m_map.length];
-
-      System.arraycopy(this.m_map, 0, clone.m_map, 0, this.m_map.length);
-    }
-
-    return clone;
-  }
-
-  public int size() {
-    return m_firstFree;
+    return nodes.size();
   }
 }

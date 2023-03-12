@@ -18,7 +18,6 @@
 package org.htmlunit.xpath.compiler;
 
 import java.util.List;
-
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 

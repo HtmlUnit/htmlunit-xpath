@@ -25,13 +25,11 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.Vector;
 import javax.xml.transform.Source;
-
 import org.htmlunit.xpath.objects.XString;
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
 import org.htmlunit.xpath.xml.dtm.DTM;
 import org.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
-import org.htmlunit.xpath.xml.dtm.DTMException;
 import org.htmlunit.xpath.xml.dtm.DTMManager;
 import org.htmlunit.xpath.xml.utils.SuballocatedIntVector;
 
@@ -1188,9 +1186,8 @@ public abstract class DTMDefaultBase implements DTM {
   public String getNodeNameX(int nodeHandle) {
 
     /* @todo: implement this org.apache.xml.dtm.DTMDefaultBase abstract method */
-    error(XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_METHOD_NOT_SUPPORTED, null));
-
-    return null;
+    throw new RuntimeException(
+        XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_METHOD_NOT_SUPPORTED, null));
   }
 
   /** {@inheritDoc} */
@@ -1234,15 +1231,6 @@ public abstract class DTMDefaultBase implements DTM {
   @Override
   public org.w3c.dom.Node getNode(int nodeHandle) {
     return new DTMNodeProxy(this, nodeHandle);
-  }
-
-  /**
-   * Simple error for asserts and the like.
-   *
-   * @param msg Error message to report.
-   */
-  protected void error(String msg) {
-    throw new DTMException(msg);
   }
 
   /**

@@ -19,9 +19,7 @@ package org.htmlunit.xpath;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.transform.TransformerException;
-
 import org.htmlunit.xpath.objects.XBoolean;
 import org.htmlunit.xpath.objects.XNodeSet;
 import org.htmlunit.xpath.objects.XNumber;

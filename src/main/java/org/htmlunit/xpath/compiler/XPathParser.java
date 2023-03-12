@@ -19,7 +19,6 @@ package org.htmlunit.xpath.compiler;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
-
 import org.htmlunit.xpath.XPathProcessorException;
 import org.htmlunit.xpath.objects.XNumber;
 import org.htmlunit.xpath.objects.XString;
@@ -306,8 +305,7 @@ public class XPathParser {
    * Notify the user of an error, and probably throw an exception.
    *
    * @param msg An error msgkey that corresponds to one of the constants found in {@link
-   *     org.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
-   *     string.
+   *     org.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format string.
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
    */
@@ -356,8 +354,8 @@ public class XPathParser {
    *
    * @param key A local name of a function.
    * @return The function ID, which may correspond to one of the FUNC_XXX values found in {@link
-   *     org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed by an
-   *     external module.
+   *     org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed by an external
+   *     module.
    */
   final int getFunctionToken(String key) {
 
@@ -1215,8 +1213,7 @@ public class XPathParser {
   /**
    * NodeTest ::= WildcardName | NodeType '(' ')' | 'processing-instruction' '(' Literal ')'
    *
-   * @param axesType FROM_XXX axes type, found in {@link
-   *     org.htmlunit.xpath.compiler.Keywords}.
+   * @param axesType FROM_XXX axes type, found in {@link org.htmlunit.xpath.compiler.Keywords}.
    * @throws javax.xml.transform.TransformerException in case of error
    */
   protected void NodeTest(int axesType) throws javax.xml.transform.TransformerException {

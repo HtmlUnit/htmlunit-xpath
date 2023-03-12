@@ -18,7 +18,6 @@
 package org.htmlunit.xpath.axes;
 
 import java.util.ArrayList;
-
 import org.htmlunit.xpath.xml.dtm.DTMIterator;
 import org.htmlunit.xpath.xml.utils.WrappedRuntimeException;
 

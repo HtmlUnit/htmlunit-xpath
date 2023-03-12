@@ -52,8 +52,8 @@ public abstract class DTMManager {
    *       as the system property defined above.
    *   <li>Use the Services API (as detailed in the JAR specification), if available, to determine
    *       the classname. The Services API will look for a classname in the file <code>
-   *       META-INF/services/org.htmlunit.xpath.xml.dtm.DTMManager</code> in jars
-   *       available to the runtime.
+   *       META-INF/services/org.htmlunit.xpath.xml.dtm.DTMManager</code> in jars available to the
+   *       runtime.
    *   <li>Use the default <code>DTMManager</code> classname, which is <code>
    *       org.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault</code>.
    * </ul>

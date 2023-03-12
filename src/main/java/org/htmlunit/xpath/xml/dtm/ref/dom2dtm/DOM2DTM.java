@@ -19,7 +19,6 @@ package org.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
 import java.util.Vector;
 import javax.xml.transform.dom.DOMSource;
-
 import org.htmlunit.xpath.objects.XString;
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
@@ -161,7 +160,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         // %REVIEW% Wrong error message, but I've been told we're trying
         // not to add messages right not for I18N reasons.
         // %REVIEW% Should this be a Fatal Error?
-        error(XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NO_DTMIDS_AVAIL, null));
+        throw new RuntimeException(
+            XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NO_DTMIDS_AVAIL, null), e);
       }
     }
 

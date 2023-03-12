@@ -17,7 +17,6 @@
  */
 package org.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
-import org.htmlunit.xpath.xml.dtm.DTMException;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -185,43 +184,43 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   /** {@inheritDoc} */
   @Override
   public void setNodeValue(String value) {
-    throw new DTMException(NOT_SUPPORTED_ERR);
+    throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
   public void setValue(String value) {
-    throw new DTMException(NOT_SUPPORTED_ERR);
+    throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
   public void setPrefix(String value) {
-    throw new DTMException(NOT_SUPPORTED_ERR);
+    throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
   public Node insertBefore(Node a, Node b) {
-    throw new DTMException(NOT_SUPPORTED_ERR);
+    throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
   public Node replaceChild(Node a, Node b) {
-    throw new DTMException(NOT_SUPPORTED_ERR);
+    throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
   public Node appendChild(Node a) {
-    throw new DTMException(NOT_SUPPORTED_ERR);
+    throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
   public Node removeChild(Node a) {
-    throw new DTMException(NOT_SUPPORTED_ERR);
+    throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
@@ -233,7 +232,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   /** {@inheritDoc} */
   @Override
   public Node cloneNode(boolean deep) {
-    throw new DTMException(NOT_SUPPORTED_ERR);
+    throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
@@ -347,13 +346,13 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
       case Node.ELEMENT_NODE:
         {
           String namespace = this.getNamespaceURI();
-          String prefix = this.getPrefix();
+          String pfx = this.getPrefix();
           if (namespace != null) {
             // REVISIT: is it possible that prefix is empty string?
-            if (specifiedPrefix == null && prefix == specifiedPrefix) {
+            if (specifiedPrefix == null && pfx == specifiedPrefix) {
               // looking for default namespace
               return namespace;
-            } else if (prefix != null && prefix.equals(specifiedPrefix)) {
+            } else if (pfx != null && pfx.equals(specifiedPrefix)) {
               // non default namespace
               return namespace;
             }

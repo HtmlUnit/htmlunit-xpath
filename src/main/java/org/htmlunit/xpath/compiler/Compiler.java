@@ -19,7 +19,6 @@ package org.htmlunit.xpath.compiler;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
-
 import org.htmlunit.xpath.Expression;
 import org.htmlunit.xpath.axes.UnionPathIterator;
 import org.htmlunit.xpath.axes.WalkerFactory;
@@ -806,8 +805,8 @@ public class Compiler extends OpMap {
    * Compiles predicates in the step.
    *
    * @param opPos The position of the first predicate the m_opMap array.
-   * @param predicates An empty pre-determined array of {@link
-   *     org.htmlunit.xpath.Expression}s, that will be filled in.
+   * @param predicates An empty pre-determined array of {@link org.htmlunit.xpath.Expression}s, that
+   *     will be filled in.
    * @throws TransformerException if any
    */
   private void compilePredicates(int opPos, Expression[] predicates) throws TransformerException {

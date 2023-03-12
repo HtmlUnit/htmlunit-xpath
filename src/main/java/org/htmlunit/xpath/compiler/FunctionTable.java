@@ -19,7 +19,6 @@ package org.htmlunit.xpath.compiler;
 
 import java.util.HashMap;
 import javax.xml.transform.TransformerException;
-
 import org.htmlunit.xpath.functions.Function;
 
 /** The function table for XPath. */
@@ -152,17 +151,13 @@ public class FunctionTable {
     m_functions[FUNC_STRING] = org.htmlunit.xpath.functions.FuncString.class;
     m_functions[FUNC_STARTS_WITH] = org.htmlunit.xpath.functions.FuncStartsWith.class;
     m_functions[FUNC_CONTAINS] = org.htmlunit.xpath.functions.FuncContains.class;
-    m_functions[FUNC_SUBSTRING_BEFORE] =
-        org.htmlunit.xpath.functions.FuncSubstringBefore.class;
-    m_functions[FUNC_SUBSTRING_AFTER] =
-        org.htmlunit.xpath.functions.FuncSubstringAfter.class;
-    m_functions[FUNC_NORMALIZE_SPACE] =
-        org.htmlunit.xpath.functions.FuncNormalizeSpace.class;
+    m_functions[FUNC_SUBSTRING_BEFORE] = org.htmlunit.xpath.functions.FuncSubstringBefore.class;
+    m_functions[FUNC_SUBSTRING_AFTER] = org.htmlunit.xpath.functions.FuncSubstringAfter.class;
+    m_functions[FUNC_NORMALIZE_SPACE] = org.htmlunit.xpath.functions.FuncNormalizeSpace.class;
     m_functions[FUNC_TRANSLATE] = org.htmlunit.xpath.functions.FuncTranslate.class;
     m_functions[FUNC_CONCAT] = org.htmlunit.xpath.functions.FuncConcat.class;
     m_functions[FUNC_SUBSTRING] = org.htmlunit.xpath.functions.FuncSubstring.class;
-    m_functions[FUNC_STRING_LENGTH] =
-        org.htmlunit.xpath.functions.FuncStringLength.class;
+    m_functions[FUNC_STRING_LENGTH] = org.htmlunit.xpath.functions.FuncStringLength.class;
   }
 
   static {
@@ -217,8 +212,8 @@ public class FunctionTable {
    * Obtain a new Function object from a function ID.
    *
    * @param which The function ID, which may correspond to one of the FUNC_XXX values found in
-   *     {@link org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed
-   *     by an external module.
+   *     {@link org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed by an
+   *     external module.
    * @return a a new Function instance.
    * @throws javax.xml.transform.TransformerException if ClassNotFoundException,
    *     IllegalAccessException, or InstantiationException is thrown.
@@ -237,8 +232,8 @@ public class FunctionTable {
    *
    * @param key the function name in a java.lang.String format.
    * @return a function ID, which may correspond to one of the FUNC_XXX values found in {@link
-   *     org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed by an
-   *     external module.
+   *     org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed by an external
+   *     module.
    */
   Object getFunctionID(String key) {
     Object id = m_functionID_customer.get(key);

@@ -19,7 +19,6 @@ package org.htmlunit.xpath;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
-
 import org.htmlunit.xpath.compiler.Compiler;
 import org.htmlunit.xpath.compiler.FunctionTable;
 import org.htmlunit.xpath.compiler.XPathParser;

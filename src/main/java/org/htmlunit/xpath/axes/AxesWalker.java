@@ -18,7 +18,6 @@
 package org.htmlunit.xpath.axes;
 
 import java.util.Vector;
-
 import org.htmlunit.xpath.Expression;
 import org.htmlunit.xpath.XPathContext;
 import org.htmlunit.xpath.XPathVisitor;

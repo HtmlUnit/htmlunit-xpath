@@ -18,14 +18,12 @@
 package org.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
-
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
 import org.htmlunit.xpath.xml.dtm.Axis;
 import org.htmlunit.xpath.xml.dtm.DTM;
 import org.htmlunit.xpath.xml.dtm.DTMAxisIterator;
 import org.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
-import org.htmlunit.xpath.xml.dtm.DTMException;
 import org.htmlunit.xpath.xml.dtm.DTMManager;
 
 /** This class implements the traversers for DTMDefaultBase. */
@@ -90,7 +88,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         iterator = new RootIterator();
         break;
       default:
-        throw new DTMException(
+        throw new RuntimeException(
             XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_ITERATOR_AXIS_NOT_IMPLEMENTED,
                 new Object[] {Axis.getNames(axis)}));
@@ -401,9 +399,10 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         // return clone.reset();
         return clone;
       } catch (CloneNotSupportedException e) {
-        throw new DTMException(
+        throw new RuntimeException(
             XPATHMessages.createXPATHMessage(
-                XPATHErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null));
+                XPATHErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null),
+            e);
       }
     }
 
@@ -532,7 +531,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         // return clone.reset();
         return clone;
       } catch (CloneNotSupportedException e) {
-        throw new DTMException(
+        throw new RuntimeException(
             XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null));
       }

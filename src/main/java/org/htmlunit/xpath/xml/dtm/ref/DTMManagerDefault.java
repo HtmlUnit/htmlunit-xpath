@@ -19,11 +19,9 @@ package org.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
-
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
 import org.htmlunit.xpath.xml.dtm.DTM;
-import org.htmlunit.xpath.xml.dtm.DTMException;
 import org.htmlunit.xpath.xml.dtm.DTMManager;
 import org.htmlunit.xpath.xml.dtm.ref.dom2dtm.DOM2DTM;
 import org.w3c.dom.Node;
@@ -88,7 +86,7 @@ public class DTMManagerDefault extends DTMManager {
    */
   public synchronized void addDTM(DTM dtm, int id, int offset) {
     if (id >= IDENT_MAX_DTMS) {
-      throw new DTMException(
+      throw new RuntimeException(
           XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NO_DTMIDS_AVAIL, null));
     }
 
@@ -157,7 +155,7 @@ public class DTMManagerDefault extends DTMManager {
 
     // It should have been handled by a derived class or the caller
     // made a mistake.
-    throw new DTMException(
+    throw new RuntimeException(
         XPATHMessages.createXPATHMessage(
             XPATHErrorResources.ER_NOT_SUPPORTED, new Object[] {source}));
   }
@@ -169,87 +167,84 @@ public class DTMManagerDefault extends DTMManager {
       throw new IllegalArgumentException(
           XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODE_NON_NULL, null));
 
-    if (node instanceof org.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy)
+    if (node instanceof org.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy) {
       return ((org.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy) node).getDTMNodeNumber();
-    else {
-      // Find the DOM2DTMs wrapped around this Document (if any)
-      // and check whether they contain the Node in question.
-      //
-      // NOTE that since a DOM2DTM may represent a subtree rather
-      // than a full document, we have to be prepared to check more
-      // than one -- and there is no guarantee that we will find
-      // one that contains ancestors or siblings of the node we're
-      // seeking.
-      //
-      // %REVIEW% We could search for the one which contains this
-      // node at the deepest level, and thus covers the widest
-      // subtree, but that's going to entail additional work
-      // checking more DTMs... and getHandleOfNode is not a
-      // cheap operation in most implementations.
-      //
-      // TODO: %REVIEW% If overflow addressing, we may recheck a DTM
-      // already examined. Ouch. But with the increased number of DTMs,
-      // scanning back to check this is painful.
-      // POSSIBLE SOLUTIONS:
-      // Generate a list of _unique_ DTM objects?
-      // Have each DTM cache last DOM node search?
-      for (DTM thisDTM : m_dtms) {
-        if ((null != thisDTM) && thisDTM instanceof DOM2DTM) {
-          int handle = ((DOM2DTM) thisDTM).getHandleOfNode(node);
-          if (handle != DTM.NULL) return handle;
-        }
-      }
-
-      // Not found; generate a new DTM.
-      //
-      // %REVIEW% Is this really desirable, or should we return null
-      // and make folks explicitly instantiate from a DOMSource? The
-      // latter is more work but gives the caller the opportunity to
-      // explicitly add the DTM to a DTMManager... and thus to know when
-      // it can be discarded again, which is something we need to pay much
-      // more attention to. (Especially since only DTMs which are assigned
-      // to a manager can use the overflow addressing scheme.)
-      //
-      // %BUG% If the source node was a DOM2DTM$defaultNamespaceDeclarationNode
-      // and the DTM wasn't registered with this DTMManager, we will create
-      // a new DTM and _still_ not be able to find the node (since it will
-      // be resynthesized). Another reason to push hard on making all DTMs
-      // be managed DTMs.
-
-      // Since the real root of our tree may be a DocumentFragment, we need to
-      // use getParent to find the root, instead of getOwnerDocument. Otherwise
-      // DOM2DTM#getHandleOfNode will be very unhappy.
-      Node root = node;
-      Node p =
-          (root.getNodeType() == Node.ATTRIBUTE_NODE)
-              ? ((org.w3c.dom.Attr) root).getOwnerElement()
-              : root.getParentNode();
-      for (; p != null; p = p.getParentNode()) {
-        root = p;
-      }
-
-      DOM2DTM dtm =
-          (DOM2DTM) getDTM(new javax.xml.transform.dom.DOMSource(root), false, true, true);
-
-      int handle;
-
-      if (node
-          instanceof
-          org.htmlunit.xpath.xml.dtm.ref.dom2dtm
-              .DOM2DTMdefaultNamespaceDeclarationNode) {
-        // Can't return the same node since it's unique to a specific DTM,
-        // but can return the equivalent node -- find the corresponding
-        // Document Element, then ask it for the xml: namespace decl.
-        handle = dtm.getHandleOfNode(((org.w3c.dom.Attr) node).getOwnerElement());
-        handle = dtm.getAttributeNode(handle, node.getNamespaceURI(), node.getLocalName());
-      } else handle = dtm.getHandleOfNode(node);
-
-      if (DTM.NULL == handle)
-        throw new RuntimeException(
-            XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_COULD_NOT_RESOLVE_NODE, null));
-
-      return handle;
     }
+
+    // Find the DOM2DTMs wrapped around this Document (if any)
+    // and check whether they contain the Node in question.
+    //
+    // NOTE that since a DOM2DTM may represent a subtree rather
+    // than a full document, we have to be prepared to check more
+    // than one -- and there is no guarantee that we will find
+    // one that contains ancestors or siblings of the node we're
+    // seeking.
+    //
+    // %REVIEW% We could search for the one which contains this
+    // node at the deepest level, and thus covers the widest
+    // subtree, but that's going to entail additional work
+    // checking more DTMs... and getHandleOfNode is not a
+    // cheap operation in most implementations.
+    //
+    // TODO: %REVIEW% If overflow addressing, we may recheck a DTM
+    // already examined. Ouch. But with the increased number of DTMs,
+    // scanning back to check this is painful.
+    // POSSIBLE SOLUTIONS:
+    // Generate a list of _unique_ DTM objects?
+    // Have each DTM cache last DOM node search?
+    for (DTM thisDTM : m_dtms) {
+      if ((null != thisDTM) && thisDTM instanceof DOM2DTM) {
+        int handle = ((DOM2DTM) thisDTM).getHandleOfNode(node);
+        if (handle != DTM.NULL) return handle;
+      }
+    }
+
+    // Not found; generate a new DTM.
+    //
+    // %REVIEW% Is this really desirable, or should we return null
+    // and make folks explicitly instantiate from a DOMSource? The
+    // latter is more work but gives the caller the opportunity to
+    // explicitly add the DTM to a DTMManager... and thus to know when
+    // it can be discarded again, which is something we need to pay much
+    // more attention to. (Especially since only DTMs which are assigned
+    // to a manager can use the overflow addressing scheme.)
+    //
+    // %BUG% If the source node was a DOM2DTM$defaultNamespaceDeclarationNode
+    // and the DTM wasn't registered with this DTMManager, we will create
+    // a new DTM and _still_ not be able to find the node (since it will
+    // be resynthesized). Another reason to push hard on making all DTMs
+    // be managed DTMs.
+
+    // Since the real root of our tree may be a DocumentFragment, we need to
+    // use getParent to find the root, instead of getOwnerDocument. Otherwise
+    // DOM2DTM#getHandleOfNode will be very unhappy.
+    Node root = node;
+    Node p =
+        (root.getNodeType() == Node.ATTRIBUTE_NODE)
+            ? ((org.w3c.dom.Attr) root).getOwnerElement()
+            : root.getParentNode();
+    for (; p != null; p = p.getParentNode()) {
+      root = p;
+    }
+
+    DOM2DTM dtm = (DOM2DTM) getDTM(new javax.xml.transform.dom.DOMSource(root), false, true, true);
+
+    int handle;
+
+    if (node
+        instanceof org.htmlunit.xpath.xml.dtm.ref.dom2dtm.DOM2DTMdefaultNamespaceDeclarationNode) {
+      // Can't return the same node since it's unique to a specific DTM,
+      // but can return the equivalent node -- find the corresponding
+      // Document Element, then ask it for the xml: namespace decl.
+      handle = dtm.getHandleOfNode(((org.w3c.dom.Attr) node).getOwnerElement());
+      handle = dtm.getAttributeNode(handle, node.getNamespaceURI(), node.getLocalName());
+    } else handle = dtm.getHandleOfNode(node);
+
+    if (DTM.NULL == handle)
+      throw new RuntimeException(
+          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_COULD_NOT_RESOLVE_NODE, null));
+
+    return handle;
   }
 
   /** {@inheritDoc} */

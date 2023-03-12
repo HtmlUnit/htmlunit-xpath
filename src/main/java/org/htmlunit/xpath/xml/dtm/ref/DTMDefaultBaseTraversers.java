@@ -18,13 +18,11 @@
 package org.htmlunit.xpath.xml.dtm.ref;
 
 import javax.xml.transform.Source;
-
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
 import org.htmlunit.xpath.xml.dtm.Axis;
 import org.htmlunit.xpath.xml.dtm.DTM;
 import org.htmlunit.xpath.xml.dtm.DTMAxisTraverser;
-import org.htmlunit.xpath.xml.dtm.DTMException;
 import org.htmlunit.xpath.xml.dtm.DTMManager;
 
 /**
@@ -130,13 +128,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       case Axis.FILTEREDLIST:
         return null; // Don't want to throw an exception for this one.
       default:
-        throw new DTMException(
+        throw new RuntimeException(
             XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_UNKNOWN_AXIS_TYPE, new Object[] {Integer.toString(axis)}));
     }
 
     if (null == traverser)
-      throw new DTMException(
+      throw new RuntimeException(
           XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_AXIS_TRAVERSER_NOT_SUPPORTED,
               new Object[] {Axis.getNames(axis)}));

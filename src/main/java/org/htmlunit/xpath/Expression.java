@@ -19,7 +19,6 @@ package org.htmlunit.xpath;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
-
 import org.htmlunit.xpath.objects.XObject;
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
@@ -28,11 +27,10 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /**
  * This abstract class serves as the base for all expression objects. An Expression can be executed
- * to return a {@link org.htmlunit.xpath.objects.XObject}, normally has a location
- * within a document or DOM, can send error and warning events, and normally do not hold state and
- * are meant to be immutable once construction has completed. An exception to the immutibility rule
- * is iterators and walkers, which must be cloned in order to be used -- the original must still be
- * immutable.
+ * to return a {@link org.htmlunit.xpath.objects.XObject}, normally has a location within a document
+ * or DOM, can send error and warning events, and normally do not hold state and are meant to be
+ * immutable once construction has completed. An exception to the immutibility rule is iterators and
+ * walkers, which must be cloned in order to be used -- the original must still be immutable.
  */
 public abstract class Expression implements ExpressionNode, XPathVisitable {
 
@@ -221,8 +219,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    *
    * @param xctxt The XPath runtime context.
    * @param msg An error msgkey that corresponds to one of the constants found in {@link
-   *     org.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
-   *     string.
+   *     org.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format string.
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
    * @throws javax.xml.transform.TransformerException if any

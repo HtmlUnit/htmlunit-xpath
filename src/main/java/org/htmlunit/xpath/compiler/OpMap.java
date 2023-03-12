@@ -18,7 +18,6 @@
 package org.htmlunit.xpath.compiler;
 
 import javax.xml.transform.TransformerException;
-
 import org.htmlunit.xpath.patterns.NodeTest;
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
@@ -204,8 +203,7 @@ public class OpMap {
    * Tell the user of an error, and probably throw an exception.
    *
    * @param msg An error msgkey that corresponds to one of the constants found in {@link
-   *     org.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
-   *     string.
+   *     org.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format string.
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
    */

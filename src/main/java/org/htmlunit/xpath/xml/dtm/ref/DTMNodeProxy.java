@@ -19,7 +19,6 @@ package org.htmlunit.xpath.xml.dtm.ref;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.htmlunit.xpath.NodeSet;
 import org.htmlunit.xpath.xml.dtm.DTM;
 import org.w3c.dom.Attr;
@@ -139,7 +138,7 @@ public class DTMNodeProxy
   @Override
   public final String getTarget() {
     return dtm.getNodeName(node);
-  } // getTarget():String
+  }
 
   /** {@inheritDoc} */
   @Override
@@ -249,8 +248,6 @@ public class DTMNodeProxy
 
     return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
   }
-
-  // DTMNamedNodeMap m_attrs;
 
   /** {@inheritDoc} */
   @Override
@@ -410,25 +407,20 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final NodeList getElementsByTagName(String tagname) {
-    List<Node> listVector = new ArrayList<>();
+    List<Node> nodes = new ArrayList<>();
     Node retNode = dtm.getNode(node);
     if (retNode != null) {
       boolean isTagNameWildCard = "*".equals(tagname);
       if (DTM.ELEMENT_NODE == retNode.getNodeType()) {
         NodeList nodeList = retNode.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
-          traverseChildren(listVector, nodeList.item(i), tagname, isTagNameWildCard);
+          traverseChildren(nodes, nodeList.item(i), tagname, isTagNameWildCard);
         }
       } else if (DTM.DOCUMENT_NODE == retNode.getNodeType()) {
-        traverseChildren(listVector, dtm.getNode(node), tagname, isTagNameWildCard);
+        traverseChildren(nodes, dtm.getNode(node), tagname, isTagNameWildCard);
       }
     }
-    int size = listVector.size();
-    NodeSet nodeSet = new NodeSet(size);
-    for (Node value : listVector) {
-      nodeSet.addNode(value);
-    }
-    return nodeSet;
+    return new NodeSet(nodes);
   }
 
   private void traverseChildren(
@@ -471,7 +463,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final NodeList getElementsByTagNameNS(String namespaceURI, String localName) {
-    List<Node> listVector = new ArrayList<>();
+    List<Node> nodes = new ArrayList<>();
     Node retNode = dtm.getNode(node);
     if (retNode != null) {
       boolean isNamespaceURIWildCard = "*".equals(namespaceURI);
@@ -480,7 +472,7 @@ public class DTMNodeProxy
         NodeList nodeList = retNode.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
           traverseChildren(
-              listVector,
+              nodes,
               nodeList.item(i),
               namespaceURI,
               localName,
@@ -489,7 +481,7 @@ public class DTMNodeProxy
         }
       } else if (DTM.DOCUMENT_NODE == retNode.getNodeType()) {
         traverseChildren(
-            listVector,
+            nodes,
             dtm.getNode(node),
             namespaceURI,
             localName,
@@ -497,12 +489,7 @@ public class DTMNodeProxy
             isLocalNameWildCard);
       }
     }
-    int size = listVector.size();
-    NodeSet nodeSet = new NodeSet(size);
-    for (Node value : listVector) {
-      nodeSet.addNode(value);
-    }
-    return nodeSet;
+    return new NodeSet(nodes);
   }
 
   /**

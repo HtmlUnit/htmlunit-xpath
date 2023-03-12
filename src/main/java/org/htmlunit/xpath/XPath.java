@@ -20,7 +20,6 @@ package org.htmlunit.xpath;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
-
 import org.htmlunit.xpath.compiler.Compiler;
 import org.htmlunit.xpath.compiler.FunctionTable;
 import org.htmlunit.xpath.compiler.XPathParser;
@@ -238,8 +237,7 @@ public class XPath {
    *
    * @param xctxt The XPath runtime context.
    * @param msg An error msgkey that corresponds to one of the constants found in {@link
-   *     org.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format
-   *     string.
+   *     org.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format string.
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
    */

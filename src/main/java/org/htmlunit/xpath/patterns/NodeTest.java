@@ -283,8 +283,7 @@ public class NodeTest extends Expression {
   /**
    * Tell what node type to test, if not DTMFilter.SHOW_ALL.
    *
-   * @param whatToShow Bit set defined mainly by {@link
-   *     org.htmlunit.xpath.xml.dtm.DTMFilter}.
+   * @param whatToShow Bit set defined mainly by {@link org.htmlunit.xpath.xml.dtm.DTMFilter}.
    * @return the node type for the whatToShow. Since whatToShow can specify multiple types, it will
    *     return the first bit tested that is on, so the caller of this function should take care
    *     that this is the function they really want to call. If none of the known bits are set, this

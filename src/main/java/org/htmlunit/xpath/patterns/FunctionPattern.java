@@ -29,8 +29,7 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
 public class FunctionPattern extends StepPattern {
 
   /**
-   * Construct a FunctionPattern from a {@link org.htmlunit.xpath.functions.Function
-   * expression}.
+   * Construct a FunctionPattern from a {@link org.htmlunit.xpath.functions.Function expression}.
    *
    * <p>NEEDSDOC @param expr
    */
