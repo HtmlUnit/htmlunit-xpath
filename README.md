@@ -14,14 +14,14 @@ and we added unit tests and the maven-based build.
 ### Project News
 [HtmlUnit@Twitter][3]
 
-### Latest release Version 2.70.0 / January 22, 2023
+### Latest release Version 3.0.0 / March 19, 2023
 
 For maven, you would add:
 
     <dependency>
-        <groupId>net.sourceforge.htmlunit</groupId>
+        <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit-cssparser</artifactId>
-        <version>2.70.0</version>
+        <version>3.0.0</version>
     </dependency>
 
 ### Last CI build
@@ -33,16 +33,16 @@ The latest builds are available from our
 If you use maven please add:
 
     <dependency>
-        <groupId>net.sourceforge.htmlunit</groupId>
+        <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit-xpath</artifactId>
-        <version>2.71.0-SNAPSHOT</version>
+        <version>3.1.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom distributionManagement section also:
 
     <repository>
         <id>OSS Sonatype snapshots</id>
-        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
         <snapshots>
             <enabled>true</enabled>
             <updatePolicy>always</updatePolicy>
@@ -100,7 +100,7 @@ This part is intended for committer who are packaging a release.
    mvn -up clean deploy
 ```
 
-* Go to [Sonatype staging repositories](https://oss.sonatype.org/index.html#stagingRepositories) and process the deploy
+* Go to [Sonatype staging repositories](https://s01.oss.sonatype.org/index.html#stagingRepositories) and process the deploy
   - select the repository and close it - wait until the close is processed
   - release the package and wait until it is processed
 

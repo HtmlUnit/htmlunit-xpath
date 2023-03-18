@@ -2,15 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>net.sourceforge.htmlunit</groupId>
+  <groupId>org.htmlunit</groupId>
   <artifactId>htmlunit-xpath</artifactId>
-  <version>3.0.0-SNAPSHOT</version>
+  <version>3.0.0</version>
   <name>HtmlUnit-XPath</name>
+  <organization>
+    <name>HtmlUnit</name>
+    <url>https://www.htmlunit.org</url>
+  </organization>
   <packaging>jar</packaging>
   <description>
     The XPath engine used by HtmlUnit.
   </description>
-  <url>http://htmlunit.sourceforge.net</url>
+  <url>https://www.htmlunit.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -214,11 +218,11 @@
   <distributionManagement>
     <snapshotRepository>
       <id>sonatype-nexus-snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>
       <id>sonatype-nexus-staging</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
     </repository>
   </distributionManagement>
   <repositories>
@@ -231,7 +235,7 @@
         <enabled>false</enabled>
       </releases>
       <id>OSS Sonatype snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
     </repository>
   </repositories>
 
