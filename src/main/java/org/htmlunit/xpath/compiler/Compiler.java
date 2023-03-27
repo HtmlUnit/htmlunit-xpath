@@ -589,12 +589,10 @@ public class Compiler extends OpMap {
       case OpCodes.NODETYPE_COMMENT:
         return DTMFilter.SHOW_COMMENT;
       case OpCodes.NODETYPE_TEXT:
-        // return DTMFilter.SHOW_TEXT | DTMFilter.SHOW_COMMENT;
         return DTMFilter.SHOW_TEXT | DTMFilter.SHOW_CDATA_SECTION;
       case OpCodes.NODETYPE_PI:
         return DTMFilter.SHOW_PROCESSING_INSTRUCTION;
       case OpCodes.NODETYPE_NODE:
-        // return DTMFilter.SHOW_ALL;
         switch (axesType) {
           case OpCodes.FROM_NAMESPACE:
             return DTMFilter.SHOW_NAMESPACE;

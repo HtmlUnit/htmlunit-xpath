@@ -59,23 +59,9 @@ public class XNodeSet extends NodeSequence {
    * nodes may be added.
    */
   public XNodeSet(DTMManager dtmMgr) {
-    this(DTM.NULL, dtmMgr);
-  }
-
-  /**
-   * Construct a XNodeSet object for one node.
-   *
-   * @param n Node to add to the new XNodeSet object
-   */
-  public XNodeSet(int n, DTMManager dtmMgr) {
-
-    super(new NodeSetDTM(dtmMgr));
-    m_dtmMgr = dtmMgr;
-
-    if (DTM.NULL != n) {
-      ((NodeSetDTM) m_obj).addNode(n);
-      m_last = 1;
-    } else m_last = 0;
+      super(new NodeSetDTM(dtmMgr));
+      m_dtmMgr = dtmMgr;
+      m_last = 0;
   }
 
   /** {@inheritDoc} */
