@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.htmlunit</groupId>
   <artifactId>htmlunit-xpath</artifactId>
-  <version>3.1.0</version>
+  <version>3.2.0-SNAPSHOT</version>
   <name>HtmlUnit-XPath</name>
   <organization>
     <name>HtmlUnit</name>
@@ -27,6 +27,7 @@
     <spotbugs.version>4.7.3</spotbugs.version>
     <pmd.version>6.50.0</pmd.version>
     <spotless.version>2.27.0</spotless.version>
+    <dependencycheck.version>8.2.1</dependencycheck.version>
   </properties>
 
   <dependencies>
@@ -176,6 +177,22 @@
             <ruleset>${basedir}/pmd-ruleset.xml</ruleset>
           </rulesets>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>${dependencycheck.version}</version>
+        <configuration>
+          <suppressionFiles>owasp-suppressions.xml</suppressionFiles>
+          <failBuildOnCVSS>0</failBuildOnCVSS>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.diffplug.spotless</groupId>

@@ -14,28 +14,28 @@ and we added unit tests and the maven-based build.
 ### Project News
 [HtmlUnit@Twitter][3]
 
-### Latest release Version 3.1.0 / April 16, 2023
+### Latest release Version 3.2.0 / May 15, 2023
 
 For maven, you would add:
 
     <dependency>
         <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit-cssparser</artifactId>
-        <version>3.1.0</version>
+        <version>3.2.0</version>
     </dependency>
 
 ### Last CI build
 The latest builds are available from our
 [Jenkins CI build server][2]
 
-[![Build Status](https://jenkins.wetator.org/buildStatus/icon?job=HtmlUnit+-+CSS+Parser)](https://jenkins.wetator.org/job/HtmlUnit%20-%20CSS%20Parser/)
+[![Build Status](https://jenkins.wetator.org/buildStatus/icon?job=HtmlUnit+-+XPath)](https://jenkins.wetator.org/job/HtmlUnit%20-%20XPath/)
 
 If you use maven please add:
 
     <dependency>
         <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit-xpath</artifactId>
-        <version>3.2.0-SNAPSHOT</version>
+        <version>3.3.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom distributionManagement section also:
@@ -132,5 +132,5 @@ This project is licensed under the Apache 2.0 License
 Many thanks to all of you contributing to HtmlUnit/CSSParser/Rhino in the past.
 
 
-[2]: https://jenkins.wetator.org/job/HtmlUnit%20-%20CSS%20Parser/ "HtmlUnit - XPath CI"
+[2]: https://jenkins.wetator.org/job/HtmlUnit%20-%20XPath/ "HtmlUnit - XPath CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
