@@ -27,7 +27,7 @@
     <spotbugs.version>4.7.3</spotbugs.version>
     <pmd.version>6.50.0</pmd.version>
     <spotless.version>2.27.0</spotless.version>
-    <dependencycheck.version>8.2.1</dependencycheck.version>
+    <dependencycheck.version>8.3.1</dependencycheck.version>
   </properties>
 
   <dependencies>
