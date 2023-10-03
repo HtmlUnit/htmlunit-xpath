@@ -14,15 +14,27 @@ and we added unit tests and the maven-based build.
 ### Project News
 [HtmlUnit@Twitter][3]
 
-### Latest release Version 3.5.0 / August 19, 2023
+### Latest release Version 3.6.0 / October 3, 2023
 
-For maven, you would add:
+### Maven
 
-    <dependency>
-        <groupId>org.htmlunit</groupId>
-        <artifactId>htmlunit-cssparser</artifactId>
-        <version>3.5.0</version>
-    </dependency>
+Add to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.htmlunit</groupId>
+    <artifactId>htmlunit-xpath</artifactId>
+    <version>3.6.0</version>
+</dependency>
+```
+
+### Gradle
+
+Add to your `build.gradle`:
+
+```groovy
+implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '3.6.0'
+```
 
 ### Last CI build
 The latest builds are available from our
@@ -35,7 +47,7 @@ If you use maven please add:
     <dependency>
         <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit-xpath</artifactId>
-        <version>3.6.0-SNAPSHOT</version>
+        <version>3.7.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom `repositories` section also:
