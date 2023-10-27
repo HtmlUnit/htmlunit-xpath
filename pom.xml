@@ -24,10 +24,10 @@
     <maven.compiler.target>8</maven.compiler.target>
 
     <checkstyle.version>10.12.4</checkstyle.version>
-    <spotbugs.version>4.7.3</spotbugs.version>
+    <spotbugs.version>4.8.0</spotbugs.version>
     <pmd.version>6.55.0</pmd.version>
     <spotless.version>2.38.0</spotless.version>
-    <dependencycheck.version>8.4.0</dependencycheck.version>
+    <dependencycheck.version>8.4.2</dependencycheck.version>
   </properties>
 
   <dependencies>
@@ -40,7 +40,7 @@
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
-      <version>2.14.0</version>
+      <version>2.15.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -53,7 +53,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.1.2</version>
+        <version>3.2.1</version>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
@@ -127,7 +127,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.1</version>
         <configuration>
           <configLocation>checkstyle.xml</configLocation>
           <suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
