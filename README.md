@@ -7,12 +7,13 @@ was discontinued in 2019. Since HtmlUnit only uses XPath functionality, we decid
 and remove all things that are no longer needed. In addition, we made some code updates for JDK 8 
 and we added unit tests and the maven-based build.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit-xpath/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit-xpath)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-xpath/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-xpath)
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
 ### Project News
-[HtmlUnit@Twitter][3]
+
+[HtmlUnit@mastodon][4] | [HtmlUnit@Twitter][3]
 
 ### Latest release Version 3.6.0 / October 3, 2023
 
@@ -146,3 +147,4 @@ Many thanks to all of you contributing to HtmlUnit/CSSParser/Rhino in the past.
 
 [2]: https://jenkins.wetator.org/job/HtmlUnit%20-%20XPath/ "HtmlUnit - XPath CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
+[4]: https://fosstodon.org/@HtmlUnit
