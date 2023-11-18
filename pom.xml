@@ -24,7 +24,7 @@
     <maven.compiler.target>8</maven.compiler.target>
 
     <checkstyle.version>10.12.4</checkstyle.version>
-    <spotbugs.version>4.8.0</spotbugs.version>
+    <spotbugs.version>4.8.1</spotbugs.version>
     <pmd.version>6.55.0</pmd.version>
     <spotless.version>2.38.0</spotless.version>
     <dependencycheck.version>8.4.3</dependencycheck.version>
@@ -53,7 +53,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>3.2.2</version>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
