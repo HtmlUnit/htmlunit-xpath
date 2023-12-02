@@ -71,8 +71,6 @@ public class FunctionPattern extends StepPattern {
         score = (n == context) ? SCORE_OTHER : SCORE_NONE;
 
         if (score == SCORE_OTHER) {
-          context = n;
-
           break;
         }
       }
@@ -97,8 +95,6 @@ public class FunctionPattern extends StepPattern {
         score = (n == context) ? SCORE_OTHER : SCORE_NONE;
 
         if (score == SCORE_OTHER) {
-          context = n;
-
           break;
         }
       }
@@ -124,8 +120,6 @@ public class FunctionPattern extends StepPattern {
         score = (n == context) ? SCORE_OTHER : SCORE_NONE;
 
         if (score == SCORE_OTHER) {
-          context = n;
-
           break;
         }
       }

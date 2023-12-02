@@ -176,31 +176,31 @@ public class Keywords {
   public static final String FUNC_STRING_LENGTH_STRING = "string-length";
 
   static {
-    m_axisnames.put(FROM_ANCESTORS_STRING, new Integer(OpCodes.FROM_ANCESTORS));
-    m_axisnames.put(FROM_ANCESTORS_OR_SELF_STRING, new Integer(OpCodes.FROM_ANCESTORS_OR_SELF));
-    m_axisnames.put(FROM_ATTRIBUTES_STRING, new Integer(OpCodes.FROM_ATTRIBUTES));
-    m_axisnames.put(FROM_CHILDREN_STRING, new Integer(OpCodes.FROM_CHILDREN));
-    m_axisnames.put(FROM_DESCENDANTS_STRING, new Integer(OpCodes.FROM_DESCENDANTS));
-    m_axisnames.put(FROM_DESCENDANTS_OR_SELF_STRING, new Integer(OpCodes.FROM_DESCENDANTS_OR_SELF));
-    m_axisnames.put(FROM_FOLLOWING_STRING, new Integer(OpCodes.FROM_FOLLOWING));
-    m_axisnames.put(FROM_FOLLOWING_SIBLINGS_STRING, new Integer(OpCodes.FROM_FOLLOWING_SIBLINGS));
-    m_axisnames.put(FROM_PARENT_STRING, new Integer(OpCodes.FROM_PARENT));
-    m_axisnames.put(FROM_PRECEDING_STRING, new Integer(OpCodes.FROM_PRECEDING));
-    m_axisnames.put(FROM_PRECEDING_SIBLINGS_STRING, new Integer(OpCodes.FROM_PRECEDING_SIBLINGS));
-    m_axisnames.put(FROM_SELF_STRING, new Integer(OpCodes.FROM_SELF));
-    m_axisnames.put(FROM_NAMESPACE_STRING, new Integer(OpCodes.FROM_NAMESPACE));
-    m_nodetypes.put(NODETYPE_COMMENT_STRING, new Integer(OpCodes.NODETYPE_COMMENT));
-    m_nodetypes.put(NODETYPE_TEXT_STRING, new Integer(OpCodes.NODETYPE_TEXT));
-    m_nodetypes.put(NODETYPE_PI_STRING, new Integer(OpCodes.NODETYPE_PI));
-    m_nodetypes.put(NODETYPE_NODE_STRING, new Integer(OpCodes.NODETYPE_NODE));
-    m_nodetypes.put(NODETYPE_ANYELEMENT_STRING, new Integer(OpCodes.NODETYPE_ANYELEMENT));
-    m_keywords.put(FROM_SELF_ABBREVIATED_STRING, new Integer(OpCodes.FROM_SELF));
-    m_keywords.put(FUNC_ID_STRING, new Integer(FunctionTable.FUNC_ID));
+    m_axisnames.put(FROM_ANCESTORS_STRING, Integer.valueOf(OpCodes.FROM_ANCESTORS));
+    m_axisnames.put(FROM_ANCESTORS_OR_SELF_STRING, Integer.valueOf(OpCodes.FROM_ANCESTORS_OR_SELF));
+    m_axisnames.put(FROM_ATTRIBUTES_STRING, Integer.valueOf(OpCodes.FROM_ATTRIBUTES));
+    m_axisnames.put(FROM_CHILDREN_STRING, Integer.valueOf(OpCodes.FROM_CHILDREN));
+    m_axisnames.put(FROM_DESCENDANTS_STRING, Integer.valueOf(OpCodes.FROM_DESCENDANTS));
+    m_axisnames.put(FROM_DESCENDANTS_OR_SELF_STRING, Integer.valueOf(OpCodes.FROM_DESCENDANTS_OR_SELF));
+    m_axisnames.put(FROM_FOLLOWING_STRING, Integer.valueOf(OpCodes.FROM_FOLLOWING));
+    m_axisnames.put(FROM_FOLLOWING_SIBLINGS_STRING, Integer.valueOf(OpCodes.FROM_FOLLOWING_SIBLINGS));
+    m_axisnames.put(FROM_PARENT_STRING, Integer.valueOf(OpCodes.FROM_PARENT));
+    m_axisnames.put(FROM_PRECEDING_STRING, Integer.valueOf(OpCodes.FROM_PRECEDING));
+    m_axisnames.put(FROM_PRECEDING_SIBLINGS_STRING, Integer.valueOf(OpCodes.FROM_PRECEDING_SIBLINGS));
+    m_axisnames.put(FROM_SELF_STRING, Integer.valueOf(OpCodes.FROM_SELF));
+    m_axisnames.put(FROM_NAMESPACE_STRING, Integer.valueOf(OpCodes.FROM_NAMESPACE));
+    m_nodetypes.put(NODETYPE_COMMENT_STRING, Integer.valueOf(OpCodes.NODETYPE_COMMENT));
+    m_nodetypes.put(NODETYPE_TEXT_STRING, Integer.valueOf(OpCodes.NODETYPE_TEXT));
+    m_nodetypes.put(NODETYPE_PI_STRING, Integer.valueOf(OpCodes.NODETYPE_PI));
+    m_nodetypes.put(NODETYPE_NODE_STRING, Integer.valueOf(OpCodes.NODETYPE_NODE));
+    m_nodetypes.put(NODETYPE_ANYELEMENT_STRING, Integer.valueOf(OpCodes.NODETYPE_ANYELEMENT));
+    m_keywords.put(FROM_SELF_ABBREVIATED_STRING, Integer.valueOf(OpCodes.FROM_SELF));
+    m_keywords.put(FUNC_ID_STRING, Integer.valueOf(FunctionTable.FUNC_ID));
 
-    m_nodetests.put(NODETYPE_COMMENT_STRING, new Integer(OpCodes.NODETYPE_COMMENT));
-    m_nodetests.put(NODETYPE_TEXT_STRING, new Integer(OpCodes.NODETYPE_TEXT));
-    m_nodetests.put(NODETYPE_PI_STRING, new Integer(OpCodes.NODETYPE_PI));
-    m_nodetests.put(NODETYPE_NODE_STRING, new Integer(OpCodes.NODETYPE_NODE));
+    m_nodetests.put(NODETYPE_COMMENT_STRING, Integer.valueOf(OpCodes.NODETYPE_COMMENT));
+    m_nodetests.put(NODETYPE_TEXT_STRING, Integer.valueOf(OpCodes.NODETYPE_TEXT));
+    m_nodetests.put(NODETYPE_PI_STRING, Integer.valueOf(OpCodes.NODETYPE_PI));
+    m_nodetests.put(NODETYPE_NODE_STRING, Integer.valueOf(OpCodes.NODETYPE_NODE));
   }
 
   static Object getAxisName(String key) {

@@ -161,38 +161,38 @@ public class FunctionTable {
   }
 
   static {
-    m_functionID.put(Keywords.FUNC_CURRENT_STRING, new Integer(FunctionTable.FUNC_CURRENT));
-    m_functionID.put(Keywords.FUNC_LAST_STRING, new Integer(FunctionTable.FUNC_LAST));
-    m_functionID.put(Keywords.FUNC_POSITION_STRING, new Integer(FunctionTable.FUNC_POSITION));
-    m_functionID.put(Keywords.FUNC_COUNT_STRING, new Integer(FunctionTable.FUNC_COUNT));
-    m_functionID.put(Keywords.FUNC_ID_STRING, new Integer(FunctionTable.FUNC_ID));
-    m_functionID.put(Keywords.FUNC_LOCAL_PART_STRING, new Integer(FunctionTable.FUNC_LOCAL_PART));
-    m_functionID.put(Keywords.FUNC_NAMESPACE_STRING, new Integer(FunctionTable.FUNC_NAMESPACE));
-    m_functionID.put(Keywords.FUNC_NAME_STRING, new Integer(FunctionTable.FUNC_QNAME));
-    m_functionID.put(Keywords.FUNC_NOT_STRING, new Integer(FunctionTable.FUNC_NOT));
-    m_functionID.put(Keywords.FUNC_TRUE_STRING, new Integer(FunctionTable.FUNC_TRUE));
-    m_functionID.put(Keywords.FUNC_FALSE_STRING, new Integer(FunctionTable.FUNC_FALSE));
-    m_functionID.put(Keywords.FUNC_BOOLEAN_STRING, new Integer(FunctionTable.FUNC_BOOLEAN));
-    m_functionID.put(Keywords.FUNC_LANG_STRING, new Integer(FunctionTable.FUNC_LANG));
-    m_functionID.put(Keywords.FUNC_NUMBER_STRING, new Integer(FunctionTable.FUNC_NUMBER));
-    m_functionID.put(Keywords.FUNC_FLOOR_STRING, new Integer(FunctionTable.FUNC_FLOOR));
-    m_functionID.put(Keywords.FUNC_CEILING_STRING, new Integer(FunctionTable.FUNC_CEILING));
-    m_functionID.put(Keywords.FUNC_ROUND_STRING, new Integer(FunctionTable.FUNC_ROUND));
-    m_functionID.put(Keywords.FUNC_SUM_STRING, new Integer(FunctionTable.FUNC_SUM));
-    m_functionID.put(Keywords.FUNC_STRING_STRING, new Integer(FunctionTable.FUNC_STRING));
-    m_functionID.put(Keywords.FUNC_STARTS_WITH_STRING, new Integer(FunctionTable.FUNC_STARTS_WITH));
-    m_functionID.put(Keywords.FUNC_CONTAINS_STRING, new Integer(FunctionTable.FUNC_CONTAINS));
+    m_functionID.put(Keywords.FUNC_CURRENT_STRING, Integer.valueOf(FunctionTable.FUNC_CURRENT));
+    m_functionID.put(Keywords.FUNC_LAST_STRING, Integer.valueOf(FunctionTable.FUNC_LAST));
+    m_functionID.put(Keywords.FUNC_POSITION_STRING, Integer.valueOf(FunctionTable.FUNC_POSITION));
+    m_functionID.put(Keywords.FUNC_COUNT_STRING, Integer.valueOf(FunctionTable.FUNC_COUNT));
+    m_functionID.put(Keywords.FUNC_ID_STRING, Integer.valueOf(FunctionTable.FUNC_ID));
+    m_functionID.put(Keywords.FUNC_LOCAL_PART_STRING, Integer.valueOf(FunctionTable.FUNC_LOCAL_PART));
+    m_functionID.put(Keywords.FUNC_NAMESPACE_STRING, Integer.valueOf(FunctionTable.FUNC_NAMESPACE));
+    m_functionID.put(Keywords.FUNC_NAME_STRING, Integer.valueOf(FunctionTable.FUNC_QNAME));
+    m_functionID.put(Keywords.FUNC_NOT_STRING, Integer.valueOf(FunctionTable.FUNC_NOT));
+    m_functionID.put(Keywords.FUNC_TRUE_STRING, Integer.valueOf(FunctionTable.FUNC_TRUE));
+    m_functionID.put(Keywords.FUNC_FALSE_STRING, Integer.valueOf(FunctionTable.FUNC_FALSE));
+    m_functionID.put(Keywords.FUNC_BOOLEAN_STRING, Integer.valueOf(FunctionTable.FUNC_BOOLEAN));
+    m_functionID.put(Keywords.FUNC_LANG_STRING, Integer.valueOf(FunctionTable.FUNC_LANG));
+    m_functionID.put(Keywords.FUNC_NUMBER_STRING, Integer.valueOf(FunctionTable.FUNC_NUMBER));
+    m_functionID.put(Keywords.FUNC_FLOOR_STRING, Integer.valueOf(FunctionTable.FUNC_FLOOR));
+    m_functionID.put(Keywords.FUNC_CEILING_STRING, Integer.valueOf(FunctionTable.FUNC_CEILING));
+    m_functionID.put(Keywords.FUNC_ROUND_STRING, Integer.valueOf(FunctionTable.FUNC_ROUND));
+    m_functionID.put(Keywords.FUNC_SUM_STRING, Integer.valueOf(FunctionTable.FUNC_SUM));
+    m_functionID.put(Keywords.FUNC_STRING_STRING, Integer.valueOf(FunctionTable.FUNC_STRING));
+    m_functionID.put(Keywords.FUNC_STARTS_WITH_STRING, Integer.valueOf(FunctionTable.FUNC_STARTS_WITH));
+    m_functionID.put(Keywords.FUNC_CONTAINS_STRING, Integer.valueOf(FunctionTable.FUNC_CONTAINS));
     m_functionID.put(
-        Keywords.FUNC_SUBSTRING_BEFORE_STRING, new Integer(FunctionTable.FUNC_SUBSTRING_BEFORE));
+        Keywords.FUNC_SUBSTRING_BEFORE_STRING, Integer.valueOf(FunctionTable.FUNC_SUBSTRING_BEFORE));
     m_functionID.put(
-        Keywords.FUNC_SUBSTRING_AFTER_STRING, new Integer(FunctionTable.FUNC_SUBSTRING_AFTER));
+        Keywords.FUNC_SUBSTRING_AFTER_STRING, Integer.valueOf(FunctionTable.FUNC_SUBSTRING_AFTER));
     m_functionID.put(
-        Keywords.FUNC_NORMALIZE_SPACE_STRING, new Integer(FunctionTable.FUNC_NORMALIZE_SPACE));
-    m_functionID.put(Keywords.FUNC_TRANSLATE_STRING, new Integer(FunctionTable.FUNC_TRANSLATE));
-    m_functionID.put(Keywords.FUNC_CONCAT_STRING, new Integer(FunctionTable.FUNC_CONCAT));
-    m_functionID.put(Keywords.FUNC_SUBSTRING_STRING, new Integer(FunctionTable.FUNC_SUBSTRING));
+        Keywords.FUNC_NORMALIZE_SPACE_STRING, Integer.valueOf(FunctionTable.FUNC_NORMALIZE_SPACE));
+    m_functionID.put(Keywords.FUNC_TRANSLATE_STRING, Integer.valueOf(FunctionTable.FUNC_TRANSLATE));
+    m_functionID.put(Keywords.FUNC_CONCAT_STRING, Integer.valueOf(FunctionTable.FUNC_CONCAT));
+    m_functionID.put(Keywords.FUNC_SUBSTRING_STRING, Integer.valueOf(FunctionTable.FUNC_SUBSTRING));
     m_functionID.put(
-        Keywords.FUNC_STRING_LENGTH_STRING, new Integer(FunctionTable.FUNC_STRING_LENGTH));
+        Keywords.FUNC_STRING_LENGTH_STRING, Integer.valueOf(FunctionTable.FUNC_STRING_LENGTH));
   }
 
   public FunctionTable() {}
@@ -258,7 +258,7 @@ public class FunctionTable {
 
       if (funcIndex < NUM_BUILT_IN_FUNCS) {
         funcIndex = m_funcNextFreeIndex++;
-        m_functionID_customer.put(name, new Integer(funcIndex));
+        m_functionID_customer.put(name, Integer.valueOf(funcIndex));
       }
       m_functions_customer[funcIndex - NUM_BUILT_IN_FUNCS] = func;
     } else {
@@ -266,7 +266,7 @@ public class FunctionTable {
 
       m_functions_customer[funcIndex - NUM_BUILT_IN_FUNCS] = func;
 
-      m_functionID_customer.put(name, new Integer(funcIndex));
+      m_functionID_customer.put(name, Integer.valueOf(funcIndex));
     }
     return funcIndex;
   }

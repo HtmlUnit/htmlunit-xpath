@@ -101,8 +101,6 @@ public class OpMap {
     m_opMap.setElementAt(0, n + 1);
     m_opMap.setElementAt(0, n + 2);
 
-    n = m_tokenQueue.size();
-
     m_tokenQueue.add(null);
     m_tokenQueue.add(null);
     m_tokenQueue.add(null);
