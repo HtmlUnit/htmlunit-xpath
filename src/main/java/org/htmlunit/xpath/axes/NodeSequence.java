@@ -491,10 +491,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       NodeVector v = (NodeVector) obj;
       if (m_cache != null) {
         m_cache.setVector(v);
-      } else if (v != null) {
-        m_cache = new IteratorCache();
-        m_cache.setVector(v);
       }
+      m_cache = new IteratorCache();
+      m_cache.setVector(v);
     } else if (obj instanceof IteratorCache) {
       IteratorCache cache = (IteratorCache) obj;
       m_cache = cache;

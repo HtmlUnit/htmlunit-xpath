@@ -52,7 +52,6 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
   public DTMAxisTraverser getAxisTraverser(final int axis) {
 
     DTMAxisTraverser traverser;
-
     if (null == m_traversers) // Cache of stateless traversers for this DTM
     {
       m_traversers = new DTMAxisTraverser[Axis.getNamesLength()];
@@ -133,14 +132,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
                 XPATHErrorResources.ER_UNKNOWN_AXIS_TYPE, new Object[] {Integer.toString(axis)}));
     }
 
-    if (null == traverser)
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_AXIS_TRAVERSER_NOT_SUPPORTED,
-              new Object[] {Axis.getNames(axis)}));
-
     m_traversers[axis] = traverser;
-
     return traverser;
   }
 
