@@ -386,7 +386,7 @@ public class NodeTest extends Expression {
         {
           String ns = dtm.getLocalName(context);
 
-          return (subPartMatch(ns, m_name)) ? m_score : SCORE_NONE;
+          return subPartMatch(ns, m_name) ? m_score : SCORE_NONE;
         }
       case DTMFilter.SHOW_ATTRIBUTE:
       case DTMFilter.SHOW_ELEMENT:
@@ -439,7 +439,7 @@ public class NodeTest extends Expression {
         {
           String ns = dtm.getLocalName(context);
 
-          return (subPartMatch(ns, m_name)) ? m_score : SCORE_NONE;
+          return subPartMatch(ns, m_name) ? m_score : SCORE_NONE;
         }
       case DTMFilter.SHOW_ATTRIBUTE:
       case DTMFilter.SHOW_ELEMENT:

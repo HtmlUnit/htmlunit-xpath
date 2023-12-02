@@ -264,7 +264,7 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Compile a '<=' operation.
+   * Compile a '&lt=' operation.
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Lte} instance.
@@ -275,7 +275,7 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Compile a '<' operation.
+   * Compile a '&lt;' operation.
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Lt} instance.
@@ -286,7 +286,7 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Compile a '>=' operation.
+   * Compile a '&gt;=' operation.
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Gte} instance.
@@ -297,7 +297,7 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Compile a '>' operation.
+   * Compile a '&gr;' operation.
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Gt} instance.
