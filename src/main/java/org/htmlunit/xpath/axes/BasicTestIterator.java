@@ -35,7 +35,7 @@ public abstract class BasicTestIterator extends LocPathIterator {
    *
    * @param nscontext The namespace context for this iterator, should be OK if null.
    */
-  protected BasicTestIterator(PrefixResolver nscontext) {
+  protected BasicTestIterator(final PrefixResolver nscontext) {
 
     super(nscontext);
   }
@@ -48,12 +48,12 @@ public abstract class BasicTestIterator extends LocPathIterator {
    * @param opPos The position of this iterator in the opcode list from the compiler.
    * @throws javax.xml.transform.TransformerException if any
    */
-  protected BasicTestIterator(Compiler compiler, int opPos, int analysis)
+  protected BasicTestIterator(final Compiler compiler, final int opPos, final int analysis)
       throws javax.xml.transform.TransformerException {
     super(analysis);
 
-    int firstStepPos = OpMap.getFirstChildPos(opPos);
-    int whatToShow = compiler.getWhatToShow(firstStepPos);
+    final int firstStepPos = OpMap.getFirstChildPos(opPos);
+    final int whatToShow = compiler.getWhatToShow(firstStepPos);
 
     if ((0
             == (whatToShow
@@ -96,8 +96,9 @@ public abstract class BasicTestIterator extends LocPathIterator {
 
         if (DTM.NULL != next) {
           if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) break;
-          else continue;
-        } else break;
+          continue;
+        }
+        break;
       } while (next != DTM.NULL);
 
       if (DTM.NULL != next) {
@@ -114,7 +115,7 @@ public abstract class BasicTestIterator extends LocPathIterator {
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
 
-    ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();
+    final ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();
 
     clone.resetProximityPositions();
 

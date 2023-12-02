@@ -258,19 +258,15 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
 
           // return walker.returnNextNode(nextNode);
           break;
-        } else {
-          AxesWalker prev = walker;
-
-          walker = walker.m_nextWalker;
-
-          walker.setRoot(nextNode);
-
-          walker.m_prevWalker = prev;
-
-          continue;
         }
-      } // if(null != nextNode)
-    } // while(null != walker)
+
+        AxesWalker prev = walker;
+        walker = walker.m_nextWalker;
+        walker.setRoot(nextNode);
+        walker.m_prevWalker = prev;
+        continue;
+      }
+    }
 
     return nextNode;
   }

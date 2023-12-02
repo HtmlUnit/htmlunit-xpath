@@ -50,7 +50,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   final String uri;
   final String nodename;
 
-  DOM2DTMdefaultNamespaceDeclarationNode(Element pseudoparent, String prefix, String uri) {
+  DOM2DTMdefaultNamespaceDeclarationNode(final Element pseudoparent, final String prefix, final String uri) {
     this.pseudoparent = pseudoparent;
     this.prefix = prefix;
     this.uri = uri;
@@ -107,7 +107,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public boolean isSupported(String feature, String version) {
+  public boolean isSupported(final String feature, final String version) {
     return false;
   }
 
@@ -183,43 +183,43 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public void setNodeValue(String value) {
+  public void setNodeValue(final String value) {
     throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public void setValue(String value) {
+  public void setValue(final String value) {
     throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public void setPrefix(String value) {
+  public void setPrefix(final String value) {
     throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Node insertBefore(Node a, Node b) {
+  public Node insertBefore(final Node a, final Node b) {
     throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Node replaceChild(Node a, Node b) {
+  public Node replaceChild(final Node a, final Node b) {
     throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Node appendChild(Node a) {
+  public Node appendChild(final Node a) {
     throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Node removeChild(Node a) {
+  public Node removeChild(final Node a) {
     throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
@@ -231,7 +231,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public Node cloneNode(boolean deep) {
+  public Node cloneNode(final boolean deep) {
     throw new RuntimeException(NOT_SUPPORTED_ERR);
   }
 
@@ -249,7 +249,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public boolean isDerivedFrom(String ns, String localName, int derivationMethod) {
+  public boolean isDerivedFrom(final String ns, final String localName, final int derivationMethod) {
     return false;
   }
 
@@ -267,19 +267,19 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public Object setUserData(String key, Object data, UserDataHandler handler) {
+  public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
     return getOwnerDocument().setUserData(key, data, handler);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Object getUserData(String key) {
+  public Object getUserData(final String key) {
     return getOwnerDocument().getUserData(key);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Object getFeature(String feature, String version) {
+  public Object getFeature(final String feature, final String version) {
     // we don't have any alternate node, either this node does the job
     // or we don't have anything that does
     return isSupported(feature, version) ? this : null;
@@ -287,7 +287,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public boolean isEqualNode(Node arg) {
+  public boolean isEqualNode(final Node arg) {
     if (arg == this) {
       return true;
     }
@@ -340,13 +340,13 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public String lookupNamespaceURI(String specifiedPrefix) {
-    short type = this.getNodeType();
+  public String lookupNamespaceURI(final String specifiedPrefix) {
+    final short type = this.getNodeType();
     switch (type) {
       case Node.ELEMENT_NODE:
         {
           String namespace = this.getNamespaceURI();
-          String pfx = this.getPrefix();
+          final String pfx = this.getPrefix();
           if (namespace != null) {
             // REVISIT: is it possible that prefix is empty string?
             if (specifiedPrefix == null && pfx == specifiedPrefix) {
@@ -358,12 +358,12 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
             }
           }
           if (this.hasAttributes()) {
-            NamedNodeMap map = this.getAttributes();
-            int length = map.getLength();
+            final NamedNodeMap map = this.getAttributes();
+            final int length = map.getLength();
             for (int i = 0; i < length; i++) {
-              Node attr = map.item(i);
-              String attrPrefix = attr.getPrefix();
-              String value = attr.getNodeValue();
+              final Node attr = map.item(i);
+              final String attrPrefix = attr.getPrefix();
+              final String value = attr.getNodeValue();
               namespace = attr.getNamespaceURI();
               if (namespace != null && namespace.equals("http://www.w3.org/2000/xmlns/")) {
                 // at this point we are dealing with DOM Level 2 nodes only
@@ -403,13 +403,13 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public boolean isDefaultNamespace(String namespaceURI) {
+  public boolean isDefaultNamespace(final String namespaceURI) {
     return false;
   }
 
   /** {@inheritDoc} */
   @Override
-  public String lookupPrefix(String namespaceURI) {
+  public String lookupPrefix(final String namespaceURI) {
 
     // REVISIT: When Namespaces 1.1 comes out this may not be true
     // Prefix can't be bound to null namespace
@@ -417,7 +417,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
       return null;
     }
 
-    short type = this.getNodeType();
+    final short type = this.getNodeType();
 
     switch (type) {
       case Node.ENTITY_NODE:
@@ -442,14 +442,14 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public boolean isSameNode(Node other) {
+  public boolean isSameNode(final Node other) {
     // we do not use any wrapper so the answer is obvious
     return this == other;
   }
 
   /** {@inheritDoc} */
   @Override
-  public void setTextContent(String textContent) throws DOMException {
+  public void setTextContent(final String textContent) throws DOMException {
     setNodeValue(textContent);
   }
 
@@ -461,7 +461,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public short compareDocumentPosition(Node other) throws DOMException {
+  public short compareDocumentPosition(final Node other) throws DOMException {
     return 0;
   }
 

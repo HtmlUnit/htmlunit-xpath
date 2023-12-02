@@ -51,14 +51,14 @@ public class WalkerFactory {
    * @return non-null AxesWalker derivative.
    * @throws javax.xml.transform.TransformerException if any
    */
-  static AxesWalker loadWalkers(WalkingIterator lpi, Compiler compiler, int stepOpCodePos)
+  static AxesWalker loadWalkers(final WalkingIterator lpi, final Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
 
     int stepType;
     AxesWalker firstWalker = null;
     AxesWalker walker, prevWalker = null;
 
-    int analysis = analyze(compiler, stepOpCodePos);
+    final int analysis = analyze(compiler, stepOpCodePos);
 
     while (OpCodes.ENDOP != (stepType = compiler.getOp(stepOpCodePos))) {
       walker = createDefaultWalker(compiler, stepOpCodePos, lpi, analysis);
@@ -83,11 +83,11 @@ public class WalkerFactory {
     return firstWalker;
   }
 
-  public static boolean isSet(int analysis, int bits) {
+  public static boolean isSet(final int analysis, final int bits) {
     return 0 != (analysis & bits);
   }
 
-  public static void diagnoseIterator(String name, int analysis, Compiler compiler) {
+  public static void diagnoseIterator(final String name, final int analysis, final Compiler compiler) {
     System.out.println(
         compiler.toString()
             + ", "
@@ -108,13 +108,13 @@ public class WalkerFactory {
    * @return non-null reference to a LocPathIterator or derivative.
    * @throws javax.xml.transform.TransformerException if any
    */
-  public static DTMIterator newDTMIterator(Compiler compiler, int opPos, boolean isTopLevel)
+  public static DTMIterator newDTMIterator(final Compiler compiler, final int opPos, final boolean isTopLevel)
       throws javax.xml.transform.TransformerException {
 
-    int firstStepPos = OpMap.getFirstChildPos(opPos);
-    int analysis = analyze(compiler, firstStepPos);
-    boolean isOneStep = isOneStep(analysis);
-    LocPathIterator iter;
+    final int firstStepPos = OpMap.getFirstChildPos(opPos);
+    final int analysis = analyze(compiler, firstStepPos);
+    final boolean isOneStep = isOneStep(analysis);
+    final LocPathIterator iter;
 
     // Is the iteration a one-step attribute pattern (i.e. select="@foo")?
     if (isOneStep && walksSelfOnly(analysis) && isWild(analysis) && !hasPredicate(analysis)) {
@@ -217,9 +217,9 @@ public class WalkerFactory {
    * @param stepOpCodePos The opcode position for the step.
    * @return 32 bits as an integer that give information about the location path as a whole.
    */
-  public static int getAxisFromStep(Compiler compiler, int stepOpCodePos) {
+  public static int getAxisFromStep(final Compiler compiler, final int stepOpCodePos) {
 
-    int stepType = compiler.getOp(stepOpCodePos);
+    final int stepType = compiler.getOp(stepOpCodePos);
 
     switch (stepType) {
       case OpCodes.FROM_FOLLOWING:
@@ -267,7 +267,7 @@ public class WalkerFactory {
    * @param axis One of Axis.ANCESTOR, etc.
    * @return One of BIT_ANCESTOR, etc.
    */
-  public static int getAnalysisBitFromAxes(int axis) {
+  public static int getAnalysisBitFromAxes(final int axis) {
     switch (axis) // Generate new traverser
     {
       case Axis.ANCESTOR:
@@ -313,10 +313,10 @@ public class WalkerFactory {
     }
   }
 
-  static boolean functionProximateOrContainsProximate(Compiler compiler, int opPos) {
-    int endFunc = opPos + compiler.getOp(opPos + 1) - 1;
+  static boolean functionProximateOrContainsProximate(final Compiler compiler, int opPos) {
+    final int endFunc = opPos + compiler.getOp(opPos + 1) - 1;
     opPos = OpMap.getFirstChildPos(opPos);
-    int funcID = compiler.getOp(opPos);
+    final int funcID = compiler.getOp(opPos);
     // System.out.println("funcID: "+funcID);
     // System.out.println("opPos: "+opPos);
     // System.out.println("endFunc: "+endFunc);
@@ -327,17 +327,17 @@ public class WalkerFactory {
       default:
         opPos++;
         for (int p = opPos; p < endFunc; p = compiler.getNextOpPos(p)) {
-          int innerExprOpPos = p + 2;
-          boolean prox = isProximateInnerExpr(compiler, innerExprOpPos);
+          final int innerExprOpPos = p + 2;
+          final boolean prox = isProximateInnerExpr(compiler, innerExprOpPos);
           if (prox) return true;
         }
     }
     return false;
   }
 
-  static boolean isProximateInnerExpr(Compiler compiler, int opPos) {
-    int op = compiler.getOp(opPos);
-    int innerExprOpPos = opPos + 2;
+  static boolean isProximateInnerExpr(final Compiler compiler, final int opPos) {
+      final int op = compiler.getOp(opPos);
+    final int innerExprOpPos = opPos + 2;
     switch (op) {
       case OpCodes.OP_ARGUMENT:
         if (isProximateInnerExpr(compiler, innerExprOpPos)) return true;
@@ -356,8 +356,8 @@ public class WalkerFactory {
       case OpCodes.OP_LT:
       case OpCodes.OP_LTE:
       case OpCodes.OP_EQUALS:
-        int leftPos = OpMap.getFirstChildPos(op);
-        int rightPos = compiler.getNextOpPos(leftPos);
+        final int leftPos = OpMap.getFirstChildPos(op);
+        final int rightPos = compiler.getNextOpPos(leftPos);
         isProx = isProximateInnerExpr(compiler, leftPos);
         if (isProx) return true;
         isProx = isProximateInnerExpr(compiler, rightPos);
@@ -370,10 +370,10 @@ public class WalkerFactory {
   }
 
   /** Tell if the predicates need to have proximity knowledge. */
-  public static boolean mightBeProximate(Compiler compiler, int opPos, int stepType)
+  public static boolean mightBeProximate(final Compiler compiler, final int opPos, final int stepType)
       throws javax.xml.transform.TransformerException {
 
-    boolean mightBeProximate = false;
+    final boolean mightBeProximate = false;
 
     switch (stepType) {
       case OpCodes.OP_VARIABLE:
@@ -386,8 +386,8 @@ public class WalkerFactory {
     int predPos = compiler.getFirstPredicateOpPos(opPos);
 
     while (OpCodes.OP_PREDICATE == compiler.getOp(predPos)) {
-      int innerExprOpPos = predPos + 2;
-      int predOp = compiler.getOp(innerExprOpPos);
+      final int innerExprOpPos = predPos + 2;
+      final int predOp = compiler.getOp(innerExprOpPos);
 
       switch (predOp) {
         case OpCodes.OP_VARIABLE:
@@ -407,8 +407,8 @@ public class WalkerFactory {
         case OpCodes.OP_LT:
         case OpCodes.OP_LTE:
         case OpCodes.OP_EQUALS:
-          int leftPos = OpMap.getFirstChildPos(innerExprOpPos);
-          int rightPos = compiler.getNextOpPos(leftPos);
+          final int leftPos = OpMap.getFirstChildPos(innerExprOpPos);
+          final int rightPos = compiler.getNextOpPos(leftPos);
           isProx = isProximateInnerExpr(compiler, leftPos);
           if (isProx) return true;
           isProx = isProximateInnerExpr(compiler, rightPos);
@@ -433,7 +433,7 @@ public class WalkerFactory {
    * @return 32 bits as an integer that give information about the location path as a whole.
    * @throws javax.xml.transform.TransformerException if any
    */
-  private static boolean isOptimizableForDescendantIterator(Compiler compiler, int stepOpCodePos)
+  private static boolean isOptimizableForDescendantIterator(final Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
 
     int stepType;
@@ -453,7 +453,7 @@ public class WalkerFactory {
       stepCount++;
       if (stepCount > 3) return false;
 
-      boolean mightBeProximate = mightBeProximate(compiler, stepOpCodePos, stepType);
+      final boolean mightBeProximate = mightBeProximate(compiler, stepOpCodePos, stepType);
       if (mightBeProximate) return false;
 
       switch (stepType) {
@@ -498,7 +498,7 @@ public class WalkerFactory {
 
       nodeTestType = compiler.getStepTestType(stepOpCodePos);
 
-      int nextStepOpCodePos = compiler.getNextStepPos(stepOpCodePos);
+      final int nextStepOpCodePos = compiler.getNextStepPos(stepOpCodePos);
 
       if (nextStepOpCodePos < 0) break;
 
@@ -524,7 +524,7 @@ public class WalkerFactory {
    * @return 32 bits as an integer that give information about the location path as a whole.
    * @throws javax.xml.transform.TransformerException if any
    */
-  private static int analyze(Compiler compiler, int stepOpCodePos)
+  private static int analyze(final Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
 
     int stepType;
@@ -534,7 +534,7 @@ public class WalkerFactory {
     while (OpCodes.ENDOP != (stepType = compiler.getOp(stepOpCodePos))) {
       stepCount++;
 
-      boolean predAnalysis = analyzePredicate(compiler, stepOpCodePos, stepType);
+      final boolean predAnalysis = analyzePredicate(compiler, stepOpCodePos, stepType);
 
       if (predAnalysis) analysisResult |= BIT_PREDICATE;
 
@@ -630,7 +630,7 @@ public class WalkerFactory {
    * @param axis One of Axis.XXX.
    * @return true if the axis is not a child axis and does not go up from the axis root.
    */
-  public static boolean isDownwardAxisOfMany(int axis) {
+  public static boolean isDownwardAxisOfMany(final int axis) {
     return Axis.DESCENDANTORSELF == axis
         || (Axis.DESCENDANT == axis)
         || (Axis.FOLLOWING == axis)
@@ -658,7 +658,7 @@ public class WalkerFactory {
    * @return A StepPattern object, which may contain relative StepPatterns.
    * @throws javax.xml.transform.TransformerException if any
    */
-  static StepPattern loadSteps(Compiler compiler, int stepOpCodePos)
+  static StepPattern loadSteps(final Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
     if (DEBUG_PATTERN_CREATION) {
       System.out.println("================");
@@ -686,10 +686,10 @@ public class WalkerFactory {
     }
 
     int axis = Axis.SELF;
-    int paxis = Axis.SELF;
+    final int paxis = Axis.SELF;
     StepPattern tail = step;
     for (StepPattern pat = step; null != pat; pat = pat.getRelativePathPattern()) {
-      int nextAxis = pat.getAxis();
+      final int nextAxis = pat.getAxis();
       // int nextPaxis = pat.getPredicateAxis();
       pat.setAxis(axis);
 
@@ -716,24 +716,24 @@ public class WalkerFactory {
       // inverted match: "self::*/parent::@*/parent::node()"
       // Lovely business, this.
       // -sb
-      int whatToShow = pat.getWhatToShow();
+      final int whatToShow = pat.getWhatToShow();
       if (whatToShow == DTMFilter.SHOW_ATTRIBUTE || whatToShow == DTMFilter.SHOW_NAMESPACE) {
-        int newAxis = (whatToShow == DTMFilter.SHOW_ATTRIBUTE) ? Axis.ATTRIBUTE : Axis.NAMESPACE;
+        final int newAxis = (whatToShow == DTMFilter.SHOW_ATTRIBUTE) ? Axis.ATTRIBUTE : Axis.NAMESPACE;
         if (isDownwardAxisOfMany(axis)) {
-          StepPattern attrPat =
+          final StepPattern attrPat =
               new StepPattern(
                   whatToShow,
                   pat.getNamespace(),
                   pat.getLocalName(),
                   // newAxis, pat.getPredicateAxis);
                   newAxis); // don't care about the predicate axis
-          XNumber score = pat.getStaticScore();
+          final XNumber score = pat.getStaticScore();
           pat.setNamespace(null);
           pat.setLocalName(NodeTest.WILD);
           attrPat.setPredicates(pat.getPredicates());
           pat.setPredicates(null);
           pat.setWhatToShow(DTMFilter.SHOW_ELEMENT);
-          StepPattern rel = pat.getRelativePathPattern();
+          final StepPattern rel = pat.getRelativePathPattern();
           pat.setRelativePathPattern(attrPat);
           attrPat.setRelativePathPattern(rel);
           attrPat.setStaticScore(score);
@@ -758,9 +758,9 @@ public class WalkerFactory {
     }
 
     if (axis < Axis.ALL) {
-      StepPattern selfPattern = new ContextMatchStepPattern(axis, paxis);
+      final StepPattern selfPattern = new ContextMatchStepPattern(axis, paxis);
       // We need to keep the new nodetest from affecting the score...
-      XNumber score = tail.getStaticScore();
+      final XNumber score = tail.getStaticScore();
       tail.setRelativePathPattern(selfPattern);
       tail.setStaticScore(score);
       selfPattern.setStaticScore(score);
@@ -781,20 +781,20 @@ public class WalkerFactory {
    * @return the head of the list.
    * @throws javax.xml.transform.TransformerException if any
    */
-  private static StepPattern createDefaultStepPattern(Compiler compiler, int opPos)
+  private static StepPattern createDefaultStepPattern(final Compiler compiler, final int opPos)
       throws javax.xml.transform.TransformerException {
 
-    int stepType = compiler.getOp(opPos);
+    final int stepType = compiler.getOp(opPos);
 
     int whatToShow = compiler.getWhatToShow(opPos);
     StepPattern ai = null;
-    int axis;
+    final int axis;
 
     switch (stepType) {
       case OpCodes.OP_VARIABLE:
       case OpCodes.OP_FUNCTION:
       case OpCodes.OP_GROUP:
-        Expression expr;
+        final Expression expr;
 
         switch (stepType) {
           case OpCodes.OP_VARIABLE:
@@ -865,7 +865,7 @@ public class WalkerFactory {
               whatToShow, compiler.getStepNS(opPos), compiler.getStepLocalName(opPos), axis);
     }
 
-    int argLen = compiler.getFirstPredicateOpPos(opPos);
+    final int argLen = compiler.getFirstPredicateOpPos(opPos);
 
     ai.setPredicates(compiler.getCompiledPredicates(argLen));
 
@@ -883,7 +883,7 @@ public class WalkerFactory {
    * @return true if step has a predicate.
    * @throws javax.xml.transform.TransformerException if any
    */
-  static boolean analyzePredicate(Compiler compiler, int opPos, int stepType)
+  static boolean analyzePredicate(final Compiler compiler, final int opPos, final int stepType)
       throws javax.xml.transform.TransformerException {
 
     switch (stepType) {
@@ -894,8 +894,8 @@ public class WalkerFactory {
       default:
     }
 
-    int pos = compiler.getFirstPredicateOpPos(opPos);
-    int nPredicates = compiler.countPredicates(pos);
+    final int pos = compiler.getFirstPredicateOpPos(opPos);
+    final int nPredicates = compiler.countPredicates(pos);
 
     return nPredicates > 0;
   }
@@ -912,10 +912,10 @@ public class WalkerFactory {
    * @throws RuntimeException if the input is bad.
    */
   private static AxesWalker createDefaultWalker(
-      Compiler compiler, int opPos, WalkingIterator lpi, int analysis) {
+        final Compiler compiler, final int opPos, final WalkingIterator lpi, final int analysis) {
 
-    AxesWalker ai;
-    int stepType = compiler.getOp(opPos);
+    final AxesWalker ai;
+    final int stepType = compiler.getOp(opPos);
 
     /*
      * System.out.println("0: "+compiler.getOp(opPos));
@@ -989,7 +989,7 @@ public class WalkerFactory {
     if (simpleInit) {
       ai.initNodeTest(DTMFilter.SHOW_ALL);
     } else {
-      int whatToShow = compiler.getWhatToShow(opPos);
+      final int whatToShow = compiler.getWhatToShow(opPos);
 
       if ((0
               == (whatToShow
@@ -1006,8 +1006,8 @@ public class WalkerFactory {
     return ai;
   }
 
-  public static String getAnalysisString(int analysis) {
-    StringBuilder buf = new StringBuilder();
+  public static String getAnalysisString(final int analysis) {
+    final StringBuilder buf = new StringBuilder();
     buf.append("count: ").append(getStepCount(analysis)).append(" ");
     if ((analysis & BIT_NODETEST_ANY) != 0) {
       buf.append("NTANY|");
@@ -1072,73 +1072,73 @@ public class WalkerFactory {
   /** Set to true for diagnostics about iterator creation */
   static final boolean DEBUG_ITERATOR_CREATION = false;
 
-  public static boolean hasPredicate(int analysis) {
+  public static boolean hasPredicate(final int analysis) {
     return 0 != (analysis & BIT_PREDICATE);
   }
 
-  public static boolean isWild(int analysis) {
+  public static boolean isWild(final int analysis) {
     return 0 != (analysis & BIT_NODETEST_ANY);
   }
 
-  public static boolean walksAttributes(int analysis) {
+  public static boolean walksAttributes(final int analysis) {
     return 0 != (analysis & BIT_ATTRIBUTE);
   }
 
-  public static boolean walksNamespaces(int analysis) {
+  public static boolean walksNamespaces(final int analysis) {
     return 0 != (analysis & BIT_NAMESPACE);
   }
 
-  public static boolean walksChildren(int analysis) {
+  public static boolean walksChildren(final int analysis) {
     return 0 != (analysis & BIT_CHILD);
   }
 
-  public static boolean walksDescendants(int analysis) {
+  public static boolean walksDescendants(final int analysis) {
     return isSet(analysis, BIT_DESCENDANT | BIT_DESCENDANT_OR_SELF);
   }
 
-  public static boolean walksSubtree(int analysis) {
+  public static boolean walksSubtree(final int analysis) {
     return isSet(analysis, BIT_DESCENDANT | BIT_DESCENDANT_OR_SELF | BIT_CHILD);
   }
 
-  public static boolean walksSubtreeOnlyMaybeAbsolute(int analysis) {
+  public static boolean walksSubtreeOnlyMaybeAbsolute(final int analysis) {
     return walksSubtree(analysis)
         && !walksExtraNodes(analysis)
         && !walksUp(analysis)
         && !walksSideways(analysis);
   }
 
-  public static boolean walksFilteredList(int analysis) {
+  public static boolean walksFilteredList(final int analysis) {
     return isSet(analysis, BIT_FILTER);
   }
 
-  public static boolean walksInDocOrder(int analysis) {
+  public static boolean walksInDocOrder(final int analysis) {
     return (walksSubtreeOnlyMaybeAbsolute(analysis)
             || walksExtraNodesOnly(analysis)
             || walksFollowingOnlyMaybeAbsolute(analysis))
         && !isSet(analysis, BIT_FILTER);
   }
 
-  public static boolean walksFollowingOnlyMaybeAbsolute(int analysis) {
+  public static boolean walksFollowingOnlyMaybeAbsolute(final int analysis) {
     return isSet(analysis, BIT_SELF | BIT_FOLLOWING_SIBLING | BIT_FOLLOWING)
         && !walksSubtree(analysis)
         && !walksUp(analysis)
         && !walksSideways(analysis);
   }
 
-  public static boolean walksUp(int analysis) {
+  public static boolean walksUp(final int analysis) {
     return isSet(analysis, BIT_PARENT | BIT_ANCESTOR | BIT_ANCESTOR_OR_SELF);
   }
 
-  public static boolean walksSideways(int analysis) {
+  public static boolean walksSideways(final int analysis) {
     return isSet(
         analysis, BIT_FOLLOWING | BIT_FOLLOWING_SIBLING | BIT_PRECEDING | BIT_PRECEDING_SIBLING);
   }
 
-  public static boolean walksExtraNodes(int analysis) {
+  public static boolean walksExtraNodes(final int analysis) {
     return isSet(analysis, BIT_NAMESPACE | BIT_ATTRIBUTE);
   }
 
-  public static boolean walksExtraNodesOnly(int analysis) {
+  public static boolean walksExtraNodesOnly(final int analysis) {
     return walksExtraNodes(analysis)
         && !isSet(analysis, BIT_SELF)
         && !walksSubtree(analysis)
@@ -1147,11 +1147,11 @@ public class WalkerFactory {
         && !isAbsolute(analysis);
   }
 
-  public static boolean isAbsolute(int analysis) {
+  public static boolean isAbsolute(final int analysis) {
     return isSet(analysis, BIT_ROOT | BIT_FILTER);
   }
 
-  public static boolean walksChildrenOnly(int analysis) {
+  public static boolean walksChildrenOnly(final int analysis) {
     return walksChildren(analysis)
         && !isSet(analysis, BIT_SELF)
         && !walksExtraNodes(analysis)
@@ -1161,7 +1161,7 @@ public class WalkerFactory {
         && (!isAbsolute(analysis) || isSet(analysis, BIT_ROOT));
   }
 
-  public static boolean walksChildrenAndExtraAndSelfOnly(int analysis) {
+  public static boolean walksChildrenAndExtraAndSelfOnly(final int analysis) {
     return walksChildren(analysis)
         && !walksDescendants(analysis)
         && !walksUp(analysis)
@@ -1169,7 +1169,7 @@ public class WalkerFactory {
         && (!isAbsolute(analysis) || isSet(analysis, BIT_ROOT));
   }
 
-  public static boolean walksDescendantsAndExtraAndSelfOnly(int analysis) {
+  public static boolean walksDescendantsAndExtraAndSelfOnly(final int analysis) {
     return !walksChildren(analysis)
         && walksDescendants(analysis)
         && !walksUp(analysis)
@@ -1177,7 +1177,7 @@ public class WalkerFactory {
         && (!isAbsolute(analysis) || isSet(analysis, BIT_ROOT));
   }
 
-  public static boolean walksSelfOnly(int analysis) {
+  public static boolean walksSelfOnly(final int analysis) {
     return isSet(analysis, BIT_SELF)
         && !walksSubtree(analysis)
         && !walksUp(analysis)
@@ -1185,25 +1185,25 @@ public class WalkerFactory {
         && !isAbsolute(analysis);
   }
 
-  public static boolean walksUpOnly(int analysis) {
+  public static boolean walksUpOnly(final int analysis) {
     return !walksSubtree(analysis)
         && walksUp(analysis)
         && !walksSideways(analysis)
         && !isAbsolute(analysis);
   }
 
-  public static boolean walksDownOnly(int analysis) {
+  public static boolean walksDownOnly(final int analysis) {
     return walksSubtree(analysis)
         && !walksUp(analysis)
         && !walksSideways(analysis)
         && !isAbsolute(analysis);
   }
 
-  public static boolean canSkipSubtrees(int analysis) {
+  public static boolean canSkipSubtrees(final int analysis) {
     return isSet(analysis, BIT_CHILD) | walksSideways(analysis);
   }
 
-  public static boolean canCrissCross(int analysis) {
+  public static boolean canCrissCross(final int analysis) {
     // This could be done faster. Coded for clarity.
     if (walksSelfOnly(analysis)) return false;
     else if (walksDownOnly(analysis) && !canSkipSubtrees(analysis)) return false;
@@ -1226,7 +1226,7 @@ public class WalkerFactory {
    * @param analysis The general analysis of the pattern.
    * @return true if the walk can be done in natural order.
    */
-  private static boolean isNaturalDocOrder(Compiler compiler, int stepOpCodePos, int analysis) {
+  private static boolean isNaturalDocOrder(final Compiler compiler, int stepOpCodePos, final int analysis) {
     if (canCrissCross(analysis)) return false;
 
     // Namespaces can present some problems, so just punt if we're looking for
@@ -1267,7 +1267,7 @@ public class WalkerFactory {
           // This doesn't seem to work as a test for wild card. Hmph.
           // int nodeTestType = compiler.getStepTestType(stepOpCodePos);
 
-          String localName = compiler.getStepLocalName(stepOpCodePos);
+          final String localName = compiler.getStepLocalName(stepOpCodePos);
           // System.err.println("localName: "+localName);
           if (localName.equals("*")) {
             foundWildAttribute = true;
@@ -1302,7 +1302,7 @@ public class WalkerFactory {
                   new Object[] {Integer.toString(stepType)}));
       }
 
-      int nextStepOpCodePos = compiler.getNextStepPos(stepOpCodePos);
+      final int nextStepOpCodePos = compiler.getNextStepPos(stepOpCodePos);
 
       if (nextStepOpCodePos < 0) break;
 
@@ -1312,11 +1312,11 @@ public class WalkerFactory {
     return true;
   }
 
-  public static boolean isOneStep(int analysis) {
+  public static boolean isOneStep(final int analysis) {
     return (analysis & BITS_COUNT) == 0x00000001;
   }
 
-  public static int getStepCount(int analysis) {
+  public static int getStepCount(final int analysis) {
     return analysis & BITS_COUNT;
   }
 
