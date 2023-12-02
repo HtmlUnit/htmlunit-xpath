@@ -169,7 +169,7 @@ public class XNodeSet extends NodeSequence {
     // from m_iter after this call. As a fix, we call SetVector() on the clone's
     // cache. See Bugzilla 14406.
     XNodeSet clone = (XNodeSet) nodelist.getDTMIterator();
-    SetVector(clone.getVector());
+    setVector(clone.getVector());
     return nodelist;
   }
 

@@ -66,7 +66,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   }
 
   /** Set the vector where nodes will be cached. */
-  protected void SetVector(NodeVector v) {
+  protected void setVector(NodeVector v) {
     setObject(v);
   }
 
@@ -129,7 +129,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   public NodeSequence(Object nodeVector) {
     super(nodeVector);
     if (nodeVector instanceof NodeVector) {
-      SetVector((NodeVector) nodeVector);
+      setVector((NodeVector) nodeVector);
     }
     if (null != nodeVector) {
       assertion(
@@ -311,9 +311,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   public void setShouldCacheNodes(boolean b) {
     if (b) {
       if (!hasCache()) {
-        SetVector(new NodeVector());
+        setVector(new NodeVector());
       }
-    } else SetVector(null);
+    } else setVector(null);
   }
 
   /** {@inheritDoc} */

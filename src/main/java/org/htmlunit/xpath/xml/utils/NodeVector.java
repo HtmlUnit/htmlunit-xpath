@@ -108,16 +108,6 @@ public class NodeVector implements Cloneable {
   }
 
   /**
-   * Return the node at the top of the stack without popping the stack. Special purpose method for
-   * TransformerImpl, pushElemTemplateElement. Performance critical.
-   *
-   * @return Node at the top of the stack or null if stack is empty.
-   */
-  public final int peepOrNull() {
-    return ((null != m_map) && (m_firstFree > 0)) ? m_map[m_firstFree - 1] : DTM.NULL;
-  }
-
-  /**
    * Inserts the specified node in this vector at the specified index. Each component in this vector
    * with an index greater or equal to the specified index is shifted upward to have an index one
    * greater than the value it had previously.
@@ -147,14 +137,6 @@ public class NodeVector implements Cloneable {
     m_map[at] = value;
 
     m_firstFree++;
-  }
-
-  /** Set the length to zero, but don't clear the array. */
-  public void RemoveAllNoClear() {
-
-    if (null == m_map) return;
-
-    m_firstFree = 0;
   }
 
   /**
