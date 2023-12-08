@@ -50,17 +50,17 @@ public class XObject extends Expression {
    *
    * @param obj Can be any object, should be a specific type for derived classes, or null.
    */
-  public XObject(Object obj) {
+  public XObject(final Object obj) {
     setObject(obj);
   }
 
-  protected void setObject(Object obj) {
+  protected void setObject(final Object obj) {
     m_obj = obj;
   }
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return this;
   }
 
@@ -251,7 +251,7 @@ public class XObject extends Expression {
    * @return True if this object is less than the given object
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  public boolean lessThan(XObject obj2) throws javax.xml.transform.TransformerException {
+  public boolean lessThan(final XObject obj2) throws javax.xml.transform.TransformerException {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
@@ -270,7 +270,8 @@ public class XObject extends Expression {
    * @return True if this object is less than or equal to the given object
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  public boolean lessThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException {
+  public boolean lessThanOrEqual(final XObject obj2)
+      throws javax.xml.transform.TransformerException {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
@@ -289,7 +290,7 @@ public class XObject extends Expression {
    * @return True if this object is greater than the given object
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  public boolean greaterThan(XObject obj2) throws javax.xml.transform.TransformerException {
+  public boolean greaterThan(final XObject obj2) throws javax.xml.transform.TransformerException {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
@@ -308,7 +309,8 @@ public class XObject extends Expression {
    * @return True if this object is greater than or equal to the given object
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  public boolean greaterThanOrEqual(XObject obj2) throws javax.xml.transform.TransformerException {
+  public boolean greaterThanOrEqual(final XObject obj2)
+      throws javax.xml.transform.TransformerException {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
@@ -326,7 +328,7 @@ public class XObject extends Expression {
    * @param obj2 Object to compare this to
    * @return True if this object is equal to the given object
    */
-  public boolean equals(XObject obj2) {
+  public boolean equals(final XObject obj2) {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
@@ -346,7 +348,7 @@ public class XObject extends Expression {
    * @return True if this object is not equal to the given object
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  public boolean notEquals(XObject obj2) throws javax.xml.transform.TransformerException {
+  public boolean notEquals(final XObject obj2) throws javax.xml.transform.TransformerException {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
@@ -362,7 +364,7 @@ public class XObject extends Expression {
    * @param msg Error message to issue
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  protected void error(String msg) throws javax.xml.transform.TransformerException {
+  protected void error(final String msg) throws javax.xml.transform.TransformerException {
     error(msg, null);
   }
 
@@ -373,27 +375,26 @@ public class XObject extends Expression {
    * @param args Arguments to use in the message
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  protected void error(String msg, Object[] args) throws javax.xml.transform.TransformerException {
+  protected void error(final String msg, final Object[] args)
+      throws javax.xml.transform.TransformerException {
 
-    String fmsg = XPATHMessages.createXPATHMessage(msg, args);
+    final String fmsg = XPATHMessages.createXPATHMessage(msg, args);
     throw new XPathException(fmsg, this);
   }
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     assertion(false, "callVisitors should not be called for this object!!!");
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
-    if (!isSameClass(expr)) return false;
-
+  public boolean deepEquals(final Expression expr) {
     // If equals at the expression level calls deepEquals, I think we're
     // still safe from infinite recursion since this object overrides
     // equals. I hope.
-    if (!this.equals((XObject) expr)) return false;
+    if (!isSameClass(expr) || !this.equals((XObject) expr)) return false;
 
     return true;
   }

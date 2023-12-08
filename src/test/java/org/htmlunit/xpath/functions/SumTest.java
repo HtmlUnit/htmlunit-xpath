@@ -29,7 +29,7 @@ public class SumTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void sum() throws Exception {
-    List<?> hits = getByXpath("<root>4</root>", "sum(/*)");
+    final List<?> hits = getByXpath("<root>4</root>", "sum(/*)");
     assertEquals(1, hits.size());
     assertEquals(4.0, hits.get(0));
   }
@@ -37,7 +37,7 @@ public class SumTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void sumMany() throws Exception {
-    List<?> hits = getByXpath("<root><a>4</a><a>3</a></root>", "sum(/*/a)");
+    final List<?> hits = getByXpath("<root><a>4</a><a>3</a></root>", "sum(/*/a)");
     assertEquals(1, hits.size());
     assertEquals(7.0, hits.get(0));
   }
@@ -45,7 +45,7 @@ public class SumTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void sumEmpty() throws Exception {
-    List<?> hits = getByXpath("sum(/*)");
+    final List<?> hits = getByXpath("sum(/*)");
     assertEquals(1, hits.size());
     assertEquals(Double.NaN, hits.get(0));
   }
@@ -58,6 +58,7 @@ public class SumTest extends AbstractXPathTest {
         "Could not retrieve XPath >sum(7)< on [#document: null]",
         "Can not convert #NUMBER to a NodeList!");
   }
+
   /** @throws Exception in case of problems */
   @Test
   public void sumNoArguments() throws Exception {

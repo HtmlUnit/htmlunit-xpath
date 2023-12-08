@@ -29,7 +29,8 @@ public class StringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void stringFunctionOperatesOnFirstNodeInDocumentOrder() throws Exception {
-    List<?> hits = getByXpath("<root><a><b><x>2</x><x>3</x></b><x>4</x></a></root>", "string(//x)");
+    final List<?> hits =
+        getByXpath("<root><a><b><x>2</x><x>3</x></b><x>4</x></a></root>", "string(//x)");
     assertEquals(1, hits.size());
     assertEquals("2", hits.get(0));
   }
@@ -37,7 +38,7 @@ public class StringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void stringOfInfinity() throws Exception {
-    List<?> hits = getByXpath("string(1 div 0)");
+    final List<?> hits = getByXpath("string(1 div 0)");
     assertEquals(1, hits.size());
     assertEquals("Infinity", hits.get(0));
   }
@@ -45,7 +46,7 @@ public class StringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void stringOfNegativeInfinity() throws Exception {
-    List<?> hits = getByXpath("string(-1 div 0)");
+    final List<?> hits = getByXpath("string(-1 div 0)");
     assertEquals(1, hits.size());
     assertEquals("-Infinity", hits.get(0));
   }
@@ -53,7 +54,7 @@ public class StringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void stringOfNegativeZero() throws Exception {
-    List<?> hits = getByXpath("string(-0)");
+    final List<?> hits = getByXpath("string(-0)");
     assertEquals(1, hits.size());
     assertEquals("0", hits.get(0));
   }
@@ -61,7 +62,7 @@ public class StringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void integersAreFormattedAsInts() throws Exception {
-    List<?> hits = getByXpath("string(12)");
+    final List<?> hits = getByXpath("string(12)");
     assertEquals(1, hits.size());
     assertEquals("12", hits.get(0));
   }
@@ -69,7 +70,7 @@ public class StringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void stringWithoutParam() throws Exception {
-    List<?> hits = getByXpath("string()");
+    final List<?> hits = getByXpath("string()");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }

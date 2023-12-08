@@ -863,7 +863,7 @@ public class WalkerFactory {
                 new Object[] {Integer.toString(stepType)}));
     }
     if (null == ai) {
-      int whatToShow = compiler.getWhatToShow(opPos); // %REVIEW%
+      final int whatToShow = compiler.getWhatToShow(opPos); // %REVIEW%
       ai =
           new StepPattern(
               whatToShow, compiler.getStepNS(opPos), compiler.getStepLocalName(opPos), axis);
@@ -1232,20 +1232,19 @@ public class WalkerFactory {
    */
   private static boolean isNaturalDocOrder(
       final Compiler compiler, int stepOpCodePos, final int analysis) {
-    if (canCrissCross(analysis)) return false;
 
     // Namespaces can present some problems, so just punt if we're looking for
     // these.
-    if (isSet(analysis, BIT_NAMESPACE)) return false;
-
     // The following, preceding, following-sibling, and preceding sibling can
     // be found in doc order if we get to this point, but if they occur
     // together, they produce
     // duplicates, so it's better for us to eliminate this case so we don't
     // have to check for duplicates during runtime if we're using a
     // WalkingIterator.
-    if (isSet(analysis, BIT_FOLLOWING | BIT_FOLLOWING_SIBLING)
-        && isSet(analysis, BIT_PRECEDING | BIT_PRECEDING_SIBLING)) return false;
+    if (canCrissCross(analysis)
+        || isSet(analysis, BIT_NAMESPACE)
+        || (isSet(analysis, BIT_FOLLOWING | BIT_FOLLOWING_SIBLING)
+            && isSet(analysis, BIT_PRECEDING | BIT_PRECEDING_SIBLING))) return false;
 
     // OK, now we have to check for select="@*/axis::*" patterns, which
     // can also cause duplicates to happen. But select="axis*/@::*" patterns

@@ -42,7 +42,8 @@ public class StepPattern extends NodeTest implements SubContextList {
    * @param name The local name to be tested.
    * @param axis The Axis for this test, one of of Axes.ANCESTORORSELF, etc.
    */
-  public StepPattern(int whatToShow, String namespace, String name, int axis) {
+  public StepPattern(
+      final int whatToShow, final String namespace, final String name, final int axis) {
 
     super(whatToShow, namespace, name);
 
@@ -55,7 +56,7 @@ public class StepPattern extends NodeTest implements SubContextList {
    * @param whatToShow Bit set defined mainly by {@link org.w3c.dom.traversal.NodeFilter}.
    * @param axis The Axis for this test, one of of Axes.ANCESTORORSELF, etc.
    */
-  public StepPattern(int whatToShow, int axis) {
+  public StepPattern(final int whatToShow, final int axis) {
 
     super(whatToShow);
 
@@ -77,7 +78,7 @@ public class StepPattern extends NodeTest implements SubContextList {
    */
   public void calcTargetString() {
 
-    int whatToShow = getWhatToShow();
+    final int whatToShow = getWhatToShow();
 
     switch (whatToShow) {
       case DTMFilter.SHOW_COMMENT:
@@ -117,7 +118,7 @@ public class StepPattern extends NodeTest implements SubContextList {
    *
    * @param expr The relative pattern expression.
    */
-  public void setRelativePathPattern(StepPattern expr) {
+  public void setRelativePathPattern(final StepPattern expr) {
 
     m_relativePathPattern = expr;
     expr.exprSetParent(this);
@@ -154,7 +155,7 @@ public class StepPattern extends NodeTest implements SubContextList {
   @Override
   public boolean canTraverseOutsideSubtree() {
 
-    int n = getPredicateCount();
+    final int n = getPredicateCount();
 
     for (int i = 0; i < n; i++) {
       if (getPredicate(i).canTraverseOutsideSubtree()) return true;
@@ -169,7 +170,7 @@ public class StepPattern extends NodeTest implements SubContextList {
    * @param i The index of the predicate.
    * @return A predicate expression.
    */
-  public Expression getPredicate(int i) {
+  public Expression getPredicate(final int i) {
     return m_predicates[i];
   }
 
@@ -187,11 +188,11 @@ public class StepPattern extends NodeTest implements SubContextList {
    *
    * @param predicates An array of expressions that define predicates for this step.
    */
-  public void setPredicates(Expression[] predicates) {
+  public void setPredicates(final Expression[] predicates) {
 
     m_predicates = predicates;
     if (null != predicates) {
-      for (Expression predicate : predicates) {
+      for (final Expression predicate : predicates) {
         predicate.exprSetParent(this);
       }
     }
@@ -212,13 +213,13 @@ public class StepPattern extends NodeTest implements SubContextList {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt, int currentNode)
+  public XObject execute(final XPathContext xctxt, final int currentNode)
       throws javax.xml.transform.TransformerException {
 
-    DTM dtm = xctxt.getDTM(currentNode);
+    final DTM dtm = xctxt.getDTM(currentNode);
 
     if (dtm != null) {
-      int expType = dtm.getExpandedTypeID(currentNode);
+      final int expType = dtm.getExpandedTypeID(currentNode);
 
       return execute(xctxt, currentNode, dtm, expType);
     }
@@ -228,13 +229,14 @@ public class StepPattern extends NodeTest implements SubContextList {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return execute(xctxt, xctxt.getCurrentNode());
   }
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt, int currentNode, DTM dtm, int expType)
+  public XObject execute(
+      final XPathContext xctxt, final int currentNode, final DTM dtm, final int expType)
       throws javax.xml.transform.TransformerException {
 
     if (m_whatToShow == NodeTest.SHOW_BYFUNCTION) {
@@ -244,7 +246,7 @@ public class StepPattern extends NodeTest implements SubContextList {
       return NodeTest.SCORE_NONE;
     }
 
-    XObject score;
+    final XObject score;
 
     score = super.execute(xctxt, currentNode, dtm, expType);
 
@@ -272,10 +274,10 @@ public class StepPattern extends NodeTest implements SubContextList {
    * @return true of the position of the context matches pos, false otherwise.
    */
   private boolean checkProximityPosition(
-      XPathContext xctxt, int predPos, DTM dtm, int context, int pos) {
+      final XPathContext xctxt, final int predPos, final DTM dtm, final int context, int pos) {
 
     try {
-      DTMAxisTraverser traverser = dtm.getAxisTraverser(Axis.PRECEDINGSIBLING);
+      final DTMAxisTraverser traverser = dtm.getAxisTraverser(Axis.PRECEDINGSIBLING);
 
       for (int child = traverser.first(context);
           DTM.NULL != child;
@@ -292,7 +294,7 @@ public class StepPattern extends NodeTest implements SubContextList {
               for (int i = 0; i < predPos; i++) {
                 xctxt.pushPredicatePos(i);
                 try {
-                  XObject pred = m_predicates[i].execute(xctxt);
+                  final XObject pred = m_predicates[i].execute(xctxt);
 
                   try {
                     if (XObject.CLASS_NUMBER == pred.getType()) {
@@ -321,7 +323,7 @@ public class StepPattern extends NodeTest implements SubContextList {
           xctxt.popCurrentNode();
         }
       }
-    } catch (javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: should keep throw sax exception...
       throw new java.lang.RuntimeException(se.getMessage());
@@ -338,15 +340,16 @@ public class StepPattern extends NodeTest implements SubContextList {
    * @param findLast If true, don't terminate when the context node is found.
    * @return the proximity position index of the current node based on the node test.
    */
-  private int getProximityPosition(XPathContext xctxt, int predPos, boolean findLast) {
+  private int getProximityPosition(
+      final XPathContext xctxt, final int predPos, final boolean findLast) {
 
     int pos = 0;
-    int context = xctxt.getCurrentNode();
-    DTM dtm = xctxt.getDTM(context);
-    int parent = dtm.getParent(context);
+    final int context = xctxt.getCurrentNode();
+    final DTM dtm = xctxt.getDTM(context);
+    final int parent = dtm.getParent(context);
 
     try {
-      DTMAxisTraverser traverser = dtm.getAxisTraverser(Axis.CHILD);
+      final DTMAxisTraverser traverser = dtm.getAxisTraverser(Axis.CHILD);
 
       for (int child = traverser.first(parent);
           DTM.NULL != child;
@@ -363,7 +366,7 @@ public class StepPattern extends NodeTest implements SubContextList {
               for (int i = 0; i < predPos; i++) {
                 xctxt.pushPredicatePos(i);
                 try {
-                  XObject pred = m_predicates[i].execute(xctxt);
+                  final XObject pred = m_predicates[i].execute(xctxt);
 
                   try {
                     if (XObject.CLASS_NUMBER == pred.getType()) {
@@ -398,7 +401,7 @@ public class StepPattern extends NodeTest implements SubContextList {
           xctxt.popCurrentNode();
         }
       }
-    } catch (javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: should keep throw sax exception...
       throw new java.lang.RuntimeException(se.getMessage());
@@ -409,13 +412,13 @@ public class StepPattern extends NodeTest implements SubContextList {
 
   /** {@inheritDoc} */
   @Override
-  public int getProximityPosition(XPathContext xctxt) {
+  public int getProximityPosition(final XPathContext xctxt) {
     return getProximityPosition(xctxt, xctxt.getPredicatePos(), false);
   }
 
   /** {@inheritDoc} */
   @Override
-  public int getLastPos(XPathContext xctxt) {
+  public int getLastPos(final XPathContext xctxt) {
     return getProximityPosition(xctxt, xctxt.getPredicatePos(), true);
   }
 
@@ -432,11 +435,12 @@ public class StepPattern extends NodeTest implements SubContextList {
    *     org.htmlunit.xpath.patterns.NodeTest#SCORE_OTHER}.
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  protected final XObject executeRelativePathPattern(XPathContext xctxt, DTM dtm, int currentNode)
+  protected final XObject executeRelativePathPattern(
+      final XPathContext xctxt, final DTM dtm, final int currentNode)
       throws javax.xml.transform.TransformerException {
 
     XObject score = NodeTest.SCORE_NONE;
-    DTMAxisTraverser traverser;
+    final DTMAxisTraverser traverser;
 
     traverser = dtm.getAxisTraverser(m_axis);
 
@@ -467,12 +471,13 @@ public class StepPattern extends NodeTest implements SubContextList {
    * @return true if the node should be accepted, false otherwise.
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  protected final boolean executePredicates(XPathContext xctxt, DTM dtm, int currentNode)
+  protected final boolean executePredicates(
+      final XPathContext xctxt, final DTM dtm, final int currentNode)
       throws javax.xml.transform.TransformerException {
 
     boolean result = true;
     boolean positionAlreadySeen = false;
-    int n = getPredicateCount();
+    final int n = getPredicateCount();
 
     try {
       xctxt.pushSubContextList(this);
@@ -481,11 +486,11 @@ public class StepPattern extends NodeTest implements SubContextList {
         xctxt.pushPredicatePos(i);
 
         try {
-          XObject pred = m_predicates[i].execute(xctxt);
+          final XObject pred = m_predicates[i].execute(xctxt);
 
           try {
             if (XObject.CLASS_NUMBER == pred.getType()) {
-              int pos = (int) pred.num();
+              final int pos = (int) pred.num();
 
               if (positionAlreadySeen) {
                 result = pos == 1;
@@ -524,7 +529,7 @@ public class StepPattern extends NodeTest implements SubContextList {
   @Override
   public String toString() {
 
-    StringBuilder buf = new StringBuilder();
+    final StringBuilder buf = new StringBuilder();
 
     for (StepPattern pat = this; pat != null; pat = pat.m_relativePathPattern) {
       if (pat != this) buf.append("/");
@@ -571,9 +576,9 @@ public class StepPattern extends NodeTest implements SubContextList {
       }
 
       if (null != pat.m_predicates) {
-        for (int i = 0; i < pat.m_predicates.length; i++) {
+        for (final Expression m_predicate : pat.m_predicates) {
           buf.append("[");
-          buf.append(pat.m_predicates[i]);
+          buf.append(m_predicate);
           buf.append("]");
         }
       }
@@ -587,7 +592,7 @@ public class StepPattern extends NodeTest implements SubContextList {
    *
    * @param axis The Axis for this test, one of of Axes.ANCESTORORSELF, etc.
    */
-  public void setAxis(int axis) {
+  public void setAxis(final int axis) {
     m_axis = axis;
   }
 
@@ -602,7 +607,7 @@ public class StepPattern extends NodeTest implements SubContextList {
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     if (visitor.visitMatchPattern()) {
       callSubtreeVisitors(visitor);
     }
@@ -612,9 +617,9 @@ public class StepPattern extends NodeTest implements SubContextList {
    * Call the visitors on the subtree. Factored out from callVisitors so it may be called by derived
    * classes.
    */
-  protected void callSubtreeVisitors(XPathVisitor visitor) {
+  protected void callSubtreeVisitors(final XPathVisitor visitor) {
     if (null != m_predicates) {
-      for (Expression m_predicate : m_predicates) {
+      for (final Expression m_predicate : m_predicates) {
         if (visitor.visitPredicate(m_predicate)) {
           m_predicate.callVisitors(visitor);
         }
@@ -627,13 +632,13 @@ public class StepPattern extends NodeTest implements SubContextList {
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
-    StepPattern sp = (StepPattern) expr;
+    final StepPattern sp = (StepPattern) expr;
 
     if (null != m_predicates) {
-      int n = m_predicates.length;
+      final int n = m_predicates.length;
       if ((null == sp.m_predicates) || (sp.m_predicates.length != n)) return false;
       for (int i = 0; i < n; i++) {
         if (!m_predicates[i].deepEquals(sp.m_predicates[i])) return false;

@@ -43,7 +43,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
    * @param doIndexing flag
    */
   public DTMDefaultBaseTraversers(
-      DTMManager mgr, Source source, int dtmIdentity, boolean doIndexing) {
+      final DTMManager mgr, final Source source, final int dtmIdentity, final boolean doIndexing) {
     super(mgr, source, dtmIdentity, doIndexing);
   }
 
@@ -141,13 +141,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, final int current) {
       return getParent(current);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
       // Process using identities
       current = makeNodeIdentity(current);
 
@@ -164,13 +164,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context) {
+    public int first(final int context) {
       return context;
     }
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context, int expandedTypeID) {
+    public int first(final int context, final int expandedTypeID) {
       return (getExpandedTypeID(context) == expandedTypeID)
           ? context
           : next(context, context, expandedTypeID);
@@ -182,13 +182,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, final int current) {
       return (context == current) ? getFirstAttribute(context) : getNextAttribute(current);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
 
       current = (context == current) ? getFirstAttribute(context) : getNextAttribute(current);
 
@@ -213,13 +213,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
      * @param expandedTypeID The expanded type ID for the request.
      * @return The node ID or NULL if not found.
      */
-    protected int getNextIndexed(int axisRoot, int nextPotential, int expandedTypeID) {
+    protected int getNextIndexed(final int axisRoot, int nextPotential, final int expandedTypeID) {
 
-      int nsIndex = m_expandedNameTable.getNamespaceID(expandedTypeID);
-      int lnIndex = m_expandedNameTable.getLocalNameID(expandedTypeID);
+      final int nsIndex = m_expandedNameTable.getNamespaceID(expandedTypeID);
+      final int lnIndex = m_expandedNameTable.getLocalNameID(expandedTypeID);
 
       for (; ; ) {
-        int nextID = findElementFromIndex(nsIndex, lnIndex, nextPotential);
+        final int nextID = findElementFromIndex(nsIndex, lnIndex, nextPotential);
 
         if (NOTPROCESSED != nextID) {
           int parentID = m_parent.elementAt(nextID);
@@ -256,29 +256,29 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context) {
+    public int first(final int context) {
       return getFirstChild(context);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context, int expandedTypeID) {
-      int identity = makeNodeIdentity(context);
+    public int first(final int context, final int expandedTypeID) {
+      final int identity = makeNodeIdentity(context);
 
-      int firstMatch = getNextIndexed(identity, _firstch(identity), expandedTypeID);
+      final int firstMatch = getNextIndexed(identity, _firstch(identity), expandedTypeID);
 
       return makeNodeHandle(firstMatch);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, final int current) {
       return getNextSibling(current);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
       // Process in Identifier space
       for (current = _nextsib(makeNodeIdentity(current));
           DTM.NULL != current;
@@ -304,7 +304,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
      * @return true if it is OK to call the {@link #getNextIndexed(int, int, int) getNextIndexed}
      *     method.
      */
-    protected final boolean isIndexed(int expandedTypeID) {
+    protected final boolean isIndexed(final int expandedTypeID) {
       return m_indexing && ExpandedNameTable.ELEMENT == m_expandedNameTable.getType(expandedTypeID);
     }
 
@@ -338,13 +338,14 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
      * @param expandedTypeID The expanded type ID for the request.
      * @return The node ID or NULL if not found.
      */
-    protected int getNextIndexed(int axisRoot, int nextPotential, int expandedTypeID) {
+    protected int getNextIndexed(
+        final int axisRoot, final int nextPotential, final int expandedTypeID) {
 
-      int nsIndex = m_expandedNameTable.getNamespaceID(expandedTypeID);
-      int lnIndex = m_expandedNameTable.getLocalNameID(expandedTypeID);
+      final int nsIndex = m_expandedNameTable.getNamespaceID(expandedTypeID);
+      final int lnIndex = m_expandedNameTable.getLocalNameID(expandedTypeID);
 
       while (true) {
-        int next = findElementFromIndex(nsIndex, lnIndex, nextPotential);
+        final int next = findElementFromIndex(nsIndex, lnIndex, nextPotential);
 
         if (NOTPROCESSED != next) {
           if (isAfterAxis(axisRoot, next)) return NULL;
@@ -369,13 +370,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
      * @param identity The node identity of the root context of the traversal.
      * @return The first potential node that can be in the traversal.
      */
-    protected int getFirstPotential(int identity) {
+    protected int getFirstPotential(final int identity) {
       return identity + 1;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected boolean axisHasBeenProcessed(int axisRoot) {
+    protected boolean axisHasBeenProcessed(final int axisRoot) {
       return !(m_nextsib.elementAt(axisRoot) == NOTPROCESSED);
     }
 
@@ -386,7 +387,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
      * @param handle handle to the root context.
      * @return identity of the root of the subtree.
      */
-    protected int getSubtreeRoot(int handle) {
+    protected int getSubtreeRoot(final int handle) {
       return makeNodeIdentity(handle);
     }
 
@@ -401,13 +402,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
      * @param identity The index number of the node in question.
      * @return true if the index is a descendant of _startNode.
      */
-    protected boolean isDescendant(int subtreeRootIdentity, int identity) {
+    protected boolean isDescendant(final int subtreeRootIdentity, final int identity) {
       return _parent(identity) >= subtreeRootIdentity;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected boolean isAfterAxis(int axisRoot, int identity) {
+    protected boolean isAfterAxis(final int axisRoot, int identity) {
       // %REVIEW% Is there *any* cheaper way to do this?
       // Yes. In ID space, compare to axisRoot's successor
       // (next-sib or ancestor's-next-sib). Probably shallower search.
@@ -421,11 +422,11 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context, int expandedTypeID) {
+    public int first(final int context, final int expandedTypeID) {
 
       if (isIndexed(expandedTypeID)) {
-        int identity = getSubtreeRoot(context);
-        int firstPotential = getFirstPotential(identity);
+        final int identity = getSubtreeRoot(context);
+        final int firstPotential = getFirstPotential(identity);
 
         return makeNodeHandle(getNextIndexed(identity, firstPotential, expandedTypeID));
       }
@@ -435,12 +436,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, int current) {
 
-      int subtreeRootIdent = getSubtreeRoot(context);
+      final int subtreeRootIdent = getSubtreeRoot(context);
 
       for (current = makeNodeIdentity(current) + 1; ; current++) {
-        int type = _type(current); // may call nextNode()
+        final int type = _type(current); // may call nextNode()
 
         if (!isDescendant(subtreeRootIdent, current)) return NULL;
 
@@ -452,9 +453,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
 
-      int subtreeRootIdent = getSubtreeRoot(context);
+      final int subtreeRootIdent = getSubtreeRoot(context);
 
       current = makeNodeIdentity(current) + 1;
 
@@ -463,7 +464,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       }
 
       for (; ; current++) {
-        int exptype = _exptype(current); // may call nextNode()
+        final int exptype = _exptype(current); // may call nextNode()
 
         if (!isDescendant(subtreeRootIdent, current)) return NULL;
 
@@ -479,13 +480,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    protected int getFirstPotential(int identity) {
+    protected int getFirstPotential(final int identity) {
       return identity;
     }
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context) {
+    public int first(final int context) {
       return context;
     }
   }
@@ -495,9 +496,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, int current) {
 
-      int subtreeRootIdent = makeNodeIdentity(context);
+      final int subtreeRootIdent = makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) + 1; ; current++) {
         // Trickological code: _exptype() has the side-effect of
@@ -524,7 +525,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       context = makeNodeIdentity(context);
 
       int first;
-      int type = _type(context);
+      final int type = _type(context);
 
       if ((DTM.ATTRIBUTE_NODE == type) || (DTM.NAMESPACE_NODE == type)) {
         context = _parent(context);
@@ -544,11 +545,11 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context, int expandedTypeID) {
+    public int first(int context, final int expandedTypeID) {
       // %REVIEW% This looks like it might want shift into identity space
       // to avoid repeated conversion in the individual functions
       int first;
-      int type = getNodeType(context);
+      final int type = getNodeType(context);
 
       if ((DTM.ATTRIBUTE_NODE == type) || (DTM.NAMESPACE_NODE == type)) {
         context = getParent(context);
@@ -575,7 +576,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, int current) {
       // Compute in identity space
       current = makeNodeIdentity(current);
 
@@ -583,7 +584,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         current++; // Only works on IDs, not handles.
 
         // %REVIEW% Are we using handles or indexes?
-        int type = _type(current); // may call nextNode()
+        final int type = _type(current); // may call nextNode()
 
         if (NULL == type) return NULL;
 
@@ -595,14 +596,14 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
       // Compute in ID space
       current = makeNodeIdentity(current);
 
       while (true) {
         current++;
 
-        int etype = _exptype(current); // may call nextNode()
+        final int etype = _exptype(current); // may call nextNode()
 
         if (NULL == etype) return NULL;
 
@@ -618,13 +619,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, final int current) {
       return getNextSibling(current);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
 
       while (DTM.NULL != (current = getNextSibling(current))) {
         if (getExpandedTypeID(current) == expandedTypeID) return current;
@@ -639,7 +640,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, final int current) {
 
       return (context == current)
           ? getFirstNamespaceNode(context, false)
@@ -648,7 +649,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
 
       current =
           (context == current)
@@ -668,7 +669,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, final int current) {
 
       return (context == current)
           ? getFirstNamespaceNode(context, true)
@@ -677,7 +678,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
 
       current =
           (context == current)
@@ -696,13 +697,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
   private class ParentTraverser extends DTMAxisTraverser {
     /** {@inheritDoc} */
     @Override
-    public int first(int context) {
+    public int first(final int context) {
       return getParent(context);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int first(int current, int expandedTypeID) {
+    public int first(int current, final int expandedTypeID) {
       // Compute in ID space
       current = makeNodeIdentity(current);
 
@@ -715,14 +716,14 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, final int current) {
 
       return NULL;
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, final int current, final int expandedTypeID) {
 
       return NULL;
     }
@@ -740,7 +741,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
      * @param currentIdent The node in question.
      * @return true if the currentIdent node is an ancestor of contextIdent.
      */
-    protected boolean isAncestor(int contextIdent, int currentIdent) {
+    protected boolean isAncestor(int contextIdent, final int currentIdent) {
       // %REVIEW% See comments in IsAfterAxis; using the "successor" of
       // contextIdent is probably more efficient.
       for (contextIdent = m_parent.elementAt(contextIdent);
@@ -754,12 +755,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, int current) {
       // compute in ID space
-      int subtreeRootIdent = makeNodeIdentity(context);
+      final int subtreeRootIdent = makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--) {
-        short type = _type(current);
+        final short type = _type(current);
 
         if (ATTRIBUTE_NODE == type
             || NAMESPACE_NODE == type
@@ -773,12 +774,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
       // Compute in ID space
-      int subtreeRootIdent = makeNodeIdentity(context);
+      final int subtreeRootIdent = makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--) {
-        int exptype = m_exptype.elementAt(current);
+        final int exptype = m_exptype.elementAt(current);
 
         if (exptype != expandedTypeID || isAncestor(subtreeRootIdent, current)) continue;
 
@@ -794,12 +795,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, int current) {
       // Compute in ID space
       makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--) {
-        short type = _type(current);
+        final short type = _type(current);
 
         if (ATTRIBUTE_NODE == type || NAMESPACE_NODE == type) continue;
 
@@ -811,12 +812,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
       // Compute in ID space
       makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--) {
-        int exptype = m_exptype.elementAt(current);
+        final int exptype = m_exptype.elementAt(current);
 
         if (exptype != expandedTypeID) continue;
 
@@ -832,13 +833,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, final int current) {
       return getPreviousSibling(current);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
 
       while (DTM.NULL != (current = getPreviousSibling(current))) {
         if (getExpandedTypeID(current) == expandedTypeID) return current;
@@ -853,25 +854,25 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context) {
+    public int first(final int context) {
       return context;
     }
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context, int expandedTypeID) {
+    public int first(final int context, final int expandedTypeID) {
       return (getExpandedTypeID(context) == expandedTypeID) ? context : NULL;
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, final int current) {
       return NULL;
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, final int current, final int expandedTypeID) {
       return NULL;
     }
   }
@@ -881,13 +882,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context) {
+    public int first(final int context) {
       return getDocumentRoot(context);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context, int expandedTypeID) {
+    public int first(final int context, final int expandedTypeID) {
       return (getExpandedTypeID(getDocumentRoot(context)) == expandedTypeID)
           ? context
           : next(context, context, expandedTypeID);
@@ -895,13 +896,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, int current) {
       // Compute in ID space
       makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) + 1; ; current++) {
         // Kluge test: Just make sure +1 yielded a real node
-        int type = _type(current); // may call nextNode()
+        final int type = _type(current); // may call nextNode()
         if (type == NULL) return NULL;
 
         return makeNodeHandle(current); // make handle.
@@ -910,12 +911,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, int current, final int expandedTypeID) {
       // Compute in ID space
       makeNodeIdentity(context);
 
       for (current = makeNodeIdentity(current) + 1; ; current++) {
-        int exptype = _exptype(current); // may call nextNode()
+        final int exptype = _exptype(current); // may call nextNode()
 
         if (exptype == NULL) return NULL;
 
@@ -930,20 +931,20 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
   private class RootTraverser extends AllFromRootTraverser {
     /** {@inheritDoc} */
     @Override
-    public int first(int context, int expandedTypeID) {
-      int root = getDocumentRoot(context);
+    public int first(final int context, final int expandedTypeID) {
+      final int root = getDocumentRoot(context);
       return (getExpandedTypeID(root) == expandedTypeID) ? root : NULL;
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current) {
+    public int next(final int context, final int current) {
       return NULL;
     }
 
     /** {@inheritDoc} */
     @Override
-    public int next(int context, int current, int expandedTypeID) {
+    public int next(final int context, final int current, final int expandedTypeID) {
       return NULL;
     }
   }
@@ -956,34 +957,34 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    protected int getFirstPotential(int identity) {
+    protected int getFirstPotential(final int identity) {
       return identity;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected int getSubtreeRoot(int handle) {
+    protected int getSubtreeRoot(final int handle) {
       // %REVIEW% Shouldn't this always be 0?
       return makeNodeIdentity(getDocument());
     }
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context) {
+    public int first(final int context) {
       return getDocumentRoot(context);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context, int expandedTypeID) {
+    public int first(final int context, final int expandedTypeID) {
       if (isIndexed(expandedTypeID)) {
-        int identity = 0;
-        int firstPotential = getFirstPotential(identity);
+        final int identity = 0;
+        final int firstPotential = getFirstPotential(identity);
 
         return makeNodeHandle(getNextIndexed(identity, firstPotential, expandedTypeID));
       }
 
-      int root = first(context);
+      final int root = first(context);
       return next(root, root, expandedTypeID);
     }
   }
@@ -996,33 +997,33 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
     /** {@inheritDoc} */
     @Override
-    protected int getFirstPotential(int identity) {
+    protected int getFirstPotential(final int identity) {
       return _firstch(0);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected int getSubtreeRoot(int handle) {
+    protected int getSubtreeRoot(final int handle) {
       return 0;
     }
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context) {
+    public int first(final int context) {
       return makeNodeHandle(_firstch(0));
     }
 
     /** {@inheritDoc} */
     @Override
-    public int first(int context, int expandedTypeID) {
+    public int first(final int context, final int expandedTypeID) {
       if (isIndexed(expandedTypeID)) {
-        int identity = 0;
-        int firstPotential = getFirstPotential(identity);
+        final int identity = 0;
+        final int firstPotential = getFirstPotential(identity);
 
         return makeNodeHandle(getNextIndexed(identity, firstPotential, expandedTypeID));
       }
 
-      int root = getDocumentRoot(context);
+      final int root = getDocumentRoot(context);
       return next(root, root, expandedTypeID);
     }
   }

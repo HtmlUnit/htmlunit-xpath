@@ -51,7 +51,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
    * @param dtm The DTM Reference, must be non-null.
    * @param element The DTM element handle.
    */
-  public DTMNamedNodeMap(DTM dtm, int element) {
+  public DTMNamedNodeMap(final DTM dtm, final int element) {
     this.dtm = dtm;
     this.element = element;
   }
@@ -75,7 +75,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
 
   /** {@inheritDoc} */
   @Override
-  public Node getNamedItem(String name) {
+  public Node getNamedItem(final String name) {
 
     for (int n = dtm.getFirstAttribute(element); n != DTM.NULL; n = dtm.getNextAttribute(n)) {
       if (dtm.getNodeName(n).equals(name)) return dtm.getNode(n);
@@ -86,7 +86,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
 
   /** {@inheritDoc} */
   @Override
-  public Node item(int i) {
+  public Node item(final int i) {
 
     int count = 0;
 
@@ -100,23 +100,23 @@ public class DTMNamedNodeMap implements NamedNodeMap {
 
   /** {@inheritDoc} */
   @Override
-  public Node setNamedItem(Node newNode) {
-    throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
+  public Node setNamedItem(final Node newNode) {
+    throw new DTMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Node removeNamedItem(String name) {
-    throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
+  public Node removeNamedItem(final String name) {
+    throw new DTMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Node getNamedItemNS(String namespaceURI, String localName) {
+  public Node getNamedItemNS(final String namespaceURI, final String localName) {
     Node retNode = null;
     for (int n = dtm.getFirstAttribute(element); n != DTM.NULL; n = dtm.getNextAttribute(n)) {
       if (localName.equals(dtm.getLocalName(n))) {
-        String nsURI = dtm.getNamespaceURI(n);
+        final String nsURI = dtm.getNamespaceURI(n);
         if ((namespaceURI == null && nsURI == null)
             || (namespaceURI != null && namespaceURI.equals(nsURI))) {
           retNode = dtm.getNode(n);
@@ -129,14 +129,15 @@ public class DTMNamedNodeMap implements NamedNodeMap {
 
   /** {@inheritDoc} */
   @Override
-  public Node setNamedItemNS(Node arg) throws DOMException {
-    throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
+  public Node setNamedItemNS(final Node arg) throws DOMException {
+    throw new DTMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Node removeNamedItemNS(String namespaceURI, String localName) throws DOMException {
-    throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
+  public Node removeNamedItemNS(final String namespaceURI, final String localName)
+      throws DOMException {
+    throw new DTMException(DOMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
   /** Simple implementation of DOMException. */
@@ -147,7 +148,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
      *
      * @param code the code
      */
-    public DTMException(short code) {
+    public DTMException(final short code) {
       super(code, "");
     }
   }

@@ -29,7 +29,7 @@ public class BooleanTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void nonEmptyNodeSetsAreTrue() throws Exception {
-    List<?> hits = getByXpath("<root><y/></root>", "boolean(//y)");
+    final List<?> hits = getByXpath("<root><y/></root>", "boolean(//y)");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -37,7 +37,7 @@ public class BooleanTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void emptyNodeSetsAreFalse() throws Exception {
-    List<?> hits = getByXpath("<root><z/></root>", "boolean(//y)");
+    final List<?> hits = getByXpath("<root><z/></root>", "boolean(//y)");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -45,7 +45,7 @@ public class BooleanTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void zeroIsFalse() throws Exception {
-    List<?> hits = getByXpath("boolean(0)");
+    final List<?> hits = getByXpath("boolean(0)");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -53,7 +53,7 @@ public class BooleanTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void emptyStringIsFalse() throws Exception {
-    List<?> hits = getByXpath("boolean('')");
+    final List<?> hits = getByXpath("boolean('')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -61,7 +61,7 @@ public class BooleanTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void naNIsFalse() throws Exception {
-    List<?> hits = getByXpath("boolean(0 div 0)");
+    final List<?> hits = getByXpath("boolean(0 div 0)");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -69,7 +69,7 @@ public class BooleanTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void nonEmptyStringIsTrue() throws Exception {
-    List<?> hits = getByXpath("boolean('false')");
+    final List<?> hits = getByXpath("boolean('false')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }

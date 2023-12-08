@@ -37,11 +37,12 @@ public class WalkingIterator extends LocPathIterator {
    *     iterator and it doesn't wish to load child walkers.
    * @throws javax.xml.transform.TransformerException if any
    */
-  WalkingIterator(Compiler compiler, int opPos, int analysis, boolean shouldLoadWalkers)
+  WalkingIterator(
+      final Compiler compiler, final int opPos, final int analysis, final boolean shouldLoadWalkers)
       throws javax.xml.transform.TransformerException {
     super(analysis);
 
-    int firstStepPos = OpMap.getFirstChildPos(opPos);
+    final int firstStepPos = OpMap.getFirstChildPos(opPos);
 
     if (shouldLoadWalkers) {
       m_firstWalker = WalkerFactory.loadWalkers(this, compiler, firstStepPos);
@@ -54,7 +55,7 @@ public class WalkingIterator extends LocPathIterator {
    *
    * @param nscontext The namespace context for this iterator, should be OK if null.
    */
-  public WalkingIterator(PrefixResolver nscontext) {
+  public WalkingIterator(final PrefixResolver nscontext) {
 
     super(nscontext);
   }
@@ -67,7 +68,7 @@ public class WalkingIterator extends LocPathIterator {
       AxesWalker walker = m_firstWalker;
 
       while (null != walker) {
-        int bit = walker.getAnalysisBits();
+        final int bit = walker.getAnalysisBits();
         bits |= bit;
         walker = walker.getNextWalker();
       }
@@ -79,7 +80,7 @@ public class WalkingIterator extends LocPathIterator {
   @Override
   public Object clone() throws CloneNotSupportedException {
 
-    WalkingIterator clone = (WalkingIterator) super.clone();
+    final WalkingIterator clone = (WalkingIterator) super.clone();
     if (null != m_firstWalker) {
       clone.m_firstWalker = m_firstWalker.cloneDeep(clone, null);
     }
@@ -102,7 +103,7 @@ public class WalkingIterator extends LocPathIterator {
 
   /** {@inheritDoc} */
   @Override
-  public void setRoot(int context, Object environment) {
+  public void setRoot(final int context, final Object environment) {
 
     super.setRoot(context, environment);
 
@@ -136,7 +137,7 @@ public class WalkingIterator extends LocPathIterator {
    *
    * @param walker The last used walker, or null.
    */
-  public final void setLastUsedWalker(AxesWalker walker) {
+  public final void setLastUsedWalker(final AxesWalker walker) {
     m_lastUsedWalker = walker;
   }
 
@@ -166,7 +167,7 @@ public class WalkingIterator extends LocPathIterator {
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     if (visitor.visitLocationPath()) {
       if (null != m_firstWalker) {
         m_firstWalker.callVisitors(visitor);
@@ -190,7 +191,7 @@ public class WalkingIterator extends LocPathIterator {
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
     AxesWalker walker1 = m_firstWalker;

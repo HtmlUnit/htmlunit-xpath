@@ -84,7 +84,7 @@ public class DTMManagerDefault extends DTMManager {
    *     each DTM, this is 0; for overflow addressing it will be a multiple of
    *     1&lt;&lt;IDENT_DTM_NODE_BITS.
    */
-  public synchronized void addDTM(DTM dtm, int id, int offset) {
+  public synchronized void addDTM(final DTM dtm, final int id, final int offset) {
     if (id >= IDENT_MAX_DTMS) {
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NO_DTMIDS_AVAIL, null));
@@ -95,19 +95,19 @@ public class DTMManagerDefault extends DTMManager {
     // to allocate that much space unless needed. We could use one of our
     // handy-dandy Fast*Vectors, but this will do for now.
     // %REVIEW%
-    int oldlen = m_dtms.length;
+    final int oldlen = m_dtms.length;
     if (oldlen <= id) {
       // Various growth strategies are possible. I think we don't want
       // to over-allocate excessively, and I'm willing to reallocate
       // more often to get that. See also Fast*Vector classes.
       //
       // %REVIEW% Should throw a more diagnostic error if we go over the max...
-      int newlen = Math.min(id + 256, IDENT_MAX_DTMS);
+      final int newlen = Math.min(id + 256, IDENT_MAX_DTMS);
 
-      DTM[] new_m_dtms = new DTM[newlen];
+      final DTM[] new_m_dtms = new DTM[newlen];
       System.arraycopy(m_dtms, 0, new_m_dtms, 0, oldlen);
       m_dtms = new_m_dtms;
-      int[] new_m_dtm_offsets = new int[newlen];
+      final int[] new_m_dtm_offsets = new int[newlen];
       System.arraycopy(m_dtm_offsets, 0, new_m_dtm_offsets, 0, oldlen);
       m_dtm_offsets = new_m_dtm_offsets;
     }
@@ -120,7 +120,7 @@ public class DTMManagerDefault extends DTMManager {
 
   /** @return the first free DTM ID available. %OPT% Linear search is inefficient! */
   public synchronized int getFirstFreeDTMID() {
-    int n = m_dtms.length;
+    final int n = m_dtms.length;
     for (int i = 1; i < n; i++) {
       if (null == m_dtms[i]) {
         return i;
@@ -137,17 +137,20 @@ public class DTMManagerDefault extends DTMManager {
 
   @Override
   public synchronized DTM getDTM(
-      Source source, boolean unique, boolean incremental, boolean doIndexing) {
+      final Source source,
+      final boolean unique,
+      final boolean incremental,
+      final boolean doIndexing) {
 
     if (DEBUG && null != source)
       System.out.println(
           "Starting " + (unique ? "UNIQUE" : "shared") + " source: " + source.getSystemId());
 
-    int dtmPos = getFirstFreeDTMID();
-    int documentID = dtmPos << IDENT_DTM_NODE_BITS;
+    final int dtmPos = getFirstFreeDTMID();
+    final int documentID = dtmPos << IDENT_DTM_NODE_BITS;
 
     if ((null != source) && source instanceof DOMSource) {
-      DOM2DTM dtm = new DOM2DTM(this, (DOMSource) source, documentID, doIndexing);
+      final DOM2DTM dtm = new DOM2DTM(this, (DOMSource) source, documentID, doIndexing);
 
       addDTM(dtm, dtmPos, 0);
       return dtm;
@@ -162,7 +165,7 @@ public class DTMManagerDefault extends DTMManager {
 
   /** {@inheritDoc} */
   @Override
-  public synchronized int getDTMHandleFromNode(org.w3c.dom.Node node) {
+  public synchronized int getDTMHandleFromNode(final org.w3c.dom.Node node) {
     if (null == node)
       throw new IllegalArgumentException(
           XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODE_NON_NULL, null));
@@ -192,9 +195,9 @@ public class DTMManagerDefault extends DTMManager {
     // POSSIBLE SOLUTIONS:
     // Generate a list of _unique_ DTM objects?
     // Have each DTM cache last DOM node search?
-    for (DTM thisDTM : m_dtms) {
+    for (final DTM thisDTM : m_dtms) {
       if ((null != thisDTM) && thisDTM instanceof DOM2DTM) {
-        int handle = ((DOM2DTM) thisDTM).getHandleOfNode(node);
+        final int handle = ((DOM2DTM) thisDTM).getHandleOfNode(node);
         if (handle != DTM.NULL) return handle;
       }
     }
@@ -227,7 +230,8 @@ public class DTMManagerDefault extends DTMManager {
       root = p;
     }
 
-    DOM2DTM dtm = (DOM2DTM) getDTM(new javax.xml.transform.dom.DOMSource(root), false, true, true);
+    final DOM2DTM dtm =
+        (DOM2DTM) getDTM(new javax.xml.transform.dom.DOMSource(root), false, true, true);
 
     int handle;
 
@@ -249,11 +253,11 @@ public class DTMManagerDefault extends DTMManager {
 
   /** {@inheritDoc} */
   @Override
-  public synchronized DTM getDTM(int nodeHandle) {
+  public synchronized DTM getDTM(final int nodeHandle) {
     try {
       // Performance critical function.
       return m_dtms[nodeHandle >>> IDENT_DTM_NODE_BITS];
-    } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+    } catch (final java.lang.ArrayIndexOutOfBoundsException e) {
       if (nodeHandle == DTM.NULL) return null; // Accept as a special case.
       throw e; // Programming error; want to know about it.
     }

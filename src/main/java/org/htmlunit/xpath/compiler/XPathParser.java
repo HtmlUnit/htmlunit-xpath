@@ -59,7 +59,7 @@ public class XPathParser {
   protected static final int FILTER_MATCH_PREDICATES = 2;
 
   /** The parser constructor. */
-  public XPathParser(ErrorListener errorListener) {
+  public XPathParser(final ErrorListener errorListener) {
     m_errorListener = errorListener;
   }
 
@@ -75,14 +75,15 @@ public class XPathParser {
    * @param namespaceContext An object that is able to resolve prefixes in the XPath to namespaces.
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  public void initXPath(Compiler compiler, String expression, PrefixResolver namespaceContext)
+  public void initXPath(
+      final Compiler compiler, final String expression, final PrefixResolver namespaceContext)
       throws javax.xml.transform.TransformerException {
 
     m_ops = compiler;
     m_namespaceContext = namespaceContext;
     m_functionTable = compiler.getFunctionTable();
 
-    Lexer lexer = new Lexer(compiler, namespaceContext, this);
+    final Lexer lexer = new Lexer(compiler, namespaceContext, this);
 
     lexer.tokenize(expression, null);
 
@@ -104,7 +105,7 @@ public class XPathParser {
       Expr();
 
       if (null != m_token) {
-        StringBuilder extraTokens = new StringBuilder();
+        final StringBuilder extraTokens = new StringBuilder();
 
         while (null != m_token) {
           extraTokens.append("'").append(m_token).append("'");
@@ -117,7 +118,7 @@ public class XPathParser {
         error(XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS, new Object[] {extraTokens.toString()});
       }
 
-    } catch (org.htmlunit.xpath.XPathProcessorException e) {
+    } catch (final org.htmlunit.xpath.XPathProcessorException e) {
       if (CONTINUE_AFTER_FATAL_ERROR.equals(e.getMessage())) {
         // What I _want_ to do is null out this XPath.
         // I doubt this has the desired effect, but I'm not sure what else to do.
@@ -139,14 +140,14 @@ public class XPathParser {
    * @throws javax.xml.transform.TransformerException in case of error
    */
   public void initMatchPattern(
-      Compiler compiler, String expression, PrefixResolver namespaceContext)
+      final Compiler compiler, final String expression, final PrefixResolver namespaceContext)
       throws javax.xml.transform.TransformerException {
 
     m_ops = compiler;
     m_namespaceContext = namespaceContext;
     m_functionTable = compiler.getFunctionTable();
 
-    Lexer lexer = new Lexer(compiler, namespaceContext, this);
+    final Lexer lexer = new Lexer(compiler, namespaceContext, this);
 
     lexer.tokenize(expression, null);
 
@@ -157,7 +158,7 @@ public class XPathParser {
     Pattern();
 
     if (null != m_token) {
-      StringBuilder extraTokens = new StringBuilder();
+      final StringBuilder extraTokens = new StringBuilder();
 
       while (null != m_token) {
         extraTokens.append("'").append(m_token).append("'");
@@ -189,7 +190,7 @@ public class XPathParser {
    *
    * @param handler Reference to error listener where syntax errors will be sent.
    */
-  public void setErrorHandler(ErrorListener handler) {
+  public void setErrorHandler(final ErrorListener handler) {
     m_errorListener = handler;
   }
 
@@ -209,7 +210,7 @@ public class XPathParser {
    * @return If m_token is null, returns false (or true if s is also null), or return true if the
    *     current token matches the string, else false.
    */
-  final boolean tokenIs(String s) {
+  final boolean tokenIs(final String s) {
     return Objects.equals(m_token, s);
   }
 
@@ -219,7 +220,7 @@ public class XPathParser {
    * @param c A character to be tested.
    * @return If m_token is null, returns false, or return true if c matches the current token.
    */
-  final boolean tokenIs(char c) {
+  final boolean tokenIs(final char c) {
     return m_token != null && (m_tokenChar == c);
   }
 
@@ -230,13 +231,13 @@ public class XPathParser {
    * @param n number of tokens to look ahead. Must be greater than 1.
    * @return true if the next token matches the character argument.
    */
-  final boolean lookahead(char c, int n) {
+  final boolean lookahead(final char c, final int n) {
 
-    int pos = m_queueMark + n;
-    boolean b;
+    final int pos = m_queueMark + n;
+    final boolean b;
 
     if ((pos <= m_ops.getTokenQueueSize()) && (pos > 0) && (m_ops.getTokenQueueSize() != 0)) {
-      String tok = (String) m_ops.m_tokenQueue.get(pos - 1);
+      final String tok = (String) m_ops.m_tokenQueue.get(pos - 1);
 
       b = tok.length() == 1 && (tok.charAt(0) == c);
     } else {
@@ -253,12 +254,12 @@ public class XPathParser {
    * @param n number of tokens to lookahead. Must be greater than 1.
    * @return true if the token behind the current token matches the string argument.
    */
-  private boolean lookahead(String s, int n) {
+  private boolean lookahead(final String s, final int n) {
 
-    boolean isToken;
+    final boolean isToken;
 
     if ((m_queueMark + n) <= m_ops.getTokenQueueSize()) {
-      String lookahead = (String) m_ops.m_tokenQueue.get(m_queueMark + (n - 1));
+      final String lookahead = (String) m_ops.m_tokenQueue.get(m_queueMark + (n - 1));
 
       isToken = Objects.equals(lookahead, s);
     } else {
@@ -286,7 +287,8 @@ public class XPathParser {
    * @param expected the character to be expected.
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  private void consumeExpected(char expected) throws javax.xml.transform.TransformerException {
+  private void consumeExpected(final char expected)
+      throws javax.xml.transform.TransformerException {
 
     if (tokenIs(expected)) {
       nextToken();
@@ -310,12 +312,12 @@ public class XPathParser {
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
    */
-  void error(String msg, Object[] args) throws TransformerException {
+  void error(final String msg, final Object[] args) throws TransformerException {
 
-    String fmsg = XPATHMessages.createXPATHMessage(msg, args);
-    ErrorListener ehandler = this.getErrorListener();
+    final String fmsg = XPATHMessages.createXPATHMessage(msg, args);
+    final ErrorListener ehandler = this.getErrorListener();
 
-    TransformerException te = new TransformerException(fmsg);
+    final TransformerException te = new TransformerException(fmsg);
     if (null != ehandler) {
       ehandler.fatalError(te);
     } else {
@@ -331,13 +333,13 @@ public class XPathParser {
   protected String dumpRemainingTokenQueue() {
 
     int q = m_queueMark;
-    String returnMsg;
+    final String returnMsg;
 
     if (q < m_ops.getTokenQueueSize()) {
-      StringBuilder msg = new StringBuilder("\n Remaining tokens: (");
+      final StringBuilder msg = new StringBuilder("\n Remaining tokens: (");
 
       while (q < m_ops.getTokenQueueSize()) {
-        String t = (String) m_ops.m_tokenQueue.get(q++);
+        final String t = (String) m_ops.m_tokenQueue.get(q++);
 
         msg.append(" '").append(t).append("'");
       }
@@ -358,7 +360,7 @@ public class XPathParser {
    *     org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed by an external
    *     module.
    */
-  final int getFunctionToken(String key) {
+  final int getFunctionToken(final String key) {
 
     int tok;
 
@@ -385,9 +387,9 @@ public class XPathParser {
    * @param length The length of the operation space in the op map.
    * @param op The op code to the inserted.
    */
-  void insertOp(int pos, int length, int op) {
+  void insertOp(final int pos, final int length, final int op) {
 
-    int totalLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int totalLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     for (int i = totalLen - 1; i >= pos; i--) {
       m_ops.setOp(i + length, m_ops.getOp(i));
@@ -404,9 +406,9 @@ public class XPathParser {
    * @param length The length of the operation.
    * @param op The op code to the inserted.
    */
-  void appendOp(int length, int op) {
+  void appendOp(final int length, final int op) {
 
-    int totalLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int totalLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     m_ops.setOp(totalLen, op);
     m_ops.setOp(totalLen + OpMap.MAPINDEX_LENGTH, length);
@@ -431,7 +433,7 @@ public class XPathParser {
    */
   protected void OrExpr() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     AndExpr();
 
@@ -451,7 +453,7 @@ public class XPathParser {
    */
   protected void AndExpr() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     EqualityExpr(-1);
 
@@ -473,7 +475,7 @@ public class XPathParser {
    */
   protected int EqualityExpr(int addPos) throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     if (-1 == addPos) addPos = opPos;
 
@@ -485,7 +487,7 @@ public class XPathParser {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_NOTEQUALS);
 
-        int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
+        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
 
         addPos = EqualityExpr(addPos);
         m_ops.setOp(
@@ -496,7 +498,7 @@ public class XPathParser {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_EQUALS);
 
-        int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
+        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
 
         addPos = EqualityExpr(addPos);
         m_ops.setOp(
@@ -519,7 +521,7 @@ public class XPathParser {
    */
   protected int RelationalExpr(int addPos) throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     if (-1 == addPos) addPos = opPos;
 
@@ -536,7 +538,7 @@ public class XPathParser {
           insertOp(addPos, 2, OpCodes.OP_LT);
         }
 
-        int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
+        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
 
         addPos = RelationalExpr(addPos);
         m_ops.setOp(
@@ -553,7 +555,7 @@ public class XPathParser {
           insertOp(addPos, 2, OpCodes.OP_GT);
         }
 
-        int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
+        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
 
         addPos = RelationalExpr(addPos);
         m_ops.setOp(
@@ -579,7 +581,7 @@ public class XPathParser {
    */
   protected int AdditiveExpr(int addPos) throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     if (-1 == addPos) addPos = opPos;
 
@@ -590,7 +592,7 @@ public class XPathParser {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_PLUS);
 
-        int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
+        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
 
         addPos = AdditiveExpr(addPos);
         m_ops.setOp(
@@ -601,7 +603,7 @@ public class XPathParser {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_MINUS);
 
-        int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
+        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
 
         addPos = AdditiveExpr(addPos);
         m_ops.setOp(
@@ -628,7 +630,7 @@ public class XPathParser {
    */
   protected int MultiplicativeExpr(int addPos) throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     if (-1 == addPos) addPos = opPos;
 
@@ -639,7 +641,7 @@ public class XPathParser {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_MULT);
 
-        int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
+        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
 
         addPos = MultiplicativeExpr(addPos);
         m_ops.setOp(
@@ -650,7 +652,7 @@ public class XPathParser {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_DIV);
 
-        int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
+        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
 
         addPos = MultiplicativeExpr(addPos);
         m_ops.setOp(
@@ -661,7 +663,7 @@ public class XPathParser {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_MOD);
 
-        int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
+        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
 
         addPos = MultiplicativeExpr(addPos);
         m_ops.setOp(
@@ -672,7 +674,7 @@ public class XPathParser {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_QUO);
 
-        int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
+        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
 
         addPos = MultiplicativeExpr(addPos);
         m_ops.setOp(
@@ -692,7 +694,7 @@ public class XPathParser {
    */
   protected void UnaryExpr() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
     boolean isNeg = false;
 
     if (m_tokenChar == '-') {
@@ -715,7 +717,7 @@ public class XPathParser {
    */
   protected void StringExpr() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     appendOp(2, OpCodes.OP_STRING);
     Expr();
@@ -730,12 +732,12 @@ public class XPathParser {
    */
   protected void BooleanExpr() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     appendOp(2, OpCodes.OP_BOOL);
     Expr();
 
-    int opLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos;
+    final int opLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos;
 
     if (opLen == 2) {
       error(XPATHErrorResources.ER_BOOLEAN_ARG_NO_LONGER_OPTIONAL, null);
@@ -751,7 +753,7 @@ public class XPathParser {
    */
   protected void NumberExpr() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     appendOp(2, OpCodes.OP_NUMBER);
     Expr();
@@ -770,8 +772,8 @@ public class XPathParser {
    */
   protected void UnionExpr() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
-    boolean continueOrLoop = true;
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final boolean continueOrLoop = true;
     boolean foundUnion = false;
 
     do {
@@ -803,9 +805,9 @@ public class XPathParser {
    */
   protected void PathExpr() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    int filterExprMatch = FilterExpr();
+    final int filterExprMatch = FilterExpr();
 
     if (filterExprMatch != FILTER_MATCH_FAILED) {
       // If FilterExpr had Predicates, a OP_LOCATIONPATH opcode would already
@@ -849,9 +851,9 @@ public class XPathParser {
    */
   protected int FilterExpr() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    int filterMatch;
+    final int filterMatch;
 
     if (PrimaryExpr()) {
       if (tokenIs('[')) {
@@ -887,8 +889,8 @@ public class XPathParser {
    */
   protected boolean PrimaryExpr() throws javax.xml.transform.TransformerException {
 
-    boolean matchFound;
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final boolean matchFound;
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     if ((m_tokenChar == '\'') || (m_tokenChar == '"')) {
       appendOp(2, OpCodes.OP_LITERAL);
@@ -939,7 +941,7 @@ public class XPathParser {
    */
   protected void Argument() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     appendOp(2, OpCodes.OP_ARGUMENT);
     Expr();
@@ -955,9 +957,9 @@ public class XPathParser {
    */
   protected boolean FunctionCall() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    int funcTok = getFunctionToken(m_token);
+    final int funcTok = getFunctionToken(m_token);
 
     if (-1 == funcTok) {
       error(XPATHErrorResources.ER_COULDNOT_FIND_FUNCTION, new Object[] {m_token});
@@ -1015,12 +1017,12 @@ public class XPathParser {
    */
   protected void LocationPath() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     // int locationPathOpPos = opPos;
     appendOp(2, OpCodes.OP_LOCATIONPATH);
 
-    boolean seenSlash = tokenIs('/');
+    final boolean seenSlash = tokenIs('/');
 
     if (seenSlash) {
       appendOp(4, OpCodes.FROM_ROOT);
@@ -1077,7 +1079,7 @@ public class XPathParser {
   protected boolean Step() throws javax.xml.transform.TransformerException {
     int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    boolean doubleSlash = tokenIs('/');
+    final boolean doubleSlash = tokenIs('/');
 
     // At most a single '/' before each Step is consumed by caller; if the
     // first thing is a '/', that means we had '//' and the Step must not
@@ -1161,8 +1163,8 @@ public class XPathParser {
    */
   protected void Basis() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
-    int axesType;
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int axesType;
 
     // The next blocks guarantee that a FROM_XXX will be added.
     if (lookahead("::", 1)) {
@@ -1198,13 +1200,13 @@ public class XPathParser {
    */
   protected int AxisName() throws javax.xml.transform.TransformerException {
 
-    Object val = Keywords.getAxisName(m_token);
+    final Object val = Keywords.getAxisName(m_token);
 
     if (null == val) {
       error(XPATHErrorResources.ER_ILLEGAL_AXIS_NAME, new Object[] {m_token});
     }
 
-    int axesType = ((Integer) val).intValue();
+    final int axesType = ((Integer) val).intValue();
 
     appendOp(2, axesType);
 
@@ -1217,17 +1219,17 @@ public class XPathParser {
    * @param axesType FROM_XXX axes type, found in {@link org.htmlunit.xpath.compiler.Keywords}.
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  protected void NodeTest(int axesType) throws javax.xml.transform.TransformerException {
+  protected void NodeTest(final int axesType) throws javax.xml.transform.TransformerException {
 
     if (lookahead('(', 1)) {
-      Object nodeTestOp = Keywords.getNodeType(m_token);
+      final Object nodeTestOp = Keywords.getNodeType(m_token);
 
       if (null == nodeTestOp) {
         error(XPATHErrorResources.ER_UNKNOWN_NODETYPE, new Object[] {m_token});
       } else {
         nextToken();
 
-        int nt = ((Integer) nodeTestOp).intValue();
+        final int nt = ((Integer) nodeTestOp).intValue();
 
         m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), nt);
         m_ops.setOp(OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) + 1);
@@ -1308,7 +1310,7 @@ public class XPathParser {
    */
   protected void PredicateExpr() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     appendOp(2, OpCodes.OP_PREDICATE);
     Expr();
@@ -1365,19 +1367,19 @@ public class XPathParser {
    */
   protected void Literal() throws javax.xml.transform.TransformerException {
 
-    int last = m_token.length() - 1;
-    char c0 = m_tokenChar;
-    char cX = m_token.charAt(last);
+    final int last = m_token.length() - 1;
+    final char c0 = m_tokenChar;
+    final char cX = m_token.charAt(last);
 
     if (((c0 == '\"') && (cX == '\"')) || ((c0 == '\'') && (cX == '\''))) {
 
       // Mutate the token to remove the quotes and have the XString object
       // already made.
-      int tokenQueuePos = m_queueMark - 1;
+      final int tokenQueuePos = m_queueMark - 1;
 
       m_ops.m_tokenQueue.set(tokenQueuePos, null);
 
-      Object obj = new XString(m_token.substring(1, last));
+      final Object obj = new XString(m_token.substring(1, last));
 
       m_ops.m_tokenQueue.set(tokenQueuePos, obj);
 
@@ -1409,7 +1411,7 @@ public class XPathParser {
         if ((m_token.indexOf('e') > -1) || (m_token.indexOf('E') > -1))
           throw new NumberFormatException();
         num = Double.valueOf(m_token).doubleValue();
-      } catch (NumberFormatException nfe) {
+      } catch (final NumberFormatException nfe) {
         num = 0.0; // to shut up compiler.
 
         error(XPATHErrorResources.ER_COULDNOT_BE_FORMATTED_TO_NUMBER, new Object[] {m_token});
@@ -1451,7 +1453,7 @@ public class XPathParser {
    */
   protected void LocationPathPattern() throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
     final int RELATIVE_PATH_NOT_PERMITTED = 0;
     final int RELATIVE_PATH_PERMITTED = 1;
@@ -1560,7 +1562,7 @@ public class XPathParser {
    * @return boolean indicating whether a slash following the step was consumed
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  protected boolean StepPattern(boolean isLeadingSlashPermitted)
+  protected boolean StepPattern(final boolean isLeadingSlashPermitted)
       throws javax.xml.transform.TransformerException {
     return AbbreviatedNodeTestStep(isLeadingSlashPermitted);
   }
@@ -1573,11 +1575,11 @@ public class XPathParser {
    * @return boolean indicating whether a slash following the step was consumed
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  protected boolean AbbreviatedNodeTestStep(boolean isLeadingSlashPermitted)
+  protected boolean AbbreviatedNodeTestStep(final boolean isLeadingSlashPermitted)
       throws javax.xml.transform.TransformerException {
 
-    int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
-    int axesType;
+    final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
+    final int axesType;
 
     // The next blocks guarantee that a MATCH_XXX will be added.
     int matchTypePos = -1;
@@ -1632,7 +1634,7 @@ public class XPathParser {
       Predicate();
     }
 
-    boolean trailingSlashConsumed;
+    final boolean trailingSlashConsumed;
 
     // For "a//b", where "a" is current step, we need to mark operation of
     // current step as "MATCH_ANY_ANCESTOR". Then we'll consume the first

@@ -29,7 +29,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringOfNumber() throws Exception {
-    List<?> hits = getByXpath("substring(1234, 3)");
+    final List<?> hits = getByXpath("substring(1234, 3)");
     assertEquals(1, hits.size());
     assertEquals("34", hits.get(0));
   }
@@ -37,7 +37,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringOfNumber2() throws Exception {
-    List<?> hits = getByXpath("substring(1234, 2, 3)");
+    final List<?> hits = getByXpath("substring(1234, 2, 3)");
     assertEquals(1, hits.size());
     assertEquals("234", hits.get(0));
   }
@@ -45,7 +45,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void unusualSubstring1() throws Exception {
-    List<?> hits = getByXpath("substring('12345', 1.5, 2.6)");
+    final List<?> hits = getByXpath("substring('12345', 1.5, 2.6)");
     assertEquals(1, hits.size());
     assertEquals("234", hits.get(0));
   }
@@ -53,7 +53,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void unusualSubstring2() throws Exception {
-    List<?> hits = getByXpath("substring('12345', 0, 3)");
+    final List<?> hits = getByXpath("substring('12345', 0, 3)");
     assertEquals(1, hits.size());
     assertEquals("12", hits.get(0));
   }
@@ -61,7 +61,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void unusualSubstring3() throws Exception {
-    List<?> hits = getByXpath("substring('12345', 0 div 0, 3)");
+    final List<?> hits = getByXpath("substring('12345', 0 div 0, 3)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -69,7 +69,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void unusualSubstring4() throws Exception {
-    List<?> hits = getByXpath("substring('12345', 1, 0 div 0)");
+    final List<?> hits = getByXpath("substring('12345', 1, 0 div 0)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -77,7 +77,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void unusualSubstring5() throws Exception {
-    List<?> hits = getByXpath("substring('12345', -42, 1 div 0)");
+    final List<?> hits = getByXpath("substring('12345', -42, 1 div 0)");
     assertEquals(1, hits.size());
     assertEquals("12345", hits.get(0));
   }
@@ -85,7 +85,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void unusualSubstring6() throws Exception {
-    List<?> hits = getByXpath("substring('12345', -1 div 0, 1 div 0)");
+    final List<?> hits = getByXpath("substring('12345', -1 div 0, 1 div 0)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -93,7 +93,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringOfNaN() throws Exception {
-    List<?> hits = getByXpath("substring(0 div 0, 2)");
+    final List<?> hits = getByXpath("substring(0 div 0, 2)");
     assertEquals(1, hits.size());
     assertEquals("aN", hits.get(0));
   }
@@ -101,7 +101,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringOfEmptyString() throws Exception {
-    List<?> hits = getByXpath("substring('', 2)");
+    final List<?> hits = getByXpath("substring('', 2)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -109,7 +109,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringLengthZero() throws Exception {
-    List<?> hits = getByXpath("substring('12345', 2, 0)");
+    final List<?> hits = getByXpath("substring('12345', 2, 0)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -117,7 +117,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringWithNegativeLength() throws Exception {
-    List<?> hits = getByXpath("substring('12345', 2, -3)");
+    final List<?> hits = getByXpath("substring('12345', 2, -3)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -125,7 +125,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringWithNegativeLength2() throws Exception {
-    List<?> hits = getByXpath("substring('12345', 2, -1)");
+    final List<?> hits = getByXpath("substring('12345', 2, -1)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -133,7 +133,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringWithExcessiveLength() throws Exception {
-    List<?> hits = getByXpath("substring('12345', 2, 32)");
+    final List<?> hits = getByXpath("substring('12345', 2, 32)");
     assertEquals(1, hits.size());
     assertEquals("2345", hits.get(0));
   }
@@ -141,7 +141,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringNegativeStartNoLength() throws Exception {
-    List<?> hits = getByXpath("substring('Hello', -50)");
+    final List<?> hits = getByXpath("substring('Hello', -50)");
     assertEquals(1, hits.size());
     assertEquals("Hello", hits.get(0));
   }
@@ -149,7 +149,7 @@ public class SubstringTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringNegativeStartWithLength() throws Exception {
-    List<?> hits = getByXpath("substring('Hello', -50, 20)");
+    final List<?> hits = getByXpath("substring('Hello', -50, 20)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }

@@ -29,14 +29,14 @@ public class IdTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void idFunctionSelectsNothingInDocumentWithNoIds() throws Exception {
-    List<?> hits = getByXpath("id('rootId')");
+    final List<?> hits = getByXpath("id('rootId')");
     assertEquals(0, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void id() throws Exception {
-    List<?> hits =
+    final List<?> hits =
         getByXpath(
             "<!DOCTYPE root [<!ATTLIST a id ID #REQUIRED>]><root><a id='myId'/></root>",
             "id('myId')");
@@ -46,7 +46,7 @@ public class IdTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void findMultipleElementsByMultipleIDs() throws Exception {
-    List<?> hits =
+    final List<?> hits =
         getByXpath(
             "<!DOCTYPE root [<!ATTLIST a id ID #REQUIRED>]><root><id>p1</id><id>p2</id><id>p3</id><a id='p1'/><a id='p2'/></root>",
             "id(//id)");
@@ -56,7 +56,7 @@ public class IdTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void returnsFirstElementWithMatchingId() throws Exception {
-    List<?> hits =
+    final List<?> hits =
         getByXpath(
             "<!DOCTYPE root [<!ATTLIST a id ID #REQUIRED><!ATTLIST b id ID #REQUIRED>]><root><a id='p1'/><b id='p1'/></root>",
             "id('p1')");

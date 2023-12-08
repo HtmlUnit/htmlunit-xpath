@@ -34,7 +34,7 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
    * @param analysis Analysis bits.
    * @throws javax.xml.transform.TransformerException if any
    */
-  SelfIteratorNoPredicate(int analysis) throws javax.xml.transform.TransformerException {
+  SelfIteratorNoPredicate(final int analysis) throws javax.xml.transform.TransformerException {
     super(analysis);
   }
 
@@ -43,7 +43,7 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
   public int nextNode() {
     if (m_foundLast) return DTM.NULL;
 
-    int next;
+    final int next;
 
     m_lastFetched = next = (DTM.NULL == m_lastFetched) ? m_context : DTM.NULL;
 
@@ -60,13 +60,13 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
 
   /** {@inheritDoc} */
   @Override
-  public int asNode(XPathContext xctxt) {
+  public int asNode(final XPathContext xctxt) {
     return xctxt.getCurrentNode();
   }
 
   /** {@inheritDoc} */
   @Override
-  public int getLastPos(XPathContext xctxt) {
+  public int getLastPos(final XPathContext xctxt) {
     return 1;
   }
 }

@@ -29,7 +29,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void numbersThatBeginWithADecimalPoint2() throws Exception {
-    List<?> hits = getByXpath(".5 > .4");
+    final List<?> hits = getByXpath(".5 > .4");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -37,7 +37,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void numbersThatBeginWithADecimalPoint() throws Exception {
-    List<?> hits = getByXpath(".3 <= .4 <= 1.1");
+    final List<?> hits = getByXpath(".3 <= .4 <= 1.1");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -45,7 +45,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void leftAssociativityOfLessThanOrEqual() throws Exception {
-    List<?> hits = getByXpath(".3 <= .4 <= 0.9");
+    final List<?> hits = getByXpath(".3 <= .4 <= 0.9");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -53,7 +53,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void negativeZeroNotEqualsZero() throws Exception {
-    List<?> hits = getByXpath("0 != -0");
+    final List<?> hits = getByXpath("0 != -0");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -61,7 +61,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void negativeZeroEqualsZero() throws Exception {
-    List<?> hits = getByXpath("0 = -0");
+    final List<?> hits = getByXpath("0 = -0");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -69,7 +69,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void zeroGreaterThanOrEqualsToNegativeZero() throws Exception {
-    List<?> hits = getByXpath("0 >= -0");
+    final List<?> hits = getByXpath("0 >= -0");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -77,7 +77,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void zeroLessThanOrEqualToNegativeZero() throws Exception {
-    List<?> hits = getByXpath("0 <= -0");
+    final List<?> hits = getByXpath("0 <= -0");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -85,7 +85,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void negativeZeroNotLessThanZero() throws Exception {
-    List<?> hits = getByXpath("-0 < 0");
+    final List<?> hits = getByXpath("-0 < 0");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -93,7 +93,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void naNNotEqualsString() throws Exception {
-    List<?> hits = getByXpath("(0.0 div 0.0) != 'foo'");
+    final List<?> hits = getByXpath("(0.0 div 0.0) != 'foo'");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -101,7 +101,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void naNEqualsString() throws Exception {
-    List<?> hits = getByXpath("(0.0 div 0.0) = 'foo'");
+    final List<?> hits = getByXpath("(0.0 div 0.0) = 'foo'");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -109,7 +109,7 @@ public class ArithmeticsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void equalityPrecedence() throws Exception {
-    List<?> hits = getByXpath("1.5 = 2.3 = 2.3");
+    final List<?> hits = getByXpath("1.5 = 2.3 = 2.3");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }

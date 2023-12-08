@@ -56,10 +56,10 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
    *
    * @param dtmIterator the iterator to be cloned
    */
-  public DTMNodeIterator(DTMIterator dtmIterator) {
+  public DTMNodeIterator(final DTMIterator dtmIterator) {
     try {
       dtm_iter = (DTMIterator) dtmIterator.clone();
-    } catch (CloneNotSupportedException cnse) {
+    } catch (final CloneNotSupportedException cnse) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(cnse);
     }
   }
@@ -88,7 +88,7 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
   /** {@inheritDoc} */
   @Override
   public Node getRoot() {
-    int handle = dtm_iter.getRoot();
+    final int handle = dtm_iter.getRoot();
     return dtm_iter.getDTM(handle).getNode(handle);
   }
 
@@ -103,7 +103,7 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
   public Node nextNode() throws DOMException {
     if (!valid) throw new DOMException(DOMException.INVALID_STATE_ERR, "");
 
-    int handle = dtm_iter.nextNode();
+    final int handle = dtm_iter.nextNode();
     if (handle == DTM.NULL) return null;
     return dtm_iter.getDTM(handle).getNode(handle);
   }
@@ -113,7 +113,7 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
   public Node previousNode() {
     if (!valid) throw new DOMException(DOMException.INVALID_STATE_ERR, "");
 
-    int handle = dtm_iter.previousNode();
+    final int handle = dtm_iter.previousNode();
     if (handle == DTM.NULL) return null;
     return dtm_iter.getDTM(handle).getNode(handle);
   }

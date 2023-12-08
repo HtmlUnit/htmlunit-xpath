@@ -29,7 +29,7 @@ public class StartsWithTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void startsWithNumber() throws Exception {
-    List<?> hits = getByXpath("starts-with(33, '3')");
+    final List<?> hits = getByXpath("starts-with(33, '3')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -37,7 +37,7 @@ public class StartsWithTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void startsWithNumberAll() throws Exception {
-    List<?> hits = getByXpath("starts-with(12.34, '12.34')");
+    final List<?> hits = getByXpath("starts-with(12.34, '12.34')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -45,7 +45,7 @@ public class StartsWithTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void startsWithNumberNot() throws Exception {
-    List<?> hits = getByXpath("starts-with(34, '4')");
+    final List<?> hits = getByXpath("starts-with(34, '4')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -53,7 +53,7 @@ public class StartsWithTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void startsWithString() throws Exception {
-    List<?> hits = getByXpath("starts-with('test', 'te')");
+    final List<?> hits = getByXpath("starts-with('test', 'te')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -61,7 +61,7 @@ public class StartsWithTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void startsWithStringAll() throws Exception {
-    List<?> hits = getByXpath("starts-with('xpath', 'xpath')");
+    final List<?> hits = getByXpath("starts-with('xpath', 'xpath')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -69,7 +69,7 @@ public class StartsWithTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void startsWithStringNot() throws Exception {
-    List<?> hits = getByXpath("starts-with('xpath', 'y')");
+    final List<?> hits = getByXpath("starts-with('xpath', 'y')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -77,7 +77,7 @@ public class StartsWithTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void emptyStringStartsWithNonEmptyString() throws Exception {
-    List<?> hits = getByXpath("starts-with('', 'y')");
+    final List<?> hits = getByXpath("starts-with('', 'y')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -85,7 +85,7 @@ public class StartsWithTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void emptyStringStartsWithEmptyString() throws Exception {
-    List<?> hits = getByXpath("starts-with('', '')");
+    final List<?> hits = getByXpath("starts-with('', '')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -93,7 +93,7 @@ public class StartsWithTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void startsWithEmptyString() throws Exception {
-    List<?> hits = getByXpath("starts-with('xpath', '')");
+    final List<?> hits = getByXpath("starts-with('xpath', '')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }

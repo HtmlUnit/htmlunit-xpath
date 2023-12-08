@@ -35,7 +35,7 @@ public class WrappedRuntimeException extends RuntimeException {
    *
    * @param e Primary checked exception
    */
-  public WrappedRuntimeException(Exception e) {
+  public WrappedRuntimeException(final Exception e) {
 
     super(e.getMessage());
 

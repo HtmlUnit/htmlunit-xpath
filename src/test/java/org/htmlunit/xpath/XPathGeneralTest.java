@@ -29,84 +29,86 @@ public class XPathGeneralTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void simpleSearch() throws Exception {
-    List<?> hits = getByXpath("<root><element/></root>", "//element");
+    final List<?> hits = getByXpath("<root><element/></root>", "//element");
     assertEquals(1, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void pipeSearch() throws Exception {
-    List<?> hits = getByXpath("<root><element/><element2/></root>", "//element | //element2");
+    final List<?> hits = getByXpath("<root><element/><element2/></root>", "//element | //element2");
     assertEquals(2, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void mathSearch() throws Exception {
-    List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()=(1+5-(2*2))div 2]");
+    final List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()=(1+5-(2*2))div 2]");
     assertEquals(1, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void gtSearch() throws Exception {
-    List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()>1]");
+    final List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()>1]");
     assertEquals(1, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void gteSearch() throws Exception {
-    List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()>=1]");
+    final List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()>=1]");
     assertEquals(2, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void ltSearch() throws Exception {
-    List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()<2]");
+    final List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()<2]");
     assertEquals(1, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void lteSearch() throws Exception {
-    List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()<=2]");
+    final List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()<=2]");
     assertEquals(2, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void eqSearch() throws Exception {
-    List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()=2]");
+    final List<?> hits = getByXpath("<root><p/><p/></root>", "//p[position()=2]");
     assertEquals(1, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void neqSearch() throws Exception {
-    List<?> hits = getByXpath("<root><p/><p/><p/><p/></root>", "//p[position()!=2]");
+    final List<?> hits = getByXpath("<root><p/><p/><p/><p/></root>", "//p[position()!=2]");
     assertEquals(3, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void andSearch() throws Exception {
-    List<?> hits = getByXpath("<root><p a='1' b='2'/><p/><p/><p/></root>", "//p[@a=1 and @b=2]");
+    final List<?> hits =
+        getByXpath("<root><p a='1' b='2'/><p/><p/><p/></root>", "//p[@a=1 and @b=2]");
     assertEquals(1, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void orSearch() throws Exception {
-    List<?> hits = getByXpath("<root><p a='1'/><p b='2'/><p/><p/></root>", "//p[@a=1 or @b=2]");
+    final List<?> hits =
+        getByXpath("<root><p a='1'/><p b='2'/><p/><p/></root>", "//p[@a=1 or @b=2]");
     assertEquals(2, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void modSearch() throws Exception {
-    List<?> hits =
+    final List<?> hits =
         getByXpath("<root><p a='1'/><p a='2'/><p a='3'/><p a='4'/></root>", "//p[@a mod 2 = 0]");
     assertEquals(2, hits.size());
   }
@@ -114,7 +116,7 @@ public class XPathGeneralTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void numberSearch() throws Exception {
-    List<?> hits =
+    final List<?> hits =
         getByXpath(
             "<root><p a='1'/><p a='2'/><p a='3'/><p a='4'/></root>", "//p[@a=number('  4\t')]");
     assertEquals(1, hits.size());
@@ -123,14 +125,16 @@ public class XPathGeneralTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void attributeSearch() throws Exception {
-    List<?> hits = getByXpath("<root><p/><p name='test'/><p/><p/></root>", "//p[@name='test']");
+    final List<?> hits =
+        getByXpath("<root><p/><p name='test'/><p/><p/></root>", "//p[@name='test']");
     assertEquals(1, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void attributeSearchDoubleQuotes() throws Exception {
-    List<?> hits = getByXpath("<root><p/><p name='test'/><p/><p/></root>", "//p[@name=\"test\"]");
+    final List<?> hits =
+        getByXpath("<root><p/><p name='test'/><p/><p/></root>", "//p[@name=\"test\"]");
     assertEquals(1, hits.size());
   }
 
@@ -143,7 +147,7 @@ public class XPathGeneralTest extends AbstractXPathTest {
             + "<a id='a2'><img src='1.gif'></img></a>"
             + "</html>";
 
-    List<?> hits = getByXpath(xml, "(/html/a/img[contains(@src,'gif')])[2]/..");
+    final List<?> hits = getByXpath(xml, "(/html/a/img[contains(@src,'gif')])[2]/..");
     assertEquals(1, hits.size());
     assertEquals("a2", ((Element) hits.get(0)).getAttribute("id"));
   }
@@ -151,21 +155,21 @@ public class XPathGeneralTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void pathWithParentheses() throws Exception {
-    List<?> hits = getByXpath("<root><child></child></root>", "(/root)/child");
+    final List<?> hits = getByXpath("<root><child></child></root>", "(/root)/child");
     assertEquals(1, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void evaluateWithMultiNodeAnswer() throws Exception {
-    List<?> hits = getByXpath("(/descendant-or-self::node())");
+    final List<?> hits = getByXpath("(/descendant-or-self::node())");
     assertEquals(2, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void evaluateString() throws Exception {
-    List<?> hits = getByXpath("string(/*)");
+    final List<?> hits = getByXpath("string(/*)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }

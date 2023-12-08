@@ -31,13 +31,13 @@ public class ContextMatchStepPattern extends StepPattern {
    * @param axis the axis
    * @param paxis the p axis
    */
-  public ContextMatchStepPattern(int axis, int paxis) {
+  public ContextMatchStepPattern(final int axis, final int paxis) {
     super(DTMFilter.SHOW_ALL, axis);
   }
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     if (DTM.NULL == xctxt.getCurrentNode()) {
       return getStaticScore();

@@ -29,7 +29,7 @@ public class ConcatTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void concat() throws Exception {
-    List<?> hits = getByXpath("concat('a', 'b')");
+    final List<?> hits = getByXpath("concat('a', 'b')");
     assertEquals(1, hits.size());
     assertEquals("ab", hits.get(0));
   }
@@ -37,7 +37,7 @@ public class ConcatTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void concatMany() throws Exception {
-    List<?> hits = getByXpath("concat('a', 'b', 'c', 'd')");
+    final List<?> hits = getByXpath("concat('a', 'b', 'c', 'd')");
     assertEquals(1, hits.size());
     assertEquals("abcd", hits.get(0));
   }

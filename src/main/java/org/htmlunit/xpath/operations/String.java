@@ -24,7 +24,7 @@ public class String extends UnaryOperation {
 
   /** {@inheritDoc} */
   @Override
-  public XObject operate(XObject right) throws javax.xml.transform.TransformerException {
+  public XObject operate(final XObject right) throws javax.xml.transform.TransformerException {
     return right.xstr(); // semi-safe cast.
   }
 }

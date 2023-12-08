@@ -28,12 +28,12 @@ public class FuncSubstring extends Function3Args {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    XString s1 = m_arg0.execute(xctxt).xstr();
+    final XString s1 = m_arg0.execute(xctxt).xstr();
     double start = m_arg1.execute(xctxt).num();
-    int lenOfS1 = s1.length();
-    XString substr;
+    final int lenOfS1 = s1.length();
+    final XString substr;
 
     if (lenOfS1 <= 0) {
       return XString.EMPTYSTRING;
@@ -53,7 +53,7 @@ public class FuncSubstring extends Function3Args {
     }
 
     if (null != m_arg2) {
-      double len = m_arg2.num(xctxt);
+      final double len = m_arg2.num(xctxt);
       if (len < 1) {
         return XString.EMPTYSTRING;
       }
@@ -77,7 +77,7 @@ public class FuncSubstring extends Function3Args {
 
   /** {@inheritDoc} */
   @Override
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
+  public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
     if (argNum < 2) reportWrongNumberArgs();
   }
 

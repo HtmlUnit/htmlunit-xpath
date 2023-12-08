@@ -29,7 +29,7 @@ public class SubstringAfterTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringAfterNumber() throws Exception {
-    List<?> hits = getByXpath("substring-after(1234, 3)");
+    final List<?> hits = getByXpath("substring-after(1234, 3)");
     assertEquals(1, hits.size());
     assertEquals("4", hits.get(0));
   }
@@ -37,7 +37,7 @@ public class SubstringAfterTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringAfterNumberFirst() throws Exception {
-    List<?> hits = getByXpath("substring-after(12444, 4)");
+    final List<?> hits = getByXpath("substring-after(12444, 4)");
     assertEquals(1, hits.size());
     assertEquals("44", hits.get(0));
   }
@@ -45,7 +45,7 @@ public class SubstringAfterTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringAfterNumberUnknown() throws Exception {
-    List<?> hits = getByXpath("substring-after(1234, 7)");
+    final List<?> hits = getByXpath("substring-after(1234, 7)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -53,7 +53,7 @@ public class SubstringAfterTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringAfterString() throws Exception {
-    List<?> hits = getByXpath("substring-after('test', 'es')");
+    final List<?> hits = getByXpath("substring-after('test', 'es')");
     assertEquals(1, hits.size());
     assertEquals("t", hits.get(0));
   }
@@ -61,7 +61,7 @@ public class SubstringAfterTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringAfterStringWhole() throws Exception {
-    List<?> hits = getByXpath("substring-after('test', 'test')");
+    final List<?> hits = getByXpath("substring-after('test', 'test')");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -69,7 +69,7 @@ public class SubstringAfterTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringAfterStringNotFound() throws Exception {
-    List<?> hits = getByXpath("substring-after('test', 'tex')");
+    final List<?> hits = getByXpath("substring-after('test', 'tex')");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -77,7 +77,7 @@ public class SubstringAfterTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringAfterStringEmpty() throws Exception {
-    List<?> hits = getByXpath("substring-after('', 'o')");
+    final List<?> hits = getByXpath("substring-after('', 'o')");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -85,7 +85,7 @@ public class SubstringAfterTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringAfterStringEmptyEmpty() throws Exception {
-    List<?> hits = getByXpath("substring-after('', '')");
+    final List<?> hits = getByXpath("substring-after('', '')");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -93,7 +93,7 @@ public class SubstringAfterTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringAfterStringEmptySearch() throws Exception {
-    List<?> hits = getByXpath("substring-after('text', '')");
+    final List<?> hits = getByXpath("substring-after('text', '')");
     assertEquals(1, hits.size());
     assertEquals("text", hits.get(0));
   }

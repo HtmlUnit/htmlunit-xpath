@@ -29,7 +29,7 @@ public class TranslateTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void translate() throws Exception {
-    List<?> hits = getByXpath("translate('abc', 'b', 'd')");
+    final List<?> hits = getByXpath("translate('abc', 'b', 'd')");
     assertEquals(1, hits.size());
     assertEquals("adc", hits.get(0));
   }
@@ -37,7 +37,7 @@ public class TranslateTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void translateIgnoresExtraArguments() throws Exception {
-    List<?> hits = getByXpath("translate('abc', 'b', 'dghf')");
+    final List<?> hits = getByXpath("translate('abc', 'b', 'dghf')");
     assertEquals(1, hits.size());
     assertEquals("adc", hits.get(0));
   }
@@ -45,7 +45,7 @@ public class TranslateTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void translateStringThatContainsNonBMPChars() throws Exception {
-    List<?> hits = getByXpath("translate('ab\uD834\uDD00b', 'b', 'd')");
+    final List<?> hits = getByXpath("translate('ab\uD834\uDD00b', 'b', 'd')");
     assertEquals(1, hits.size());
     assertEquals("ad\uD834\uDD00d", hits.get(0));
   }
@@ -53,7 +53,7 @@ public class TranslateTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void translateWithExtraCharsInReplacementString() throws Exception {
-    List<?> hits = getByXpath("translate('abc', 'c', 'def')");
+    final List<?> hits = getByXpath("translate('abc', 'c', 'def')");
     assertEquals(1, hits.size());
     assertEquals("abd", hits.get(0));
   }

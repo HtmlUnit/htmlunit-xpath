@@ -33,13 +33,13 @@ public class ReverseAxesWalker extends AxesWalker {
    *
    * @param locPathIterator The location path iterator that 'owns' this walker.
    */
-  ReverseAxesWalker(LocPathIterator locPathIterator, int axis) {
+  ReverseAxesWalker(final LocPathIterator locPathIterator, final int axis) {
     super(locPathIterator, axis);
   }
 
   /** {@inheritDoc} */
   @Override
-  public void setRoot(int root) {
+  public void setRoot(final int root) {
     super.setRoot(root);
     m_iterator = getDTM(root).getAxisIterator(m_axis);
     m_iterator.setStartNode(root);
@@ -57,7 +57,7 @@ public class ReverseAxesWalker extends AxesWalker {
   protected int getNextNode() {
     if (m_foundLast) return DTM.NULL;
 
-    int next = m_iterator.next();
+    final int next = m_iterator.next();
 
     if (m_isFresh) m_isFresh = false;
 
@@ -74,7 +74,7 @@ public class ReverseAxesWalker extends AxesWalker {
 
   /** {@inheritDoc} */
   @Override
-  protected int getProximityPosition(int predicateIndex) {
+  protected int getProximityPosition(final int predicateIndex) {
     // A negative predicate index seems to occur with
     // (preceding-sibling::*|following-sibling::*)/ancestor::*[position()]/*[position()]
     // -sb
@@ -83,10 +83,10 @@ public class ReverseAxesWalker extends AxesWalker {
     int count = m_proximityPositions[predicateIndex];
 
     if (count <= 0) {
-      AxesWalker savedWalker = wi().getLastUsedWalker();
+      final AxesWalker savedWalker = wi().getLastUsedWalker();
 
       try {
-        ReverseAxesWalker clone = (ReverseAxesWalker) this.clone();
+        final ReverseAxesWalker clone = (ReverseAxesWalker) this.clone();
 
         clone.setRoot(this.getRoot());
 
@@ -103,7 +103,7 @@ public class ReverseAxesWalker extends AxesWalker {
         }
 
         m_proximityPositions[predicateIndex] = count;
-      } catch (CloneNotSupportedException cnse) {
+      } catch (final CloneNotSupportedException cnse) {
 
         // can't happen
       } finally {
@@ -116,19 +116,19 @@ public class ReverseAxesWalker extends AxesWalker {
 
   /** {@inheritDoc} */
   @Override
-  protected void countProximityPosition(int i) {
+  protected void countProximityPosition(final int i) {
     if (i < m_proximityPositions.length) m_proximityPositions[i]--;
   }
 
   /** {@inheritDoc} */
   @Override
-  public int getLastPos(XPathContext xctxt) {
+  public int getLastPos(final XPathContext xctxt) {
 
     int count = 0;
-    AxesWalker savedWalker = wi().getLastUsedWalker();
+    final AxesWalker savedWalker = wi().getLastUsedWalker();
 
     try {
-      ReverseAxesWalker clone = (ReverseAxesWalker) this.clone();
+      final ReverseAxesWalker clone = (ReverseAxesWalker) this.clone();
 
       clone.setRoot(this.getRoot());
 
@@ -141,7 +141,7 @@ public class ReverseAxesWalker extends AxesWalker {
       while (DTM.NULL != clone.nextNode()) {
         count++;
       }
-    } catch (CloneNotSupportedException cnse) {
+    } catch (final CloneNotSupportedException cnse) {
 
       // can't happen
     } finally {

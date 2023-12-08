@@ -94,7 +94,7 @@ public class OpMap {
   /** Replace the large arrays with a small array. */
   void shrink() {
 
-    int n = m_opMap.elementAt(MAPINDEX_LENGTH);
+    final int n = m_opMap.elementAt(MAPINDEX_LENGTH);
     m_opMap.setToSize(n + 4);
 
     m_opMap.setElementAt(0, n);
@@ -112,7 +112,7 @@ public class OpMap {
    * @param opPos index into op map.
    * @return the op that corresponds to the opPos argument.
    */
-  public int getOp(int opPos) {
+  public int getOp(final int opPos) {
     return m_opMap.elementAt(opPos);
   }
 
@@ -122,7 +122,7 @@ public class OpMap {
    * @param opPos index into op map.
    * @param value Value to set
    */
-  public void setOp(int opPos, int value) {
+  public void setOp(final int opPos, final int value) {
     m_opMap.setElementAt(value, opPos);
   }
 
@@ -132,7 +132,7 @@ public class OpMap {
    * @param opPos An op position of an operation for which there is a size entry following.
    * @return position of next operation in m_opMap.
    */
-  public int getNextOpPos(int opPos) {
+  public int getNextOpPos(final int opPos) {
     return opPos + m_opMap.elementAt(opPos + 1);
   }
 
@@ -142,7 +142,7 @@ public class OpMap {
    * @param opPos the position of a location step.
    * @return the position of the next location step.
    */
-  public int getNextStepPos(int opPos) {
+  public int getNextStepPos(final int opPos) {
 
     int stepType = getOp(opPos);
 
@@ -178,9 +178,10 @@ public class OpMap {
    * @param opPos position of FROM_stepType op.
    * @return position of predicate in FROM_stepType structure.
    */
-  public int getFirstPredicateOpPos(int opPos) throws javax.xml.transform.TransformerException {
+  public int getFirstPredicateOpPos(final int opPos)
+      throws javax.xml.transform.TransformerException {
 
-    int stepType = m_opMap.elementAt(opPos);
+    final int stepType = m_opMap.elementAt(opPos);
 
     if ((stepType >= OpCodes.AXES_START_TYPES) && (stepType <= OpCodes.AXES_END_TYPES)) {
       return opPos + m_opMap.elementAt(opPos + 2);
@@ -217,7 +218,7 @@ public class OpMap {
    * @param opPos position of operation.
    * @return The position of the first child of the operation.
    */
-  public static int getFirstChildPos(int opPos) {
+  public static int getFirstChildPos(final int opPos) {
     return opPos + 2;
   }
 
@@ -227,7 +228,7 @@ public class OpMap {
    * @param opPos Position of location step in op map.
    * @return The length of the step.
    */
-  public int getArgLengthOfStep(int opPos) {
+  public int getArgLengthOfStep(final int opPos) {
     return m_opMap.elementAt(opPos + MAPINDEX_LENGTH + 1) - 3;
   }
 
@@ -237,7 +238,7 @@ public class OpMap {
    * @param opPos Position of location step in the location map.
    * @return The first child position of the step.
    */
-  public static int getFirstChildPosOfStep(int opPos) {
+  public static int getFirstChildPosOfStep(final int opPos) {
     return opPos + 3;
   }
 
@@ -247,7 +248,7 @@ public class OpMap {
    * @param opPosOfStep The position of the FROM_XXX step.
    * @return NODETYPE_XXX value.
    */
-  public int getStepTestType(int opPosOfStep) {
+  public int getStepTestType(final int opPosOfStep) {
     return m_opMap.elementAt(opPosOfStep + 3); // skip past op, len, len without predicates
   }
 
@@ -257,13 +258,13 @@ public class OpMap {
    * @param opPosOfStep The position of the FROM_XXX step.
    * @return The step's namespace, NodeTest.WILD, or null for null namespace.
    */
-  public String getStepNS(int opPosOfStep) {
+  public String getStepNS(final int opPosOfStep) {
 
-    int argLenOfStep = getArgLengthOfStep(opPosOfStep);
+    final int argLenOfStep = getArgLengthOfStep(opPosOfStep);
 
     // System.out.println("getStepNS.argLenOfStep: "+argLenOfStep);
     if (argLenOfStep == 3) {
-      int index = m_opMap.elementAt(opPosOfStep + 4);
+      final int index = m_opMap.elementAt(opPosOfStep + 4);
 
       if (index >= 0) return (String) m_tokenQueue.get(index);
       else if (OpCodes.ELEMWILDCARD == index) return NodeTest.WILD;
@@ -278,12 +279,12 @@ public class OpMap {
    * @param opPosOfStep The position of the FROM_XXX step.
    * @return OpCodes.EMPTY, OpCodes.ELEMWILDCARD, or the local name.
    */
-  public String getStepLocalName(int opPosOfStep) {
+  public String getStepLocalName(final int opPosOfStep) {
 
-    int argLenOfStep = getArgLengthOfStep(opPosOfStep);
+    final int argLenOfStep = getArgLengthOfStep(opPosOfStep);
 
     // System.out.println("getStepLocalName.argLenOfStep: "+argLenOfStep);
-    int index;
+    final int index;
 
     switch (argLenOfStep) {
       case 0:

@@ -40,7 +40,7 @@ public class LastTest extends AbstractXPathTest {
             + "<x>4</x>"
             + "</b>"
             + "</root>";
-    List<?> hits = getByXpath(xml, "//x[position()=last()]");
+    final List<?> hits = getByXpath(xml, "//x[position()=last()]");
     assertEquals(2, hits.size());
     assertEquals("2", ((Node) hits.get(0)).getTextContent());
     assertEquals("4", ((Node) hits.get(1)).getTextContent());
@@ -49,7 +49,7 @@ public class LastTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void lastEmptyList() throws Exception {
-    List<?> hits = getByXpath("//x[position()=last()]");
+    final List<?> hits = getByXpath("//x[position()=last()]");
     assertEquals(0, hits.size());
   }
 

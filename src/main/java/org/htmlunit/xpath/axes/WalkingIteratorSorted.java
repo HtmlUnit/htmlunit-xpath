@@ -30,7 +30,7 @@ public class WalkingIteratorSorted extends WalkingIterator {
    * @param opPos The position of this iterator in the opcode list from the compiler.
    * @throws javax.xml.transform.TransformerException if any
    */
-  WalkingIteratorSorted(Compiler compiler, int opPos, int analysis)
+  WalkingIteratorSorted(final Compiler compiler, final int opPos, final int analysis)
       throws javax.xml.transform.TransformerException {
     super(compiler, opPos, analysis, true);
   }

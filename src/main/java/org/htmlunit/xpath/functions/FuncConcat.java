@@ -27,9 +27,9 @@ public class FuncConcat extends FunctionMultiArgs {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    StringBuilder sb = new StringBuilder();
+    final StringBuilder sb = new StringBuilder();
 
     // Compiler says we must have at least two arguments.
     sb.append(m_arg0.execute(xctxt).str());
@@ -38,7 +38,7 @@ public class FuncConcat extends FunctionMultiArgs {
     if (null != m_arg2) sb.append(m_arg2.execute(xctxt).str());
 
     if (null != m_args) {
-      for (org.htmlunit.xpath.Expression m_arg : m_args) {
+      for (final org.htmlunit.xpath.Expression m_arg : m_args) {
         sb.append(m_arg.execute(xctxt).str());
       }
     }
@@ -48,7 +48,7 @@ public class FuncConcat extends FunctionMultiArgs {
 
   /** {@inheritDoc} */
   @Override
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
+  public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
     if (argNum < 2) reportWrongNumberArgs();
   }
 

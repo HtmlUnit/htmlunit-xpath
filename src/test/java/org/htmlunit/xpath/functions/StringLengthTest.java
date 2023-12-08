@@ -29,7 +29,7 @@ public class StringLengthTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void stringLengthOfNumber() throws Exception {
-    List<?> hits = getByXpath("string-length(3)");
+    final List<?> hits = getByXpath("string-length(3)");
     assertEquals(1, hits.size());
     assertEquals(1, ((Double) hits.get(0)).intValue());
   }
@@ -37,7 +37,7 @@ public class StringLengthTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void stringLengthOfEmptyString() throws Exception {
-    List<?> hits = getByXpath("string-length('')");
+    final List<?> hits = getByXpath("string-length('')");
     assertEquals(1, hits.size());
     assertEquals(0, ((Double) hits.get(0)).intValue());
   }
@@ -45,7 +45,7 @@ public class StringLengthTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void stringLengthOfString() throws Exception {
-    List<?> hits = getByXpath("string-length('0123456789')");
+    final List<?> hits = getByXpath("string-length('0123456789')");
     assertEquals(1, hits.size());
     assertEquals(10, ((Double) hits.get(0)).intValue());
   }
@@ -53,7 +53,7 @@ public class StringLengthTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void stringLengthFunctionOperatesOnContextNode() throws Exception {
-    List<?> hits = getByXpath("string-length()");
+    final List<?> hits = getByXpath("string-length()");
     assertEquals(1, hits.size());
     assertEquals(0, ((Double) hits.get(0)).intValue());
   }

@@ -206,19 +206,19 @@ public class Keywords {
     m_nodetests.put(NODETYPE_NODE_STRING, Integer.valueOf(OpCodes.NODETYPE_NODE));
   }
 
-  static Object getAxisName(String key) {
+  static Object getAxisName(final String key) {
     return m_axisnames.get(key);
   }
 
-  static Object lookupNodeTest(String key) {
+  static Object lookupNodeTest(final String key) {
     return m_nodetests.get(key);
   }
 
-  static Object getKeyWord(String key) {
+  static Object getKeyWord(final String key) {
     return m_keywords.get(key);
   }
 
-  static Object getNodeType(String key) {
+  static Object getNodeType(final String key) {
     return m_nodetypes.get(key);
   }
 }

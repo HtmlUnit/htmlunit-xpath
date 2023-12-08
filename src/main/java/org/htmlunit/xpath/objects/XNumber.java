@@ -38,7 +38,7 @@ public class XNumber extends XObject {
    *
    * @param d Value of the object
    */
-  public XNumber(double d) {
+  public XNumber(final double d) {
     super();
 
     m_val = d;
@@ -64,7 +64,7 @@ public class XNumber extends XObject {
 
   /** {@inheritDoc} */
   @Override
-  public double num(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public double num(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     return m_val;
   }
@@ -89,7 +89,7 @@ public class XNumber extends XObject {
     }
 
     String s = Double.toString(m_val);
-    int len = s.length();
+    final int len = s.length();
 
     if (s.charAt(len - 2) == '.' && s.charAt(len - 1) == '0') {
       s = s.substring(0, len - 2);
@@ -108,8 +108,8 @@ public class XNumber extends XObject {
       return s;
     }
 
-    int exp = Integer.parseInt(s.substring(e + 1));
-    String sign;
+    final int exp = Integer.parseInt(s.substring(e + 1));
+    final String sign;
 
     if (s.charAt(0) == '-') {
       sign = "-";
@@ -118,7 +118,7 @@ public class XNumber extends XObject {
       --e;
     } else sign = "";
 
-    int nDigits = e - 2;
+    final int nDigits = e - 2;
 
     if (exp >= nDigits) return sign + s.substring(0, 1) + s.substring(2, e) + zeros(exp - nDigits);
 
@@ -137,10 +137,10 @@ public class XNumber extends XObject {
    * @param n Length of the string to be returned
    * @return a string of '0' with the given length
    */
-  private static String zeros(int n) {
+  private static String zeros(final int n) {
     if (n < 1) return "";
 
-    char[] buf = new char[n];
+    final char[] buf = new char[n];
 
     for (int i = 0; i < n; i++) {
       buf[i] = '0';
@@ -158,17 +158,17 @@ public class XNumber extends XObject {
 
   /** {@inheritDoc} */
   @Override
-  public boolean equals(XObject obj2) {
+  public boolean equals(final XObject obj2) {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
     // nodeset function.
-    int t = obj2.getType();
+    final int t = obj2.getType();
     try {
       if (t == XObject.CLASS_NODESET) return obj2.equals(this);
       else if (t == XObject.CLASS_BOOLEAN) return obj2.bool() == bool();
       else return m_val == obj2.num();
-    } catch (javax.xml.transform.TransformerException te) {
+    } catch (final javax.xml.transform.TransformerException te) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
     }
   }
@@ -181,7 +181,7 @@ public class XNumber extends XObject {
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     visitor.visitNumberLiteral();
   }
 }

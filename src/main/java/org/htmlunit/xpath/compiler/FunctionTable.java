@@ -204,7 +204,7 @@ public class FunctionTable {
    * Return the name of the a function in the static table. Needed to avoid making the table
    * publicly available.
    */
-  String getFunctionName(int funcID) {
+  String getFunctionName(final int funcID) {
     if (funcID < NUM_BUILT_IN_FUNCS) {
       return m_functions[funcID].getSimpleName();
     }
@@ -221,7 +221,7 @@ public class FunctionTable {
    * @throws javax.xml.transform.TransformerException if ClassNotFoundException,
    *     IllegalAccessException, or InstantiationException is thrown.
    */
-  Function getFunction(int which) throws javax.xml.transform.TransformerException {
+  Function getFunction(final int which) throws javax.xml.transform.TransformerException {
     try {
       if (which < NUM_BUILT_IN_FUNCS) return (Function) m_functions[which].newInstance();
       return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].newInstance();
@@ -238,7 +238,7 @@ public class FunctionTable {
    *     org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed by an external
    *     module.
    */
-  Object getFunctionID(String key) {
+  Object getFunctionID(final String key) {
     Object id = m_functionID_customer.get(key);
     if (null == id) id = m_functionID.get(key);
     return id;
@@ -251,10 +251,10 @@ public class FunctionTable {
    * @param func A Implementation of an XPath Function object.
    * @return the position of the function in the internal index.
    */
-  public int installFunction(String name, Class<?> func) {
+  public int installFunction(final String name, final Class<?> func) {
 
     int funcIndex;
-    Object funcIndexObj = getFunctionID(name);
+    final Object funcIndexObj = getFunctionID(name);
 
     if (null != funcIndexObj) {
       funcIndex = ((Integer) funcIndexObj).intValue();
@@ -280,7 +280,7 @@ public class FunctionTable {
    * @param methName The local name of the function.
    * @return True if the function can be executed.
    */
-  public boolean functionAvailable(String methName) {
+  public boolean functionAvailable(final String methName) {
     Object tblEntry = m_functionID.get(methName);
     if (null != tblEntry) return true;
 

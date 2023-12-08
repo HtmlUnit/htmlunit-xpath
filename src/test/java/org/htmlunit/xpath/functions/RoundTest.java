@@ -30,7 +30,7 @@ public class RoundTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void round() throws Exception {
-    List<?> hits = getByXpath("round(1.5)");
+    final List<?> hits = getByXpath("round(1.5)");
     assertEquals(1, hits.size());
     assertEquals(2, ((Double) hits.get(0)).doubleValue(), 0.0001);
   }
@@ -38,7 +38,7 @@ public class RoundTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void negativeRound() throws Exception {
-    List<?> hits = getByXpath("round(-1.5)");
+    final List<?> hits = getByXpath("round(-1.5)");
     assertEquals(1, hits.size());
     assertEquals(-1, ((Double) hits.get(0)).doubleValue(), 0.0001);
   }
@@ -46,7 +46,7 @@ public class RoundTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void negativeRound2() throws Exception {
-    List<?> hits = getByXpath("round(-0.49)");
+    final List<?> hits = getByXpath("round(-0.49)");
     assertEquals(1, hits.size());
     assertEquals(0, ((Double) hits.get(0)).doubleValue(), 0.0001);
   }
@@ -54,7 +54,7 @@ public class RoundTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void roundZero() throws Exception {
-    List<?> hits = getByXpath("round(0)");
+    final List<?> hits = getByXpath("round(0)");
     assertEquals(1, hits.size());
     assertEquals(0.0, ((Double) hits.get(0)).doubleValue(), 0.0001);
   }
@@ -62,18 +62,18 @@ public class RoundTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void naNRoundIsNaN() throws Exception {
-    List<?> hits = getByXpath("round(1.0 div 0.0 - 2.0 div 0.0)");
+    final List<?> hits = getByXpath("round(1.0 div 0.0 - 2.0 div 0.0)");
     assertEquals(1, hits.size());
-    double result = ((Double) hits.get(0)).doubleValue();
+    final double result = ((Double) hits.get(0)).doubleValue();
     assertTrue(Double.isNaN(result));
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void infRoundIsInf() throws Exception {
-    List<?> hits = getByXpath("round(1.0 div 0.0)");
+    final List<?> hits = getByXpath("round(1.0 div 0.0)");
     assertEquals(1, hits.size());
-    double result = ((Double) hits.get(0)).doubleValue();
+    final double result = ((Double) hits.get(0)).doubleValue();
     assertTrue(Double.isInfinite(result));
     assertTrue(result > 0);
   }
@@ -81,9 +81,9 @@ public class RoundTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void negativeInfRoundIsNegativeInf() throws Exception {
-    List<?> hits = getByXpath("round(-11.0 div 0.0)");
+    final List<?> hits = getByXpath("round(-11.0 div 0.0)");
     assertEquals(1, hits.size());
-    double result = ((Double) hits.get(0)).doubleValue();
+    final double result = ((Double) hits.get(0)).doubleValue();
     assertTrue(Double.isInfinite(result));
     assertTrue(result < 0);
   }

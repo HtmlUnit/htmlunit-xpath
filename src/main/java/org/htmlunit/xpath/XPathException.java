@@ -33,7 +33,7 @@ public class XPathException extends TransformerException {
    *
    * @param message The error message.
    */
-  public XPathException(String message, SourceLocator ex) {
+  public XPathException(final String message, final SourceLocator ex) {
     super(message);
     this.setLocator(ex);
   }
@@ -43,14 +43,14 @@ public class XPathException extends TransformerException {
    *
    * @param message The error message.
    */
-  public XPathException(String message) {
+  public XPathException(final String message) {
     super(message);
   }
 
   /** {@inheritDoc} */
   @Override
   public String getMessage() {
-    String lastMessage = super.getMessage();
+    final String lastMessage = super.getMessage();
     return (null != lastMessage) ? lastMessage : "";
   }
 

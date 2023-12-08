@@ -80,7 +80,7 @@ public class DTMNodeProxy
    * @param dtm The DTM Reference, must be non-null.
    * @param node The DTM node handle.
    */
-  public DTMNodeProxy(DTM dtm, int node) {
+  public DTMNodeProxy(final DTM dtm, final int node) {
     this.dtm = dtm;
     this.node = node;
   }
@@ -100,22 +100,22 @@ public class DTMNodeProxy
    * @param node A DTM node proxy reference.
    * @return true if the given node has the same handle as this node.
    */
-  public final boolean equals(Node node) {
+  public final boolean equals(final Node node) {
 
     try {
-      DTMNodeProxy dtmp = (DTMNodeProxy) node;
+      final DTMNodeProxy dtmp = (DTMNodeProxy) node;
 
       // return (dtmp.node == this.node);
       // Patch attributed to Gary L Peskin <garyp@firstech.com>
       return (dtmp.node == this.node) && (dtmp.dtm == this.dtm);
-    } catch (ClassCastException cce) {
+    } catch (final ClassCastException cce) {
       return false;
     }
   }
 
   /** {@inheritDoc} */
   @Override
-  public final boolean equals(Object node) {
+  public final boolean equals(final Object node) {
 
     try {
 
@@ -123,7 +123,7 @@ public class DTMNodeProxy
       // return (dtmp.node == this.node);
       // Patch attributed to Gary L Peskin <garyp@firstech.com>
       return equals((Node) node);
-    } catch (ClassCastException cce) {
+    } catch (final ClassCastException cce) {
       return false;
     }
   }
@@ -154,7 +154,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final void setPrefix(String prefix) throws DOMException {
+  public final void setPrefix(final String prefix) throws DOMException {
     throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
@@ -166,7 +166,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final boolean isSupported(String feature, String version) {
+  public final boolean isSupported(final String feature, final String version) {
     return implementation.hasFeature(feature, version);
     // throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
@@ -179,7 +179,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final void setNodeValue(String nodeValue) throws DOMException {
+  public final void setNodeValue(final String nodeValue) throws DOMException {
     throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
@@ -195,7 +195,7 @@ public class DTMNodeProxy
 
     if (getNodeType() == Node.ATTRIBUTE_NODE) return null;
 
-    int newnode = dtm.getParent(node);
+    final int newnode = dtm.getParent(node);
 
     return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
   }
@@ -214,7 +214,7 @@ public class DTMNodeProxy
   @Override
   public final Node getFirstChild() {
 
-    int newnode = dtm.getFirstChild(node);
+    final int newnode = dtm.getFirstChild(node);
 
     return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
   }
@@ -223,7 +223,7 @@ public class DTMNodeProxy
   @Override
   public final Node getLastChild() {
 
-    int newnode = dtm.getLastChild(node);
+    final int newnode = dtm.getLastChild(node);
 
     return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
   }
@@ -232,7 +232,7 @@ public class DTMNodeProxy
   @Override
   public final Node getPreviousSibling() {
 
-    int newnode = dtm.getPreviousSibling(node);
+    final int newnode = dtm.getPreviousSibling(node);
 
     return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
   }
@@ -244,7 +244,7 @@ public class DTMNodeProxy
     // Attr's Next is defined at DTM level, but not at DOM level.
     if (dtm.getNodeType(node) == Node.ATTRIBUTE_NODE) return null;
 
-    int newnode = dtm.getNextSibling(node);
+    final int newnode = dtm.getNextSibling(node);
 
     return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
   }
@@ -258,13 +258,13 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public boolean hasAttribute(String name) {
+  public boolean hasAttribute(final String name) {
     return DTM.NULL != dtm.getAttributeNode(node, null, name);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean hasAttributeNS(String namespaceURI, String localName) {
+  public boolean hasAttributeNS(final String namespaceURI, final String localName) {
     return DTM.NULL != dtm.getAttributeNode(node, namespaceURI, localName);
   }
 
@@ -277,25 +277,25 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final Node insertBefore(Node newChild, Node refChild) throws DOMException {
+  public final Node insertBefore(final Node newChild, final Node refChild) throws DOMException {
     throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Node replaceChild(Node newChild, Node oldChild) throws DOMException {
+  public final Node replaceChild(final Node newChild, final Node oldChild) throws DOMException {
     throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Node removeChild(Node oldChild) throws DOMException {
+  public final Node removeChild(final Node oldChild) throws DOMException {
     throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Node appendChild(Node newChild) throws DOMException {
+  public final Node appendChild(final Node newChild) throws DOMException {
     throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
@@ -307,7 +307,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final Node cloneNode(boolean deep) {
+  public final Node cloneNode(final boolean deep) {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
@@ -326,7 +326,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final Element getDocumentElement() {
-    int dochandle = dtm.getDocument();
+    final int dochandle = dtm.getDocument();
     int elementhandle = DTM.NULL;
     for (int kidhandle = dtm.getFirstChild(dochandle);
         kidhandle != DTM.NULL;
@@ -357,7 +357,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final Element createElement(String tagName) throws DOMException {
+  public final Element createElement(final String tagName) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
@@ -369,50 +369,50 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final Text createTextNode(String data) {
+  public final Text createTextNode(final String data) {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Comment createComment(String data) {
+  public final Comment createComment(final String data) {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final CDATASection createCDATASection(String data) throws DOMException {
+  public final CDATASection createCDATASection(final String data) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final ProcessingInstruction createProcessingInstruction(String target, String data)
-      throws DOMException {
+  public final ProcessingInstruction createProcessingInstruction(
+      final String target, final String data) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Attr createAttribute(String name) throws DOMException {
+  public final Attr createAttribute(final String name) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final EntityReference createEntityReference(String name) throws DOMException {
+  public final EntityReference createEntityReference(final String name) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final NodeList getElementsByTagName(String tagname) {
-    List<Node> nodes = new ArrayList<>();
-    Node retNode = dtm.getNode(node);
+  public final NodeList getElementsByTagName(final String tagname) {
+    final List<Node> nodes = new ArrayList<>();
+    final Node retNode = dtm.getNode(node);
     if (retNode != null) {
-      boolean isTagNameWildCard = "*".equals(tagname);
+      final boolean isTagNameWildCard = "*".equals(tagname);
       if (DTM.ELEMENT_NODE == retNode.getNodeType()) {
-        NodeList nodeList = retNode.getChildNodes();
+        final NodeList nodeList = retNode.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
           traverseChildren(nodes, nodeList.item(i), tagname, isTagNameWildCard);
         }
@@ -424,7 +424,10 @@ public class DTMNodeProxy
   }
 
   private void traverseChildren(
-      List<Node> listVector, Node tempNode, String tagname, boolean isTagNameWildCard) {
+      final List<Node> listVector,
+      final Node tempNode,
+      final String tagname,
+      final boolean isTagNameWildCard) {
     if (tempNode == null) {
     } else {
       if (tempNode.getNodeType() == DTM.ELEMENT_NODE
@@ -432,7 +435,7 @@ public class DTMNodeProxy
         listVector.add(tempNode);
       }
       if (tempNode.hasChildNodes()) {
-        NodeList nodeList = tempNode.getChildNodes();
+        final NodeList nodeList = tempNode.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
           traverseChildren(listVector, nodeList.item(i), tagname, isTagNameWildCard);
         }
@@ -442,34 +445,34 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final Node importNode(Node importedNode, boolean deep) throws DOMException {
+  public final Node importNode(final Node importedNode, final boolean deep) throws DOMException {
     throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Element createElementNS(String namespaceURI, String qualifiedName)
+  public final Element createElementNS(final String namespaceURI, final String qualifiedName)
       throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Attr createAttributeNS(String namespaceURI, String qualifiedName)
+  public final Attr createAttributeNS(final String namespaceURI, final String qualifiedName)
       throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final NodeList getElementsByTagNameNS(String namespaceURI, String localName) {
-    List<Node> nodes = new ArrayList<>();
-    Node retNode = dtm.getNode(node);
+  public final NodeList getElementsByTagNameNS(final String namespaceURI, final String localName) {
+    final List<Node> nodes = new ArrayList<>();
+    final Node retNode = dtm.getNode(node);
     if (retNode != null) {
-      boolean isNamespaceURIWildCard = "*".equals(namespaceURI);
-      boolean isLocalNameWildCard = "*".equals(localName);
+      final boolean isNamespaceURIWildCard = "*".equals(namespaceURI);
+      final boolean isLocalNameWildCard = "*".equals(localName);
       if (DTM.ELEMENT_NODE == retNode.getNodeType()) {
-        NodeList nodeList = retNode.getChildNodes();
+        final NodeList nodeList = retNode.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
           traverseChildren(
               nodes,
@@ -503,17 +506,17 @@ public class DTMNodeProxy
    *     namespaceURI.
    */
   private void traverseChildren(
-      List<Node> listVector,
-      Node tempNode,
-      String namespaceURI,
-      String localname,
-      boolean isNamespaceURIWildCard,
-      boolean isLocalNameWildCard) {
+      final List<Node> listVector,
+      final Node tempNode,
+      final String namespaceURI,
+      final String localname,
+      final boolean isNamespaceURIWildCard,
+      final boolean isLocalNameWildCard) {
     if (tempNode == null) {
     } else {
       if (tempNode.getNodeType() == DTM.ELEMENT_NODE
           && (isLocalNameWildCard || tempNode.getLocalName().equals(localname))) {
-        String nsURI = tempNode.getNamespaceURI();
+        final String nsURI = tempNode.getNamespaceURI();
         if ((namespaceURI == null && nsURI == null)
             || isNamespaceURIWildCard
             || (namespaceURI != null && namespaceURI.equals(nsURI))) {
@@ -521,7 +524,7 @@ public class DTMNodeProxy
         }
       }
       if (tempNode.hasChildNodes()) {
-        NodeList nl = tempNode.getChildNodes();
+        final NodeList nl = tempNode.getChildNodes();
         for (int i = 0; i < nl.getLength(); i++) {
           traverseChildren(
               listVector,
@@ -537,13 +540,13 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final Element getElementById(String elementId) {
+  public final Element getElementById(final String elementId) {
     return (Element) dtm.getNode(dtm.getElementById(elementId));
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Text splitText(int offset) throws DOMException {
+  public final Text splitText(final int offset) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
@@ -555,7 +558,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final void setData(String data) throws DOMException {
+  public final void setData(final String data) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
@@ -568,31 +571,32 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final String substringData(int offset, int count) throws DOMException {
+  public final String substringData(final int offset, final int count) throws DOMException {
     return getData().substring(offset, offset + count);
   }
 
   /** {@inheritDoc} */
   @Override
-  public final void appendData(String arg) throws DOMException {
+  public final void appendData(final String arg) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final void insertData(int offset, String arg) throws DOMException {
+  public final void insertData(final int offset, final String arg) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final void deleteData(int offset, int count) throws DOMException {
+  public final void deleteData(final int offset, final int count) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final void replaceData(int offset, int count, String arg) throws DOMException {
+  public final void replaceData(final int offset, final int count, final String arg)
+      throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
@@ -604,42 +608,42 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final String getAttribute(String name) {
+  public final String getAttribute(final String name) {
 
-    DTMNamedNodeMap map = new DTMNamedNodeMap(dtm, node);
-    Node node = map.getNamedItem(name);
+    final DTMNamedNodeMap map = new DTMNamedNodeMap(dtm, node);
+    final Node node = map.getNamedItem(name);
     return (null == node) ? EMPTYSTRING : node.getNodeValue();
   }
 
   /** {@inheritDoc} */
   @Override
-  public final void setAttribute(String name, String value) throws DOMException {
+  public final void setAttribute(final String name, final String value) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final void removeAttribute(String name) throws DOMException {
+  public final void removeAttribute(final String name) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Attr getAttributeNode(String name) {
+  public final Attr getAttributeNode(final String name) {
 
-    DTMNamedNodeMap map = new DTMNamedNodeMap(dtm, node);
+    final DTMNamedNodeMap map = new DTMNamedNodeMap(dtm, node);
     return (Attr) map.getNamedItem(name);
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Attr setAttributeNode(Attr newAttr) throws DOMException {
+  public final Attr setAttributeNode(final Attr newAttr) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Attr removeAttributeNode(Attr oldAttr) throws DOMException {
+  public final Attr removeAttributeNode(final Attr oldAttr) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
@@ -657,38 +661,40 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final String getAttributeNS(String namespaceURI, String localName) {
+  public final String getAttributeNS(final String namespaceURI, final String localName) {
     Node retNode = null;
-    int n = dtm.getAttributeNode(node, namespaceURI, localName);
+    final int n = dtm.getAttributeNode(node, namespaceURI, localName);
     if (n != DTM.NULL) retNode = dtm.getNode(n);
     return (null == retNode) ? EMPTYSTRING : retNode.getNodeValue();
   }
 
   /** {@inheritDoc} */
   @Override
-  public final void setAttributeNS(String namespaceURI, String qualifiedName, String value)
+  public final void setAttributeNS(
+      final String namespaceURI, final String qualifiedName, final String value)
       throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final void removeAttributeNS(String namespaceURI, String localName) throws DOMException {
+  public final void removeAttributeNS(final String namespaceURI, final String localName)
+      throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Attr getAttributeNodeNS(String namespaceURI, String localName) {
+  public final Attr getAttributeNodeNS(final String namespaceURI, final String localName) {
     Attr retAttr = null;
-    int n = dtm.getAttributeNode(node, namespaceURI, localName);
+    final int n = dtm.getAttributeNode(node, namespaceURI, localName);
     if (n != DTM.NULL) retAttr = (Attr) dtm.getNode(n);
     return retAttr;
   }
 
   /** {@inheritDoc} */
   @Override
-  public final Attr setAttributeNodeNS(Attr newAttr) throws DOMException {
+  public final Attr setAttributeNodeNS(final Attr newAttr) throws DOMException {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
@@ -716,7 +722,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public final void setValue(String value) {
+  public final void setValue(final String value) {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
@@ -726,13 +732,13 @@ public class DTMNodeProxy
     if (getNodeType() != Node.ATTRIBUTE_NODE) return null;
     // In XPath and DTM data models, unlike DOM, an Attr's parent is its
     // owner element.
-    int newnode = dtm.getParent(node);
+    final int newnode = dtm.getParent(node);
     return (newnode == DTM.NULL) ? null : (Element) (dtm.getNode(newnode));
   }
 
   /** {@inheritDoc} */
   @Override
-  public Node adoptNode(Node source) throws DOMException {
+  public Node adoptNode(final Node source) throws DOMException {
 
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
@@ -753,7 +759,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public void setStrictErrorChecking(boolean strictErrorChecking) {
+  public void setStrictErrorChecking(final boolean strictErrorChecking) {
     throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
   }
 
@@ -761,27 +767,29 @@ public class DTMNodeProxy
   static class DTMNodeProxyImplementation implements DOMImplementation {
     /** {@inheritDoc} */
     @Override
-    public DocumentType createDocumentType(String qualifiedName, String publicId, String systemId) {
+    public DocumentType createDocumentType(
+        final String qualifiedName, final String publicId, final String systemId) {
       throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
     }
 
     /** {@inheritDoc} */
     @Override
-    public Document createDocument(String namespaceURI, String qualfiedName, DocumentType doctype) {
+    public Document createDocument(
+        final String namespaceURI, final String qualfiedName, final DocumentType doctype) {
       // Could create a DTM... but why, when it'd have to be permanantly empty?
       throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean hasFeature(String feature, String version) {
+    public boolean hasFeature(final String feature, final String version) {
       return ("CORE".equalsIgnoreCase(feature) || "XML".equalsIgnoreCase(feature))
           && ("1.0".equals(version) || "2.0".equals(version));
     }
 
     /** {@inheritDoc} */
     @Override
-    public Object getFeature(String feature, String version) {
+    public Object getFeature(final String feature, final String version) {
       // we don't have any alternate node, either this node does the job
       // or we don't have anything that does
       // return hasFeature(feature, version) ? this : null;
@@ -791,19 +799,19 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public Object setUserData(String key, Object data, UserDataHandler handler) {
+  public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
     return getOwnerDocument().setUserData(key, data, handler);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Object getUserData(String key) {
+  public Object getUserData(final String key) {
     return getOwnerDocument().getUserData(key);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Object getFeature(String feature, String version) {
+  public Object getFeature(final String feature, final String version) {
     // we don't have any alternate node, either this node does the job
     // or we don't have anything that does
     return isSupported(feature, version) ? this : null;
@@ -811,7 +819,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public boolean isEqualNode(Node arg) {
+  public boolean isEqualNode(final Node arg) {
     if (arg == this) {
       return true;
     }
@@ -860,13 +868,13 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public String lookupNamespaceURI(String specifiedPrefix) {
-    short type = this.getNodeType();
+  public String lookupNamespaceURI(final String specifiedPrefix) {
+    final short type = this.getNodeType();
     switch (type) {
       case Node.ELEMENT_NODE:
         {
           String namespace = this.getNamespaceURI();
-          String prefix = this.getPrefix();
+          final String prefix = this.getPrefix();
           if (namespace != null) {
             // REVISIT: is it possible that prefix is empty string?
             if (specifiedPrefix == null && prefix == specifiedPrefix) {
@@ -878,12 +886,12 @@ public class DTMNodeProxy
             }
           }
           if (this.hasAttributes()) {
-            NamedNodeMap map = this.getAttributes();
-            int length = map.getLength();
+            final NamedNodeMap map = this.getAttributes();
+            final int length = map.getLength();
             for (int i = 0; i < length; i++) {
-              Node attr = map.item(i);
-              String attrPrefix = attr.getPrefix();
-              String value = attr.getNodeValue();
+              final Node attr = map.item(i);
+              final String attrPrefix = attr.getPrefix();
+              final String value = attr.getNodeValue();
               namespace = attr.getNamespaceURI();
               if (namespace != null && namespace.equals("http://www.w3.org/2000/xmlns/")) {
                 // at this point we are dealing with DOM Level 2 nodes only
@@ -923,13 +931,13 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public boolean isDefaultNamespace(String namespaceURI) {
+  public boolean isDefaultNamespace(final String namespaceURI) {
     return false;
   }
 
   /** {@inheritDoc} */
   @Override
-  public String lookupPrefix(String namespaceURI) {
+  public String lookupPrefix(final String namespaceURI) {
 
     // REVISIT: When Namespaces 1.1 comes out this may not be true
     // Prefix can't be bound to null namespace
@@ -937,7 +945,7 @@ public class DTMNodeProxy
       return null;
     }
 
-    short type = this.getNodeType();
+    final short type = this.getNodeType();
 
     switch (type) {
       case Node.ENTITY_NODE:
@@ -962,14 +970,14 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public boolean isSameNode(Node other) {
+  public boolean isSameNode(final Node other) {
     // we do not use any wrapper so the answer is obvious
     return this == other;
   }
 
   /** {@inheritDoc} */
   @Override
-  public void setTextContent(String textContent) throws DOMException {
+  public void setTextContent(final String textContent) throws DOMException {
     setNodeValue(textContent);
   }
 
@@ -981,7 +989,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public short compareDocumentPosition(Node other) throws DOMException {
+  public short compareDocumentPosition(final Node other) throws DOMException {
     return 0;
   }
 
@@ -993,7 +1001,8 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public Node renameNode(Node n, String namespaceURI, String name) throws DOMException {
+  public Node renameNode(final Node n, final String namespaceURI, final String name)
+      throws DOMException {
     return n;
   }
 
@@ -1011,7 +1020,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public void setDocumentURI(String documentURI) {
+  public void setDocumentURI(final String documentURI) {
 
     fDocumentURI = documentURI;
   }
@@ -1024,7 +1033,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public Text replaceWholeText(String content) throws DOMException {
+  public Text replaceWholeText(final String content) throws DOMException {
     return null; // Pending
   }
 
@@ -1042,19 +1051,20 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public void setIdAttribute(String name, boolean makeId) {
+  public void setIdAttribute(final String name, final boolean makeId) {
     // PENDING
   }
 
   /** {@inheritDoc} */
   @Override
-  public void setIdAttributeNode(Attr at, boolean makeId) {
+  public void setIdAttributeNode(final Attr at, final boolean makeId) {
     // PENDING
   }
 
   /** {@inheritDoc} */
   @Override
-  public void setIdAttributeNS(String namespaceURI, String localName, boolean makeId) {
+  public void setIdAttributeNS(
+      final String namespaceURI, final String localName, final boolean makeId) {
     // PENDING
   }
 
@@ -1086,7 +1096,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public void setXmlStandalone(boolean xmlStandalone) throws DOMException {
+  public void setXmlStandalone(final boolean xmlStandalone) throws DOMException {
     this.xmlStandalone = xmlStandalone;
   }
 
@@ -1100,7 +1110,7 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public void setXmlVersion(String xmlVersion) throws DOMException {
+  public void setXmlVersion(final String xmlVersion) throws DOMException {
     this.xmlVersion = xmlVersion;
   }
 }

@@ -29,7 +29,7 @@ public class ContainsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void containsNumber() throws Exception {
-    List<?> hits = getByXpath("contains(33, '3')");
+    final List<?> hits = getByXpath("contains(33, '3')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -37,7 +37,7 @@ public class ContainsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void containsNumberAll() throws Exception {
-    List<?> hits = getByXpath("contains(12.34, '12.34')");
+    final List<?> hits = getByXpath("contains(12.34, '12.34')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -45,7 +45,7 @@ public class ContainsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void containsNumberNot() throws Exception {
-    List<?> hits = getByXpath("contains(33, '4')");
+    final List<?> hits = getByXpath("contains(33, '4')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -53,7 +53,7 @@ public class ContainsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void containsString() throws Exception {
-    List<?> hits = getByXpath("contains('test', 'es')");
+    final List<?> hits = getByXpath("contains('test', 'es')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -61,7 +61,7 @@ public class ContainsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void containsStringAll() throws Exception {
-    List<?> hits = getByXpath("contains('xpath', 'xpath')");
+    final List<?> hits = getByXpath("contains('xpath', 'xpath')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -69,7 +69,7 @@ public class ContainsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void containsStringNot() throws Exception {
-    List<?> hits = getByXpath("contains('xpath', 'y')");
+    final List<?> hits = getByXpath("contains('xpath', 'y')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -77,7 +77,7 @@ public class ContainsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void emptyStringContainsNonEmptyString() throws Exception {
-    List<?> hits = getByXpath("contains('', 'y')");
+    final List<?> hits = getByXpath("contains('', 'y')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -85,7 +85,7 @@ public class ContainsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void emptyStringContainsEmptyString() throws Exception {
-    List<?> hits = getByXpath("contains('', '')");
+    final List<?> hits = getByXpath("contains('', '')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -93,7 +93,7 @@ public class ContainsTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void containsEmptyString() throws Exception {
-    List<?> hits = getByXpath("contains('xpath', '')");
+    final List<?> hits = getByXpath("contains('xpath', '')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }

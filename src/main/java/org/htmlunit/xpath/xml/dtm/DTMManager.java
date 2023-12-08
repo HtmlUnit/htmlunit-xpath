@@ -107,8 +107,8 @@ public abstract class DTMManager {
   static {
     try {
       /* Temp debug code - this will be removed after we test everything */
-      boolean debug = System.getProperty("dtm.debug") != null;
-    } catch (SecurityException ex) {
+      final boolean debug = System.getProperty("dtm.debug") != null;
+    } catch (final SecurityException ex) {
     }
   }
 

@@ -30,7 +30,7 @@ public class CeilingTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void ceiling() throws Exception {
-    List<?> hits = getByXpath("ceiling(1.5)");
+    final List<?> hits = getByXpath("ceiling(1.5)");
     assertEquals(1, hits.size());
     assertEquals(2, ((Double) hits.get(0)).doubleValue(), 0.0001);
   }
@@ -38,7 +38,7 @@ public class CeilingTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void negativeCeiling() throws Exception {
-    List<?> hits = getByXpath("ceiling(-1.5)");
+    final List<?> hits = getByXpath("ceiling(-1.5)");
     assertEquals(1, hits.size());
     assertEquals(-1, ((Double) hits.get(0)).doubleValue(), 0.0001);
   }
@@ -46,18 +46,18 @@ public class CeilingTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void naNCeilingIsNaN() throws Exception {
-    List<?> hits = getByXpath("ceiling(1.0 div 0.0 - 2.0 div 0.0)");
+    final List<?> hits = getByXpath("ceiling(1.0 div 0.0 - 2.0 div 0.0)");
     assertEquals(1, hits.size());
-    double result = ((Double) hits.get(0)).doubleValue();
+    final double result = ((Double) hits.get(0)).doubleValue();
     assertTrue(Double.isNaN(result));
   }
 
   /** @throws Exception in case of problems */
   @Test
   public void infCeilingIsInf() throws Exception {
-    List<?> hits = getByXpath("ceiling(1.0 div 0.0)");
+    final List<?> hits = getByXpath("ceiling(1.0 div 0.0)");
     assertEquals(1, hits.size());
-    double result = ((Double) hits.get(0)).doubleValue();
+    final double result = ((Double) hits.get(0)).doubleValue();
     assertTrue(Double.isInfinite(result));
     assertTrue(result > 0);
   }
@@ -65,9 +65,9 @@ public class CeilingTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void negativeInfCeilingIsNegativeInf() throws Exception {
-    List<?> hits = getByXpath("ceiling(-11.0 div 0.0)");
+    final List<?> hits = getByXpath("ceiling(-11.0 div 0.0)");
     assertEquals(1, hits.size());
-    double result = ((Double) hits.get(0)).doubleValue();
+    final double result = ((Double) hits.get(0)).doubleValue();
     assertTrue(Double.isInfinite(result));
     assertTrue(result < 0);
   }

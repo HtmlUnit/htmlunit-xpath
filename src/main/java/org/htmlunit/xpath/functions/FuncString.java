@@ -25,7 +25,7 @@ public class FuncString extends FunctionDef1Arg {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return getArg0AsString(xctxt);
   }
 }

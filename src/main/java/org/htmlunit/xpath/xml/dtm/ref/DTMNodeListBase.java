@@ -46,7 +46,7 @@ public class DTMNodeListBase implements org.w3c.dom.NodeList {
 
   /** {@inheritDoc} */
   @Override
-  public Node item(int index) {
+  public Node item(final int index) {
     return null;
   }
 

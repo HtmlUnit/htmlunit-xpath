@@ -29,7 +29,7 @@ public class CountTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void count() throws Exception {
-    List<?> hits = getByXpath("count(/*)");
+    final List<?> hits = getByXpath("count(/*)");
     assertEquals(1, hits.size());
     assertEquals(1, ((Double) hits.get(0)).doubleValue(), 0.0001);
   }

@@ -40,13 +40,13 @@ public class FilterExprWalker extends AxesWalker {
    *
    * @param locPathIterator non-null reference to the parent iterator.
    */
-  public FilterExprWalker(WalkingIterator locPathIterator) {
+  public FilterExprWalker(final WalkingIterator locPathIterator) {
     super(locPathIterator, Axis.FILTEREDLIST);
   }
 
   /** {@inheritDoc} */
   @Override
-  public void init(Compiler compiler, int opPos, int stepType)
+  public void init(final Compiler compiler, final int opPos, final int stepType)
       throws javax.xml.transform.TransformerException {
 
     super.init(compiler, opPos, stepType);
@@ -76,7 +76,7 @@ public class FilterExprWalker extends AxesWalker {
 
   /** {@inheritDoc} */
   @Override
-  public void setRoot(int root) {
+  public void setRoot(final int root) {
 
     super.setRoot(root);
 
@@ -94,14 +94,14 @@ public class FilterExprWalker extends AxesWalker {
    * this object.
    */
   public static XNodeSet executeFilterExpr(
-      int context,
-      XPathContext xctxt,
-      PrefixResolver prefixResolver,
-      boolean isTopLevel,
-      Expression expr)
+      final int context,
+      final XPathContext xctxt,
+      final PrefixResolver prefixResolver,
+      final boolean isTopLevel,
+      final Expression expr)
       throws org.htmlunit.xpath.xml.utils.WrappedRuntimeException {
-    PrefixResolver savedResolver = xctxt.getNamespaceContext();
-    XNodeSet result;
+    final PrefixResolver savedResolver = xctxt.getNamespaceContext();
+    final XNodeSet result;
 
     try {
       xctxt.pushCurrentNode(context);
@@ -119,7 +119,7 @@ public class FilterExprWalker extends AxesWalker {
         result.setShouldCacheNodes(true);
       } else result = (org.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
 
-    } catch (javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: Fix...
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(se);
@@ -134,7 +134,7 @@ public class FilterExprWalker extends AxesWalker {
   @Override
   public Object clone() throws CloneNotSupportedException {
 
-    FilterExprWalker clone = (FilterExprWalker) super.clone();
+    final FilterExprWalker clone = (FilterExprWalker) super.clone();
 
     if (null != m_exprObj) clone.m_exprObj = (XNodeSet) m_exprObj.clone();
 
@@ -143,7 +143,7 @@ public class FilterExprWalker extends AxesWalker {
 
   /** {@inheritDoc} */
   @Override
-  public short acceptNode(int n) {
+  public short acceptNode(final int n) {
 
     try {
       if (getPredicateCount() > 0) {
@@ -153,7 +153,7 @@ public class FilterExprWalker extends AxesWalker {
       }
 
       return DTMIterator.FILTER_ACCEPT;
-    } catch (javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
       throw new RuntimeException(se.getMessage());
     }
   }
@@ -170,7 +170,7 @@ public class FilterExprWalker extends AxesWalker {
 
   /** {@inheritDoc} */
   @Override
-  public int getLastPos(XPathContext xctxt) {
+  public int getLastPos(final XPathContext xctxt) {
     return m_exprObj.getLength();
   }
 
@@ -201,7 +201,7 @@ public class FilterExprWalker extends AxesWalker {
 
   /** {@inheritDoc} */
   @Override
-  public void callPredicateVisitors(XPathVisitor visitor) {
+  public void callPredicateVisitors(final XPathVisitor visitor) {
     m_expr.callVisitors(visitor);
 
     super.callPredicateVisitors(visitor);
@@ -209,10 +209,10 @@ public class FilterExprWalker extends AxesWalker {
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
-    FilterExprWalker walker = (FilterExprWalker) expr;
+    final FilterExprWalker walker = (FilterExprWalker) expr;
     return m_expr.deepEquals(walker.m_expr);
   }
 }

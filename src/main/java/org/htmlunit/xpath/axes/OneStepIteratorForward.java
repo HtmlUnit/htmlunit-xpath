@@ -39,17 +39,17 @@ public class OneStepIteratorForward extends ChildTestIterator {
    *     this itterator.
    * @throws javax.xml.transform.TransformerException if any
    */
-  OneStepIteratorForward(Compiler compiler, int opPos, int analysis)
+  OneStepIteratorForward(final Compiler compiler, final int opPos, final int analysis)
       throws javax.xml.transform.TransformerException {
     super(compiler, opPos, analysis);
-    int firstStepPos = OpMap.getFirstChildPos(opPos);
+    final int firstStepPos = OpMap.getFirstChildPos(opPos);
 
     m_axis = WalkerFactory.getAxisFromStep(compiler, firstStepPos);
   }
 
   /** {@inheritDoc} */
   @Override
-  public void setRoot(int context, Object environment) {
+  public void setRoot(final int context, final Object environment) {
     super.setRoot(context, environment);
     m_traverser = m_cdtm.getAxisTraverser(m_axis);
   }
@@ -72,7 +72,7 @@ public class OneStepIteratorForward extends ChildTestIterator {
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
     return m_axis == ((OneStepIteratorForward) expr).m_axis;

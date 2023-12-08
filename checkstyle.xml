@@ -19,6 +19,11 @@
 
     <module name="TreeWalker">
 
+
+        <!-- Checks for Naming Conventions.                  -->
+        <!-- See http://checkstyle.sf.net/config_naming.html -->
+        <module name="LocalFinalVariableName"/>
+
         <!-- Checks for imports                               -->
         <!-- See http://checkstyle.sf.net/config_imports.html -->
         <module name="AvoidStarImport"/>
@@ -35,6 +40,10 @@
         <module name="UnnecessarySemicolonInEnumeration"/>
         <module name="UnnecessarySemicolonInTryWithResources"/>
 
+        <module name="FinalLocalVariable">
+            <property name="tokens" value="VARIABLE_DEF,PARAMETER_DEF"/>
+            <property name="validateEnhancedForLoopVariable" value="true"/>
+        </module>
         <module name="MissingOverride"/>
     </module>
 </module>

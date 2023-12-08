@@ -40,7 +40,7 @@ public abstract class Function extends Expression {
    * @throws WrongNumberArgsException If the argNum parameter is beyond what is specified for this
    *     function.
    */
-  public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
+  public void setArg(final Expression arg, final int argNum) throws WrongNumberArgsException {
     reportWrongNumberArgs();
   }
 
@@ -52,7 +52,7 @@ public abstract class Function extends Expression {
    * @param argNum The number of arguments that is being passed to the function.
    * @throws WrongNumberArgsException if any
    */
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
+  public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
     if (argNum != 0) reportWrongNumberArgs();
   }
 
@@ -69,7 +69,7 @@ public abstract class Function extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     // Programmer's assert. (And, no, I don't want the method to be abstract).
     System.out.println("Error! Function.execute should not be called!");
@@ -78,11 +78,11 @@ public abstract class Function extends Expression {
   }
 
   /** Call the visitors for the function arguments. */
-  public void callArgVisitors(XPathVisitor visitor) {}
+  public void callArgVisitors(final XPathVisitor visitor) {}
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     if (visitor.visitFunction(this)) {
       callArgVisitors(visitor);
     }
@@ -90,7 +90,7 @@ public abstract class Function extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     return isSameClass(expr);
   }
 
@@ -98,7 +98,7 @@ public abstract class Function extends Expression {
    * This function is currently only being used by Position() and Last(). See respective functions
    * for more detail.
    */
-  public void postCompileStep(Compiler compiler) {
+  public void postCompileStep(final Compiler compiler) {
     // no default action
   }
 }

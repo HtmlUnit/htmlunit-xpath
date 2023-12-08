@@ -30,7 +30,7 @@ public class FuncPosition extends Function {
 
   /** {@inheritDoc} */
   @Override
-  public void postCompileStep(Compiler compiler) {
+  public void postCompileStep(final Compiler compiler) {
     m_isTopLevel = compiler.getLocationPathDepth() == -1;
   }
 
@@ -41,11 +41,11 @@ public class FuncPosition extends Function {
    * @return The current position of the iteration in the context node list, or -1 if there is no
    *     active context node list.
    */
-  public int getPositionInContextNodeList(XPathContext xctxt) {
+  public int getPositionInContextNodeList(final XPathContext xctxt) {
 
     // System.out.println("FuncPosition- entry");
     // If we're in a predicate, then this will return non-null.
-    SubContextList iter = m_isTopLevel ? null : xctxt.getSubContextList();
+    final SubContextList iter = m_isTopLevel ? null : xctxt.getSubContextList();
 
     if (null != iter) {
       return iter.getProximityPosition(xctxt);
@@ -57,8 +57,8 @@ public class FuncPosition extends Function {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    double pos = getPositionInContextNodeList(xctxt);
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
+    final double pos = getPositionInContextNodeList(xctxt);
 
     return new XNumber(pos);
   }

@@ -26,7 +26,7 @@ public class FuncTrue extends Function {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return XBoolean.S_TRUE;
   }
 }

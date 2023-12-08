@@ -33,7 +33,7 @@ public class FunctionPattern extends StepPattern {
    *
    * <p>NEEDSDOC @param expr
    */
-  public FunctionPattern(Expression expr, int axis) {
+  public FunctionPattern(final Expression expr, final int axis) {
 
     super(0, null, null, axis);
 
@@ -58,10 +58,10 @@ public class FunctionPattern extends StepPattern {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt, int context)
+  public XObject execute(final XPathContext xctxt, final int context)
       throws javax.xml.transform.TransformerException {
 
-    DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
+    final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
     XNumber score = SCORE_NONE;
 
     if (null != nl) {
@@ -82,10 +82,11 @@ public class FunctionPattern extends StepPattern {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt, int context, DTM dtm, int expType)
+  public XObject execute(
+      final XPathContext xctxt, final int context, final DTM dtm, final int expType)
       throws javax.xml.transform.TransformerException {
 
-    DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
+    final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
     XNumber score = SCORE_NONE;
 
     if (null != nl) {
@@ -107,10 +108,10 @@ public class FunctionPattern extends StepPattern {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    int context = xctxt.getCurrentNode();
-    DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
+    final int context = xctxt.getCurrentNode();
+    final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
     XNumber score = SCORE_NONE;
 
     if (null != nl) {
@@ -132,7 +133,7 @@ public class FunctionPattern extends StepPattern {
 
   /** {@inheritDoc} */
   @Override
-  protected void callSubtreeVisitors(XPathVisitor visitor) {
+  protected void callSubtreeVisitors(final XPathVisitor visitor) {
     m_functionExpr.callVisitors(visitor);
     super.callSubtreeVisitors(visitor);
   }

@@ -29,7 +29,7 @@ public class QnameTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void name() throws Exception {
-    List<?> hits = getByXpath("<root>4</root>", "name(/root)");
+    final List<?> hits = getByXpath("<root>4</root>", "name(/root)");
     assertEquals(1, hits.size());
     assertEquals("root", hits.get(0));
   }
@@ -37,7 +37,7 @@ public class QnameTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void nameMany() throws Exception {
-    List<?> hits = getByXpath("<root><a>4</a><a>3</a></root>", "name(/*/a)");
+    final List<?> hits = getByXpath("<root><a>4</a><a>3</a></root>", "name(/*/a)");
     assertEquals(1, hits.size());
     assertEquals("a", hits.get(0));
   }
@@ -45,7 +45,7 @@ public class QnameTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void nameEmpty() throws Exception {
-    List<?> hits = getByXpath("name(/o)");
+    final List<?> hits = getByXpath("name(/o)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -62,7 +62,7 @@ public class QnameTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void nameNoArguments() throws Exception {
-    List<?> hits = getByXpath("name()");
+    final List<?> hits = getByXpath("name()");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -70,7 +70,7 @@ public class QnameTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void nameOfComment() throws Exception {
-    List<?> hits = getByXpath("<root><!-- comment --></root>", "name(/root/comment())");
+    final List<?> hits = getByXpath("<root><!-- comment --></root>", "name(/root/comment())");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -78,7 +78,7 @@ public class QnameTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void nameOfAttribute() throws Exception {
-    List<?> hits = getByXpath("<root attr='abc'></root>", "name(/*/@*)");
+    final List<?> hits = getByXpath("<root attr='abc'></root>", "name(/*/@*)");
     assertEquals(1, hits.size());
     assertEquals("attr", hits.get(0));
   }
@@ -86,7 +86,7 @@ public class QnameTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void nameOfText() throws Exception {
-    List<?> hits = getByXpath("<root>abc</root>", "name(/*/text())");
+    final List<?> hits = getByXpath("<root>abc</root>", "name(/*/text())");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }

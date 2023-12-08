@@ -29,7 +29,7 @@ public class SubstringBeforeTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringBeforeNumber() throws Exception {
-    List<?> hits = getByXpath("substring-before(1234, 3)");
+    final List<?> hits = getByXpath("substring-before(1234, 3)");
     assertEquals(1, hits.size());
     assertEquals("12", hits.get(0));
   }
@@ -37,7 +37,7 @@ public class SubstringBeforeTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringBeforeNumberFirst() throws Exception {
-    List<?> hits = getByXpath("substring-before(12444, 4)");
+    final List<?> hits = getByXpath("substring-before(12444, 4)");
     assertEquals(1, hits.size());
     assertEquals("12", hits.get(0));
   }
@@ -45,7 +45,7 @@ public class SubstringBeforeTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringBeforeNumberUnknown() throws Exception {
-    List<?> hits = getByXpath("substring-before(1234, 7)");
+    final List<?> hits = getByXpath("substring-before(1234, 7)");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -53,7 +53,7 @@ public class SubstringBeforeTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringBeforeString() throws Exception {
-    List<?> hits = getByXpath("substring-before('test', 'es')");
+    final List<?> hits = getByXpath("substring-before('test', 'es')");
     assertEquals(1, hits.size());
     assertEquals("t", hits.get(0));
   }
@@ -61,7 +61,7 @@ public class SubstringBeforeTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringBeforeStringWhole() throws Exception {
-    List<?> hits = getByXpath("substring-before('test', 'test')");
+    final List<?> hits = getByXpath("substring-before('test', 'test')");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -69,7 +69,7 @@ public class SubstringBeforeTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringBeforeStringNotFound() throws Exception {
-    List<?> hits = getByXpath("substring-before('test', 'tex')");
+    final List<?> hits = getByXpath("substring-before('test', 'tex')");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -77,7 +77,7 @@ public class SubstringBeforeTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringBeforeStringEmpty() throws Exception {
-    List<?> hits = getByXpath("substring-before('', 'o')");
+    final List<?> hits = getByXpath("substring-before('', 'o')");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -85,7 +85,7 @@ public class SubstringBeforeTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringBeforeStringEmptyEmpty() throws Exception {
-    List<?> hits = getByXpath("substring-before('', '')");
+    final List<?> hits = getByXpath("substring-before('', '')");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }
@@ -93,7 +93,7 @@ public class SubstringBeforeTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void substringBeforeStringEmptySearch() throws Exception {
-    List<?> hits = getByXpath("substring-before('text', '')");
+    final List<?> hits = getByXpath("substring-before('text', '')");
     assertEquals(1, hits.size());
     assertEquals("", hits.get(0));
   }

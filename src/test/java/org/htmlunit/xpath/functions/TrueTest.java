@@ -29,7 +29,7 @@ public class TrueTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void trueLessThanOrEqualToTrue() throws Exception {
-    List<?> hits = getByXpath("true() <= true()");
+    final List<?> hits = getByXpath("true() <= true()");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -37,7 +37,7 @@ public class TrueTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void emptyNodeSetLessThanOrEqualToTrue() throws Exception {
-    List<?> hits = getByXpath("/nonexistent<=true()");
+    final List<?> hits = getByXpath("/nonexistent<=true()");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -45,7 +45,7 @@ public class TrueTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void emptyNodeSetLessThanTrue() throws Exception {
-    List<?> hits = getByXpath("/nonexistent<true()");
+    final List<?> hits = getByXpath("/nonexistent<true()");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -53,7 +53,7 @@ public class TrueTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void trueLessThanOrEqualToEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("true()<=/nonexistent");
+    final List<?> hits = getByXpath("true()<=/nonexistent");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -61,7 +61,7 @@ public class TrueTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void trueGreaterThanOrEqualToEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("true()>=/nonexistent");
+    final List<?> hits = getByXpath("true()>=/nonexistent");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -69,7 +69,7 @@ public class TrueTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void trueGreaterThaEmptyNodeSet() throws Exception {
-    List<?> hits = getByXpath("true()>/nonexistent");
+    final List<?> hits = getByXpath("true()>/nonexistent");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }

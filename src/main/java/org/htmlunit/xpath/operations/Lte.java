@@ -25,7 +25,7 @@ public class Lte extends Operation {
 
   /** {@inheritDoc} */
   @Override
-  public XObject operate(XObject left, XObject right)
+  public XObject operate(final XObject left, final XObject right)
       throws javax.xml.transform.TransformerException {
     return left.lessThanOrEqual(right) ? XBoolean.S_TRUE : XBoolean.S_FALSE;
   }

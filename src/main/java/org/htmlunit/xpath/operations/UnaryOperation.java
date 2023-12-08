@@ -46,14 +46,14 @@ public abstract class UnaryOperation extends Expression {
    *
    * @param r The expression operand to which the unary operation will be applied.
    */
-  public void setRight(Expression r) {
+  public void setRight(final Expression r) {
     m_right = r;
     r.exprSetParent(this);
   }
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     return operate(m_right.execute(xctxt));
   }
@@ -69,7 +69,7 @@ public abstract class UnaryOperation extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     if (visitor.visitUnaryOperation()) {
       m_right.callVisitors(visitor);
     }
@@ -77,10 +77,8 @@ public abstract class UnaryOperation extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
-    if (!isSameClass(expr)) return false;
-
-    if (!m_right.deepEquals(((UnaryOperation) expr).m_right)) return false;
+  public boolean deepEquals(final Expression expr) {
+    if (!isSameClass(expr) || !m_right.deepEquals(((UnaryOperation) expr).m_right)) return false;
 
     return true;
   }

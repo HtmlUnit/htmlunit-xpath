@@ -33,7 +33,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @param locPathIterator non-null reference to the parent iterator.
    */
-  PredicatedNodeTest(LocPathIterator locPathIterator) {
+  PredicatedNodeTest(final LocPathIterator locPathIterator) {
     m_lpi = locPathIterator;
   }
 
@@ -45,7 +45,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   public Object clone() throws CloneNotSupportedException {
     // Do not access the location path itterator during this operation!
 
-    PredicatedNodeTest clone = (PredicatedNodeTest) super.clone();
+    final PredicatedNodeTest clone = (PredicatedNodeTest) super.clone();
 
     if ((null != this.m_proximityPositions)
         && (this.m_proximityPositions == clone.m_proximityPositions)) {
@@ -85,9 +85,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @param count The number of predicates, which must be equal or less than the existing count.
    */
-  public void setPredicateCount(int count) {
+  public void setPredicateCount(final int count) {
     if (count > 0) {
-      Expression[] newPredicates = new Expression[count];
+      final Expression[] newPredicates = new Expression[count];
       System.arraycopy(m_predicates, 0, newPredicates, 0, count);
       m_predicates = newPredicates;
     } else m_predicates = null;
@@ -100,15 +100,15 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @param opPos The op code position of this location step.
    * @throws javax.xml.transform.TransformerException if any
    */
-  protected void initPredicateInfo(Compiler compiler, int opPos)
+  protected void initPredicateInfo(final Compiler compiler, final int opPos)
       throws javax.xml.transform.TransformerException {
 
-    int pos = compiler.getFirstPredicateOpPos(opPos);
+    final int pos = compiler.getFirstPredicateOpPos(opPos);
 
     if (pos > 0) {
       m_predicates = compiler.getCompiledPredicates(pos);
       if (null != m_predicates) {
-        for (Expression m_predicate : m_predicates) {
+        for (final Expression m_predicate : m_predicates) {
           m_predicate.exprSetParent(this);
         }
       }
@@ -121,7 +121,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @param index Index of the predicate.
    * @return A predicate expression.
    */
-  public Expression getPredicate(int index) {
+  public Expression getPredicate(final int index) {
     return m_predicates[index];
   }
 
@@ -136,7 +136,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
   /** {@inheritDoc} */
   @Override
-  public int getProximityPosition(XPathContext xctxt) {
+  public int getProximityPosition(final XPathContext xctxt) {
     return getProximityPosition();
   }
 
@@ -150,20 +150,20 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @param predicateIndex The index of the predicate where the proximity should be taken from.
    * @return The node position of this walker in the sub-context node list.
    */
-  protected int getProximityPosition(int predicateIndex) {
+  protected int getProximityPosition(final int predicateIndex) {
     return (predicateIndex >= 0) ? m_proximityPositions[predicateIndex] : 0;
   }
 
   /** Reset the proximity positions counts. */
   public void resetProximityPositions() {
-    int nPredicates = getPredicateCount();
+    final int nPredicates = getPredicateCount();
     if (nPredicates > 0) {
       if (null == m_proximityPositions) m_proximityPositions = new int[nPredicates];
 
       for (int i = 0; i < nPredicates; i++) {
         try {
           initProximityPosition(i);
-        } catch (Exception e) {
+        } catch (final Exception e) {
           // TODO: Fix this...
           throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(e);
         }
@@ -176,7 +176,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @param i The index into the m_proximityPositions array.
    */
-  public void initProximityPosition(int i) {
+  public void initProximityPosition(final int i) {
     m_proximityPositions[i] = 0;
   }
 
@@ -185,10 +185,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @param i The index into the m_proximityPositions array, where the increment will occur.
    */
-  protected void countProximityPosition(int i) {
+  protected void countProximityPosition(final int i) {
     // Note that in the case of a UnionChildIterator, this may be a
     // static object and so m_proximityPositions may indeed be null!
-    int[] pp = m_proximityPositions;
+    final int[] pp = m_proximityPositions;
     if ((null != pp) && (i < pp.length)) pp[i]++;
   }
 
@@ -209,10 +209,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @return the result of executing the predicate expressions.
    * @throws javax.xml.transform.TransformerException if any
    */
-  boolean executePredicates(int context, XPathContext xctxt)
+  boolean executePredicates(final int context, final XPathContext xctxt)
       throws javax.xml.transform.TransformerException {
 
-    int nPredicates = getPredicateCount();
+    final int nPredicates = getPredicateCount();
     // System.out.println("nPredicates: "+nPredicates);
     if (nPredicates == 0) return true;
 
@@ -223,7 +223,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
       xctxt.pushCurrentNode(context);
 
       for (int i = 0; i < nPredicates; i++) {
-        XObject pred = m_predicates[i].execute(xctxt);
+        final XObject pred = m_predicates[i].execute(xctxt);
         // System.out.println("\nBack from executing predicate expression - waiting
         // count:
         // "+m_lpi.getWaitingCount());
@@ -238,8 +238,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
             System.out.println("pred.num(): " + pred.num());
           }
 
-          int proxPos = this.getProximityPosition(m_predicateIndex);
-          int predIndex = (int) pred.num();
+          final int proxPos = this.getProximityPosition(m_predicateIndex);
+          final int predIndex = (int) pred.num();
           if (proxPos != predIndex) {
             if (DEBUG_PREDICATECOUNTING) {
               System.out.println("\nnode context: " + nodeToString(context));
@@ -285,9 +285,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @param n Node to give diagnostic information about, or null.
    * @return Informative string about the argument.
    */
-  protected String nodeToString(int n) {
+  protected String nodeToString(final int n) {
     if (DTM.NULL != n) {
-      DTM dtm = m_lpi.getXPathContext().getDTM(n);
+      final DTM dtm = m_lpi.getXPathContext().getDTM(n);
       return dtm.getNodeName(n) + "{" + (n + 1) + "}";
     }
     return "null";
@@ -304,14 +304,14 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @return a constant to determine whether the node is accepted, rejected, or skipped, as defined
    *     above .
    */
-  public short acceptNode(int n) {
+  public short acceptNode(final int n) {
 
-    XPathContext xctxt = m_lpi.getXPathContext();
+    final XPathContext xctxt = m_lpi.getXPathContext();
 
     try {
       xctxt.pushCurrentNode(n);
 
-      XObject score = execute(xctxt, n);
+      final XObject score = execute(xctxt, n);
 
       // System.out.println("\n::acceptNode - score: "+score.num()+"::");
       if (score != NodeTest.SCORE_NONE) {
@@ -323,7 +323,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
         return DTMIterator.FILTER_ACCEPT;
       }
-    } catch (javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: Fix this.
       throw new RuntimeException(se.getMessage());
@@ -340,7 +340,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @param li non-null reference to the owning location path iterator.
    */
-  public void setLocPathIterator(LocPathIterator li) {
+  public void setLocPathIterator(final LocPathIterator li) {
     m_lpi = li;
     if (this != li) li.exprSetParent(this);
   }
@@ -348,7 +348,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
-    int n = getPredicateCount();
+    final int n = getPredicateCount();
     for (int i = 0; i < n; i++) {
       if (getPredicate(i).canTraverseOutsideSubtree()) return true;
     }
@@ -361,9 +361,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @param visitor The visitor whose appropriate method will be called.
    */
-  public void callPredicateVisitors(XPathVisitor visitor) {
+  public void callPredicateVisitors(final XPathVisitor visitor) {
     if (null != m_predicates) {
-      for (Expression m_predicate : m_predicates) {
+      for (final Expression m_predicate : m_predicates) {
         if (visitor.visitPredicate(m_predicate)) {
           m_predicate.callVisitors(visitor);
         }
@@ -373,13 +373,13 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
-    PredicatedNodeTest pnt = (PredicatedNodeTest) expr;
+    final PredicatedNodeTest pnt = (PredicatedNodeTest) expr;
     if (null != m_predicates) {
 
-      int n = m_predicates.length;
+      final int n = m_predicates.length;
       if ((null == pnt.m_predicates) || (pnt.m_predicates.length != n)) return false;
       for (int i = 0; i < n; i++) {
         if (!m_predicates[i].deepEquals(pnt.m_predicates[i])) return false;

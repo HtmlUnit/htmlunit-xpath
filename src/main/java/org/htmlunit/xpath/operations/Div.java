@@ -26,14 +26,14 @@ public class Div extends Operation {
 
   /** {@inheritDoc} */
   @Override
-  public XObject operate(XObject left, XObject right)
+  public XObject operate(final XObject left, final XObject right)
       throws javax.xml.transform.TransformerException {
     return new XNumber(left.num() / right.num());
   }
 
   /** {@inheritDoc} */
   @Override
-  public double num(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public double num(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     return m_left.num(xctxt) / m_right.num(xctxt);
   }

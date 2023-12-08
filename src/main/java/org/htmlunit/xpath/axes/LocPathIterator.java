@@ -50,7 +50,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @param nscontext The namespace context for this iterator, should be OK if null.
    */
-  protected LocPathIterator(PrefixResolver nscontext) {
+  protected LocPathIterator(final PrefixResolver nscontext) {
 
     setLocPathIterator(this);
     m_prefixResolver = nscontext;
@@ -62,7 +62,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @throws javax.xml.transform.TransformerException if any
    */
-  protected LocPathIterator(int analysis) throws javax.xml.transform.TransformerException {
+  protected LocPathIterator(final int analysis) throws javax.xml.transform.TransformerException {
     this(analysis, true);
   }
 
@@ -74,7 +74,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *     iterator and it doesn't wish to load child walkers.
    * @throws javax.xml.transform.TransformerException if any
    */
-  protected LocPathIterator(int analysis, boolean shouldLoadWalkers)
+  protected LocPathIterator(final int analysis, final boolean shouldLoadWalkers)
       throws javax.xml.transform.TransformerException {
     setLocPathIterator(this);
   }
@@ -82,13 +82,13 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   /** {@inheritDoc} */
   @Override
   public int getAnalysisBits() {
-    int axis = getAxis();
+    final int axis = getAxis();
     return WalkerFactory.getAnalysisBitFromAxes(axis);
   }
 
   /** {@inheritDoc} */
   @Override
-  public DTM getDTM(int nodeHandle) {
+  public DTM getDTM(final int nodeHandle) {
     // %OPT%
     return m_execContext.getDTM(nodeHandle);
   }
@@ -101,9 +101,9 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    XNodeSet iter = new XNodeSet(m_clones.getInstance());
+    final XNodeSet iter = new XNodeSet(m_clones.getInstance());
 
     iter.setRoot(xctxt.getCurrentNode(), xctxt);
 
@@ -112,8 +112,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public DTMIterator asIterator(XPathContext xctxt, int contextNode) {
-    XNodeSet iter = new XNodeSet(m_clones.getInstance());
+  public DTMIterator asIterator(final XPathContext xctxt, final int contextNode) {
+    final XNodeSet iter = new XNodeSet(m_clones.getInstance());
 
     iter.setRoot(contextNode, xctxt);
 
@@ -122,21 +122,21 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public int asNode(XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    DTMIterator iter = m_clones.getInstance();
+  public int asNode(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
+    final DTMIterator iter = m_clones.getInstance();
 
-    int current = xctxt.getCurrentNode();
+    final int current = xctxt.getCurrentNode();
 
     iter.setRoot(current, xctxt);
 
-    int next = iter.nextNode();
+    final int next = iter.nextNode();
     iter.detach();
     return next;
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean bool(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public boolean bool(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return asNode(xctxt) != DTM.NULL;
   }
 
@@ -145,7 +145,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @param b true if this location path is at the top level of the expression.
    */
-  public void setIsTopLevel(boolean b) {
+  public void setIsTopLevel(final boolean b) {
     m_isTopLevel = b;
   }
 
@@ -160,11 +160,11 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public void setRoot(int context, Object environment) {
+  public void setRoot(final int context, final Object environment) {
 
     m_context = context;
 
-    XPathContext xctxt = (XPathContext) environment;
+    final XPathContext xctxt = (XPathContext) environment;
     m_execContext = xctxt;
     m_cdtm = xctxt.getDTM(context);
 
@@ -189,14 +189,14 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public void setShouldCacheNodes(boolean b) {
+  public void setShouldCacheNodes(final boolean b) {
 
     assertion(false, "setShouldCacheNodes not supported by this iterater!");
   }
 
   /** {@inheritDoc} */
   @Override
-  public void setCurrentPos(int i) {
+  public void setCurrentPos(final int i) {
     assertion(false, "setCurrentPos not supported by this iterator!");
   }
 
@@ -207,7 +207,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public int item(int index) {
+  public int item(final int index) {
     assertion(false, "item(int index) not supported by this iterator!");
     return 0;
   }
@@ -216,10 +216,10 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   @Override
   public int getLength() {
     // Tell if this is being called from within a predicate.
-    boolean isPredicateTest = this == m_execContext.getSubContextList();
+    final boolean isPredicateTest = this == m_execContext.getSubContextList();
 
     // And get how many total predicates are part of this step.
-    int predCount = getPredicateCount();
+    final int predCount = getPredicateCount();
 
     // If we have already calculated the length, and the current predicate
     // is the first predicate, then return the length. We don't cache
@@ -235,11 +235,11 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     // predicates after the current one.
     int pos = (m_predicateIndex >= 0) ? getProximityPosition() : m_pos;
 
-    LocPathIterator clone;
+    final LocPathIterator clone;
 
     try {
       clone = (LocPathIterator) clone();
-    } catch (CloneNotSupportedException cnse) {
+    } catch (final CloneNotSupportedException cnse) {
       return -1;
     }
 
@@ -322,7 +322,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   /** {@inheritDoc} */
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
-    LocPathIterator clone;
+    final LocPathIterator clone;
     // clone = (LocPathIterator) clone();
     clone = (LocPathIterator) m_clones.getInstanceOrThrow();
     clone.m_execContext = m_execContext;
@@ -347,7 +347,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * @param nextNode The next node found, may be null.
    * @return The same node that was passed as an argument.
    */
-  protected int returnNextNode(int nextNode) {
+  protected int returnNextNode(final int nextNode) {
 
     if (DTM.NULL != nextNode) {
       m_pos++;
@@ -368,7 +368,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public void runTo(int index) {
+  public void runTo(final int index) {
 
     if (m_foundLast || ((index >= 0) && (index <= getCurrentPos()))) return;
 
@@ -408,7 +408,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     if (visitor.visitLocationPath()) {
       visitor.visitStep();
       callPredicateVisitors(visitor);
@@ -484,7 +484,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public int getLastPos(XPathContext xctxt) {
+  public int getLastPos(final XPathContext xctxt) {
     return getLength();
   }
 }

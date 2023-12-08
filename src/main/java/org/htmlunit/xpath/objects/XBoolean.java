@@ -41,7 +41,7 @@ public class XBoolean extends XObject {
    *
    * @param b Value of the boolean object
    */
-  public XBoolean(boolean b) {
+  public XBoolean(final boolean b) {
 
     super();
 
@@ -87,7 +87,7 @@ public class XBoolean extends XObject {
 
   /** {@inheritDoc} */
   @Override
-  public boolean equals(XObject obj2) {
+  public boolean equals(final XObject obj2) {
     if (this == obj2) {
       return true;
     }
@@ -99,7 +99,7 @@ public class XBoolean extends XObject {
 
     try {
       return m_val == obj2.bool();
-    } catch (javax.xml.transform.TransformerException te) {
+    } catch (final javax.xml.transform.TransformerException te) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
     }
   }

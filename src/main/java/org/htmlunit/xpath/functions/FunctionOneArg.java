@@ -33,7 +33,7 @@ public class FunctionOneArg extends Function {
 
   /** {@inheritDoc} */
   @Override
-  public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
+  public void setArg(final Expression arg, final int argNum) throws WrongNumberArgsException {
 
     if (0 == argNum) {
       m_arg0 = arg;
@@ -43,7 +43,7 @@ public class FunctionOneArg extends Function {
 
   /** {@inheritDoc} */
   @Override
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
+  public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
     if (argNum != 1) reportWrongNumberArgs();
   }
 
@@ -61,19 +61,18 @@ public class FunctionOneArg extends Function {
 
   /** {@inheritDoc} */
   @Override
-  public void callArgVisitors(XPathVisitor visitor) {
+  public void callArgVisitors(final XPathVisitor visitor) {
     if (null != m_arg0) m_arg0.callVisitors(visitor);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
     if (null != m_arg0) {
-      if (null == ((FunctionOneArg) expr).m_arg0) return false;
-
-      if (!m_arg0.deepEquals(((FunctionOneArg) expr).m_arg0)) return false;
+      if ((null == ((FunctionOneArg) expr).m_arg0)
+          || !m_arg0.deepEquals(((FunctionOneArg) expr).m_arg0)) return false;
     } else if (null != ((FunctionOneArg) expr).m_arg0) return false;
 
     return true;

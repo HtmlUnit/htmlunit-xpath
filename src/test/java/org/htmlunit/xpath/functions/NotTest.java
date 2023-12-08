@@ -29,7 +29,7 @@ public class NotTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void notZero() throws Exception {
-    List<?> hits = getByXpath("not(0)");
+    final List<?> hits = getByXpath("not(0)");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -37,7 +37,7 @@ public class NotTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void notOne() throws Exception {
-    List<?> hits = getByXpath("not(1)");
+    final List<?> hits = getByXpath("not(1)");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }
@@ -45,7 +45,7 @@ public class NotTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void notEmptyString() throws Exception {
-    List<?> hits = getByXpath("not('')");
+    final List<?> hits = getByXpath("not('')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.TRUE, hits.get(0));
   }
@@ -53,7 +53,7 @@ public class NotTest extends AbstractXPathTest {
   /** @throws Exception in case of problems */
   @Test
   public void notString() throws Exception {
-    List<?> hits = getByXpath("not('false')");
+    final List<?> hits = getByXpath("not('false')");
     assertEquals(1, hits.size());
     assertEquals(Boolean.FALSE, hits.get(0));
   }

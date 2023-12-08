@@ -29,7 +29,7 @@ public class FuncLast extends Function {
 
   /** {@inheritDoc} */
   @Override
-  public void postCompileStep(Compiler compiler) {
+  public void postCompileStep(final Compiler compiler) {
     m_isTopLevel = compiler.getLocationPathDepth() == -1;
   }
 
@@ -40,12 +40,12 @@ public class FuncLast extends Function {
    * @return The number of nodes in the list.
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  public int getCountOfContextNodeList(XPathContext xctxt)
+  public int getCountOfContextNodeList(final XPathContext xctxt)
       throws javax.xml.transform.TransformerException {
 
     // assert(null != m_contextNodeList, "m_contextNodeList must be non-null");
     // If we're in a predicate, then this will return non-null.
-    SubContextList iter = m_isTopLevel ? null : xctxt.getSubContextList();
+    final SubContextList iter = m_isTopLevel ? null : xctxt.getSubContextList();
 
     // System.out.println("iter: "+iter);
     if (null != iter) {
@@ -57,7 +57,7 @@ public class FuncLast extends Function {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return new XNumber(getCountOfContextNodeList(xctxt));
   }
 }

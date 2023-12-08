@@ -31,7 +31,7 @@ public abstract class AbstractXPathTest {
   public <T> List<T> getByXpath(final String xml, final String xPath) throws Exception {
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(xml, StandardCharsets.UTF_8));
+    final Document doc = builder.parse(IOUtils.toInputStream(xml, StandardCharsets.UTF_8));
 
     return XPathHelper.getByXPath(doc, xPath, null, false);
   }
@@ -45,9 +45,9 @@ public abstract class AbstractXPathTest {
       throws Exception {
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     final DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(IOUtils.toInputStream(xml, StandardCharsets.UTF_8));
+    final Document doc = builder.parse(IOUtils.toInputStream(xml, StandardCharsets.UTF_8));
 
-    Exception exception =
+    final Exception exception =
         Assertions.assertThrows(
             RuntimeException.class, () -> XPathHelper.getByXPath(doc, xPath, null, false));
     Assertions.assertEquals(exMsg, exception.getMessage());
