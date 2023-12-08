@@ -243,8 +243,6 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
   public void addNodeInDocOrder(int node, boolean test, XPathContext support) {
-    int insertIndex = -1;
-
     if (test) {
 
       // This needs to do a binary search, but a binary search
@@ -268,12 +266,10 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
       }
 
       if (i != -2) {
-        insertIndex = i + 1;
-
-        insertElementAt(node, insertIndex);
+        insertElementAt(node, i + 1);
       }
     } else {
-      insertIndex = this.size();
+      int insertIndex = this.size();
 
       boolean foundit = false;
 

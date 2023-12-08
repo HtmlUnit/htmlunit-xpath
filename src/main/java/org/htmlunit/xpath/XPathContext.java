@@ -84,7 +84,6 @@ public class XPathContext extends DTMManager {
   public XPathContext(boolean recursiveVarContext) {
     m_prefixResolvers.push(null);
     m_currentNodes.push(DTM.NULL);
-    m_currentExpressionNodes.push(DTM.NULL);
   }
 
   /** Reset for new run. */
@@ -92,14 +91,12 @@ public class XPathContext extends DTMManager {
     m_dtmManager = DTMManager.newInstance();
 
     m_axesIteratorStack.removeAllElements();
-    m_currentExpressionNodes.removeAllElements();
     m_currentNodes.removeAllElements();
     m_predicatePos.removeAllElements();
     m_prefixResolvers.removeAllElements();
 
     m_prefixResolvers.push(null);
     m_currentNodes.push(DTM.NULL);
-    m_currentExpressionNodes.push(DTM.NULL);
   }
 
   // =================================================
@@ -195,13 +192,11 @@ public class XPathContext extends DTMManager {
    */
   public final void pushCurrentNodeAndExpression(int cn) {
     m_currentNodes.push(cn);
-    m_currentExpressionNodes.push(cn);
   }
 
   /** Set the current context node. */
   public final void popCurrentNodeAndExpression() {
     m_currentNodes.pop();
-    m_currentExpressionNodes.pop();
   }
 
   /**
@@ -217,9 +212,6 @@ public class XPathContext extends DTMManager {
   public final void popCurrentNode() {
     m_currentNodes.pop();
   }
-
-  /** A stack of the current sub-expression nodes. */
-  private final Stack<Integer> m_currentExpressionNodes = new Stack<>();
 
   private final Stack<Integer> m_predicatePos = new Stack<>();
 

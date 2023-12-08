@@ -26,6 +26,8 @@ import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
+import java.util.Objects;
+
 /**
  * Tokenizes and parses XPath expressions. This should really be named XPathParserImpl, and may be
  * renamed in the future.
@@ -209,7 +211,7 @@ public class XPathParser {
    *     current token matches the string, else false.
    */
   final boolean tokenIs(String s) {
-    return (m_token != null) ? (m_token.equals(s)) : (s == null);
+    return Objects.equals(m_token, s);
   }
 
   /**
@@ -259,7 +261,7 @@ public class XPathParser {
     if ((m_queueMark + n) <= m_ops.getTokenQueueSize()) {
       String lookahead = (String) m_ops.m_tokenQueue.get(m_queueMark + (n - 1));
 
-      isToken = (lookahead != null) ? lookahead.equals(s) : (s == null);
+      isToken = Objects.equals(lookahead, s);
     } else {
       isToken = null == s;
     }

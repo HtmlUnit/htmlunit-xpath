@@ -854,10 +854,8 @@ public class DTMNodeProxy
 
     if (getNodeValue() == null) {
       return arg.getNodeValue() == null;
-    } else if (!getNodeValue().equals(arg.getNodeValue())) {
-      return false;
     }
-    return true;
+    return getNodeValue().equals(arg.getNodeValue());
   }
 
   /** {@inheritDoc} */

@@ -30,7 +30,7 @@ public class OpMapVector {
   protected int[] m_map; // IntStack is trying to see this directly
 
   /** Position where size of array is kept */
-  protected int m_lengthPos = 0;
+  protected int m_lengthPos;
 
   /** Size of array */
   protected int m_mapSize;
@@ -41,7 +41,6 @@ public class OpMapVector {
    * @param blocksize Size of block to allocate
    */
   public OpMapVector(int blocksize, int increaseSize, int lengthPos) {
-
     m_blocksize = increaseSize;
     m_mapSize = blocksize;
     m_lengthPos = lengthPos;

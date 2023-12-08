@@ -137,7 +137,7 @@ public class StepPattern extends NodeTest implements SubContextList {
   /**
    * Set the list of predicate expressions for this pattern step.
    *
-   * @return List of expression objects.
+   * @return Array of expression objects.
    */
   public Expression[] getPredicates() {
     return m_predicates;

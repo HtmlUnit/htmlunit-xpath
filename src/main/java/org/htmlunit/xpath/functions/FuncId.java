@@ -51,19 +51,16 @@ public class FuncId extends FunctionOneArg {
       boolean mayBeMore) {
 
     if (null != refval) {
-      String ref = null;
       // DOMHelper dh = xctxt.getDOMHelper();
       StringTokenizer tokenizer = new StringTokenizer(refval);
       boolean hasMore = tokenizer.hasMoreTokens();
       DTM dtm = xctxt.getDTM(docContext);
 
       while (hasMore) {
-        ref = tokenizer.nextToken();
+        String ref = tokenizer.nextToken();
         hasMore = tokenizer.hasMoreTokens();
 
         if ((null != usedrefs) && usedrefs.contains(ref)) {
-          ref = null;
-
           continue;
         }
 

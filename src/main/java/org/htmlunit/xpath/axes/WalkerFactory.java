@@ -786,7 +786,6 @@ public class WalkerFactory {
 
     final int stepType = compiler.getOp(opPos);
 
-    int whatToShow = compiler.getWhatToShow(opPos);
     StepPattern ai = null;
     final int axis;
 
@@ -859,7 +858,7 @@ public class WalkerFactory {
                 new Object[] {Integer.toString(stepType)}));
     }
     if (null == ai) {
-      whatToShow = compiler.getWhatToShow(opPos); // %REVIEW%
+      int whatToShow = compiler.getWhatToShow(opPos); // %REVIEW%
       ai =
           new StepPattern(
               whatToShow, compiler.getStepNS(opPos), compiler.getStepLocalName(opPos), axis);
