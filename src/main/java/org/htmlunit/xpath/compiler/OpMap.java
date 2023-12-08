@@ -204,9 +204,9 @@ public class OpMap {
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
    */
-  public void error(String msg, Object[] args) throws javax.xml.transform.TransformerException {
-
-    java.lang.String fmsg = XPATHMessages.createXPATHMessage(msg, args);
+  public void error(final String msg, final Object[] args)
+      throws javax.xml.transform.TransformerException {
+    final String fmsg = XPATHMessages.createXPATHMessage(msg, args);
 
     throw new javax.xml.transform.TransformerException(fmsg);
   }

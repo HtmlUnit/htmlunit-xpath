@@ -17,6 +17,7 @@
  */
 package org.htmlunit.xpath.compiler;
 
+import java.util.Objects;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 import org.htmlunit.xpath.XPathProcessorException;
@@ -25,8 +26,6 @@ import org.htmlunit.xpath.objects.XString;
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
-
-import java.util.Objects;
 
 /**
  * Tokenizes and parses XPath expressions. This should really be named XPathParserImpl, and may be

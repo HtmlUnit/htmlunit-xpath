@@ -166,7 +166,8 @@ public class FunctionTable {
     m_functionID.put(Keywords.FUNC_POSITION_STRING, Integer.valueOf(FunctionTable.FUNC_POSITION));
     m_functionID.put(Keywords.FUNC_COUNT_STRING, Integer.valueOf(FunctionTable.FUNC_COUNT));
     m_functionID.put(Keywords.FUNC_ID_STRING, Integer.valueOf(FunctionTable.FUNC_ID));
-    m_functionID.put(Keywords.FUNC_LOCAL_PART_STRING, Integer.valueOf(FunctionTable.FUNC_LOCAL_PART));
+    m_functionID.put(
+        Keywords.FUNC_LOCAL_PART_STRING, Integer.valueOf(FunctionTable.FUNC_LOCAL_PART));
     m_functionID.put(Keywords.FUNC_NAMESPACE_STRING, Integer.valueOf(FunctionTable.FUNC_NAMESPACE));
     m_functionID.put(Keywords.FUNC_NAME_STRING, Integer.valueOf(FunctionTable.FUNC_QNAME));
     m_functionID.put(Keywords.FUNC_NOT_STRING, Integer.valueOf(FunctionTable.FUNC_NOT));
@@ -180,10 +181,12 @@ public class FunctionTable {
     m_functionID.put(Keywords.FUNC_ROUND_STRING, Integer.valueOf(FunctionTable.FUNC_ROUND));
     m_functionID.put(Keywords.FUNC_SUM_STRING, Integer.valueOf(FunctionTable.FUNC_SUM));
     m_functionID.put(Keywords.FUNC_STRING_STRING, Integer.valueOf(FunctionTable.FUNC_STRING));
-    m_functionID.put(Keywords.FUNC_STARTS_WITH_STRING, Integer.valueOf(FunctionTable.FUNC_STARTS_WITH));
+    m_functionID.put(
+        Keywords.FUNC_STARTS_WITH_STRING, Integer.valueOf(FunctionTable.FUNC_STARTS_WITH));
     m_functionID.put(Keywords.FUNC_CONTAINS_STRING, Integer.valueOf(FunctionTable.FUNC_CONTAINS));
     m_functionID.put(
-        Keywords.FUNC_SUBSTRING_BEFORE_STRING, Integer.valueOf(FunctionTable.FUNC_SUBSTRING_BEFORE));
+        Keywords.FUNC_SUBSTRING_BEFORE_STRING,
+        Integer.valueOf(FunctionTable.FUNC_SUBSTRING_BEFORE));
     m_functionID.put(
         Keywords.FUNC_SUBSTRING_AFTER_STRING, Integer.valueOf(FunctionTable.FUNC_SUBSTRING_AFTER));
     m_functionID.put(

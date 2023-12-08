@@ -77,14 +77,17 @@ public class XPath {
    * @throws javax.xml.transform.TransformerException if syntax or other error.
    */
   public XPath(
-      String exprString, PrefixResolver prefixResolver, int type, ErrorListener errorListener)
+      final String exprString,
+      final PrefixResolver prefixResolver,
+      final int type,
+      ErrorListener errorListener)
       throws javax.xml.transform.TransformerException {
     initFunctionTable();
     if (null == errorListener)
       errorListener = new org.htmlunit.xpath.xml.utils.DefaultErrorHandler();
 
-    XPathParser parser = new XPathParser(errorListener);
-    Compiler compiler = new Compiler(errorListener, m_funcTable);
+    final XPathParser parser = new XPathParser(errorListener);
+    final Compiler compiler = new Compiler(errorListener, m_funcTable);
 
     if (SELECT == type) parser.initXPath(compiler, exprString, prefixResolver);
     else if (MATCH == type) parser.initMatchPattern(compiler, exprString, prefixResolver);
@@ -111,18 +114,18 @@ public class XPath {
    * @throws javax.xml.transform.TransformerException if syntax or other error.
    */
   public XPath(
-      String exprString,
-      PrefixResolver prefixResolver,
-      int type,
+      final String exprString,
+      final PrefixResolver prefixResolver,
+      final int type,
       ErrorListener errorListener,
-      FunctionTable aTable)
+      final FunctionTable aTable)
       throws javax.xml.transform.TransformerException {
     m_funcTable = aTable;
     if (null == errorListener)
       errorListener = new org.htmlunit.xpath.xml.utils.DefaultErrorHandler();
 
-    XPathParser parser = new XPathParser(errorListener);
-    Compiler compiler = new Compiler(errorListener, m_funcTable);
+    final XPathParser parser = new XPathParser(errorListener);
+    final Compiler compiler = new Compiler(errorListener, m_funcTable);
 
     if (SELECT == type) parser.initXPath(compiler, exprString, prefixResolver);
     else if (MATCH == type) parser.initMatchPattern(compiler, exprString, prefixResolver);
@@ -146,7 +149,7 @@ public class XPath {
    * @param type one of {@link #SELECT} or {@link #MATCH}.
    * @throws javax.xml.transform.TransformerException if syntax or other error.
    */
-  public XPath(String exprString, PrefixResolver prefixResolver, int type)
+  public XPath(final String exprString, final PrefixResolver prefixResolver, final int type)
       throws javax.xml.transform.TransformerException {
     this(exprString, prefixResolver, type, null);
   }
@@ -156,7 +159,7 @@ public class XPath {
    *
    * @param expr The Expression object.
    */
-  public XPath(Expression expr) {
+  public XPath(final Expression expr) {
     m_mainExp = expr;
     initFunctionTable();
   }
@@ -173,7 +176,9 @@ public class XPath {
    * @throws javax.xml.transform.TransformerException in case of error
    */
   public XObject execute(
-      XPathContext xctxt, org.w3c.dom.Node contextNode, PrefixResolver namespaceContext)
+      final XPathContext xctxt,
+      final org.w3c.dom.Node contextNode,
+      final PrefixResolver namespaceContext)
       throws javax.xml.transform.TransformerException {
     return execute(xctxt, xctxt.getDTMHandleFromNode(contextNode), namespaceContext);
   }
@@ -189,7 +194,8 @@ public class XPath {
    *     is severe enough to halt processing.
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  public XObject execute(XPathContext xctxt, int contextNode, PrefixResolver namespaceContext)
+  public XObject execute(
+      final XPathContext xctxt, final int contextNode, final PrefixResolver namespaceContext)
       throws javax.xml.transform.TransformerException {
 
     xctxt.pushNamespaceContext(namespaceContext);
@@ -200,9 +206,9 @@ public class XPath {
 
     try {
       xobj = m_mainExp.execute(xctxt);
-    } catch (TransformerException te) {
+    } catch (final TransformerException te) {
       te.setLocator(this.getLocator());
-      ErrorListener el = xctxt.getErrorListener();
+      final ErrorListener el = xctxt.getErrorListener();
       if (null != el) // defensive, should never happen.
       {
         el.error(te);
@@ -217,8 +223,8 @@ public class XPath {
       if (msg == null || msg.length() == 0) {
         msg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_XPATH_ERROR, null);
       }
-      TransformerException te = new TransformerException(msg, getLocator(), e);
-      ErrorListener el = xctxt.getErrorListener();
+      final TransformerException te = new TransformerException(msg, getLocator(), e);
+      final ErrorListener el = xctxt.getErrorListener();
       if (null != el) // defensive, should never happen.
       {
         el.fatalError(te);
@@ -241,11 +247,11 @@ public class XPath {
    * @param args An array of arguments represented in the format string, which may be null.
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
    */
-  public void error(XPathContext xctxt, String msg, Object[] args)
+  public void error(final XPathContext xctxt, final String msg, final Object[] args)
       throws javax.xml.transform.TransformerException {
 
-    String fmsg = XPATHMessages.createXPATHMessage(msg, args);
-    ErrorListener ehandler = xctxt.getErrorListener();
+    final String fmsg = XPATHMessages.createXPATHMessage(msg, args);
+    final ErrorListener ehandler = xctxt.getErrorListener();
 
     if (null != ehandler) {
       ehandler.fatalError(new TransformerException(fmsg));
@@ -258,7 +264,7 @@ public class XPath {
    *
    * @param visitor The visitor whose appropriate method will be called.
    */
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     m_mainExp.callVisitors(visitor);
   }
 

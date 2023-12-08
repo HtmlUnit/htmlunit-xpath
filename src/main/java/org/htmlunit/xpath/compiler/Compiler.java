@@ -856,8 +856,8 @@ public class Compiler extends OpMap {
         }
 
         func.checkNumberArgs(i);
-      } catch (WrongNumberArgsException wnae) {
-        java.lang.String name = m_functionTable.getFunctionName(funcID);
+      } catch (final WrongNumberArgsException wnae) {
+        final String name = m_functionTable.getFunctionName(funcID);
 
         error(XPATHErrorResources.ER_ONLY_ALLOWS, new Object[] {name, wnae.getMessage()});
       }
@@ -870,9 +870,8 @@ public class Compiler extends OpMap {
 
   /** {@inheritDoc} */
   @Override
-  public void error(String msg, Object[] args) throws TransformerException {
-
-    java.lang.String fmsg = XPATHMessages.createXPATHMessage(msg, args);
+  public void error(final String msg, final Object[] args) throws TransformerException {
+    final String fmsg = XPATHMessages.createXPATHMessage(msg, args);
 
     if (null != m_errorHandler) {
       m_errorHandler.fatalError(new TransformerException(fmsg));

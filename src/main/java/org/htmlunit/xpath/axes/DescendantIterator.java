@@ -227,6 +227,6 @@ public class DescendantIterator extends LocPathIterator {
   public boolean deepEquals(Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
-      return m_axis == ((DescendantIterator) expr).m_axis;
+    return m_axis == ((DescendantIterator) expr).m_axis;
   }
 }

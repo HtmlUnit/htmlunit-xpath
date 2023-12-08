@@ -44,13 +44,13 @@ public class NodeSet implements NodeList {
   private final ArrayList<Node> nodes;
 
   /** Create an empty, using the given block size. */
-  public NodeSet(List<Node> nodes) {
+  public NodeSet(final List<Node> nodes) {
     this.nodes = new ArrayList<>(nodes);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Node item(int index) {
+  public Node item(final int index) {
     return nodes.get(index);
   }
 

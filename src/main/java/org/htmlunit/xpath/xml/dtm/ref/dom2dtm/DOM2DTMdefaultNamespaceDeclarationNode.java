@@ -50,7 +50,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   final String uri;
   final String nodename;
 
-  DOM2DTMdefaultNamespaceDeclarationNode(final Element pseudoparent, final String prefix, final String uri) {
+  DOM2DTMdefaultNamespaceDeclarationNode(
+      final Element pseudoparent, final String prefix, final String uri) {
     this.pseudoparent = pseudoparent;
     this.prefix = prefix;
     this.uri = uri;
@@ -249,7 +250,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public boolean isDerivedFrom(final String ns, final String localName, final int derivationMethod) {
+  public boolean isDerivedFrom(
+      final String ns, final String localName, final int derivationMethod) {
     return false;
   }
 

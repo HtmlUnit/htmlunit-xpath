@@ -327,15 +327,18 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   public void runTo(int index) {
     if (-1 == index) {
       int pos = m_next;
-      while (DTM.NULL != nextNode()) ;
+      while (DTM.NULL != nextNode())
+        ;
       m_next = pos;
     } else if (m_next == index) {
     } else if (hasCache() && m_next < getVector().size()) {
       m_next = index;
     } else if ((null == getVector()) && (index < m_next)) {
-      while ((m_next >= index) && DTM.NULL != previousNode()) ;
+      while ((m_next >= index) && DTM.NULL != previousNode())
+        ;
     } else {
-      while ((m_next < index) && DTM.NULL != nextNode()) ;
+      while ((m_next < index) && DTM.NULL != nextNode())
+        ;
     }
   }
 

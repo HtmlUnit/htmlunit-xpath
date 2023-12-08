@@ -59,9 +59,9 @@ public class XNodeSet extends NodeSequence {
    * nodes may be added.
    */
   public XNodeSet(DTMManager dtmMgr) {
-      super(new NodeSetDTM(dtmMgr));
-      m_dtmMgr = dtmMgr;
-      m_last = 0;
+    super(new NodeSetDTM(dtmMgr));
+    m_dtmMgr = dtmMgr;
+    m_last = 0;
   }
 
   /** {@inheritDoc} */

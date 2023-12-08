@@ -87,7 +87,11 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    * @param dtmIdentity The DTM identity ID for this DTM.
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
-  public DOM2DTM(final DTMManager mgr, final DOMSource domSource, final int dtmIdentity, final boolean doIndexing) {
+  public DOM2DTM(
+      final DTMManager mgr,
+      final DOMSource domSource,
+      final int dtmIdentity,
+      final boolean doIndexing) {
     super(mgr, domSource, dtmIdentity, doIndexing);
 
     // Initialize DOM navigation
@@ -142,7 +146,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    *     DTM behavior).
    * @return The index identity of the node that was added.
    */
-  protected int addNode(final Node node, final int parentIndex, final int previousSibling, final int forceNodeType) {
+  protected int addNode(
+      final Node node, final int parentIndex, final int previousSibling, final int forceNodeType) {
     final int nodeIndex = m_nodes.size();
 
     // Have we overflowed a DTM Identity's addressing range?
@@ -311,7 +316,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
             // %TBD% Should never arise, but I want to be sure of that...
             if (JJK_DEBUG) {
               System.out.println("***** DOM2DTM Pop Control Flow problem");
-              for (; ; ) ; // Freeze right here!
+              for (; ; )
+                ; // Freeze right here!
             }
           }
 

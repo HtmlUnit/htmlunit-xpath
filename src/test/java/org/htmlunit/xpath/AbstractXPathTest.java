@@ -49,8 +49,7 @@ public abstract class AbstractXPathTest {
 
     Exception exception =
         Assertions.assertThrows(
-            RuntimeException.class,
-            () -> XPathHelper.getByXPath(doc, xPath, null, false));
+            RuntimeException.class, () -> XPathHelper.getByXPath(doc, xPath, null, false));
     Assertions.assertEquals(exMsg, exception.getMessage());
     Assertions.assertEquals(exCauseMsg, exception.getCause().getMessage());
   }

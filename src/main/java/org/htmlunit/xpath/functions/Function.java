@@ -91,7 +91,7 @@ public abstract class Function extends Expression {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(Expression expr) {
-      return isSameClass(expr);
+    return isSameClass(expr);
   }
 
   /**

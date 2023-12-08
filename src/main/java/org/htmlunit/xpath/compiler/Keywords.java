@@ -181,12 +181,15 @@ public class Keywords {
     m_axisnames.put(FROM_ATTRIBUTES_STRING, Integer.valueOf(OpCodes.FROM_ATTRIBUTES));
     m_axisnames.put(FROM_CHILDREN_STRING, Integer.valueOf(OpCodes.FROM_CHILDREN));
     m_axisnames.put(FROM_DESCENDANTS_STRING, Integer.valueOf(OpCodes.FROM_DESCENDANTS));
-    m_axisnames.put(FROM_DESCENDANTS_OR_SELF_STRING, Integer.valueOf(OpCodes.FROM_DESCENDANTS_OR_SELF));
+    m_axisnames.put(
+        FROM_DESCENDANTS_OR_SELF_STRING, Integer.valueOf(OpCodes.FROM_DESCENDANTS_OR_SELF));
     m_axisnames.put(FROM_FOLLOWING_STRING, Integer.valueOf(OpCodes.FROM_FOLLOWING));
-    m_axisnames.put(FROM_FOLLOWING_SIBLINGS_STRING, Integer.valueOf(OpCodes.FROM_FOLLOWING_SIBLINGS));
+    m_axisnames.put(
+        FROM_FOLLOWING_SIBLINGS_STRING, Integer.valueOf(OpCodes.FROM_FOLLOWING_SIBLINGS));
     m_axisnames.put(FROM_PARENT_STRING, Integer.valueOf(OpCodes.FROM_PARENT));
     m_axisnames.put(FROM_PRECEDING_STRING, Integer.valueOf(OpCodes.FROM_PRECEDING));
-    m_axisnames.put(FROM_PRECEDING_SIBLINGS_STRING, Integer.valueOf(OpCodes.FROM_PRECEDING_SIBLINGS));
+    m_axisnames.put(
+        FROM_PRECEDING_SIBLINGS_STRING, Integer.valueOf(OpCodes.FROM_PRECEDING_SIBLINGS));
     m_axisnames.put(FROM_SELF_STRING, Integer.valueOf(OpCodes.FROM_SELF));
     m_axisnames.put(FROM_NAMESPACE_STRING, Integer.valueOf(OpCodes.FROM_NAMESPACE));
     m_nodetypes.put(NODETYPE_COMMENT_STRING, Integer.valueOf(OpCodes.NODETYPE_COMMENT));

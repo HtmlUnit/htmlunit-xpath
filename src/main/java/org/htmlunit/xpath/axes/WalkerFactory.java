@@ -51,7 +51,8 @@ public class WalkerFactory {
    * @return non-null AxesWalker derivative.
    * @throws javax.xml.transform.TransformerException if any
    */
-  static AxesWalker loadWalkers(final WalkingIterator lpi, final Compiler compiler, int stepOpCodePos)
+  static AxesWalker loadWalkers(
+      final WalkingIterator lpi, final Compiler compiler, int stepOpCodePos)
       throws javax.xml.transform.TransformerException {
 
     int stepType;
@@ -87,7 +88,8 @@ public class WalkerFactory {
     return 0 != (analysis & bits);
   }
 
-  public static void diagnoseIterator(final String name, final int analysis, final Compiler compiler) {
+  public static void diagnoseIterator(
+      final String name, final int analysis, final Compiler compiler) {
     System.out.println(
         compiler.toString()
             + ", "
@@ -108,7 +110,8 @@ public class WalkerFactory {
    * @return non-null reference to a LocPathIterator or derivative.
    * @throws javax.xml.transform.TransformerException if any
    */
-  public static DTMIterator newDTMIterator(final Compiler compiler, final int opPos, final boolean isTopLevel)
+  public static DTMIterator newDTMIterator(
+      final Compiler compiler, final int opPos, final boolean isTopLevel)
       throws javax.xml.transform.TransformerException {
 
     final int firstStepPos = OpMap.getFirstChildPos(opPos);
@@ -336,7 +339,7 @@ public class WalkerFactory {
   }
 
   static boolean isProximateInnerExpr(final Compiler compiler, final int opPos) {
-      final int op = compiler.getOp(opPos);
+    final int op = compiler.getOp(opPos);
     final int innerExprOpPos = opPos + 2;
     switch (op) {
       case OpCodes.OP_ARGUMENT:
@@ -370,7 +373,8 @@ public class WalkerFactory {
   }
 
   /** Tell if the predicates need to have proximity knowledge. */
-  public static boolean mightBeProximate(final Compiler compiler, final int opPos, final int stepType)
+  public static boolean mightBeProximate(
+      final Compiler compiler, final int opPos, final int stepType)
       throws javax.xml.transform.TransformerException {
 
     final boolean mightBeProximate = false;
@@ -433,8 +437,8 @@ public class WalkerFactory {
    * @return 32 bits as an integer that give information about the location path as a whole.
    * @throws javax.xml.transform.TransformerException if any
    */
-  private static boolean isOptimizableForDescendantIterator(final Compiler compiler, int stepOpCodePos)
-      throws javax.xml.transform.TransformerException {
+  private static boolean isOptimizableForDescendantIterator(
+      final Compiler compiler, int stepOpCodePos) throws javax.xml.transform.TransformerException {
 
     int stepType;
     int stepCount = 0;
@@ -718,7 +722,8 @@ public class WalkerFactory {
       // -sb
       final int whatToShow = pat.getWhatToShow();
       if (whatToShow == DTMFilter.SHOW_ATTRIBUTE || whatToShow == DTMFilter.SHOW_NAMESPACE) {
-        final int newAxis = (whatToShow == DTMFilter.SHOW_ATTRIBUTE) ? Axis.ATTRIBUTE : Axis.NAMESPACE;
+        final int newAxis =
+            (whatToShow == DTMFilter.SHOW_ATTRIBUTE) ? Axis.ATTRIBUTE : Axis.NAMESPACE;
         if (isDownwardAxisOfMany(axis)) {
           final StepPattern attrPat =
               new StepPattern(
@@ -911,7 +916,7 @@ public class WalkerFactory {
    * @throws RuntimeException if the input is bad.
    */
   private static AxesWalker createDefaultWalker(
-        final Compiler compiler, final int opPos, final WalkingIterator lpi, final int analysis) {
+      final Compiler compiler, final int opPos, final WalkingIterator lpi, final int analysis) {
 
     final AxesWalker ai;
     final int stepType = compiler.getOp(opPos);
@@ -1225,7 +1230,8 @@ public class WalkerFactory {
    * @param analysis The general analysis of the pattern.
    * @return true if the walk can be done in natural order.
    */
-  private static boolean isNaturalDocOrder(final Compiler compiler, int stepOpCodePos, final int analysis) {
+  private static boolean isNaturalDocOrder(
+      final Compiler compiler, int stepOpCodePos, final int analysis) {
     if (canCrissCross(analysis)) return false;
 
     // Namespaces can present some problems, so just punt if we're looking for
