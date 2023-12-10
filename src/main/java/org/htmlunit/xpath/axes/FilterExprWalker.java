@@ -117,13 +117,16 @@ public class FilterExprWalker extends AxesWalker {
 
         result = (org.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
         result.setShouldCacheNodes(true);
-      } else result = (org.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
+      }
+      else result = (org.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
 
-    } catch (final javax.xml.transform.TransformerException se) {
+    }
+    catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: Fix...
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(se);
-    } finally {
+    }
+    finally {
       xctxt.popCurrentNode();
       xctxt.setNamespaceContext(savedResolver);
     }
@@ -153,7 +156,8 @@ public class FilterExprWalker extends AxesWalker {
       }
 
       return DTMIterator.FILTER_ACCEPT;
-    } catch (final javax.xml.transform.TransformerException se) {
+    }
+    catch (final javax.xml.transform.TransformerException se) {
       throw new RuntimeException(se.getMessage());
     }
   }

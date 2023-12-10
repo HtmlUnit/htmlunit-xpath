@@ -96,7 +96,8 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
     // recursive infinate loop.
     if (null != cloneList) {
       if (null != m_prevWalker) clone.m_prevWalker = m_prevWalker.cloneDeep(cloneOwner, cloneList);
-    } else {
+    }
+    else {
       if (null != m_nextWalker) clone.m_nextWalker.m_prevWalker = clone;
     }
     return clone;
@@ -248,7 +249,8 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
       if (DTM.NULL == nextNode) {
 
         walker = walker.m_prevWalker;
-      } else {
+      }
+      else {
         if (walker.acceptNode(nextNode) != DTMIterator.FILTER_ACCEPT) {
           continue;
         }
@@ -283,7 +285,8 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
 
     try {
       walker = (AxesWalker) clone();
-    } catch (final CloneNotSupportedException cnse) {
+    }
+    catch (final CloneNotSupportedException cnse) {
       return -1;
     }
 
@@ -302,7 +305,8 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
       }
 
       // TODO: Should probably save this in the iterator.
-    } finally {
+    }
+    finally {
       lpi.setLastUsedWalker(savedWalker);
     }
 

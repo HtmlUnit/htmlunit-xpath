@@ -58,7 +58,8 @@ public class DescendantIterator extends LocPathIterator {
     if (OpCodes.FROM_SELF == stepType) {
       orSelf = true;
       // firstStepPos += 8;
-    } else if (OpCodes.FROM_ROOT == stepType) {
+    }
+    else if (OpCodes.FROM_ROOT == stepType) {
       fromRoot = true;
       // Ugly code... will go away when AST work is done.
       final int nextStepPos = compiler.getNextStepPos(firstStepPos);
@@ -74,7 +75,8 @@ public class DescendantIterator extends LocPathIterator {
         final int stepOp = compiler.getOp(nextStepPos);
         if (OpCodes.ENDOP != stepOp) firstStepPos = nextStepPos;
         else break;
-      } else break;
+      }
+      else break;
     }
 
     // Fix for http://nagoya.apache.org/bugzilla/show_bug.cgi?id=1336
@@ -83,7 +85,8 @@ public class DescendantIterator extends LocPathIterator {
     if (fromRoot) {
       if (orSelf) m_axis = Axis.DESCENDANTSORSELFFROMROOT;
       else m_axis = Axis.DESCENDANTSFROMROOT;
-    } else if (orSelf) m_axis = Axis.DESCENDANTORSELF;
+    }
+    else if (orSelf) m_axis = Axis.DESCENDANTORSELF;
     else m_axis = Axis.DESCENDANT;
 
     final int whatToShow = compiler.getWhatToShow(firstStepPos);
@@ -132,7 +135,8 @@ public class DescendantIterator extends LocPathIterator {
                   (DTM.NULL == m_lastFetched)
                       ? m_traverser.first(m_context)
                       : m_traverser.next(m_context, m_lastFetched);
-        } else {
+        }
+        else {
           next =
               m_lastFetched =
                   (DTM.NULL == m_lastFetched)
@@ -141,10 +145,15 @@ public class DescendantIterator extends LocPathIterator {
         }
 
         if (DTM.NULL != next) {
-          if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) break;
-          else continue;
-        } else break;
-      } while (next != DTM.NULL);
+          if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) {
+              break;
+          }
+          continue;
+        }
+
+        break;
+      }
+      while (next != DTM.NULL);
 
       if (DTM.NULL != next) {
         m_pos++;
@@ -153,7 +162,8 @@ public class DescendantIterator extends LocPathIterator {
 
       m_foundLast = true;
       return DTM.NULL;
-    } finally {
+    }
+    finally {
     }
   }
 
@@ -170,7 +180,8 @@ public class DescendantIterator extends LocPathIterator {
         || NodeTest.WILD.equals(localName)
         || NodeTest.WILD.equals(namespace)) {
       m_extendedTypeID = 0;
-    } else {
+    }
+    else {
       final int type = getNodeTypeTest(what);
       m_extendedTypeID = m_cdtm.getExpandedTypeID(namespace, localName, type);
     }

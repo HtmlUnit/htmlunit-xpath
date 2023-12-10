@@ -99,7 +99,8 @@ public abstract class BasicTestIterator extends LocPathIterator {
           continue;
         }
         break;
-      } while (next != DTM.NULL);
+      }
+      while (next != DTM.NULL);
 
       if (DTM.NULL != next) {
         m_pos++;
@@ -107,7 +108,8 @@ public abstract class BasicTestIterator extends LocPathIterator {
       }
       m_foundLast = true;
       return DTM.NULL;
-    } finally {
+    }
+    finally {
     }
   }
 

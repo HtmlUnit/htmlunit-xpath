@@ -33,8 +33,7 @@ public class XPATHMessages {
    * @return The formatted message string.
    */
   public static String createXPATHMessage(
-      final String msgKey, final Object[] args) // throws Exception
-      {
+      final String msgKey, final Object[] args) { // throws Exception
     if (XPATHBundle == null) XPATHBundle = new XPATHErrorResources();
 
     if (XPATHBundle != null) {
@@ -78,11 +77,13 @@ public class XPATHMessages {
         }
 
         fmsg = java.text.MessageFormat.format(msg, args);
-      } catch (final Exception e) {
+      }
+      catch (final Exception e) {
         fmsg = fResourceBundle.getString(XPATHErrorResources.FORMAT_FAILED);
         fmsg += " " + msg;
       }
-    } else {
+    }
+    else {
       fmsg = msg;
     }
 

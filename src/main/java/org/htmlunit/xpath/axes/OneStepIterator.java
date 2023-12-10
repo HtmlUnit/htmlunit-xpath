@@ -135,10 +135,12 @@ public class OneStepIterator extends ChildTestIterator {
         }
 
         m_proximityPositions[predicateIndex] += count;
-      } catch (final CloneNotSupportedException cnse) {
+      }
+      catch (final CloneNotSupportedException cnse) {
 
-        // can't happen
-      } finally {
+      // can't happen
+      }
+      finally {
         xctxt.popCurrentNode();
       }
     }
@@ -174,9 +176,11 @@ public class OneStepIterator extends ChildTestIterator {
       while (DTM.NULL != (clone.nextNode())) {
         count++;
       }
-    } catch (final CloneNotSupportedException cnse) {
+    }
+    catch (final CloneNotSupportedException cnse) {
       // can't happen
-    } finally {
+    }
+    finally {
       xctxt.popCurrentNode();
     }
     if (isPredicateTest && m_predicateIndex < 1) m_length = count;

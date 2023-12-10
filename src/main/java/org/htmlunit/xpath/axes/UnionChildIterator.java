@@ -53,7 +53,8 @@ public class UnionChildIterator extends ChildTestIterator {
     if (null == m_nodeTests) {
       m_nodeTests = new PredicatedNodeTest[1];
       m_nodeTests[0] = test;
-    } else {
+    }
+    else {
       final PredicatedNodeTest[] tests = m_nodeTests;
       final int len = m_nodeTests.length;
 
@@ -78,14 +79,17 @@ public class UnionChildIterator extends ChildTestIterator {
           // Note that we are assuming there are no positional predicates!
           if (pnt.getPredicateCount() > 0) {
             if (pnt.executePredicates(n, xctxt)) return DTMIterator.FILTER_ACCEPT;
-          } else return DTMIterator.FILTER_ACCEPT;
+          }
+          else return DTMIterator.FILTER_ACCEPT;
         }
       }
-    } catch (final javax.xml.transform.TransformerException se) {
+    }
+    catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: Fix this.
       throw new RuntimeException(se.getMessage());
-    } finally {
+    }
+    finally {
       xctxt.popCurrentNode();
     }
     return DTMIterator.FILTER_SKIP;

@@ -43,7 +43,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     implements Cloneable, DTMIterator, PathComponent {
 
   /** Create a LocPathIterator object. */
-  protected LocPathIterator() {}
+  protected LocPathIterator() {
+  }
 
   /**
    * Create a LocPathIterator object.
@@ -239,7 +240,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
     try {
       clone = (LocPathIterator) clone();
-    } catch (final CloneNotSupportedException cnse) {
+    }
+    catch (final CloneNotSupportedException cnse) {
       return -1;
     }
 
@@ -375,7 +377,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     if (-1 == index) {
       while (DTM.NULL != nextNode())
         ;
-    } else {
+    }
+    else {
       while (DTM.NULL != nextNode()) {
         if (getCurrentPos() >= index) break;
       }

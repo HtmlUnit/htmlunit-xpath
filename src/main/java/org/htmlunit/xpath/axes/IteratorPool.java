@@ -68,7 +68,8 @@ public final class IteratorPool {
       // Create a new object if so.
       try {
         return (DTMIterator) m_orig.clone();
-      } catch (final Exception ex) {
+      }
+      catch (final Exception ex) {
         throw new WrappedRuntimeException(ex);
       }
     }

@@ -103,10 +103,12 @@ public class ReverseAxesWalker extends AxesWalker {
         }
 
         m_proximityPositions[predicateIndex] = count;
-      } catch (final CloneNotSupportedException cnse) {
+      }
+      catch (final CloneNotSupportedException cnse) {
 
         // can't happen
-      } finally {
+      }
+      finally {
         wi().setLastUsedWalker(savedWalker);
       }
     }
@@ -141,10 +143,12 @@ public class ReverseAxesWalker extends AxesWalker {
       while (DTM.NULL != clone.nextNode()) {
         count++;
       }
-    } catch (final CloneNotSupportedException cnse) {
+    }
+    catch (final CloneNotSupportedException cnse) {
 
       // can't happen
-    } finally {
+    }
+    finally {
       wi().setLastUsedWalker(savedWalker);
     }
 

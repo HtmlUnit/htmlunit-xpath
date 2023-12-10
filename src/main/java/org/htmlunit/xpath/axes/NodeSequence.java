@@ -84,7 +84,8 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
     final boolean complete;
     if (m_cache != null) {
       complete = m_cache.isComplete();
-    } else {
+    }
+    else {
       complete = false;
     }
     return complete;
@@ -143,7 +144,8 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   }
 
   /** Create a new NodeSequence in an invalid (null) state. */
-  public NodeSequence() {}
+  public NodeSequence() {
+  }
 
   /** {@inheritDoc} */
   @Override
@@ -186,7 +188,8 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         runTo(-1);
         m_next = 0;
       }
-    } else assertion(false, "Can not setRoot on a non-iterated NodeSequence!");
+    }
+    else assertion(false, "Can not setRoot on a non-iterated NodeSequence!");
   }
 
   /** {@inheritDoc} */
@@ -226,7 +229,8 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         final int next = vec.elementAt(m_next);
         m_next++;
         return next;
-      } else if (cacheComplete() || (-1 != m_last) || (null == m_iter)) {
+      }
+      else if (cacheComplete() || (-1 != m_last) || (null == m_iter)) {
         m_next++;
         return DTM.NULL;
       }
@@ -240,12 +244,15 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         if (m_iter.isDocOrdered()) {
           getVector().addElement(next);
           m_next++;
-        } else {
+        }
+        else {
           final int insertIndex = addNodeInDocOrder(next);
           if (insertIndex >= 0) m_next++;
         }
-      } else m_next++;
-    } else {
+      }
+      else m_next++;
+    }
+    else {
       // We have exhausted the iterator, and if there is a cache
       // it must have all nodes in it by now, so let the cache
       // know that it is complete.
@@ -313,7 +320,8 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       if (!hasCache()) {
         setVector(new NodeVector());
       }
-    } else setVector(null);
+    }
+    else setVector(null);
   }
 
   /** {@inheritDoc} */
@@ -330,13 +338,17 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       while (DTM.NULL != nextNode())
         ;
       m_next = pos;
-    } else if (m_next == index) {
-    } else if (hasCache() && m_next < getVector().size()) {
+    }
+    else if (m_next == index) {
+    }
+    else if (hasCache() && m_next < getVector().size()) {
       m_next = index;
-    } else if ((null == getVector()) && (index < m_next)) {
+    }
+    else if ((null == getVector()) && (index < m_next)) {
       while ((m_next >= index) && DTM.NULL != previousNode())
         ;
-    } else {
+    }
+    else {
       while ((m_next < index) && DTM.NULL != nextNode())
         ;
     }
@@ -498,13 +510,15 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       }
       m_cache = new IteratorCache();
       m_cache.setVector(v);
-    } else if (obj instanceof IteratorCache) {
+    }
+    else if (obj instanceof IteratorCache) {
       final IteratorCache cache = (IteratorCache) obj;
       m_cache = cache;
 
       // Keep our superclass informed of the current NodeVector
       super.setObject(cache.getVector());
-    } else {
+    }
+    else {
       super.setObject(obj);
     }
   }

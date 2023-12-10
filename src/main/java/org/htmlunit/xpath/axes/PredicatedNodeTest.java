@@ -38,7 +38,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   }
 
   /** Construct an AxesWalker. The location path iterator will have to be set before use. */
-  PredicatedNodeTest() {}
+  PredicatedNodeTest() {
+  }
 
   /** {@inheritDoc} */
   @Override
@@ -90,7 +91,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
       final Expression[] newPredicates = new Expression[count];
       System.arraycopy(predicates_, 0, newPredicates, 0, count);
       predicates_ = newPredicates;
-    } else predicates_ = null;
+    }
+    else predicates_ = null;
   }
 
   /**
@@ -163,7 +165,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
       for (int i = 0; i < nPredicates; i++) {
         try {
           initProximityPosition(i);
-        } catch (final Exception e) {
+        }
+        catch (final Exception e) {
           // TODO: Fix this...
           throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(e);
         }
@@ -247,7 +250,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
               System.out.println("\n===== end predicate count ========");
             }
             return false;
-          } else if (DEBUG_PREDICATECOUNTING) {
+          }
+          else if (DEBUG_PREDICATECOUNTING) {
             System.out.println("\nnode context: " + nodeToString(context));
             System.out.println("index predicate is true: " + proxPos);
             System.out.println("\n===== end predicate count ========");
@@ -265,11 +269,13 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
           if (predicates_[i].isStableNumber() && i == nPredicates - 1) {
             m_foundLast = true;
           }
-        } else if (!pred.bool()) return false;
+        }
+        else if (!pred.bool()) return false;
 
         countProximityPosition(++m_predicateIndex);
       }
-    } finally {
+    }
+    finally {
       xctxt.popCurrentNode();
       xctxt.popNamespaceContext();
       xctxt.popSubContextList();
@@ -323,11 +329,13 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
         return DTMIterator.FILTER_ACCEPT;
       }
-    } catch (final javax.xml.transform.TransformerException se) {
+    }
+    catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: Fix this.
       throw new RuntimeException(se.getMessage());
-    } finally {
+    }
+    finally {
       xctxt.popCurrentNode();
     }
 
@@ -384,7 +392,8 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
       for (int i = 0; i < n; i++) {
         if (!predicates_[i].deepEquals(pnt.predicates_[i])) return false;
       }
-    } else if (null != pnt.predicates_) return false;
+    }
+    else if (null != pnt.predicates_) return false;
 
     return true;
   }

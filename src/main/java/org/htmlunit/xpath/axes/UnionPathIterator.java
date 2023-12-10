@@ -52,7 +52,8 @@ public class UnionPathIterator extends LocPathIterator
         }
         iterators_ = newIters;
       }
-    } catch (final Exception e) {
+    }
+    catch (final Exception e) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(e);
     }
   }
@@ -197,7 +198,8 @@ public class UnionPathIterator extends LocPathIterator
 
       exprs_[count] = createDTMIterator(compiler, opPos);
       exprs_[count].exprSetParent(this);
-    } else {
+    }
+    else {
 
       // Have to check for unwrapped functions, which the LocPathIterator
       // doesn't handle.
@@ -244,12 +246,14 @@ public class UnionPathIterator extends LocPathIterator
         else if (DTM.NULL == earliestNode) {
           iteratorUsed = i;
           earliestNode = node;
-        } else {
+        }
+        else {
           if (node == earliestNode) {
 
             // Found a duplicate, so skip past it.
             iterators_[i].nextNode();
-          } else {
+          }
+          else {
             final DTM dtm = getDTM(node);
 
             if (dtm.isNodeAfter(node, earliestNode)) {
@@ -264,7 +268,8 @@ public class UnionPathIterator extends LocPathIterator
         iterators_[iteratorUsed].nextNode();
 
         incrementCurrentPos();
-      } else m_foundLast = true;
+      }
+      else m_foundLast = true;
     }
 
     m_lastFetched = earliestNode;
@@ -324,7 +329,8 @@ public class UnionPathIterator extends LocPathIterator
       for (int i = 0; i < n; i++) {
         if (!exprs_[i].deepEquals(upi.exprs_[i])) return false;
       }
-    } else if (null != upi.exprs_) {
+    }
+    else if (null != upi.exprs_) {
       return false;
     }
 
