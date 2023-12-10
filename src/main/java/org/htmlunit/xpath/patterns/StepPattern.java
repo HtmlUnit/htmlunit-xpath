@@ -496,14 +496,12 @@ public class StepPattern extends NodeTest implements SubContextList {
                 result = pos == 1;
 
                 break;
-              } else {
-                positionAlreadySeen = true;
+              }
+              positionAlreadySeen = true;
 
-                if (!checkProximityPosition(xctxt, i, dtm, currentNode, pos)) {
-                  result = false;
-
-                  break;
-                }
+              if (!checkProximityPosition(xctxt, i, dtm, currentNode, pos)) {
+                result = false;
+                break;
               }
 
             } else if (!pred.boolWithSideEffects()) {
@@ -576,9 +574,9 @@ public class StepPattern extends NodeTest implements SubContextList {
       }
 
       if (null != pat.m_predicates) {
-        for (final Expression m_predicate : pat.m_predicates) {
+        for (final Expression predicate : pat.m_predicates) {
           buf.append("[");
-          buf.append(m_predicate);
+          buf.append(predicate);
           buf.append("]");
         }
       }
@@ -619,9 +617,9 @@ public class StepPattern extends NodeTest implements SubContextList {
    */
   protected void callSubtreeVisitors(final XPathVisitor visitor) {
     if (null != m_predicates) {
-      for (final Expression m_predicate : m_predicates) {
-        if (visitor.visitPredicate(m_predicate)) {
-          m_predicate.callVisitors(visitor);
+      for (final Expression predicate : m_predicates) {
+        if (visitor.visitPredicate(predicate)) {
+          predicate.callVisitors(visitor);
         }
       }
     }

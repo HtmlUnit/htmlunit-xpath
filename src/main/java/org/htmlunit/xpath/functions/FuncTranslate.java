@@ -30,7 +30,7 @@ public class FuncTranslate extends Function3Args {
 
     final String theFirstString = m_arg0.execute(xctxt).str();
     final String theSecondString = m_arg1.execute(xctxt).str();
-    final String theThirdString = m_arg2.execute(xctxt).str();
+    final String theThirdString = arg2_.execute(xctxt).str();
     final int theFirstStringLength = theFirstString.length();
     final int theThirdStringLength = theThirdString.length();
 

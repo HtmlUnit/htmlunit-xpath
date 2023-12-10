@@ -91,8 +91,10 @@ public class DTMNamedNodeMap implements NamedNodeMap {
     int count = 0;
 
     for (int n = dtm.getFirstAttribute(element); n != -1; n = dtm.getNextAttribute(n)) {
-      if (count == i) return dtm.getNode(n);
-      else ++count;
+      if (count == i) {
+        return dtm.getNode(n);
+      }
+      ++count;
     }
 
     return null;

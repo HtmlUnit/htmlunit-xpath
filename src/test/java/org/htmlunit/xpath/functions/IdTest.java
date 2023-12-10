@@ -48,7 +48,8 @@ public class IdTest extends AbstractXPathTest {
   public void findMultipleElementsByMultipleIDs() throws Exception {
     final List<?> hits =
         getByXpath(
-            "<!DOCTYPE root [<!ATTLIST a id ID #REQUIRED>]><root><id>p1</id><id>p2</id><id>p3</id><a id='p1'/><a id='p2'/></root>",
+            "<!DOCTYPE root [<!ATTLIST a id ID #REQUIRED>]>"
+                + "<root><id>p1</id><id>p2</id><id>p3</id><a id='p1'/><a id='p2'/></root>",
             "id(//id)");
     assertEquals(2, hits.size());
   }
@@ -58,7 +59,8 @@ public class IdTest extends AbstractXPathTest {
   public void returnsFirstElementWithMatchingId() throws Exception {
     final List<?> hits =
         getByXpath(
-            "<!DOCTYPE root [<!ATTLIST a id ID #REQUIRED><!ATTLIST b id ID #REQUIRED>]><root><a id='p1'/><b id='p1'/></root>",
+            "<!DOCTYPE root [<!ATTLIST a id ID #REQUIRED><!ATTLIST b id ID #REQUIRED>]>"
+                + "<root><a id='p1'/><b id='p1'/></root>",
             "id('p1')");
     assertEquals(1, hits.size());
     assertEquals("[a: null]", hits.get(0).toString());

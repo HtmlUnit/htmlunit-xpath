@@ -52,8 +52,8 @@ public class FuncSubstring extends Function3Args {
       startIndex = (start > 0) ? (int) start - 1 : 0;
     }
 
-    if (null != m_arg2) {
-      final double len = m_arg2.num(xctxt);
+    if (null != arg2_) {
+      final double len = arg2_.num(xctxt);
       if (len < 1) {
         return XString.EMPTYSTRING;
       }

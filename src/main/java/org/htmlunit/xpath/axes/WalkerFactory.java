@@ -207,7 +207,8 @@ public class WalkerFactory {
         iter = new WalkingIteratorSorted(compiler, opPos, analysis);
       }
     }
-    if (iter instanceof LocPathIterator) iter.setIsTopLevel(isTopLevel);
+
+    iter.setIsTopLevel(isTopLevel);
 
     return iter;
   }

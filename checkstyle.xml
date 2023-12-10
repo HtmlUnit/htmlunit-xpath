@@ -17,6 +17,82 @@
         <property name="eachLine" value="true"/>
     </module>
 
+    <module name="LineLength">
+        <property name="max" value="120"/>
+    </module>
+
+    <!-- Prevent two spaces after @xxxx -->
+    <module name="RegexpSingleline">
+        <property name="format" value="\* *@\w*  "/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\*\*/"/>
+        <property name="message" value="Trailing two asterisks."/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\s$"/>
+        <property name="message" value="Trailing whitespace found."/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\(value = (\w|\d)+\)"/>
+        <property name="message" value="Unneeded 'value' literal."/>
+    </module>
+
+    <module name="RegexpMultiline">
+        <property name="format" value="(?&lt;=\r?\n)\r?\n\r?\n"/>
+        <property name="message" value="Two empty contiguous lines"/>
+    </module>
+
+    <module name="RegexpMultiline">
+        <property name="format" value="package .*\r?\nimport"/>
+        <property name="message" value="Package declaration should be followed by an empty line"/>
+    </module>
+
+    <module name="RegexpMultiline">
+        <property name="format" value="\r?\n\r?\npackage"/>
+        <property name="message" value="Package declaration should not be preceeded by an empty line"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="@JsxFunction\(\)|@JsxGetter\(\)|@JsxSetter\(\)|@JsxConstructor\(\)|@Alerts\(\)$"/>
+        <property name="message" value="No need to specify parentheses"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="@Alerts$"/>
+        <property name="message" value="No need to specify empty @Alerts"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="serialVersionUID"/>
+        <property name="message" value="No need to specify serialVersionUID"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\{ &quot;&quot; \}"/>
+        <property name="message" value="No need for the curly brackets"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="@version"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="^(?!import).*BrowserVersionFeatures\.[A-Z]"/>
+        <property name="message" value="Use static import for BrowserVersionFeatures"/>
+    </module>
+
+<!--
+    <module name="RegexpMultiline">
+        <property name="id" value="sysout"/>
+        <property name="format" value="System\s*\.\s*(out)|(err)\s*\.\s*print(ln)?\("/>
+        <property name="message" value="System.out.print/ln found"/>
+    </module>
+-->
+
     <module name="TreeWalker">
 
 

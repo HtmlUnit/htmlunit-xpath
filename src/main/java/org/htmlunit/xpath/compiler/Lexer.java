@@ -255,9 +255,8 @@ class Lexer {
               addToTokenQueue(pat.substring(i - 1, i + 1));
 
               break;
-            } else {
-              posOfNSSep = i;
             }
+            posOfNSSep = i;
           }
 
           // fall through on purpose
@@ -475,9 +474,8 @@ class Lexer {
             if (s.length() > 0) addToTokenQueue(s);
 
             return -1;
-          } else {
-            uName = m_namespaceContext.getNamespaceForPrefix(prefix);
           }
+          uName = m_namespaceContext.getNamespaceForPrefix(prefix);
         }
       } catch (final ClassCastException cce) {
         uName = m_namespaceContext.getNamespaceForPrefix(prefix);

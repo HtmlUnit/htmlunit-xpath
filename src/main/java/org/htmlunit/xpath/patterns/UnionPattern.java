@@ -32,14 +32,14 @@ public class UnionPattern extends Expression {
    *
    * @serial
    */
-  private StepPattern[] m_patterns;
+  private StepPattern[] patterns_;
 
   /** {@inheritDoc} */
   @Override
   public boolean canTraverseOutsideSubtree() {
-    if (null != m_patterns) {
-      for (final StepPattern m_pattern : m_patterns) {
-        if (m_pattern.canTraverseOutsideSubtree()) return true;
+    if (null != patterns_) {
+      for (final StepPattern pattern : patterns_) {
+        if (pattern.canTraverseOutsideSubtree()) return true;
       }
     }
     return false;
@@ -51,7 +51,7 @@ public class UnionPattern extends Expression {
    * @param patterns the contained step patterns to be tested.
    */
   public void setPatterns(final StepPattern[] patterns) {
-    m_patterns = patterns;
+    patterns_ = patterns;
     if (null != patterns) {
       for (final StepPattern pattern : patterns) {
         pattern.exprSetParent(this);
@@ -64,8 +64,8 @@ public class UnionPattern extends Expression {
   public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     XObject bestScore = null;
-    for (final StepPattern m_pattern : m_patterns) {
-      final XObject score = m_pattern.execute(xctxt);
+    for (final StepPattern pattern : patterns_) {
+      final XObject score = pattern.execute(xctxt);
 
       if (score != NodeTest.SCORE_NONE) {
         if (null == bestScore) bestScore = score;
@@ -84,9 +84,9 @@ public class UnionPattern extends Expression {
   @Override
   public void callVisitors(final XPathVisitor visitor) {
     visitor.visitUnionPattern();
-    if (null != m_patterns) {
-      for (final StepPattern m_pattern : m_patterns) {
-        m_pattern.callVisitors(visitor);
+    if (null != patterns_) {
+      for (final StepPattern pattern : patterns_) {
+        pattern.callVisitors(visitor);
       }
     }
   }
@@ -98,14 +98,14 @@ public class UnionPattern extends Expression {
 
     final UnionPattern up = (UnionPattern) expr;
 
-    if (null != m_patterns) {
-      final int n = m_patterns.length;
-      if ((null == up.m_patterns) || (up.m_patterns.length != n)) return false;
+    if (null != patterns_) {
+      final int n = patterns_.length;
+      if ((null == up.patterns_) || (up.patterns_.length != n)) return false;
 
       for (int i = 0; i < n; i++) {
-        if (!m_patterns[i].deepEquals(up.m_patterns[i])) return false;
+        if (!patterns_[i].deepEquals(up.patterns_[i])) return false;
       }
-    } else if (up.m_patterns != null) return false;
+    } else if (up.patterns_ != null) return false;
 
     return true;
   }

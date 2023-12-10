@@ -87,9 +87,8 @@ public class DTMNodeList extends DTMNodeListBase {
         return null;
       }
       return m_iter.getDTM(handle).getNode(handle);
-    } else {
-      return null;
     }
+    return null;
   }
 
   /** {@inheritDoc} */

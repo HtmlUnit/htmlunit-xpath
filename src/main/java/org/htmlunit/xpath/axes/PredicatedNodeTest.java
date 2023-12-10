@@ -73,7 +73,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @return the number of predicates that this walker has.
    */
   public int getPredicateCount() {
-    if (-1 == m_predCount) return (null == m_predicates) ? 0 : m_predicates.length;
+    if (-1 == m_predCount) return (null == predicates_) ? 0 : predicates_.length;
     return m_predCount;
   }
 
@@ -88,9 +88,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   public void setPredicateCount(final int count) {
     if (count > 0) {
       final Expression[] newPredicates = new Expression[count];
-      System.arraycopy(m_predicates, 0, newPredicates, 0, count);
-      m_predicates = newPredicates;
-    } else m_predicates = null;
+      System.arraycopy(predicates_, 0, newPredicates, 0, count);
+      predicates_ = newPredicates;
+    } else predicates_ = null;
   }
 
   /**
@@ -106,10 +106,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     final int pos = compiler.getFirstPredicateOpPos(opPos);
 
     if (pos > 0) {
-      m_predicates = compiler.getCompiledPredicates(pos);
-      if (null != m_predicates) {
-        for (final Expression m_predicate : m_predicates) {
-          m_predicate.exprSetParent(this);
+      predicates_ = compiler.getCompiledPredicates(pos);
+      if (null != predicates_) {
+        for (final Expression predicate : predicates_) {
+          predicate.exprSetParent(this);
         }
       }
     }
@@ -122,7 +122,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @return A predicate expression.
    */
   public Expression getPredicate(final int index) {
-    return m_predicates[index];
+    return predicates_[index];
   }
 
   /**
@@ -223,7 +223,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
       xctxt.pushCurrentNode(context);
 
       for (int i = 0; i < nPredicates; i++) {
-        final XObject pred = m_predicates[i].execute(xctxt);
+        final XObject pred = predicates_[i].execute(xctxt);
         // System.out.println("\nBack from executing predicate expression - waiting
         // count:
         // "+m_lpi.getWaitingCount());
@@ -262,7 +262,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
           // We can't set m_foundLast = true unless we're sure that -all-
           // remaining parameters are stable, or else last() fails. Fixed so
           // only sets m_foundLast if on the last predicate
-          if (m_predicates[i].isStableNumber() && i == nPredicates - 1) {
+          if (predicates_[i].isStableNumber() && i == nPredicates - 1) {
             m_foundLast = true;
           }
         } else if (!pred.bool()) return false;
@@ -362,10 +362,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @param visitor The visitor whose appropriate method will be called.
    */
   public void callPredicateVisitors(final XPathVisitor visitor) {
-    if (null != m_predicates) {
-      for (final Expression m_predicate : m_predicates) {
-        if (visitor.visitPredicate(m_predicate)) {
-          m_predicate.callVisitors(visitor);
+    if (null != predicates_) {
+      for (final Expression predicate : predicates_) {
+        if (visitor.visitPredicate(predicate)) {
+          predicate.callVisitors(visitor);
         }
       }
     }
@@ -377,14 +377,14 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     if (!super.deepEquals(expr)) return false;
 
     final PredicatedNodeTest pnt = (PredicatedNodeTest) expr;
-    if (null != m_predicates) {
+    if (null != predicates_) {
 
-      final int n = m_predicates.length;
-      if ((null == pnt.m_predicates) || (pnt.m_predicates.length != n)) return false;
+      final int n = predicates_.length;
+      if ((null == pnt.predicates_) || (pnt.predicates_.length != n)) return false;
       for (int i = 0; i < n; i++) {
-        if (!m_predicates[i].deepEquals(pnt.m_predicates[i])) return false;
+        if (!predicates_[i].deepEquals(pnt.predicates_[i])) return false;
       }
-    } else if (null != pnt.m_predicates) return false;
+    } else if (null != pnt.predicates_) return false;
 
     return true;
   }
@@ -407,7 +407,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @serial
    */
-  private Expression[] m_predicates;
+  private Expression[] predicates_;
 
   /** An array of counts that correspond to the number of predicates the step contains. */
   protected transient int[] m_proximityPositions;

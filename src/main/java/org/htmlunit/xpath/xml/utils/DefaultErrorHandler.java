@@ -73,11 +73,12 @@ public class DefaultErrorHandler implements ErrorListener {
   public void error(final TransformerException exception) throws TransformerException {
     // If the m_throwExceptionOnError flag is true, rethrow the exception.
     // Otherwise report the error to System.err.
-    if (m_throwExceptionOnError) throw exception;
-    else {
-      final PrintWriter pw = getErrorWriter();
-      pw.println(exception.getMessage());
+    if (m_throwExceptionOnError) {
+      throw exception;
     }
+
+    final PrintWriter pw = getErrorWriter();
+    pw.println(exception.getMessage());
   }
 
   /** {@inheritDoc} */
@@ -85,10 +86,11 @@ public class DefaultErrorHandler implements ErrorListener {
   public void fatalError(final TransformerException exception) throws TransformerException {
     // If the m_throwExceptionOnError flag is true, rethrow the exception.
     // Otherwise report the error to System.err.
-    if (m_throwExceptionOnError) throw exception;
-    else {
-      final PrintWriter pw = getErrorWriter();
-      pw.println(exception.getMessage());
+    if (m_throwExceptionOnError) {
+      throw exception;
     }
+
+    final PrintWriter pw = getErrorWriter();
+    pw.println(exception.getMessage());
   }
 }

@@ -41,16 +41,16 @@ public class UnionPathIterator extends LocPathIterator
     super.setRoot(context, environment);
 
     try {
-      if (null != m_exprs) {
-        final int n = m_exprs.length;
+      if (null != exprs_) {
+        final int n = exprs_.length;
         final DTMIterator[] newIters = new DTMIterator[n];
 
         for (int i = 0; i < n; i++) {
-          final DTMIterator iter = m_exprs[i].asIterator(m_execContext, context);
+          final DTMIterator iter = exprs_[i].asIterator(m_execContext, context);
           newIters[i] = iter;
           iter.nextNode();
         }
-        m_iterators = newIters;
+        iterators_ = newIters;
       }
     } catch (final Exception e) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(e);
@@ -60,11 +60,11 @@ public class UnionPathIterator extends LocPathIterator
   /** {@inheritDoc} */
   @Override
   public void detach() {
-    if (null != m_iterators) {
-      for (final DTMIterator m_iterator : m_iterators) {
-        m_iterator.detach();
+    if (null != iterators_) {
+      for (final DTMIterator iterator : iterators_) {
+        iterator.detach();
       }
-      m_iterators = null;
+      iterators_ = null;
     }
   }
 
@@ -101,27 +101,26 @@ public class UnionPathIterator extends LocPathIterator
     // be more effecient to just test for the conditions for a UnionChildIterator,
     // and then create that directly.
     final UnionPathIterator upi = new UnionPathIterator(compiler, opPos);
-    final int nPaths = upi.m_exprs.length;
+    final int nPaths = upi.exprs_.length;
     boolean isAllChildIterators = true;
     for (int i = 0; i < nPaths; i++) {
-      final LocPathIterator lpi = upi.m_exprs[i];
+      final LocPathIterator lpi = upi.exprs_[i];
 
       if (lpi.getAxis() != Axis.CHILD) {
         isAllChildIterators = false;
         break;
-      } else {
-        // check for positional predicates or position function, which won't work.
-        if (HasPositionalPredChecker.check(lpi)) {
-          isAllChildIterators = false;
-          break;
-        }
+      }
+      // check for positional predicates or position function, which won't work.
+      if (HasPositionalPredChecker.check(lpi)) {
+        isAllChildIterators = false;
+        break;
       }
     }
     if (isAllChildIterators) {
       final UnionChildIterator uci = new UnionChildIterator();
 
       for (int i = 0; i < nPaths; i++) {
-        final PredicatedNodeTest lpi = upi.m_exprs[i];
+        final PredicatedNodeTest lpi = upi.exprs_[i];
         // I could strip the lpi down to a pure PredicatedNodeTest, but
         // I don't think it's worth it. Note that the test can be used
         // as a static object... so it doesn't have to be cloned.
@@ -137,9 +136,9 @@ public class UnionPathIterator extends LocPathIterator
   public int getAnalysisBits() {
     int bits = 0;
 
-    if (m_exprs != null) {
-      for (final LocPathIterator m_expr : m_exprs) {
-        final int bit = m_expr.getAnalysisBits();
+    if (exprs_ != null) {
+      for (final LocPathIterator expr : exprs_) {
+        final int bit = expr.getAnalysisBits();
         bits |= bit;
       }
     }
@@ -152,13 +151,13 @@ public class UnionPathIterator extends LocPathIterator
   public Object clone() throws CloneNotSupportedException {
 
     final UnionPathIterator clone = (UnionPathIterator) super.clone();
-    if (m_iterators != null) {
-      final int n = m_iterators.length;
+    if (iterators_ != null) {
+      final int n = iterators_.length;
 
-      clone.m_iterators = new DTMIterator[n];
+      clone.iterators_ = new DTMIterator[n];
 
       for (int i = 0; i < n; i++) {
-        clone.m_iterators[i] = (DTMIterator) m_iterators[i].clone();
+        clone.iterators_[i] = (DTMIterator) iterators_[i].clone();
       }
     }
 
@@ -196,8 +195,8 @@ public class UnionPathIterator extends LocPathIterator
     if (steptype == OpCodes.OP_LOCATIONPATH) {
       loadLocationPaths(compiler, compiler.getNextOpPos(opPos), count + 1);
 
-      m_exprs[count] = createDTMIterator(compiler, opPos);
-      m_exprs[count].exprSetParent(this);
+      exprs_[count] = createDTMIterator(compiler, opPos);
+      exprs_[count].exprSetParent(this);
     } else {
 
       // Have to check for unwrapped functions, which the LocPathIterator
@@ -217,10 +216,10 @@ public class UnionPathIterator extends LocPathIterator
 
           iter.m_firstWalker.init(compiler, opPos, steptype);
 
-          m_exprs[count] = iter;
+          exprs_[count] = iter;
           break;
         default:
-          m_exprs = new LocPathIterator[count];
+          exprs_ = new LocPathIterator[count];
       }
     }
   }
@@ -234,12 +233,12 @@ public class UnionPathIterator extends LocPathIterator
     // node, and get the earliest occuring in document order
     int earliestNode = DTM.NULL;
 
-    if (null != m_iterators) {
-      final int n = m_iterators.length;
+    if (null != iterators_) {
+      final int n = iterators_.length;
       int iteratorUsed = -1;
 
       for (int i = 0; i < n; i++) {
-        final int node = m_iterators[i].getCurrentNode();
+        final int node = iterators_[i].getCurrentNode();
 
         if (DTM.NULL == node) continue;
         else if (DTM.NULL == earliestNode) {
@@ -249,7 +248,7 @@ public class UnionPathIterator extends LocPathIterator
           if (node == earliestNode) {
 
             // Found a duplicate, so skip past it.
-            m_iterators[i].nextNode();
+            iterators_[i].nextNode();
           } else {
             final DTM dtm = getDTM(node);
 
@@ -262,7 +261,7 @@ public class UnionPathIterator extends LocPathIterator
       }
 
       if (DTM.NULL != earliestNode) {
-        m_iterators[iteratorUsed].nextNode();
+        iterators_[iteratorUsed].nextNode();
 
         incrementCurrentPos();
       } else m_foundLast = true;
@@ -280,7 +279,7 @@ public class UnionPathIterator extends LocPathIterator
    *
    * @serial
    */
-  protected LocPathIterator[] m_exprs;
+  protected LocPathIterator[] exprs_;
 
   /**
    * The location path iterators, one for each <a
@@ -289,7 +288,7 @@ public class UnionPathIterator extends LocPathIterator
    *
    * @serial
    */
-  protected DTMIterator[] m_iterators;
+  protected DTMIterator[] iterators_;
 
   /** {@inheritDoc} */
   @Override
@@ -302,9 +301,9 @@ public class UnionPathIterator extends LocPathIterator
   @Override
   public void callVisitors(final XPathVisitor visitor) {
     if (visitor.visitUnionPath()) {
-      if (null != m_exprs) {
-        for (final LocPathIterator m_expr : m_exprs) {
-          m_expr.callVisitors(visitor);
+      if (null != exprs_) {
+        for (final LocPathIterator expr : exprs_) {
+          expr.callVisitors(visitor);
         }
       }
     }
@@ -317,15 +316,15 @@ public class UnionPathIterator extends LocPathIterator
 
     final UnionPathIterator upi = (UnionPathIterator) expr;
 
-    if (null != m_exprs) {
-      final int n = m_exprs.length;
+    if (null != exprs_) {
+      final int n = exprs_.length;
 
-      if ((null == upi.m_exprs) || (upi.m_exprs.length != n)) return false;
+      if ((null == upi.exprs_) || (upi.exprs_.length != n)) return false;
 
       for (int i = 0; i < n; i++) {
-        if (!m_exprs[i].deepEquals(upi.m_exprs[i])) return false;
+        if (!exprs_[i].deepEquals(upi.exprs_[i])) return false;
       }
-    } else if (null != upi.m_exprs) {
+    } else if (null != upi.exprs_) {
       return false;
     }
 

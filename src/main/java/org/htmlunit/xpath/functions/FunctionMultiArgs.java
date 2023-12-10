@@ -30,7 +30,7 @@ public class FunctionMultiArgs extends Function3Args {
    *
    * @serial
    */
-  Expression[] m_args;
+  Expression[] args_;
 
   /** {@inheritDoc} */
   @Override
@@ -38,18 +38,18 @@ public class FunctionMultiArgs extends Function3Args {
 
     if (argNum < 3) super.setArg(arg, argNum);
     else {
-      if (null == m_args) {
-        m_args = new Expression[1];
-        m_args[0] = arg;
+      if (null == args_) {
+        args_ = new Expression[1];
+        args_[0] = arg;
       } else {
 
         // Slow but space conservative.
-        final Expression[] args = new Expression[m_args.length + 1];
+        final Expression[] args = new Expression[args_.length + 1];
 
-        System.arraycopy(m_args, 0, args, 0, m_args.length);
+        System.arraycopy(args_, 0, args, 0, args_.length);
 
-        args[m_args.length] = arg;
-        m_args = args;
+        args[args_.length] = arg;
+        args_ = args;
       }
       arg.exprSetParent(this);
     }
@@ -80,8 +80,8 @@ public class FunctionMultiArgs extends Function3Args {
       return true;
     }
 
-    for (final Expression m_arg : m_args) {
-      if (m_arg.canTraverseOutsideSubtree()) {
+    for (final Expression arg : args_) {
+      if (arg.canTraverseOutsideSubtree()) {
         return true;
       }
     }
@@ -93,9 +93,9 @@ public class FunctionMultiArgs extends Function3Args {
   @Override
   public void callArgVisitors(final XPathVisitor visitor) {
     super.callArgVisitors(visitor);
-    if (null != m_args) {
-      for (final Expression m_arg : m_args) {
-        m_arg.callVisitors(visitor);
+    if (null != args_) {
+      for (final Expression arg : args_) {
+        arg.callVisitors(visitor);
       }
     }
   }
@@ -106,15 +106,15 @@ public class FunctionMultiArgs extends Function3Args {
     if (!super.deepEquals(expr)) return false;
 
     final FunctionMultiArgs fma = (FunctionMultiArgs) expr;
-    if (null != m_args) {
-      final int n = m_args.length;
-      if ((null == fma) || (fma.m_args.length != n)) return false;
+    if (null != args_) {
+      final int n = args_.length;
+      if ((null == fma) || (fma.args_.length != n)) return false;
 
       for (int i = 0; i < n; i++) {
-        if (!m_args[i].deepEquals(fma.m_args[i])) return false;
+        if (!args_[i].deepEquals(fma.args_[i])) return false;
       }
 
-    } else if (null != fma.m_args) {
+    } else if (null != fma.args_) {
       return false;
     }
 

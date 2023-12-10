@@ -104,12 +104,12 @@ public class DTMManagerDefault extends DTMManager {
       // %REVIEW% Should throw a more diagnostic error if we go over the max...
       final int newlen = Math.min(id + 256, IDENT_MAX_DTMS);
 
-      final DTM[] new_m_dtms = new DTM[newlen];
-      System.arraycopy(m_dtms, 0, new_m_dtms, 0, oldlen);
-      m_dtms = new_m_dtms;
-      final int[] new_m_dtm_offsets = new int[newlen];
-      System.arraycopy(m_dtm_offsets, 0, new_m_dtm_offsets, 0, oldlen);
-      m_dtm_offsets = new_m_dtm_offsets;
+      final DTM[] newDtms = new DTM[newlen];
+      System.arraycopy(m_dtms, 0, newDtms, 0, oldlen);
+      m_dtms = newDtms;
+      final int[] newDtmOffsets = new int[newlen];
+      System.arraycopy(m_dtm_offsets, 0, newDtmOffsets, 0, oldlen);
+      m_dtm_offsets = newDtmOffsets;
     }
 
     m_dtms[id] = dtm;
