@@ -206,7 +206,8 @@ public class StepPattern extends NodeTest implements SubContextList {
 
     if ((getPredicateCount() > 0) || (null != m_relativePathPattern)) {
       m_score = SCORE_OTHER;
-    } else super.calcScore();
+    }
+    else super.calcScore();
 
     if (null == m_targetString) calcTargetString();
   }
@@ -299,19 +300,23 @@ public class StepPattern extends NodeTest implements SubContextList {
                   try {
                     if (XObject.CLASS_NUMBER == pred.getType()) {
                       throw new Error("Why: Should never have been called");
-                    } else if (!pred.boolWithSideEffects()) {
+                    }
+                    else if (!pred.boolWithSideEffects()) {
                       pass = false;
 
                       break;
                     }
-                  } finally {
+                  }
+                  finally {
                     pred.detach();
                   }
-                } finally {
+                }
+                finally {
                   xctxt.popPredicatePos();
                 }
               }
-            } finally {
+            }
+            finally {
               xctxt.popSubContextList();
             }
 
@@ -319,11 +324,13 @@ public class StepPattern extends NodeTest implements SubContextList {
 
             if (pos < 1) return false;
           }
-        } finally {
+        }
+        finally {
           xctxt.popCurrentNode();
         }
       }
-    } catch (final javax.xml.transform.TransformerException se) {
+    }
+    catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: should keep throw sax exception...
       throw new java.lang.RuntimeException(se.getMessage());
@@ -375,19 +382,23 @@ public class StepPattern extends NodeTest implements SubContextList {
 
                         break;
                       }
-                    } else if (!pred.boolWithSideEffects()) {
+                    }
+                    else if (!pred.boolWithSideEffects()) {
                       pass = false;
 
                       break;
                     }
-                  } finally {
+                  }
+                  finally {
                     pred.detach();
                   }
-                } finally {
+                }
+                finally {
                   xctxt.popPredicatePos();
                 }
               }
-            } finally {
+            }
+            finally {
               xctxt.popSubContextList();
             }
 
@@ -397,11 +408,13 @@ public class StepPattern extends NodeTest implements SubContextList {
               return pos;
             }
           }
-        } finally {
+        }
+        finally {
           xctxt.popCurrentNode();
         }
       }
-    } catch (final javax.xml.transform.TransformerException se) {
+    }
+    catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: should keep throw sax exception...
       throw new java.lang.RuntimeException(se.getMessage());
@@ -453,7 +466,8 @@ public class StepPattern extends NodeTest implements SubContextList {
         score = execute(xctxt);
 
         if (score != NodeTest.SCORE_NONE) break;
-      } finally {
+      }
+      finally {
         xctxt.popCurrentNode();
       }
     }
@@ -504,19 +518,23 @@ public class StepPattern extends NodeTest implements SubContextList {
                 break;
               }
 
-            } else if (!pred.boolWithSideEffects()) {
+            }
+            else if (!pred.boolWithSideEffects()) {
               result = false;
 
               break;
             }
-          } finally {
+          }
+          finally {
             pred.detach();
           }
-        } finally {
+        }
+        finally {
           xctxt.popPredicatePos();
         }
       }
-    } finally {
+    }
+    finally {
       xctxt.popSubContextList();
     }
 
@@ -537,13 +555,17 @@ public class StepPattern extends NodeTest implements SubContextList {
 
       if (0x000005000 == pat.m_whatToShow) {
         buf.append("doc()");
-      } else if (DTMFilter.SHOW_BYFUNCTION == pat.m_whatToShow) {
+      }
+      else if (DTMFilter.SHOW_BYFUNCTION == pat.m_whatToShow) {
         buf.append("function()");
-      } else if (DTMFilter.SHOW_ALL == pat.m_whatToShow) {
+      }
+      else if (DTMFilter.SHOW_ALL == pat.m_whatToShow) {
         buf.append("node()");
-      } else if (DTMFilter.SHOW_TEXT == pat.m_whatToShow) {
+      }
+      else if (DTMFilter.SHOW_TEXT == pat.m_whatToShow) {
         buf.append("text()");
-      } else if (DTMFilter.SHOW_PROCESSING_INSTRUCTION == pat.m_whatToShow) {
+      }
+      else if (DTMFilter.SHOW_PROCESSING_INSTRUCTION == pat.m_whatToShow) {
         buf.append("processing-instruction(");
 
         if (null != pat.m_name) {
@@ -551,9 +573,11 @@ public class StepPattern extends NodeTest implements SubContextList {
         }
 
         buf.append(")");
-      } else if (DTMFilter.SHOW_COMMENT == pat.m_whatToShow) {
+      }
+      else if (DTMFilter.SHOW_COMMENT == pat.m_whatToShow) {
         buf.append("comment()");
-      } else if (null != pat.m_name) {
+      }
+      else if (null != pat.m_name) {
         if (DTMFilter.SHOW_ATTRIBUTE == pat.m_whatToShow) {
           buf.append("@");
         }
@@ -565,11 +589,14 @@ public class StepPattern extends NodeTest implements SubContextList {
         }
 
         buf.append(pat.m_name);
-      } else if (DTMFilter.SHOW_ATTRIBUTE == pat.m_whatToShow) {
+      }
+      else if (DTMFilter.SHOW_ATTRIBUTE == pat.m_whatToShow) {
         buf.append("@");
-      } else if ((DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT) == pat.m_whatToShow) {
+      }
+      else if ((DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT) == pat.m_whatToShow) {
         buf.append("doc-root()");
-      } else {
+      }
+      else {
         buf.append("?").append(Integer.toHexString(pat.m_whatToShow));
       }
 
@@ -641,11 +668,13 @@ public class StepPattern extends NodeTest implements SubContextList {
       for (int i = 0; i < n; i++) {
         if (!m_predicates[i].deepEquals(sp.m_predicates[i])) return false;
       }
-    } else if (null != sp.m_predicates) return false;
+    }
+    else if (null != sp.m_predicates) return false;
 
     if (null != m_relativePathPattern) {
       if (!m_relativePathPattern.deepEquals(sp.m_relativePathPattern)) return false;
-    } else if (sp.m_relativePathPattern != null) return false;
+    }
+    else if (sp.m_relativePathPattern != null) return false;
 
     return true;
   }

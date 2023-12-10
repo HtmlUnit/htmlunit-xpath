@@ -70,7 +70,8 @@ public class WalkerFactory {
       // walker.setAnalysis(analysis);
       if (null == firstWalker) {
         firstWalker = walker;
-      } else {
+      }
+      else {
         prevWalker.setNextWalker(walker);
         walker.setPrevWalker(prevWalker);
       }
@@ -137,7 +138,8 @@ public class WalkerFactory {
 
         // Use simple child iteration without any test.
         iter = new ChildIterator(analysis);
-      } else {
+      }
+      else {
         if (DEBUG_ITERATOR_CREATION) diagnoseIterator("ChildTestIterator", analysis, compiler);
 
         // Else use simple node test iteration with predicate test.
@@ -151,7 +153,8 @@ public class WalkerFactory {
       // Then use a simple iteration of the attributes, with node test
       // and predicate testing.
       iter = new AttributeIterator(compiler, opPos, analysis);
-    } else if (isOneStep && !walksFilteredList(analysis)) {
+    }
+    else if (isOneStep && !walksFilteredList(analysis)) {
       if (!walksNamespaces(analysis)
           && (walksInDocOrder(analysis) || isSet(analysis, BIT_PARENT))) {
         if (false || DEBUG_ITERATOR_CREATION)
@@ -160,7 +163,8 @@ public class WalkerFactory {
         // Then use a simple iteration of the attributes, with node test
         // and predicate testing.
         iter = new OneStepIteratorForward(compiler, opPos, analysis);
-      } else {
+      }
+      else {
         if (false || DEBUG_ITERATOR_CREATION)
           diagnoseIterator("OneStepIterator", analysis, compiler);
 
@@ -190,14 +194,16 @@ public class WalkerFactory {
       if (DEBUG_ITERATOR_CREATION) diagnoseIterator("DescendantIterator", analysis, compiler);
 
       iter = new DescendantIterator(compiler, opPos, analysis);
-    } else {
+    }
+    else {
       if (isNaturalDocOrder(compiler, firstStepPos, analysis)) {
         if (false || DEBUG_ITERATOR_CREATION) {
           diagnoseIterator("WalkingIterator", analysis, compiler);
         }
 
         iter = new WalkingIterator(compiler, opPos, analysis, true);
-      } else {
+      }
+      else {
         // if (DEBUG_ITERATOR_CREATION)
         // diagnoseIterator("MatchPatternIterator", analysis, compiler);
         //
@@ -272,8 +278,7 @@ public class WalkerFactory {
    * @return One of BIT_ANCESTOR, etc.
    */
   public static int getAnalysisBitFromAxes(final int axis) {
-    switch (axis) // Generate new traverser
-    {
+    switch (axis) { // Generate new traverser
       case Axis.ANCESTOR:
         return BIT_ANCESTOR;
       case Axis.ANCESTORORSELF:
@@ -613,8 +618,7 @@ public class WalkerFactory {
                   new Object[] {Integer.toString(stepType)}));
       }
 
-      if (OpCodes.NODETYPE_NODE == compiler.getOp(stepOpCodePos + 3)) // child::node()
-      {
+      if (OpCodes.NODETYPE_NODE == compiler.getOp(stepOpCodePos + 3)) { // child::node()
         analysisResult |= BIT_NODETEST_ANY;
       }
 
@@ -678,8 +682,8 @@ public class WalkerFactory {
 
       if (null == firstStep) {
         firstStep = step;
-      } else {
-
+      }
+      else {
         // prevStep.setNextWalker(step);
         step.setRelativePathPattern(prevStep);
       }
@@ -752,7 +756,8 @@ public class WalkerFactory {
           else if (Axis.DESCENDANT == pat.getAxis()) pat.setAxis(Axis.DESCENDANTORSELF);
 
           pat = attrPat;
-        } else if (Axis.CHILD == pat.getAxis()) {
+        }
+        else if (Axis.CHILD == pat.getAxis()) {
           // In this case just change the axis.
           // pat.setWhatToShow(whatToShow);
           pat.setAxis(Axis.ATTRIBUTE);
@@ -993,7 +998,8 @@ public class WalkerFactory {
 
     if (simpleInit) {
       ai.initNodeTest(DTMFilter.SHOW_ALL);
-    } else {
+    }
+    else {
       final int whatToShow = compiler.getWhatToShow(opPos);
 
       if ((0

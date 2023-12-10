@@ -101,8 +101,7 @@ class Lexer {
       char c = pat.charAt(i);
 
       switch (c) {
-        case '\"':
-          {
+        case '\"': {
             if (startSubstring != -1) {
               isNum = false;
               isStartOfPat = mapPatternElemPos(nesting, isStartOfPat, isAttrName);
@@ -110,7 +109,8 @@ class Lexer {
 
               if (-1 != posOfNSSep) {
                 posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, i);
-              } else {
+              }
+              else {
                 addToTokenQueue(pat.substring(startSubstring, i));
               }
             }
@@ -124,7 +124,8 @@ class Lexer {
               addToTokenQueue(pat.substring(startSubstring, i + 1));
 
               startSubstring = -1;
-            } else {
+            }
+            else {
               m_processor.error(XPATHErrorResources.ER_EXPECTED_DOUBLE_QUOTE, null);
             }
           }
@@ -137,7 +138,8 @@ class Lexer {
 
             if (-1 != posOfNSSep) {
               posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, i);
-            } else {
+            }
+            else {
               addToTokenQueue(pat.substring(startSubstring, i));
             }
           }
@@ -151,7 +153,8 @@ class Lexer {
             addToTokenQueue(pat.substring(startSubstring, i + 1));
 
             startSubstring = -1;
-          } else {
+          }
+          else {
             m_processor.error(XPATHErrorResources.ER_EXPECTED_SINGLE_QUOTE, null);
           }
           break;
@@ -166,7 +169,8 @@ class Lexer {
 
             if (-1 != posOfNSSep) {
               posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, i);
-            } else {
+            }
+            else {
               addToTokenQueue(pat.substring(startSubstring, i));
             }
 
@@ -210,14 +214,17 @@ class Lexer {
 
             if (-1 != posOfNSSep) {
               posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, i);
-            } else {
+            }
+            else {
               addToTokenQueue(pat.substring(startSubstring, i));
             }
 
             startSubstring = -1;
-          } else if (('/' == c) && isStartOfPat) {
+          }
+          else if (('/' == c) && isStartOfPat) {
             isStartOfPat = mapPatternElemPos(nesting, isStartOfPat, isAttrName);
-          } else if ('*' == c) {
+          }
+          else if ('*' == c) {
             isStartOfPat = mapPatternElemPos(nesting, isStartOfPat, isAttrName);
             isAttrName = false;
           }
@@ -234,7 +241,8 @@ class Lexer {
 
           if ((')' == c) || (']' == c)) {
             nesting--;
-          } else if (('(' == c) || ('[' == c)) {
+          }
+          else if (('(' == c) || ('[' == c)) {
             nesting++;
           }
 
@@ -264,7 +272,8 @@ class Lexer {
           if (-1 == startSubstring) {
             startSubstring = i;
             isNum = Character.isDigit(c);
-          } else if (isNum) {
+          }
+          else if (isNum) {
             isNum = Character.isDigit(c);
           }
       }
@@ -277,15 +286,19 @@ class Lexer {
       if ((-1 != posOfNSSep)
           || ((m_namespaceContext != null) && (m_namespaceContext.handlesNullPrefixes()))) {
         posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, nChars);
-      } else {
+      }
+      else {
         addToTokenQueue(pat.substring(startSubstring, nChars));
       }
     }
 
     if (0 == m_compiler.getTokenQueueSize()) {
       m_processor.error(XPATHErrorResources.ER_EMPTY_EXPRESSION, null);
-    } else if (null != targetStrings) {
-      recordTokenString(targetStrings);
+    }
+    else {
+      if (null != targetStrings) {
+        recordTokenString(targetStrings);
+      }
     }
 
     m_processor.m_queueMark = 0;
@@ -350,7 +363,8 @@ class Lexer {
     if (m_processor.m_queueMark < qsz) {
       m_processor.m_token = (String) m_compiler.getTokenQueue().get(m_processor.m_queueMark++);
       m_processor.m_tokenChar = m_processor.m_token.charAt(0);
-    } else {
+    }
+    else {
       m_processor.m_token = null;
       m_processor.m_tokenChar = 0;
     }
@@ -370,7 +384,8 @@ class Lexer {
       final Integer itok = (Integer) Keywords.getKeyWord(key);
 
       tok = (null != itok) ? itok.intValue() : 0;
-    } catch (NullPointerException | ClassCastException npe) {
+    }
+    catch (NullPointerException | ClassCastException npe) {
       tok = 0;
     }
 
@@ -413,7 +428,8 @@ class Lexer {
         default:
           targetStrings.add(PseudoNames.PSEUDONAME_ANY);
       }
-    } else {
+    }
+    else {
       if (m_processor.tokenIs('@')) {
         tokPos++;
 
@@ -477,10 +493,12 @@ class Lexer {
           }
           uName = m_namespaceContext.getNamespaceForPrefix(prefix);
         }
-      } catch (final ClassCastException cce) {
+      }
+      catch (final ClassCastException cce) {
         uName = m_namespaceContext.getNamespaceForPrefix(prefix);
       }
-    } else {
+    }
+    else {
       uName = prefix;
     }
 
@@ -491,7 +509,8 @@ class Lexer {
       final String s = pat.substring(posOfNSSep + 1, posOfScan);
 
       if (s.length() > 0) addToTokenQueue(s);
-    } else {
+    }
+    else {
       m_processor.error(XPATHErrorResources.ER_PREFIX_MUST_RESOLVE, new String[] {prefix});
     }
 

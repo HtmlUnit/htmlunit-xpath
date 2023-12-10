@@ -95,6 +95,17 @@
 
     <module name="TreeWalker">
 
+        <property name="tabWidth" value="4"/>
+
+        <module name="AnnotationUseStyle"/>
+
+        <module name="LeftCurly">
+            <property name="option" value="eol"/>
+        </module>
+        <module name="RightCurly">
+            <property name="option" value="alone"/>
+            <property name="tokens" value="LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO, STATIC_INIT, INSTANCE_INIT"/>
+        </module>
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->

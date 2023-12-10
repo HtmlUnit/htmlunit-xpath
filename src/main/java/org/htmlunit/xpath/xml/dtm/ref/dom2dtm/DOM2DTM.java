@@ -160,7 +160,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         final int id = mgrD.getFirstFreeDTMID();
         mgrD.addDTM(this, id, nodeIndex);
         m_dtmIdent.addElement(id << DTMManager.IDENT_DTM_NODE_BITS);
-      } catch (final ClassCastException e) {
+      }
+      catch (final ClassCastException e) {
         // %REVIEW% Wrong error message, but I've been told we're trying
         // not to add messages right not for I18N reasons.
         // %REVIEW% Should this be a Fatal Error?
@@ -327,7 +328,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
           if (pos != null && ENTITY_REFERENCE_NODE == pos.getNodeType()) {
             // Nothing needs doing
             if (JJK_DEBUG) System.out.println("***** DOM2DTM popping EntRef");
-          } else {
+          }
+          else {
             // Fix and pop DTM
             if (m_last_kid == NULL)
               m_firstch.setElementAt(NULL, m_last_parent); // Popping from an element
@@ -346,7 +348,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       // More work, but simpler code, more likely to be correct, and
       // it doesn't happen very often. We'd get rid of the loop too.
       if (ENTITY_REFERENCE_NODE == nexttype) pos = next;
-    } while (ENTITY_REFERENCE_NODE == nexttype);
+    }
+    while (ENTITY_REFERENCE_NODE == nexttype);
 
     // Did we run out of the tree?
     if (next == null) {
@@ -544,7 +547,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
 
         len = m_nodes.size();
 
-      } while (isMore || i < len);
+      }
+      while (isMore || i < len);
     }
 
     return DTM.NULL;
@@ -627,8 +631,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
 
           if (nodeuri.equals(namespaceURI) && name.equals(nodelocalname))
             return makeNodeHandle(identity);
-        } else // if (DTM.NAMESPACE_NODE != type)
-        {
+        }
+        else { // if (DTM.NAMESPACE_NODE != type)
           break;
         }
       }
@@ -653,7 +657,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       final String s = (buf.length() > 0) ? buf.toString() : "";
 
       return new XString(s);
-    } else if (TEXT_NODE == type || CDATA_SECTION_NODE == type) {
+    }
+    else if (TEXT_NODE == type || CDATA_SECTION_NODE == type) {
       // If this is a DTM text node, it may be made of multiple DOM text
       // nodes -- including navigating into Entity References. DOM2DTM
       // records the first node in the sequence and requires that we
@@ -668,7 +673,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       }
       final String s = (buf.length() > 0) ? buf.toString() : "";
       return new XString(s);
-    } else return new XString(node.getNodeValue());
+    }
+    else return new XString(node.getNodeValue());
   }
 
   /**
@@ -693,8 +699,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     switch (node.getNodeType()) {
       case Node.DOCUMENT_FRAGMENT_NODE:
       case Node.DOCUMENT_NODE:
-      case Node.ELEMENT_NODE:
-        {
+      case Node.ELEMENT_NODE: {
           for (Node child = node.getFirstChild(); null != child; child = child.getNextSibling()) {
             getNodeData(child, buf);
           }
@@ -732,15 +737,15 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     final short type = getNodeType(nodeHandle);
 
     switch (type) {
-      case DTM.NAMESPACE_NODE:
-        {
+      case DTM.NAMESPACE_NODE: {
           final Node node = getNode(nodeHandle);
 
           // assume not null.
           name = node.getNodeName();
           if (name.startsWith("xmlns:")) {
             name = getLocalPart(name);
-          } else if (name.equals("xmlns")) {
+          }
+          else if (name.equals("xmlns")) {
             name = "";
           }
         }
@@ -748,8 +753,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       case DTM.ATTRIBUTE_NODE:
       case DTM.ELEMENT_NODE:
       case DTM.ENTITY_REFERENCE_NODE:
-      case DTM.PROCESSING_INSTRUCTION_NODE:
-        {
+      case DTM.PROCESSING_INSTRUCTION_NODE: {
           final Node node = getNode(nodeHandle);
 
           // assume not null.
@@ -790,7 +794,8 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         // Match old default for this function
         // This conversion may or may not be necessary
         newname = "";
-      } else {
+      }
+      else {
         final int index = qname.indexOf(':');
         newname = (index < 0) ? qname : qname.substring(index + 1);
       }
@@ -806,8 +811,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     final short type = getNodeType(nodeHandle);
 
     switch (type) {
-      case DTM.NAMESPACE_NODE:
-        {
+      case DTM.NAMESPACE_NODE: {
           final Node node = getNode(nodeHandle);
 
           // assume not null.
@@ -818,8 +822,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         }
         break;
       case DTM.ATTRIBUTE_NODE:
-      case DTM.ELEMENT_NODE:
-        {
+      case DTM.ELEMENT_NODE: {
           final Node node = getNode(nodeHandle);
 
           // assume not null.

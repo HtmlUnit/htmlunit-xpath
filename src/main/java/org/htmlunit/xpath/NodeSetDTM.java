@@ -166,7 +166,8 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
 
   /** {@inheritDoc} */
   @Override
-  public void detach() {}
+  public void detach() {
+  }
 
   /** {@inheritDoc} */
   @Override
@@ -222,8 +223,7 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
   public void addNodes(final DTMIterator iterator) {
-    if (null != iterator) // defensive to fix a bug that Sanjiva reported.
-    {
+    if (null != iterator) { // defensive to fix a bug that Sanjiva reported.
       int obj;
 
       while (DTM.NULL != (obj = iterator.nextNode())) {
@@ -268,7 +268,8 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
       if (i != -2) {
         insertElementAt(node, i + 1);
       }
-    } else {
+    }
+    else {
       final int insertIndex = this.size();
 
       boolean foundit = false;

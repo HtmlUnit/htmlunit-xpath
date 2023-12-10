@@ -52,18 +52,17 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
   public DTMAxisTraverser getAxisTraverser(final int axis) {
 
     DTMAxisTraverser traverser;
-    if (null == m_traversers) // Cache of stateless traversers for this DTM
-    {
+    if (null == m_traversers) { // Cache of stateless traversers for this DTM
       m_traversers = new DTMAxisTraverser[Axis.getNamesLength()];
       traverser = null;
-    } else {
+    }
+    else {
       traverser = m_traversers[axis]; // Share/reuse existing traverser
 
       if (traverser != null) return traverser;
     }
 
-    switch (axis) // Generate new traverser
-    {
+    switch (axis) { // Generate new traverser
       case Axis.ANCESTOR:
         traverser = new AncestorTraverser();
         break;
@@ -194,7 +193,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
       do {
         if (getExpandedTypeID(current) == expandedTypeID) return current;
-      } while (DTM.NULL != (current = getNextAttribute(current)));
+      }
+      while (DTM.NULL != (current = getNextAttribute(current)));
 
       return NULL;
     }
@@ -239,7 +239,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
           do {
             parentID = m_parent.elementAt(parentID);
             if (parentID < axisRoot) return NULL;
-          } while (parentID > axisRoot);
+          }
+          while (parentID > axisRoot);
 
           // System.out.println("Found node via index: "+first);
           nextPotential = nextID + 1;
@@ -352,7 +353,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
           // System.out.println("Found node via index: "+first);
           return next;
-        } else if (axisHasBeenProcessed(axisRoot)) break;
+        }
+        else if (axisHasBeenProcessed(axisRoot)) break;
 
         nextNode();
       }
@@ -415,7 +417,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       do {
         if (identity == axisRoot) return false;
         identity = m_parent.elementAt(identity);
-      } while (identity >= axisRoot);
+      }
+      while (identity >= axisRoot);
 
       return true;
     }
@@ -538,7 +541,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         first = _nextsib(context);
 
         if (NULL == first) context = _parent(context);
-      } while (NULL == first && NULL != context);
+      }
+      while (NULL == first && NULL != context);
 
       return makeNodeHandle(first);
     }
@@ -569,7 +573,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
           if (getExpandedTypeID(first) == expandedTypeID) return first;
           return next(context, first, expandedTypeID);
         }
-      } while (NULL == first && NULL != context);
+      }
+      while (NULL == first && NULL != context);
 
       return first;
     }
@@ -658,7 +663,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
       do {
         if (getExpandedTypeID(current) == expandedTypeID) return current;
-      } while (DTM.NULL != (current = getNextNamespaceNode(context, current, false)));
+      }
+      while (DTM.NULL != (current = getNextNamespaceNode(context, current, false)));
 
       return NULL;
     }
@@ -687,7 +693,8 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
       do {
         if (getExpandedTypeID(current) == expandedTypeID) return current;
-      } while (DTM.NULL != (current = getNextNamespaceNode(context, current, true)));
+      }
+      while (DTM.NULL != (current = getNextNamespaceNode(context, current, true)));
 
       return NULL;
     }
