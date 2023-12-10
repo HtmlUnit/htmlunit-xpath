@@ -83,19 +83,25 @@ public class XPath {
       ErrorListener errorListener)
       throws javax.xml.transform.TransformerException {
     initFunctionTable();
-    if (null == errorListener)
+    if (null == errorListener) {
       errorListener = new org.htmlunit.xpath.xml.utils.DefaultErrorHandler();
+    }
 
     final XPathParser parser = new XPathParser(errorListener);
     final Compiler compiler = new Compiler(errorListener, m_funcTable);
 
-    if (SELECT == type) parser.initXPath(compiler, exprString, prefixResolver);
-    else if (MATCH == type) parser.initMatchPattern(compiler, exprString, prefixResolver);
-    else
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_CANNOT_DEAL_XPATH_TYPE,
-              new Object[] {Integer.toString(type)}));
+    if (SELECT == type) {
+        parser.initXPath(compiler, exprString, prefixResolver);
+    }
+    else if (MATCH == type) {
+        parser.initMatchPattern(compiler, exprString, prefixResolver);
+    }
+    else {
+        throw new RuntimeException(
+                XPATHMessages.createXPATHMessage(
+                    XPATHErrorResources.ER_CANNOT_DEAL_XPATH_TYPE,
+                    new Object[] {Integer.toString(type)}));
+    }
 
     m_mainExp = compiler.compile(0);
   }
@@ -121,19 +127,25 @@ public class XPath {
       final FunctionTable aTable)
       throws javax.xml.transform.TransformerException {
     m_funcTable = aTable;
-    if (null == errorListener)
+    if (null == errorListener) {
       errorListener = new org.htmlunit.xpath.xml.utils.DefaultErrorHandler();
+    }
 
     final XPathParser parser = new XPathParser(errorListener);
     final Compiler compiler = new Compiler(errorListener, m_funcTable);
 
-    if (SELECT == type) parser.initXPath(compiler, exprString, prefixResolver);
-    else if (MATCH == type) parser.initMatchPattern(compiler, exprString, prefixResolver);
-    else
+    if (SELECT == type) {
+        parser.initXPath(compiler, exprString, prefixResolver);
+    }
+    else if (MATCH == type) {
+        parser.initMatchPattern(compiler, exprString, prefixResolver);
+    }
+    else {
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_CANNOT_DEAL_XPATH_TYPE,
               new Object[] {Integer.toString(type)}));
+    }
 
     m_mainExp = compiler.compile(0);
   }
@@ -210,10 +222,12 @@ public class XPath {
     catch (final TransformerException te) {
       te.setLocator(this.getLocator());
       final ErrorListener el = xctxt.getErrorListener();
-      if (null != el) {// defensive, should never happen.
+      if (null != el) { // defensive, should never happen.
         el.error(te);
       }
-      else throw te;
+      else {
+          throw te;
+      }
     }
     catch (Exception e) {
       while (e instanceof org.htmlunit.xpath.xml.utils.WrappedRuntimeException) {
@@ -230,7 +244,9 @@ public class XPath {
       if (null != el) { // defensive, should never happen.
         el.fatalError(te);
       }
-      else throw te;
+      else {
+          throw te;
+      }
     }
     finally {
       xctxt.popNamespaceContext();

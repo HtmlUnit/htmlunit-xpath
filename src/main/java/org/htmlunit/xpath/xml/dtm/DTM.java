@@ -124,7 +124,7 @@ public interface DTM {
    * @param axis One of Axes.ANCESTORORSELF, etc.
    * @return A DTMAxisIterator, or null if the givin axis isn't supported.
    */
-  DTMAxisTraverser getAxisTraverser(final int axis);
+  DTMAxisTraverser getAxisTraverser(int axis);
 
   /**
    * This is a shortcut to the iterators that implement XPath axes. Returns a bare-bones iterator
@@ -133,7 +133,7 @@ public interface DTM {
    * @param axis One of Axes.ANCESTORORSELF, etc.
    * @return A DTMAxisIterator, or null if the givin axis isn't supported.
    */
-  DTMAxisIterator getAxisIterator(final int axis);
+  DTMAxisIterator getAxisIterator(int axis);
 
   /**
    * Given a node handle, get the handle of the node's first child.

@@ -153,7 +153,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // Have we overflowed a DTM Identity's addressing range?
     if (m_dtmIdent.size() == (nodeIndex >>> DTMManager.IDENT_DTM_NODE_BITS)) {
       try {
-        if (m_mgr == null) throw new ClassCastException();
+        if (m_mgr == null) {
+            throw new ClassCastException();
+        }
 
         // Handle as Extended Addressing
         final DTMManagerDefault mgrD = (DTMManagerDefault) m_mgr;
@@ -174,8 +176,12 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // ensureSize(nodeIndex);
 
     int type;
-    if (NULL == forceNodeType) type = node.getNodeType();
-    else type = forceNodeType;
+    if (NULL == forceNodeType) {
+        type = node.getNodeType();
+    }
+    else {
+        type = forceNodeType;
+    }
 
     // %REVIEW% The Namespace Spec currently says that Namespaces are
     // processed in a non-namespace-aware manner, by matching the
@@ -211,8 +217,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
 
     if (DTM.NULL != parentIndex && type != DTM.ATTRIBUTE_NODE && type != DTM.NAMESPACE_NODE) {
       // If the DTM parent had no children, this becomes its first child.
-      if (NOTPROCESSED == m_firstch.elementAt(parentIndex))
+      if (NOTPROCESSED == m_firstch.elementAt(parentIndex)) {
         m_firstch.setElementAt(nodeIndex, parentIndex);
+      }
     }
 
     final String nsURI = node.getNamespaceURI();
@@ -224,8 +231,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         (type == Node.PROCESSING_INSTRUCTION_NODE) ? node.getNodeName() : node.getLocalName();
 
     // Hack to make DOM1 sort of work...
-    if (((type == Node.ELEMENT_NODE) || (type == Node.ATTRIBUTE_NODE)) && null == localName)
+    if (((type == Node.ELEMENT_NODE) || (type == Node.ATTRIBUTE_NODE)) && null == localName) {
       localName = node.getNodeName(); // -sb
+    }
 
     final ExpandedNameTable exnt = m_expandedNameTable;
 
@@ -250,11 +258,15 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
 
     indexNode(expandedNameID, nodeIndex);
 
-    if (DTM.NULL != previousSibling) m_nextsib.setElementAt(nodeIndex, previousSibling);
+    if (DTM.NULL != previousSibling) {
+        m_nextsib.setElementAt(nodeIndex, previousSibling);
+    }
 
     // This should be done after m_exptype has been set, and probably should
     // always be the last thing we do
-    if (type == DTM.NAMESPACE_NODE) declareNamespaceInContext(parentIndex, nodeIndex);
+    if (type == DTM.NAMESPACE_NODE) {
+        declareNamespaceInContext(parentIndex, nodeIndex);
+    }
 
     return nodeIndex;
   }
@@ -267,7 +279,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // Navigating the DOM is simple, navigating the DTM is simple;
     // keeping track of both at once is a trifle baroque but at least
     // we've avoided most of the special cases.
-    if (m_nodesAreProcessed) return false;
+    if (m_nodesAreProcessed) {
+        return false;
+    }
 
     // %REVIEW% Is this local copy Really Useful from a performance
     // point of view? Or is this a false microoptimization?
@@ -283,7 +297,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
 
         // %REVIEW% There's probably a more elegant way to skip
         // the doctype. (Just let it go and Suppress it?
-        if (next != null && DOCUMENT_TYPE_NODE == next.getNodeType()) next = next.getNextSibling();
+        if (next != null && DOCUMENT_TYPE_NODE == next.getNodeType()) {
+            next = next.getNextSibling();
+        }
 
         // Push DTM context -- except for children of Entity References,
         // which have no DTM equivalent and cause no DTM navigation.
@@ -298,18 +314,22 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         if (m_last_kid != NULL) {
           // Last node posted at this level had no more children
           // If it has _no_ children, we need to record that.
-          if (m_firstch.elementAt(m_last_kid) == NOTPROCESSED)
+          if (m_firstch.elementAt(m_last_kid) == NOTPROCESSED) {
             m_firstch.setElementAt(NULL, m_last_kid);
+          }
         }
 
         while (m_last_parent != NULL) {
           // %REVIEW% There's probably a more elegant way to
           // skip the doctype. (Just let it go and Suppress it?
           next = pos.getNextSibling();
-          if (next != null && DOCUMENT_TYPE_NODE == next.getNodeType())
+          if (next != null && DOCUMENT_TYPE_NODE == next.getNodeType()) {
             next = next.getNextSibling();
+          }
 
-          if (next != null) break; // Found it!
+          if (next != null) {
+              break; // Found it!
+          }
 
           // No next-sibling found. Pop the DOM.
           pos = pos.getParentNode();
@@ -327,27 +347,38 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
           // encounter one, pop it _without_ popping DTM.
           if (pos != null && ENTITY_REFERENCE_NODE == pos.getNodeType()) {
             // Nothing needs doing
-            if (JJK_DEBUG) System.out.println("***** DOM2DTM popping EntRef");
+            if (JJK_DEBUG) {
+                System.out.println("***** DOM2DTM popping EntRef");
+            }
           }
           else {
             // Fix and pop DTM
-            if (m_last_kid == NULL)
+            if (m_last_kid == NULL) {
               m_firstch.setElementAt(NULL, m_last_parent); // Popping from an element
-            else m_nextsib.setElementAt(NULL, m_last_kid); // Popping from anything else
+            }
+            else {
+                m_nextsib.setElementAt(NULL, m_last_kid); // Popping from anything else
+            }
             m_last_parent = m_parent.elementAt(m_last_kid = m_last_parent);
           }
         }
-        if (m_last_parent == NULL) next = null;
+        if (m_last_parent == NULL) {
+            next = null;
+        }
       }
 
-      if (next != null) nexttype = next.getNodeType();
+      if (next != null) {
+          nexttype = next.getNodeType();
+      }
 
       // If it's an entity ref, advance past it.
       //
       // %REVIEW% Should we let this out the door and just suppress it?
       // More work, but simpler code, more likely to be correct, and
       // it doesn't happen very often. We'd get rid of the loop too.
-      if (ENTITY_REFERENCE_NODE == nexttype) pos = next;
+      if (ENTITY_REFERENCE_NODE == nexttype) {
+          pos = next;
+      }
     }
     while (ENTITY_REFERENCE_NODE == nexttype);
 
@@ -359,8 +390,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
 
       if (JJK_DEBUG) {
         System.out.println("***** DOM2DTM Crosscheck:");
-        for (int i = 0; i < m_nodes.size(); ++i)
+        for (int i = 0; i < m_nodes.size(); ++i) {
           System.out.println(i + ":\t" + m_firstch.elementAt(i) + "\t" + m_nextsib.elementAt(i));
+        }
       }
 
       return false;
@@ -396,7 +428,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       while (n != null) {
         lastTextNode = n;
         // Any Text node means DTM considers it all Text
-        if (TEXT_NODE == n.getNodeType()) nexttype = TEXT_NODE;
+        if (TEXT_NODE == n.getNodeType()) {
+            nexttype = TEXT_NODE;
+        }
         // Any non-whitespace in this sequence blocks whitespace
         // suppression
         suppressNode &= XMLCharacterRecognizer.isWhiteSpace(n.getNodeValue());
@@ -445,8 +479,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
             // safer for now to test the QName and trust the
             // parsers to prevent anyone from redefining the
             // reserved xmlns: prefix
-            if (!m_processedFirstElement && "xmlns:xml".equals(attrs.item(i).getNodeName()))
+            if (!m_processedFirstElement && "xmlns:xml".equals(attrs.item(i).getNodeName())) {
               m_processedFirstElement = true;
+            }
           }
           // Terminate list of attrs, and make sure they aren't
           // considered children of the element
@@ -468,9 +503,11 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
           m_firstch.setElementAt(DTM.NULL, attrIndex);
           m_processedFirstElement = true;
         }
-        if (attrIndex != NULL) m_nextsib.setElementAt(DTM.NULL, attrIndex);
-      } // if(ELEMENT_NODE)
-    } // (if !suppressNode)
+        if (attrIndex != NULL) {
+            m_nextsib.setElementAt(DTM.NULL, attrIndex);
+        }
+      }
+    }
 
     // Text postprocessing: Act on values stored above
     if (TEXT_NODE == nexttype || CDATA_SECTION_NODE == nexttype) {
@@ -511,7 +548,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     identity += 1;
 
     if (identity >= m_nodes.size()) {
-      if (!nextNode()) identity = DTM.NULL;
+      if (!nextNode()) {
+          identity = DTM.NULL;
+      }
     }
 
     return identity;
@@ -586,12 +625,13 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
                 (cursor.getNodeType() != ATTRIBUTE_NODE)
                     ? cursor.getParentNode()
                     : ((org.w3c.dom.Attr) cursor).getOwnerElement()) {
-          if (cursor == m_root)
+          if (cursor == m_root) {
             // We know this node; find its handle.
             return getHandleFromNode(node);
-        } // for ancestors of node
-      } // if node and m_root in same Document
-    } // if node!=null
+          }
+        }
+      }
+    }
 
     return DTM.NULL;
   }
@@ -601,7 +641,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   public int getAttributeNode(final int nodeHandle, String namespaceURI, final String name) {
 
     // %OPT% This is probably slower than it needs to be.
-    if (null == namespaceURI) namespaceURI = "";
+    if (null == namespaceURI) {
+        namespaceURI = "";
+    }
 
     int type = getNodeType(nodeHandle);
 
@@ -625,12 +667,15 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
           final Node node = lookupNode(identity);
           String nodeuri = node.getNamespaceURI();
 
-          if (null == nodeuri) nodeuri = "";
+          if (null == nodeuri) {
+              nodeuri = "";
+          }
 
           final String nodelocalname = node.getLocalName();
 
-          if (nodeuri.equals(namespaceURI) && name.equals(nodelocalname))
+          if (nodeuri.equals(namespaceURI) && name.equals(nodelocalname)) {
             return makeNodeHandle(identity);
+          }
         }
         else { // if (DTM.NAMESPACE_NODE != type)
           break;
@@ -674,7 +719,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       final String s = (buf.length() > 0) ? buf.toString() : "";
       return new XString(s);
     }
-    else return new XString(node.getNodeValue());
+    else {
+        return new XString(node.getNodeValue());
+    }
   }
 
   /**
@@ -784,7 +831,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   @Override
   public String getLocalName(final int nodeHandle) {
     final int id = makeNodeIdentity(nodeHandle);
-    if (NULL == id) return null;
+    if (NULL == id) {
+        return null;
+    }
     final Node newnode = m_nodes.elementAt(id);
     String newname = newnode.getLocalName();
     if (null == newname) {
@@ -843,7 +892,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   @Override
   public String getNamespaceURI(final int nodeHandle) {
     final int id = makeNodeIdentity(nodeHandle);
-    if (id == NULL) return null;
+    if (id == NULL) {
+        return null;
+    }
     final Node node = m_nodes.elementAt(id);
     return node.getNamespaceURI();
   }
@@ -862,19 +913,27 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
           n != null && ENTITY_REFERENCE_NODE == n.getNodeType();
           n = n.getParentNode()) {
         p = n.getNextSibling();
-        if (p != null) break;
+        if (p != null) {
+            break;
+        }
       }
     }
     n = p;
     while (n != null && ENTITY_REFERENCE_NODE == n.getNodeType()) {
       // Walk into any EntityReferenceNodes that start with text
-      if (n.hasChildNodes()) n = n.getFirstChild();
-      else n = n.getNextSibling();
+      if (n.hasChildNodes()) {
+          n = n.getFirstChild();
+      }
+      else {
+          n = n.getNextSibling();
+      }
     }
     if (n != null) {
       // Found a logical next sibling. Is it text?
       final int ntype = n.getNodeType();
-      if (TEXT_NODE != ntype && CDATA_SECTION_NODE != ntype) n = null;
+      if (TEXT_NODE != ntype && CDATA_SECTION_NODE != ntype) {
+          n = null;
+      }
     }
     return n;
   }
@@ -888,7 +947,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     int type = _exptype(makeNodeIdentity(nodeHandle));
     type = (NULL != type) ? getNodeType(nodeHandle) : NULL;
 
-    if (TEXT_NODE != type && CDATA_SECTION_NODE != type) return getNode(nodeHandle).getNodeValue();
+    if (TEXT_NODE != type && CDATA_SECTION_NODE != type) {
+        return getNode(nodeHandle).getNodeValue();
+    }
 
     // If this is a DTM text node, it may be made of multiple DOM text
     // nodes -- including navigating into Entity References. DOM2DTM
@@ -899,7 +960,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // retrieval method which performs this function for us.
     final Node node = getNode(nodeHandle);
     Node n = logicalNextDOMTextNode(node);
-    if (n == null) return node.getNodeValue();
+    if (n == null) {
+        return node.getNodeValue();
+    }
 
     final StringBuilder buf = new StringBuilder();
     buf.append(node.getNodeValue());
