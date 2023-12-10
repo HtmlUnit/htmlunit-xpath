@@ -51,7 +51,8 @@ public class XNodeSet extends NodeSequence {
 
       // Get the cache from val and use it ourselves (we share it).
       setObject(nodeSet.getIteratorCache());
-    } else setIter(val);
+    }
+    else setIter(val);
   }
 
   /**
@@ -186,7 +187,8 @@ public class XNodeSet extends NodeSequence {
         return cloneWithReset();
       }
       return this; // don't bother to clone... won't do any good!
-    } catch (final CloneNotSupportedException cnse) {
+    }
+    catch (final CloneNotSupportedException cnse) {
       throw new RuntimeException(cnse.getMessage());
     }
   }
@@ -198,7 +200,8 @@ public class XNodeSet extends NodeSequence {
 
     if (m_obj instanceof NodeSetDTM) {
       mnl = (NodeSetDTM) m_obj;
-    } else {
+    }
+    else {
       mnl = new NodeSetDTM(iter());
       setObject(mnl);
       setCurrentPos(0);
@@ -277,7 +280,8 @@ public class XNodeSet extends NodeSequence {
 
             node2Strings.add(s2);
           }
-        } else {
+        }
+        else {
           for (final XString node2String : node2Strings) {
             if (comparator.compareStrings(s1, node2String)) {
               result = true;
@@ -289,7 +293,8 @@ public class XNodeSet extends NodeSequence {
       }
       list1.reset();
       list2.reset();
-    } else if (XObject.CLASS_BOOLEAN == type) {
+    }
+    else if (XObject.CLASS_BOOLEAN == type) {
 
       // From http://www.w3.org/TR/xpath:
       // If one object to be compared is a node-set and the other is a boolean,
@@ -301,7 +306,8 @@ public class XNodeSet extends NodeSequence {
       final double num2 = obj2.num();
 
       result = comparator.compareNumbers(num1, num2);
-    } else if (XObject.CLASS_NUMBER == type) {
+    }
+    else if (XObject.CLASS_NUMBER == type) {
 
       // From http://www.w3.org/TR/xpath:
       // If one object to be compared is a node-set and the other is a number,
@@ -324,7 +330,8 @@ public class XNodeSet extends NodeSequence {
         }
       }
       list1.reset();
-    } else if (XObject.CLASS_RTREEFRAG == type) {
+    }
+    else if (XObject.CLASS_RTREEFRAG == type) {
       final XString s2 = obj2.xstr();
       final DTMIterator list1 = iterRaw();
       int node;
@@ -339,7 +346,8 @@ public class XNodeSet extends NodeSequence {
         }
       }
       list1.reset();
-    } else if (XObject.CLASS_STRING == type) {
+    }
+    else if (XObject.CLASS_STRING == type) {
 
       // From http://www.w3.org/TR/xpath:
       // If one object to be compared is a node-set and the other is a
@@ -360,7 +368,8 @@ public class XNodeSet extends NodeSequence {
         }
       }
       list1.reset();
-    } else {
+    }
+    else {
       result = comparator.compareNumbers(this.num(), obj2.num());
     }
 
@@ -398,7 +407,8 @@ public class XNodeSet extends NodeSequence {
   public boolean equals(final XObject obj2) {
     try {
       return compare(obj2, S_EQ);
-    } catch (final javax.xml.transform.TransformerException te) {
+    }
+    catch (final javax.xml.transform.TransformerException te) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
     }
   }

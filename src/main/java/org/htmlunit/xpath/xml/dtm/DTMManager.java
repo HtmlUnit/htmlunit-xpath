@@ -38,7 +38,8 @@ import org.htmlunit.xpath.xml.dtm.ref.DTMManagerDefault;
  */
 public abstract class DTMManager {
   /** Default constructor is protected on purpose. */
-  protected DTMManager() {}
+  protected DTMManager() {
+  }
 
   /**
    * Obtain a new instance of a <code>DTMManager</code>. This static method creates a new factory
@@ -108,7 +109,8 @@ public abstract class DTMManager {
     try {
       /* Temp debug code - this will be removed after we test everything */
       final boolean debug = System.getProperty("dtm.debug") != null;
-    } catch (final SecurityException ex) {
+    }
+    catch (final SecurityException ex) {
     }
   }
 

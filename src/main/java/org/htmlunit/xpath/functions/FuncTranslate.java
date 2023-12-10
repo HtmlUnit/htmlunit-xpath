@@ -47,12 +47,14 @@ public class FuncTranslate extends Function3Args {
         // Didn't find the character in the second string, so it
         // is not translated.
         sbuffer.append(theCurrentChar);
-      } else if (theIndex < theThirdStringLength) {
+      }
+      else if (theIndex < theThirdStringLength) {
 
         // OK, there's a corresponding character in the
         // third string, so do the translation...
         sbuffer.append(theThirdString.charAt(theIndex));
-      } else {
+      }
+      else {
 
         // There's no corresponding character in the
         // third string, since it's shorter than the

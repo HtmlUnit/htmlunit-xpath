@@ -47,7 +47,8 @@ public class FuncSubstring extends Function3Args {
       // so just use a big number and hope I never get caught.
       start = -1000000;
       startIndex = 0;
-    } else {
+    }
+    else {
       start = Math.round(start);
       startIndex = (start > 0) ? (int) start - 1 : 0;
     }
@@ -67,7 +68,8 @@ public class FuncSubstring extends Function3Args {
       if (startIndex > lenOfS1) startIndex = lenOfS1;
 
       substr = s1.substring(startIndex, end);
-    } else {
+    }
+    else {
       if (startIndex > lenOfS1) startIndex = lenOfS1;
       substr = s1.substring(startIndex);
     }

@@ -105,7 +105,8 @@ public class UnionPattern extends Expression {
       for (int i = 0; i < n; i++) {
         if (!patterns_[i].deepEquals(up.patterns_[i])) return false;
       }
-    } else if (up.patterns_ != null) return false;
+    }
+    else if (up.patterns_ != null) return false;
 
     return true;
   }

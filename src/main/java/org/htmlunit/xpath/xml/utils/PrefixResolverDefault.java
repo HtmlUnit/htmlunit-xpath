@@ -56,7 +56,8 @@ public class PrefixResolverDefault implements PrefixResolver {
 
     if (prefix.equals("xml")) {
       namespace = "http://www.w3.org/XML/1998/namespace";
-    } else {
+    }
+    else {
       int type;
 
       while ((null != parent)

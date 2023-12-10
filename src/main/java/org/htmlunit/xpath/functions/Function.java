@@ -78,7 +78,8 @@ public abstract class Function extends Expression {
   }
 
   /** Call the visitors for the function arguments. */
-  public void callArgVisitors(final XPathVisitor visitor) {}
+  public void callArgVisitors(final XPathVisitor visitor) {
+  }
 
   /** {@inheritDoc} */
   @Override

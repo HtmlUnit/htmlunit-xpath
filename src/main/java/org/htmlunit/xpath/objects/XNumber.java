@@ -81,7 +81,8 @@ public class XNumber extends XObject {
 
     if (Double.isNaN(m_val)) {
       return "NaN";
-    } else if (Double.isInfinite(m_val)) {
+    }
+    else if (Double.isInfinite(m_val)) {
       if (m_val > 0) {
         return "Infinity";
       }
@@ -116,7 +117,8 @@ public class XNumber extends XObject {
       s = s.substring(1);
 
       --e;
-    } else sign = "";
+    }
+    else sign = "";
 
     final int nDigits = e - 2;
 
@@ -168,7 +170,8 @@ public class XNumber extends XObject {
       if (t == XObject.CLASS_NODESET) return obj2.equals(this);
       else if (t == XObject.CLASS_BOOLEAN) return obj2.bool() == bool();
       else return m_val == obj2.num();
-    } catch (final javax.xml.transform.TransformerException te) {
+    }
+    catch (final javax.xml.transform.TransformerException te) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
     }
   }

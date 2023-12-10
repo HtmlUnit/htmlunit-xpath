@@ -84,7 +84,8 @@ public final class ExtendedType {
       return other.nodetype == this.nodetype
           && other.localName.equals(this.localName)
           && other.namespace.equals(this.namespace);
-    } catch (final NullPointerException e) {
+    }
+    catch (final NullPointerException e) {
       return false;
     }
   }

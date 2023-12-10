@@ -41,8 +41,8 @@ public class FunctionMultiArgs extends Function3Args {
       if (null == args_) {
         args_ = new Expression[1];
         args_[0] = arg;
-      } else {
-
+      }
+      else {
         // Slow but space conservative.
         final Expression[] args = new Expression[args_.length + 1];
 
@@ -57,7 +57,8 @@ public class FunctionMultiArgs extends Function3Args {
 
   /** {@inheritDoc} */
   @Override
-  public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {}
+  public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
+  }
 
   /** {@inheritDoc} */
   @Override
@@ -114,7 +115,8 @@ public class FunctionMultiArgs extends Function3Args {
         if (!args_[i].deepEquals(fma.args_[i])) return false;
       }
 
-    } else if (null != fma.args_) {
+    }
+    else if (null != fma.args_) {
       return false;
     }
 

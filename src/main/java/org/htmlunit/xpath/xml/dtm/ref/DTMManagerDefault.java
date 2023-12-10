@@ -133,7 +133,8 @@ public class DTMManagerDefault extends DTMManager {
   private final ExpandedNameTable m_expandedNameTable = new ExpandedNameTable();
 
   /** Constructor DTMManagerDefault */
-  public DTMManagerDefault() {}
+  public DTMManagerDefault() {
+  }
 
   @Override
   public synchronized DTM getDTM(
@@ -242,7 +243,8 @@ public class DTMManagerDefault extends DTMManager {
       // Document Element, then ask it for the xml: namespace decl.
       handle = dtm.getHandleOfNode(((org.w3c.dom.Attr) node).getOwnerElement());
       handle = dtm.getAttributeNode(handle, node.getNamespaceURI(), node.getLocalName());
-    } else handle = dtm.getHandleOfNode(node);
+    }
+    else handle = dtm.getHandleOfNode(node);
 
     if (DTM.NULL == handle)
       throw new RuntimeException(
@@ -257,7 +259,8 @@ public class DTMManagerDefault extends DTMManager {
     try {
       // Performance critical function.
       return m_dtms[nodeHandle >>> IDENT_DTM_NODE_BITS];
-    } catch (final java.lang.ArrayIndexOutOfBoundsException e) {
+    }
+    catch (final java.lang.ArrayIndexOutOfBoundsException e) {
       if (nodeHandle == DTM.NULL) return null; // Accept as a special case.
       throw e; // Programming error; want to know about it.
     }

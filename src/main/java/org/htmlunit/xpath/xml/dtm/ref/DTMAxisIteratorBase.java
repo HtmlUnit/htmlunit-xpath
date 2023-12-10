@@ -94,7 +94,8 @@ public abstract class DTMAxisIteratorBase implements DTMAxisIterator {
 
       // return clone.reset();
       return clone;
-    } catch (final CloneNotSupportedException e) {
+    }
+    catch (final CloneNotSupportedException e) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(e);
     }
   }

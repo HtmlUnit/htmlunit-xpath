@@ -159,7 +159,8 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
       xctxt.pushCurrentNodeAndExpression(contextNode);
 
       return execute(xctxt).iter();
-    } finally {
+    }
+    finally {
       xctxt.popCurrentNodeAndExpression();
     }
   }

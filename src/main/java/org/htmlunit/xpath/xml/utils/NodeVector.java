@@ -91,7 +91,8 @@ public class NodeVector implements Cloneable {
       if (null == m_map) {
         m_map = new int[m_blocksize];
         m_mapSize = m_blocksize;
-      } else {
+      }
+      else {
         m_mapSize += m_blocksize;
 
         final int[] newMap = new int[m_mapSize];
@@ -120,7 +121,8 @@ public class NodeVector implements Cloneable {
     if (null == m_map) {
       m_map = new int[m_blocksize];
       m_mapSize = m_blocksize;
-    } else if ((m_firstFree + 1) >= m_mapSize) {
+    }
+    else if ((m_firstFree + 1) >= m_mapSize) {
       m_mapSize += m_blocksize;
 
       final int[] newMap = new int[m_mapSize];

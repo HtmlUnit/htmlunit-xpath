@@ -42,7 +42,8 @@ import org.w3c.dom.Node;
  * <p>State: In progress!!
  */
 public class DTMNodeListBase implements org.w3c.dom.NodeList {
-  public DTMNodeListBase() {}
+  public DTMNodeListBase() {
+  }
 
   /** {@inheritDoc} */
   @Override

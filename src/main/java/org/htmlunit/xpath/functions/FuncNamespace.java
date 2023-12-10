@@ -37,7 +37,8 @@ public class FuncNamespace extends FunctionDef1Arg {
       final int t = dtm.getNodeType(context);
       if (t == DTM.ELEMENT_NODE) {
         s = dtm.getNamespaceURI(context);
-      } else if (t == DTM.ATTRIBUTE_NODE) {
+      }
+      else if (t == DTM.ATTRIBUTE_NODE) {
 
         // This function always returns an empty string for namespace nodes.
         // We check for those here. Fix inspired by Davanum Srinivas.
@@ -46,8 +47,10 @@ public class FuncNamespace extends FunctionDef1Arg {
         if (s.startsWith("xmlns:") || s.equals("xmlns")) return XString.EMPTYSTRING;
 
         s = dtm.getNamespaceURI(context);
-      } else return XString.EMPTYSTRING;
-    } else return XString.EMPTYSTRING;
+      }
+      else return XString.EMPTYSTRING;
+    }
+    else return XString.EMPTYSTRING;
 
     return (null == s) ? XString.EMPTYSTRING : new XString(s);
   }

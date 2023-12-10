@@ -38,7 +38,8 @@ public class FunctionOneArg extends Function {
     if (0 == argNum) {
       m_arg0 = arg;
       arg.exprSetParent(this);
-    } else reportWrongNumberArgs();
+    }
+    else reportWrongNumberArgs();
   }
 
   /** {@inheritDoc} */
@@ -73,7 +74,8 @@ public class FunctionOneArg extends Function {
     if (null != m_arg0) {
       if ((null == ((FunctionOneArg) expr).m_arg0)
           || !m_arg0.deepEquals(((FunctionOneArg) expr).m_arg0)) return false;
-    } else if (null != ((FunctionOneArg) expr).m_arg0) return false;
+    }
+    else if (null != ((FunctionOneArg) expr).m_arg0) return false;
 
     return true;
   }

@@ -198,7 +198,8 @@ public class FunctionTable {
         Keywords.FUNC_STRING_LENGTH_STRING, Integer.valueOf(FunctionTable.FUNC_STRING_LENGTH));
   }
 
-  public FunctionTable() {}
+  public FunctionTable() {
+  }
 
   /**
    * Return the name of the a function in the static table. Needed to avoid making the table
@@ -225,7 +226,8 @@ public class FunctionTable {
     try {
       if (which < NUM_BUILT_IN_FUNCS) return (Function) m_functions[which].newInstance();
       return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].newInstance();
-    } catch (IllegalAccessException | InstantiationException ex) {
+    }
+    catch (IllegalAccessException | InstantiationException ex) {
       throw new TransformerException(ex.getMessage());
     }
   }
@@ -264,7 +266,8 @@ public class FunctionTable {
         m_functionID_customer.put(name, Integer.valueOf(funcIndex));
       }
       m_functions_customer[funcIndex - NUM_BUILT_IN_FUNCS] = func;
-    } else {
+    }
+    else {
       funcIndex = m_funcNextFreeIndex++;
 
       m_functions_customer[funcIndex - NUM_BUILT_IN_FUNCS] = func;

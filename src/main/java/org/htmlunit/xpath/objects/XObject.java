@@ -43,7 +43,8 @@ public class XObject extends Expression {
   protected Object m_obj; // This may be NULL!!!
 
   /** Create an XObject. */
-  public XObject() {}
+  public XObject() {
+  }
 
   /**
    * Create an XObject.
@@ -70,7 +71,8 @@ public class XObject extends Expression {
    * </code> has been invoked, calls to <code>nextNode</code> or <code>previousNode</code> will
    * raise a runtime exception.
    */
-  public void detach() {}
+  public void detach() {
+  }
 
   /** Constant for NULL object type */
   public static final int CLASS_NULL = -1;

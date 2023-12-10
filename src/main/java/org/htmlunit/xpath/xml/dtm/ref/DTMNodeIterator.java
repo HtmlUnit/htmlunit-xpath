@@ -59,7 +59,8 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
   public DTMNodeIterator(final DTMIterator dtmIterator) {
     try {
       dtm_iter = (DTMIterator) dtmIterator.clone();
-    } catch (final CloneNotSupportedException cnse) {
+    }
+    catch (final CloneNotSupportedException cnse) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(cnse);
     }
   }

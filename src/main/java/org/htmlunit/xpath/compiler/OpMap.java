@@ -148,7 +148,8 @@ public class OpMap {
 
     if ((stepType >= OpCodes.AXES_START_TYPES) && (stepType <= OpCodes.AXES_END_TYPES)) {
       return getNextOpPos(opPos);
-    } else if ((stepType >= OpCodes.FIRST_NODESET_OP) && (stepType <= OpCodes.LAST_NODESET_OP)) {
+    }
+    else if ((stepType >= OpCodes.FIRST_NODESET_OP) && (stepType <= OpCodes.LAST_NODESET_OP)) {
       int newOpPos = getNextOpPos(opPos);
 
       while (OpCodes.OP_PREDICATE == getOp(newOpPos)) {
@@ -162,7 +163,8 @@ public class OpMap {
       }
 
       return newOpPos;
-    } else {
+    }
+    else {
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_UNKNOWN_STEP, new Object[] {String.valueOf(stepType)}));
@@ -185,11 +187,14 @@ public class OpMap {
 
     if ((stepType >= OpCodes.AXES_START_TYPES) && (stepType <= OpCodes.AXES_END_TYPES)) {
       return opPos + m_opMap.elementAt(opPos + 2);
-    } else if ((stepType >= OpCodes.FIRST_NODESET_OP) && (stepType <= OpCodes.LAST_NODESET_OP)) {
+    }
+    else if ((stepType >= OpCodes.FIRST_NODESET_OP) && (stepType <= OpCodes.LAST_NODESET_OP)) {
       return opPos + m_opMap.elementAt(opPos + 1);
-    } else if (-2 == stepType) {
+    }
+    else if (-2 == stepType) {
       return -2;
-    } else {
+    }
+    else {
       error(
           org.htmlunit.xpath.res.XPATHErrorResources.ER_UNKNOWN_OPCODE,
           new Object[] {String.valueOf(stepType)});

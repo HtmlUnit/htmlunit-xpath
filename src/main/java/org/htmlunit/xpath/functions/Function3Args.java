@@ -37,10 +37,12 @@ public class Function3Args extends Function2Args {
 
     if (argNum < 2) {
       super.setArg(arg, argNum);
-    } else if (2 == argNum) {
+    }
+    else if (2 == argNum) {
       arg2_ = arg;
       arg.exprSetParent(this);
-    } else {
+    }
+    else {
       reportWrongNumberArgs();
     }
   }
@@ -78,7 +80,8 @@ public class Function3Args extends Function2Args {
     if (null != arg2_) {
       if ((null == ((Function3Args) expr).arg2_) || !arg2_.deepEquals(((Function3Args) expr).arg2_))
         return false;
-    } else if (null != ((Function3Args) expr).arg2_) return false;
+    }
+    else if (null != ((Function3Args) expr).arg2_) return false;
 
     return true;
   }

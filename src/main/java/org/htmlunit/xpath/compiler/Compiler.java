@@ -472,7 +472,8 @@ public class Compiler extends OpMap {
     locPathDepth++;
     try {
       return UnionPathIterator.createUnionIterator(this, opPos);
-    } finally {
+    }
+    finally {
       locPathDepth--;
     }
   }
@@ -506,7 +507,8 @@ public class Compiler extends OpMap {
     try {
       final DTMIterator iter = WalkerFactory.newDTMIterator(this, opPos, locPathDepth == 0);
       return (Expression) iter; // cast OK, I guess.
-    } finally {
+    }
+    finally {
       locPathDepth--;
     }
   }
@@ -554,7 +556,8 @@ public class Compiler extends OpMap {
       up.setPatterns(patterns);
 
       return up;
-    } finally {
+    }
+    finally {
       locPathDepth--;
     }
   }
@@ -750,7 +753,8 @@ public class Compiler extends OpMap {
        * pattern.getStaticScore(); pattern.setRelativePathPattern(selfPattern);
        * pattern.setStaticScore(score); selfPattern.setStaticScore(score); }
        */
-    } else {
+    }
+    else {
       // System.out.println("Setting "+ancestorPattern+" as relative to "+pattern);
       pattern.setRelativePathPattern(ancestorPattern);
     }
@@ -860,7 +864,8 @@ public class Compiler extends OpMap {
         }
 
         func.checkNumberArgs(i);
-      } catch (final WrongNumberArgsException wnae) {
+      }
+      catch (final WrongNumberArgsException wnae) {
         final String name = m_functionTable.getFunctionName(funcID);
 
         error(XPATHErrorResources.ER_ONLY_ALLOWS, new Object[] {name, wnae.getMessage()});
@@ -879,7 +884,8 @@ public class Compiler extends OpMap {
 
     if (null != m_errorHandler) {
       m_errorHandler.fatalError(new TransformerException(fmsg));
-    } else {
+    }
+    else {
       throw new TransformerException(fmsg);
     }
   }

@@ -339,7 +339,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         final int type = m_expandedNameTable.getType(_exptype(node));
         if (ExpandedNameTable.ATTRIBUTE == type || ExpandedNameTable.NAMESPACE == type) {
           _currentNode = node;
-        } else {
+        }
+        else {
           // Be careful to handle the Document node properly
           _currentNode = _parent(node);
           if (NULL != _currentNode) _currentNode = _firstch(_currentNode);
@@ -399,7 +400,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         // return clone.reset();
         return clone;
-      } catch (final CloneNotSupportedException e) {
+      }
+      catch (final CloneNotSupportedException e) {
         throw new RuntimeException(
             XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null),
@@ -452,7 +454,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         if (_currentNode < _stack[_sp]) {
           if (_type(_currentNode) != ATTRIBUTE_NODE && _type(_currentNode) != NAMESPACE_NODE)
             return returnNode(makeNodeHandle(_currentNode));
-        } else --_sp;
+        }
+        else --_sp;
       }
       return NULL;
     }
@@ -530,7 +533,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         // return clone.reset();
         return clone;
-      } catch (final CloneNotSupportedException e) {
+      }
+      catch (final CloneNotSupportedException e) {
         throw new RuntimeException(
             XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null));
@@ -648,7 +652,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
           _currentNode = NULL;
           return END;
         }
-      } while (ATTRIBUTE_NODE == type || TEXT_NODE == type || NAMESPACE_NODE == type);
+      }
+      while (ATTRIBUTE_NODE == type || TEXT_NODE == type || NAMESPACE_NODE == type);
 
       _currentNode = node;
       return returnNode(makeNodeHandle(node)); // make handle.
@@ -699,7 +704,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         _currentNode = _startNode;
 
         resetPosition();
-      } else if (_isRestartable) {
+      }
+      else if (_isRestartable) {
         _currentNode = _startNode = node;
 
         resetPosition();
@@ -714,7 +720,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         _currentNode = _startNode;
 
         resetPosition();
-      } else {
+      }
+      else {
         final boolean temp = _isRestartable;
 
         _isRestartable = true;

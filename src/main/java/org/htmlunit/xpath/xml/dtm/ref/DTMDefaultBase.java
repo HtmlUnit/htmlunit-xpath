@@ -158,7 +158,8 @@ public abstract class DTMDefaultBase implements DTM {
     if (blocksize <= 64) {
       numblocks = DEFAULT_NUMBLOCKS_SMALL;
       m_dtmIdent = new SuballocatedIntVector(4, 1);
-    } else {
+    }
+    else {
       numblocks = DEFAULT_NUMBLOCKS;
       m_dtmIdent = new SuballocatedIntVector(32);
     }
@@ -182,7 +183,8 @@ public abstract class DTMDefaultBase implements DTM {
 
     if (doIndexing) {
       m_expandedNameTable = new ExpandedNameTable();
-    } else {
+    }
+    else {
       // Note that this fails if we aren't talking to an instance of
       // DTMManagerDefault
       m_expandedNameTable = m_mgrDefault.getExpandedNameTable();
@@ -199,7 +201,8 @@ public abstract class DTMDefaultBase implements DTM {
 
     if (null == m_elemIndexes) {
       m_elemIndexes = new int[namespaceID + 20][][];
-    } else if (m_elemIndexes.length <= namespaceID) {
+    }
+    else if (m_elemIndexes.length <= namespaceID) {
       final int[][][] indexes = m_elemIndexes;
 
       m_elemIndexes = new int[namespaceID + 20][][];
@@ -212,7 +215,8 @@ public abstract class DTMDefaultBase implements DTM {
     if (null == localNameIndex) {
       localNameIndex = new int[LocalNameID + 100][];
       m_elemIndexes[namespaceID] = localNameIndex;
-    } else if (localNameIndex.length <= LocalNameID) {
+    }
+    else if (localNameIndex.length <= LocalNameID) {
       final int[][] indexes = localNameIndex;
 
       localNameIndex = new int[LocalNameID + 100][];
@@ -228,7 +232,8 @@ public abstract class DTMDefaultBase implements DTM {
       elemHandles = new int[128];
       localNameIndex[LocalNameID] = elemHandles;
       elemHandles[0] = 1;
-    } else if (elemHandles.length <= elemHandles[0] + 1) {
+    }
+    else if (elemHandles.length <= elemHandles[0] + 1) {
       final int[] indexes = elemHandles;
 
       elemHandles = new int[elemHandles[0] + 1024];
@@ -498,7 +503,8 @@ public abstract class DTMDefaultBase implements DTM {
       }
       final PrintStream ps = new PrintStream(os, false, "UTF-8");
 
-      while (nextNode()) {}
+      while (nextNode()) {
+      }
 
       final int nRecords = m_size;
 
@@ -602,7 +608,8 @@ public abstract class DTMDefaultBase implements DTM {
         ps.println("Node Value: " + getNodeValue(i));
         ps.println("String Value: " + getStringValue(i));
       }
-    } catch (final IOException ioe) {
+    }
+    catch (final IOException ioe) {
       ioe.printStackTrace(System.err);
       throw new RuntimeException(ioe.getMessage());
     }
@@ -810,7 +817,8 @@ public abstract class DTMDefaultBase implements DTM {
 
         if (type == DTM.ATTRIBUTE_NODE) {
           return identity;
-        } else if (DTM.NAMESPACE_NODE != type) {
+        }
+        else if (DTM.NAMESPACE_NODE != type) {
           break;
         }
       }
@@ -874,7 +882,8 @@ public abstract class DTMDefaultBase implements DTM {
 
       if (type == DTM.ATTRIBUTE_NODE) {
         return identity;
-      } else if (type != DTM.NAMESPACE_NODE) {
+      }
+      else if (type != DTM.NAMESPACE_NODE) {
         break;
       }
     }
@@ -905,7 +914,8 @@ public abstract class DTMDefaultBase implements DTM {
       m_namespaceDeclSets = new Vector<>();
       nsList = new SuballocatedIntVector(32);
       m_namespaceDeclSets.addElement(nsList);
-    } else {
+    }
+    else {
       // Most recent. May be -1 (none) if DTM was pruned.
       // %OPT% Is there a lastElement() method? Should there be?
       final int last = m_namespaceDeclSetElements.size() - 1;
@@ -932,7 +942,8 @@ public abstract class DTMDefaultBase implements DTM {
         for (int i = 0; i < isize; ++i) {
           nsList.addElement(inherited.elementAt(i));
         }
-      } else {
+      }
+      else {
         nsList = new SuballocatedIntVector(32);
       }
 
@@ -995,7 +1006,8 @@ public abstract class DTMDefaultBase implements DTM {
         if (getNodeType(rootHandle) == DTM.DOCUMENT_NODE) {
           final int ch = _firstch(rootID);
           uppermostNSCandidateID = (ch != DTM.NULL) ? ch : rootID;
-        } else {
+        }
+        else {
           uppermostNSCandidateID = rootID;
         }
 
@@ -1008,15 +1020,19 @@ public abstract class DTMDefaultBase implements DTM {
         if (candidate == ancestor) {
           // Found ancestor in list
           return m_namespaceDeclSets.elementAt(wouldBeAt);
-        } else if (candidate < ancestor) {
+        }
+        else if (candidate < ancestor) {
           // Too deep in tree
           do {
             ancestor = _parent(ancestor);
-          } while (candidate < ancestor);
-        } else if (wouldBeAt > 0) {
+          }
+          while (candidate < ancestor);
+        }
+        else if (wouldBeAt > 0) {
           // Too late in list
           candidate = m_namespaceDeclSetElements.elementAt(--wouldBeAt);
-        } else break;
+        }
+        else break;
       }
     }
 
@@ -1049,9 +1065,11 @@ public abstract class DTMDefaultBase implements DTM {
         final int test = lookfor - vector.elementAt(i);
         if (test == 0) {
           return i; // Name found
-        } else if (test < 0) {
+        }
+        else if (test < 0) {
           last = i - 1; // looked too late
-        } else {
+        }
+        else {
           first = i + 1; // looked ot early
         }
       }
@@ -1119,7 +1137,8 @@ public abstract class DTMDefaultBase implements DTM {
       final int type = _type(identity);
       if (type == DTM.NAMESPACE_NODE) {
         return makeNodeHandle(identity);
-      } else if (type != DTM.ATTRIBUTE_NODE) {
+      }
+      else if (type != DTM.ATTRIBUTE_NODE) {
         break;
       }
     }

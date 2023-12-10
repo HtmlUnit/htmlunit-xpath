@@ -115,7 +115,8 @@ public class SuballocatedIntVector {
     if (indexRelativeToCache >= 0 && indexRelativeToCache < m_blocksize) {
       m_buildCache[indexRelativeToCache] = value;
       ++m_firstFree;
-    } else {
+    }
+    else {
       // Growing the outer array should be rare. We initialize to a
       // total of m_blocksize squared elements, which at the default
       // size is 4M integers... and we grow by at least that much each
