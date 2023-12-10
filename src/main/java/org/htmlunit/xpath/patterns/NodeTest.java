@@ -198,12 +198,14 @@ public class NodeTest extends Expression {
     if (null != nt.m_name) {
       if (null == m_name) return false;
       else if (!nt.m_name.equals(m_name)) return false;
-    } else if (null != m_name) return false;
+    }
+    else if (null != m_name) return false;
 
     if (null != nt.m_namespace) {
       if (null == m_namespace) return false;
       else if (!nt.m_namespace.equals(m_namespace)) return false;
-    } else if (null != m_namespace) return false;
+    }
+    else if (null != m_namespace) return false;
 
     if (m_whatToShow != nt.m_whatToShow) return false;
 
@@ -211,7 +213,8 @@ public class NodeTest extends Expression {
   }
 
   /** Null argument constructor. */
-  public NodeTest() {}
+  public NodeTest() {
+  }
 
   /**
    * Initialize this node test by setting the whatToShow property, and calculating the score that
@@ -382,15 +385,13 @@ public class NodeTest extends Expression {
         // namespace declarations. The node test will be true for any node
         // of the principal type whose expanded name has the URI to which
         // the prefix expands, regardless of the local part of the name."
-      case DTMFilter.SHOW_NAMESPACE:
-        {
+      case DTMFilter.SHOW_NAMESPACE: {
           final String ns = dtm.getLocalName(context);
 
           return subPartMatch(ns, m_name) ? m_score : SCORE_NONE;
         }
       case DTMFilter.SHOW_ATTRIBUTE:
-      case DTMFilter.SHOW_ELEMENT:
-        {
+      case DTMFilter.SHOW_ELEMENT: {
           return (m_isTotallyWild
                   || (subPartMatchNS(dtm.getNamespaceURI(context), m_namespace)
                       && subPartMatch(dtm.getLocalName(context), m_name)))
@@ -436,15 +437,13 @@ public class NodeTest extends Expression {
         // namespace declarations. The node test will be true for any node
         // of the principal type whose expanded name has the URI to which
         // the prefix expands, regardless of the local part of the name."
-      case DTMFilter.SHOW_NAMESPACE:
-        {
+      case DTMFilter.SHOW_NAMESPACE: {
           final String ns = dtm.getLocalName(context);
 
           return subPartMatch(ns, m_name) ? m_score : SCORE_NONE;
         }
       case DTMFilter.SHOW_ATTRIBUTE:
-      case DTMFilter.SHOW_ELEMENT:
-        {
+      case DTMFilter.SHOW_ELEMENT: {
           return (m_isTotallyWild
                   || (subPartMatchNS(dtm.getNamespaceURI(context), m_namespace)
                       && subPartMatch(dtm.getLocalName(context), m_name)))

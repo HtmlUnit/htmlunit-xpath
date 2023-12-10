@@ -110,11 +110,14 @@ public class XPathVisitor {
   }
 
   /** Visit a union pattern. */
-  public void visitUnionPattern() {}
+  public void visitUnionPattern() {
+  }
 
   /** Visit a string literal. */
-  public void visitStringLiteral() {}
+  public void visitStringLiteral() {
+  }
 
   /** Visit a number literal. */
-  public void visitNumberLiteral() {}
+  public void visitNumberLiteral() {
+  }
 }

@@ -206,14 +206,16 @@ public class XPath {
 
     try {
       xobj = m_mainExp.execute(xctxt);
-    } catch (final TransformerException te) {
+    }
+    catch (final TransformerException te) {
       te.setLocator(this.getLocator());
       final ErrorListener el = xctxt.getErrorListener();
-      if (null != el) // defensive, should never happen.
-      {
+      if (null != el) {// defensive, should never happen.
         el.error(te);
-      } else throw te;
-    } catch (Exception e) {
+      }
+      else throw te;
+    }
+    catch (Exception e) {
       while (e instanceof org.htmlunit.xpath.xml.utils.WrappedRuntimeException) {
         e = ((org.htmlunit.xpath.xml.utils.WrappedRuntimeException) e).getException();
       }
@@ -225,11 +227,12 @@ public class XPath {
       }
       final TransformerException te = new TransformerException(msg, getLocator(), e);
       final ErrorListener el = xctxt.getErrorListener();
-      if (null != el) // defensive, should never happen.
-      {
+      if (null != el) { // defensive, should never happen.
         el.fatalError(te);
-      } else throw te;
-    } finally {
+      }
+      else throw te;
+    }
+    finally {
       xctxt.popNamespaceContext();
 
       xctxt.popCurrentNodeAndExpression();

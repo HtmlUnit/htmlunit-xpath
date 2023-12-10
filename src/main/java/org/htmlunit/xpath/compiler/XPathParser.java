@@ -118,13 +118,15 @@ public class XPathParser {
         error(XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS, new Object[] {extraTokens.toString()});
       }
 
-    } catch (final org.htmlunit.xpath.XPathProcessorException e) {
+    }
+    catch (final org.htmlunit.xpath.XPathProcessorException e) {
       if (CONTINUE_AFTER_FATAL_ERROR.equals(e.getMessage())) {
         // What I _want_ to do is null out this XPath.
         // I doubt this has the desired effect, but I'm not sure what else to do.
         // %REVIEW%!!!
         initXPath(compiler, "/..", namespaceContext);
-      } else throw e;
+      }
+      else throw e;
     }
 
     compiler.shrink();
@@ -240,7 +242,8 @@ public class XPathParser {
       final String tok = (String) m_ops.m_tokenQueue.get(pos - 1);
 
       b = tok.length() == 1 && (tok.charAt(0) == c);
-    } else {
+    }
+    else {
       b = false;
     }
 
@@ -262,7 +265,8 @@ public class XPathParser {
       final String lookahead = (String) m_ops.m_tokenQueue.get(m_queueMark + (n - 1));
 
       isToken = Objects.equals(lookahead, s);
-    } else {
+    }
+    else {
       isToken = null == s;
     }
 
@@ -275,7 +279,8 @@ public class XPathParser {
     if (m_queueMark < m_ops.getTokenQueueSize()) {
       m_token = (String) m_ops.m_tokenQueue.get(m_queueMark++);
       m_tokenChar = m_token.charAt(0);
-    } else {
+    }
+    else {
       m_token = null;
       m_tokenChar = 0;
     }
@@ -292,7 +297,8 @@ public class XPathParser {
 
     if (tokenIs(expected)) {
       nextToken();
-    } else {
+    }
+    else {
       error(
           XPATHErrorResources.ER_EXPECTED_BUT_FOUND,
           new Object[] {String.valueOf(expected), m_token});
@@ -320,7 +326,8 @@ public class XPathParser {
     final TransformerException te = new TransformerException(fmsg);
     if (null != ehandler) {
       ehandler.fatalError(te);
-    } else {
+    }
+    else {
       throw te;
     }
   }
@@ -345,7 +352,8 @@ public class XPathParser {
       }
 
       returnMsg = msg + ")";
-    } else {
+    }
+    else {
       returnMsg = "";
     }
 
@@ -372,7 +380,8 @@ public class XPathParser {
       id = Keywords.lookupNodeTest(key);
       if (null == id) id = m_functionTable.getFunctionID(key);
       tok = ((Integer) id).intValue();
-    } catch (NullPointerException | ClassCastException npe) {
+    }
+    catch (NullPointerException | ClassCastException npe) {
       tok = -1;
     }
 
@@ -494,7 +503,8 @@ public class XPathParser {
             addPos + OpMap.MAPINDEX_LENGTH,
             m_ops.getOp(addPos + opPlusLeftHandLen + 1) + opPlusLeftHandLen);
         addPos += 2;
-      } else if (tokenIs('=')) {
+      }
+      else if (tokenIs('=')) {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_EQUALS);
 
@@ -534,7 +544,8 @@ public class XPathParser {
         if (tokenIs('=')) {
           nextToken();
           insertOp(addPos, 2, OpCodes.OP_LTE);
-        } else {
+        }
+        else {
           insertOp(addPos, 2, OpCodes.OP_LT);
         }
 
@@ -545,13 +556,15 @@ public class XPathParser {
             addPos + OpMap.MAPINDEX_LENGTH,
             m_ops.getOp(addPos + opPlusLeftHandLen + 1) + opPlusLeftHandLen);
         addPos += 2;
-      } else if (tokenIs('>')) {
+      }
+      else if (tokenIs('>')) {
         nextToken();
 
         if (tokenIs('=')) {
           nextToken();
           insertOp(addPos, 2, OpCodes.OP_GTE);
-        } else {
+        }
+        else {
           insertOp(addPos, 2, OpCodes.OP_GT);
         }
 
@@ -599,7 +612,8 @@ public class XPathParser {
             addPos + OpMap.MAPINDEX_LENGTH,
             m_ops.getOp(addPos + opPlusLeftHandLen + 1) + opPlusLeftHandLen);
         addPos += 2;
-      } else if (tokenIs('-')) {
+      }
+      else if (tokenIs('-')) {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_MINUS);
 
@@ -648,7 +662,8 @@ public class XPathParser {
             addPos + OpMap.MAPINDEX_LENGTH,
             m_ops.getOp(addPos + opPlusLeftHandLen + 1) + opPlusLeftHandLen);
         addPos += 2;
-      } else if (tokenIs("div")) {
+      }
+      else if (tokenIs("div")) {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_DIV);
 
@@ -659,7 +674,8 @@ public class XPathParser {
             addPos + OpMap.MAPINDEX_LENGTH,
             m_ops.getOp(addPos + opPlusLeftHandLen + 1) + opPlusLeftHandLen);
         addPos += 2;
-      } else if (tokenIs("mod")) {
+      }
+      else if (tokenIs("mod")) {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_MOD);
 
@@ -670,7 +686,8 @@ public class XPathParser {
             addPos + OpMap.MAPINDEX_LENGTH,
             m_ops.getOp(addPos + opPlusLeftHandLen + 1) + opPlusLeftHandLen);
         addPos += 2;
-      } else if (tokenIs("quo")) {
+      }
+      else if (tokenIs("quo")) {
         nextToken();
         insertOp(addPos, 2, OpCodes.OP_QUO);
 
@@ -787,12 +804,14 @@ public class XPathParser {
         }
 
         nextToken();
-      } else {
+      }
+      else {
         break;
       }
 
       // this.m_testForDocOrder = true;
-    } while (continueOrLoop);
+    }
+    while (continueOrLoop);
 
     m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos);
   }
@@ -835,7 +854,8 @@ public class XPathParser {
         m_ops.setOp(OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) + 1);
         m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos);
       }
-    } else {
+    }
+    else {
       LocationPath();
     }
   }
@@ -866,10 +886,12 @@ public class XPathParser {
         }
 
         filterMatch = FILTER_MATCH_PREDICATES;
-      } else {
+      }
+      else {
         filterMatch = FILTER_MATCH_PRIMARY;
       }
-    } else {
+    }
+    else {
       filterMatch = FILTER_MATCH_FAILED;
     }
 
@@ -899,7 +921,8 @@ public class XPathParser {
       m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos);
 
       matchFound = true;
-    } else if (m_tokenChar == '$') {
+    }
+    else if (m_tokenChar == '$') {
       nextToken(); // consume '$'
       appendOp(2, OpCodes.OP_VARIABLE);
       QName();
@@ -907,7 +930,8 @@ public class XPathParser {
       m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos);
 
       matchFound = true;
-    } else if (m_tokenChar == '(') {
+    }
+    else if (m_tokenChar == '(') {
       nextToken();
       appendOp(2, OpCodes.OP_GROUP);
       Expr();
@@ -916,7 +940,8 @@ public class XPathParser {
       m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos);
 
       matchFound = true;
-    } else if ((null != m_token)
+    }
+    else if ((null != m_token)
         && ((('.' == m_tokenChar) && (m_token.length() > 1) && Character.isDigit(m_token.charAt(1)))
             || Character.isDigit(m_tokenChar))) {
       appendOp(2, OpCodes.OP_NUMBERLIT);
@@ -925,9 +950,11 @@ public class XPathParser {
       m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos);
 
       matchFound = true;
-    } else if (lookahead('(', 1) || (lookahead(':', 1) && lookahead('(', 3))) {
+    }
+    else if (lookahead('(', 1) || (lookahead(':', 1) && lookahead('(', 3))) {
       matchFound = FunctionCall();
-    } else {
+    }
+    else {
       matchFound = false;
     }
 
@@ -1032,7 +1059,8 @@ public class XPathParser {
       m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH) - 1, OpCodes.NODETYPE_ROOT);
 
       nextToken();
-    } else if (m_token == null) {
+    }
+    else if (m_token == null) {
       error(XPATHErrorResources.ER_EXPECTED_LOC_PATH_AT_END_EXPR, null);
     }
 
@@ -1120,7 +1148,8 @@ public class XPathParser {
       // Tell how long the step is without the predicate
       m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH) - 2, 4);
       m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH) - 1, OpCodes.NODETYPE_NODE);
-    } else if (tokenIs("..")) {
+    }
+    else if (tokenIs("..")) {
       nextToken();
       appendOp(4, OpCodes.FROM_PARENT);
 
@@ -1144,7 +1173,8 @@ public class XPathParser {
 
       // Tell how long the entire step is.
       m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos);
-    } else {
+    }
+    else {
       // No Step matched - that's an error if previous thing was a '//'
       if (doubleSlash) {
         error(XPATHErrorResources.ER_EXPECTED_LOC_STEP, null);
@@ -1172,12 +1202,14 @@ public class XPathParser {
 
       nextToken();
       nextToken();
-    } else if (tokenIs('@')) {
+    }
+    else if (tokenIs('@')) {
       axesType = OpCodes.FROM_ATTRIBUTES;
 
       appendOp(2, axesType);
       nextToken();
-    } else {
+    }
+    else {
       axesType = OpCodes.FROM_CHILDREN;
 
       appendOp(2, axesType);
@@ -1226,7 +1258,8 @@ public class XPathParser {
 
       if (null == nodeTestOp) {
         error(XPATHErrorResources.ER_UNKNOWN_NODETYPE, new Object[] {m_token});
-      } else {
+      }
+      else {
         nextToken();
 
         final int nt = ((Integer) nodeTestOp).intValue();
@@ -1244,7 +1277,8 @@ public class XPathParser {
 
         consumeExpected(')');
       }
-    } else {
+    }
+    else {
 
       // Assume name of attribute or element.
       m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), OpCodes.NODENAME);
@@ -1253,7 +1287,8 @@ public class XPathParser {
       if (lookahead(':', 1)) {
         if (tokenIs('*')) {
           m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), OpCodes.ELEMWILDCARD);
-        } else {
+        }
+        else {
           m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), m_queueMark - 1);
 
           // Minimalist check for an NCName - just check first character
@@ -1265,7 +1300,8 @@ public class XPathParser {
 
         nextToken();
         consumeExpected(':');
-      } else {
+      }
+      else {
         m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), OpCodes.EMPTY);
       }
 
@@ -1273,7 +1309,8 @@ public class XPathParser {
 
       if (tokenIs('*')) {
         m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), OpCodes.ELEMWILDCARD);
-      } else {
+      }
+      else {
         m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), m_queueMark - 1);
 
         // Minimalist check for an NCName - just check first character
@@ -1334,7 +1371,8 @@ public class XPathParser {
 
       nextToken();
       consumeExpected(':');
-    } else {
+    }
+    else {
       m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), OpCodes.EMPTY);
       m_ops.setOp(OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) + 1);
     }
@@ -1388,7 +1426,8 @@ public class XPathParser {
       m_ops.setOp(OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) + 1);
 
       nextToken();
-    } else {
+    }
+    else {
       error(XPATHErrorResources.ER_PATTERN_LITERAL_NEEDS_BE_QUOTED, new Object[] {m_token});
     }
   }
@@ -1411,7 +1450,8 @@ public class XPathParser {
         if ((m_token.indexOf('e') > -1) || (m_token.indexOf('E') > -1))
           throw new NumberFormatException();
         num = Double.valueOf(m_token).doubleValue();
-      } catch (final NumberFormatException nfe) {
+      }
+      catch (final NumberFormatException nfe) {
         num = 0.0; // to shut up compiler.
 
         error(XPATHErrorResources.ER_COULDNOT_BE_FORMATTED_TO_NUMBER, new Object[] {m_token});
@@ -1439,7 +1479,8 @@ public class XPathParser {
 
       if (tokenIs('|')) {
         nextToken();
-      } else {
+      }
+      else {
         break;
       }
     }
@@ -1473,7 +1514,8 @@ public class XPathParser {
           appendOp(4, OpCodes.MATCH_ANY_ANCESTOR);
 
           nextToken();
-        } else {
+        }
+        else {
           appendOp(4, OpCodes.MATCH_IMMEDIATE_ANCESTOR);
         }
 
@@ -1483,7 +1525,8 @@ public class XPathParser {
 
         relativePathStatus = RELATIVE_PATH_REQUIRED;
       }
-    } else if (tokenIs('/')) {
+    }
+    else if (tokenIs('/')) {
       if (lookahead('/', 1)) {
         appendOp(4, OpCodes.MATCH_ANY_ANCESTOR);
 
@@ -1494,7 +1537,8 @@ public class XPathParser {
         nextToken();
 
         relativePathStatus = RELATIVE_PATH_REQUIRED;
-      } else {
+      }
+      else {
         appendOp(4, OpCodes.FROM_ROOT);
 
         relativePathStatus = RELATIVE_PATH_PERMITTED;
@@ -1505,14 +1549,16 @@ public class XPathParser {
       m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH) - 1, OpCodes.NODETYPE_ROOT);
 
       nextToken();
-    } else {
+    }
+    else {
       relativePathStatus = RELATIVE_PATH_REQUIRED;
     }
 
     if (relativePathStatus != RELATIVE_PATH_NOT_PERMITTED) {
       if (!tokenIs('|') && (null != m_token)) {
         RelativePathPattern();
-      } else if (relativePathStatus == RELATIVE_PATH_REQUIRED) {
+      }
+      else if (relativePathStatus == RELATIVE_PATH_REQUIRED) {
         error(XPATHErrorResources.ER_EXPECTED_REL_PATH_PATTERN, null);
       }
     }
@@ -1589,17 +1635,20 @@ public class XPathParser {
 
       appendOp(2, axesType);
       nextToken();
-    } else if (this.lookahead("::", 1)) {
+    }
+    else if (this.lookahead("::", 1)) {
       if (tokenIs("attribute")) {
         axesType = OpCodes.MATCH_ATTRIBUTE;
 
         appendOp(2, axesType);
-      } else if (tokenIs("child")) {
+      }
+      else if (tokenIs("child")) {
         matchTypePos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
         axesType = OpCodes.MATCH_IMMEDIATE_ANCESTOR;
 
         appendOp(2, axesType);
-      } else {
+      }
+      else {
         axesType = -1;
 
         this.error(XPATHErrorResources.ER_AXES_NOT_ALLOWED, new Object[] {this.m_token});
@@ -1607,7 +1656,8 @@ public class XPathParser {
 
       nextToken();
       nextToken();
-    } else if (tokenIs('/')) {
+    }
+    else if (tokenIs('/')) {
       if (!isLeadingSlashPermitted) {
         error(XPATHErrorResources.ER_EXPECTED_STEP_PATTERN, null);
       }
@@ -1615,7 +1665,8 @@ public class XPathParser {
 
       appendOp(2, axesType);
       nextToken();
-    } else {
+    }
+    else {
       matchTypePos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
       axesType = OpCodes.MATCH_IMMEDIATE_ANCESTOR;
 
@@ -1654,7 +1705,8 @@ public class XPathParser {
       nextToken();
 
       trailingSlashConsumed = true;
-    } else {
+    }
+    else {
       trailingSlashConsumed = false;
     }
 

@@ -162,7 +162,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   /** {@inheritDoc} */
   @Override
-  public void normalize() {}
+  public void normalize() {
+  }
 
   /** {@inheritDoc} */
   @Override
@@ -302,7 +303,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
       if (arg.getNodeName() != null) {
         return false;
       }
-    } else if (!getNodeName().equals(arg.getNodeName())) {
+    }
+    else if (!getNodeName().equals(arg.getNodeName())) {
       return false;
     }
 
@@ -310,7 +312,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
       if (arg.getLocalName() != null) {
         return false;
       }
-    } else if (!getLocalName().equals(arg.getLocalName())) {
+    }
+    else if (!getLocalName().equals(arg.getLocalName())) {
       return false;
     }
 
@@ -318,7 +321,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
       if (arg.getNamespaceURI() != null) {
         return false;
       }
-    } else if (!getNamespaceURI().equals(arg.getNamespaceURI())) {
+    }
+    else if (!getNamespaceURI().equals(arg.getNamespaceURI())) {
       return false;
     }
 
@@ -326,7 +330,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
       if (arg.getPrefix() != null) {
         return false;
       }
-    } else if (!getPrefix().equals(arg.getPrefix())) {
+    }
+    else if (!getPrefix().equals(arg.getPrefix())) {
       return false;
     }
 
@@ -334,7 +339,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
       if (arg.getNodeValue() != null) {
         return false;
       }
-    } else if (!getNodeValue().equals(arg.getNodeValue())) {
+    }
+    else if (!getNodeValue().equals(arg.getNodeValue())) {
       return false;
     }
     return true;
@@ -345,8 +351,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   public String lookupNamespaceURI(final String specifiedPrefix) {
     final short type = this.getNodeType();
     switch (type) {
-      case Node.ELEMENT_NODE:
-        {
+      case Node.ELEMENT_NODE: {
           String namespace = this.getNamespaceURI();
           final String pfx = this.getPrefix();
           if (namespace != null) {
@@ -354,7 +359,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
             if (specifiedPrefix == null && pfx == specifiedPrefix) {
               // looking for default namespace
               return namespace;
-            } else if (pfx != null && pfx.equals(specifiedPrefix)) {
+            }
+            else if (pfx != null && pfx.equals(specifiedPrefix)) {
               // non default namespace
               return namespace;
             }
@@ -372,7 +378,8 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
                 if (specifiedPrefix == null && attr.getNodeName().equals("xmlns")) {
                   // default namespace
                   return value;
-                } else if (attrPrefix != null
+                }
+                else if (attrPrefix != null
                     && attrPrefix.equals("xmlns")
                     && attr.getLocalName().equals(specifiedPrefix)) {
                   // non default namespace
@@ -389,15 +396,13 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
       case Node.DOCUMENT_TYPE_NODE:
         // type is unknown
         return null;
-      case Node.ATTRIBUTE_NODE:
-        {
+      case Node.ATTRIBUTE_NODE: {
           if (this.getOwnerElement().getNodeType() == Node.ELEMENT_NODE) {
             return getOwnerElement().lookupNamespaceURI(specifiedPrefix);
           }
           return null;
         }
-      default:
-        {
+      default: {
           return null;
         }
     }
@@ -428,15 +433,13 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
       case Node.DOCUMENT_TYPE_NODE:
         // type is unknown
         return null;
-      case Node.ATTRIBUTE_NODE:
-        {
+      case Node.ATTRIBUTE_NODE: {
           if (this.getOwnerElement().getNodeType() == Node.ELEMENT_NODE) {
             return getOwnerElement().lookupPrefix(namespaceURI);
           }
           return null;
         }
-      default:
-        {
+      default: {
           return null;
         }
     }

@@ -97,15 +97,18 @@ class XPathAdapter {
 
     try {
       xobj = mainExp_.execute(xpathContext);
-    } catch (final TransformerException te) {
+    }
+    catch (final TransformerException te) {
       te.setLocator(mainExp_);
       final ErrorListener el = xpathContext.getErrorListener();
       if (null != el) {
         el.error(te);
-      } else {
+      }
+      else {
         throw te;
       }
-    } catch (final Exception e) {
+    }
+    catch (final Exception e) {
       Exception unwrapped = e;
       while (unwrapped instanceof WrappedRuntimeException) {
         unwrapped = ((WrappedRuntimeException) unwrapped).getException();
@@ -119,10 +122,12 @@ class XPathAdapter {
       final ErrorListener el = xpathContext.getErrorListener();
       if (null != el) {
         el.fatalError(te);
-      } else {
+      }
+      else {
         throw te;
       }
-    } finally {
+    }
+    finally {
       xpathContext.popNamespaceContext();
       xpathContext.popCurrentNodeAndExpression();
     }

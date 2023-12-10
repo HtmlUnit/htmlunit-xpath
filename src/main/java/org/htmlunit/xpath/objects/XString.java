@@ -91,7 +91,8 @@ public class XString extends XObject {
     }
     try {
       result = Double.parseDouble(s.toString());
-    } catch (final NumberFormatException e) {
+    }
+    catch (final NumberFormatException e) {
       // ignore
     }
 
@@ -181,7 +182,8 @@ public class XString extends XObject {
       // to be compared is converted to a number as if by applying the number
       // function.
       else if (XObject.CLASS_NUMBER == t) return obj2.num() == num();
-    } catch (final javax.xml.transform.TransformerException te) {
+    }
+    catch (final javax.xml.transform.TransformerException te) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
     }
 
@@ -429,14 +431,17 @@ public class XString extends XObject {
             if (!((prevChar == '.') || (prevChar == '!') || (prevChar == '?'))) {
               pres = true;
             }
-          } else {
+          }
+          else {
             pres = true;
           }
-        } else {
+        }
+        else {
           edit = true;
           pres = true;
         }
-      } else {
+      }
+      else {
         buf[d++] = c;
         pres = false;
       }

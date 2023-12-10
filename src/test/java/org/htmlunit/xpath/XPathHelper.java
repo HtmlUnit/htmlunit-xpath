@@ -71,16 +71,21 @@ public final class XPathHelper {
         for (int i = 0; i < nodelist.getLength(); i++) {
           list.add((T) nodelist.item(i));
         }
-      } else if (result instanceof XNumber) {
+      }
+      else if (result instanceof XNumber) {
         list.add((T) Double.valueOf(result.num()));
-      } else if (result instanceof XBoolean) {
+      }
+      else if (result instanceof XBoolean) {
         list.add((T) Boolean.valueOf(result.bool()));
-      } else if (result instanceof XString) {
+      }
+      else if (result instanceof XString) {
         list.add((T) result.str());
-      } else {
+      }
+      else {
         throw new RuntimeException("Unproccessed " + result.getClass().getName());
       }
-    } catch (final Exception e) {
+    }
+    catch (final Exception e) {
       throw new RuntimeException("Could not retrieve XPath >" + xpathExpr + "< on " + node, e);
     }
     return list;

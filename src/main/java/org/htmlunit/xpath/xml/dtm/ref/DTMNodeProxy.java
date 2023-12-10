@@ -63,10 +63,10 @@ public class DTMNodeProxy
         DocumentFragment {
 
   /** The DTM for this node. */
-  public final DTM dtm;
+  public final DTM dtm_;
 
   /** The DTM node handle. */
-  final int node;
+  final int node_;
 
   /** The return value as Empty String. */
   private static final String EMPTYSTRING = "";
@@ -81,8 +81,8 @@ public class DTMNodeProxy
    * @param node The DTM node handle.
    */
   public DTMNodeProxy(final DTM dtm, final int node) {
-    this.dtm = dtm;
-    this.node = node;
+    this.dtm_ = dtm;
+    this.node_ = node;
   }
 
   /**
@@ -91,7 +91,7 @@ public class DTMNodeProxy
    * @return The DTM node handle.
    */
   public final int getDTMNodeNumber() {
-    return node;
+    return node_;
   }
 
   /**
@@ -101,14 +101,14 @@ public class DTMNodeProxy
    * @return true if the given node has the same handle as this node.
    */
   public final boolean equals(final Node node) {
-
     try {
       final DTMNodeProxy dtmp = (DTMNodeProxy) node;
 
       // return (dtmp.node == this.node);
       // Patch attributed to Gary L Peskin <garyp@firstech.com>
-      return (dtmp.node == this.node) && (dtmp.dtm == this.dtm);
-    } catch (final ClassCastException cce) {
+      return (dtmp.node_ == this.node_) && (dtmp.dtm_ == this.dtm_);
+    }
+    catch (final ClassCastException cce) {
       return false;
     }
   }
@@ -123,7 +123,8 @@ public class DTMNodeProxy
       // return (dtmp.node == this.node);
       // Patch attributed to Gary L Peskin <garyp@firstech.com>
       return equals((Node) node);
-    } catch (final ClassCastException cce) {
+    }
+    catch (final ClassCastException cce) {
       return false;
     }
   }
@@ -131,25 +132,25 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final String getNodeName() {
-    return dtm.getNodeName(node);
+    return dtm_.getNodeName(node_);
   }
 
   /** {@inheritDoc} */
   @Override
   public final String getTarget() {
-    return dtm.getNodeName(node);
+    return dtm_.getNodeName(node_);
   }
 
   /** {@inheritDoc} */
   @Override
   public final String getLocalName() {
-    return dtm.getLocalName(node);
+    return dtm_.getLocalName(node_);
   }
 
   /** {@inheritDoc} */
   @Override
   public final String getPrefix() {
-    return dtm.getPrefix(node);
+    return dtm_.getPrefix(node_);
   }
 
   /** {@inheritDoc} */
@@ -161,7 +162,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final String getNamespaceURI() {
-    return dtm.getNamespaceURI(node);
+    return dtm_.getNamespaceURI(node_);
   }
 
   /** {@inheritDoc} */
@@ -174,7 +175,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final String getNodeValue() throws DOMException {
-    return dtm.getNodeValue(node);
+    return dtm_.getNodeValue(node_);
   }
 
   /** {@inheritDoc} */
@@ -186,7 +187,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final short getNodeType() {
-    return dtm.getNodeType(node);
+    return dtm_.getNodeType(node_);
   }
 
   /** {@inheritDoc} */
@@ -195,9 +196,9 @@ public class DTMNodeProxy
 
     if (getNodeType() == Node.ATTRIBUTE_NODE) return null;
 
-    final int newnode = dtm.getParent(node);
+    final int newnode = dtm_.getParent(node_);
 
-    return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
+    return (newnode == DTM.NULL) ? null : dtm_.getNode(newnode);
   }
 
   /** {@inheritDoc} */
@@ -207,34 +208,34 @@ public class DTMNodeProxy
     // Annoyingly, AxisIterators do not currently implement DTMIterator, so
     // we can't just wap DTMNodeList around an Axis.CHILD iterator.
     // Instead, we've created a special-case operating mode for that object.
-    return new DTMChildIterNodeList(dtm, node);
+    return new DTMChildIterNodeList(dtm_, node_);
   }
 
   /** {@inheritDoc} */
   @Override
   public final Node getFirstChild() {
 
-    final int newnode = dtm.getFirstChild(node);
+    final int newnode = dtm_.getFirstChild(node_);
 
-    return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
+    return (newnode == DTM.NULL) ? null : dtm_.getNode(newnode);
   }
 
   /** {@inheritDoc} */
   @Override
   public final Node getLastChild() {
 
-    final int newnode = dtm.getLastChild(node);
+    final int newnode = dtm_.getLastChild(node_);
 
-    return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
+    return (newnode == DTM.NULL) ? null : dtm_.getNode(newnode);
   }
 
   /** {@inheritDoc} */
   @Override
   public final Node getPreviousSibling() {
 
-    final int newnode = dtm.getPreviousSibling(node);
+    final int newnode = dtm_.getPreviousSibling(node_);
 
-    return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
+    return (newnode == DTM.NULL) ? null : dtm_.getNode(newnode);
   }
 
   /** {@inheritDoc} */
@@ -242,37 +243,37 @@ public class DTMNodeProxy
   public final Node getNextSibling() {
 
     // Attr's Next is defined at DTM level, but not at DOM level.
-    if (dtm.getNodeType(node) == Node.ATTRIBUTE_NODE) return null;
+    if (dtm_.getNodeType(node_) == Node.ATTRIBUTE_NODE) return null;
 
-    final int newnode = dtm.getNextSibling(node);
+    final int newnode = dtm_.getNextSibling(node_);
 
-    return (newnode == DTM.NULL) ? null : dtm.getNode(newnode);
+    return (newnode == DTM.NULL) ? null : dtm_.getNode(newnode);
   }
 
   /** {@inheritDoc} */
   @Override
   public final NamedNodeMap getAttributes() {
 
-    return new DTMNamedNodeMap(dtm, node);
+    return new DTMNamedNodeMap(dtm_, node_);
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean hasAttribute(final String name) {
-    return DTM.NULL != dtm.getAttributeNode(node, null, name);
+    return DTM.NULL != dtm_.getAttributeNode(node_, null, name);
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean hasAttributeNS(final String namespaceURI, final String localName) {
-    return DTM.NULL != dtm.getAttributeNode(node, namespaceURI, localName);
+    return DTM.NULL != dtm_.getAttributeNode(node_, namespaceURI, localName);
   }
 
   /** {@inheritDoc} */
   @Override
   public final Document getOwnerDocument() {
     // Note that this uses the DOM-compatable version of the call
-    return (Document) (dtm.getNode(dtm.getOwnerDocument(node)));
+    return (Document) (dtm_.getNode(dtm_.getOwnerDocument(node_)));
   }
 
   /** {@inheritDoc} */
@@ -302,7 +303,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final boolean hasChildNodes() {
-    return DTM.NULL != dtm.getFirstChild(node);
+    return DTM.NULL != dtm_.getFirstChild(node_);
   }
 
   /** {@inheritDoc} */
@@ -326,17 +327,18 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final Element getDocumentElement() {
-    final int dochandle = dtm.getDocument();
+    final int dochandle = dtm_.getDocument();
     int elementhandle = DTM.NULL;
-    for (int kidhandle = dtm.getFirstChild(dochandle);
+    for (int kidhandle = dtm_.getFirstChild(dochandle);
         kidhandle != DTM.NULL;
-        kidhandle = dtm.getNextSibling(kidhandle)) {
-      switch (dtm.getNodeType(kidhandle)) {
+        kidhandle = dtm_.getNextSibling(kidhandle)) {
+      switch (dtm_.getNodeType(kidhandle)) {
         case Node.ELEMENT_NODE:
           if (elementhandle != DTM.NULL) {
             elementhandle = DTM.NULL; // More than one; ill-formed.
-            kidhandle = dtm.getLastChild(dochandle); // End loop
-          } else elementhandle = kidhandle;
+            kidhandle = dtm_.getLastChild(dochandle); // End loop
+          }
+          else elementhandle = kidhandle;
           break;
 
           // These are harmless; document is still wellformed
@@ -347,12 +349,12 @@ public class DTMNodeProxy
 
         default:
           elementhandle = DTM.NULL; // ill-formed
-          kidhandle = dtm.getLastChild(dochandle); // End loop
+          kidhandle = dtm_.getLastChild(dochandle); // End loop
           break;
       }
     }
     if (elementhandle == DTM.NULL) throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
-    return (Element) (dtm.getNode(elementhandle));
+    return (Element) (dtm_.getNode(elementhandle));
   }
 
   /** {@inheritDoc} */
@@ -408,7 +410,7 @@ public class DTMNodeProxy
   @Override
   public final NodeList getElementsByTagName(final String tagname) {
     final List<Node> nodes = new ArrayList<>();
-    final Node retNode = dtm.getNode(node);
+    final Node retNode = dtm_.getNode(node_);
     if (retNode != null) {
       final boolean isTagNameWildCard = "*".equals(tagname);
       if (DTM.ELEMENT_NODE == retNode.getNodeType()) {
@@ -416,8 +418,9 @@ public class DTMNodeProxy
         for (int i = 0; i < nodeList.getLength(); i++) {
           traverseChildren(nodes, nodeList.item(i), tagname, isTagNameWildCard);
         }
-      } else if (DTM.DOCUMENT_NODE == retNode.getNodeType()) {
-        traverseChildren(nodes, dtm.getNode(node), tagname, isTagNameWildCard);
+      }
+      else if (DTM.DOCUMENT_NODE == retNode.getNodeType()) {
+        traverseChildren(nodes, dtm_.getNode(node_), tagname, isTagNameWildCard);
       }
     }
     return new NodeSet(nodes);
@@ -429,7 +432,8 @@ public class DTMNodeProxy
       final String tagname,
       final boolean isTagNameWildCard) {
     if (tempNode == null) {
-    } else {
+    }
+    else {
       if (tempNode.getNodeType() == DTM.ELEMENT_NODE
           && (isTagNameWildCard || tempNode.getNodeName().equals(tagname))) {
         listVector.add(tempNode);
@@ -467,7 +471,7 @@ public class DTMNodeProxy
   @Override
   public final NodeList getElementsByTagNameNS(final String namespaceURI, final String localName) {
     final List<Node> nodes = new ArrayList<>();
-    final Node retNode = dtm.getNode(node);
+    final Node retNode = dtm_.getNode(node_);
     if (retNode != null) {
       final boolean isNamespaceURIWildCard = "*".equals(namespaceURI);
       final boolean isLocalNameWildCard = "*".equals(localName);
@@ -482,10 +486,11 @@ public class DTMNodeProxy
               isNamespaceURIWildCard,
               isLocalNameWildCard);
         }
-      } else if (DTM.DOCUMENT_NODE == retNode.getNodeType()) {
+      }
+      else if (DTM.DOCUMENT_NODE == retNode.getNodeType()) {
         traverseChildren(
             nodes,
-            dtm.getNode(node),
+            dtm_.getNode(node_),
             namespaceURI,
             localName,
             isNamespaceURIWildCard,
@@ -513,7 +518,8 @@ public class DTMNodeProxy
       final boolean isNamespaceURIWildCard,
       final boolean isLocalNameWildCard) {
     if (tempNode == null) {
-    } else {
+    }
+    else {
       if (tempNode.getNodeType() == DTM.ELEMENT_NODE
           && (isLocalNameWildCard || tempNode.getLocalName().equals(localname))) {
         final String nsURI = tempNode.getNamespaceURI();
@@ -541,7 +547,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final Element getElementById(final String elementId) {
-    return (Element) dtm.getNode(dtm.getElementById(elementId));
+    return (Element) dtm_.getNode(dtm_.getElementById(elementId));
   }
 
   /** {@inheritDoc} */
@@ -553,7 +559,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final String getData() throws DOMException {
-    return dtm.getNodeValue(node);
+    return dtm_.getNodeValue(node_);
   }
 
   /** {@inheritDoc} */
@@ -566,7 +572,7 @@ public class DTMNodeProxy
   @Override
   public final int getLength() {
     // %OPT% This should do something smarter?
-    return dtm.getNodeValue(node).length();
+    return dtm_.getNodeValue(node_).length();
   }
 
   /** {@inheritDoc} */
@@ -603,16 +609,15 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final String getTagName() {
-    return dtm.getNodeName(node);
+    return dtm_.getNodeName(node_);
   }
 
   /** {@inheritDoc} */
   @Override
   public final String getAttribute(final String name) {
-
-    final DTMNamedNodeMap map = new DTMNamedNodeMap(dtm, node);
-    final Node node = map.getNamedItem(name);
-    return (null == node) ? EMPTYSTRING : node.getNodeValue();
+    final DTMNamedNodeMap map = new DTMNamedNodeMap(dtm_, node_);
+    final Node n = map.getNamedItem(name);
+    return (null == n) ? EMPTYSTRING : n.getNodeValue();
   }
 
   /** {@inheritDoc} */
@@ -631,7 +636,7 @@ public class DTMNodeProxy
   @Override
   public final Attr getAttributeNode(final String name) {
 
-    final DTMNamedNodeMap map = new DTMNamedNodeMap(dtm, node);
+    final DTMNamedNodeMap map = new DTMNamedNodeMap(dtm_, node_);
     return (Attr) map.getNamedItem(name);
   }
 
@@ -650,7 +655,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public boolean hasAttributes() {
-    return DTM.NULL != dtm.getFirstAttribute(node);
+    return DTM.NULL != dtm_.getFirstAttribute(node_);
   }
 
   /** {@inheritDoc} */
@@ -663,8 +668,8 @@ public class DTMNodeProxy
   @Override
   public final String getAttributeNS(final String namespaceURI, final String localName) {
     Node retNode = null;
-    final int n = dtm.getAttributeNode(node, namespaceURI, localName);
-    if (n != DTM.NULL) retNode = dtm.getNode(n);
+    final int n = dtm_.getAttributeNode(node_, namespaceURI, localName);
+    if (n != DTM.NULL) retNode = dtm_.getNode(n);
     return (null == retNode) ? EMPTYSTRING : retNode.getNodeValue();
   }
 
@@ -687,8 +692,8 @@ public class DTMNodeProxy
   @Override
   public final Attr getAttributeNodeNS(final String namespaceURI, final String localName) {
     Attr retAttr = null;
-    final int n = dtm.getAttributeNode(node, namespaceURI, localName);
-    if (n != DTM.NULL) retAttr = (Attr) dtm.getNode(n);
+    final int n = dtm_.getAttributeNode(node_, namespaceURI, localName);
+    if (n != DTM.NULL) retAttr = (Attr) dtm_.getNode(n);
     return retAttr;
   }
 
@@ -701,7 +706,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final String getName() {
-    return dtm.getNodeName(node);
+    return dtm_.getNodeName(node_);
   }
 
   /** {@inheritDoc} */
@@ -717,7 +722,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final String getValue() {
-    return dtm.getNodeValue(node);
+    return dtm_.getNodeValue(node_);
   }
 
   /** {@inheritDoc} */
@@ -732,8 +737,8 @@ public class DTMNodeProxy
     if (getNodeType() != Node.ATTRIBUTE_NODE) return null;
     // In XPath and DTM data models, unlike DOM, an Attr's parent is its
     // owner element.
-    final int newnode = dtm.getParent(node);
-    return (newnode == DTM.NULL) ? null : (Element) (dtm.getNode(newnode));
+    final int newnode = dtm_.getParent(node_);
+    return (newnode == DTM.NULL) ? null : (Element) (dtm_.getNode(newnode));
   }
 
   /** {@inheritDoc} */
@@ -832,7 +837,8 @@ public class DTMNodeProxy
       if (arg.getNodeName() != null) {
         return false;
       }
-    } else if (!getNodeName().equals(arg.getNodeName())) {
+    }
+    else if (!getNodeName().equals(arg.getNodeName())) {
       return false;
     }
 
@@ -840,7 +846,8 @@ public class DTMNodeProxy
       if (arg.getLocalName() != null) {
         return false;
       }
-    } else if (!getLocalName().equals(arg.getLocalName())) {
+    }
+    else if (!getLocalName().equals(arg.getLocalName())) {
       return false;
     }
 
@@ -848,7 +855,8 @@ public class DTMNodeProxy
       if (arg.getNamespaceURI() != null) {
         return false;
       }
-    } else if (!getNamespaceURI().equals(arg.getNamespaceURI())) {
+    }
+    else if (!getNamespaceURI().equals(arg.getNamespaceURI())) {
       return false;
     }
 
@@ -856,7 +864,8 @@ public class DTMNodeProxy
       if (arg.getPrefix() != null) {
         return false;
       }
-    } else if (!getPrefix().equals(arg.getPrefix())) {
+    }
+    else if (!getPrefix().equals(arg.getPrefix())) {
       return false;
     }
 
@@ -871,8 +880,7 @@ public class DTMNodeProxy
   public String lookupNamespaceURI(final String specifiedPrefix) {
     final short type = this.getNodeType();
     switch (type) {
-      case Node.ELEMENT_NODE:
-        {
+      case Node.ELEMENT_NODE: {
           String namespace = this.getNamespaceURI();
           final String prefix = this.getPrefix();
           if (namespace != null) {
@@ -880,7 +888,8 @@ public class DTMNodeProxy
             if (specifiedPrefix == null && prefix == specifiedPrefix) {
               // looking for default namespace
               return namespace;
-            } else if (prefix != null && prefix.equals(specifiedPrefix)) {
+            }
+            else if (prefix != null && prefix.equals(specifiedPrefix)) {
               // non default namespace
               return namespace;
             }
@@ -898,7 +907,8 @@ public class DTMNodeProxy
                 if (specifiedPrefix == null && attr.getNodeName().equals("xmlns")) {
                   // default namespace
                   return value;
-                } else if (attrPrefix != null
+                }
+                else if (attrPrefix != null
                     && attrPrefix.equals("xmlns")
                     && attr.getLocalName().equals(specifiedPrefix)) {
                   // non default namespace
@@ -915,15 +925,13 @@ public class DTMNodeProxy
       case Node.DOCUMENT_TYPE_NODE:
         // type is unknown
         return null;
-      case Node.ATTRIBUTE_NODE:
-        {
+      case Node.ATTRIBUTE_NODE: {
           if (this.getOwnerElement().getNodeType() == Node.ELEMENT_NODE) {
             return getOwnerElement().lookupNamespaceURI(specifiedPrefix);
           }
           return null;
         }
-      default:
-        {
+      default: {
           return null;
         }
     }
@@ -954,15 +962,13 @@ public class DTMNodeProxy
       case Node.DOCUMENT_TYPE_NODE:
         // type is unknown
         return null;
-      case Node.ATTRIBUTE_NODE:
-        {
+      case Node.ATTRIBUTE_NODE: {
           if (this.getOwnerElement().getNodeType() == Node.ELEMENT_NODE) {
             return getOwnerElement().lookupPrefix(namespaceURI);
           }
           return null;
         }
-      default:
-        {
+      default: {
           return null;
         }
     }
@@ -984,7 +990,7 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public String getTextContent() throws DOMException {
-    return dtm.getStringValue(node).toString();
+    return dtm_.getStringValue(node_).toString();
   }
 
   /** {@inheritDoc} */
@@ -1008,7 +1014,8 @@ public class DTMNodeProxy
 
   /** {@inheritDoc} */
   @Override
-  public void normalizeDocument() {}
+  public void normalizeDocument() {
+  }
 
   /** {@inheritDoc} */
   @Override
