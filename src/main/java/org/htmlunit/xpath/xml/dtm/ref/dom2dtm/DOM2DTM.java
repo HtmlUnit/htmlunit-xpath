@@ -579,7 +579,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       int i = 0;
       do {
         for (; i < len; i++) {
-          if (m_nodes.elementAt(i) == node) return makeNodeHandle(i);
+          if (m_nodes.elementAt(i) == node) {
+              return makeNodeHandle(i);
+          }
         }
 
         isMore = nextNode();

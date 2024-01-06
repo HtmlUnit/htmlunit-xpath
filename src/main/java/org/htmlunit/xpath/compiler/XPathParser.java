@@ -112,7 +112,9 @@ public class XPathParser {
 
           nextToken();
 
-          if (null != m_token) extraTokens.append(", ");
+          if (null != m_token) {
+            extraTokens.append(", ");
+          }
         }
 
         error(XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS, new Object[] {extraTokens.toString()});
@@ -126,7 +128,9 @@ public class XPathParser {
         // %REVIEW%!!!
         initXPath(compiler, "/..", namespaceContext);
       }
-      else throw e;
+      else {
+        throw e;
+      }
     }
 
     compiler.shrink();
@@ -167,7 +171,9 @@ public class XPathParser {
 
         nextToken();
 
-        if (null != m_token) extraTokens.append(", ");
+        if (null != m_token) {
+          extraTokens.append(", ");
+        }
       }
 
       error(XPATHErrorResources.ER_EXTRA_ILLEGAL_TOKENS, new Object[] {extraTokens.toString()});
@@ -378,7 +384,9 @@ public class XPathParser {
       // These are nodetests, xpathparser treats them as functions when parsing
       // a FilterExpr.
       id = Keywords.lookupNodeTest(key);
-      if (null == id) id = m_functionTable.getFunctionID(key);
+      if (null == id) {
+        id = m_functionTable.getFunctionID(key);
+      }
       tok = ((Integer) id).intValue();
     }
     catch (NullPointerException | ClassCastException npe) {
@@ -486,7 +494,9 @@ public class XPathParser {
 
     final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    if (-1 == addPos) addPos = opPos;
+    if (-1 == addPos) {
+      addPos = opPos;
+    }
 
     RelationalExpr(-1);
 
@@ -533,7 +543,9 @@ public class XPathParser {
 
     final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    if (-1 == addPos) addPos = opPos;
+    if (-1 == addPos) {
+      addPos = opPos;
+    }
 
     AdditiveExpr(-1);
 
@@ -596,7 +608,9 @@ public class XPathParser {
 
     final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    if (-1 == addPos) addPos = opPos;
+    if (-1 == addPos) {
+      addPos = opPos;
+    }
 
     MultiplicativeExpr(-1);
 
@@ -646,7 +660,9 @@ public class XPathParser {
 
     final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    if (-1 == addPos) addPos = opPos;
+    if (-1 == addPos) {
+      addPos = opPos;
+    }
 
     UnaryExpr();
 
@@ -723,8 +739,9 @@ public class XPathParser {
 
     UnionExpr();
 
-    if (isNeg)
+    if (isNeg) {
       m_ops.setOp(opPos + OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) - opPos);
+    }
   }
 
   /**
@@ -1447,8 +1464,9 @@ public class XPathParser {
 
       try {
         // XPath 1.0 does not support number in exp notation
-        if ((m_token.indexOf('e') > -1) || (m_token.indexOf('E') > -1))
+        if ((m_token.indexOf('e') > -1) || (m_token.indexOf('E') > -1)) {
           throw new NumberFormatException();
+        }
         num = Double.valueOf(m_token).doubleValue();
       }
       catch (final NumberFormatException nfe) {

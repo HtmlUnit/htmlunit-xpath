@@ -172,10 +172,14 @@ public abstract class DTMDefaultBase implements DTM {
     // Only create the m_prevsib array if the usePrevsib flag is true.
     // Some DTM implementations (e.g. SAXImpl) do not need this array.
     // We can save the time to build it in those cases.
-    if (usePrevsib) m_prevsib = new SuballocatedIntVector(blocksize, numblocks);
+    if (usePrevsib) {
+      m_prevsib = new SuballocatedIntVector(blocksize, numblocks);
+    }
 
     m_mgr = mgr;
-    if (mgr instanceof DTMManagerDefault) m_mgrDefault = (DTMManagerDefault) mgr;
+    if (mgr instanceof DTMManagerDefault) {
+      m_mgrDefault = (DTMManagerDefault) mgr;
+    }
 
     m_documentBaseURI = (null != source) ? source.getSystemId() : null;
     m_dtmIdent.setElementAt(dtmIdentity, 0);
@@ -289,9 +293,15 @@ public abstract class DTMDefaultBase implements DTM {
       final int mid = (low + high) >>> 1;
       final int c = list[mid];
 
-      if (c > value) high = mid - 1;
-      else if (c < value) low = mid + 1;
-      else return mid;
+      if (c > value) {
+        high = mid - 1;
+      }
+      else if (c < value) {
+        low = mid + 1;
+      }
+      else {
+        return mid;
+      }
     }
 
     return (low <= end && list[low] > value) ? low : -1;
@@ -371,12 +381,16 @@ public abstract class DTMDefaultBase implements DTM {
    * @return The expanded type ID, or DTM.NULL.
    */
   protected int _exptype(final int identity) {
-    if (identity == DTM.NULL) return NULL;
+    if (identity == DTM.NULL) {
+      return NULL;
+    }
     // Reorganized test and loop into single flow
     // Tiny performance improvement, saves a few bytes of code, clearer.
     // %OPT% Other internal getters could be treated simliarly
     while (identity >= m_size) {
-      if (!nextNode() && identity >= m_size) return NULL;
+      if (!nextNode() && identity >= m_size) {
+        return NULL;
+      }
     }
     return m_exptype.elementAt(identity);
   }
@@ -390,11 +404,15 @@ public abstract class DTMDefaultBase implements DTM {
   protected int _level(int identity) {
     while (identity >= m_size) {
       final boolean isMore = nextNode();
-      if (!isMore && identity >= m_size) return NULL;
+      if (!isMore && identity >= m_size) {
+        return NULL;
+      }
     }
 
     int i = 0;
-    while (NULL != (identity = _parent(identity))) ++i;
+    while (NULL != (identity = _parent(identity))) {
+      ++i;
+    }
     return i;
   }
 
@@ -419,7 +437,9 @@ public abstract class DTMDefaultBase implements DTM {
         return NULL;
       }
       info = m_firstch.elementAt(identity);
-      if (info == NOTPROCESSED && !isMore) return NULL;
+      if (info == NOTPROCESSED && !isMore) {
+        return NULL;
+      }
     }
 
     return info;
@@ -445,7 +465,9 @@ public abstract class DTMDefaultBase implements DTM {
         return NULL;
       }
       info = m_nextsib.elementAt(identity);
-      if (info == NOTPROCESSED && !isMore) return NULL;
+      if (info == NOTPROCESSED && !isMore) {
+        return NULL;
+      }
     }
 
     return info;
@@ -459,7 +481,9 @@ public abstract class DTMDefaultBase implements DTM {
    */
   protected int _prevsib(final int identity) {
 
-    if (identity < m_size) return m_prevsib.elementAt(identity);
+    if (identity < m_size) {
+      return m_prevsib.elementAt(identity);
+    }
 
     // Check to see if the information requested has been processed, and,
     // if not, advance the iterator until we the information has been
@@ -467,8 +491,12 @@ public abstract class DTMDefaultBase implements DTM {
     while (true) {
       final boolean isMore = nextNode();
 
-      if (identity >= m_size && !isMore) return NULL;
-      else if (identity < m_size) return m_prevsib.elementAt(identity);
+      if (identity >= m_size && !isMore) {
+        return NULL;
+      }
+      else if (identity < m_size) {
+        return m_prevsib.elementAt(identity);
+      }
     }
   }
 
@@ -480,7 +508,9 @@ public abstract class DTMDefaultBase implements DTM {
    */
   protected int _parent(final int identity) {
 
-    if (identity < m_size) return m_parent.elementAt(identity);
+    if (identity < m_size) {
+      return m_parent.elementAt(identity);
+    }
 
     // Check to see if the information requested has been processed, and,
     // if not, advance the iterator until we the information has been
@@ -488,8 +518,12 @@ public abstract class DTMDefaultBase implements DTM {
     while (true) {
       final boolean isMore = nextNode();
 
-      if (identity >= m_size && !isMore) return NULL;
-      else if (identity < m_size) return m_parent.elementAt(identity);
+      if (identity >= m_size && !isMore) {
+        return NULL;
+      }
+      else if (identity < m_size) {
+        return m_parent.elementAt(identity);
+      }
     }
   }
 
@@ -578,29 +612,53 @@ public abstract class DTMDefaultBase implements DTM {
 
         final int firstChild = _firstch(index);
 
-        if (DTM.NULL == firstChild) ps.println("First child: DTM.NULL");
-        else if (NOTPROCESSED == firstChild) ps.println("First child: NOTPROCESSED");
-        else ps.println("First child: " + firstChild);
+        if (DTM.NULL == firstChild) {
+          ps.println("First child: DTM.NULL");
+        }
+        else if (NOTPROCESSED == firstChild) {
+          ps.println("First child: NOTPROCESSED");
+        }
+        else {
+          ps.println("First child: " + firstChild);
+        }
 
         if (m_prevsib != null) {
           final int prevSibling = _prevsib(index);
 
-          if (DTM.NULL == prevSibling) ps.println("Prev sibling: DTM.NULL");
-          else if (NOTPROCESSED == prevSibling) ps.println("Prev sibling: NOTPROCESSED");
-          else ps.println("Prev sibling: " + prevSibling);
+          if (DTM.NULL == prevSibling) {
+            ps.println("Prev sibling: DTM.NULL");
+          }
+          else if (NOTPROCESSED == prevSibling) {
+            ps.println("Prev sibling: NOTPROCESSED");
+          }
+          else {
+            ps.println("Prev sibling: " + prevSibling);
+          }
         }
 
         final int nextSibling = _nextsib(index);
 
-        if (DTM.NULL == nextSibling) ps.println("Next sibling: DTM.NULL");
-        else if (NOTPROCESSED == nextSibling) ps.println("Next sibling: NOTPROCESSED");
-        else ps.println("Next sibling: " + nextSibling);
+        if (DTM.NULL == nextSibling) {
+          ps.println("Next sibling: DTM.NULL");
+        }
+        else if (NOTPROCESSED == nextSibling) {
+          ps.println("Next sibling: NOTPROCESSED");
+        }
+        else {
+          ps.println("Next sibling: " + nextSibling);
+        }
 
         final int parent = _parent(index);
 
-        if (DTM.NULL == parent) ps.println("Parent: DTM.NULL");
-        else if (NOTPROCESSED == parent) ps.println("Parent: NOTPROCESSED");
-        else ps.println("Parent: " + parent);
+        if (DTM.NULL == parent) {
+          ps.println("Parent: DTM.NULL");
+        }
+        else if (NOTPROCESSED == parent) {
+          ps.println("Parent: NOTPROCESSED");
+        }
+        else {
+          ps.println("Parent: " + parent);
+        }
 
         final int level = _level(index);
 
@@ -627,7 +685,9 @@ public abstract class DTMDefaultBase implements DTM {
    * it's a useful diagnostic and uses only DTM's public APIs.
    */
   public String dumpNode(final int nodeHandle) {
-    if (nodeHandle == DTM.NULL) return "[null]";
+    if (nodeHandle == DTM.NULL) {
+      return "[null]";
+    }
 
     final String typestring;
     switch (getNodeType(nodeHandle)) {
@@ -711,7 +771,9 @@ public abstract class DTMDefaultBase implements DTM {
    * @return NodeHandle (external representation of node)
    */
   public final int makeNodeHandle(final int nodeIdentity) {
-    if (NULL == nodeIdentity) return NULL;
+    if (NULL == nodeIdentity) {
+      return NULL;
+    }
 
     return m_dtmIdent.elementAt(nodeIdentity >>> DTMManager.IDENT_DTM_NODE_BITS)
         + (nodeIdentity & DTMManager.IDENT_NODE_DEFAULT);
@@ -734,7 +796,9 @@ public abstract class DTMDefaultBase implements DTM {
    * @return nodeIdentity Internal offset to this node's records.
    */
   public final int makeNodeIdentity(final int nodeHandle) {
-    if (NULL == nodeHandle) return NULL;
+    if (NULL == nodeHandle) {
+      return NULL;
+    }
 
     if (m_mgrDefault != null) {
       // Optimization: use the DTMManagerDefault's fast DTMID-to-offsets
@@ -830,14 +894,18 @@ public abstract class DTMDefaultBase implements DTM {
   /** {@inheritDoc} */
   @Override
   public int getNextSibling(final int nodeHandle) {
-    if (nodeHandle == DTM.NULL) return DTM.NULL;
+    if (nodeHandle == DTM.NULL) {
+      return DTM.NULL;
+    }
     return makeNodeHandle(_nextsib(makeNodeIdentity(nodeHandle)));
   }
 
   /** {@inheritDoc} */
   @Override
   public int getPreviousSibling(final int nodeHandle) {
-    if (nodeHandle == DTM.NULL) return DTM.NULL;
+    if (nodeHandle == DTM.NULL) {
+      return DTM.NULL;
+    }
 
     if (m_prevsib != null) {
       return makeNodeHandle(_prevsib(makeNodeIdentity(nodeHandle)));
@@ -1032,7 +1100,9 @@ public abstract class DTMDefaultBase implements DTM {
           // Too late in list
           candidate = m_namespaceDeclSetElements.elementAt(--wouldBeAt);
         }
-        else break;
+        else {
+          break;
+        }
       }
     }
 
@@ -1089,7 +1159,9 @@ public abstract class DTMDefaultBase implements DTM {
       final int identity = makeNodeIdentity(nodeHandle);
       if (_type(identity) == DTM.ELEMENT_NODE) {
         final SuballocatedIntVector nsContext = findNamespaceContext(identity);
-        if (nsContext == null || nsContext.size() < 1) return NULL;
+        if (nsContext == null || nsContext.size() < 1) {
+          return NULL;
+        }
 
         return nsContext.elementAt(0);
       }
@@ -1105,8 +1177,12 @@ public abstract class DTMDefaultBase implements DTM {
     if (_type(identity) == DTM.ELEMENT_NODE) {
       while (DTM.NULL != (identity = getNextNodeIdentity(identity))) {
         final int type = _type(identity);
-        if (type == DTM.NAMESPACE_NODE) return makeNodeHandle(identity);
-        else if (DTM.ATTRIBUTE_NODE != type) break;
+        if (type == DTM.NAMESPACE_NODE) {
+          return makeNodeHandle(identity);
+        }
+        else if (DTM.ATTRIBUTE_NODE != type) {
+          break;
+        }
       }
       return NULL;
     }
@@ -1125,9 +1201,13 @@ public abstract class DTMDefaultBase implements DTM {
 
       final SuballocatedIntVector nsContext = findNamespaceContext(makeNodeIdentity(baseHandle));
 
-      if (nsContext == null) return NULL;
+      if (nsContext == null) {
+        return NULL;
+      }
       final int i = 1 + nsContext.indexOf(nodeHandle);
-      if (i <= 0 || i == nsContext.size()) return NULL;
+      if (i <= 0 || i == nsContext.size()) {
+        return NULL;
+      }
 
       return nsContext.elementAt(i);
     }
@@ -1167,7 +1247,9 @@ public abstract class DTMDefaultBase implements DTM {
   @Override
   public int getOwnerDocument(final int nodeHandle) {
 
-    if (DTM.DOCUMENT_NODE == getNodeType(nodeHandle)) return DTM.NULL;
+    if (DTM.DOCUMENT_NODE == getNodeType(nodeHandle)) {
+      return DTM.NULL;
+    }
 
     return getDocumentRoot(nodeHandle);
   }
@@ -1189,7 +1271,9 @@ public abstract class DTMDefaultBase implements DTM {
     // node...
     // which one would hope would never happen...
     final int id = makeNodeIdentity(nodeHandle);
-    if (id == NULL) return NULL;
+    if (id == NULL) {
+      return NULL;
+    }
     return _exptype(id);
   }
 
@@ -1232,7 +1316,9 @@ public abstract class DTMDefaultBase implements DTM {
   /** {@inheritDoc} */
   @Override
   public short getNodeType(final int nodeHandle) {
-    if (nodeHandle == DTM.NULL) return DTM.NULL;
+    if (nodeHandle == DTM.NULL) {
+      return DTM.NULL;
+    }
     return m_expandedNameTable.getType(_exptype(makeNodeIdentity(nodeHandle)));
   }
 

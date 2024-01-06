@@ -172,16 +172,22 @@ public class XString extends XObject {
     // nodeset function.
     final int t = obj2.getType();
     try {
-      if (XObject.CLASS_NODESET == t) return obj2.equals(this);
+      if (XObject.CLASS_NODESET == t) {
+        return obj2.equals(this);
+      }
       // If at least one object to be compared is a boolean, then each object
       // to be compared is converted to a boolean as if by applying the
       // boolean function.
-      else if (XObject.CLASS_BOOLEAN == t) return obj2.bool() == bool();
+      else if (XObject.CLASS_BOOLEAN == t) {
+        return obj2.bool() == bool();
+      }
       // Otherwise, if at least one object to be compared is a number, then each
       // object
       // to be compared is converted to a number as if by applying the number
       // function.
-      else if (XObject.CLASS_NUMBER == t) return obj2.num() == num();
+      else if (XObject.CLASS_NUMBER == t) {
+        return obj2.num() == num();
+      }
     }
     catch (final javax.xml.transform.TransformerException te) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
@@ -230,14 +236,22 @@ public class XString extends XObject {
   @Override
   public boolean equals(final Object obj2) {
 
-    if (null == obj2) return false;
+    if (null == obj2) {
+      return false;
+    }
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
     // nodeset function.
-    else if (obj2 instanceof XNodeSet) return obj2.equals(this);
-    else if (obj2 instanceof XNumber) return obj2.equals(this);
-    else return str().equals(obj2.toString());
+    else if (obj2 instanceof XNodeSet) {
+      return obj2.equals(this);
+    }
+    else if (obj2 instanceof XNumber) {
+      return obj2.equals(this);
+    }
+    else {
+      return str().equals(obj2.toString());
+    }
   }
 
   /**

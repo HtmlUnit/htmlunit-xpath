@@ -81,7 +81,9 @@ public class XBoolean extends XObject {
   /** {@inheritDoc} */
   @Override
   public Object object() {
-    if (null == m_obj) setObject(m_val ? Boolean.TRUE : Boolean.FALSE);
+    if (null == m_obj) {
+      setObject(m_val ? Boolean.TRUE : Boolean.FALSE);
+    }
     return m_obj;
   }
 
@@ -95,7 +97,9 @@ public class XBoolean extends XObject {
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
     // nodeset function.
-    if (obj2.getType() == XObject.CLASS_NODESET) return obj2.equals(this);
+    if (obj2.getType() == XObject.CLASS_NODESET) {
+      return obj2.equals(this);
+    }
 
     try {
       return m_val == obj2.bool();

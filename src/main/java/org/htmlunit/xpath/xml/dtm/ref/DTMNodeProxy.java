@@ -194,7 +194,9 @@ public class DTMNodeProxy
   @Override
   public final Node getParentNode() {
 
-    if (getNodeType() == Node.ATTRIBUTE_NODE) return null;
+    if (getNodeType() == Node.ATTRIBUTE_NODE) {
+      return null;
+    }
 
     final int newnode = dtm_.getParent(node_);
 
@@ -243,7 +245,9 @@ public class DTMNodeProxy
   public final Node getNextSibling() {
 
     // Attr's Next is defined at DTM level, but not at DOM level.
-    if (dtm_.getNodeType(node_) == Node.ATTRIBUTE_NODE) return null;
+    if (dtm_.getNodeType(node_) == Node.ATTRIBUTE_NODE) {
+      return null;
+    }
 
     final int newnode = dtm_.getNextSibling(node_);
 
@@ -338,7 +342,9 @@ public class DTMNodeProxy
             elementhandle = DTM.NULL; // More than one; ill-formed.
             kidhandle = dtm_.getLastChild(dochandle); // End loop
           }
-          else elementhandle = kidhandle;
+          else {
+            elementhandle = kidhandle;
+          }
           break;
 
           // These are harmless; document is still wellformed
@@ -353,7 +359,9 @@ public class DTMNodeProxy
           break;
       }
     }
-    if (elementhandle == DTM.NULL) throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
+    if (elementhandle == DTM.NULL) {
+      throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "");
+    }
     return (Element) (dtm_.getNode(elementhandle));
   }
 
@@ -431,9 +439,7 @@ public class DTMNodeProxy
       final Node tempNode,
       final String tagname,
       final boolean isTagNameWildCard) {
-    if (tempNode == null) {
-    }
-    else {
+    if (tempNode != null) {
       if (tempNode.getNodeType() == DTM.ELEMENT_NODE
           && (isTagNameWildCard || tempNode.getNodeName().equals(tagname))) {
         listVector.add(tempNode);
@@ -669,7 +675,9 @@ public class DTMNodeProxy
   public final String getAttributeNS(final String namespaceURI, final String localName) {
     Node retNode = null;
     final int n = dtm_.getAttributeNode(node_, namespaceURI, localName);
-    if (n != DTM.NULL) retNode = dtm_.getNode(n);
+    if (n != DTM.NULL) {
+      retNode = dtm_.getNode(n);
+    }
     return (null == retNode) ? EMPTYSTRING : retNode.getNodeValue();
   }
 
@@ -693,7 +701,9 @@ public class DTMNodeProxy
   public final Attr getAttributeNodeNS(final String namespaceURI, final String localName) {
     Attr retAttr = null;
     final int n = dtm_.getAttributeNode(node_, namespaceURI, localName);
-    if (n != DTM.NULL) retAttr = (Attr) dtm_.getNode(n);
+    if (n != DTM.NULL) {
+      retAttr = (Attr) dtm_.getNode(n);
+    }
     return retAttr;
   }
 
@@ -734,7 +744,9 @@ public class DTMNodeProxy
   /** {@inheritDoc} */
   @Override
   public final Element getOwnerElement() {
-    if (getNodeType() != Node.ATTRIBUTE_NODE) return null;
+    if (getNodeType() != Node.ATTRIBUTE_NODE) {
+      return null;
+    }
     // In XPath and DTM data models, unlike DOM, an Attr's parent is its
     // owner element.
     final int newnode = dtm_.getParent(node_);

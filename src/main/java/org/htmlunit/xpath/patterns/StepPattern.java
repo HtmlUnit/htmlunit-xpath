@@ -97,8 +97,12 @@ public class StepPattern extends NodeTest implements SubContextList {
         m_targetString = PseudoNames.PSEUDONAME_ROOT;
         break;
       case DTMFilter.SHOW_ELEMENT:
-        if (WILD == m_name) m_targetString = PseudoNames.PSEUDONAME_ANY;
-        else m_targetString = m_name;
+        if (WILD == m_name) {
+          m_targetString = PseudoNames.PSEUDONAME_ANY;
+        }
+        else {
+          m_targetString = m_name;
+        }
         break;
       default:
         m_targetString = PseudoNames.PSEUDONAME_ANY;
@@ -158,7 +162,9 @@ public class StepPattern extends NodeTest implements SubContextList {
     final int n = getPredicateCount();
 
     for (int i = 0; i < n; i++) {
-      if (getPredicate(i).canTraverseOutsideSubtree()) return true;
+      if (getPredicate(i).canTraverseOutsideSubtree()) {
+        return true;
+      }
     }
 
     return false;
@@ -207,9 +213,13 @@ public class StepPattern extends NodeTest implements SubContextList {
     if ((getPredicateCount() > 0) || (null != m_relativePathPattern)) {
       m_score = SCORE_OTHER;
     }
-    else super.calcScore();
+    else {
+      super.calcScore();
+    }
 
-    if (null == m_targetString) calcTargetString();
+    if (null == m_targetString) {
+      calcTargetString();
+    }
   }
 
   /** {@inheritDoc} */
@@ -251,14 +261,19 @@ public class StepPattern extends NodeTest implements SubContextList {
 
     score = super.execute(xctxt, currentNode, dtm, expType);
 
-    if (score == NodeTest.SCORE_NONE) return NodeTest.SCORE_NONE;
-
-    if (getPredicateCount() != 0) {
-      if (!executePredicates(xctxt, dtm, currentNode)) return NodeTest.SCORE_NONE;
+    if (score == NodeTest.SCORE_NONE) {
+      return NodeTest.SCORE_NONE;
     }
 
-    if (null != m_relativePathPattern)
+    if (getPredicateCount() != 0) {
+      if (!executePredicates(xctxt, dtm, currentNode)) {
+        return NodeTest.SCORE_NONE;
+      }
+    }
+
+    if (null != m_relativePathPattern) {
       return m_relativePathPattern.executeRelativePathPattern(xctxt, dtm, currentNode);
+    }
 
     return score;
   }
@@ -320,9 +335,13 @@ public class StepPattern extends NodeTest implements SubContextList {
               xctxt.popSubContextList();
             }
 
-            if (pass) pos--;
+            if (pass) {
+              pos--;
+            }
 
-            if (pos < 1) return false;
+            if (pos < 1) {
+              return false;
+            }
           }
         }
         finally {
@@ -465,7 +484,9 @@ public class StepPattern extends NodeTest implements SubContextList {
 
         score = execute(xctxt);
 
-        if (score != NodeTest.SCORE_NONE) break;
+        if (score != NodeTest.SCORE_NONE) {
+          break;
+        }
       }
       finally {
         xctxt.popCurrentNode();
@@ -548,7 +569,9 @@ public class StepPattern extends NodeTest implements SubContextList {
     final StringBuilder buf = new StringBuilder();
 
     for (StepPattern pat = this; pat != null; pat = pat.m_relativePathPattern) {
-      if (pat != this) buf.append("/");
+      if (pat != this) {
+        buf.append("/");
+      }
 
       buf.append(Axis.getNames(pat.m_axis));
       buf.append("::");
@@ -658,23 +681,35 @@ public class StepPattern extends NodeTest implements SubContextList {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+      return false;
+    }
 
     final StepPattern sp = (StepPattern) expr;
 
     if (null != m_predicates) {
       final int n = m_predicates.length;
-      if ((null == sp.m_predicates) || (sp.m_predicates.length != n)) return false;
+      if ((null == sp.m_predicates) || (sp.m_predicates.length != n)) {
+        return false;
+      }
       for (int i = 0; i < n; i++) {
-        if (!m_predicates[i].deepEquals(sp.m_predicates[i])) return false;
+        if (!m_predicates[i].deepEquals(sp.m_predicates[i])) {
+          return false;
+        }
       }
     }
-    else if (null != sp.m_predicates) return false;
+    else if (null != sp.m_predicates) {
+      return false;
+    }
 
     if (null != m_relativePathPattern) {
-      if (!m_relativePathPattern.deepEquals(sp.m_relativePathPattern)) return false;
+      if (!m_relativePathPattern.deepEquals(sp.m_relativePathPattern)) {
+        return false;
+      }
     }
-    else if (sp.m_relativePathPattern != null) return false;
+    else if (sp.m_relativePathPattern != null) {
+      return false;
+    }
 
     return true;
   }

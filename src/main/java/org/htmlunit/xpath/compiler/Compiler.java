@@ -542,7 +542,9 @@ public class Compiler extends OpMap {
         nextOpPos = getNextOpPos(nextOpPos);
       }
 
-      if (i == 1) return compile(opPos);
+      if (i == 1) {
+        return compile(opPos);
+      }
 
       final UnionPattern up = new UnionPattern();
       final StepPattern[] patterns = new StepPattern[i];
@@ -674,12 +676,16 @@ public class Compiler extends OpMap {
 
     switch (stepType) {
       case OpCodes.OP_FUNCTION:
-        if (DEBUG) System.out.println("MATCH_FUNCTION: " + m_currentPattern);
+        if (DEBUG) {
+          System.out.println("MATCH_FUNCTION: " + m_currentPattern);
+        }
         argLen = getOp(opPos + OpMap.MAPINDEX_LENGTH);
         pattern = new FunctionPattern(compileFunction(opPos), Axis.PARENT);
         break;
       case OpCodes.FROM_ROOT:
-        if (DEBUG) System.out.println("FROM_ROOT, " + m_currentPattern);
+        if (DEBUG) {
+          System.out.println("FROM_ROOT, " + m_currentPattern);
+        }
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
         pattern =
@@ -687,9 +693,10 @@ public class Compiler extends OpMap {
                 DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT, Axis.PARENT);
         break;
       case OpCodes.MATCH_ATTRIBUTE:
-        if (DEBUG)
+        if (DEBUG) {
           System.out.println(
-              "MATCH_ATTRIBUTE: " + getStepLocalName(startOpPos) + ", " + m_currentPattern);
+                      "MATCH_ATTRIBUTE: " + getStepLocalName(startOpPos) + ", " + m_currentPattern);
+        }
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
         pattern =
@@ -700,9 +707,10 @@ public class Compiler extends OpMap {
                 Axis.PARENT);
         break;
       case OpCodes.MATCH_ANY_ANCESTOR:
-        if (DEBUG)
+        if (DEBUG) {
           System.out.println(
               "MATCH_ANY_ANCESTOR: " + getStepLocalName(startOpPos) + ", " + m_currentPattern);
+        }
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
         // bit-o-hackery, but this code is due for the morgue anyway...
@@ -714,12 +722,13 @@ public class Compiler extends OpMap {
                 Axis.ANCESTOR);
         break;
       case OpCodes.MATCH_IMMEDIATE_ANCESTOR:
-        if (DEBUG)
+        if (DEBUG) {
           System.out.println(
               "MATCH_IMMEDIATE_ANCESTOR: "
                   + getStepLocalName(startOpPos)
                   + ", "
                   + m_currentPattern);
+        }
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
         pattern =
