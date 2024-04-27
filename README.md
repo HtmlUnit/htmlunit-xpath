@@ -15,7 +15,7 @@ and we added unit tests and the maven-based build.
 
 [HtmlUnit@mastodon][4] | [HtmlUnit@Twitter][3]
 
-### Latest release Version 4.0.0 / April 1, 2024
+### Latest release Version 4.1.0 / April 28, 2024
 
 ### Maven
 
@@ -25,7 +25,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-xpath</artifactId>
-    <version>4.0.0</version>
+    <version>4.1.0</version>
 </dependency>
 ```
 
@@ -34,7 +34,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '4.0.0'
+implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '4.1.0'
 ```
 
 ### Last CI build
@@ -48,7 +48,7 @@ If you use maven please add:
     <dependency>
         <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit-xpath</artifactId>
-        <version>4.1.0-SNAPSHOT</version>
+        <version>4.2.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom `repositories` section also:
@@ -102,7 +102,14 @@ Every contribution - from bug reports to feature requests, typos to full new fea
 This part is intended for committer who are packaging a release.
 
 * Check all your files are checked in
-* Execute "mvn -U clean test" to be sure all tests are passing
+* Execute these mvn commands to be sure all tests are passing and everything is up to data
+
+```
+   mvn versions:display-plugin-updates
+   mvn versions:display-dependency-updates
+   mvn -U clean test
+```
+
 * Update the version number in pom.xml and README.md
 * Commit the changes
 
@@ -120,12 +127,12 @@ This part is intended for committer who are packaging a release.
 * Create the version on Github
     * login to Github and open project https://github.com/HtmlUnit/htmlunit-xpath
     * click Releases > Draft new release
-    * fill the tag and title field with the release number (e.g. 3.10.0)
+    * fill the tag and title field with the release number (e.g. 4.0.0)
     * append 
-        * htmlunit-xpath-3.x.x.jar
-        * htmlunit-xpath-3.x.x.jar.asc 
-        * htmlunit-xpath-3.x.x-javadoc.jar
-        * htmlunit-xpath-3.x.x-javadoc.jar.asc
+        * htmlunit-xpath-4.x.x.jar
+        * htmlunit-xpath-4.x.x.jar.asc 
+        * htmlunit-xpath-4.x.x-javadoc.jar
+        * htmlunit-xpath-4.x.x-javadoc.jar.asc
     * and publish the release 
 
 * Update the version number in pom.xml to start next snapshot development
