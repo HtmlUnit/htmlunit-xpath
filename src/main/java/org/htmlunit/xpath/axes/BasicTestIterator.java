@@ -61,7 +61,9 @@ public abstract class BasicTestIterator extends LocPathIterator {
                     | DTMFilter.SHOW_NAMESPACE
                     | DTMFilter.SHOW_ELEMENT
                     | DTMFilter.SHOW_PROCESSING_INSTRUCTION)))
-        || (whatToShow == DTMFilter.SHOW_ALL)) initNodeTest(whatToShow);
+        || (whatToShow == DTMFilter.SHOW_ALL)) {
+        initNodeTest(whatToShow);
+    }
     else {
       initNodeTest(
           whatToShow, compiler.getStepNS(firstStepPos), compiler.getStepLocalName(firstStepPos));
@@ -95,7 +97,9 @@ public abstract class BasicTestIterator extends LocPathIterator {
         next = getNextNode();
 
         if (DTM.NULL != next) {
-          if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) break;
+          if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) {
+              break;
+          }
           continue;
         }
         break;

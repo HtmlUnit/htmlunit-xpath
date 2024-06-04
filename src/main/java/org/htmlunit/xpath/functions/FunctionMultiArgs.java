@@ -36,7 +36,9 @@ public class FunctionMultiArgs extends Function3Args {
   @Override
   public void setArg(final Expression arg, final int argNum) throws WrongNumberArgsException {
 
-    if (argNum < 3) super.setArg(arg, argNum);
+    if (argNum < 3) {
+        super.setArg(arg, argNum);
+    }
     else {
       if (null == args_) {
         args_ = new Expression[1];
@@ -104,15 +106,21 @@ public class FunctionMultiArgs extends Function3Args {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     final FunctionMultiArgs fma = (FunctionMultiArgs) expr;
     if (null != args_) {
       final int n = args_.length;
-      if ((null == fma) || (fma.args_.length != n)) return false;
+      if ((null == fma) || (fma.args_.length != n)) {
+          return false;
+      }
 
       for (int i = 0; i < n; i++) {
-        if (!args_[i].deepEquals(fma.args_[i])) return false;
+        if (!args_[i].deepEquals(fma.args_[i])) {
+            return false;
+        }
       }
 
     }

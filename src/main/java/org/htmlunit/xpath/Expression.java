@@ -193,7 +193,9 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @return true of the passed in class is the exact same class as this class.
    */
   protected final boolean isSameClass(final Expression expr) {
-    if (null == expr) return false;
+    if (null == expr) {
+        return false;
+    }
 
     return getClass() == expr.getClass();
   }
@@ -246,7 +248,9 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    */
   public ExpressionNode getExpressionOwner() {
     ExpressionNode parent = exprGetParent();
-    while ((null != parent) && (parent instanceof Expression)) parent = parent.exprGetParent();
+    while ((null != parent) && (parent instanceof Expression)) {
+        parent = parent.exprGetParent();
+    }
     return parent;
   }
 
@@ -268,28 +272,36 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
   /** {@inheritDoc} */
   @Override
   public String getPublicId() {
-    if (null == m_parent) return null;
+    if (null == m_parent) {
+        return null;
+    }
     return m_parent.getPublicId();
   }
 
   /** {@inheritDoc} */
   @Override
   public String getSystemId() {
-    if (null == m_parent) return null;
+    if (null == m_parent) {
+        return null;
+    }
     return m_parent.getSystemId();
   }
 
   /** {@inheritDoc} */
   @Override
   public int getLineNumber() {
-    if (null == m_parent) return 0;
+    if (null == m_parent) {
+        return 0;
+    }
     return m_parent.getLineNumber();
   }
 
   /** {@inheritDoc} */
   @Override
   public int getColumnNumber() {
-    if (null == m_parent) return 0;
+    if (null == m_parent) {
+        return 0;
+    }
     return m_parent.getColumnNumber();
   }
 }

@@ -66,10 +66,14 @@ public class FuncId extends FunctionOneArg {
 
         final int node = dtm.getElementById(ref);
 
-        if (DTM.NULL != node) nodeSet.addNodeInDocOrder(node, xctxt);
+        if (DTM.NULL != node) {
+            nodeSet.addNodeInDocOrder(node, xctxt);
+        }
 
         if ((null != ref) && (hasMore || mayBeMore)) {
-          if (null == usedrefs) usedrefs = new ArrayList<>();
+          if (null == usedrefs) {
+              usedrefs = new ArrayList<>();
+          }
 
           usedrefs.add(ref);
         }
@@ -87,7 +91,9 @@ public class FuncId extends FunctionOneArg {
     final DTM dtm = xctxt.getDTM(context);
     final int docContext = dtm.getDocument();
 
-    if (DTM.NULL == docContext) error(xctxt, XPATHErrorResources.ER_CONTEXT_HAS_NO_OWNERDOC, null);
+    if (DTM.NULL == docContext) {
+        error(xctxt, XPATHErrorResources.ER_CONTEXT_HAS_NO_OWNERDOC, null);
+    }
 
     final XObject arg = m_arg0.execute(xctxt);
     final int argType = arg.getType();

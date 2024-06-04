@@ -32,7 +32,9 @@ public class FuncContains extends Function2Args {
     final String s2 = m_arg1.execute(xctxt).str();
 
     // Add this check for JDK consistency for empty strings.
-    if (s1.length() == 0 && s2.length() == 0) return XBoolean.S_TRUE;
+    if (s1.length() == 0 && s2.length() == 0) {
+        return XBoolean.S_TRUE;
+    }
 
     final int index = s1.indexOf(s2);
 

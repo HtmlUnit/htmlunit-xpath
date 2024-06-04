@@ -95,7 +95,9 @@ public class FunctionDef1Arg extends FunctionOneArg {
   /** {@inheritDoc} */
   @Override
   public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
-    if (argNum > 1) reportWrongNumberArgs();
+    if (argNum > 1) {
+        reportWrongNumberArgs();
+    }
   }
 
   /** {@inheritDoc} */

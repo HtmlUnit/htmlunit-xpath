@@ -95,7 +95,9 @@ public class XNumber extends XObject {
     if (s.charAt(len - 2) == '.' && s.charAt(len - 1) == '0') {
       s = s.substring(0, len - 2);
 
-      if (s.equals("-0")) return "0";
+      if (s.equals("-0")) {
+          return "0";
+      }
 
       return s;
     }
@@ -118,17 +120,24 @@ public class XNumber extends XObject {
 
       --e;
     }
-    else sign = "";
+    else {
+        sign = "";
+    }
 
     final int nDigits = e - 2;
 
-    if (exp >= nDigits) return sign + s.substring(0, 1) + s.substring(2, e) + zeros(exp - nDigits);
+    if (exp >= nDigits) {
+        return sign + s.substring(0, 1) + s.substring(2, e) + zeros(exp - nDigits);
+    }
 
     // Eliminate trailing 0's - bugzilla 14241
-    while (s.charAt(e - 1) == '0') e--;
+    while (s.charAt(e - 1) == '0') {
+        e--;
+    }
 
-    if (exp > 0)
+    if (exp > 0) {
       return sign + s.substring(0, 1) + s.substring(2, 2 + exp) + "." + s.substring(2 + exp, e);
+    }
 
     return sign + "0." + zeros(-1 - exp) + s.substring(0, 1) + s.substring(2, e);
   }
@@ -140,7 +149,9 @@ public class XNumber extends XObject {
    * @return a string of '0' with the given length
    */
   private static String zeros(final int n) {
-    if (n < 1) return "";
+    if (n < 1) {
+        return "";
+    }
 
     final char[] buf = new char[n];
 
@@ -154,7 +165,9 @@ public class XNumber extends XObject {
   /** {@inheritDoc} */
   @Override
   public Object object() {
-    if (null == m_obj) setObject(new Double(m_val));
+    if (null == m_obj) {
+        setObject(new Double(m_val));
+    }
     return m_obj;
   }
 
@@ -167,9 +180,15 @@ public class XNumber extends XObject {
     // nodeset function.
     final int t = obj2.getType();
     try {
-      if (t == XObject.CLASS_NODESET) return obj2.equals(this);
-      else if (t == XObject.CLASS_BOOLEAN) return obj2.bool() == bool();
-      else return m_val == obj2.num();
+      if (t == XObject.CLASS_NODESET) {
+          return obj2.equals(this);
+      }
+      else if (t == XObject.CLASS_BOOLEAN) {
+          return obj2.bool() == bool();
+      }
+      else {
+          return m_val == obj2.num();
+      }
     }
     catch (final javax.xml.transform.TransformerException te) {
       throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);

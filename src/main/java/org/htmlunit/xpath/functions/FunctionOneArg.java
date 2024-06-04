@@ -39,13 +39,17 @@ public class FunctionOneArg extends Function {
       m_arg0 = arg;
       arg.exprSetParent(this);
     }
-    else reportWrongNumberArgs();
+    else {
+        reportWrongNumberArgs();
+    }
   }
 
   /** {@inheritDoc} */
   @Override
   public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
-    if (argNum != 1) reportWrongNumberArgs();
+    if (argNum != 1) {
+        reportWrongNumberArgs();
+    }
   }
 
   /** {@inheritDoc} */
@@ -63,19 +67,27 @@ public class FunctionOneArg extends Function {
   /** {@inheritDoc} */
   @Override
   public void callArgVisitors(final XPathVisitor visitor) {
-    if (null != m_arg0) m_arg0.callVisitors(visitor);
+    if (null != m_arg0) {
+        m_arg0.callVisitors(visitor);
+    }
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     if (null != m_arg0) {
       if ((null == ((FunctionOneArg) expr).m_arg0)
-          || !m_arg0.deepEquals(((FunctionOneArg) expr).m_arg0)) return false;
+          || !m_arg0.deepEquals(((FunctionOneArg) expr).m_arg0)) {
+          return false;
+      }
     }
-    else if (null != ((FunctionOneArg) expr).m_arg0) return false;
+    else if (null != ((FunctionOneArg) expr).m_arg0) {
+        return false;
+    }
 
     return true;
   }

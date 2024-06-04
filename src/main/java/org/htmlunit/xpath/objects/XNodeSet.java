@@ -47,12 +47,16 @@ public class XNodeSet extends NodeSequence {
       m_last = nodeSet.m_last;
       // First make sure the DTMIterator val has a cache,
       // so if it doesn't have one, make one.
-      if (!nodeSet.hasCache()) nodeSet.setShouldCacheNodes(true);
+      if (!nodeSet.hasCache()) {
+          nodeSet.setShouldCacheNodes(true);
+      }
 
       // Get the cache from val and use it ourselves (we share it).
       setObject(nodeSet.getIteratorCache());
     }
-    else setIter(val);
+    else {
+        setIter(val);
+    }
   }
 
   /**
@@ -276,7 +280,9 @@ public class XNodeSet extends NodeSequence {
               break;
             }
 
-            if (null == node2Strings) node2Strings = new ArrayList<>();
+            if (null == node2Strings) {
+                node2Strings = new ArrayList<>();
+            }
 
             node2Strings.add(s2);
           }

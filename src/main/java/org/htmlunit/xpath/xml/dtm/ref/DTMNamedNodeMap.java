@@ -78,7 +78,9 @@ public class DTMNamedNodeMap implements NamedNodeMap {
   public Node getNamedItem(final String name) {
 
     for (int n = dtm.getFirstAttribute(element); n != DTM.NULL; n = dtm.getNextAttribute(n)) {
-      if (dtm.getNodeName(n).equals(name)) return dtm.getNode(n);
+      if (dtm.getNodeName(n).equals(name)) {
+          return dtm.getNode(n);
+      }
     }
 
     return null;

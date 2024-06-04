@@ -50,7 +50,9 @@ public class HasPositionalPredChecker extends XPathVisitor {
   /** {@inheritDoc} */
   @Override
   public boolean visitFunction(final Function func) {
-    if ((func instanceof FuncPosition) || (func instanceof FuncLast)) m_hasPositionalPred = true;
+    if ((func instanceof FuncPosition) || (func instanceof FuncLast)) {
+        m_hasPositionalPred = true;
+    }
     return true;
   }
 
@@ -67,8 +69,12 @@ public class HasPositionalPredChecker extends XPathVisitor {
           || (pred instanceof Mod)
           || (pred instanceof Mult)
           || (pred instanceof org.htmlunit.xpath.operations.Number)
-          || (pred instanceof Function)) m_hasPositionalPred = true;
-      else pred.callVisitors(this);
+          || (pred instanceof Function)) {
+          m_hasPositionalPred = true;
+      }
+      else {
+          pred.callVisitors(this);
+      }
     }
 
     m_predDepth--;

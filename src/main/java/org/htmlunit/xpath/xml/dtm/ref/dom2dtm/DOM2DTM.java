@@ -337,8 +337,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
             // %TBD% Should never arise, but I want to be sure of that...
             if (JJK_DEBUG) {
               System.out.println("***** DOM2DTM Pop Control Flow problem");
-              for (; ; )
-                ; // Freeze right here!
+              for ( ; ;) {
+                  // Freeze right here!
+              }
             }
           }
 
@@ -578,7 +579,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       boolean isMore;
       int i = 0;
       do {
-        for (; i < len; i++) {
+        for ( ; i < len; i++) {
           if (m_nodes.elementAt(i) == node) {
               return makeNodeHandle(i);
           }

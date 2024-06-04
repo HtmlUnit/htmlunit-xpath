@@ -271,9 +271,15 @@ public class OpMap {
     if (argLenOfStep == 3) {
       final int index = m_opMap.elementAt(opPosOfStep + 4);
 
-      if (index >= 0) return (String) m_tokenQueue.get(index);
-      else if (OpCodes.ELEMWILDCARD == index) return NodeTest.WILD;
-      else return null;
+      if (index >= 0) {
+          return (String) m_tokenQueue.get(index);
+      }
+      else if (OpCodes.ELEMWILDCARD == index) {
+          return NodeTest.WILD;
+      }
+      else {
+          return null;
+      }
     }
     return null;
   }
@@ -309,8 +315,14 @@ public class OpMap {
         break; // Should assert error
     }
 
-    if (index >= 0) return m_tokenQueue.get(index).toString();
-    else if (OpCodes.ELEMWILDCARD == index) return NodeTest.WILD;
-    else return null;
+    if (index >= 0) {
+        return m_tokenQueue.get(index).toString();
+    }
+    else if (OpCodes.ELEMWILDCARD == index) {
+        return NodeTest.WILD;
+    }
+    else {
+        return null;
+    }
   }
 }

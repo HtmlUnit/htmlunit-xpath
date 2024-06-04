@@ -62,15 +62,23 @@ public class FuncSubstring extends Function3Args {
       int end = (int) (Math.round(len) + start) - 1;
 
       // Normalize end index.
-      if (end < 0) end = 0;
-      else if (end > lenOfS1) end = lenOfS1;
+      if (end < 0) {
+          end = 0;
+      }
+      else if (end > lenOfS1) {
+          end = lenOfS1;
+      }
 
-      if (startIndex > lenOfS1) startIndex = lenOfS1;
+      if (startIndex > lenOfS1) {
+          startIndex = lenOfS1;
+      }
 
       substr = s1.substring(startIndex, end);
     }
     else {
-      if (startIndex > lenOfS1) startIndex = lenOfS1;
+      if (startIndex > lenOfS1) {
+          startIndex = lenOfS1;
+      }
       substr = s1.substring(startIndex);
     }
 
@@ -80,7 +88,9 @@ public class FuncSubstring extends Function3Args {
   /** {@inheritDoc} */
   @Override
   public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
-    if (argNum < 2) reportWrongNumberArgs();
+    if (argNum < 2) {
+        reportWrongNumberArgs();
+    }
   }
 
   /** {@inheritDoc} */

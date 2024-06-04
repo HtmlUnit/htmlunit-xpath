@@ -117,8 +117,8 @@ class Lexer {
 
             startSubstring = i;
 
-            for (i++; (i < nChars) && ((c = pat.charAt(i)) != '\"'); i++)
-              ;
+            for (i++; (i < nChars) && ((c = pat.charAt(i)) != '\"'); i++) {
+            }
 
             if (c == '\"' && i < nChars) {
               addToTokenQueue(pat.substring(startSubstring, i + 1));
@@ -146,8 +146,8 @@ class Lexer {
 
           startSubstring = i;
 
-          for (i++; (i < nChars) && ((c = pat.charAt(i)) != '\''); i++)
-            ;
+          for (i++; (i < nChars) && ((c = pat.charAt(i)) != '\''); i++) {
+          }
 
           if (c == '\'' && i < nChars) {
             addToTokenQueue(pat.substring(startSubstring, i + 1));

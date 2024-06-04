@@ -53,7 +53,9 @@ public abstract class Function extends Expression {
    * @throws WrongNumberArgsException if any
    */
   public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
-    if (argNum != 0) reportWrongNumberArgs();
+    if (argNum != 0) {
+        reportWrongNumberArgs();
+    }
   }
 
   /**

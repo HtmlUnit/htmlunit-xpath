@@ -55,7 +55,9 @@ public class ChildIterator extends LocPathIterator {
   /** {@inheritDoc} */
   @Override
   public int nextNode() {
-    if (m_foundLast) return DTM.NULL;
+    if (m_foundLast) {
+        return DTM.NULL;
+    }
 
     final int next;
 

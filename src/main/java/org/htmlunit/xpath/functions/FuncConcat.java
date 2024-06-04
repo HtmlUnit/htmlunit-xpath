@@ -35,7 +35,9 @@ public class FuncConcat extends FunctionMultiArgs {
     sb.append(m_arg0.execute(xctxt).str());
     sb.append(m_arg1.execute(xctxt).str());
 
-    if (null != arg2_) sb.append(arg2_.execute(xctxt).str());
+    if (null != arg2_) {
+        sb.append(arg2_.execute(xctxt).str());
+    }
 
     if (null != args_) {
       for (final org.htmlunit.xpath.Expression arg : args_) {
@@ -49,7 +51,9 @@ public class FuncConcat extends FunctionMultiArgs {
   /** {@inheritDoc} */
   @Override
   public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
-    if (argNum < 2) reportWrongNumberArgs();
+    if (argNum < 2) {
+        reportWrongNumberArgs();
+    }
   }
 
   /** {@inheritDoc} */

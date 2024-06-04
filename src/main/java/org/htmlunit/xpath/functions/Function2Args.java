@@ -36,18 +36,24 @@ public class Function2Args extends FunctionOneArg {
   public void setArg(final Expression arg, final int argNum) throws WrongNumberArgsException {
 
     // System.out.println("argNum: "+argNum);
-    if (argNum == 0) super.setArg(arg, argNum);
+    if (argNum == 0) {
+        super.setArg(arg, argNum);
+    }
     else if (1 == argNum) {
       m_arg1 = arg;
       arg.exprSetParent(this);
     }
-    else reportWrongNumberArgs();
+    else {
+        reportWrongNumberArgs();
+    }
   }
 
   /** {@inheritDoc} */
   @Override
   public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
-    if (argNum != 2) reportWrongNumberArgs();
+    if (argNum != 2) {
+        reportWrongNumberArgs();
+    }
   }
 
   /** {@inheritDoc} */
@@ -66,19 +72,27 @@ public class Function2Args extends FunctionOneArg {
   @Override
   public void callArgVisitors(final XPathVisitor visitor) {
     super.callArgVisitors(visitor);
-    if (null != m_arg1) m_arg1.callVisitors(visitor);
+    if (null != m_arg1) {
+        m_arg1.callVisitors(visitor);
+    }
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     if (null != m_arg1) {
       if ((null == ((Function2Args) expr).m_arg1)
-          || !m_arg1.deepEquals(((Function2Args) expr).m_arg1)) return false;
+          || !m_arg1.deepEquals(((Function2Args) expr).m_arg1)) {
+          return false;
+      }
     }
-    else if (null != ((Function2Args) expr).m_arg1) return false;
+    else if (null != ((Function2Args) expr).m_arg1) {
+        return false;
+    }
 
     return true;
   }

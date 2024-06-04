@@ -118,7 +118,9 @@ public class FilterExprWalker extends AxesWalker {
         result = (org.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
         result.setShouldCacheNodes(true);
       }
-      else result = (org.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
+      else {
+          result = (org.htmlunit.xpath.objects.XNodeSet) expr.execute(xctxt);
+      }
 
     }
     catch (final javax.xml.transform.TransformerException se) {
@@ -139,7 +141,9 @@ public class FilterExprWalker extends AxesWalker {
 
     final FilterExprWalker clone = (FilterExprWalker) super.clone();
 
-    if (null != m_exprObj) clone.m_exprObj = (XNodeSet) m_exprObj.clone();
+    if (null != m_exprObj) {
+        clone.m_exprObj = (XNodeSet) m_exprObj.clone();
+    }
 
     return clone;
   }
@@ -152,7 +156,9 @@ public class FilterExprWalker extends AxesWalker {
       if (getPredicateCount() > 0) {
         countProximityPosition(0);
 
-        if (!executePredicates(n, m_lpi.getXPathContext())) return DTMIterator.FILTER_SKIP;
+        if (!executePredicates(n, m_lpi.getXPathContext())) {
+            return DTMIterator.FILTER_SKIP;
+        }
       }
 
       return DTMIterator.FILTER_ACCEPT;
@@ -214,7 +220,9 @@ public class FilterExprWalker extends AxesWalker {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     final FilterExprWalker walker = (FilterExprWalker) expr;
     return m_expr.deepEquals(walker.m_expr);

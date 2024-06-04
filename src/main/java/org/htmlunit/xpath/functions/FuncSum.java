@@ -45,7 +45,9 @@ public class FuncSum extends FunctionOneArg {
       final DTM dtm = nodes.getDTM(pos);
       final XString s = dtm.getStringValue(pos);
 
-      if (null != s) sum += s.toDouble();
+      if (null != s) {
+          sum += s.toDouble();
+      }
     }
     nodes.detach();
 
