@@ -252,7 +252,9 @@ class Lexer {
           if (i > 0) {
             if (posOfNSSep == (i - 1)) {
               if (startSubstring != -1) {
-                if (startSubstring < (i - 1)) addToTokenQueue(pat.substring(startSubstring, i - 1));
+                if (startSubstring < (i - 1)) {
+                    addToTokenQueue(pat.substring(startSubstring, i - 1));
+                }
               }
 
               isNum = false;
@@ -476,7 +478,9 @@ class Lexer {
 
     if ((null != m_namespaceContext) && !prefix.equals("*") && !prefix.equals("xmlns")) {
       try {
-        if (prefix.length() > 0) uName = m_namespaceContext.getNamespaceForPrefix(prefix);
+        if (prefix.length() > 0) {
+            uName = m_namespaceContext.getNamespaceForPrefix(prefix);
+        }
         else {
 
           // Assume last was wildcard. This is not legal according
@@ -487,7 +491,9 @@ class Lexer {
 
             final String s = pat.substring(posOfNSSep + 1, posOfScan);
 
-            if (s.length() > 0) addToTokenQueue(s);
+            if (s.length() > 0) {
+                addToTokenQueue(s);
+            }
 
             return -1;
           }
@@ -508,7 +514,9 @@ class Lexer {
 
       final String s = pat.substring(posOfNSSep + 1, posOfScan);
 
-      if (s.length() > 0) addToTokenQueue(s);
+      if (s.length() > 0) {
+          addToTokenQueue(s);
+      }
     }
     else {
       m_processor.error(XPATHErrorResources.ER_PREFIX_MUST_RESOLVE, new String[] {prefix});

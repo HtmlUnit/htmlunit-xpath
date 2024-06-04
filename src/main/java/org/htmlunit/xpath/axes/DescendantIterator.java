@@ -63,7 +63,9 @@ public class DescendantIterator extends LocPathIterator {
       fromRoot = true;
       // Ugly code... will go away when AST work is done.
       final int nextStepPos = compiler.getNextStepPos(firstStepPos);
-      if (compiler.getOp(nextStepPos) == OpCodes.FROM_DESCENDANTS_OR_SELF) orSelf = true;
+      if (compiler.getOp(nextStepPos) == OpCodes.FROM_DESCENDANTS_OR_SELF) {
+          orSelf = true;
+      }
       // firstStepPos += 8;
     }
 
@@ -73,21 +75,37 @@ public class DescendantIterator extends LocPathIterator {
       nextStepPos = compiler.getNextStepPos(nextStepPos);
       if (nextStepPos > 0) {
         final int stepOp = compiler.getOp(nextStepPos);
-        if (OpCodes.ENDOP != stepOp) firstStepPos = nextStepPos;
-        else break;
+        if (OpCodes.ENDOP != stepOp) {
+            firstStepPos = nextStepPos;
+        }
+        else {
+            break;
+        }
       }
-      else break;
+      else {
+          break;
+      }
     }
 
     // Fix for http://nagoya.apache.org/bugzilla/show_bug.cgi?id=1336
-    if ((analysis & WalkerFactory.BIT_CHILD) != 0) orSelf = false;
+    if ((analysis & WalkerFactory.BIT_CHILD) != 0) {
+        orSelf = false;
+    }
 
     if (fromRoot) {
-      if (orSelf) m_axis = Axis.DESCENDANTSORSELFFROMROOT;
-      else m_axis = Axis.DESCENDANTSFROMROOT;
+      if (orSelf) {
+          m_axis = Axis.DESCENDANTSORSELFFROMROOT;
+      }
+      else {
+          m_axis = Axis.DESCENDANTSFROMROOT;
+      }
     }
-    else if (orSelf) m_axis = Axis.DESCENDANTORSELF;
-    else m_axis = Axis.DESCENDANT;
+    else if (orSelf) {
+        m_axis = Axis.DESCENDANTORSELF;
+    }
+    else {
+        m_axis = Axis.DESCENDANT;
+    }
 
     final int whatToShow = compiler.getWhatToShow(firstStepPos);
 
@@ -96,7 +114,9 @@ public class DescendantIterator extends LocPathIterator {
                 & (DTMFilter.SHOW_ATTRIBUTE
                     | DTMFilter.SHOW_ELEMENT
                     | DTMFilter.SHOW_PROCESSING_INSTRUCTION)))
-        || (whatToShow == DTMFilter.SHOW_ALL)) initNodeTest(whatToShow);
+        || (whatToShow == DTMFilter.SHOW_ALL)) {
+        initNodeTest(whatToShow);
+    }
     else {
       initNodeTest(
           whatToShow, compiler.getStepNS(firstStepPos), compiler.getStepLocalName(firstStepPos));
@@ -119,7 +139,9 @@ public class DescendantIterator extends LocPathIterator {
   /** {@inheritDoc} */
   @Override
   public int nextNode() {
-    if (m_foundLast) return DTM.NULL;
+    if (m_foundLast) {
+        return DTM.NULL;
+    }
 
     if (DTM.NULL == m_lastFetched) {
       resetProximityPositions();
@@ -190,7 +212,9 @@ public class DescendantIterator extends LocPathIterator {
   /** {@inheritDoc} */
   @Override
   public int asNode(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    if (getPredicateCount() > 0) return super.asNode(xctxt);
+    if (getPredicateCount() > 0) {
+        return super.asNode(xctxt);
+    }
 
     final int current = xctxt.getCurrentNode();
 
@@ -236,7 +260,9 @@ public class DescendantIterator extends LocPathIterator {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     return m_axis == ((DescendantIterator) expr).m_axis;
   }

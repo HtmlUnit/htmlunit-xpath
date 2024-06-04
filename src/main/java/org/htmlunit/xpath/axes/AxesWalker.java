@@ -80,7 +80,9 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
   AxesWalker cloneDeep(final WalkingIterator cloneOwner, final Vector<AxesWalker> cloneList)
       throws CloneNotSupportedException {
     AxesWalker clone = findClone(this, cloneList);
-    if (null != clone) return clone;
+    if (null != clone) {
+        return clone;
+    }
     clone = (AxesWalker) this.clone();
     clone.setLocPathIterator(cloneOwner);
     if (null != cloneList) {
@@ -88,17 +90,25 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
       cloneList.addElement(clone);
     }
 
-    if (wi().m_lastUsedWalker == this) cloneOwner.m_lastUsedWalker = clone;
+    if (wi().m_lastUsedWalker == this) {
+        cloneOwner.m_lastUsedWalker = clone;
+    }
 
-    if (null != m_nextWalker) clone.m_nextWalker = m_nextWalker.cloneDeep(cloneOwner, cloneList);
+    if (null != m_nextWalker) {
+        clone.m_nextWalker = m_nextWalker.cloneDeep(cloneOwner, cloneList);
+    }
 
     // If you don't check for the cloneList here, you'll go into an
     // recursive infinate loop.
     if (null != cloneList) {
-      if (null != m_prevWalker) clone.m_prevWalker = m_prevWalker.cloneDeep(cloneOwner, cloneList);
+      if (null != m_prevWalker) {
+          clone.m_prevWalker = m_prevWalker.cloneDeep(cloneOwner, cloneList);
+      }
     }
     else {
-      if (null != m_nextWalker) clone.m_nextWalker.m_prevWalker = clone;
+      if (null != m_nextWalker) {
+          clone.m_nextWalker.m_prevWalker = clone;
+      }
     }
     return clone;
   }
@@ -116,7 +126,9 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
       // First, look for clone on list.
       final int n = cloneList.size();
       for (int i = 0; i < n; i += 2) {
-        if (key == cloneList.elementAt(i)) return cloneList.elementAt(i + 1);
+        if (key == cloneList.elementAt(i)) {
+            return cloneList.elementAt(i + 1);
+        }
       }
     }
     return null;
@@ -210,7 +222,9 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    * @return the next node in document order on the axes, or null.
    */
   protected int getNextNode() {
-    if (m_foundLast) return DTM.NULL;
+    if (m_foundLast) {
+        return DTM.NULL;
+    }
 
     if (m_isFresh) {
       m_currentNode = m_traverser.first(m_root);
@@ -223,7 +237,9 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
       m_currentNode = m_traverser.next(m_root, m_currentNode);
     }
 
-    if (DTM.NULL == m_currentNode) this.m_foundLast = true;
+    if (DTM.NULL == m_currentNode) {
+        this.m_foundLast = true;
+    }
 
     return m_currentNode;
   }
@@ -242,7 +258,9 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
     AxesWalker walker = wi().getLastUsedWalker();
 
     while (true) {
-      if (null == walker) break;
+      if (null == walker) {
+          break;
+      }
 
       nextNode = walker.getNextNode();
 
@@ -356,7 +374,9 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     final AxesWalker walker = (AxesWalker) expr;
     return this.m_axis == walker.m_axis;

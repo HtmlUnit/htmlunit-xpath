@@ -611,10 +611,11 @@ public class Compiler extends OpMap {
           case OpCodes.FROM_DESCENDANTS_OR_SELF:
             return DTMFilter.SHOW_ALL;
           default:
-            if (getOp(0) == OpCodes.OP_MATCHPATTERN)
+            if (getOp(0) == OpCodes.OP_MATCHPATTERN) {
               return ~DTMFilter.SHOW_ATTRIBUTE
                   & ~DTMFilter.SHOW_DOCUMENT
                   & ~DTMFilter.SHOW_DOCUMENT_FRAGMENT;
+            }
             return ~DTMFilter.SHOW_ATTRIBUTE;
         }
       case OpCodes.NODETYPE_ROOT:

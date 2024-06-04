@@ -212,7 +212,9 @@ public class UnionPathIterator extends LocPathIterator
           final WalkingIterator iter = new WalkingIterator(compiler.getNamespaceContext());
           iter.exprSetParent(this);
 
-          if (compiler.getLocationPathDepth() <= 0) iter.setIsTopLevel(true);
+          if (compiler.getLocationPathDepth() <= 0) {
+              iter.setIsTopLevel(true);
+          }
 
           iter.m_firstWalker = new org.htmlunit.xpath.axes.FilterExprWalker(iter);
 
@@ -229,7 +231,9 @@ public class UnionPathIterator extends LocPathIterator
   /** {@inheritDoc} */
   @Override
   public int nextNode() {
-    if (m_foundLast) return DTM.NULL;
+    if (m_foundLast) {
+        return DTM.NULL;
+    }
 
     // Loop through the iterators getting the current fetched
     // node, and get the earliest occuring in document order
@@ -242,7 +246,9 @@ public class UnionPathIterator extends LocPathIterator
       for (int i = 0; i < n; i++) {
         final int node = iterators_[i].getCurrentNode();
 
-        if (DTM.NULL == node) continue;
+        if (DTM.NULL == node) {
+            continue;
+        }
         else if (DTM.NULL == earliestNode) {
           iteratorUsed = i;
           earliestNode = node;
@@ -269,7 +275,9 @@ public class UnionPathIterator extends LocPathIterator
 
         incrementCurrentPos();
       }
-      else m_foundLast = true;
+      else {
+          m_foundLast = true;
+      }
     }
 
     m_lastFetched = earliestNode;
@@ -317,17 +325,23 @@ public class UnionPathIterator extends LocPathIterator
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     final UnionPathIterator upi = (UnionPathIterator) expr;
 
     if (null != exprs_) {
       final int n = exprs_.length;
 
-      if ((null == upi.exprs_) || (upi.exprs_.length != n)) return false;
+      if ((null == upi.exprs_) || (upi.exprs_.length != n)) {
+          return false;
+      }
 
       for (int i = 0; i < n; i++) {
-        if (!exprs_[i].deepEquals(upi.exprs_[i])) return false;
+        if (!exprs_[i].deepEquals(upi.exprs_[i])) {
+            return false;
+        }
       }
     }
     else if (null != upi.exprs_) {

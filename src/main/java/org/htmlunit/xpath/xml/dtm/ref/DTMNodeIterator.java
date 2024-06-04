@@ -102,20 +102,28 @@ public class DTMNodeIterator implements org.w3c.dom.traversal.NodeIterator {
   /** {@inheritDoc} */
   @Override
   public Node nextNode() throws DOMException {
-    if (!valid) throw new DOMException(DOMException.INVALID_STATE_ERR, "");
+    if (!valid) {
+        throw new DOMException(DOMException.INVALID_STATE_ERR, "");
+    }
 
     final int handle = dtm_iter.nextNode();
-    if (handle == DTM.NULL) return null;
+    if (handle == DTM.NULL) {
+        return null;
+    }
     return dtm_iter.getDTM(handle).getNode(handle);
   }
 
   /** {@inheritDoc} */
   @Override
   public Node previousNode() {
-    if (!valid) throw new DOMException(DOMException.INVALID_STATE_ERR, "");
+    if (!valid) {
+        throw new DOMException(DOMException.INVALID_STATE_ERR, "");
+    }
 
     final int handle = dtm_iter.previousNode();
-    if (handle == DTM.NULL) return null;
+    if (handle == DTM.NULL) {
+        return null;
+    }
     return dtm_iter.getDTM(handle).getNode(handle);
   }
 }

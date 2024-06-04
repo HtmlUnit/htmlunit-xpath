@@ -44,13 +44,19 @@ public class FuncNamespace extends FunctionDef1Arg {
         // We check for those here. Fix inspired by Davanum Srinivas.
 
         s = dtm.getNodeName(context);
-        if (s.startsWith("xmlns:") || s.equals("xmlns")) return XString.EMPTYSTRING;
+        if (s.startsWith("xmlns:") || s.equals("xmlns")) {
+            return XString.EMPTYSTRING;
+        }
 
         s = dtm.getNamespaceURI(context);
       }
-      else return XString.EMPTYSTRING;
+      else {
+          return XString.EMPTYSTRING;
+      }
     }
-    else return XString.EMPTYSTRING;
+    else {
+        return XString.EMPTYSTRING;
+    }
 
     return (null == s) ? XString.EMPTYSTRING : new XString(s);
   }
