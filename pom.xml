@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.htmlunit</groupId>
   <artifactId>htmlunit-xpath</artifactId>
-  <version>4.2.0-SNAPSHOT</version>
+  <version>4.2.0</version>
   <name>HtmlUnit-XPath</name>
   <organization>
     <name>HtmlUnit</name>
@@ -23,10 +23,10 @@
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
 
-    <checkstyle.version>10.15.0</checkstyle.version>
-    <spotbugs.version>4.8.4</spotbugs.version>
+    <checkstyle.version>10.17.0</checkstyle.version>
+    <spotbugs.version>4.8.5</spotbugs.version>
     <pmd.version>6.55.0</pmd.version>
-    <dependencycheck.version>9.1.0</dependencycheck.version>
+    <dependencycheck.version>9.2.0</dependencycheck.version>
   </properties>
 
   <dependencies>
@@ -93,7 +93,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.6.3</version>
+        <version>3.7.0</version>
         <configuration>
           <quiet>true</quiet>
           <doclint>none</doclint>
@@ -143,7 +143,7 @@
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>4.8.4.0</version>
+        <version>4.8.5.0</version>
         <dependencies>
           <dependency>
             <groupId>com.github.spotbugs</groupId>
@@ -196,7 +196,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>3.4.1</version>
+        <version>3.5.0</version>
         <executions>
           <execution>
             <configuration>
