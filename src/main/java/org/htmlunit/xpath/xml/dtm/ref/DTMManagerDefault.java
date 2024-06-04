@@ -143,9 +143,10 @@ public class DTMManagerDefault extends DTMManager {
       final boolean incremental,
       final boolean doIndexing) {
 
-    if (DEBUG && null != source)
+    if (DEBUG && null != source) {
       System.out.println(
           "Starting " + (unique ? "UNIQUE" : "shared") + " source: " + source.getSystemId());
+    }
 
     final int dtmPos = getFirstFreeDTMID();
     final int documentID = dtmPos << IDENT_DTM_NODE_BITS;
@@ -167,9 +168,10 @@ public class DTMManagerDefault extends DTMManager {
   /** {@inheritDoc} */
   @Override
   public synchronized int getDTMHandleFromNode(final org.w3c.dom.Node node) {
-    if (null == node)
+    if (null == node) {
       throw new IllegalArgumentException(
           XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODE_NON_NULL, null));
+    }
 
     if (node instanceof org.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy) {
       return ((org.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy) node).getDTMNodeNumber();
@@ -199,7 +201,9 @@ public class DTMManagerDefault extends DTMManager {
     for (final DTM thisDTM : m_dtms) {
       if ((null != thisDTM) && thisDTM instanceof DOM2DTM) {
         final int handle = ((DOM2DTM) thisDTM).getHandleOfNode(node);
-        if (handle != DTM.NULL) return handle;
+        if (handle != DTM.NULL) {
+            return handle;
+        }
       }
     }
 
@@ -227,7 +231,7 @@ public class DTMManagerDefault extends DTMManager {
         (root.getNodeType() == Node.ATTRIBUTE_NODE)
             ? ((org.w3c.dom.Attr) root).getOwnerElement()
             : root.getParentNode();
-    for (; p != null; p = p.getParentNode()) {
+    for ( ; p != null; p = p.getParentNode()) {
       root = p;
     }
 
@@ -244,12 +248,14 @@ public class DTMManagerDefault extends DTMManager {
       handle = dtm.getHandleOfNode(((org.w3c.dom.Attr) node).getOwnerElement());
       handle = dtm.getAttributeNode(handle, node.getNamespaceURI(), node.getLocalName());
     }
-    else handle = dtm.getHandleOfNode(node);
+    else {
+        handle = dtm.getHandleOfNode(node);
+    }
 
-    if (DTM.NULL == handle)
+    if (DTM.NULL == handle) {
       throw new RuntimeException(
           XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_COULD_NOT_RESOLVE_NODE, null));
-
+    }
     return handle;
   }
 
@@ -261,7 +267,9 @@ public class DTMManagerDefault extends DTMManager {
       return m_dtms[nodeHandle >>> IDENT_DTM_NODE_BITS];
     }
     catch (final java.lang.ArrayIndexOutOfBoundsException e) {
-      if (nodeHandle == DTM.NULL) return null; // Accept as a special case.
+      if (nodeHandle == DTM.NULL) {
+          return null; // Accept as a special case.
+      }
       throw e; // Programming error; want to know about it.
     }
   }

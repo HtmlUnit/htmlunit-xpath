@@ -59,7 +59,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
     else {
       traverser = m_traversers[axis]; // Share/reuse existing traverser
 
-      if (traverser != null) return traverser;
+      if (traverser != null) {
+          return traverser;
+      }
     }
 
     switch (axis) { // Generate new traverser
@@ -151,7 +153,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       current = makeNodeIdentity(current);
 
       while (DTM.NULL != (current = m_parent.elementAt(current))) {
-        if (m_exptype.elementAt(current) == expandedTypeID) return makeNodeHandle(current);
+        if (m_exptype.elementAt(current) == expandedTypeID) {
+            return makeNodeHandle(current);
+        }
       }
 
       return NULL;
@@ -192,7 +196,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       current = (context == current) ? getFirstAttribute(context) : getNextAttribute(current);
 
       do {
-        if (getExpandedTypeID(current) == expandedTypeID) return current;
+        if (getExpandedTypeID(current) == expandedTypeID) {
+            return current;
+        }
       }
       while (DTM.NULL != (current = getNextAttribute(current)));
 
@@ -218,18 +224,22 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       final int nsIndex = m_expandedNameTable.getNamespaceID(expandedTypeID);
       final int lnIndex = m_expandedNameTable.getLocalNameID(expandedTypeID);
 
-      for (; ; ) {
+      for ( ;;) {
         final int nextID = findElementFromIndex(nsIndex, lnIndex, nextPotential);
 
         if (NOTPROCESSED != nextID) {
           int parentID = m_parent.elementAt(nextID);
 
           // Is it a child?
-          if (parentID == axisRoot) return nextID;
+          if (parentID == axisRoot) {
+              return nextID;
+          }
 
           // If the parent occured before the subtree root, then
           // we know it is past the child axis.
-          if (parentID < axisRoot) return NULL;
+          if (parentID < axisRoot) {
+              return NULL;
+          }
 
           // Otherwise, it could be a descendant below the subtree root
           // children, or it could be after the subtree root. So we have
@@ -238,7 +248,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
           // root, in which case we continue to look.
           do {
             parentID = m_parent.elementAt(parentID);
-            if (parentID < axisRoot) return NULL;
+            if (parentID < axisRoot) {
+                return NULL;
+            }
           }
           while (parentID > axisRoot);
 
@@ -249,7 +261,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
         nextNode();
 
-        if (!(m_nextsib.elementAt(axisRoot) == NOTPROCESSED)) break;
+        if (!(m_nextsib.elementAt(axisRoot) == NOTPROCESSED)) {
+            break;
+        }
       }
 
       return DTM.NULL;
@@ -284,7 +298,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       for (current = _nextsib(makeNodeIdentity(current));
           DTM.NULL != current;
           current = _nextsib(current)) {
-        if (m_exptype.elementAt(current) == expandedTypeID) return makeNodeHandle(current);
+        if (m_exptype.elementAt(current) == expandedTypeID) {
+            return makeNodeHandle(current);
+        }
       }
 
       return NULL;
@@ -349,12 +365,16 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         final int next = findElementFromIndex(nsIndex, lnIndex, nextPotential);
 
         if (NOTPROCESSED != next) {
-          if (isAfterAxis(axisRoot, next)) return NULL;
+          if (isAfterAxis(axisRoot, next)) {
+              return NULL;
+          }
 
           // System.out.println("Found node via index: "+first);
           return next;
         }
-        else if (axisHasBeenProcessed(axisRoot)) break;
+        else if (axisHasBeenProcessed(axisRoot)) {
+            break;
+        }
 
         nextNode();
       }
@@ -415,7 +435,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       // Yes. In ID space, compare to axisRoot's successor
       // (next-sib or ancestor's-next-sib). Probably shallower search.
       do {
-        if (identity == axisRoot) return false;
+        if (identity == axisRoot) {
+            return false;
+        }
         identity = m_parent.elementAt(identity);
       }
       while (identity >= axisRoot);
@@ -446,9 +468,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       for (current = makeNodeIdentity(current) + 1; ; current++) {
         final int type = _type(current); // may call nextNode()
 
-        if (!isDescendant(subtreeRootIdent, current)) return NULL;
+        if (!isDescendant(subtreeRootIdent, current)) {
+            return NULL;
+        }
 
-        if (ATTRIBUTE_NODE == type || NAMESPACE_NODE == type) continue;
+        if (ATTRIBUTE_NODE == type || NAMESPACE_NODE == type) {
+            continue;
+        }
 
         return makeNodeHandle(current); // make handle.
       }
@@ -466,12 +492,16 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         return makeNodeHandle(getNextIndexed(subtreeRootIdent, current, expandedTypeID));
       }
 
-      for (; ; current++) {
+      for ( ; ; current++) {
         final int exptype = _exptype(current); // may call nextNode()
 
-        if (!isDescendant(subtreeRootIdent, current)) return NULL;
+        if (!isDescendant(subtreeRootIdent, current)) {
+            return NULL;
+        }
 
-        if (exptype != expandedTypeID) continue;
+        if (exptype != expandedTypeID) {
+            continue;
+        }
 
         return makeNodeHandle(current); // make handle.
       }
@@ -511,7 +541,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         // is quite a kluge...
         _exptype(current); // make sure it's here.
 
-        if (!isDescendant(subtreeRootIdent, current)) return NULL;
+        if (!isDescendant(subtreeRootIdent, current)) {
+            return NULL;
+        }
 
         return makeNodeHandle(current); // make handle.
       }
@@ -534,13 +566,17 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         context = _parent(context);
         first = _firstch(context);
 
-        if (NULL != first) return makeNodeHandle(first);
+        if (NULL != first) {
+            return makeNodeHandle(first);
+        }
       }
 
       do {
         first = _nextsib(context);
 
-        if (NULL == first) context = _parent(context);
+        if (NULL == first) {
+            context = _parent(context);
+        }
       }
       while (NULL == first && NULL != context);
 
@@ -560,7 +596,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         first = getFirstChild(context);
 
         if (NULL != first) {
-          if (getExpandedTypeID(first) == expandedTypeID) return first;
+          if (getExpandedTypeID(first) == expandedTypeID) {
+              return first;
+          }
           return next(context, first, expandedTypeID);
         }
       }
@@ -568,9 +606,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       do {
         first = getNextSibling(context);
 
-        if (NULL == first) context = getParent(context);
+        if (NULL == first) {
+            context = getParent(context);
+        }
         else {
-          if (getExpandedTypeID(first) == expandedTypeID) return first;
+          if (getExpandedTypeID(first) == expandedTypeID) {
+              return first;
+          }
           return next(context, first, expandedTypeID);
         }
       }
@@ -591,9 +633,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         // %REVIEW% Are we using handles or indexes?
         final int type = _type(current); // may call nextNode()
 
-        if (NULL == type) return NULL;
+        if (NULL == type) {
+            return NULL;
+        }
 
-        if (ATTRIBUTE_NODE == type || NAMESPACE_NODE == type) continue;
+        if (ATTRIBUTE_NODE == type || NAMESPACE_NODE == type) {
+            continue;
+        }
 
         return makeNodeHandle(current); // make handle.
       }
@@ -610,9 +656,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
         final int etype = _exptype(current); // may call nextNode()
 
-        if (NULL == etype) return NULL;
+        if (NULL == etype) {
+            return NULL;
+        }
 
-        if (etype != expandedTypeID) continue;
+        if (etype != expandedTypeID) {
+            continue;
+        }
 
         return makeNodeHandle(current); // make handle.
       }
@@ -633,7 +683,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
     public int next(final int context, int current, final int expandedTypeID) {
 
       while (DTM.NULL != (current = getNextSibling(current))) {
-        if (getExpandedTypeID(current) == expandedTypeID) return current;
+        if (getExpandedTypeID(current) == expandedTypeID) {
+            return current;
+        }
       }
 
       return NULL;
@@ -662,7 +714,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
               : getNextNamespaceNode(context, current, false);
 
       do {
-        if (getExpandedTypeID(current) == expandedTypeID) return current;
+        if (getExpandedTypeID(current) == expandedTypeID) {
+            return current;
+        }
       }
       while (DTM.NULL != (current = getNextNamespaceNode(context, current, false)));
 
@@ -692,7 +746,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
               : getNextNamespaceNode(context, current, true);
 
       do {
-        if (getExpandedTypeID(current) == expandedTypeID) return current;
+        if (getExpandedTypeID(current) == expandedTypeID) {
+            return current;
+        }
       }
       while (DTM.NULL != (current = getNextNamespaceNode(context, current, true)));
 
@@ -715,7 +771,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       current = makeNodeIdentity(current);
 
       while (NULL != (current = m_parent.elementAt(current))) {
-        if (m_exptype.elementAt(current) == expandedTypeID) return makeNodeHandle(current);
+        if (m_exptype.elementAt(current) == expandedTypeID) {
+            return makeNodeHandle(current);
+        }
       }
 
       return NULL;
@@ -754,7 +812,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       for (contextIdent = m_parent.elementAt(contextIdent);
           DTM.NULL != contextIdent;
           contextIdent = m_parent.elementAt(contextIdent)) {
-        if (contextIdent == currentIdent) return true;
+        if (contextIdent == currentIdent) {
+            return true;
+        }
       }
 
       return false;
@@ -771,7 +831,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
         if (ATTRIBUTE_NODE == type
             || NAMESPACE_NODE == type
-            || isAncestor(subtreeRootIdent, current)) continue;
+            || isAncestor(subtreeRootIdent, current)) {
+            continue;
+        }
 
         return makeNodeHandle(current); // make handle.
       }
@@ -788,7 +850,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--) {
         final int exptype = m_exptype.elementAt(current);
 
-        if (exptype != expandedTypeID || isAncestor(subtreeRootIdent, current)) continue;
+        if (exptype != expandedTypeID || isAncestor(subtreeRootIdent, current)) {
+            continue;
+        }
 
         return makeNodeHandle(current); // make handle.
       }
@@ -809,7 +873,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--) {
         final short type = _type(current);
 
-        if (ATTRIBUTE_NODE == type || NAMESPACE_NODE == type) continue;
+        if (ATTRIBUTE_NODE == type || NAMESPACE_NODE == type) {
+            continue;
+        }
 
         return makeNodeHandle(current); // make handle.
       }
@@ -826,7 +892,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       for (current = makeNodeIdentity(current) - 1; current >= 0; current--) {
         final int exptype = m_exptype.elementAt(current);
 
-        if (exptype != expandedTypeID) continue;
+        if (exptype != expandedTypeID) {
+            continue;
+        }
 
         return makeNodeHandle(current); // make handle.
       }
@@ -849,7 +917,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
     public int next(final int context, int current, final int expandedTypeID) {
 
       while (DTM.NULL != (current = getPreviousSibling(current))) {
-        if (getExpandedTypeID(current) == expandedTypeID) return current;
+        if (getExpandedTypeID(current) == expandedTypeID) {
+            return current;
+        }
       }
 
       return NULL;
@@ -910,7 +980,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       for (current = makeNodeIdentity(current) + 1; ; current++) {
         // Kluge test: Just make sure +1 yielded a real node
         final int type = _type(current); // may call nextNode()
-        if (type == NULL) return NULL;
+        if (type == NULL) {
+            return NULL;
+        }
 
         return makeNodeHandle(current); // make handle.
       }
@@ -925,9 +997,13 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
       for (current = makeNodeIdentity(current) + 1; ; current++) {
         final int exptype = _exptype(current); // may call nextNode()
 
-        if (exptype == NULL) return NULL;
+        if (exptype == NULL) {
+            return NULL;
+        }
 
-        if (exptype != expandedTypeID) continue;
+        if (exptype != expandedTypeID) {
+            continue;
+        }
 
         return makeNodeHandle(current); // make handle.
       }

@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.htmlunit</groupId>
   <artifactId>htmlunit-xpath</artifactId>
-  <version>4.1.0</version>
+  <version>4.2.0-SNAPSHOT</version>
   <name>HtmlUnit-XPath</name>
   <organization>
     <name>HtmlUnit</name>
@@ -183,6 +183,7 @@
         <version>${dependencycheck.version}</version>
         <configuration>
           <failBuildOnCVSS>0</failBuildOnCVSS>
+          <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
         </configuration>
         <executions>
           <execution>

@@ -130,7 +130,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
       if (_isRestartable) {
         _startNode = node;
         _currentNode = (node == DTM.NULL) ? DTM.NULL : _firstch(makeNodeIdentity(node));
@@ -162,7 +164,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
       if (_isRestartable) {
         _startNode = node;
         _currentNode = getParent(node);
@@ -199,7 +203,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
       if (_isRestartable) {
         _startNode = node;
         _currentNode = getFirstNamespaceNode(node, true);
@@ -214,7 +220,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
       final int node = _currentNode;
 
-      if (DTM.NULL != node) _currentNode = getNextNamespaceNode(_startNode, node, true);
+      if (DTM.NULL != node) {
+          _currentNode = getNextNamespaceNode(_startNode, node, true);
+      }
 
       return returnNode(node);
     }
@@ -244,7 +252,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     /** {@inheritDoc} */
     @Override
     public int next() {
-      if (_startNode == _currentNode) return NULL;
+      if (_startNode == _currentNode) {
+          return NULL;
+      }
 
       _currentNode = _startNode;
 
@@ -259,7 +269,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
       if (_isRestartable) {
         _startNode = node;
         _currentNode = makeNodeIdentity(node);
@@ -285,7 +297,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
       if (_isRestartable) {
         _startNode = node;
         _currentNode = getFirstAttributeIdentity(makeNodeIdentity(node));
@@ -325,7 +339,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
       if (_isRestartable) {
         _startNode = node;
         node = _startNodeID = makeNodeIdentity(node);
@@ -343,8 +359,12 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         else {
           // Be careful to handle the Document node properly
           _currentNode = _parent(node);
-          if (NULL != _currentNode) _currentNode = _firstch(_currentNode);
-          else _currentNode = node;
+          if (NULL != _currentNode) {
+              _currentNode = _firstch(_currentNode);
+          }
+          else {
+              _currentNode = node;
+          }
         }
 
         resetPosition();
@@ -413,14 +433,18 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
       if (_isRestartable) {
         node = makeNodeIdentity(node);
 
         // iterator is not a clone
         int parent, index;
 
-        if (_type(node) == DTM.ATTRIBUTE_NODE) node = _parent(node);
+        if (_type(node) == DTM.ATTRIBUTE_NODE) {
+            node = _parent(node);
+        }
 
         _startNode = node;
         _stack[index = 0] = node;
@@ -434,7 +458,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
           }
           _stack[index] = parent;
         }
-        if (index > 0) --index; // Pop actual root node (if not start) back off the stack
+        if (index > 0) {
+            --index; // Pop actual root node (if not start) back off the stack
+        }
 
         _currentNode = _stack[index]; // Last parent before root node
 
@@ -452,10 +478,13 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
       // the tail-recursion.
       for (++_currentNode; _sp >= 0; ++_currentNode) {
         if (_currentNode < _stack[_sp]) {
-          if (_type(_currentNode) != ATTRIBUTE_NODE && _type(_currentNode) != NAMESPACE_NODE)
+          if (_type(_currentNode) != ATTRIBUTE_NODE && _type(_currentNode) != NAMESPACE_NODE) {
             return returnNode(makeNodeHandle(_currentNode));
+          }
         }
-        else --_sp;
+        else {
+            --_sp;
+        }
       }
       return NULL;
     }
@@ -484,7 +513,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
       if (_isRestartable) {
         _startNode = node;
         _currentNode = m_traverser.first(node);
@@ -545,7 +576,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
 
       if (_isRestartable) {
         int nodeID = makeNodeIdentity(node);
@@ -602,12 +635,16 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
       if (_isRestartable) {
         node = makeNodeIdentity(node);
         _startNode = node;
 
-        if (_includeSelf) node--;
+        if (_includeSelf) {
+            node--;
+        }
 
         _currentNode = node;
 
@@ -638,8 +675,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
         return NULL;
       }
 
-      if (_includeSelf && (_currentNode + 1) == _startNode)
+      if (_includeSelf && (_currentNode + 1) == _startNode) {
         return returnNode(makeNodeHandle(++_currentNode)); // | m_dtmIdent);
+      }
 
       int node = _currentNode;
       int type;
@@ -699,7 +737,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public void setStartNode(int node) {
       // %HZ%: Added reference to DTMDefaultBase.ROOTNODE back in, temporarily
-      if (node == DTMDefaultBase.ROOTNODE) node = getDocument();
+      if (node == DTMDefaultBase.ROOTNODE) {
+          node = getDocument();
+      }
       if (_isConstant) {
         _currentNode = _startNode;
 

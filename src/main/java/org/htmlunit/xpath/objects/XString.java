@@ -428,7 +428,7 @@ public class XString extends XObject {
     int d = s;
     boolean pres = false;
 
-    for (; s < len; s++) {
+    for ( ; s < len; s++) {
       final char c = buf[s];
 
       if (isSpace(c)) {

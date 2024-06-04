@@ -148,8 +148,9 @@ public class NodeVector implements Cloneable {
    * @return Node at specified index
    */
   public int elementAt(final int i) {
-
-    if (null == m_map) return DTM.NULL;
+    if (null == m_map) {
+        return DTM.NULL;
+    }
 
     return m_map[i];
   }
@@ -161,13 +162,16 @@ public class NodeVector implements Cloneable {
    * @return True if the given node was found.
    */
   public boolean contains(final int s) {
-
-    if (null == m_map) return false;
+    if (null == m_map) {
+        return false;
+    }
 
     for (int i = 0; i < m_firstFree; i++) {
       final int node = m_map[i];
 
-      if (node == s) return true;
+      if (node == s) {
+          return true;
+      }
     }
 
     return false;
@@ -183,13 +187,16 @@ public class NodeVector implements Cloneable {
    *     index or later in the vector; returns -1 if the object is not found.
    */
   public int indexOf(final int elem, final int index) {
-
-    if (null == m_map) return -1;
+    if (null == m_map) {
+        return -1;
+    }
 
     for (int i = index; i < m_firstFree; i++) {
       final int node = m_map[i];
 
-      if (node == elem) return i;
+      if (node == elem) {
+          return i;
+      }
     }
 
     return -1;
@@ -204,13 +211,16 @@ public class NodeVector implements Cloneable {
    *     index or later in the vector; returns -1 if the object is not found.
    */
   public int indexOf(final int elem) {
-
-    if (null == m_map) return -1;
+    if (null == m_map) {
+        return -1;
+    }
 
     for (int i = 0; i < m_firstFree; i++) {
       final int node = m_map[i];
 
-      if (node == elem) return i;
+      if (node == elem) {
+          return i;
+      }
     }
 
     return -1;

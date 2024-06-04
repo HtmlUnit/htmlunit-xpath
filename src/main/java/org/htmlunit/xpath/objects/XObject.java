@@ -260,7 +260,9 @@ public class XObject extends Expression {
     // nodeset function. Because the arguments
     // are backwards, we call the opposite comparison
     // function.
-    if (obj2.getType() == XObject.CLASS_NODESET) return obj2.greaterThan(this);
+    if (obj2.getType() == XObject.CLASS_NODESET) {
+        return obj2.greaterThan(this);
+    }
 
     return this.num() < obj2.num();
   }
@@ -280,7 +282,9 @@ public class XObject extends Expression {
     // nodeset function. Because the arguments
     // are backwards, we call the opposite comparison
     // function.
-    if (obj2.getType() == XObject.CLASS_NODESET) return obj2.greaterThanOrEqual(this);
+    if (obj2.getType() == XObject.CLASS_NODESET) {
+        return obj2.greaterThanOrEqual(this);
+    }
 
     return this.num() <= obj2.num();
   }
@@ -299,7 +303,9 @@ public class XObject extends Expression {
     // nodeset function. Because the arguments
     // are backwards, we call the opposite comparison
     // function.
-    if (obj2.getType() == XObject.CLASS_NODESET) return obj2.lessThan(this);
+    if (obj2.getType() == XObject.CLASS_NODESET) {
+        return obj2.lessThan(this);
+    }
 
     return this.num() > obj2.num();
   }
@@ -319,7 +325,9 @@ public class XObject extends Expression {
     // nodeset function. Because the arguments
     // are backwards, we call the opposite comparison
     // function.
-    if (obj2.getType() == XObject.CLASS_NODESET) return obj2.lessThanOrEqual(this);
+    if (obj2.getType() == XObject.CLASS_NODESET) {
+        return obj2.lessThanOrEqual(this);
+    }
 
     return this.num() >= obj2.num();
   }
@@ -335,7 +343,9 @@ public class XObject extends Expression {
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
     // nodeset function.
-    if (obj2.getType() == XObject.CLASS_NODESET) return obj2.equals(this);
+    if (obj2.getType() == XObject.CLASS_NODESET) {
+        return obj2.equals(this);
+    }
 
     if (null != m_obj) {
       return m_obj.equals(obj2.m_obj);
@@ -355,7 +365,9 @@ public class XObject extends Expression {
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
     // nodeset function.
-    if (obj2.getType() == XObject.CLASS_NODESET) return obj2.notEquals(this);
+    if (obj2.getType() == XObject.CLASS_NODESET) {
+        return obj2.notEquals(this);
+    }
 
     return !equals(obj2);
   }
@@ -396,7 +408,9 @@ public class XObject extends Expression {
     // If equals at the expression level calls deepEquals, I think we're
     // still safe from infinite recursion since this object overrides
     // equals. I hope.
-    if (!isSameClass(expr) || !this.equals((XObject) expr)) return false;
+    if (!isSameClass(expr) || !this.equals((XObject) expr)) {
+        return false;
+    }
 
     return true;
   }

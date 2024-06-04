@@ -72,8 +72,8 @@ public class SuballocatedIntVector {
    */
   public SuballocatedIntVector(int blocksize, final int numblocks) {
     // m_blocksize = blocksize;
-    for (m_SHIFT = 0; 0 != (blocksize >>>= 1); ++m_SHIFT)
-      ;
+    for (m_SHIFT = 0; 0 != (blocksize >>>= 1); ++m_SHIFT) {
+    }
     m_blocksize = 1 << m_SHIFT;
     m_MASK = m_blocksize - 1;
     m_numblocks = numblocks;
@@ -134,7 +134,9 @@ public class SuballocatedIntVector {
         m_map = newMap;
       }
       int[] block = m_map[index];
-      if (null == block) block = m_map[index] = new int[m_blocksize];
+      if (null == block) {
+          block = m_map[index] = new int[m_blocksize];
+      }
       block[offset] = value;
 
       // Cache the current row of m_map. Next m_blocksize-1
@@ -157,7 +159,9 @@ public class SuballocatedIntVector {
    * @param at Index of where to set the object
    */
   public void setElementAt(final int value, final int at) {
-    if (at < m_blocksize) m_map0[at] = value;
+    if (at < m_blocksize) {
+        m_map0[at] = value;
+    }
     else {
       final int index = at >>> m_SHIFT;
       final int offset = at & m_MASK;
@@ -170,11 +174,15 @@ public class SuballocatedIntVector {
       }
 
       int[] block = m_map[index];
-      if (null == block) block = m_map[index] = new int[m_blocksize];
+      if (null == block) {
+          block = m_map[index] = new int[m_blocksize];
+      }
       block[offset] = value;
     }
 
-    if (at >= m_firstFree) m_firstFree = at + 1;
+    if (at >= m_firstFree) {
+        m_firstFree = at + 1;
+    }
   }
 
   /**
@@ -194,7 +202,9 @@ public class SuballocatedIntVector {
    */
   public int elementAt(final int i) {
     // This is actually a significant optimization!
-    if (i < m_blocksize) return m_map0[i];
+    if (i < m_blocksize) {
+        return m_map0[i];
+    }
 
     return m_map[i >>> m_SHIFT][i & m_MASK];
   }
@@ -209,25 +219,34 @@ public class SuballocatedIntVector {
    *     index or later in the vector; returns -1 if the object is not found.
    */
   public int indexOf(final int elem, final int index) {
-    if (index >= m_firstFree) return -1;
+    if (index >= m_firstFree) {
+        return -1;
+    }
 
     int bindex = index >>> m_SHIFT;
     int boffset = index & m_MASK;
     final int maxindex = m_firstFree >>> m_SHIFT;
     int[] block;
 
-    for (; bindex < maxindex; ++bindex) {
+    for ( ; bindex < maxindex; ++bindex) {
       block = m_map[bindex];
-      if (block != null)
-        for (int offset = boffset; offset < m_blocksize; ++offset)
-          if (block[offset] == elem) return offset + bindex * m_blocksize;
+      if (block != null) {
+          for (int offset = boffset; offset < m_blocksize; ++offset) {
+              if (block[offset] == elem) {
+                  return offset + bindex * m_blocksize;
+              }
+          }
+      }
       boffset = 0; // after first
     }
     // Last block may need to stop before end
     final int maxoffset = m_firstFree & m_MASK;
     block = m_map[maxindex];
-    for (int offset = boffset; offset < maxoffset; ++offset)
-      if (block[offset] == elem) return offset + maxindex * m_blocksize;
+    for (int offset = boffset; offset < maxoffset; ++offset) {
+      if (block[offset] == elem) {
+          return offset + maxindex * m_blocksize;
+      }
+    }
 
     return -1;
   }
