@@ -191,23 +191,39 @@ public class NodeTest extends Expression {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!isSameClass(expr)) return false;
+    if (!isSameClass(expr)) {
+        return false;
+    }
 
     final NodeTest nt = (NodeTest) expr;
 
     if (null != nt.m_name) {
-      if (null == m_name) return false;
-      else if (!nt.m_name.equals(m_name)) return false;
+      if (null == m_name) {
+        return false;
     }
-    else if (null != m_name) return false;
+    else if (!nt.m_name.equals(m_name)) {
+        return false;
+    }
+    }
+    else if (null != m_name) {
+        return false;
+    }
 
     if (null != nt.m_namespace) {
-      if (null == m_namespace) return false;
-      else if (!nt.m_namespace.equals(m_namespace)) return false;
+      if (null == m_namespace) {
+        return false;
     }
-    else if (null != m_namespace) return false;
+    else if (!nt.m_namespace.equals(m_namespace)) {
+        return false;
+    }
+    }
+    else if (null != m_namespace) {
+        return false;
+    }
 
-    if (m_whatToShow != nt.m_whatToShow) return false;
+    if (m_whatToShow != nt.m_whatToShow) {
+        return false;
+    }
 
     return m_isTotallyWild == nt.m_isTotallyWild;
   }
@@ -274,11 +290,18 @@ public class NodeTest extends Expression {
   /** Static calc of match score. */
   protected void calcScore() {
 
-    if ((m_namespace == null) && (m_name == null)) m_score = SCORE_NODETEST;
-    else if (((m_namespace == WILD) || (m_namespace == null)) && (m_name == WILD))
-      m_score = SCORE_NODETEST;
-    else if ((m_namespace != WILD) && (m_name == WILD)) m_score = SCORE_NSWILD;
-    else m_score = SCORE_QNAME;
+    if ((m_namespace == null) && (m_name == null)) {
+        m_score = SCORE_NODETEST;
+    }
+    else if (((m_namespace == WILD) || (m_namespace == null)) && (m_name == WILD)) {
+        m_score = SCORE_NODETEST;
+    }
+    else if ((m_namespace != WILD) && (m_name == WILD)) {
+        m_score = SCORE_NSWILD;
+    }
+    else {
+        m_score = SCORE_QNAME;
+    }
 
     m_isTotallyWild = m_namespace == null && m_name == WILD;
   }
@@ -294,32 +317,57 @@ public class NodeTest extends Expression {
    */
   public static int getNodeTypeTest(final int whatToShow) {
     // %REVIEW% Is there a better way?
-    if (0 != (whatToShow & DTMFilter.SHOW_ELEMENT)) return DTM.ELEMENT_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_ELEMENT)) {
+        return DTM.ELEMENT_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_ATTRIBUTE)) return DTM.ATTRIBUTE_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_ATTRIBUTE)) {
+        return DTM.ATTRIBUTE_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_TEXT)) return DTM.TEXT_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_TEXT)) {
+        return DTM.TEXT_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT)) return DTM.DOCUMENT_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT)) {
+        return DTM.DOCUMENT_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT_FRAGMENT)) return DTM.DOCUMENT_FRAGMENT_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT_FRAGMENT)) {
+        return DTM.DOCUMENT_FRAGMENT_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_NAMESPACE)) return DTM.NAMESPACE_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_NAMESPACE)) {
+        return DTM.NAMESPACE_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_COMMENT)) return DTM.COMMENT_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_COMMENT)) {
+        return DTM.COMMENT_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_PROCESSING_INSTRUCTION))
-      return DTM.PROCESSING_INSTRUCTION_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_PROCESSING_INSTRUCTION)) {
+        return DTM.PROCESSING_INSTRUCTION_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT_TYPE)) return DTM.DOCUMENT_TYPE_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_DOCUMENT_TYPE)) {
+        return DTM.DOCUMENT_TYPE_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_ENTITY)) return DTM.ENTITY_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_ENTITY)) {
+        return DTM.ENTITY_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_ENTITY_REFERENCE)) return DTM.ENTITY_REFERENCE_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_ENTITY_REFERENCE)) {
+        return DTM.ENTITY_REFERENCE_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_NOTATION)) return DTM.NOTATION_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_NOTATION)) {
+        return DTM.NOTATION_NODE;
+    }
 
-    if (0 != (whatToShow & DTMFilter.SHOW_CDATA_SECTION)) return DTM.CDATA_SECTION_NODE;
+    if (0 != (whatToShow & DTMFilter.SHOW_CDATA_SECTION)) {
+        return DTM.CDATA_SECTION_NODE;
+    }
 
     return 0;
   }
@@ -357,7 +405,9 @@ public class NodeTest extends Expression {
     final DTM dtm = xctxt.getDTM(context);
     final short nodeType = dtm.getNodeType(context);
 
-    if (m_whatToShow == DTMFilter.SHOW_ALL) return m_score;
+    if (m_whatToShow == DTMFilter.SHOW_ALL) {
+        return m_score;
+    }
 
     final int nodeBit = m_whatToShow & (0x00000001 << (nodeType - 1));
 
@@ -409,7 +459,9 @@ public class NodeTest extends Expression {
       final XPathContext xctxt, final int context, final DTM dtm, final int expType)
       throws javax.xml.transform.TransformerException {
 
-    if (m_whatToShow == DTMFilter.SHOW_ALL) return m_score;
+    if (m_whatToShow == DTMFilter.SHOW_ALL) {
+        return m_score;
+    }
 
     final int nodeBit = m_whatToShow & (0x00000001 << ((dtm.getNodeType(context)) - 1));
 

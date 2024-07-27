@@ -36,7 +36,9 @@ public abstract class UnaryOperation extends Expression {
   @Override
   public boolean canTraverseOutsideSubtree() {
 
-    if (null != m_right && m_right.canTraverseOutsideSubtree()) return true;
+    if (null != m_right && m_right.canTraverseOutsideSubtree()) {
+        return true;
+    }
 
     return false;
   }
@@ -78,7 +80,9 @@ public abstract class UnaryOperation extends Expression {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!isSameClass(expr) || !m_right.deepEquals(((UnaryOperation) expr).m_right)) return false;
+    if (!isSameClass(expr) || !m_right.deepEquals(((UnaryOperation) expr).m_right)) {
+        return false;
+    }
 
     return true;
   }

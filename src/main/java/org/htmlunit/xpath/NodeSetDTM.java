@@ -153,9 +153,10 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
   @Override
   public int previousNode() {
 
-    if (!m_cacheNodes)
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null));
+    if (!m_cacheNodes) {
+        throw new RuntimeException(
+              XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_ITERATE, null));
+    }
 
     if ((m_next - 1) > 0) {
       m_next--;
@@ -179,12 +180,17 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
   @Override
   public void runTo(final int index) {
 
-    if (!m_cacheNodes)
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null));
+    if (!m_cacheNodes) {
+        throw new RuntimeException(
+              XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null));
+    }
 
-    if ((index >= 0) && (m_next < m_firstFree)) m_next = index;
-    else m_next = m_firstFree - 1;
+    if ((index >= 0) && (m_next < m_firstFree)) {
+        m_next = index;
+    }
+    else {
+        m_next = m_firstFree - 1;
+    }
   }
 
   /** {@inheritDoc} */
@@ -282,7 +288,9 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
         }
       }
 
-      if (!foundit) addElement(node);
+      if (!foundit) {
+        addElement(node);
+    }
     }
 
     // checkDups();
@@ -348,9 +356,10 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
   @Override
   public void setCurrentPos(final int i) {
 
-    if (!m_cacheNodes)
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null));
+    if (!m_cacheNodes) {
+        throw new RuntimeException(
+              XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODESETDTM_CANNOT_INDEX, null));
+    }
 
     m_next = i;
   }
@@ -359,8 +368,9 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
   @Override
   public int getCurrentNode() {
 
-    if (!m_cacheNodes)
-      throw new RuntimeException("This NodeSetDTM can not do indexing or counting functions!");
+    if (!m_cacheNodes) {
+        throw new RuntimeException("This NodeSetDTM can not do indexing or counting functions!");
+    }
 
     final int saved = m_next;
     // because nextNode always increments
@@ -386,10 +396,11 @@ public class NodeSetDTM extends NodeVector implements DTMIterator, Cloneable {
   @Override
   public void setShouldCacheNodes(final boolean b) {
 
-    if (!isFresh())
-      throw new RuntimeException(
-          XPATHMessages.createXPATHMessage(
-              XPATHErrorResources.ER_CANNOT_CALL_SETSHOULDCACHENODE, null));
+    if (!isFresh()) {
+        throw new RuntimeException(
+              XPATHMessages.createXPATHMessage(
+                  XPATHErrorResources.ER_CANNOT_CALL_SETSHOULDCACHENODE, null));
+    }
     m_cacheNodes = b;
   }
 

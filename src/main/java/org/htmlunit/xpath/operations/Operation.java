@@ -44,7 +44,9 @@ public class Operation extends Expression {
   public boolean canTraverseOutsideSubtree() {
 
     if ((null != m_left && m_left.canTraverseOutsideSubtree())
-        || (null != m_right && m_right.canTraverseOutsideSubtree())) return true;
+        || (null != m_right && m_right.canTraverseOutsideSubtree())) {
+        return true;
+    }
 
     return false;
   }
@@ -102,7 +104,9 @@ public class Operation extends Expression {
   public boolean deepEquals(final Expression expr) {
     if (!isSameClass(expr)
         || !m_left.deepEquals(((Operation) expr).m_left)
-        || !m_right.deepEquals(((Operation) expr).m_right)) return false;
+        || !m_right.deepEquals(((Operation) expr).m_right)) {
+        return false;
+    }
 
     return true;
   }

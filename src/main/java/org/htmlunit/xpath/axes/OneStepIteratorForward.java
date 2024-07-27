@@ -73,7 +73,9 @@ public class OneStepIteratorForward extends ChildTestIterator {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     return m_axis == ((OneStepIteratorForward) expr).m_axis;
   }

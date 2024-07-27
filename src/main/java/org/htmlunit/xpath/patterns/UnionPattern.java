@@ -39,7 +39,9 @@ public class UnionPattern extends Expression {
   public boolean canTraverseOutsideSubtree() {
     if (null != patterns_) {
       for (final StepPattern pattern : patterns_) {
-        if (pattern.canTraverseOutsideSubtree()) return true;
+        if (pattern.canTraverseOutsideSubtree()) {
+            return true;
+        }
       }
     }
     return false;
@@ -68,8 +70,12 @@ public class UnionPattern extends Expression {
       final XObject score = pattern.execute(xctxt);
 
       if (score != NodeTest.SCORE_NONE) {
-        if (null == bestScore) bestScore = score;
-        else if (score.num() > bestScore.num()) bestScore = score;
+        if (null == bestScore) {
+            bestScore = score;
+        }
+        else if (score.num() > bestScore.num()) {
+            bestScore = score;
+        }
       }
     }
 
@@ -94,19 +100,27 @@ public class UnionPattern extends Expression {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!isSameClass(expr)) return false;
+    if (!isSameClass(expr)) {
+        return false;
+    }
 
     final UnionPattern up = (UnionPattern) expr;
 
     if (null != patterns_) {
       final int n = patterns_.length;
-      if ((null == up.patterns_) || (up.patterns_.length != n)) return false;
+      if ((null == up.patterns_) || (up.patterns_.length != n)) {
+          return false;
+      }
 
       for (int i = 0; i < n; i++) {
-        if (!patterns_[i].deepEquals(up.patterns_[i])) return false;
+        if (!patterns_[i].deepEquals(up.patterns_[i])) {
+            return false;
+        }
       }
     }
-    else if (up.patterns_ != null) return false;
+    else if (up.patterns_ != null) {
+        return false;
+    }
 
     return true;
   }

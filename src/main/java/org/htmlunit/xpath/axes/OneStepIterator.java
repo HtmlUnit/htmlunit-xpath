@@ -57,14 +57,18 @@ public class OneStepIterator extends ChildTestIterator {
   @Override
   public void setRoot(final int context, final Object environment) {
     super.setRoot(context, environment);
-    if (m_axis > -1) m_iterator = m_cdtm.getAxisIterator(m_axis);
+    if (m_axis > -1) {
+        m_iterator = m_cdtm.getAxisIterator(m_axis);
+    }
     m_iterator.setStartNode(m_context);
   }
 
   /** {@inheritDoc} */
   @Override
   public void detach() {
-    if (m_axis > -1) m_iterator = null;
+    if (m_axis > -1) {
+        m_iterator = null;
+    }
 
     // Always call the superclass detach last!
     super.detach();
@@ -108,12 +112,16 @@ public class OneStepIterator extends ChildTestIterator {
   /** {@inheritDoc} */
   @Override
   protected int getProximityPosition(final int predicateIndex) {
-    if (!isReverseAxes()) return super.getProximityPosition(predicateIndex);
+    if (!isReverseAxes()) {
+        return super.getProximityPosition(predicateIndex);
+    }
 
     // A negative predicate index seems to occur with
     // (preceding-sibling::*|following-sibling::*)/ancestor::*[position()]/*[position()]
     // -sb
-    if (predicateIndex < 0) return -1;
+    if (predicateIndex < 0) {
+        return -1;
+    }
 
     if (m_proximityPositions[predicateIndex] <= 0) {
       final XPathContext xctxt = getXPathContext();
@@ -151,7 +159,9 @@ public class OneStepIterator extends ChildTestIterator {
   /** {@inheritDoc} */
   @Override
   public int getLength() {
-    if (!isReverseAxes()) return super.getLength();
+    if (!isReverseAxes()) {
+        return super.getLength();
+    }
 
     // Tell if this is being called from within a predicate.
     final boolean isPredicateTest = this == m_execContext.getSubContextList();
@@ -159,7 +169,9 @@ public class OneStepIterator extends ChildTestIterator {
     // If we have already calculated the length, and the current predicate
     // is the first predicate, then return the length. We don't cache
     // the anything but the length of the list to the first predicate.
-    if (-1 != m_length && isPredicateTest && m_predicateIndex < 1) return m_length;
+    if (-1 != m_length && isPredicateTest && m_predicateIndex < 1) {
+        return m_length;
+    }
 
     int count = 0;
 
@@ -183,7 +195,9 @@ public class OneStepIterator extends ChildTestIterator {
     finally {
       xctxt.popCurrentNode();
     }
-    if (isPredicateTest && m_predicateIndex < 1) m_length = count;
+    if (isPredicateTest && m_predicateIndex < 1) {
+        m_length = count;
+    }
 
     return count;
   }
@@ -191,8 +205,12 @@ public class OneStepIterator extends ChildTestIterator {
   /** {@inheritDoc} */
   @Override
   protected void countProximityPosition(final int i) {
-    if (!isReverseAxes()) super.countProximityPosition(i);
-    else if (i < m_proximityPositions.length) m_proximityPositions[i]--;
+    if (!isReverseAxes()) {
+        super.countProximityPosition(i);
+    }
+    else if (i < m_proximityPositions.length) {
+        m_proximityPositions[i]--;
+    }
   }
 
   /** {@inheritDoc} */
@@ -200,7 +218,9 @@ public class OneStepIterator extends ChildTestIterator {
   public void reset() {
 
     super.reset();
-    if (null != m_iterator) m_iterator.reset();
+    if (null != m_iterator) {
+        m_iterator.reset();
+    }
   }
 
   /** {@inheritDoc} */
@@ -212,7 +232,9 @@ public class OneStepIterator extends ChildTestIterator {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     return m_axis == ((OneStepIterator) expr).m_axis;
   }

@@ -523,9 +523,7 @@ public class DTMNodeProxy
       final String localname,
       final boolean isNamespaceURIWildCard,
       final boolean isLocalNameWildCard) {
-    if (tempNode == null) {
-    }
-    else {
+    if (tempNode != null) {
       if (tempNode.getNodeType() == DTM.ELEMENT_NODE
           && (isLocalNameWildCard || tempNode.getLocalName().equals(localname))) {
         final String nsURI = tempNode.getNamespaceURI();

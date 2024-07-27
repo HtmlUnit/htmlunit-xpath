@@ -46,7 +46,9 @@ public class FunctionPattern extends StepPattern {
 
     m_score = SCORE_OTHER;
 
-    if (null == m_targetString) calcTargetString();
+    if (null == m_targetString) {
+        calcTargetString();
+    }
   }
 
   /**

@@ -78,9 +78,13 @@ public class UnionChildIterator extends ChildTestIterator {
         if (score != NodeTest.SCORE_NONE) {
           // Note that we are assuming there are no positional predicates!
           if (pnt.getPredicateCount() > 0) {
-            if (pnt.executePredicates(n, xctxt)) return DTMIterator.FILTER_ACCEPT;
+            if (pnt.executePredicates(n, xctxt)) {
+                return DTMIterator.FILTER_ACCEPT;
+            }
           }
-          else return DTMIterator.FILTER_ACCEPT;
+          else {
+            return DTMIterator.FILTER_ACCEPT;
+        }
         }
       }
     }

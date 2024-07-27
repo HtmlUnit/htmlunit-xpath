@@ -172,7 +172,9 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     m_currentContextNode = context; // only if top level?
 
     // Yech, shouldn't have to do this. -sb
-    if (null == m_prefixResolver) m_prefixResolver = xctxt.getNamespaceContext();
+    if (null == m_prefixResolver) {
+        m_prefixResolver = xctxt.getNamespaceContext();
+    }
 
     m_lastFetched = DTM.NULL;
     m_foundLast = false;
@@ -225,11 +227,15 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     // If we have already calculated the length, and the current predicate
     // is the first predicate, then return the length. We don't cache
     // the anything but the length of the list to the first predicate.
-    if (-1 != m_length && isPredicateTest && m_predicateIndex < 1) return m_length;
+    if (-1 != m_length && isPredicateTest && m_predicateIndex < 1) {
+        return m_length;
+    }
 
     // I'm a bit worried about this one, since it doesn't have the
     // checks found above. I suspect it's fine. -sb
-    if (m_foundLast) return m_pos;
+    if (m_foundLast) {
+        return m_pos;
+    }
 
     // Create a clone, and count from the current position to the end
     // of the list, not taking into account the current predicate and
@@ -260,7 +266,9 @@ public abstract class LocPathIterator extends PredicatedNodeTest
       pos++;
     }
 
-    if (isPredicateTest && m_predicateIndex < 1) m_length = pos;
+    if (isPredicateTest && m_predicateIndex < 1) {
+        m_length = pos;
+    }
 
     return pos;
   }
@@ -357,7 +365,9 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
     m_lastFetched = nextNode;
 
-    if (DTM.NULL == nextNode) m_foundLast = true;
+    if (DTM.NULL == nextNode) {
+        m_foundLast = true;
+    }
 
     return nextNode;
   }
@@ -372,15 +382,20 @@ public abstract class LocPathIterator extends PredicatedNodeTest
   @Override
   public void runTo(final int index) {
 
-    if (m_foundLast || ((index >= 0) && (index <= getCurrentPos()))) return;
+    if (m_foundLast || ((index >= 0) && (index <= getCurrentPos()))) {
+        return;
+    }
 
     if (-1 == index) {
-      while (DTM.NULL != nextNode())
+      while (DTM.NULL != nextNode()) {
         ;
+    }
     }
     else {
       while (DTM.NULL != nextNode()) {
-        if (getCurrentPos() >= index) break;
+        if (getCurrentPos() >= index) {
+            break;
+        }
       }
     }
   }

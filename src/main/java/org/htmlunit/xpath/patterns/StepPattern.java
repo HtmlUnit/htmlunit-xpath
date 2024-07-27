@@ -421,7 +421,9 @@ public class StepPattern extends NodeTest implements SubContextList {
               xctxt.popSubContextList();
             }
 
-            if (pass) pos++;
+            if (pass) {
+                pos++;
+            }
 
             if (!findLast && child == context) {
               return pos;

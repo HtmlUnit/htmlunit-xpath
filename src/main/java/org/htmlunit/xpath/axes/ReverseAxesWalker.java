@@ -55,13 +55,19 @@ public class ReverseAxesWalker extends AxesWalker {
   /** {@inheritDoc} */
   @Override
   protected int getNextNode() {
-    if (m_foundLast) return DTM.NULL;
+    if (m_foundLast) {
+        return DTM.NULL;
+    }
 
     final int next = m_iterator.next();
 
-    if (m_isFresh) m_isFresh = false;
+    if (m_isFresh) {
+        m_isFresh = false;
+    }
 
-    if (DTM.NULL == next) this.m_foundLast = true;
+    if (DTM.NULL == next) {
+        this.m_foundLast = true;
+    }
 
     return next;
   }
@@ -78,7 +84,9 @@ public class ReverseAxesWalker extends AxesWalker {
     // A negative predicate index seems to occur with
     // (preceding-sibling::*|following-sibling::*)/ancestor::*[position()]/*[position()]
     // -sb
-    if (predicateIndex < 0) return -1;
+    if (predicateIndex < 0) {
+        return -1;
+    }
 
     int count = m_proximityPositions[predicateIndex];
 
@@ -119,7 +127,9 @@ public class ReverseAxesWalker extends AxesWalker {
   /** {@inheritDoc} */
   @Override
   protected void countProximityPosition(final int i) {
-    if (i < m_proximityPositions.length) m_proximityPositions[i]--;
+    if (i < m_proximityPositions.length) {
+        m_proximityPositions[i]--;
+    }
   }
 
   /** {@inheritDoc} */

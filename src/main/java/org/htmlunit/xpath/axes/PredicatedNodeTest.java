@@ -60,7 +60,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
           this.m_proximityPositions.length);
     }
 
-    if (clone.m_lpi == this) clone.m_lpi = (LocPathIterator) clone;
+    if (clone.m_lpi == this) {
+        clone.m_lpi = (LocPathIterator) clone;
+    }
 
     return clone;
   }
@@ -74,7 +76,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @return the number of predicates that this walker has.
    */
   public int getPredicateCount() {
-    if (-1 == m_predCount) return (null == predicates_) ? 0 : predicates_.length;
+    if (-1 == m_predCount) {
+        return (null == predicates_) ? 0 : predicates_.length;
+    }
     return m_predCount;
   }
 
@@ -92,7 +96,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
       System.arraycopy(predicates_, 0, newPredicates, 0, count);
       predicates_ = newPredicates;
     }
-    else predicates_ = null;
+    else {
+        predicates_ = null;
+    }
   }
 
   /**
@@ -160,7 +166,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   public void resetProximityPositions() {
     final int nPredicates = getPredicateCount();
     if (nPredicates > 0) {
-      if (null == m_proximityPositions) m_proximityPositions = new int[nPredicates];
+      if (null == m_proximityPositions) {
+        m_proximityPositions = new int[nPredicates];
+    }
 
       for (int i = 0; i < nPredicates; i++) {
         try {
@@ -192,7 +200,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
     // Note that in the case of a UnionChildIterator, this may be a
     // static object and so m_proximityPositions may indeed be null!
     final int[] pp = m_proximityPositions;
-    if ((null != pp) && (i < pp.length)) pp[i]++;
+    if ((null != pp) && (i < pp.length)) {
+        pp[i]++;
+    }
   }
 
   /**
@@ -217,7 +227,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
     final int nPredicates = getPredicateCount();
     // System.out.println("nPredicates: "+nPredicates);
-    if (nPredicates == 0) return true;
+    if (nPredicates == 0) {
+        return true;
+    }
 
     try {
       m_predicateIndex = 0;
@@ -270,7 +282,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
             m_foundLast = true;
           }
         }
-        else if (!pred.bool()) return false;
+        else if (!pred.bool()) {
+            return false;
+        }
 
         countProximityPosition(++m_predicateIndex);
       }
@@ -324,7 +338,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
         if (getPredicateCount() > 0) {
           countProximityPosition(0);
 
-          if (!executePredicates(n, xctxt)) return DTMIterator.FILTER_SKIP;
+          if (!executePredicates(n, xctxt)) {
+            return DTMIterator.FILTER_SKIP;
+        }
         }
 
         return DTMIterator.FILTER_ACCEPT;
@@ -350,7 +366,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    */
   public void setLocPathIterator(final LocPathIterator li) {
     m_lpi = li;
-    if (this != li) li.exprSetParent(this);
+    if (this != li) {
+        li.exprSetParent(this);
+    }
   }
 
   /** {@inheritDoc} */
@@ -358,7 +376,9 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   public boolean canTraverseOutsideSubtree() {
     final int n = getPredicateCount();
     for (int i = 0; i < n; i++) {
-      if (getPredicate(i).canTraverseOutsideSubtree()) return true;
+      if (getPredicate(i).canTraverseOutsideSubtree()) {
+        return true;
+    }
     }
     return false;
   }
@@ -382,18 +402,26 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     final PredicatedNodeTest pnt = (PredicatedNodeTest) expr;
     if (null != predicates_) {
 
       final int n = predicates_.length;
-      if ((null == pnt.predicates_) || (pnt.predicates_.length != n)) return false;
+      if ((null == pnt.predicates_) || (pnt.predicates_.length != n)) {
+        return false;
+    }
       for (int i = 0; i < n; i++) {
-        if (!predicates_[i].deepEquals(pnt.predicates_[i])) return false;
+        if (!predicates_[i].deepEquals(pnt.predicates_[i])) {
+            return false;
+        }
       }
     }
-    else if (null != pnt.predicates_) return false;
+    else if (null != pnt.predicates_) {
+        return false;
+    }
 
     return true;
   }

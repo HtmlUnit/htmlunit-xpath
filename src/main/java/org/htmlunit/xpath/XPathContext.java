@@ -119,7 +119,9 @@ public class XPathContext extends DTMManager {
    * @return A non-null ErrorListener reference.
    */
   public final ErrorListener getErrorListener() {
-    if (null != m_errorListener) return m_errorListener;
+    if (null != m_errorListener) {
+        return m_errorListener;
+    }
 
     if (null == m_defaultErrorListener) {
       m_defaultErrorListener = new org.htmlunit.xpath.xml.utils.DefaultErrorHandler();
@@ -133,9 +135,10 @@ public class XPathContext extends DTMManager {
    * @param listener A non-null ErrorListener reference.
    */
   public void setErrorListener(final ErrorListener listener) throws IllegalArgumentException {
-    if (listener == null)
-      throw new IllegalArgumentException(
-          XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NULL_ERROR_HANDLER, null));
+    if (listener == null) {
+        throw new IllegalArgumentException(
+              XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NULL_ERROR_HANDLER, null));
+    }
     m_errorListener = listener;
   }
 

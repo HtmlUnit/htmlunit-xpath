@@ -116,7 +116,9 @@ public class WalkingIterator extends LocPathIterator {
   /** {@inheritDoc} */
   @Override
   public int nextNode() {
-    if (m_foundLast) return DTM.NULL;
+    if (m_foundLast) {
+        return DTM.NULL;
+    }
 
     // If the variable stack position is not -1, we'll have to
     // set our position in the variable stack, so our variable access
@@ -192,12 +194,16 @@ public class WalkingIterator extends LocPathIterator {
   /** {@inheritDoc} */
   @Override
   public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) return false;
+    if (!super.deepEquals(expr)) {
+        return false;
+    }
 
     AxesWalker walker1 = m_firstWalker;
     AxesWalker walker2 = ((WalkingIterator) expr).m_firstWalker;
     while ((null != walker1) && (null != walker2)) {
-      if (!walker1.deepEquals(walker2)) return false;
+      if (!walker1.deepEquals(walker2)) {
+        return false;
+    }
       walker1 = walker1.getNextWalker();
       walker2 = walker2.getNextWalker();
     }

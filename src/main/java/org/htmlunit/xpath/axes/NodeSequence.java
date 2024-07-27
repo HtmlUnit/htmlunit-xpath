@@ -184,12 +184,16 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       m_dtmMgr = xctxt.getDTMManager();
       m_iter.setRoot(nodeHandle, environment);
       if (!m_iter.isDocOrdered()) {
-        if (!hasCache()) setShouldCacheNodes(true);
+        if (!hasCache()) {
+            setShouldCacheNodes(true);
+        }
         runTo(-1);
         m_next = 0;
       }
     }
-    else assertion(false, "Can not setRoot on a non-iterated NodeSequence!");
+    else {
+        assertion(false, "Can not setRoot on a non-iterated NodeSequence!");
+    }
   }
 
   /** {@inheritDoc} */
@@ -236,7 +240,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       }
     }
 
-    if (null == m_iter) return DTM.NULL;
+    if (null == m_iter) {
+        return DTM.NULL;
+    }
 
     final int next = m_iter.nextNode();
     if (DTM.NULL != next) {
@@ -247,10 +253,14 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         }
         else {
           final int insertIndex = addNodeInDocOrder(next);
-          if (insertIndex >= 0) m_next++;
+          if (insertIndex >= 0) {
+            m_next++;
+        }
         }
       }
-      else m_next++;
+      else {
+        m_next++;
+    }
     }
     else {
       // We have exhausted the iterator, and if there is a cache
@@ -285,7 +295,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /** {@inheritDoc} */
   @Override
   public void detach() {
-    if (null != m_iter) m_iter.detach();
+    if (null != m_iter) {
+        m_iter.detach();
+    }
     super.detach();
   }
 
@@ -321,7 +333,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         setVector(new NodeVector());
       }
     }
-    else setVector(null);
+    else {
+        setVector(null);
+    }
   }
 
   /** {@inheritDoc} */
@@ -335,8 +349,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   public void runTo(final int index) {
     if (-1 == index) {
       final int pos = m_next;
-      while (DTM.NULL != nextNode())
+      while (DTM.NULL != nextNode()) {
         ;
+    }
       m_next = pos;
     }
     else if (m_next == index) {
@@ -345,12 +360,14 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       m_next = index;
     }
     else if ((null == getVector()) && (index < m_next)) {
-      while ((m_next >= index) && DTM.NULL != previousNode())
+      while ((m_next >= index) && DTM.NULL != previousNode()) {
         ;
     }
+    }
     else {
-      while ((m_next < index) && DTM.NULL != nextNode())
+      while ((m_next < index) && DTM.NULL != nextNode()) {
         ;
+    }
     }
   }
 
@@ -414,7 +431,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   @Override
   public Object clone() throws CloneNotSupportedException {
     final NodeSequence clone = (NodeSequence) super.clone();
-    if (null != m_iter) clone.m_iter = (DTMIterator) m_iter.clone();
+    if (null != m_iter) {
+        clone.m_iter = (DTMIterator) m_iter.clone();
+    }
 
     return clone;
   }

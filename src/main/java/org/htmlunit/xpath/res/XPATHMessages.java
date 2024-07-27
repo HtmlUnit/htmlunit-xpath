@@ -34,7 +34,9 @@ public class XPATHMessages {
    */
   public static String createXPATHMessage(
       final String msgKey, final Object[] args) { // throws Exception
-    if (XPATHBundle == null) XPATHBundle = new XPATHErrorResources();
+    if (XPATHBundle == null) {
+        XPATHBundle = new XPATHErrorResources();
+    }
 
     if (XPATHBundle != null) {
       return createXPATHMsg(XPATHBundle, msgKey, args);
@@ -58,7 +60,9 @@ public class XPATHMessages {
     boolean throwex = false;
     String msg = null;
 
-    if (msgKey != null) msg = fResourceBundle.getString(msgKey);
+    if (msgKey != null) {
+        msg = fResourceBundle.getString(msgKey);
+    }
 
     if (msg == null) {
       msg = fResourceBundle.getString(XPATHErrorResources.BAD_CODE);
@@ -73,7 +77,9 @@ public class XPATHMessages {
         final int n = args.length;
 
         for (int i = 0; i < n; i++) {
-          if (null == args[i]) args[i] = "";
+          if (null == args[i]) {
+            args[i] = "";
+        }
         }
 
         fmsg = java.text.MessageFormat.format(msg, args);
