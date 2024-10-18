@@ -17,8 +17,11 @@
  */
 package org.htmlunit.xpath.xml.dtm.ref.dom2dtm;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.transform.dom.DOMSource;
+
 import org.htmlunit.xpath.objects.XString;
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
@@ -77,7 +80,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    * Text/CDATASection nodes in the DOM have been coalesced into a single DTM Text node); this table
    * points only to the first in that sequence.
    */
-  protected final Vector<Node> m_nodes = new Vector<>();
+  protected final List<Node> m_nodes = new ArrayList<>();
 
   /**
    * Construct a DOM2DTM object from a DOM node.
@@ -208,7 +211,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       }
     }
 
-    m_nodes.addElement(node);
+    m_nodes.add(node);
 
     m_firstch.setElementAt(NOTPROCESSED, nodeIndex);
     m_nextsib.setElementAt(NOTPROCESSED, nodeIndex);
@@ -528,7 +531,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
 
     final int identity = makeNodeIdentity(nodeHandle);
 
-    return m_nodes.elementAt(identity);
+    return m_nodes.get(identity);
   }
 
   /**
@@ -539,7 +542,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    * <p>NEEDSDOC ($objectName$) @return
    */
   protected Node lookupNode(final int nodeIdentity) {
-    return m_nodes.elementAt(nodeIdentity);
+    return m_nodes.get(nodeIdentity);
   }
 
   /** {@inheritDoc} */
@@ -580,7 +583,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
       int i = 0;
       do {
         for ( ; i < len; i++) {
-          if (m_nodes.elementAt(i) == node) {
+          if (m_nodes.get(i) == node) {
               return makeNodeHandle(i);
           }
         }
@@ -837,7 +840,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     if (NULL == id) {
         return null;
     }
-    final Node newnode = m_nodes.elementAt(id);
+    final Node newnode = m_nodes.get(id);
     String newname = newnode.getLocalName();
     if (null == newname) {
       // XSLT treats PIs, and possibly other things, as having QNames.
@@ -898,7 +901,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     if (id == NULL) {
         return null;
     }
-    final Node node = m_nodes.elementAt(id);
+    final Node node = m_nodes.get(id);
     return node.getNamespaceURI();
   }
 

@@ -572,7 +572,7 @@ public class StepPattern extends NodeTest implements SubContextList {
 
     for (StepPattern pat = this; pat != null; pat = pat.m_relativePathPattern) {
       if (pat != this) {
-        buf.append("/");
+        buf.append('/');
       }
 
       buf.append(Axis.getNames(pat.m_axis));
@@ -597,39 +597,39 @@ public class StepPattern extends NodeTest implements SubContextList {
           buf.append(pat.m_name);
         }
 
-        buf.append(")");
+        buf.append(')');
       }
       else if (DTMFilter.SHOW_COMMENT == pat.m_whatToShow) {
         buf.append("comment()");
       }
       else if (null != pat.m_name) {
         if (DTMFilter.SHOW_ATTRIBUTE == pat.m_whatToShow) {
-          buf.append("@");
+          buf.append('@');
         }
 
         if (null != pat.m_namespace) {
-          buf.append("{");
+          buf.append('{');
           buf.append(pat.m_namespace);
-          buf.append("}");
+          buf.append('}');
         }
 
         buf.append(pat.m_name);
       }
       else if (DTMFilter.SHOW_ATTRIBUTE == pat.m_whatToShow) {
-        buf.append("@");
+        buf.append('@');
       }
       else if ((DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT) == pat.m_whatToShow) {
         buf.append("doc-root()");
       }
       else {
-        buf.append("?").append(Integer.toHexString(pat.m_whatToShow));
+        buf.append('?').append(Integer.toHexString(pat.m_whatToShow));
       }
 
       if (null != pat.m_predicates) {
         for (final Expression predicate : pat.m_predicates) {
-          buf.append("[");
+          buf.append('[');
           buf.append(predicate);
-          buf.append("]");
+          buf.append(']');
         }
       }
     }

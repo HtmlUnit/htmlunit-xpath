@@ -108,7 +108,7 @@ public class XPathParser {
         final StringBuilder extraTokens = new StringBuilder();
 
         while (null != m_token) {
-          extraTokens.append("'").append(m_token).append("'");
+          extraTokens.append('\'').append(m_token).append('\'');
 
           nextToken();
 
@@ -167,7 +167,7 @@ public class XPathParser {
       final StringBuilder extraTokens = new StringBuilder();
 
       while (null != m_token) {
-        extraTokens.append("'").append(m_token).append("'");
+        extraTokens.append('\'').append(m_token).append('\'');
 
         nextToken();
 
@@ -354,7 +354,7 @@ public class XPathParser {
       while (q < m_ops.getTokenQueueSize()) {
         final String t = (String) m_ops.m_tokenQueue.get(q++);
 
-        msg.append(" '").append(t).append("'");
+        msg.append(" '").append(t).append('\'');
       }
 
       returnMsg = msg + ")";
