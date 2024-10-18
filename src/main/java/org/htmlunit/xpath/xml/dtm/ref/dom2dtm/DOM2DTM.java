@@ -203,7 +203,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     if (Node.ATTRIBUTE_NODE == type) {
       final String name = node.getNodeName();
 
-      if (name.startsWith("xmlns:") || name.equals("xmlns")) {
+      if (name.startsWith("xmlns:") || "xmlns".equals(name)) {
         type = DTM.NAMESPACE_NODE;
       }
     }
@@ -446,7 +446,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // workaround pending proper handling of these fields in DOM Level
     // 3. We want to recognize and reject that case.
     else if (PROCESSING_INSTRUCTION_NODE == nexttype) {
-      suppressNode = pos.getNodeName().equalsIgnoreCase("xml");
+      suppressNode = "xml".equalsIgnoreCase(pos.getNodeName());
     }
 
     if (!suppressNode) {
@@ -795,7 +795,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
           if (name.startsWith("xmlns:")) {
             name = getLocalPart(name);
           }
-          else if (name.equals("xmlns")) {
+          else if ("xmlns".equals(name)) {
             name = "";
           }
         }

@@ -1357,7 +1357,7 @@ public class WalkerFactory {
 
           final String localName = compiler.getStepLocalName(stepOpCodePos);
           // System.err.println("localName: "+localName);
-          if (localName.equals("*")) {
+          if ("*".equals(localName)) {
             foundWildAttribute = true;
           }
           break;

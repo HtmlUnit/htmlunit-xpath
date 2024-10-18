@@ -95,7 +95,7 @@ public class XNumber extends XObject {
     if (s.charAt(len - 2) == '.' && s.charAt(len - 1) == '0') {
       s = s.substring(0, len - 2);
 
-      if (s.equals("-0")) {
+      if ("-0".equals(s)) {
           return "0";
       }
 

@@ -476,7 +476,7 @@ class Lexer {
     }
     String uName;
 
-    if ((null != m_namespaceContext) && !prefix.equals("*") && !prefix.equals("xmlns")) {
+    if ((null != m_namespaceContext) && !"*".equals(prefix) && !"xmlns".equals(prefix)) {
       try {
         if (prefix.length() > 0) {
             uName = m_namespaceContext.getNamespaceForPrefix(prefix);

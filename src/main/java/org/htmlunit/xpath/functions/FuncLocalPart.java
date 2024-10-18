@@ -35,7 +35,7 @@ public class FuncLocalPart extends FunctionDef1Arg {
     }
     final DTM dtm = xctxt.getDTM(context);
     final String s = (context != DTM.NULL) ? dtm.getLocalName(context) : "";
-    if (s.startsWith("#") || s.equals("xmlns")) {
+    if (s.startsWith("#") || "xmlns".equals(s)) {
         return XString.EMPTYSTRING;
     }
 
