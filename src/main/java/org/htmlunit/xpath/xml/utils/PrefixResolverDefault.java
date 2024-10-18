@@ -54,7 +54,7 @@ public class PrefixResolverDefault implements PrefixResolver {
     Node parent = namespaceContext;
     String namespace = null;
 
-    if (prefix.equals("xml")) {
+    if ("xml".equals(prefix)) {
       namespace = "http://www.w3.org/XML/1998/namespace";
     }
     else {
@@ -75,7 +75,7 @@ public class PrefixResolverDefault implements PrefixResolver {
             final String aname = attr.getNodeName();
             final boolean isPrefix = aname.startsWith("xmlns:");
 
-            if (isPrefix || aname.equals("xmlns")) {
+            if (isPrefix || "xmlns".equals(aname)) {
               final int index = aname.indexOf(':');
               final String p = isPrefix ? aname.substring(index + 1) : "";
 

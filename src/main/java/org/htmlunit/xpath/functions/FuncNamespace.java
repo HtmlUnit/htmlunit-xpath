@@ -44,7 +44,7 @@ public class FuncNamespace extends FunctionDef1Arg {
         // We check for those here. Fix inspired by Davanum Srinivas.
 
         s = dtm.getNodeName(context);
-        if (s.startsWith("xmlns:") || s.equals("xmlns")) {
+        if (s.startsWith("xmlns:") || "xmlns".equals(s)) {
             return XString.EMPTYSTRING;
         }
 

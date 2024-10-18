@@ -373,14 +373,13 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
               final String attrPrefix = attr.getPrefix();
               final String value = attr.getNodeValue();
               namespace = attr.getNamespaceURI();
-              if (namespace != null && namespace.equals("http://www.w3.org/2000/xmlns/")) {
+              if ("http://www.w3.org/2000/xmlns/".equals(namespace)) {
                 // at this point we are dealing with DOM Level 2 nodes only
-                if (specifiedPrefix == null && attr.getNodeName().equals("xmlns")) {
+                if (specifiedPrefix == null && "xmlns".equals(attr.getNodeName())) {
                   // default namespace
                   return value;
                 }
-                else if (attrPrefix != null
-                    && attrPrefix.equals("xmlns")
+                else if ("xmlns".equals(attrPrefix)
                     && attr.getLocalName().equals(specifiedPrefix)) {
                   // non default namespace
                   return value;

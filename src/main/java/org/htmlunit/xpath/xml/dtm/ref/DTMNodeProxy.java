@@ -918,8 +918,7 @@ public class DTMNodeProxy
                   // default namespace
                   return value;
                 }
-                else if (attrPrefix != null
-                    && attrPrefix.equals("xmlns")
+                else if ("xmlns".equals(attrPrefix)
                     && attr.getLocalName().equals(specifiedPrefix)) {
                   // non default namespace
                   return value;
