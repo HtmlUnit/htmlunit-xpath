@@ -13,6 +13,8 @@ and we added unit tests and the maven-based build.
 
 ### Project News
 
+**[Developer Blog][5]**
+
 [HtmlUnit@mastodon][4] | [HtmlUnit@Twitter][3]
 
 ### Latest release Version 4.4.0 / July 28, 2024
@@ -131,8 +133,12 @@ This part is intended for committer who are packaging a release.
     * append 
         * htmlunit-xpath-4.x.x.jar
         * htmlunit-xpath-4.x.x.jar.asc 
+        * htmlunit-xpath-4.x.x.pom
+        * htmlunit-xpath-4.x.x.pom.asc 
         * htmlunit-xpath-4.x.x-javadoc.jar
         * htmlunit-xpath-4.x.x-javadoc.jar.asc
+        * htmlunit-xpath-4.x.x-sources.jar
+        * htmlunit-xpath-4.x.x-sources.jar.asc
     * and publish the release 
 
 * Update the version number in pom.xml to start next snapshot development
@@ -155,3 +161,4 @@ Many thanks to all of you contributing to HtmlUnit/CSSParser/Rhino in the past.
 [2]: https://jenkins.wetator.org/job/HtmlUnit%20-%20XPath/ "HtmlUnit - XPath CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://fosstodon.org/@HtmlUnit
+[5]: https://htmlunit.github.io/htmlunit-blog/
