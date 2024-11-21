@@ -40,10 +40,6 @@ import org.w3c.dom.Node;
  * before the DTM's storage is actually released for reuse.
  */
 public class DTMManagerDefault extends DTMManager {
-  // static final boolean JKESS_XNI_EXPERIMENT=true;
-
-  /** Set this to true if you want a dump of the DTM after creation. */
-  private static final boolean DUMPTREE = false;
 
   /** Set this to true if you want a basic diagnostics. */
   private static final boolean DEBUG = false;
