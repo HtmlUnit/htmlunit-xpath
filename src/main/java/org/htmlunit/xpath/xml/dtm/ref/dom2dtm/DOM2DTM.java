@@ -752,10 +752,9 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     switch (node.getNodeType()) {
       case Node.DOCUMENT_FRAGMENT_NODE:
       case Node.DOCUMENT_NODE:
-      case Node.ELEMENT_NODE: {
-          for (Node child = node.getFirstChild(); null != child; child = child.getNextSibling()) {
-            getNodeData(child, buf);
-          }
+      case Node.ELEMENT_NODE:
+        for (Node child = node.getFirstChild(); null != child; child = child.getNextSibling()) {
+          getNodeData(child, buf);
         }
         break;
       case Node.TEXT_NODE:
@@ -785,39 +784,29 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   /** {@inheritDoc} */
   @Override
   public String getNodeNameX(final int nodeHandle) {
-
-    String name;
     final short type = getNodeType(nodeHandle);
 
-    switch (type) {
-      case DTM.NAMESPACE_NODE: {
-          final Node node = getNode(nodeHandle);
-
-          // assume not null.
-          name = node.getNodeName();
-          if (name.startsWith("xmlns:")) {
-            name = getLocalPart(name);
-          }
-          else if ("xmlns".equals(name)) {
-            name = "";
-          }
+    if (DTM.NAMESPACE_NODE == type) {
+        // assume not null.
+        String namespaceNodeName = getNode(nodeHandle).getNodeName();
+        if (namespaceNodeName.startsWith("xmlns:")) {
+            return getLocalPart(namespaceNodeName);
         }
-        break;
-      case DTM.ATTRIBUTE_NODE:
-      case DTM.ELEMENT_NODE:
-      case DTM.ENTITY_REFERENCE_NODE:
-      case DTM.PROCESSING_INSTRUCTION_NODE: {
-          final Node node = getNode(nodeHandle);
-
-          // assume not null.
-          name = node.getNodeName();
+        if ("xmlns".equals(namespaceNodeName)) {
+            return "";
         }
-        break;
-      default:
-        name = "";
+        return namespaceNodeName;
     }
 
-    return name;
+    if (DTM.ATTRIBUTE_NODE == type
+            || DTM.ELEMENT_NODE == type
+            || DTM.ENTITY_REFERENCE_NODE == type
+            || DTM.PROCESSING_INSTRUCTION_NODE == type) {
+        // assume not null.
+        return getNode(nodeHandle).getNodeName();
+    }
+
+    return "";
   }
 
   /**
@@ -861,37 +850,25 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   /** {@inheritDoc} */
   @Override
   public String getPrefix(final int nodeHandle) {
-
-    final String prefix;
     final short type = getNodeType(nodeHandle);
 
-    switch (type) {
-      case DTM.NAMESPACE_NODE: {
-          final Node node = getNode(nodeHandle);
+    if (DTM.NAMESPACE_NODE == type) {
+        // assume not null.
+        final String qname = getNode(nodeHandle).getNodeName();
+        final int index = qname.indexOf(':');
 
-          // assume not null.
-          final String qname = node.getNodeName();
-          final int index = qname.indexOf(':');
-
-          prefix = (index < 0) ? "" : qname.substring(index + 1);
-        }
-        break;
-      case DTM.ATTRIBUTE_NODE:
-      case DTM.ELEMENT_NODE: {
-          final Node node = getNode(nodeHandle);
-
-          // assume not null.
-          final String qname = node.getNodeName();
-          final int index = qname.indexOf(':');
-
-          prefix = (index < 0) ? "" : qname.substring(0, index);
-        }
-        break;
-      default:
-        prefix = "";
+        return (index < 0) ? "" : qname.substring(index + 1);
     }
 
-    return prefix;
+    if (DTM.ATTRIBUTE_NODE == type
+            || DTM.ELEMENT_NODE == type) {
+          // assume not null.
+          final String qname = getNode(nodeHandle).getNodeName();
+          final int index = qname.indexOf(':');
+
+          return (index < 0) ? "" : qname.substring(0, index);
+    }
+    return "";
   }
 
   /** {@inheritDoc} */
