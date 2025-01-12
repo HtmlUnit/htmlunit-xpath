@@ -788,7 +788,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
 
     if (DTM.NAMESPACE_NODE == type) {
         // assume not null.
-        String namespaceNodeName = getNode(nodeHandle).getNodeName();
+        final String namespaceNodeName = getNode(nodeHandle).getNodeName();
         if (namespaceNodeName.startsWith("xmlns:")) {
             return getLocalPart(namespaceNodeName);
         }
