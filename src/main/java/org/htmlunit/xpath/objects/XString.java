@@ -309,6 +309,13 @@ public class XString extends XObject {
   }
 
   /**
+   * Tests if this string ends with the specified suffix.
+   */
+  public boolean endsWith(final XString suffix) {
+    return str().endsWith(suffix.str());
+  }
+
+  /**
    * Returns the index within this string of the first occurrence of the specified substring. The
    * integer returned is the smallest value <i>k</i> such that:
    *
@@ -380,6 +387,22 @@ public class XString extends XObject {
    */
   public XString trim() {
     return new XString(str().trim());
+  }
+
+  /**
+   *
+   * @return this string converted to lower case
+   */
+  public XString toLowerCase() {
+    return new XString(str().toLowerCase());
+  }
+
+  /**
+   *
+   * @return this string converted to upper case
+   */
+  public XString toUpperCase() {
+    return new XString(str().toUpperCase());
   }
 
   /**

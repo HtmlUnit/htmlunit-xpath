@@ -148,6 +148,9 @@ public class Keywords {
   /** string function string. */
   public static final String FUNC_STRING_STRING = "string";
 
+  /** ends-with function string. */
+  public static final String FUNC_ENDS_WITH_STRING = "ends-with";
+
   /** starts-with function string. */
   public static final String FUNC_STARTS_WITH_STRING = "starts-with";
 
@@ -174,6 +177,12 @@ public class Keywords {
 
   /** string-length function string. */
   public static final String FUNC_STRING_LENGTH_STRING = "string-length";
+
+  /** upper-case function string. */
+  public static final String FUNC_UPPER_CASE_STRING = "upper-case";
+
+  /** lower-case function string. */
+  public static final String FUNC_LOWER_CASE_STRING = "lower-case";
 
   static {
     m_axisnames.put(FROM_ANCESTORS_STRING, Integer.valueOf(OpCodes.FROM_ANCESTORS));

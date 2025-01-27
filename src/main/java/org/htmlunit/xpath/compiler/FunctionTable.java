@@ -105,8 +105,17 @@ public class FunctionTable {
   /** The 'string-length()' id. */
   public static final int FUNC_STRING_LENGTH = 30;
 
+  /** The 'upper-case()' id. */
+  public static final int FUNC_UPPER_CASE = 31;
+
   /** The 'lang()' id. */
   public static final int FUNC_LANG = 32;
+
+  /** The 'lower-case()' id. */
+  public static final int FUNC_LOWER_CASE = 33;
+
+  /** The 'ends-with()' id. */
+  public static final int FUNC_ENDS_WITH = 34;
 
   /** The function table. */
   private static final Class<?>[] m_functions;
@@ -121,7 +130,7 @@ public class FunctionTable {
   private final HashMap<String, Integer> m_functionID_customer = new HashMap<>();
 
   /** Number of built in functions. Be sure to update this as built-in functions are added. */
-  private static final int NUM_BUILT_IN_FUNCS = 37;
+  private static final int NUM_BUILT_IN_FUNCS = 40;
 
   /** Number of built-in functions that may be added. */
   private static final int NUM_ALLOWABLE_ADDINS = 30;
@@ -158,6 +167,9 @@ public class FunctionTable {
     m_functions[FUNC_CONCAT] = org.htmlunit.xpath.functions.FuncConcat.class;
     m_functions[FUNC_SUBSTRING] = org.htmlunit.xpath.functions.FuncSubstring.class;
     m_functions[FUNC_STRING_LENGTH] = org.htmlunit.xpath.functions.FuncStringLength.class;
+    m_functions[FUNC_UPPER_CASE] = org.htmlunit.xpath.functions.FuncUpperCase.class;
+    m_functions[FUNC_LOWER_CASE] = org.htmlunit.xpath.functions.FuncLowerCase.class;
+    m_functions[FUNC_ENDS_WITH] = org.htmlunit.xpath.functions.FuncEndsWith.class;
   }
 
   static {
@@ -196,6 +208,9 @@ public class FunctionTable {
     m_functionID.put(Keywords.FUNC_SUBSTRING_STRING, Integer.valueOf(FunctionTable.FUNC_SUBSTRING));
     m_functionID.put(
         Keywords.FUNC_STRING_LENGTH_STRING, Integer.valueOf(FunctionTable.FUNC_STRING_LENGTH));
+    m_functionID.put(Keywords.FUNC_UPPER_CASE_STRING, Integer.valueOf(FunctionTable.FUNC_UPPER_CASE));
+    m_functionID.put(Keywords.FUNC_LOWER_CASE_STRING, Integer.valueOf(FunctionTable.FUNC_LOWER_CASE));
+    m_functionID.put(Keywords.FUNC_ENDS_WITH_STRING, Integer.valueOf(FunctionTable.FUNC_ENDS_WITH));
   }
 
   public FunctionTable() {
