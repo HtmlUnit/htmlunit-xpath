@@ -29,6 +29,6 @@ public class FuncNormalizeSpace extends FunctionDef1Arg {
   public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     final XString s1 = getArg0AsString(xctxt);
 
-    return s1.fixWhiteSpace(true, true, false);
+    return s1.fixWhiteSpace();
   }
 }

@@ -396,18 +396,11 @@ public class XString extends XObject {
 
   /**
    * Conditionally trim all leading and trailing whitespace in the specified String. All strings of
-   * white space are replaced by a single space character (#x20), except spaces after punctuation
-   * which receive double spaces if doublePunctuationSpaces is true. This function may be useful to
-   * a formatter, but to get first class results, the formatter should probably do it's own white
-   * space handling based on the semantics of the formatting object.
+   * white space are replaced by a single space character (#x20), except spaces after punctuation.
    *
-   * @param trimHead Trim leading whitespace?
-   * @param trimTail Trim trailing whitespace?
-   * @param doublePunctuationSpaces Use double spaces for punctuation?
    * @return The trimmed string.
    */
-  public XString fixWhiteSpace(
-      final boolean trimHead, final boolean trimTail, final boolean doublePunctuationSpaces) {
+  public XString fixWhiteSpace() {
 
     // %OPT% !!!!!!!
     final int len = this.length();
@@ -439,16 +432,7 @@ public class XString extends XObject {
 
           buf[d++] = ' ';
 
-          if (doublePunctuationSpaces && (s != 0)) {
-            final char prevChar = buf[s - 1];
-
-            if (!((prevChar == '.') || (prevChar == '!') || (prevChar == '?'))) {
-              pres = true;
-            }
-          }
-          else {
-            pres = true;
-          }
+          pres = true;
         }
         else {
           edit = true;
@@ -461,7 +445,7 @@ public class XString extends XObject {
       }
     }
 
-    if (trimTail && 1 <= d && ' ' == buf[d - 1]) {
+    if (1 <= d && ' ' == buf[d - 1]) {
       edit = true;
 
       d--;
@@ -469,7 +453,7 @@ public class XString extends XObject {
 
     int start = 0;
 
-    if (trimHead && 0 < d && ' ' == buf[0]) {
+    if (0 < d && ' ' == buf[0]) {
       edit = true;
 
       start++;
