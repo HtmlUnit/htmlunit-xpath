@@ -17,7 +17,7 @@ and we added unit tests and the maven-based build.
 
 [HtmlUnit@mastodon](https://fosstodon.org/@HtmlUnit) | [HtmlUnit@bsky](https://bsky.app/profile/htmlunit.bsky.social) | [HtmlUnit@Twitter](https://twitter.com/HtmlUnit)
 
-### Latest release Version 4.10.0 / February 22, 2025
+### Latest release Version 4.11.0 / March 23, 2025
 
 ### Maven
 
@@ -27,7 +27,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-xpath</artifactId>
-    <version>4.10.0</version>
+    <version>4.11.0</version>
 </dependency>
 ```
 
@@ -36,7 +36,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '4.10.0'
+implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '4.11.0'
 ```
 
 ### Last CI build
@@ -50,7 +50,7 @@ If you use maven please add:
     <dependency>
         <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit-xpath</artifactId>
-        <version>4.11.0-SNAPSHOT</version>
+        <version>4.12.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom `repositories` section also:
