@@ -58,6 +58,12 @@ public class XPathParser {
   protected static final int FILTER_MATCH_PRIMARY = 1;
   protected static final int FILTER_MATCH_PREDICATES = 2;
 
+  private enum RELATIVE_PATH_STATUS {
+      NOT_PERMITTED,
+      PERMITTED,
+      REQUIRED
+  }
+
   /** The parser constructor. */
   public XPathParser(final ErrorListener errorListener) {
     m_errorListener = errorListener;
@@ -389,7 +395,7 @@ public class XPathParser {
       }
       tok = ((Integer) id).intValue();
     }
-    catch (NullPointerException | ClassCastException npe) {
+    catch (NullPointerException | ClassCastException ignored) {
       tok = -1;
     }
 
@@ -1469,7 +1475,7 @@ public class XPathParser {
         }
         num = Double.valueOf(m_token).doubleValue();
       }
-      catch (final NumberFormatException nfe) {
+      catch (final NumberFormatException ignored) {
         num = 0.0; // to shut up compiler.
 
         error(XPATHErrorResources.ER_COULDNOT_BE_FORMATTED_TO_NUMBER, new Object[] {m_token});
@@ -1514,11 +1520,7 @@ public class XPathParser {
 
     final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    final int RELATIVE_PATH_NOT_PERMITTED = 0;
-    final int RELATIVE_PATH_PERMITTED = 1;
-    final int RELATIVE_PATH_REQUIRED = 2;
-
-    int relativePathStatus = RELATIVE_PATH_NOT_PERMITTED;
+    RELATIVE_PATH_STATUS relativePathStatus = RELATIVE_PATH_STATUS.NOT_PERMITTED;
 
     appendOp(2, OpCodes.OP_LOCATIONPATHPATTERN);
 
@@ -1541,7 +1543,7 @@ public class XPathParser {
         m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH) - 2, 4);
         m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH) - 1, OpCodes.NODETYPE_FUNCTEST);
 
-        relativePathStatus = RELATIVE_PATH_REQUIRED;
+        relativePathStatus = RELATIVE_PATH_STATUS.REQUIRED;
       }
     }
     else if (tokenIs('/')) {
@@ -1554,12 +1556,12 @@ public class XPathParser {
         // any ancestor that is 'x'.
         nextToken();
 
-        relativePathStatus = RELATIVE_PATH_REQUIRED;
+        relativePathStatus = RELATIVE_PATH_STATUS.REQUIRED;
       }
       else {
         appendOp(4, OpCodes.FROM_ROOT);
 
-        relativePathStatus = RELATIVE_PATH_PERMITTED;
+        relativePathStatus = RELATIVE_PATH_STATUS.PERMITTED;
       }
 
       // Tell how long the step is without the predicate
@@ -1569,14 +1571,14 @@ public class XPathParser {
       nextToken();
     }
     else {
-      relativePathStatus = RELATIVE_PATH_REQUIRED;
+      relativePathStatus = RELATIVE_PATH_STATUS.REQUIRED;
     }
 
-    if (relativePathStatus != RELATIVE_PATH_NOT_PERMITTED) {
+    if (relativePathStatus != RELATIVE_PATH_STATUS.NOT_PERMITTED) {
       if (!tokenIs('|') && (null != m_token)) {
         RelativePathPattern();
       }
-      else if (relativePathStatus == RELATIVE_PATH_REQUIRED) {
+      else if (relativePathStatus == RELATIVE_PATH_STATUS.REQUIRED) {
         error(XPATHErrorResources.ER_EXPECTED_REL_PATH_PATTERN, null);
       }
     }
