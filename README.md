@@ -17,7 +17,7 @@ and we added unit tests and the maven-based build.
 
 [HtmlUnit@mastodon](https://fosstodon.org/@HtmlUnit) | [HtmlUnit@bsky](https://bsky.app/profile/htmlunit.bsky.social) | [HtmlUnit@Twitter](https://twitter.com/HtmlUnit)
 
-### Latest release Version 4.13.0 / June 03, 2025
+### Latest release Version 4.14.0 / July 30, 2025
 
 ### Maven
 
@@ -27,7 +27,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-xpath</artifactId>
-    <version>4.13.0</version>
+    <version>4.14.0</version>
 </dependency>
 ```
 
@@ -36,7 +36,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '4.13.0'
+implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '4.14.0'
 ```
 
 ### Last CI build
@@ -50,22 +50,24 @@ If you use maven please add:
     <dependency>
         <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit-xpath</artifactId>
-        <version>4.14.0-SNAPSHOT</version>
+        <version>4.15.0-SNAPSHOT</version>
     </dependency>
 
-You have to add the sonatype snapshot repository to your pom `repositories` section also:
+You have to add the sonatype-central snapshot repository to your pom `repositories` section also:
 
-    <repository>
-        <id>OSS Sonatype snapshots</id>
-        <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-        <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-        </snapshots>
-        <releases>
-            <enabled>false</enabled>
-        </releases>
-    </repository>
+    <repositories>
+        <repository>
+            <name>Central Portal Snapshots</name>
+            <id>central-portal-snapshots</id>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 
 ## Start HtmlUnit - XPath Development
@@ -122,9 +124,8 @@ This part is intended for committer who are packaging a release.
    mvn -up clean deploy
 ```
 
-* Go to [Sonatype staging repositories](https://s01.oss.sonatype.org/index.html#stagingRepositories) and process the deploy
-  - select the repository and close it - wait until the close is processed
-  - release the package and wait until it is processed
+* Go to [Maven Central Portal](https://central.sonatype.com/) and process the deploy
+  - publish the package and wait until it is processed
 
 * Create the version on Github
     * login to Github and open project https://github.com/HtmlUnit/htmlunit-xpath
