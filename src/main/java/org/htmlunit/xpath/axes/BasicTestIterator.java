@@ -30,101 +30,101 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
  */
 public abstract class BasicTestIterator extends LocPathIterator {
 
-  /**
-   * Create a LocPathIterator object.
-   *
-   * @param nscontext The namespace context for this iterator, should be OK if null.
-   */
-  protected BasicTestIterator(final PrefixResolver nscontext) {
+    /**
+     * Create a LocPathIterator object.
+     *
+     * @param nscontext The namespace context for this iterator, should be OK if null.
+     */
+    protected BasicTestIterator(final PrefixResolver nscontext) {
 
-    super(nscontext);
-  }
+        super(nscontext);
+    }
 
-  /**
-   * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
-   * call back into the Compiler to create predicate expressions.
-   *
-   * @param compiler The Compiler which is creating this expression.
-   * @param opPos The position of this iterator in the opcode list from the compiler.
-   * @throws javax.xml.transform.TransformerException if any
-   */
-  protected BasicTestIterator(final Compiler compiler, final int opPos, final int analysis)
-      throws javax.xml.transform.TransformerException {
-    super(analysis);
+    /**
+     * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
+     * call back into the Compiler to create predicate expressions.
+     *
+     * @param compiler The Compiler which is creating this expression.
+     * @param opPos    The position of this iterator in the opcode list from the compiler.
+     * @throws javax.xml.transform.TransformerException if any
+     */
+    protected BasicTestIterator(final Compiler compiler, final int opPos, final int analysis)
+            throws javax.xml.transform.TransformerException {
+        super(analysis);
 
-    final int firstStepPos = OpMap.getFirstChildPos(opPos);
-    final int whatToShow = compiler.getWhatToShow(firstStepPos);
+        final int firstStepPos = OpMap.getFirstChildPos(opPos);
+        final int whatToShow = compiler.getWhatToShow(firstStepPos);
 
-    if ((0
-            == (whatToShow
+        if ((0
+                == (whatToShow
                 & (DTMFilter.SHOW_ATTRIBUTE
-                    | DTMFilter.SHOW_NAMESPACE
-                    | DTMFilter.SHOW_ELEMENT
-                    | DTMFilter.SHOW_PROCESSING_INSTRUCTION)))
-        || (whatToShow == DTMFilter.SHOW_ALL)) {
-        initNodeTest(whatToShow);
-    }
-    else {
-      initNodeTest(
-          whatToShow, compiler.getStepNS(firstStepPos), compiler.getStepLocalName(firstStepPos));
-    }
-    initPredicateInfo(compiler, firstStepPos);
-  }
-
-  /**
-   * Get the next node via getNextXXX. Bottlenecked for derived class override.
-   *
-   * @return The next node on the axis, or DTM.NULL.
-   */
-  protected abstract int getNextNode();
-
-  /** {@inheritDoc} */
-  @Override
-  public int nextNode() {
-    if (m_foundLast) {
-      m_lastFetched = DTM.NULL;
-      return DTM.NULL;
+                | DTMFilter.SHOW_NAMESPACE
+                | DTMFilter.SHOW_ELEMENT
+                | DTMFilter.SHOW_PROCESSING_INSTRUCTION)))
+                || (whatToShow == DTMFilter.SHOW_ALL)) {
+            initNodeTest(whatToShow);
+        }
+        else {
+            initNodeTest(
+                    whatToShow, compiler.getStepNS(firstStepPos), compiler.getStepLocalName(firstStepPos));
+        }
+        initPredicateInfo(compiler, firstStepPos);
     }
 
-    if (DTM.NULL == m_lastFetched) {
-      resetProximityPositions();
-    }
+    /**
+     * Get the next node via getNextXXX. Bottlenecked for derived class override.
+     *
+     * @return The next node on the axis, or DTM.NULL.
+     */
+    protected abstract int getNextNode();
 
-    int next;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int nextNode() {
+        if (m_foundLast) {
+            m_lastFetched = DTM.NULL;
+            return DTM.NULL;
+        }
 
-    try {
-      do {
-        next = getNextNode();
+        if (DTM.NULL == m_lastFetched) {
+            resetProximityPositions();
+        }
+
+        int next;
+
+        do {
+            next = getNextNode();
+
+            if (DTM.NULL != next) {
+                if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) {
+                    break;
+                }
+                continue;
+            }
+            break;
+        }
+        while (next != DTM.NULL);
 
         if (DTM.NULL != next) {
-          if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) {
-              break;
-          }
-          continue;
+            m_pos++;
+            return next;
         }
-        break;
-      }
-      while (next != DTM.NULL);
-
-      if (DTM.NULL != next) {
-        m_pos++;
-        return next;
-      }
-      m_foundLast = true;
-      return DTM.NULL;
+        m_foundLast = true;
+        return DTM.NULL;
     }
-    finally {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DTMIterator cloneWithReset() throws CloneNotSupportedException {
+
+        final ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();
+
+        clone.resetProximityPositions();
+
+        return clone;
     }
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException {
-
-    final ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();
-
-    clone.resetProximityPositions();
-
-    return clone;
-  }
 }

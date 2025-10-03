@@ -30,75 +30,87 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
  * @see org.htmlunit.xpath.axes.BasicTestIterator
  */
 public class ChildTestIterator extends BasicTestIterator {
-  /** The traverser to use to navigate over the descendants. */
-  protected transient DTMAxisTraverser m_traverser;
+    /**
+     * The traverser to use to navigate over the descendants.
+     */
+    protected transient DTMAxisTraverser m_traverser;
 
-  /**
-   * Create a ChildTestIterator object.
-   *
-   * @param compiler A reference to the Compiler that contains the op map.
-   * @param opPos The position within the op map, which contains the location path expression for
-   *     this itterator.
-   * @throws javax.xml.transform.TransformerException if any
-   */
-  ChildTestIterator(final Compiler compiler, final int opPos, final int analysis)
-      throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis);
-  }
-
-  /**
-   * Create a ChildTestIterator object.
-   *
-   * @param traverser Traverser that tells how the KeyIterator is to be handled.
-   */
-  public ChildTestIterator(final DTMAxisTraverser traverser) {
-
-    super(null);
-
-    m_traverser = traverser;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  protected int getNextNode() {
-    if (true /* 0 == m_extendedTypeID */) {
-      m_lastFetched =
-          (DTM.NULL == m_lastFetched)
-              ? m_traverser.first(m_context)
-              : m_traverser.next(m_context, m_lastFetched);
+    /**
+     * Create a ChildTestIterator object.
+     *
+     * @param compiler A reference to the Compiler that contains the op map.
+     * @param opPos    The position within the op map, which contains the location path expression for
+     *                 this itterator.
+     * @throws javax.xml.transform.TransformerException if any
+     */
+    ChildTestIterator(final Compiler compiler, final int opPos, final int analysis)
+            throws javax.xml.transform.TransformerException {
+        super(compiler, opPos, analysis);
     }
-    return m_lastFetched;
-  }
 
-  /** {@inheritDoc} */
-  @Override
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException {
+    /**
+     * Create a ChildTestIterator object.
+     *
+     * @param traverser Traverser that tells how the KeyIterator is to be handled.
+     */
+    public ChildTestIterator(final DTMAxisTraverser traverser) {
 
-    final ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();
-    clone.m_traverser = m_traverser;
+        super(null);
 
-    return clone;
-  }
+        m_traverser = traverser;
+    }
 
-  /** {@inheritDoc} */
-  @Override
-  public void setRoot(final int context, final Object environment) {
-    super.setRoot(context, environment);
-    m_traverser = m_cdtm.getAxisTraverser(Axis.CHILD);
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected int getNextNode() {
+        if (true /* 0 == m_extendedTypeID */) {
+            m_lastFetched =
+                    (DTM.NULL == m_lastFetched)
+                            ? m_traverser.first(m_context)
+                            : m_traverser.next(m_context, m_lastFetched);
+        }
+        return m_lastFetched;
+    }
 
-  /** {@inheritDoc} */
-  @Override
-  public int getAxis() {
-    return org.htmlunit.xpath.xml.dtm.Axis.CHILD;
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DTMIterator cloneWithReset() throws CloneNotSupportedException {
 
-  /** {@inheritDoc} */
-  @Override
-  public void detach() {
-    m_traverser = null;
+        final ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();
+        clone.m_traverser = m_traverser;
 
-    // Always call the superclass detach last!
-    super.detach();
-  }
+        return clone;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setRoot(final int context, final Object environment) {
+        super.setRoot(context, environment);
+        m_traverser = m_cdtm.getAxisTraverser(Axis.CHILD);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getAxis() {
+        return org.htmlunit.xpath.xml.dtm.Axis.CHILD;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void detach() {
+        m_traverser = null;
+
+        // Always call the superclass detach last!
+        super.detach();
+    }
 }

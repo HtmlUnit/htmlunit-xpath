@@ -73,6 +73,7 @@ public class SuballocatedIntVector {
   public SuballocatedIntVector(int blocksize, final int numblocks) {
     // m_blocksize = blocksize;
     for (m_SHIFT = 0; 0 != (blocksize >>>= 1); ++m_SHIFT) {
+        // empty
     }
     m_blocksize = 1 << m_SHIFT;
     m_MASK = m_blocksize - 1;

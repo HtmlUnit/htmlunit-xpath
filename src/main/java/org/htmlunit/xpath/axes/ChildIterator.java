@@ -29,57 +29,63 @@ import org.htmlunit.xpath.xml.dtm.DTMFilter;
  */
 public class ChildIterator extends LocPathIterator {
 
-  /**
-   * Create a ChildIterator object.
-   *
-   * @param analysis Analysis bits of the entire pattern.
-   * @throws javax.xml.transform.TransformerException if any
-   */
-  ChildIterator(final int analysis) throws javax.xml.transform.TransformerException {
-    super(analysis);
+    /**
+     * Create a ChildIterator object.
+     *
+     * @param analysis Analysis bits of the entire pattern.
+     * @throws javax.xml.transform.TransformerException if any
+     */
+    ChildIterator(final int analysis) throws javax.xml.transform.TransformerException {
+        super(analysis);
 
-    // This iterator matches all kinds of nodes
-    initNodeTest(DTMFilter.SHOW_ALL);
-  }
+        // This iterator matches all kinds of nodes
+        initNodeTest(DTMFilter.SHOW_ALL);
+    }
 
-  /** {@inheritDoc} */
-  @Override
-  public int asNode(final XPathContext xctxt) {
-    final int current = xctxt.getCurrentNode();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int asNode(final XPathContext xctxt) {
+        final int current = xctxt.getCurrentNode();
 
-    final DTM dtm = xctxt.getDTM(current);
+        final DTM dtm = xctxt.getDTM(current);
 
-    return dtm.getFirstChild(current);
-  }
+        return dtm.getFirstChild(current);
+    }
 
-  /** {@inheritDoc} */
-  @Override
-  public int nextNode() {
-    if (m_foundLast) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int nextNode() {
+        if (m_foundLast) {
+            return DTM.NULL;
+        }
+
+        final int next;
+
+        m_lastFetched =
+                next =
+                        (DTM.NULL == m_lastFetched)
+                                ? m_cdtm.getFirstChild(m_context)
+                                : m_cdtm.getNextSibling(m_lastFetched);
+
+        // m_lastFetched = next;
+        if (DTM.NULL != next) {
+            m_pos++;
+            return next;
+        }
+
+        m_foundLast = true;
         return DTM.NULL;
     }
 
-    final int next;
-
-    m_lastFetched =
-        next =
-            (DTM.NULL == m_lastFetched)
-                ? m_cdtm.getFirstChild(m_context)
-                : m_cdtm.getNextSibling(m_lastFetched);
-
-    // m_lastFetched = next;
-    if (DTM.NULL != next) {
-      m_pos++;
-      return next;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getAxis() {
+        return org.htmlunit.xpath.xml.dtm.Axis.CHILD;
     }
-
-    m_foundLast = true;
-    return DTM.NULL;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int getAxis() {
-    return org.htmlunit.xpath.xml.dtm.Axis.CHILD;
-  }
 }

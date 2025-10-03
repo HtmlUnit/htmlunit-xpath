@@ -20,35 +20,41 @@ package org.htmlunit.xpath.axes;
 import org.htmlunit.xpath.compiler.Compiler;
 import org.htmlunit.xpath.xml.dtm.DTM;
 
-/** This class implements an optimized iterator for attribute axes patterns. */
+/**
+ * This class implements an optimized iterator for attribute axes patterns.
+ */
 public class AttributeIterator extends ChildTestIterator {
 
-  /**
-   * Create a AttributeIterator object.
-   *
-   * @param compiler A reference to the Compiler that contains the op map.
-   * @param opPos The position within the op map, which contains the location path expression for
-   *     this iterator.
-   * @throws javax.xml.transform.TransformerException if any
-   */
-  AttributeIterator(final Compiler compiler, final int opPos, final int analysis)
-      throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis);
-  }
+    /**
+     * Create a AttributeIterator object.
+     *
+     * @param compiler A reference to the Compiler that contains the op map.
+     * @param opPos    The position within the op map, which contains the location path expression for
+     *                 this iterator.
+     * @throws javax.xml.transform.TransformerException if any
+     */
+    AttributeIterator(final Compiler compiler, final int opPos, final int analysis)
+            throws javax.xml.transform.TransformerException {
+        super(compiler, opPos, analysis);
+    }
 
-  /** {@inheritDoc} */
-  @Override
-  protected int getNextNode() {
-    m_lastFetched =
-        (DTM.NULL == m_lastFetched)
-            ? m_cdtm.getFirstAttribute(m_context)
-            : m_cdtm.getNextAttribute(m_lastFetched);
-    return m_lastFetched;
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected int getNextNode() {
+        m_lastFetched =
+                (DTM.NULL == m_lastFetched)
+                        ? m_cdtm.getFirstAttribute(m_context)
+                        : m_cdtm.getNextAttribute(m_lastFetched);
+        return m_lastFetched;
+    }
 
-  /** {@inheritDoc} */
-  @Override
-  public int getAxis() {
-    return org.htmlunit.xpath.xml.dtm.Axis.ATTRIBUTE;
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getAxis() {
+        return org.htmlunit.xpath.xml.dtm.Axis.ATTRIBUTE;
+    }
 }

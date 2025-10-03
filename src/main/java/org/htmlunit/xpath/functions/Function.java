@@ -27,7 +27,7 @@ import org.htmlunit.xpath.res.XPATHMessages;
 /**
  * This is a superclass of all XPath functions. This allows two ways for the class to be called. One
  * method is that the super class processes the arguments and hands the results to the derived
- * class, the other method is that the derived class may process it's own arguments, which is faster
+ * class, the other method is that the derived class may process its own arguments, which is faster
  * since the arguments don't have to be added to an array, but causes a larger code footprint.
  */
 public abstract class Function extends Expression {

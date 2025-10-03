@@ -18,6 +18,7 @@
 package org.htmlunit.xpath;
 
 import javax.xml.transform.TransformerException;
+
 import org.htmlunit.xpath.objects.XObject;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.htmlunit.xpath.xml.utils.PrefixResolverDefault;
@@ -153,7 +154,7 @@ public class XPathAPI {
    *
    * @param contextNode The node to start searching from.
    * @param str A valid XPath string.
-   * @return An XObject, which can be used to obtain a string, number, nodelist, etc, should never
+   * @return An XObject, which can be used to obtain a string, number, nodelist, etc., should never
    *     be null.
    * @see org.htmlunit.xpath.objects.XObject
    * @see org.htmlunit.xpath.objects.XBoolean
@@ -174,7 +175,7 @@ public class XPathAPI {
    * @param contextNode The node to start searching from.
    * @param str A valid XPath string.
    * @param namespaceNode The node from which prefixes in the XPath will be resolved to namespaces.
-   * @return An XObject, which can be used to obtain a string, number, nodelist, etc, should never
+   * @return An XObject, which can be used to obtain a string, number, nodelist, etc., should never
    *     be null.
    * @see org.htmlunit.xpath.objects.XObject
    * @see org.htmlunit.xpath.objects.XBoolean
@@ -185,7 +186,7 @@ public class XPathAPI {
   public static XObject eval(final Node contextNode, final String str, final Node namespaceNode)
       throws TransformerException {
 
-    // Since we don't have a XML Parser involved here, install some default support
+    // Since we don't have an XML Parser involved here, install some default support
     // for things like namespaces, etc.
     // (Changed from: XPathContext xpathSupport = new XPathContext();
     // because XPathContext is weak in a number of areas... perhaps
@@ -224,7 +225,7 @@ public class XPathAPI {
    * @param str A valid XPath string.
    * @param prefixResolver Will be called if the parser encounters namespace prefixes, to resolve
    *     the prefixes to URLs.
-   * @return An XObject, which can be used to obtain a string, number, nodelist, etc, should never
+   * @return An XObject, which can be used to obtain a string, number, nodelist, etc., should never
    *     be null.
    * @see org.htmlunit.xpath.objects.XObject
    * @see org.htmlunit.xpath.objects.XBoolean
@@ -236,7 +237,7 @@ public class XPathAPI {
       final Node contextNode, final String str, final PrefixResolver prefixResolver)
       throws TransformerException {
 
-    // Since we don't have a XML Parser involved here, install some default support
+    // Since we don't have an XML Parser involved here, install some default support
     // for things like namespaces, etc.
     // (Changed from: XPathContext xpathSupport = new XPathContext();
     // because XPathContext is weak in a number of areas... perhaps

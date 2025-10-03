@@ -19,6 +19,7 @@ package org.htmlunit.xpath.xml.dtm.ref;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.htmlunit.xpath.NodeSet;
 import org.htmlunit.xpath.xml.dtm.DTM;
 import org.w3c.dom.Attr;

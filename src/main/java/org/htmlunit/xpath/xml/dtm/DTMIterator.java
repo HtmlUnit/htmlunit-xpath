@@ -201,7 +201,7 @@ public interface DTMIterator {
 
   /**
    * If an index is requested, NodeSetDTM will call this method to run the iterator to the index. By
-   * default this sets m_next to the index. If the index argument is -1, this signals that the
+   * default, this sets m_next to the index. If the index argument is -1, this signals that the
    * iterator should be run to the end and completely fill the cache.
    *
    * @param index The index to run to, or -1 if the iterator should be run to the end.

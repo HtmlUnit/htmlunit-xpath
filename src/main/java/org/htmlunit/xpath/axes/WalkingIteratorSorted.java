@@ -19,25 +19,29 @@ package org.htmlunit.xpath.axes;
 
 import org.htmlunit.xpath.compiler.Compiler;
 
-/** This class iterates over set of nodes that needs to be sorted. */
+/**
+ * This class iterates over set of nodes that needs to be sorted.
+ */
 public class WalkingIteratorSorted extends WalkingIterator {
 
-  /**
-   * Create a WalkingIterator iterator, including creation of step walkers from the opcode list, and
-   * call back into the Compiler to create predicate expressions.
-   *
-   * @param compiler The Compiler which is creating this expression.
-   * @param opPos The position of this iterator in the opcode list from the compiler.
-   * @throws javax.xml.transform.TransformerException if any
-   */
-  WalkingIteratorSorted(final Compiler compiler, final int opPos, final int analysis)
-      throws javax.xml.transform.TransformerException {
-    super(compiler, opPos, analysis, true);
-  }
+    /**
+     * Create a WalkingIterator iterator, including creation of step walkers from the opcode list, and
+     * call back into the Compiler to create predicate expressions.
+     *
+     * @param compiler The Compiler which is creating this expression.
+     * @param opPos    The position of this iterator in the opcode list from the compiler.
+     * @throws javax.xml.transform.TransformerException if any
+     */
+    WalkingIteratorSorted(final Compiler compiler, final int opPos, final int analysis)
+            throws javax.xml.transform.TransformerException {
+        super(compiler, opPos, analysis, true);
+    }
 
-  /** {@inheritDoc} */
-  @Override
-  public boolean isDocOrdered() {
-    return false;
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isDocOrdered() {
+        return false;
+    }
 }

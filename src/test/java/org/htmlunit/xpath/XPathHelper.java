@@ -19,7 +19,9 @@ package org.htmlunit.xpath;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.transform.TransformerException;
+
 import org.htmlunit.xpath.objects.XBoolean;
 import org.htmlunit.xpath.objects.XNodeSet;
 import org.htmlunit.xpath.objects.XNumber;
@@ -97,7 +99,7 @@ public final class XPathHelper {
    * @param contextNode the node to start searching from
    * @param str a valid XPath string
    * @param prefixResolver prefix resolver to use for resolving namespace prefixes, or null
-   * @return an XObject, which can be used to obtain a string, number, nodelist, etc (should never
+   * @return an XObject, which can be used to obtain a string, number, nodelist, etc. (should never
    *     be {@code null})
    * @throws TransformerException if a syntax or other error occurs
    */

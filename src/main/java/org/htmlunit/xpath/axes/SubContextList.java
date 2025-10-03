@@ -25,20 +25,20 @@ import org.htmlunit.xpath.XPathContext;
  */
 public interface SubContextList {
 
-  /**
-   * Get the number of nodes in the node list, which, in the XSLT 1 based counting system, is the
-   * last index position.
-   *
-   * @param xctxt The XPath runtime context.
-   * @return the number of nodes in the node list.
-   */
-  int getLastPos(XPathContext xctxt);
+    /**
+     * Get the number of nodes in the node list, which, in the XSLT 1 based counting system, is the
+     * last index position.
+     *
+     * @param xctxt The XPath runtime context.
+     * @return the number of nodes in the node list.
+     */
+    int getLastPos(XPathContext xctxt);
 
-  /**
-   * Get the current sub-context position.
-   *
-   * @param xctxt The XPath runtime context.
-   * @return The position of the current node in the list.
-   */
-  int getProximityPosition(XPathContext xctxt);
+    /**
+     * Get the current sub-context position.
+     *
+     * @param xctxt The XPath runtime context.
+     * @return The position of the current node in the list.
+     */
+    int getProximityPosition(XPathContext xctxt);
 }

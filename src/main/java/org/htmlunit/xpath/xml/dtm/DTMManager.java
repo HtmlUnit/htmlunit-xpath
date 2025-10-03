@@ -70,7 +70,7 @@ public abstract class DTMManager {
 
   /**
    * Get an instance of a DTM, loaded with the content from the specified source. If the unique flag
-   * is true, a new instance will always be returned. Otherwise it is up to the DTMManager to return
+   * is true, a new instance will always be returned, otherwise it is up to the DTMManager to return
    * a new instance or an instance that it already created and may be being used by someone else.
    *
    * <p>(More parameters may eventually need to be added for error handling and entity resolution,

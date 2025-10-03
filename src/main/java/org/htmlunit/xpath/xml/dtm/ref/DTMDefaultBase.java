@@ -74,8 +74,8 @@ public abstract class DTMDefaultBase implements DTM {
   protected SuballocatedIntVector m_namespaceDeclSetElements = null;
 
   /**
-   * These hold indexes to elements based on namespace and local name. The base lookup is the the
-   * namespace. The second lookup is the local name, and the last array contains the the first free
+   * These hold indexes to elements based on namespace and local name. The base lookup is the
+   * namespace. The second lookup is the local name, and the last array contains the first free
    * element at the start, and the list of element handles following.
    */
   protected int[][][] m_elemIndexes;
@@ -427,7 +427,7 @@ public abstract class DTMDefaultBase implements DTM {
    */
   protected int _firstch(final int identity) {
 
-    // Boiler-plate code for each of the _xxx functions, except for the array.
+    // Boilerplate code for each of the _xxx functions, except for the array.
     int info = (identity >= m_size) ? NOTPROCESSED : m_firstch.elementAt(identity);
 
     // Check to see if the information requested has been processed, and,
@@ -455,7 +455,7 @@ public abstract class DTMDefaultBase implements DTM {
    * @return The next sibling identity, or DTM.NULL.
    */
   protected int _nextsib(final int identity) {
-    // Boiler-plate code for each of the _xxx functions, except for the array.
+    // Boilerplate code for each of the _xxx functions, except for the array.
     int info = (identity >= m_size) ? NOTPROCESSED : m_nextsib.elementAt(identity);
 
     // Check to see if the information requested has been processed, and,
@@ -541,6 +541,7 @@ public abstract class DTMDefaultBase implements DTM {
       final PrintStream ps = new PrintStream(os, false, "UTF-8");
 
       while (nextNode()) {
+          // empty
       }
 
       final int nRecords = m_size;
@@ -806,7 +807,7 @@ public abstract class DTMDefaultBase implements DTM {
     if (m_mgrDefault != null) {
       // Optimization: use the DTMManagerDefault's fast DTMID-to-offsets
       // table. I'm not wild about this solution but this operation
-      // needs need extreme speed.
+      // needs extreme speed.
 
       final int whichDTMindex = nodeHandle >>> DTMManager.IDENT_DTM_NODE_BITS;
 

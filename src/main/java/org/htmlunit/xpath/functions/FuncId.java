@@ -20,6 +20,7 @@ package org.htmlunit.xpath.functions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+
 import org.htmlunit.xpath.NodeSetDTM;
 import org.htmlunit.xpath.XPathContext;
 import org.htmlunit.xpath.objects.XNodeSet;

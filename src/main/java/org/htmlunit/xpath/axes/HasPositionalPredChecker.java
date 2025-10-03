@@ -30,56 +30,60 @@ import org.htmlunit.xpath.operations.Mult;
 import org.htmlunit.xpath.operations.Plus;
 
 public class HasPositionalPredChecker extends XPathVisitor {
-  private boolean m_hasPositionalPred = false;
-  private int m_predDepth = 0;
+    private boolean m_hasPositionalPred = false;
+    private int m_predDepth = 0;
 
-  /**
-   * Process the LocPathIterator to see if it contains variables or functions that may make it
-   * context dependent.
-   *
-   * @param path LocPathIterator that is assumed to be absolute, but needs checking.
-   * @return true if the path is confirmed to be absolute, false if it may contain context
-   *     dependencies.
-   */
-  public static boolean check(final LocPathIterator path) {
-    final HasPositionalPredChecker hppc = new HasPositionalPredChecker();
-    path.callVisitors(hppc);
-    return hppc.m_hasPositionalPred;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean visitFunction(final Function func) {
-    if ((func instanceof FuncPosition) || (func instanceof FuncLast)) {
-        m_hasPositionalPred = true;
-    }
-    return true;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean visitPredicate(final Expression pred) {
-    m_predDepth++;
-
-    if (m_predDepth == 1) {
-      if ((pred instanceof XNumber)
-          || (pred instanceof Div)
-          || (pred instanceof Plus)
-          || (pred instanceof Minus)
-          || (pred instanceof Mod)
-          || (pred instanceof Mult)
-          || (pred instanceof org.htmlunit.xpath.operations.Number)
-          || (pred instanceof Function)) {
-          m_hasPositionalPred = true;
-      }
-      else {
-          pred.callVisitors(this);
-      }
+    /**
+     * Process the LocPathIterator to see if it contains variables or functions that may make it
+     * context dependent.
+     *
+     * @param path LocPathIterator that is assumed to be absolute, but needs checking.
+     * @return true if the path is confirmed to be absolute, false if it may contain context
+     * dependencies.
+     */
+    public static boolean check(final LocPathIterator path) {
+        final HasPositionalPredChecker hppc = new HasPositionalPredChecker();
+        path.callVisitors(hppc);
+        return hppc.m_hasPositionalPred;
     }
 
-    m_predDepth--;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean visitFunction(final Function func) {
+        if ((func instanceof FuncPosition) || (func instanceof FuncLast)) {
+            m_hasPositionalPred = true;
+        }
+        return true;
+    }
 
-    // Don't go have the caller go any further down the subtree.
-    return false;
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean visitPredicate(final Expression pred) {
+        m_predDepth++;
+
+        if (m_predDepth == 1) {
+            if ((pred instanceof XNumber)
+                    || (pred instanceof Div)
+                    || (pred instanceof Plus)
+                    || (pred instanceof Minus)
+                    || (pred instanceof Mod)
+                    || (pred instanceof Mult)
+                    || (pred instanceof org.htmlunit.xpath.operations.Number)
+                    || (pred instanceof Function)) {
+                m_hasPositionalPred = true;
+            }
+            else {
+                pred.callVisitors(this);
+            }
+        }
+
+        m_predDepth--;
+
+        // Don't go have the caller go any further down the subtree.
+        return false;
+    }
 }

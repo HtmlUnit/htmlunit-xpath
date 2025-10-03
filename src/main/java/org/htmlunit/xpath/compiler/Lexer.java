@@ -18,6 +18,7 @@
 package org.htmlunit.xpath.compiler;
 
 import java.util.List;
+
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
@@ -118,6 +119,7 @@ class Lexer {
             startSubstring = i;
 
             for (i++; (i < nChars) && ((c = pat.charAt(i)) != '\"'); i++) {
+                // empty
             }
 
             if (c == '\"' && i < nChars) {
@@ -147,6 +149,7 @@ class Lexer {
           startSubstring = i;
 
           for (i++; (i < nChars) && ((c = pat.charAt(i)) != '\''); i++) {
+              // empty
           }
 
           if (c == '\'' && i < nChars) {

@@ -43,7 +43,7 @@ import org.w3c.dom.Node;
  * a specific node and its subtree and the right things should happen. (I don't _think_ we currently
  * support DocumentFrgment nodes as roots, though that might be worth considering.)
  *
- * <p>Note too that we do not currently attempt to track document mutation. If you alter the DOM
+ * <p>Note that we do not currently attempt to track document mutation. If you alter the DOM
  * after wrapping DOM2DTM around it, all bets are off.
  */
 public class DOM2DTM extends DTMDefaultBaseIterators {
@@ -109,7 +109,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // %REVIEW% Move this logic into addNode and recurse? Cleaner!
     //
     // (If it's an EntityReference node, we're probably in
-    // seriously bad trouble. For now
+    // seriously bad trouble. For now,
     // I'm just hoping nobody is ever quite that foolish... %REVIEW%)
     //
     // %ISSUE% What about inherited namespaces in this case?
@@ -299,7 +299,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         next = pos.getFirstChild();
 
         // %REVIEW% There's probably a more elegant way to skip
-        // the doctype. (Just let it go and Suppress it?
+        // the doctype. (Just let it go and Suppress it?)
         if (next != null && DOCUMENT_TYPE_NODE == next.getNodeType()) {
             next = next.getNextSibling();
         }
@@ -324,7 +324,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
 
         while (m_last_parent != NULL) {
           // %REVIEW% There's probably a more elegant way to
-          // skip the doctype. (Just let it go and Suppress it?
+          // skip the doctype. (Just let it go and Suppress it?)
           next = pos.getNextSibling();
           if (next != null && DOCUMENT_TYPE_NODE == next.getNodeType()) {
             next = next.getNextSibling();
@@ -493,7 +493,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
         if (!m_processedFirstElement) {
           // The DOM might not have an explicit declaration for the
           // implicit "xml:" prefix, but the XPath data model
-          // requires that this appear as a Namespace Node so we
+          // requires that this appears as a Namespace Node so we
           // have to synthesize one. You can think of this as
           // being a default attribute defined by the XML
           // Namespaces spec rather than by the DTD.
@@ -734,7 +734,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
    * Retrieve the text content of a DOM subtree, appending it into a user-supplied FastStringBuffer
    * object. Note that attributes are not considered part of the content of an element.
    *
-   * <p>There are open questions regarding whitespace stripping. Currently we make no special effort
+   * <p>There are open questions regarding whitespace stripping, currently we make no special effort
    * in that regard, since the standard DOM doesn't yet provide DTD-based information to distinguish
    * whitespace-in-element-context from genuine #PCDATA. Note that we should probably also consider
    * xml:space if/when we address this. DOM Level 3 may solve the problem for us.

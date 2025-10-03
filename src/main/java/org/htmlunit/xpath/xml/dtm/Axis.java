@@ -21,7 +21,7 @@ package org.htmlunit.xpath.xml.dtm;
  * Specifies values related to XPath Axes.
  *
  * <p>The ancestor, descendant, following, preceding and self axes partition a document (ignoring
- * attribute and namespace nodes): they do not overlap and together they contain all the nodes in
+ * attribute and namespace nodes): they do not overlap, and together they contain all the nodes in
  * the document.
  */
 public final class Axis {
@@ -111,7 +111,7 @@ public final class Axis {
   public static final int ALLFROMNODE = 14;
 
   /**
-   * A non-xpath axis, traversing the the preceding and the ancestor nodes, needed for inverseing
+   * A non-xpath axis, traversing the preceding and the ancestor nodes, needed for inverseing
    * select patterns to match patterns.
    */
   public static final int PRECEDINGANDANCESTOR = 15;

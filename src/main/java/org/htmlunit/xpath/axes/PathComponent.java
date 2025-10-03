@@ -22,10 +22,10 @@ package org.htmlunit.xpath.axes;
  * component.
  */
 public interface PathComponent {
-  /**
-   * Get the analysis bits for this path component, as defined in the WalkerFactory.
-   *
-   * @return One of WalkerFactory#BIT_DESCENDANT, etc.
-   */
-  int getAnalysisBits();
+    /**
+     * Get the analysis bits for this path component, as defined in the WalkerFactory.
+     *
+     * @return One of WalkerFactory#BIT_DESCENDANT, etc.
+     */
+    int getAnalysisBits();
 }

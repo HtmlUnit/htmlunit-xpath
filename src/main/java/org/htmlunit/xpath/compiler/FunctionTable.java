@@ -18,7 +18,9 @@
 package org.htmlunit.xpath.compiler;
 
 import java.util.HashMap;
+
 import javax.xml.transform.TransformerException;
+
 import org.htmlunit.xpath.functions.Function;
 
 /** The function table for XPath. */

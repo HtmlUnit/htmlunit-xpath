@@ -18,7 +18,9 @@
 package org.htmlunit.xpath.compiler;
 
 import java.util.ArrayList;
+
 import javax.xml.transform.TransformerException;
+
 import org.htmlunit.xpath.patterns.NodeTest;
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;

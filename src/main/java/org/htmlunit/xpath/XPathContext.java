@@ -18,8 +18,10 @@
 package org.htmlunit.xpath;
 
 import java.util.Stack;
+
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
+
 import org.htmlunit.xpath.axes.SubContextList;
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;

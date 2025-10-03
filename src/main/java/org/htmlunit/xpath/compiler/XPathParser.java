@@ -18,8 +18,10 @@
 package org.htmlunit.xpath.compiler;
 
 import java.util.Objects;
+
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
+
 import org.htmlunit.xpath.XPathProcessorException;
 import org.htmlunit.xpath.objects.XNumber;
 import org.htmlunit.xpath.objects.XString;
@@ -73,7 +75,7 @@ public class XPathParser {
   PrefixResolver m_namespaceContext;
 
   /**
-   * Given an string, init an XPath object for selections, in order that a parse doesn't have to be
+   * Given a string, init an XPath object for selections, in order that a parse doesn't have to be
    * done each time the expression is evaluated.
    *
    * @param compiler The compiler object.
@@ -143,7 +145,7 @@ public class XPathParser {
   }
 
   /**
-   * Given an string, init an XPath object for pattern matches, in order that a parse doesn't have
+   * Given a string, init an XPath object for pattern matches, in order that a parse doesn't have
    * to be done each time the expression is evaluated.
    *
    * @param compiler The XPath object to be initialized.

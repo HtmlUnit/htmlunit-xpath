@@ -19,8 +19,10 @@ package org.htmlunit.xpath;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
 import org.w3c.dom.Document;

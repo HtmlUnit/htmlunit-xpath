@@ -18,6 +18,7 @@
 package org.htmlunit.xpath.xml.utils;
 
 import java.io.PrintWriter;
+
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 
@@ -71,8 +72,8 @@ public class DefaultErrorHandler implements ErrorListener {
   /** {@inheritDoc} */
   @Override
   public void error(final TransformerException exception) throws TransformerException {
-    // If the m_throwExceptionOnError flag is true, rethrow the exception.
-    // Otherwise report the error to System.err.
+    // If the m_throwExceptionOnError flag is true, rethrow the exception,
+    // otherwise report the error to System.err.
     if (m_throwExceptionOnError) {
       throw exception;
     }
@@ -84,8 +85,8 @@ public class DefaultErrorHandler implements ErrorListener {
   /** {@inheritDoc} */
   @Override
   public void fatalError(final TransformerException exception) throws TransformerException {
-    // If the m_throwExceptionOnError flag is true, rethrow the exception.
-    // Otherwise report the error to System.err.
+    // If the m_throwExceptionOnError flag is true, rethrow the exception,
+    // otherwise report the error to System.err.
     if (m_throwExceptionOnError) {
       throw exception;
     }

@@ -19,6 +19,7 @@ package org.htmlunit.xpath.compiler;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
+
 import org.htmlunit.xpath.Expression;
 import org.htmlunit.xpath.axes.UnionPathIterator;
 import org.htmlunit.xpath.axes.WalkerFactory;
@@ -54,7 +55,7 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
- * An instance of this class compiles an XPath string expression into a Expression object. This
+ * An instance of this class compiles an XPath string expression into an Expression object. This
  * class compiles the string into a sequence of operation codes (op map) and then builds from that
  * into an Expression tree.
  */
@@ -185,7 +186,7 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Bottle-neck compilation of an operation with left and right operands.
+   * Bottleneck compilation of an operation with left and right operands.
    *
    * @param operation non-null reference to parent operation.
    * @param opPos The op map position of the parent operation.
@@ -204,7 +205,7 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Bottle-neck compilation of a unary operation.
+   * Bottleneck compilation of a unary operation.
    *
    * @param unary The parent unary operation.
    * @param opPos The position in the op map of the parent operation.
@@ -226,7 +227,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Or} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression or(final int opPos) throws TransformerException {
     return compileOperation(new Or(), opPos);
@@ -237,7 +238,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.And} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression and(final int opPos) throws TransformerException {
     return compileOperation(new And(), opPos);
@@ -248,7 +249,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.NotEquals} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression notequals(final int opPos) throws TransformerException {
     return compileOperation(new NotEquals(), opPos);
@@ -259,7 +260,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Equals} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression equals(final int opPos) throws TransformerException {
     return compileOperation(new Equals(), opPos);
@@ -270,7 +271,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Lte} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression lte(final int opPos) throws TransformerException {
     return compileOperation(new Lte(), opPos);
@@ -281,7 +282,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Lt} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression lt(final int opPos) throws TransformerException {
     return compileOperation(new Lt(), opPos);
@@ -292,7 +293,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Gte} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression gte(final int opPos) throws TransformerException {
     return compileOperation(new Gte(), opPos);
@@ -303,7 +304,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Gt} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression gt(final int opPos) throws TransformerException {
     return compileOperation(new Gt(), opPos);
@@ -314,7 +315,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Plus} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression plus(final int opPos) throws TransformerException {
     return compileOperation(new Plus(), opPos);
@@ -325,7 +326,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Minus} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression minus(final int opPos) throws TransformerException {
     return compileOperation(new Minus(), opPos);
@@ -336,7 +337,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Mult} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression mult(final int opPos) throws TransformerException {
     return compileOperation(new Mult(), opPos);
@@ -347,7 +348,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Div} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression div(final int opPos) throws TransformerException {
     return compileOperation(new Div(), opPos);
@@ -358,7 +359,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Mod} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression mod(final int opPos) throws TransformerException {
     return compileOperation(new Mod(), opPos);
@@ -369,7 +370,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Neg} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression neg(final int opPos) throws TransformerException {
     return compileUnary(new Neg(), opPos);
@@ -380,7 +381,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.String} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression string(final int opPos) throws TransformerException {
     return compileUnary(new org.htmlunit.xpath.operations.String(), opPos);
@@ -391,7 +392,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Bool} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression bool(final int opPos) throws TransformerException {
     return compileUnary(new org.htmlunit.xpath.operations.Bool(), opPos);
@@ -402,7 +403,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.operations.Number} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression number(final int opPos) throws TransformerException {
     return compileUnary(new org.htmlunit.xpath.operations.Number(), opPos);
@@ -439,7 +440,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to the contained expression.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression group(final int opPos) throws TransformerException {
 
@@ -452,7 +453,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to the argument expression.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression arg(final int opPos) throws TransformerException {
 
@@ -466,7 +467,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.axes.LocPathIterator} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression union(final int opPos) throws TransformerException {
     locPathDepth++;
@@ -500,7 +501,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.axes.LocPathIterator} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   public Expression locationPath(final int opPos) throws TransformerException {
     locPathDepth++;
@@ -518,7 +519,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return the contained predicate expression.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   public Expression predicate(final int opPos) throws TransformerException {
     return compile(opPos + 2);
@@ -529,7 +530,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.patterns.UnionPattern} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected Expression matchPattern(int opPos) throws TransformerException {
     locPathDepth++;
@@ -569,7 +570,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.patterns.StepPattern} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   public Expression locationPathPattern(int opPos) throws TransformerException {
 
@@ -654,7 +655,7 @@ public class Compiler extends OpMap {
    * @param stepCount The number of steps to expect.
    * @param ancestorPattern The owning StepPattern, which may be null.
    * @return reference to {@link org.htmlunit.xpath.patterns.StepPattern} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   protected StepPattern stepPattern(
       int opPos, final int stepCount, final StepPattern ancestorPattern)
@@ -779,7 +780,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The position of the first predicate the m_opMap array.
    * @return reference to array of {@link org.htmlunit.xpath.Expression} instances.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   public Expression[] getCompiledPredicates(final int opPos) throws TransformerException {
 
@@ -801,7 +802,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The position of the first predicate the m_opMap array.
    * @return The number of predicates for this step.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   public int countPredicates(int opPos) throws TransformerException {
 
@@ -838,7 +839,7 @@ public class Compiler extends OpMap {
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.htmlunit.xpath.functions.Function} instance.
-   * @throws TransformerException if a error occurs creating the Expression.
+   * @throws TransformerException if an error occurs creating the Expression.
    */
   Expression compileFunction(int opPos) throws TransformerException {
 

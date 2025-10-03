@@ -28,47 +28,53 @@ import org.htmlunit.xpath.xml.dtm.DTM;
  */
 public class SelfIteratorNoPredicate extends LocPathIterator {
 
-  /**
-   * Create a SelfIteratorNoPredicate object.
-   *
-   * @param analysis Analysis bits.
-   * @throws javax.xml.transform.TransformerException if any
-   */
-  SelfIteratorNoPredicate(final int analysis) throws javax.xml.transform.TransformerException {
-    super(analysis);
-  }
+    /**
+     * Create a SelfIteratorNoPredicate object.
+     *
+     * @param analysis Analysis bits.
+     * @throws javax.xml.transform.TransformerException if any
+     */
+    SelfIteratorNoPredicate(final int analysis) throws javax.xml.transform.TransformerException {
+        super(analysis);
+    }
 
-  /** {@inheritDoc} */
-  @Override
-  public int nextNode() {
-    if (m_foundLast) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int nextNode() {
+        if (m_foundLast) {
+            return DTM.NULL;
+        }
+
+        final int next;
+
+        m_lastFetched = next = (DTM.NULL == m_lastFetched) ? m_context : DTM.NULL;
+
+        // m_lastFetched = next;
+        if (DTM.NULL != next) {
+            m_pos++;
+
+            return next;
+        }
+
+        m_foundLast = true;
         return DTM.NULL;
     }
 
-    final int next;
-
-    m_lastFetched = next = (DTM.NULL == m_lastFetched) ? m_context : DTM.NULL;
-
-    // m_lastFetched = next;
-    if (DTM.NULL != next) {
-      m_pos++;
-
-      return next;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int asNode(final XPathContext xctxt) {
+        return xctxt.getCurrentNode();
     }
 
-    m_foundLast = true;
-    return DTM.NULL;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int asNode(final XPathContext xctxt) {
-    return xctxt.getCurrentNode();
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int getLastPos(final XPathContext xctxt) {
-    return 1;
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getLastPos(final XPathContext xctxt) {
+        return 1;
+    }
 }

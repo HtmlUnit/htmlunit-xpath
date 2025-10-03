@@ -18,71 +18,78 @@
 package org.htmlunit.xpath.axes;
 
 import java.util.ArrayList;
+
 import org.htmlunit.xpath.xml.dtm.DTMIterator;
 import org.htmlunit.xpath.xml.utils.WrappedRuntimeException;
 
-/** Pool of object of a given type to pick from to help memory usage */
+/**
+ * Pool of object of a given type to pick from to help memory usage
+ */
 public final class IteratorPool {
 
-  /** Type of objects in this pool. */
-  private final DTMIterator m_orig;
+    /**
+     * Type of objects in this pool.
+     */
+    private final DTMIterator m_orig;
 
-  /** Stack of given objects this points to. */
-  private final ArrayList<DTMIterator> m_freeStack;
+    /**
+     * Stack of given objects this points to.
+     */
+    private final ArrayList<DTMIterator> m_freeStack;
 
-  /**
-   * Constructor IteratorPool
-   *
-   * @param original The original iterator from which all others will be cloned.
-   */
-  public IteratorPool(final DTMIterator original) {
-    m_orig = original;
-    m_freeStack = new ArrayList<>();
-  }
-
-  /**
-   * Get an instance of the given object in this pool
-   *
-   * @return An instance of the given object
-   */
-  public synchronized DTMIterator getInstanceOrThrow() throws CloneNotSupportedException {
-    // Check if the pool is empty.
-    if (m_freeStack.isEmpty()) {
-
-      // Create a new object if so.
-      return (DTMIterator) m_orig.clone();
+    /**
+     * Constructor IteratorPool
+     *
+     * @param original The original iterator from which all others will be cloned.
+     */
+    public IteratorPool(final DTMIterator original) {
+        m_orig = original;
+        m_freeStack = new ArrayList<>();
     }
-    // Remove object from end of free pool.
-    return m_freeStack.remove(m_freeStack.size() - 1);
-  }
 
-  /**
-   * Get an instance of the given object in this pool
-   *
-   * @return An instance of the given object
-   */
-  public synchronized DTMIterator getInstance() {
-    // Check if the pool is empty.
-    if (m_freeStack.isEmpty()) {
+    /**
+     * Get an instance of the given object in this pool
+     *
+     * @return An instance of the given object
+     */
+    public synchronized DTMIterator getInstanceOrThrow() throws CloneNotSupportedException {
+        // Check if the pool is empty.
+        if (m_freeStack.isEmpty()) {
 
-      // Create a new object if so.
-      try {
-        return (DTMIterator) m_orig.clone();
-      }
-      catch (final Exception ex) {
-        throw new WrappedRuntimeException(ex);
-      }
+            // Create a new object if so.
+            return (DTMIterator) m_orig.clone();
+        }
+        // Remove object from end of free pool.
+        return m_freeStack.remove(m_freeStack.size() - 1);
     }
-    // Remove object from end of free pool.
-    return m_freeStack.remove(m_freeStack.size() - 1);
-  }
 
-  /**
-   * Add an instance of the given object to the pool
-   *
-   * @param obj Object to add.
-   */
-  public synchronized void freeInstance(final DTMIterator obj) {
-    m_freeStack.add(obj);
-  }
+    /**
+     * Get an instance of the given object in this pool
+     *
+     * @return An instance of the given object
+     */
+    public synchronized DTMIterator getInstance() {
+        // Check if the pool is empty.
+        if (m_freeStack.isEmpty()) {
+
+            // Create a new object if so.
+            try {
+                return (DTMIterator) m_orig.clone();
+            }
+            catch (final Exception ex) {
+                throw new WrappedRuntimeException(ex);
+            }
+        }
+        // Remove object from end of free pool.
+        return m_freeStack.remove(m_freeStack.size() - 1);
+    }
+
+    /**
+     * Add an instance of the given object to the pool
+     *
+     * @param obj Object to add.
+     */
+    public synchronized void freeInstance(final DTMIterator obj) {
+        m_freeStack.add(obj);
+    }
 }

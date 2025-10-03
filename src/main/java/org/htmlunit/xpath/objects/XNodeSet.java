@@ -19,6 +19,7 @@ package org.htmlunit.xpath.objects;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.htmlunit.xpath.NodeSetDTM;
 import org.htmlunit.xpath.axes.NodeSequence;
 import org.htmlunit.xpath.xml.dtm.DTM;

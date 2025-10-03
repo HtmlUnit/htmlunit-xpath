@@ -28,74 +28,78 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
  */
 public class UnionChildIterator extends ChildTestIterator {
 
-  /**
-   * Even though these may hold full LocPathIterators, this array does not have to be cloned, since
-   * only the node test and predicate portion are used, and these only need static information.
-   * However, also note that index predicates can not be used!
-   */
-  private PredicatedNodeTest[] m_nodeTests = null;
+    /**
+     * Even though these may hold full LocPathIterators, this array does not have to be cloned, since
+     * only the node test and predicate portion are used, and these only need static information.
+     * However, also note that index predicates can not be used!
+     */
+    private PredicatedNodeTest[] m_nodeTests = null;
 
-  /** Constructor for UnionChildIterator */
-  public UnionChildIterator() {
-    super(null);
-  }
-
-  /**
-   * Add a node test to the union list.
-   *
-   * @param test reference to a NodeTest, which will be added directly to the list of node tests (in
-   *     other words, it will not be cloned). The parent of this test will be set to this object.
-   */
-  public void addNodeTest(final PredicatedNodeTest test) {
-
-    // Increase array size by only 1 at a time. Fix this
-    // if it looks to be a problem.
-    if (null == m_nodeTests) {
-      m_nodeTests = new PredicatedNodeTest[1];
-      m_nodeTests[0] = test;
+    /**
+     * Constructor for UnionChildIterator
+     */
+    public UnionChildIterator() {
+        super(null);
     }
-    else {
-      final PredicatedNodeTest[] tests = m_nodeTests;
-      final int len = m_nodeTests.length;
 
-      m_nodeTests = new PredicatedNodeTest[len + 1];
+    /**
+     * Add a node test to the union list.
+     *
+     * @param test reference to a NodeTest, which will be added directly to the list of node tests (in
+     *             other words, it will not be cloned). The parent of this test will be set to this object.
+     */
+    public void addNodeTest(final PredicatedNodeTest test) {
 
-      System.arraycopy(tests, 0, m_nodeTests, 0, len);
+        // Increase array size by only 1 at a time. Fix this
+        // if it looks to be a problem.
+        if (null == m_nodeTests) {
+            m_nodeTests = new PredicatedNodeTest[1];
+            m_nodeTests[0] = test;
+        }
+        else {
+            final PredicatedNodeTest[] tests = m_nodeTests;
+            final int len = m_nodeTests.length;
 
-      m_nodeTests[len] = test;
+            m_nodeTests = new PredicatedNodeTest[len + 1];
+
+            System.arraycopy(tests, 0, m_nodeTests, 0, len);
+
+            m_nodeTests[len] = test;
+        }
+        test.exprSetParent(this);
     }
-    test.exprSetParent(this);
-  }
 
-  /** {@inheritDoc} */
-  @Override
-  public short acceptNode(final int n) {
-    final XPathContext xctxt = getXPathContext();
-    try {
-      xctxt.pushCurrentNode(n);
-      for (final PredicatedNodeTest pnt : m_nodeTests) {
-        final XObject score = pnt.execute(xctxt, n);
-        if (score != NodeTest.SCORE_NONE) {
-          // Note that we are assuming there are no positional predicates!
-          if (pnt.getPredicateCount() > 0) {
-            if (pnt.executePredicates(n, xctxt)) {
-                return DTMIterator.FILTER_ACCEPT;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public short acceptNode(final int n) {
+        final XPathContext xctxt = getXPathContext();
+        try {
+            xctxt.pushCurrentNode(n);
+            for (final PredicatedNodeTest pnt : m_nodeTests) {
+                final XObject score = pnt.execute(xctxt, n);
+                if (score != NodeTest.SCORE_NONE) {
+                    // Note that we are assuming there are no positional predicates!
+                    if (pnt.getPredicateCount() > 0) {
+                        if (pnt.executePredicates(n, xctxt)) {
+                            return DTMIterator.FILTER_ACCEPT;
+                        }
+                    }
+                    else {
+                        return DTMIterator.FILTER_ACCEPT;
+                    }
+                }
             }
-          }
-          else {
-            return DTMIterator.FILTER_ACCEPT;
         }
-        }
-      }
-    }
-    catch (final javax.xml.transform.TransformerException se) {
+        catch (final javax.xml.transform.TransformerException se) {
 
-      // TODO: Fix this.
-      throw new RuntimeException(se.getMessage());
+            // TODO: Fix this.
+            throw new RuntimeException(se.getMessage());
+        }
+        finally {
+            xctxt.popCurrentNode();
+        }
+        return DTMIterator.FILTER_SKIP;
     }
-    finally {
-      xctxt.popCurrentNode();
-    }
-    return DTMIterator.FILTER_SKIP;
-  }
 }

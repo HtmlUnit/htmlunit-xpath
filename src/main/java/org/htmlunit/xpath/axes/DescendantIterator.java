@@ -37,233 +37,249 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
  */
 public class DescendantIterator extends LocPathIterator {
 
-  /**
-   * Create a DescendantIterator object.
-   *
-   * @param compiler A reference to the Compiler that contains the op map.
-   * @param opPos The position within the op map, which contains the location path expression for
-   *     this itterator.
-   * @throws javax.xml.transform.TransformerException if any
-   */
-  DescendantIterator(final Compiler compiler, final int opPos, final int analysis)
-      throws javax.xml.transform.TransformerException {
+    /**
+     * Create a DescendantIterator object.
+     *
+     * @param compiler A reference to the Compiler that contains the op map.
+     * @param opPos    The position within the op map, which contains the location path expression for
+     *                 this itterator.
+     * @throws javax.xml.transform.TransformerException if any
+     */
+    DescendantIterator(final Compiler compiler, final int opPos, final int analysis)
+            throws javax.xml.transform.TransformerException {
 
-    super(analysis);
+        super(analysis);
 
-    int firstStepPos = OpMap.getFirstChildPos(opPos);
-    final int stepType = compiler.getOp(firstStepPos);
+        int firstStepPos = OpMap.getFirstChildPos(opPos);
+        final int stepType = compiler.getOp(firstStepPos);
 
-    boolean orSelf = OpCodes.FROM_DESCENDANTS_OR_SELF == stepType;
-    boolean fromRoot = false;
-    if (OpCodes.FROM_SELF == stepType) {
-      orSelf = true;
-      // firstStepPos += 8;
-    }
-    else if (OpCodes.FROM_ROOT == stepType) {
-      fromRoot = true;
-      // Ugly code... will go away when AST work is done.
-      final int nextStepPos = compiler.getNextStepPos(firstStepPos);
-      if (compiler.getOp(nextStepPos) == OpCodes.FROM_DESCENDANTS_OR_SELF) {
-          orSelf = true;
-      }
-      // firstStepPos += 8;
-    }
+        boolean orSelf = OpCodes.FROM_DESCENDANTS_OR_SELF == stepType;
+        boolean fromRoot = false;
+        if (OpCodes.FROM_SELF == stepType) {
+            orSelf = true;
+            // firstStepPos += 8;
+        }
+        else if (OpCodes.FROM_ROOT == stepType) {
+            fromRoot = true;
+            // Ugly code... will go away when AST work is done.
+            final int nextStepPos = compiler.getNextStepPos(firstStepPos);
+            if (compiler.getOp(nextStepPos) == OpCodes.FROM_DESCENDANTS_OR_SELF) {
+                orSelf = true;
+            }
+            // firstStepPos += 8;
+        }
 
-    // Find the position of the last step.
-    int nextStepPos = firstStepPos;
-    while (true) {
-      nextStepPos = compiler.getNextStepPos(nextStepPos);
-      if (nextStepPos > 0) {
-        final int stepOp = compiler.getOp(nextStepPos);
-        if (OpCodes.ENDOP != stepOp) {
-            firstStepPos = nextStepPos;
+        // Find the position of the last step.
+        int nextStepPos = firstStepPos;
+        while (true) {
+            nextStepPos = compiler.getNextStepPos(nextStepPos);
+            if (nextStepPos > 0) {
+                final int stepOp = compiler.getOp(nextStepPos);
+                if (OpCodes.ENDOP != stepOp) {
+                    firstStepPos = nextStepPos;
+                }
+                else {
+                    break;
+                }
+            }
+            else {
+                break;
+            }
+        }
+
+        // Fix for http://nagoya.apache.org/bugzilla/show_bug.cgi?id=1336
+        if ((analysis & WalkerFactory.BIT_CHILD) != 0) {
+            orSelf = false;
+        }
+
+        if (fromRoot) {
+            if (orSelf) {
+                m_axis = Axis.DESCENDANTSORSELFFROMROOT;
+            }
+            else {
+                m_axis = Axis.DESCENDANTSFROMROOT;
+            }
+        }
+        else if (orSelf) {
+            m_axis = Axis.DESCENDANTORSELF;
         }
         else {
+            m_axis = Axis.DESCENDANT;
+        }
+
+        final int whatToShow = compiler.getWhatToShow(firstStepPos);
+
+        if ((0
+                == (whatToShow
+                & (DTMFilter.SHOW_ATTRIBUTE
+                | DTMFilter.SHOW_ELEMENT
+                | DTMFilter.SHOW_PROCESSING_INSTRUCTION)))
+                || (whatToShow == DTMFilter.SHOW_ALL)) {
+            initNodeTest(whatToShow);
+        }
+        else {
+            initNodeTest(
+                    whatToShow, compiler.getStepNS(firstStepPos), compiler.getStepLocalName(firstStepPos));
+        }
+        initPredicateInfo(compiler, firstStepPos);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DTMIterator cloneWithReset() throws CloneNotSupportedException {
+
+        final DescendantIterator clone = (DescendantIterator) super.cloneWithReset();
+        clone.m_traverser = m_traverser;
+
+        clone.resetProximityPositions();
+
+        return clone;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int nextNode() {
+        if (m_foundLast) {
+            return DTM.NULL;
+        }
+
+        if (DTM.NULL == m_lastFetched) {
+            resetProximityPositions();
+        }
+
+        int next;
+
+        do {
+            if (0 == m_extendedTypeID) {
+                next =
+                        m_lastFetched =
+                                (DTM.NULL == m_lastFetched)
+                                        ? m_traverser.first(m_context)
+                                        : m_traverser.next(m_context, m_lastFetched);
+            }
+            else {
+                next =
+                        m_lastFetched =
+                                (DTM.NULL == m_lastFetched)
+                                        ? m_traverser.first(m_context, m_extendedTypeID)
+                                        : m_traverser.next(m_context, m_lastFetched, m_extendedTypeID);
+            }
+
+            if (DTM.NULL != next) {
+                if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) {
+                    break;
+                }
+                continue;
+            }
+
             break;
         }
-      }
-      else {
-          break;
-      }
-    }
+        while (next != DTM.NULL);
 
-    // Fix for http://nagoya.apache.org/bugzilla/show_bug.cgi?id=1336
-    if ((analysis & WalkerFactory.BIT_CHILD) != 0) {
-        orSelf = false;
-    }
+        if (DTM.NULL != next) {
+            m_pos++;
+            return next;
+        }
 
-    if (fromRoot) {
-      if (orSelf) {
-          m_axis = Axis.DESCENDANTSORSELFFROMROOT;
-      }
-      else {
-          m_axis = Axis.DESCENDANTSFROMROOT;
-      }
-    }
-    else if (orSelf) {
-        m_axis = Axis.DESCENDANTORSELF;
-    }
-    else {
-        m_axis = Axis.DESCENDANT;
-    }
-
-    final int whatToShow = compiler.getWhatToShow(firstStepPos);
-
-    if ((0
-            == (whatToShow
-                & (DTMFilter.SHOW_ATTRIBUTE
-                    | DTMFilter.SHOW_ELEMENT
-                    | DTMFilter.SHOW_PROCESSING_INSTRUCTION)))
-        || (whatToShow == DTMFilter.SHOW_ALL)) {
-        initNodeTest(whatToShow);
-    }
-    else {
-      initNodeTest(
-          whatToShow, compiler.getStepNS(firstStepPos), compiler.getStepLocalName(firstStepPos));
-    }
-    initPredicateInfo(compiler, firstStepPos);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public DTMIterator cloneWithReset() throws CloneNotSupportedException {
-
-    final DescendantIterator clone = (DescendantIterator) super.cloneWithReset();
-    clone.m_traverser = m_traverser;
-
-    clone.resetProximityPositions();
-
-    return clone;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int nextNode() {
-    if (m_foundLast) {
+        m_foundLast = true;
         return DTM.NULL;
     }
 
-    if (DTM.NULL == m_lastFetched) {
-      resetProximityPositions();
-    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setRoot(final int context, final Object environment) {
+        super.setRoot(context, environment);
+        m_traverser = m_cdtm.getAxisTraverser(m_axis);
 
-    int next;
-
-    try {
-      do {
-        if (0 == m_extendedTypeID) {
-          next =
-              m_lastFetched =
-                  (DTM.NULL == m_lastFetched)
-                      ? m_traverser.first(m_context)
-                      : m_traverser.next(m_context, m_lastFetched);
+        final String localName = getLocalName();
+        final String namespace = getNamespace();
+        final int what = m_whatToShow;
+        if (DTMFilter.SHOW_ALL == what
+                || NodeTest.WILD.equals(localName)
+                || NodeTest.WILD.equals(namespace)) {
+            m_extendedTypeID = 0;
         }
         else {
-          next =
-              m_lastFetched =
-                  (DTM.NULL == m_lastFetched)
-                      ? m_traverser.first(m_context, m_extendedTypeID)
-                      : m_traverser.next(m_context, m_lastFetched, m_extendedTypeID);
+            final int type = getNodeTypeTest(what);
+            m_extendedTypeID = m_cdtm.getExpandedTypeID(namespace, localName, type);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int asNode(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
+        if (getPredicateCount() > 0) {
+            return super.asNode(xctxt);
         }
 
-        if (DTM.NULL != next) {
-          if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) {
-              break;
-          }
-          continue;
+        final int current = xctxt.getCurrentNode();
+
+        final DTM dtm = xctxt.getDTM(current);
+        final DTMAxisTraverser traverser = dtm.getAxisTraverser(m_axis);
+
+        final String localName = getLocalName();
+        final String namespace = getNamespace();
+        final int what = m_whatToShow;
+        if (DTMFilter.SHOW_ALL == what || localName == NodeTest.WILD || namespace == NodeTest.WILD) {
+            return traverser.first(current);
+        }
+        final int type = getNodeTypeTest(what);
+        final int extendedType = dtm.getExpandedTypeID(namespace, localName, type);
+        return traverser.first(current, extendedType);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void detach() {
+        m_traverser = null;
+        m_extendedTypeID = 0;
+
+        // Always call the superclass detach last!
+        super.detach();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getAxis() {
+        return m_axis;
+    }
+
+    /**
+     * The traverser to use to navigate over the descendants.
+     */
+    protected transient DTMAxisTraverser m_traverser;
+
+    /**
+     * The axis that we are traversing.
+     */
+    protected int m_axis;
+
+    /**
+     * The extended type ID, not set until setRoot.
+     */
+    protected int m_extendedTypeID;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean deepEquals(final Expression expr) {
+        if (!super.deepEquals(expr)) {
+            return false;
         }
 
-        break;
-      }
-      while (next != DTM.NULL);
-
-      if (DTM.NULL != next) {
-        m_pos++;
-        return next;
-      }
-
-      m_foundLast = true;
-      return DTM.NULL;
+        return m_axis == ((DescendantIterator) expr).m_axis;
     }
-    finally {
-    }
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void setRoot(final int context, final Object environment) {
-    super.setRoot(context, environment);
-    m_traverser = m_cdtm.getAxisTraverser(m_axis);
-
-    final String localName = getLocalName();
-    final String namespace = getNamespace();
-    final int what = m_whatToShow;
-    if (DTMFilter.SHOW_ALL == what
-        || NodeTest.WILD.equals(localName)
-        || NodeTest.WILD.equals(namespace)) {
-      m_extendedTypeID = 0;
-    }
-    else {
-      final int type = getNodeTypeTest(what);
-      m_extendedTypeID = m_cdtm.getExpandedTypeID(namespace, localName, type);
-    }
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int asNode(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    if (getPredicateCount() > 0) {
-        return super.asNode(xctxt);
-    }
-
-    final int current = xctxt.getCurrentNode();
-
-    final DTM dtm = xctxt.getDTM(current);
-    final DTMAxisTraverser traverser = dtm.getAxisTraverser(m_axis);
-
-    final String localName = getLocalName();
-    final String namespace = getNamespace();
-    final int what = m_whatToShow;
-    if (DTMFilter.SHOW_ALL == what || localName == NodeTest.WILD || namespace == NodeTest.WILD) {
-      return traverser.first(current);
-    }
-    final int type = getNodeTypeTest(what);
-    final int extendedType = dtm.getExpandedTypeID(namespace, localName, type);
-    return traverser.first(current, extendedType);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void detach() {
-    m_traverser = null;
-    m_extendedTypeID = 0;
-
-    // Always call the superclass detach last!
-    super.detach();
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int getAxis() {
-    return m_axis;
-  }
-
-  /** The traverser to use to navigate over the descendants. */
-  protected transient DTMAxisTraverser m_traverser;
-
-  /** The axis that we are traversing. */
-  protected int m_axis;
-
-  /** The extended type ID, not set until setRoot. */
-  protected int m_extendedTypeID;
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean deepEquals(final Expression expr) {
-    if (!super.deepEquals(expr)) {
-        return false;
-    }
-
-    return m_axis == ((DescendantIterator) expr).m_axis;
-  }
 }

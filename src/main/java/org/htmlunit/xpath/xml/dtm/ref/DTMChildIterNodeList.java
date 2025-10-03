@@ -24,7 +24,7 @@ import org.w3c.dom.Node;
  * <code>DTMNodeList</code> gives us an implementation of the DOM's NodeList interface wrapped
  * around a DTM Iterator. The author considers this something of an abominations, since NodeList was
  * not intended to be a general purpose "list of nodes" API and is generally considered by the DOM
- * WG to have be a mistake... but I'm told that some of the XPath/XSLT folks say they must have this
+ * WG to have a mistake... but I'm told that some of the XPath/XSLT folks say they must have this
  * solution.
  *
  * <p>Please note that this is not necessarily equivlaent to a DOM NodeList operating over the same
@@ -52,7 +52,7 @@ public class DTMChildIterNodeList extends DTMNodeListBase {
    * Public constructor: Create a NodeList to support DTMNodeProxy.getChildren().
    *
    * <p>Unfortunately AxisIterators and DTMIterators don't share an API, so I can't use the existing
-   * Axis.CHILD iterator. Rather than create Yet Another Class, let's set up a special case of this
+   * Axis. CHILD iterator. Rather than create Yet Another Class, let's set up a special case of this
    * one.
    *
    * @param parentDTM The DTM containing this node

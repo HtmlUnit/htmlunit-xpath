@@ -18,7 +18,9 @@
 package org.htmlunit.xpath.xml.dtm.ref;
 
 import java.util.ArrayList;
+
 import javax.xml.transform.Source;
+
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.res.XPATHMessages;
 import org.htmlunit.xpath.xml.dtm.Axis;
@@ -473,8 +475,8 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     /** {@inheritDoc} */
     @Override
     public int next() {
-      // Bugzilla 8324: We were forgetting to skip Attrs and NS nodes.
-      // Also recoded the loop controls for clarity and to flatten out
+      // Bugzilla 8324: We were forgetting to skip Attrs and NS nodes,
+      // also recoded the loop controls for clarity and to flatten out
       // the tail-recursion.
       for (++_currentNode; _sp >= 0; ++_currentNode) {
         if (_currentNode < _stack[_sp]) {

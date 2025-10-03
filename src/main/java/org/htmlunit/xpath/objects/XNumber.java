@@ -17,6 +17,8 @@
  */
 package org.htmlunit.xpath.objects;
 
+import java.util.Arrays;
+
 import org.htmlunit.xpath.XPathContext;
 import org.htmlunit.xpath.XPathVisitor;
 
@@ -26,184 +28,200 @@ import org.htmlunit.xpath.XPathVisitor;
  */
 public class XNumber extends XObject {
 
-  /**
-   * Value of the XNumber object.
-   *
-   * @serial
-   */
-  final double m_val;
+    /**
+     * Value of the XNumber object.
+     *
+     * @serial
+     */
+    final double m_val;
 
-  /**
-   * Construct a XNodeSet object.
-   *
-   * @param d Value of the object
-   */
-  public XNumber(final double d) {
-    super();
+    /**
+     * Construct a XNodeSet object.
+     *
+     * @param d Value of the object
+     */
+    public XNumber(final double d) {
+        super();
 
-    m_val = d;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int getType() {
-    return CLASS_NUMBER;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public String getTypeString() {
-    return "#NUMBER";
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public double num() {
-    return m_val;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public double num(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
-
-    return m_val;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean bool() {
-    return !Double.isNaN(m_val) && (m_val != 0.0);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public String str() {
-
-    if (Double.isNaN(m_val)) {
-      return "NaN";
-    }
-    else if (Double.isInfinite(m_val)) {
-      if (m_val > 0) {
-        return "Infinity";
-      }
-      return "-Infinity";
+        m_val = d;
     }
 
-    String s = Double.toString(m_val);
-    final int len = s.length();
-
-    if (s.charAt(len - 2) == '.' && s.charAt(len - 1) == '0') {
-      s = s.substring(0, len - 2);
-
-      if ("-0".equals(s)) {
-          return "0";
-      }
-
-      return s;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getType() {
+        return CLASS_NUMBER;
     }
 
-    int e = s.indexOf('E');
-
-    if (e < 0) {
-      if (s.charAt(len - 1) == '0') {
-        return s.substring(0, len - 1);
-      }
-      return s;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTypeString() {
+        return "#NUMBER";
     }
 
-    final int exp = Integer.parseInt(s.substring(e + 1));
-    final String sign;
-
-    if (s.charAt(0) == '-') {
-      sign = "-";
-      s = s.substring(1);
-
-      --e;
-    }
-    else {
-        sign = "";
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double num() {
+        return m_val;
     }
 
-    final int nDigits = e - 2;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double num(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    if (exp >= nDigits) {
-        return sign + s.substring(0, 1) + s.substring(2, e) + zeros(exp - nDigits);
+        return m_val;
     }
 
-    // Eliminate trailing 0's - bugzilla 14241
-    while (s.charAt(e - 1) == '0') {
-        e--;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean bool() {
+        return !Double.isNaN(m_val) && (m_val != 0.0);
     }
 
-    if (exp > 0) {
-      return sign + s.substring(0, 1) + s.substring(2, 2 + exp) + "." + s.substring(2 + exp, e);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String str() {
+        if (Double.isNaN(m_val)) {
+            return "NaN";
+        }
+        else if (Double.isInfinite(m_val)) {
+            if (m_val > 0) {
+                return "Infinity";
+            }
+            return "-Infinity";
+        }
+
+        String s = Double.toString(m_val);
+        final int len = s.length();
+
+        if (s.charAt(len - 2) == '.' && s.charAt(len - 1) == '0') {
+            s = s.substring(0, len - 2);
+
+            if ("-0".equals(s)) {
+                return "0";
+            }
+
+            return s;
+        }
+
+        int e = s.indexOf('E');
+
+        if (e < 0) {
+            if (s.charAt(len - 1) == '0') {
+                return s.substring(0, len - 1);
+            }
+            return s;
+        }
+
+        final int exp = Integer.parseInt(s.substring(e + 1));
+        final String sign;
+
+        if (s.charAt(0) == '-') {
+            sign = "-";
+            s = s.substring(1);
+
+            --e;
+        }
+        else {
+            sign = "";
+        }
+
+        final int nDigits = e - 2;
+
+        if (exp >= nDigits) {
+            return sign + s.substring(0, 1) + s.substring(2, e) + zeros(exp - nDigits);
+        }
+
+        // Eliminate trailing 0's - bugzilla 14241
+        while (s.charAt(e - 1) == '0') {
+            e--;
+        }
+
+        if (exp > 0) {
+            return sign + s.substring(0, 1) + s.substring(2, 2 + exp) + "." + s.substring(2 + exp, e);
+        }
+
+        return sign + "0." + zeros(-1 - exp) + s.substring(0, 1) + s.substring(2, e);
     }
 
-    return sign + "0." + zeros(-1 - exp) + s.substring(0, 1) + s.substring(2, e);
-  }
+    /**
+     * Return a string of '0' of the given length
+     *
+     * @param n Length of the string to be returned
+     * @return a string of '0' with the given length
+     */
+    private static String zeros(final int n) {
+        if (n < 1) {
+            return "";
+        }
 
-  /**
-   * Return a string of '0' of the given length
-   *
-   * @param n Length of the string to be returned
-   * @return a string of '0' with the given length
-   */
-  private static String zeros(final int n) {
-    if (n < 1) {
-        return "";
+        final char[] buf = new char[n];
+        Arrays.fill(buf, '0');
+
+        return new String(buf);
     }
 
-    final char[] buf = new char[n];
-
-    for (int i = 0; i < n; i++) {
-      buf[i] = '0';
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object object() {
+        if (null == m_obj) {
+            setObject(new Double(m_val));
+        }
+        return m_obj;
     }
 
-    return new String(buf);
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final XObject obj2) {
 
-  /** {@inheritDoc} */
-  @Override
-  public Object object() {
-    if (null == m_obj) {
-        setObject(new Double(m_val));
+        // In order to handle the 'all' semantics of
+        // nodeset comparisons, we always call the
+        // nodeset function.
+        final int t = obj2.getType();
+        try {
+            if (t == XObject.CLASS_NODESET) {
+                return obj2.equals(this);
+            }
+            else if (t == XObject.CLASS_BOOLEAN) {
+                return obj2.bool() == bool();
+            }
+            else {
+                return m_val == obj2.num();
+            }
+        }
+        catch (final javax.xml.transform.TransformerException te) {
+            throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
+        }
     }
-    return m_obj;
-  }
 
-  /** {@inheritDoc} */
-  @Override
-  public boolean equals(final XObject obj2) {
-
-    // In order to handle the 'all' semantics of
-    // nodeset comparisons, we always call the
-    // nodeset function.
-    final int t = obj2.getType();
-    try {
-      if (t == XObject.CLASS_NODESET) {
-          return obj2.equals(this);
-      }
-      else if (t == XObject.CLASS_BOOLEAN) {
-          return obj2.bool() == bool();
-      }
-      else {
-          return m_val == obj2.num();
-      }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isStableNumber() {
+        return true;
     }
-    catch (final javax.xml.transform.TransformerException te) {
-      throw new org.htmlunit.xpath.xml.utils.WrappedRuntimeException(te);
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void callVisitors(final XPathVisitor visitor) {
+        visitor.visitNumberLiteral();
     }
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean isStableNumber() {
-    return true;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void callVisitors(final XPathVisitor visitor) {
-    visitor.visitNumberLiteral();
-  }
 }
