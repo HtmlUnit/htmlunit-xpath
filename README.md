@@ -7,7 +7,7 @@ was discontinued in 2019. Since HtmlUnit only uses XPath functionality, we decid
 and remove all things that are no longer needed. In addition, we made some code updates for JDK 8 
 and we added unit tests and the maven-based build.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-xpath/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-xpath)
+[![Maven Central Version](https://img.shields.io/maven-central/v/org.htmlunit/htmlunit-xpath)](https://central.sonatype.com/artifact/org.htmlunit/htmlunit-xpath)
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
