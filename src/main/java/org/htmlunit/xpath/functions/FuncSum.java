@@ -27,30 +27,33 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
 /** Execute the Sum() function. */
 public class FuncSum extends FunctionOneArg {
 
-  /**
-   * Execute the function. The function must return a valid object.
-   *
-   * @param xctxt The current execution context.
-   * @return A valid XObject.
-   * @throws javax.xml.transform.TransformerException in case of error
-   */
-  @Override
-  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
+    /**
+     * Execute the function. The function must return a valid object.
+     *
+     * @param xctxt The current execution context.
+     * @return A valid XObject.
+     * @throws javax.xml.transform.TransformerException in case of error
+     */
+    @Override
+    public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
-    final DTMIterator nodes = m_arg0.asIterator(xctxt, xctxt.getCurrentNode());
-    double sum = 0.0;
-    int pos;
+        final DTMIterator nodes = m_arg0.asIterator(xctxt, xctxt.getCurrentNode());
+        try {
+            double sum = 0.0;
+            int pos;
 
-    while (DTM.NULL != (pos = nodes.nextNode())) {
-      final DTM dtm = nodes.getDTM(pos);
-      final XString s = dtm.getStringValue(pos);
+            while (DTM.NULL != (pos = nodes.nextNode())) {
+                final DTM dtm = nodes.getDTM(pos);
+                final XString s = dtm.getStringValue(pos);
 
-      if (null != s) {
-          sum += s.toDouble();
-      }
+                if (null != s) {
+                    sum += s.toDouble();
+                }
+            }
+            return new XNumber(sum);
+        }
+        finally {
+            nodes.detach();
+        }
     }
-    nodes.detach();
-
-    return new XNumber(sum);
-  }
 }

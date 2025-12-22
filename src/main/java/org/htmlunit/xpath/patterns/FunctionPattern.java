@@ -28,115 +28,122 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
 /** Match pattern step that contains a function. */
 public class FunctionPattern extends StepPattern {
 
-  /**
-   * Construct a FunctionPattern from a {@link org.htmlunit.xpath.functions.Function expression}.
-   *
-   * <p>NEEDSDOC @param expr
-   */
-  public FunctionPattern(final Expression expr, final int axis) {
+    /**
+     * Construct a FunctionPattern from a
+     * {@link org.htmlunit.xpath.functions.Function expression}.
+     *
+     * <p>
+     * NEEDSDOC @param expr
+     */
+    public FunctionPattern(final Expression expr, final int axis) {
 
-    super(0, null, null, axis);
+        super(0, null, null, axis);
 
-    m_functionExpr = expr;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public final void calcScore() {
-
-    m_score = SCORE_OTHER;
-
-    if (null == m_targetString) {
-        calcTargetString();
+        m_functionExpr = expr;
     }
-  }
 
-  /**
-   * Should be a {@link org.htmlunit.xpath.functions.Function expression}.
-   *
-   * @serial
-   */
-  final Expression m_functionExpr;
+    /** {@inheritDoc} */
+    @Override
+    public final void calcScore() {
 
-  /** {@inheritDoc} */
-  @Override
-  public XObject execute(final XPathContext xctxt, final int context)
-      throws javax.xml.transform.TransformerException {
+        m_score = SCORE_OTHER;
 
-    final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
-    XNumber score = SCORE_NONE;
-
-    if (null != nl) {
-      int n;
-
-      while (DTM.NULL != (n = nl.nextNode())) {
-        score = (n == context) ? SCORE_OTHER : SCORE_NONE;
-
-        if (score == SCORE_OTHER) {
-          break;
+        if (null == m_targetString) {
+            calcTargetString();
         }
-      }
     }
-    nl.detach();
 
-    return score;
-  }
+    /**
+     * Should be a {@link org.htmlunit.xpath.functions.Function expression}.
+     *
+     * @serial
+     */
+    final Expression m_functionExpr;
 
-  /** {@inheritDoc} */
-  @Override
-  public XObject execute(
-      final XPathContext xctxt, final int context, final DTM dtm, final int expType)
-      throws javax.xml.transform.TransformerException {
+    /** {@inheritDoc} */
+    @Override
+    public XObject execute(final XPathContext xctxt, final int context)
+            throws javax.xml.transform.TransformerException {
 
-    final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
-    XNumber score = SCORE_NONE;
+        final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
+        try {
+            XNumber score = SCORE_NONE;
 
-    if (null != nl) {
-      int n;
+            if (null != nl) {
+                int n;
 
-      while (DTM.NULL != (n = nl.nextNode())) {
-        score = (n == context) ? SCORE_OTHER : SCORE_NONE;
+                while (DTM.NULL != (n = nl.nextNode())) {
+                    score = (n == context) ? SCORE_OTHER : SCORE_NONE;
 
-        if (score == SCORE_OTHER) {
-          break;
+                    if (score == SCORE_OTHER) {
+                        break;
+                    }
+                }
+            }
+
+            return score;
         }
-      }
-
-      nl.detach();
-    }
-
-    return score;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
-
-    final int context = xctxt.getCurrentNode();
-    final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
-    XNumber score = SCORE_NONE;
-
-    if (null != nl) {
-      int n;
-
-      while (DTM.NULL != (n = nl.nextNode())) {
-        score = (n == context) ? SCORE_OTHER : SCORE_NONE;
-
-        if (score == SCORE_OTHER) {
-          break;
+        finally {
+            nl.detach();
         }
-      }
-
-      nl.detach();
     }
 
-    return score;
-  }
+    /** {@inheritDoc} */
+    @Override
+    public XObject execute(final XPathContext xctxt, final int context, final DTM dtm, final int expType)
+            throws javax.xml.transform.TransformerException {
 
-  /** {@inheritDoc} */
-  @Override
-  protected void callSubtreeVisitors(final XPathVisitor visitor) {
-    m_functionExpr.callVisitors(visitor);
-    super.callSubtreeVisitors(visitor);
-  }
+        final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
+        try {
+            XNumber score = SCORE_NONE;
+
+            if (null != nl) {
+                int n;
+                while (DTM.NULL != (n = nl.nextNode())) {
+                    score = (n == context) ? SCORE_OTHER : SCORE_NONE;
+
+                    if (score == SCORE_OTHER) {
+                        break;
+                    }
+                }
+            }
+            return score;
+        }
+        finally {
+            nl.detach();
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
+
+        final int context = xctxt.getCurrentNode();
+        final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
+        try {
+            XNumber score = SCORE_NONE;
+
+            if (null != nl) {
+                int n;
+                while (DTM.NULL != (n = nl.nextNode())) {
+                    score = (n == context) ? SCORE_OTHER : SCORE_NONE;
+
+                    if (score == SCORE_OTHER) {
+                        break;
+                    }
+                }
+            }
+            return score;
+        }
+        finally {
+            nl.detach();
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected void callSubtreeVisitors(final XPathVisitor visitor) {
+        m_functionExpr.callVisitors(visitor);
+        super.callSubtreeVisitors(visitor);
+    }
 }

@@ -30,17 +30,18 @@ import org.htmlunit.xpath.xml.dtm.DTMManager;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
- * This class extends NodeSetDTM, which implements NodeIterator, and fetches nodes one at a time in
- * document order based on a XPath.<br>
+ * This class extends NodeSetDTM, which implements NodeIterator, and fetches
+ * nodes one at a time in document order based on a XPath.<br>
  *
  * @see <a href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a>.
- * <p>If setShouldCacheNodes(true) is called, as each node is iterated via nextNode(), the node
- * is also stored in the NodeVector, so that previousNode() can easily be done, except in the
- * case where the LocPathIterator is "owned" by a UnionPathIterator, in which case the
- * UnionPathIterator will cache the nodes.
+ *      <p>
+ *      If setShouldCacheNodes(true) is called, as each node is iterated via
+ *      nextNode(), the node is also stored in the NodeVector, so that
+ *      previousNode() can easily be done, except in the case where the
+ *      LocPathIterator is "owned" by a UnionPathIterator, in which case the
+ *      UnionPathIterator will cache the nodes.
  */
-public abstract class LocPathIterator extends PredicatedNodeTest
-        implements Cloneable, DTMIterator, PathComponent {
+public abstract class LocPathIterator extends PredicatedNodeTest implements Cloneable, DTMIterator, PathComponent {
 
     /**
      * Create a LocPathIterator object.
@@ -51,7 +52,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     /**
      * Create a LocPathIterator object.
      *
-     * @param nscontext The namespace context for this iterator, should be OK if null.
+     * @param nscontext The namespace context for this iterator, should be OK if
+     *                  null.
      */
     protected LocPathIterator(final PrefixResolver nscontext) {
         setLocPathIterator(this);
@@ -59,8 +61,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     }
 
     /**
-     * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
-     * call back into the Compiler to create predicate expressions.
+     * Create a LocPathIterator object, including creation of step walkers from the
+     * opcode list, and call back into the Compiler to create predicate expressions.
      *
      * @throws javax.xml.transform.TransformerException if any
      */
@@ -69,11 +71,12 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     }
 
     /**
-     * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
-     * call back into the Compiler to create predicate expressions.
+     * Create a LocPathIterator object, including creation of step walkers from the
+     * opcode list, and call back into the Compiler to create predicate expressions.
      *
-     * @param shouldLoadWalkers True if walkers should be loaded, or false if this is a derived
-     *                          iterator and it doesn't wish to load child walkers.
+     * @param shouldLoadWalkers True if walkers should be loaded, or false if this
+     *                          is a derived iterator and it doesn't wish to load
+     *                          child walkers.
      * @throws javax.xml.transform.TransformerException if any
      */
     protected LocPathIterator(final int analysis, final boolean shouldLoadWalkers)
@@ -133,12 +136,16 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     @Override
     public int asNode(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
         final DTMIterator iter = m_clones.getInstance();
-        final int current = xctxt.getCurrentNode();
-        iter.setRoot(current, xctxt);
+        try {
+            final int current = xctxt.getCurrentNode();
+            iter.setRoot(current, xctxt);
 
-        final int next = iter.nextNode();
-        iter.detach();
-        return next;
+            final int next = iter.nextNode();
+            return next;
+        }
+        finally {
+            iter.detach();
+        }
     }
 
     /**
@@ -443,16 +450,16 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     /**
      * The XPath execution context we are operating on.
      *
-     * @return XPath execution context this iterator is operating on, or null if setRoot has not been
-     * called.
+     * @return XPath execution context this iterator is operating on, or null if
+     *         setRoot has not been called.
      */
     public final XPathContext getXPathContext() {
         return m_execContext;
     }
 
     /**
-     * Return the saved reference to the prefix resolver that was in effect when this iterator was
-     * created.
+     * Return the saved reference to the prefix resolver that was in effect when
+     * this iterator was created.
      *
      * @return The prefix resolver or this iterator, which may be null.
      */
@@ -476,14 +483,15 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     }
 
     /**
-     * The pool for cloned iterators. Iterators need to be cloned because the hold running state, and
-     * thus the original iterator expression from the stylesheet pool can not be used.
+     * The pool for cloned iterators. Iterators need to be cloned because the hold
+     * running state, and thus the original iterator expression from the stylesheet
+     * pool can not be used.
      */
     protected final transient IteratorPool m_clones = new IteratorPool(this);
 
     /**
-     * The dtm of the context node. Careful about using this... it may not be the dtm of the current
-     * node.
+     * The dtm of the context node. Careful about using this... it may not be the
+     * dtm of the current node.
      */
     protected transient DTM m_cdtm;
 
@@ -493,8 +501,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     transient int m_stackFrame = -1;
 
     /**
-     * Value determined at compile time, indicates that this is an iterator at the top level of the
-     * expression, rather than inside a predicate.
+     * Value determined at compile time, indicates that this is an iterator at the
+     * top level of the expression, rather than inside a predicate.
      *
      * @serial
      */
@@ -506,14 +514,15 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     public transient int m_lastFetched = DTM.NULL;
 
     /**
-     * The context node for this iterator, which doesn't change through the course of the iteration.
+     * The context node for this iterator, which doesn't change through the course
+     * of the iteration.
      */
     protected transient int m_context = DTM.NULL;
 
     /**
-     * The node context from where the expression is being executed from (i.e. for current() support).
-     * Different from m_context in that this is the context for the entire expression, rather than the
-     * context for the subexpression.
+     * The node context from where the expression is being executed from (i.e. for
+     * current() support). Different from m_context in that this is the context for
+     * the entire expression, rather than the context for the subexpression.
      */
     protected transient int m_currentContextNode = DTM.NULL;
 
@@ -525,7 +534,8 @@ public abstract class LocPathIterator extends PredicatedNodeTest
     protected transient int m_length = -1;
 
     /**
-     * Fast access to the current prefix resolver. It isn't really clear that this is needed.
+     * Fast access to the current prefix resolver. It isn't really clear that this
+     * is needed.
      *
      * @serial
      */

@@ -25,13 +25,16 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
 /** Execute the Count() function. */
 public class FuncCount extends FunctionOneArg {
 
-  /** {@inheritDoc} */
-  @Override
-  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
-    final DTMIterator nl = m_arg0.asIterator(xctxt, xctxt.getCurrentNode());
-    final int i = nl.getLength();
-    nl.detach();
-
-    return new XNumber(i);
-  }
+    /** {@inheritDoc} */
+    @Override
+    public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
+        final DTMIterator nl = m_arg0.asIterator(xctxt, xctxt.getCurrentNode());
+        try {
+            final int i = nl.getLength();
+            return new XNumber(i);
+        }
+        finally {
+            nl.detach();
+        }
+    }
 }
