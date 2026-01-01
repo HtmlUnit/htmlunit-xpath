@@ -231,7 +231,7 @@ public class XPATHErrorResources extends ListResourceBundle {
       // the characters specified by the substitution text were encountered instead.
       {
         ER_EXPECTED_LOC_PATH,
-        "A location path was expected, but the following token was encountered\u003a  {0}"
+        "A location path was expected, but the following token was encountered:  {0}"
       },
 
       // Note to translators: A location path is a form of XPath expression.

@@ -115,10 +115,9 @@ public class ReverseAxesWalker extends AxesWalker {
                 wi().setLastUsedWalker(clone);
 
                 // Count 'em all
-                count++;
-                while (DTM.NULL != clone.nextNode()) {
+                do {
                     count++;
-                }
+                } while (DTM.NULL != clone.nextNode());
 
                 m_proximityPositions[predicateIndex] = count;
             }

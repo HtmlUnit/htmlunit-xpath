@@ -30,7 +30,7 @@ public class OpMapVector {
   protected int[] m_map; // IntStack is trying to see this directly
 
   /** Position where size of array is kept */
-  protected int m_lengthPos;
+  protected final int m_lengthPos;
 
   /** Size of array */
   protected int m_mapSize;

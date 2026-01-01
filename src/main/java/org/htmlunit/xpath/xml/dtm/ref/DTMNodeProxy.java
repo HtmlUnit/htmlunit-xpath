@@ -913,7 +913,7 @@ public class DTMNodeProxy
               final String attrPrefix = attr.getPrefix();
               final String value = attr.getNodeValue();
               namespace = attr.getNamespaceURI();
-              if (namespace != null && "http://www.w3.org/2000/xmlns/".equals(namespace)) {
+              if ("http://www.w3.org/2000/xmlns/".equals(namespace)) {
                 // at this point we are dealing with DOM Level 2 nodes only
                 if (specifiedPrefix == null && "xmlns".equals(attr.getNodeName())) {
                   // default namespace
