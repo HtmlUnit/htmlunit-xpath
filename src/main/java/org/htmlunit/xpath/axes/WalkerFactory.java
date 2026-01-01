@@ -247,44 +247,27 @@ public class WalkerFactory {
 
         final int stepType = compiler.getOp(stepOpCodePos);
 
-        switch (stepType) {
-            case OpCodes.FROM_FOLLOWING:
-                return Axis.FOLLOWING;
-            case OpCodes.FROM_FOLLOWING_SIBLINGS:
-                return Axis.FOLLOWINGSIBLING;
-            case OpCodes.FROM_PRECEDING:
-                return Axis.PRECEDING;
-            case OpCodes.FROM_PRECEDING_SIBLINGS:
-                return Axis.PRECEDINGSIBLING;
-            case OpCodes.FROM_PARENT:
-                return Axis.PARENT;
-            case OpCodes.FROM_NAMESPACE:
-                return Axis.NAMESPACE;
-            case OpCodes.FROM_ANCESTORS:
-                return Axis.ANCESTOR;
-            case OpCodes.FROM_ANCESTORS_OR_SELF:
-                return Axis.ANCESTORORSELF;
-            case OpCodes.FROM_ATTRIBUTES:
-                return Axis.ATTRIBUTE;
-            case OpCodes.FROM_ROOT:
-                return Axis.ROOT;
-            case OpCodes.FROM_CHILDREN:
-                return Axis.CHILD;
-            case OpCodes.FROM_DESCENDANTS_OR_SELF:
-                return Axis.DESCENDANTORSELF;
-            case OpCodes.FROM_DESCENDANTS:
-                return Axis.DESCENDANT;
-            case OpCodes.FROM_SELF:
-                return Axis.SELF;
-            case OpCodes.OP_FUNCTION:
-            case OpCodes.OP_GROUP:
-            case OpCodes.OP_VARIABLE:
-                return Axis.FILTEREDLIST;
-        }
+        return switch (stepType) {
+            case OpCodes.FROM_FOLLOWING -> Axis.FOLLOWING;
+            case OpCodes.FROM_FOLLOWING_SIBLINGS -> Axis.FOLLOWINGSIBLING;
+            case OpCodes.FROM_PRECEDING -> Axis.PRECEDING;
+            case OpCodes.FROM_PRECEDING_SIBLINGS -> Axis.PRECEDINGSIBLING;
+            case OpCodes.FROM_PARENT -> Axis.PARENT;
+            case OpCodes.FROM_NAMESPACE -> Axis.NAMESPACE;
+            case OpCodes.FROM_ANCESTORS -> Axis.ANCESTOR;
+            case OpCodes.FROM_ANCESTORS_OR_SELF -> Axis.ANCESTORORSELF;
+            case OpCodes.FROM_ATTRIBUTES -> Axis.ATTRIBUTE;
+            case OpCodes.FROM_ROOT -> Axis.ROOT;
+            case OpCodes.FROM_CHILDREN -> Axis.CHILD;
+            case OpCodes.FROM_DESCENDANTS_OR_SELF -> Axis.DESCENDANTORSELF;
+            case OpCodes.FROM_DESCENDANTS -> Axis.DESCENDANT;
+            case OpCodes.FROM_SELF -> Axis.SELF;
+            case OpCodes.OP_FUNCTION, OpCodes.OP_GROUP, OpCodes.OP_VARIABLE -> Axis.FILTEREDLIST;
+            default -> throw new RuntimeException(
+                    XPATHMessages.createXPATHMessage(
+                            XPATHErrorResources.ER_NULL_ERROR_HANDLER, new Object[]{Integer.toString(stepType)}));
+        };
 
-        throw new RuntimeException(
-                XPATHMessages.createXPATHMessage(
-                        XPATHErrorResources.ER_NULL_ERROR_HANDLER, new Object[]{Integer.toString(stepType)}));
     }
 
     /**
@@ -294,48 +277,27 @@ public class WalkerFactory {
      * @return One of BIT_ANCESTOR, etc.
      */
     public static int getAnalysisBitFromAxes(final int axis) {
-        switch (axis) { // Generate new traverser
-            case Axis.ANCESTOR:
-                return BIT_ANCESTOR;
-            case Axis.ANCESTORORSELF:
-                return BIT_ANCESTOR_OR_SELF;
-            case Axis.ATTRIBUTE:
-                return BIT_ATTRIBUTE;
-            case Axis.CHILD:
-                return BIT_CHILD;
-            case Axis.DESCENDANT:
-                return BIT_DESCENDANT;
-            case Axis.DESCENDANTORSELF:
-                return BIT_DESCENDANT_OR_SELF;
-            case Axis.FOLLOWING:
-                return BIT_FOLLOWING;
-            case Axis.FOLLOWINGSIBLING:
-                return BIT_FOLLOWING_SIBLING;
-            case Axis.NAMESPACE:
-            case Axis.NAMESPACEDECLS:
-                return BIT_NAMESPACE;
-            case Axis.PARENT:
-                return BIT_PARENT;
-            case Axis.PRECEDING:
-                return BIT_PRECEDING;
-            case Axis.PRECEDINGSIBLING:
-                return BIT_PRECEDING_SIBLING;
-            case Axis.SELF:
-                return BIT_SELF;
-            case Axis.ALLFROMNODE:
-                return BIT_DESCENDANT_OR_SELF;
+        return switch (axis) { // Generate new traverser
+            case Axis.ANCESTOR -> BIT_ANCESTOR;
+            case Axis.ANCESTORORSELF -> BIT_ANCESTOR_OR_SELF;
+            case Axis.ATTRIBUTE -> BIT_ATTRIBUTE;
+            case Axis.CHILD -> BIT_CHILD;
+            case Axis.DESCENDANT -> BIT_DESCENDANT;
+            case Axis.DESCENDANTORSELF -> BIT_DESCENDANT_OR_SELF;
+            case Axis.FOLLOWING -> BIT_FOLLOWING;
+            case Axis.FOLLOWINGSIBLING -> BIT_FOLLOWING_SIBLING;
+            case Axis.NAMESPACE, Axis.NAMESPACEDECLS -> BIT_NAMESPACE;
+            case Axis.PARENT -> BIT_PARENT;
+            case Axis.PRECEDING -> BIT_PRECEDING;
+            case Axis.PRECEDINGSIBLING -> BIT_PRECEDING_SIBLING;
+            case Axis.SELF -> BIT_SELF;
+            case Axis.ALLFROMNODE -> BIT_DESCENDANT_OR_SELF;
             // case Axis.PRECEDINGANDANCESTOR :
-            case Axis.DESCENDANTSFROMROOT:
-            case Axis.ALL:
-            case Axis.DESCENDANTSORSELFFROMROOT:
-                return BIT_ANY_DESCENDANT_FROM_ROOT;
-            case Axis.ROOT:
-                return BIT_ROOT;
-            case Axis.FILTEREDLIST:
-                return BIT_FILTER;
-            default:
-                return BIT_FILTER;
-        }
+            case Axis.DESCENDANTSFROMROOT, Axis.ALL, Axis.DESCENDANTSORSELFFROMROOT -> BIT_ANY_DESCENDANT_FROM_ROOT;
+            case Axis.ROOT -> BIT_ROOT;
+            case Axis.FILTEREDLIST -> BIT_FILTER;
+            default -> BIT_FILTER;
+        };
     }
 
     static boolean functionProximateOrContainsProximate(final Compiler compiler, int opPos) {
@@ -862,17 +824,10 @@ public class WalkerFactory {
             case OpCodes.OP_VARIABLE:
             case OpCodes.OP_FUNCTION:
             case OpCodes.OP_GROUP:
-                final Expression expr;
-
-                switch (stepType) {
-                    case OpCodes.OP_VARIABLE:
-                    case OpCodes.OP_FUNCTION:
-                    case OpCodes.OP_GROUP:
-                        expr = compiler.compile(opPos);
-                        break;
-                    default:
-                        expr = compiler.compile(opPos + 2);
-                }
+                final Expression expr = switch (stepType) {
+                    case OpCodes.OP_VARIABLE, OpCodes.OP_FUNCTION, OpCodes.OP_GROUP -> compiler.compile(opPos);
+                    default -> compiler.compile(opPos + 2);
+                };
 
                 axis = Axis.FILTEREDLIST;
                 ai = new FunctionPattern(expr, axis);

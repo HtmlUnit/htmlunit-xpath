@@ -562,57 +562,25 @@ public abstract class DTMDefaultBase implements DTM {
         ps.println("Expanded Type ID: " + Integer.toHexString(exTypeID));
 
         final int type = _type(index);
-        final String typestring;
+        final String typestring = switch (type) {
+            case DTM.ATTRIBUTE_NODE -> "ATTRIBUTE_NODE";
+            case DTM.CDATA_SECTION_NODE -> "CDATA_SECTION_NODE";
+            case DTM.COMMENT_NODE -> "COMMENT_NODE";
+            case DTM.DOCUMENT_FRAGMENT_NODE -> "DOCUMENT_FRAGMENT_NODE";
+            case DTM.DOCUMENT_NODE -> "DOCUMENT_NODE";
+            case DTM.DOCUMENT_TYPE_NODE -> "DOCUMENT_NODE";
+            case DTM.ELEMENT_NODE -> "ELEMENT_NODE";
+            case DTM.ENTITY_NODE -> "ENTITY_NODE";
+            case DTM.ENTITY_REFERENCE_NODE -> "ENTITY_REFERENCE_NODE";
+            case DTM.NAMESPACE_NODE -> "NAMESPACE_NODE";
+            case DTM.NOTATION_NODE -> "NOTATION_NODE";
+            case DTM.NULL -> "NULL";
+            case DTM.PROCESSING_INSTRUCTION_NODE -> "PROCESSING_INSTRUCTION_NODE";
+            case DTM.TEXT_NODE -> "TEXT_NODE";
+            default -> "Unknown!";
+        };
 
-        switch (type) {
-          case DTM.ATTRIBUTE_NODE:
-            typestring = "ATTRIBUTE_NODE";
-            break;
-          case DTM.CDATA_SECTION_NODE:
-            typestring = "CDATA_SECTION_NODE";
-            break;
-          case DTM.COMMENT_NODE:
-            typestring = "COMMENT_NODE";
-            break;
-          case DTM.DOCUMENT_FRAGMENT_NODE:
-            typestring = "DOCUMENT_FRAGMENT_NODE";
-            break;
-          case DTM.DOCUMENT_NODE:
-            typestring = "DOCUMENT_NODE";
-            break;
-          case DTM.DOCUMENT_TYPE_NODE:
-            typestring = "DOCUMENT_NODE";
-            break;
-          case DTM.ELEMENT_NODE:
-            typestring = "ELEMENT_NODE";
-            break;
-          case DTM.ENTITY_NODE:
-            typestring = "ENTITY_NODE";
-            break;
-          case DTM.ENTITY_REFERENCE_NODE:
-            typestring = "ENTITY_REFERENCE_NODE";
-            break;
-          case DTM.NAMESPACE_NODE:
-            typestring = "NAMESPACE_NODE";
-            break;
-          case DTM.NOTATION_NODE:
-            typestring = "NOTATION_NODE";
-            break;
-          case DTM.NULL:
-            typestring = "NULL";
-            break;
-          case DTM.PROCESSING_INSTRUCTION_NODE:
-            typestring = "PROCESSING_INSTRUCTION_NODE";
-            break;
-          case DTM.TEXT_NODE:
-            typestring = "TEXT_NODE";
-            break;
-          default:
-            typestring = "Unknown!";
-            break;
-        }
-
-        ps.println("Type: " + typestring);
+          ps.println("Type: " + typestring);
 
         final int firstChild = _firstch(index);
 
@@ -693,56 +661,25 @@ public abstract class DTMDefaultBase implements DTM {
       return "[null]";
     }
 
-    final String typestring;
-    switch (getNodeType(nodeHandle)) {
-      case DTM.ATTRIBUTE_NODE:
-        typestring = "ATTR";
-        break;
-      case DTM.CDATA_SECTION_NODE:
-        typestring = "CDATA";
-        break;
-      case DTM.COMMENT_NODE:
-        typestring = "COMMENT";
-        break;
-      case DTM.DOCUMENT_FRAGMENT_NODE:
-        typestring = "DOC_FRAG";
-        break;
-      case DTM.DOCUMENT_NODE:
-        typestring = "DOC";
-        break;
-      case DTM.DOCUMENT_TYPE_NODE:
-        typestring = "DOC_TYPE";
-        break;
-      case DTM.ELEMENT_NODE:
-        typestring = "ELEMENT";
-        break;
-      case DTM.ENTITY_NODE:
-        typestring = "ENTITY";
-        break;
-      case DTM.ENTITY_REFERENCE_NODE:
-        typestring = "ENT_REF";
-        break;
-      case DTM.NAMESPACE_NODE:
-        typestring = "NAMESPACE";
-        break;
-      case DTM.NOTATION_NODE:
-        typestring = "NOTATION";
-        break;
-      case DTM.NULL:
-        typestring = "null";
-        break;
-      case DTM.PROCESSING_INSTRUCTION_NODE:
-        typestring = "PI";
-        break;
-      case DTM.TEXT_NODE:
-        typestring = "TEXT";
-        break;
-      default:
-        typestring = "Unknown!";
-        break;
-    }
+    final String typestring = switch (getNodeType(nodeHandle)) {
+        case DTM.ATTRIBUTE_NODE -> "ATTR";
+        case DTM.CDATA_SECTION_NODE -> "CDATA";
+        case DTM.COMMENT_NODE -> "COMMENT";
+        case DTM.DOCUMENT_FRAGMENT_NODE -> "DOC_FRAG";
+        case DTM.DOCUMENT_NODE -> "DOC";
+        case DTM.DOCUMENT_TYPE_NODE -> "DOC_TYPE";
+        case DTM.ELEMENT_NODE -> "ELEMENT";
+        case DTM.ENTITY_NODE -> "ENTITY";
+        case DTM.ENTITY_REFERENCE_NODE -> "ENT_REF";
+        case DTM.NAMESPACE_NODE -> "NAMESPACE";
+        case DTM.NOTATION_NODE -> "NOTATION";
+        case DTM.NULL -> "null";
+        case DTM.PROCESSING_INSTRUCTION_NODE -> "PI";
+        case DTM.TEXT_NODE -> "TEXT";
+        default -> "Unknown!";
+    };
 
-    return "["
+      return "["
         + nodeHandle
         + ": "
         + typestring

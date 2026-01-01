@@ -411,46 +411,37 @@ public class NodeTest extends Expression {
 
     final int nodeBit = m_whatToShow & (0x00000001 << (nodeType - 1));
 
-    switch (nodeBit) {
-      case DTMFilter.SHOW_DOCUMENT_FRAGMENT:
-      case DTMFilter.SHOW_DOCUMENT:
-        return SCORE_OTHER;
-      case DTMFilter.SHOW_COMMENT:
-        return m_score;
-      case DTMFilter.SHOW_CDATA_SECTION:
-      case DTMFilter.SHOW_TEXT:
-        return m_score;
-      case DTMFilter.SHOW_PROCESSING_INSTRUCTION:
-        return subPartMatch(dtm.getNodeName(context), m_name) ? m_score : SCORE_NONE;
+      return switch (nodeBit) {
+          case DTMFilter.SHOW_DOCUMENT_FRAGMENT, DTMFilter.SHOW_DOCUMENT -> SCORE_OTHER;
+          case DTMFilter.SHOW_COMMENT -> m_score;
+          case DTMFilter.SHOW_CDATA_SECTION, DTMFilter.SHOW_TEXT -> m_score;
+          case DTMFilter.SHOW_PROCESSING_INSTRUCTION ->
+                  subPartMatch(dtm.getNodeName(context), m_name) ? m_score : SCORE_NONE;
 
-        // From the draft: "Two expanded names are equal if they
-        // have the same local part, and either both have no URI or
-        // both have the same URI."
-        // "A node test * is true for any node of the principal node type.
-        // For example, child::* will select all element children of the
-        // context node, and attribute::* will select all attributes of
-        // the context node."
-        // "A node test can have the form NCName:*. In this case, the prefix
-        // is expanded in the same way as with a QName using the context
-        // namespace declarations. The node test will be true for any node
-        // of the principal type whose expanded name has the URI to which
-        // the prefix expands, regardless of the local part of the name."
-      case DTMFilter.SHOW_NAMESPACE: {
-          final String ns = dtm.getLocalName(context);
+          // From the draft: "Two expanded names are equal if they
+          // have the same local part, and either both have no URI or
+          // both have the same URI."
+          // "A node test * is true for any node of the principal node type.
+          // For example, child::* will select all element children of the
+          // context node, and attribute::* will select all attributes of
+          // the context node."
+          // "A node test can have the form NCName:*. In this case, the prefix
+          // is expanded in the same way as with a QName using the context
+          // namespace declarations. The node test will be true for any node
+          // of the principal type whose expanded name has the URI to which
+          // the prefix expands, regardless of the local part of the name."
+          case DTMFilter.SHOW_NAMESPACE -> {
+              final String ns = dtm.getLocalName(context);
 
-          return subPartMatch(ns, m_name) ? m_score : SCORE_NONE;
-        }
-      case DTMFilter.SHOW_ATTRIBUTE:
-      case DTMFilter.SHOW_ELEMENT: {
-          return (m_isTotallyWild
+              yield subPartMatch(ns, m_name) ? m_score : SCORE_NONE;
+          }
+          case DTMFilter.SHOW_ATTRIBUTE, DTMFilter.SHOW_ELEMENT -> (m_isTotallyWild
                   || (subPartMatchNS(dtm.getNamespaceURI(context), m_namespace)
-                      && subPartMatch(dtm.getLocalName(context), m_name)))
-              ? m_score
-              : SCORE_NONE;
-        }
-      default:
-        return SCORE_NONE;
-    } // end switch(testType)
+                  && subPartMatch(dtm.getLocalName(context), m_name)))
+                  ? m_score
+                  : SCORE_NONE;
+          default -> SCORE_NONE;
+      }; // end switch(testType)
   }
 
   /** {@inheritDoc} */
@@ -465,46 +456,37 @@ public class NodeTest extends Expression {
 
     final int nodeBit = m_whatToShow & (0x00000001 << ((dtm.getNodeType(context)) - 1));
 
-    switch (nodeBit) {
-      case DTMFilter.SHOW_DOCUMENT_FRAGMENT:
-      case DTMFilter.SHOW_DOCUMENT:
-        return SCORE_OTHER;
-      case DTMFilter.SHOW_COMMENT:
-        return m_score;
-      case DTMFilter.SHOW_CDATA_SECTION:
-      case DTMFilter.SHOW_TEXT:
-        return m_score;
-      case DTMFilter.SHOW_PROCESSING_INSTRUCTION:
-        return subPartMatch(dtm.getNodeName(context), m_name) ? m_score : SCORE_NONE;
+      return switch (nodeBit) {
+          case DTMFilter.SHOW_DOCUMENT_FRAGMENT, DTMFilter.SHOW_DOCUMENT -> SCORE_OTHER;
+          case DTMFilter.SHOW_COMMENT -> m_score;
+          case DTMFilter.SHOW_CDATA_SECTION, DTMFilter.SHOW_TEXT -> m_score;
+          case DTMFilter.SHOW_PROCESSING_INSTRUCTION ->
+                  subPartMatch(dtm.getNodeName(context), m_name) ? m_score : SCORE_NONE;
 
-        // From the draft: "Two expanded names are equal if they
-        // have the same local part, and either both have no URI or
-        // both have the same URI."
-        // "A node test * is true for any node of the principal node type.
-        // For example, child::* will select all element children of the
-        // context node, and attribute::* will select all attributes of
-        // the context node."
-        // "A node test can have the form NCName:*. In this case, the prefix
-        // is expanded in the same way as with a QName using the context
-        // namespace declarations. The node test will be true for any node
-        // of the principal type whose expanded name has the URI to which
-        // the prefix expands, regardless of the local part of the name."
-      case DTMFilter.SHOW_NAMESPACE: {
-          final String ns = dtm.getLocalName(context);
+          // From the draft: "Two expanded names are equal if they
+          // have the same local part, and either both have no URI or
+          // both have the same URI."
+          // "A node test * is true for any node of the principal node type.
+          // For example, child::* will select all element children of the
+          // context node, and attribute::* will select all attributes of
+          // the context node."
+          // "A node test can have the form NCName:*. In this case, the prefix
+          // is expanded in the same way as with a QName using the context
+          // namespace declarations. The node test will be true for any node
+          // of the principal type whose expanded name has the URI to which
+          // the prefix expands, regardless of the local part of the name."
+          case DTMFilter.SHOW_NAMESPACE -> {
+              final String ns = dtm.getLocalName(context);
 
-          return subPartMatch(ns, m_name) ? m_score : SCORE_NONE;
-        }
-      case DTMFilter.SHOW_ATTRIBUTE:
-      case DTMFilter.SHOW_ELEMENT: {
-          return (m_isTotallyWild
+              yield subPartMatch(ns, m_name) ? m_score : SCORE_NONE;
+          }
+          case DTMFilter.SHOW_ATTRIBUTE, DTMFilter.SHOW_ELEMENT -> (m_isTotallyWild
                   || (subPartMatchNS(dtm.getNamespaceURI(context), m_namespace)
-                      && subPartMatch(dtm.getLocalName(context), m_name)))
-              ? m_score
-              : SCORE_NONE;
-        }
-      default:
-        return SCORE_NONE;
-    } // end switch(testType)
+                  && subPartMatch(dtm.getLocalName(context), m_name)))
+                  ? m_score
+                  : SCORE_NONE;
+          default -> SCORE_NONE;
+      }; // end switch(testType)
   }
 
   /** {@inheritDoc} */

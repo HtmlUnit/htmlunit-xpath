@@ -601,45 +601,35 @@ public class Compiler extends OpMap {
       case OpCodes.NODETYPE_PI:
         return DTMFilter.SHOW_PROCESSING_INSTRUCTION;
       case OpCodes.NODETYPE_NODE:
-        switch (axesType) {
-          case OpCodes.FROM_NAMESPACE:
-            return DTMFilter.SHOW_NAMESPACE;
-          case OpCodes.FROM_ATTRIBUTES:
-          case OpCodes.MATCH_ATTRIBUTE:
-            return DTMFilter.SHOW_ATTRIBUTE;
-          case OpCodes.FROM_SELF:
-          case OpCodes.FROM_ANCESTORS_OR_SELF:
-          case OpCodes.FROM_DESCENDANTS_OR_SELF:
-            return DTMFilter.SHOW_ALL;
-          default:
-            if (getOp(0) == OpCodes.OP_MATCHPATTERN) {
-              return ~DTMFilter.SHOW_ATTRIBUTE
-                  & ~DTMFilter.SHOW_DOCUMENT
-                  & ~DTMFilter.SHOW_DOCUMENT_FRAGMENT;
-            }
-            return ~DTMFilter.SHOW_ATTRIBUTE;
-        }
+          return switch (axesType) {
+              case OpCodes.FROM_NAMESPACE -> DTMFilter.SHOW_NAMESPACE;
+              case OpCodes.FROM_ATTRIBUTES, OpCodes.MATCH_ATTRIBUTE -> DTMFilter.SHOW_ATTRIBUTE;
+              case OpCodes.FROM_SELF, OpCodes.FROM_ANCESTORS_OR_SELF, OpCodes.FROM_DESCENDANTS_OR_SELF ->
+                      DTMFilter.SHOW_ALL;
+              default -> {
+                  if (getOp(0) == OpCodes.OP_MATCHPATTERN) {
+                      yield ~DTMFilter.SHOW_ATTRIBUTE
+                              & ~DTMFilter.SHOW_DOCUMENT
+                              & ~DTMFilter.SHOW_DOCUMENT_FRAGMENT;
+                  }
+                  yield ~DTMFilter.SHOW_ATTRIBUTE;
+              }
+          };
       case OpCodes.NODETYPE_ROOT:
         return DTMFilter.SHOW_DOCUMENT | DTMFilter.SHOW_DOCUMENT_FRAGMENT;
       case OpCodes.NODETYPE_FUNCTEST:
         return NodeTest.SHOW_BYFUNCTION;
       case OpCodes.NODENAME:
-        switch (axesType) {
-          case OpCodes.FROM_NAMESPACE:
-            return DTMFilter.SHOW_NAMESPACE;
-          case OpCodes.FROM_ATTRIBUTES:
-          case OpCodes.MATCH_ATTRIBUTE:
-            return DTMFilter.SHOW_ATTRIBUTE;
+          return switch (axesType) {
+              case OpCodes.FROM_NAMESPACE -> DTMFilter.SHOW_NAMESPACE;
+              case OpCodes.FROM_ATTRIBUTES, OpCodes.MATCH_ATTRIBUTE -> DTMFilter.SHOW_ATTRIBUTE;
 
-            // break;
-          case OpCodes.MATCH_ANY_ANCESTOR:
-          case OpCodes.MATCH_IMMEDIATE_ANCESTOR:
-            return DTMFilter.SHOW_ELEMENT;
+              // break;
+              case OpCodes.MATCH_ANY_ANCESTOR, OpCodes.MATCH_IMMEDIATE_ANCESTOR -> DTMFilter.SHOW_ELEMENT;
 
-            // break;
-          default:
-            return DTMFilter.SHOW_ELEMENT;
-        }
+              // break;
+              default -> DTMFilter.SHOW_ELEMENT;
+          };
       default:
         // System.err.println("We should never reach here.");
         return DTMFilter.SHOW_ALL;

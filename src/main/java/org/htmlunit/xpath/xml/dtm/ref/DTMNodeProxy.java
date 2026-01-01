@@ -965,23 +965,18 @@ public class DTMNodeProxy
 
     final short type = this.getNodeType();
 
-    switch (type) {
-      case Node.ENTITY_NODE:
-      case Node.NOTATION_NODE:
-      case Node.DOCUMENT_FRAGMENT_NODE:
-      case Node.DOCUMENT_TYPE_NODE:
-        // type is unknown
-        return null;
-      case Node.ATTRIBUTE_NODE: {
-          if (this.getOwnerElement().getNodeType() == Node.ELEMENT_NODE) {
-            return getOwnerElement().lookupPrefix(namespaceURI);
+      return switch (type) {
+          case Node.ENTITY_NODE, Node.NOTATION_NODE, Node.DOCUMENT_FRAGMENT_NODE, Node.DOCUMENT_TYPE_NODE ->
+              // type is unknown
+                  null;
+          case Node.ATTRIBUTE_NODE -> {
+              if (this.getOwnerElement().getNodeType() == Node.ELEMENT_NODE) {
+                  yield getOwnerElement().lookupPrefix(namespaceURI);
+              }
+              yield null;
           }
-          return null;
-        }
-      default: {
-          return null;
-        }
-    }
+          default -> null;
+      };
   }
 
   /** {@inheritDoc} */
