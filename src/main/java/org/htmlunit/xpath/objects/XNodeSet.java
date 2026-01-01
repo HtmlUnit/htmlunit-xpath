@@ -41,8 +41,7 @@ public class XNodeSet extends NodeSequence {
    */
   public XNodeSet(final DTMIterator val) {
     super();
-    if (val instanceof XNodeSet) {
-      final XNodeSet nodeSet = (XNodeSet) val;
+    if (val instanceof XNodeSet nodeSet) {
       setIter(nodeSet.m_iter);
       m_dtmMgr = nodeSet.m_dtmMgr;
       m_last = nodeSet.m_last;
@@ -203,8 +202,8 @@ public class XNodeSet extends NodeSequence {
   public NodeSetDTM mutableNodeset() {
     final NodeSetDTM mnl;
 
-    if (m_obj instanceof NodeSetDTM) {
-      mnl = (NodeSetDTM) m_obj;
+    if (m_obj instanceof NodeSetDTM tM) {
+      mnl = tM;
     }
     else {
       mnl = new NodeSetDTM(iter());

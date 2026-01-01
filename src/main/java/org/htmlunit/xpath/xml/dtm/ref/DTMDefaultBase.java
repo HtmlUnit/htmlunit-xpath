@@ -180,8 +180,8 @@ public abstract class DTMDefaultBase implements DTM {
     }
 
     m_mgr = mgr;
-    if (mgr instanceof DTMManagerDefault) {
-      m_mgrDefault = (DTMManagerDefault) mgr;
+    if (mgr instanceof DTMManagerDefault default1) {
+      m_mgrDefault = default1;
     }
 
     m_documentBaseURI = (null != source) ? source.getSystemId() : null;

@@ -137,16 +137,16 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
      */
     public NodeSequence(final Object nodeVector) {
         super(nodeVector);
-        if (nodeVector instanceof NodeVector) {
-            setVector((NodeVector) nodeVector);
+        if (nodeVector instanceof NodeVector vector) {
+            setVector(vector);
         }
         if (null != nodeVector) {
             assertion(
                     nodeVector instanceof NodeVector,
                     "Must have a NodeVector as the object for NodeSequence!");
-            if (nodeVector instanceof DTMIterator) {
-                setIter((DTMIterator) nodeVector);
-                m_last = ((DTMIterator) nodeVector).getLength();
+            if (nodeVector instanceof DTMIterator iterator) {
+                setIter(iterator);
+                m_last = iterator.getLength();
             }
         }
     }
@@ -519,8 +519,8 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
      */
     @Override
     public int getAnalysisBits() {
-        if ((null != m_iter) && (m_iter instanceof PathComponent)) {
-            return ((PathComponent) m_iter).getAnalysisBits();
+        if ((null != m_iter) && (m_iter instanceof PathComponent component)) {
+            return component.getAnalysisBits();
         }
 
         return 0;
@@ -576,21 +576,19 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
      */
     @Override
     protected void setObject(final Object obj) {
-        if (obj instanceof NodeVector) {
+        if (obj instanceof NodeVector v) {
             // Keep our superclass informed of the current NodeVector
             // ... if we don't the smoketest fails (don't know why).
             super.setObject(obj);
 
             // A copy of the code of what SetVector() would do.
-            final NodeVector v = (NodeVector) obj;
             if (m_cache != null) {
                 m_cache.setVector(v);
             }
             m_cache = new IteratorCache();
             m_cache.setVector(v);
         }
-        else if (obj instanceof IteratorCache) {
-            final IteratorCache cache = (IteratorCache) obj;
+        else if (obj instanceof IteratorCache cache) {
             m_cache = cache;
 
             // Keep our superclass informed of the current NodeVector

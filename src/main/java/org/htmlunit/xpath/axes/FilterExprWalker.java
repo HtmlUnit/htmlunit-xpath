@@ -215,8 +215,8 @@ public class FilterExprWalker extends AxesWalker {
      */
     @Override
     public int getAnalysisBits() {
-        if (null != m_expr && m_expr instanceof PathComponent) {
-            return ((PathComponent) m_expr).getAnalysisBits();
+        if (null != m_expr && m_expr instanceof PathComponent component) {
+            return component.getAnalysisBits();
         }
         return WalkerFactory.BIT_FILTER;
     }

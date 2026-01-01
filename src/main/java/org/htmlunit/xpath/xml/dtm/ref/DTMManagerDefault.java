@@ -148,8 +148,8 @@ public class DTMManagerDefault extends DTMManager {
     final int dtmPos = getFirstFreeDTMID();
     final int documentID = dtmPos << IDENT_DTM_NODE_BITS;
 
-    if ((null != source) && source instanceof DOMSource) {
-      final DOM2DTM dtm = new DOM2DTM(this, (DOMSource) source, documentID, doIndexing);
+    if ((null != source) && source instanceof DOMSource mSource) {
+      final DOM2DTM dtm = new DOM2DTM(this, mSource, documentID, doIndexing);
 
       addDTM(dtm, dtmPos, 0);
       return dtm;
@@ -170,8 +170,8 @@ public class DTMManagerDefault extends DTMManager {
           XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NODE_NON_NULL, null));
     }
 
-    if (node instanceof org.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy) {
-      return ((org.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy) node).getDTMNodeNumber();
+    if (node instanceof org.htmlunit.xpath.xml.dtm.ref.DTMNodeProxy proxy) {
+      return proxy.getDTMNodeNumber();
     }
 
     // Find the DOM2DTMs wrapped around this Document (if any)
@@ -196,8 +196,8 @@ public class DTMManagerDefault extends DTMManager {
     // Generate a list of _unique_ DTM objects?
     // Have each DTM cache last DOM node search?
     for (final DTM thisDTM : m_dtms) {
-      if ((null != thisDTM) && thisDTM instanceof DOM2DTM) {
-        final int handle = ((DOM2DTM) thisDTM).getHandleOfNode(node);
+      if ((null != thisDTM) && thisDTM instanceof DOM2DTM tM) {
+        final int handle = tM.getHandleOfNode(node);
         if (handle != DTM.NULL) {
             return handle;
         }

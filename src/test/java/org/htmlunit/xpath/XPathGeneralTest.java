@@ -143,10 +143,11 @@ public class XPathGeneralTest extends AbstractXPathTest {
   @Test
   public void parentOfSelection() throws Exception {
     final String xml =
-        "<html>\n"
-            + "<a id='a1'><img src='1.gif'></img></a>"
-            + "<a id='a2'><img src='1.gif'></img></a>"
-            + "</html>";
+        """
+        <html>
+        <a id='a1'><img src='1.gif'></img></a>\
+        <a id='a2'><img src='1.gif'></img></a>\
+        </html>""";
 
     final List<?> hits = getByXpath(xml, "(/html/a/img[contains(@src,'gif')])[2]/..");
     assertEquals(1, hits.size());

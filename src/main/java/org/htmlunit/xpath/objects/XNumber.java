@@ -178,7 +178,7 @@ public class XNumber extends XObject {
     @Override
     public Object object() {
         if (null == m_obj) {
-            setObject(new Double(m_val));
+            setObject(Double.valueOf(m_val));
         }
         return m_obj;
     }
