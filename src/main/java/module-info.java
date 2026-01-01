@@ -28,6 +28,8 @@
  * @since 5.0.0
  */
 module org.htmlunit.xpath {
+    requires java.xml;
+
     exports org.htmlunit.xpath;
     exports org.htmlunit.xpath.axes;
     exports org.htmlunit.xpath.compiler;
