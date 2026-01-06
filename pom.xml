@@ -108,7 +108,6 @@
                 <configuration>
                     <quiet>true</quiet>
                     <doclint>none</doclint>
-                    <additionalparam>--allow-script-in-comments</additionalparam>
                     <links>
                         <link>https://docs.oracle.com/en/java/javase/17/docs/api/</link>
                     </links>
