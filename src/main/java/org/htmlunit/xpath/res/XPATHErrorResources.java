@@ -262,6 +262,7 @@ public class XPATHErrorResources extends ListResourceBundle {
       // The message indicates that syntactically such an expression was expected,
       // but was not found.
       {ER_EXPECTED_REL_PATH_PATTERN, "A relative path pattern was expected."},
+      {ER_XPATH_ERROR, "Unknown error in XPath."},
       {ER_CANNOT_OVERWRITE_CAUSE, "Cannot overwrite cause"},
       {ER_ITERATOR_AXIS_NOT_IMPLEMENTED, "Error: iterator for axis {0} not implemented "},
       {ER_ITERATOR_CLONE_NOT_SUPPORTED, "Iterator clone not supported"},
