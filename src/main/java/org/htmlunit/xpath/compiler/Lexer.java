@@ -102,7 +102,7 @@ class Lexer {
       char c = pat.charAt(i);
 
       switch (c) {
-        case '\"': {
+        case '\"':
             if (startSubstring != -1) {
               isNum = false;
               isStartOfPat = mapPatternElemPos(nesting, isStartOfPat, isAttrName);
@@ -130,8 +130,7 @@ class Lexer {
             else {
               m_processor.error(XPATHErrorResources.ER_EXPECTED_DOUBLE_QUOTE, null);
             }
-          }
-          break;
+            break;
         case '\'':
           if (startSubstring != -1) {
             isNum = false;

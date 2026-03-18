@@ -93,6 +93,10 @@
     </module>
 -->
 
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="(.*[\\/]test[\\/].*$)|(module\-info\.java$)"/>
+    </module>
+
     <module name="TreeWalker">
 
         <property name="tabWidth" value="4"/>
@@ -148,7 +152,9 @@
 
         <!-- Checks for blocks. You know, those {}'s         -->
         <!-- See http://checkstyle.sf.net/config_blocks.html -->
-        <module name="AvoidNestedBlocks"/>
+        <module name="AvoidNestedBlocks">
+            <property name="allowInSwitchCase" value="true"/>
+        </module>
         <module name="EmptyBlock">
             <property name="option" value="text"/>
         </module>
