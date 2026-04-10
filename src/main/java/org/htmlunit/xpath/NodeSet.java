@@ -52,7 +52,10 @@ public class NodeSet implements NodeList {
   /** {@inheritDoc} */
   @Override
   public Node item(final int index) {
-    return nodes.get(index);
+      if (index < 0 || index >= nodes.size()) {
+          return null;
+      }
+      return nodes.get(index);
   }
 
   /** {@inheritDoc} */

@@ -17,6 +17,7 @@
  */
 package org.htmlunit.xpath;
 
+import java.util.ArrayDeque;
 import java.util.Stack;
 
 import javax.xml.transform.ErrorListener;
@@ -95,12 +96,13 @@ public class XPathContext extends DTMManager {
   public void reset() {
     m_dtmManager = DTMManager.newInstance();
 
-    m_axesIteratorStack.removeAllElements();
-    m_currentNodes.removeAllElements();
-    m_predicatePos.removeAllElements();
-    m_prefixResolvers.removeAllElements();
+    m_axesIteratorStack.clear();
+    m_predicatePos.clear();
 
+    m_prefixResolvers.removeAllElements();
     m_prefixResolvers.push(null);
+
+    m_currentNodes.clear();
     m_currentNodes.push(DTM.NULL);
   }
 
@@ -174,15 +176,12 @@ public class XPathContext extends DTMManager {
   // SECTION: Execution context state tracking
   // ==========================================================
 
-  /** The ammount to use for stacks that record information during the recursive execution. */
-  public static final int RECURSIONLIMIT = 1024 * 4;
-
   /**
    * The stack of <a href="http://www.w3.org/TR/xslt#dt-current-node">current node</a> objects. Not
    * to be confused with the current node list. %REVIEW% Note that there are no bounds check and
    * resize for this stack, so if it is blown, it's all over.
    */
-  private final Stack<Integer> m_currentNodes = new Stack<>();
+  private final ArrayDeque<Integer> m_currentNodes = new ArrayDeque<>();
 
   /**
    * Get the current context node.
@@ -221,7 +220,7 @@ public class XPathContext extends DTMManager {
     m_currentNodes.pop();
   }
 
-  private final Stack<Integer> m_predicatePos = new Stack<>();
+  private final ArrayDeque<Integer> m_predicatePos = new ArrayDeque<>();
 
   public final int getPredicatePos() {
     return m_predicatePos.peek();
@@ -235,6 +234,8 @@ public class XPathContext extends DTMManager {
     m_predicatePos.pop();
   }
 
+  // Stack because ArrayDeque does not permit null elements,
+  // and this stack is initialized with a null sentinel value.
   private final Stack<PrefixResolver> m_prefixResolvers = new Stack<>();
 
   /**
@@ -275,7 +276,7 @@ public class XPathContext extends DTMManager {
   // ==========================================================
 
   /** Stack of AxesIterators. */
-  private final Stack<SubContextList> m_axesIteratorStack = new Stack<>();
+  private final ArrayDeque<SubContextList> m_axesIteratorStack = new ArrayDeque<>();
 
   /**
    * Push a TreeWalker on the stack.
@@ -299,9 +300,4 @@ public class XPathContext extends DTMManager {
   public SubContextList getSubContextList() {
     return m_axesIteratorStack.isEmpty() ? null : m_axesIteratorStack.peek();
   }
-
-  // ==========================================================
-  // SECTION: Implementation of ExpressionContext interface
-  // ==========================================================
-
 }
