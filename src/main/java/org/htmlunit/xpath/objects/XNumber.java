@@ -36,7 +36,7 @@ public class XNumber extends XObject {
     final double m_val;
 
     /**
-     * Construct a XNodeSet object.
+     * Construct an XNumber object.
      *
      * @param d Value of the object
      */

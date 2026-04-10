@@ -26,7 +26,7 @@ public class XBoolean extends XObject {
   /** A true boolean object so we don't have to keep creating them. */
   public static final XBoolean S_TRUE = new XBoolean(true);
 
-  /** A true boolean object so we don't have to keep creating them. */
+  /** A false boolean object so we don't have to keep creating them. */
   public static final XBoolean S_FALSE = new XBoolean(false);
 
   /**
