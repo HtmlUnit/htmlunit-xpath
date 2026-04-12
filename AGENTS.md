@@ -26,7 +26,22 @@ src/main/java/org/htmlunit/xpath/
 ├── res/         # Error messages and resources
 ├── xml/         # XML/DTM utilities
 └── *.java       # Core classes: XPath, XPathAPI, XPathContext, Expression, etc.
+
+src/main/module-info/
+└── module-info.java  # Java Platform Module System descriptor (separate for IDE compatibility)
 ```
+
+## Module System (JPMS)
+
+This project uses the Java Platform Module System. The `module-info.java` file is located in `src/main/module-info/` (instead of the standard `src/main/java/`) to avoid compatibility issues with Eclipse IDE.
+
+**Key Points:**
+- The module descriptor is automatically included during Maven builds via `build-helper-maven-plugin`
+- Eclipse users won't encounter module-related compilation errors
+- IntelliJ IDEA and other IDEs handle this setup correctly
+- The final JAR is a proper modular JAR with `module-info.class`
+
+See `src/main/module-info/README.md` for detailed information about this setup.
 
 ## Useful commands
 
@@ -50,3 +65,14 @@ src/main/java/org/htmlunit/xpath/
   - New test classes should extend `AbstractXPathTest` for helper methods.
 - New test classes should be written using JUnit Jupiter (JUnit 5+).
 - Code style is enforced via Checkstyle. After every change, make sure there are no checkstyle violations.
+
+## IDE Setup
+
+### Eclipse
+Eclipse may have issues with `module-info.java`. This project addresses this by keeping the module descriptor in a separate directory (`src/main/module-info/`) that Eclipse doesn't process. You can import the project as a standard Maven project without any special configuration.
+
+### IntelliJ IDEA
+IntelliJ IDEA handles Java modules well and should work with this project out of the box:
+1. Open the project via `File → Open` and select the `pom.xml`
+2. Let IntelliJ import the Maven project
+3. The module descriptor will be recognized automatically
