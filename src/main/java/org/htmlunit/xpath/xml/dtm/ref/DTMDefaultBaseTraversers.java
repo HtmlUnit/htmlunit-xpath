@@ -339,10 +339,9 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
     }
 
     /**
-     * Super class for derived classes that want a convenient way to access the indexing mechanism.
+     * Implements traversal of the Ancestor access, in reverse document order.
      */
-    private abstract class IndexedDTMAxisTraverser extends DTMAxisTraverser {
-
+    private class DescendantTraverser extends DTMAxisTraverser {
         /**
          * Tell if the indexing is on and the given expanded type ID matches what is in the indexes.
          * Derived classes should call this before calling {@link #getNextIndexed(int, int, int)
@@ -355,26 +354,6 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         protected final boolean isIndexed(final int expandedTypeID) {
             return m_indexing && ExpandedNameTable.ELEMENT == m_expandedNameTable.getType(expandedTypeID);
         }
-
-        /**
-         * Tell if a node is outside the axis being traversed. This method must be implemented by
-         * derived classes, and must be robust enough to handle any node that occurs after the axis
-         * root.
-         *
-         * @param axisRoot The root identity of the axis.
-         * @param identity The node in question.
-         * @return true if the given node falls outside the axis being traversed.
-         */
-        protected abstract boolean isAfterAxis(int axisRoot, int identity);
-
-        /**
-         * Tell if the axis has been fully processed to tell if the wait for an arriving node should
-         * terminate. This method must be implemented be a derived class.
-         *
-         * @param axisRoot The root identity of the axis.
-         * @return true if the axis has been fully processed.
-         */
-        protected abstract boolean axisHasBeenProcessed(int axisRoot);
 
         /**
          * Get the next indexed node that matches the expanded type ID. Before calling this function,
@@ -412,12 +391,7 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
             return DTM.NULL;
         }
-    }
 
-    /**
-     * Implements traversal of the Ancestor access, in reverse document order.
-     */
-    private class DescendantTraverser extends IndexedDTMAxisTraverser {
         /**
          * Get the first potential identity that can be returned. This should be overridded by classes
          * that need to return the self node.
@@ -430,9 +404,12 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         }
 
         /**
-         * {@inheritDoc}
+         * Tell if the axis has been fully processed to tell if the wait for an arriving node should
+         * terminate. This method must be implemented be a derived class.
+         *
+         * @param axisRoot The root identity of the axis.
+         * @return true if the axis has been fully processed.
          */
-        @Override
         protected boolean axisHasBeenProcessed(final int axisRoot) {
             return !(m_nextsib.elementAt(axisRoot) == NOTPROCESSED);
         }
@@ -464,9 +441,14 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
         }
 
         /**
-         * {@inheritDoc}
+         * Tell if a node is outside the axis being traversed. This method must be implemented by
+         * derived classes, and must be robust enough to handle any node that occurs after the axis
+         * root.
+         *
+         * @param axisRoot The root identity of the axis.
+         * @param identity The node in question.
+         * @return true if the given node falls outside the axis being traversed.
          */
-        @Override
         protected boolean isAfterAxis(final int axisRoot, int identity) {
             // %REVIEW% Is there *any* cheaper way to do this?
             // Yes. In ID space, compare to axisRoot's successor
