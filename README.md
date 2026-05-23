@@ -19,25 +19,11 @@ and we added unit tests and the maven-based build.
 
 #### Version 5
 
-Work on HtmlUnit-CSP 5.0 has started. This new major version will require **JDK 17 or higher**.
+Starting with version 5.0.0, **JDK 17 or higher is required**.  
+If you are still on JDK 8, see [Legacy Support (JDK 8)](#legacy-support-jdk-8) below.
 
 
-#### Legacy Support (JDK 8)
-
-If you need to continue using **JDK 8**, please note that versions 4.x will remain available as-is. However,
-**ongoing maintenance and fixes for JDK 8 compatibility are only available through sponsorship**.
-
-Maintaining separate fix versions for JDK 8 requires significant additional effort for __backporting__, testing, and release management.
-
-**To enable continued JDK 8 support**, please contact me via email to discuss sponsorship options. Sponsorship provides:
-
-- __Backporting__ security and bug fixes to the 4.x branch
-- Maintaining compatibility with older Java versions
-- Timely releases for critical issues
-
-Without sponsorship, the 4.x branch will not receive updates. Your support ensures the long-term __sustainability__ of this project across multiple Java versions.
-
-### Latest release Version 4.21.0 / December 28, 2025
+### Latest release Version 5.0.0 / May 24, 2026
 
 ### Maven
 
@@ -47,7 +33,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-xpath</artifactId>
-    <version>4.21.0</version>
+    <version>5.0.0</version>
 </dependency>
 ```
 
@@ -56,8 +42,23 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '4.21.0'
+implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '5.0.0'
 ```
+
+
+<a name="legacy-support-jdk-8"></a>
+### Legacy Support (JDK 8)
+
+If you need to continue using **JDK 8**, versions 4.x remain available as-is.
+Ongoing maintenance and fixes for JDK 8 are only available through sponsorship —
+please contact me via email to discuss options. Sponsorship provides:
+
+- Backporting security and bug fixes to the 4.x branch
+- Compatibility maintenance with older Java versions
+- Timely releases for critical issues
+
+Without sponsorship, the 4.x branch will not receive further updates.
+
 
 ### Last CI build
 The latest builds are available from our
@@ -70,7 +71,7 @@ If you use maven please add:
     <dependency>
         <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit-xpath</artifactId>
-        <version>4.22.0-SNAPSHOT</version>
+        <version>5.1.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype-central snapshot repository to your pom `repositories` section also:
@@ -151,16 +152,16 @@ This part is intended for committer who are packaging a release.
 * Create the version on Github
     * login to Github and open project https://github.com/HtmlUnit/htmlunit-xpath
     * click Releases > Draft new release
-    * fill the tag and title field with the release number (e.g. 4.0.0)
+    * fill the tag and title field with the release number (e.g. 5.0.0)
     * append 
-        * htmlunit-xpath-4.x.x.jar
-        * htmlunit-xpath-4.x.x.jar.asc 
-        * htmlunit-xpath-4.x.x.pom
-        * htmlunit-xpath-4.x.x.pom.asc 
-        * htmlunit-xpath-4.x.x-javadoc.jar
-        * htmlunit-xpath-4.x.x-javadoc.jar.asc
-        * htmlunit-xpath-4.x.x-sources.jar
-        * htmlunit-xpath-4.x.x-sources.jar.asc
+        * htmlunit-xpath-5.x.x.jar
+        * htmlunit-xpath-5.x.x.jar.asc 
+        * htmlunit-xpath-5.x.x.pom
+        * htmlunit-xpath-5.x.x.pom.asc 
+        * htmlunit-xpath-5.x.x-javadoc.jar
+        * htmlunit-xpath-5.x.x-javadoc.jar.asc
+        * htmlunit-xpath-5.x.x-sources.jar
+        * htmlunit-xpath-5.x.x-sources.jar.asc
     * and publish the release 
 
 * Update the version number in pom.xml to start next snapshot development
