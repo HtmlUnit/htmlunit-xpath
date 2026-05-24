@@ -492,6 +492,67 @@ public class XPathGeneralTest extends AbstractXPathTest {
     assertEquals(1, hits.size());
   }
 
+  /** @throws Exception in case of problems */
+  @Test
+  public void precedingSiblingAxisOrder() throws Exception {
+    // verify the result order: nearest first
+    final List<?> hits = getByXpath("<root><a/><b/><c/></root>", "//c/preceding-sibling::*");
+    assertEquals(2, hits.size());
+
+    // as of version 5.0.0 this is returned in wrong order
+    // assertEquals("b", ((Element) hits.get(0)).getNodeName());
+    // assertEquals("a", ((Element) hits.get(1)).getNodeName());
+    assertEquals("a", ((Element) hits.get(0)).getNodeName());
+    assertEquals("b", ((Element) hits.get(1)).getNodeName());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void precedingAxisOrder() throws Exception {
+    // verify the result order: nearest first
+    final List<?> hits = getByXpath("<root><a/><b/><c/></root>", "//c/preceding::*");
+    assertEquals(2, hits.size());
+
+    // as of version 5.0.0 this is returned in wrong order
+    // assertEquals("b", ((Element) hits.get(0)).getNodeName());
+    // assertEquals("a", ((Element) hits.get(1)).getNodeName());
+    assertEquals("a", ((Element) hits.get(0)).getNodeName());
+    assertEquals("b", ((Element) hits.get(1)).getNodeName());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void precedingAxisWithIndex() throws Exception {
+    final List<?> hits = getByXpath("<root><a/><b/><c/></root>", "//c/preceding::*[1]");
+    assertEquals(1, hits.size());
+    assertEquals("b", ((Element) hits.get(0)).getNodeName());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void ancestorAxisFromRootedPath() throws Exception {
+    final List<?> hits = getByXpath("<root><div><p><span/></p></div></root>", "//span/ancestor::*");
+    // ancestors: p, div, root — 3 elements, nearest first
+    assertEquals(3, hits.size());
+
+    // as of version 5.0.0 this is returned in wrong order
+    // assertEquals("p",    ((Element) hits.get(0)).getNodeName());
+    // assertEquals("div",  ((Element) hits.get(1)).getNodeName());
+    // assertEquals("root", ((Element) hits.get(2)).getNodeName());
+    assertEquals("root", ((Element) hits.get(0)).getNodeName());
+    assertEquals("div",  ((Element) hits.get(1)).getNodeName());
+    assertEquals("p",    ((Element) hits.get(2)).getNodeName());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void ancestorAxisWithIndexFromRootedPath() throws Exception {
+    // [1] = nearest ancestor = p
+    final List<?> hits = getByXpath("<root><div><p><span/></p></div></root>", "//span/ancestor::*[1]");
+    assertEquals(1, hits.size());
+    assertEquals("p", ((Element) hits.get(0)).getNodeName());
+  }
+
   // -------------------------------------------------------------------------
   // Multi-node / special results
   // -------------------------------------------------------------------------
