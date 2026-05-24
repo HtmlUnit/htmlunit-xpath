@@ -24,8 +24,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
-/** Unit test for simple App. */
+/** Unit tests for XPath expressions evaluated from the document root. */
 public class XPathGeneralTest extends AbstractXPathTest {
+
+  // -------------------------------------------------------------------------
+  // Basic navigation
+  // -------------------------------------------------------------------------
 
   /** @throws Exception in case of problems */
   @Test
@@ -40,6 +44,151 @@ public class XPathGeneralTest extends AbstractXPathTest {
     final List<?> hits = getByXpath("<root><element/><element2/></root>", "//element | //element2");
     assertEquals(2, hits.size());
   }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void pathWithParentheses() throws Exception {
+    final List<?> hits = getByXpath("<root><child></child></root>", "(/root)/child");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void parentOfSelection() throws Exception {
+    final String xml =
+        """
+        <html>
+        <a id='a1'><img src='1.gif'></img></a>\
+        <a id='a2'><img src='1.gif'></img></a>\
+        </html>""";
+
+    final List<?> hits = getByXpath(xml, "(/html/a/img[contains(@src,'gif')])[2]/..");
+    assertEquals(1, hits.size());
+    assertEquals("a2", ((Element) hits.get(0)).getAttribute("id"));
+  }
+
+  // -------------------------------------------------------------------------
+  // Axes
+  // -------------------------------------------------------------------------
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void childAxis() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><p/></root>", "/root/child::p");
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void descendantAxis() throws Exception {
+    final List<?> hits = getByXpath("<root><div><p/></div><p/></root>", "/root/descendant::p");
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void descendantOrSelfAxis() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><div><p/></div></root>", "/root/descendant-or-self::p");
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void selfAxis() throws Exception {
+    final List<?> hits = getByXpath("<root><p/></root>", "/root/self::root");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void followingSiblingAxis() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><p/><p/></root>", "//p[1]/following-sibling::p");
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void followingSiblingAxisWithIndex() throws Exception {
+    final List<?> hits = getByXpath("<root><a/><b/><c/></root>", "//a/following-sibling::*[1]");
+    assertEquals(1, hits.size());
+    assertEquals("b", ((Element) hits.get(0)).getNodeName());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void precedingSiblingAxis() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><p/><p/></root>", "//p[3]/preceding-sibling::p");
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void precedingSiblingAxisWithIndex() throws Exception {
+    final List<?> hits = getByXpath("<root><a/><b/><c/></root>", "//c/preceding-sibling::*[1]");
+    assertEquals(1, hits.size());
+    assertEquals("b", ((Element) hits.get(0)).getNodeName());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void followingAxis() throws Exception {
+    final List<?> hits = getByXpath("<root><a/><b/><c/></root>", "//a/following::*");
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void precedingAxis() throws Exception {
+    final List<?> hits = getByXpath("<root><a/><b/><c/></root>", "//c/preceding::*");
+    assertEquals(2, hits.size());
+  }
+
+  // -------------------------------------------------------------------------
+  // Wildcards
+  // -------------------------------------------------------------------------
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void wildcardElement() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><div/><span/></root>", "/root/*");
+    assertEquals(3, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void wildcardAttribute() throws Exception {
+    final List<?> hits = getByXpath("<root><p a='1'/><p/><p b='2'/></root>", "//p[@*]");
+    assertEquals(2, hits.size());
+  }
+
+  // -------------------------------------------------------------------------
+  // Node type tests
+  // -------------------------------------------------------------------------
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void textNodeTest() throws Exception {
+    final List<?> hits = getByXpath("<root><p>text</p><p/></root>", "//p/text()");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void commentNodeTest() throws Exception {
+    final List<?> hits = getByXpath("<root><!-- comment --><p/></root>", "//comment()");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void nodeTest() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><div/></root>", "/root/node()");
+    assertEquals(2, hits.size());
+  }
+
+  // -------------------------------------------------------------------------
+  // Position / comparison operators
+  // -------------------------------------------------------------------------
 
   /** @throws Exception in case of problems */
   @Test
@@ -90,6 +239,10 @@ public class XPathGeneralTest extends AbstractXPathTest {
     assertEquals(3, hits.size());
   }
 
+  // -------------------------------------------------------------------------
+  // Logical operators
+  // -------------------------------------------------------------------------
+
   /** @throws Exception in case of problems */
   @Test
   public void andSearch() throws Exception {
@@ -105,6 +258,189 @@ public class XPathGeneralTest extends AbstractXPathTest {
         getByXpath("<root><p a='1'/><p b='2'/><p/><p/></root>", "//p[@a=1 or @b=2]");
     assertEquals(2, hits.size());
   }
+
+  // -------------------------------------------------------------------------
+  // Attribute predicates
+  // -------------------------------------------------------------------------
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void attributeSearch() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p/><p name='test'/><p/><p/></root>", "//p[@name='test']");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void attributeSearchDoubleQuotes() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p/><p name='test'/><p/><p/></root>", "//p[@name=\"test\"]");
+    assertEquals(1, hits.size());
+  }
+
+  // -------------------------------------------------------------------------
+  // Boolean functions
+  // -------------------------------------------------------------------------
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void notFunction() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><p name='test'/><p/></root>", "//p[not(@name)]");
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void booleanFunction() throws Exception {
+    final List<?> hits = getByXpath("<root><p a='1'/><p/></root>", "//p[boolean(@a)]");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void trueFunction() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><p/></root>", "//p[true()]");
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void falseFunction() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><p/></root>", "//p[false()]");
+    assertEquals(0, hits.size());
+  }
+
+  // -------------------------------------------------------------------------
+  // Position functions
+  // -------------------------------------------------------------------------
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void lastFunction() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><p/><p/></root>", "//p[last()]");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void countFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><div><p/><p/></div><div><p/></div></root>", "//div[count(p)=2]");
+    assertEquals(1, hits.size());
+  }
+
+  // -------------------------------------------------------------------------
+  // String functions
+  // -------------------------------------------------------------------------
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void containsFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p name='test'/><p name='other'/></root>", "//p[contains(@name,'es')]");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void startsWithFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p name='test'/><p name='other'/></root>", "//p[starts-with(@name,'te')]");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void stringLengthFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p name='ab'/><p name='abcd'/></root>", "//p[string-length(@name)>3]");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void normalizeSpaceFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p name='  test  '/><p name='other'/></root>",
+            "//p[normalize-space(@name)='test']");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void concatFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p name='hello world'/></root>",
+            "//p[@name=concat('hello',' ','world')]");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void substringFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p name='testing'/><p name='other'/></root>",
+            "//p[substring(@name,1,4)='test']");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void substringBeforeFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p name='test-val'/><p name='other'/></root>",
+            "//p[substring-before(@name,'-')='test']");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void substringAfterFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p name='test-val'/><p name='other'/></root>",
+            "//p[substring-after(@name,'-')='val']");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void translateFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p name='TEST'/><p name='other'/></root>",
+            "//p[translate(@name,'TEST','test')='test']");
+    assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void evaluateString() throws Exception {
+    final List<?> hits = getByXpath("string(/*)");
+    assertEquals(1, hits.size());
+    assertEquals("", hits.get(0));
+  }
+
+  // -------------------------------------------------------------------------
+  // Name functions
+  // -------------------------------------------------------------------------
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void nameFunction() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><div/><p/></root>", "//*[name()='p']");
+    assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void localNameFunction() throws Exception {
+    final List<?> hits = getByXpath("<root><p/><div/><p/></root>", "//*[local-name()='p']");
+    assertEquals(2, hits.size());
+  }
+
+  // -------------------------------------------------------------------------
+  // Numeric functions
+  // -------------------------------------------------------------------------
 
   /** @throws Exception in case of problems */
   @Test
@@ -125,41 +461,40 @@ public class XPathGeneralTest extends AbstractXPathTest {
 
   /** @throws Exception in case of problems */
   @Test
-  public void attributeSearch() throws Exception {
+  public void sumFunction() throws Exception {
     final List<?> hits =
-        getByXpath("<root><p/><p name='test'/><p/><p/></root>", "//p[@name='test']");
+        getByXpath("<root><div><p a='3'/><p a='4'/></div><div><p a='1'/></div></root>",
+            "//div[sum(p/@a) > 5]");
     assertEquals(1, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void attributeSearchDoubleQuotes() throws Exception {
+  public void floorFunction() throws Exception {
     final List<?> hits =
-        getByXpath("<root><p/><p name='test'/><p/><p/></root>", "//p[@name=\"test\"]");
+        getByXpath("<root><p a='2.7'/><p a='1.1'/></root>", "//p[floor(@a) = 2]");
     assertEquals(1, hits.size());
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void parentOfSelection() throws Exception {
-    final String xml =
-        """
-        <html>
-        <a id='a1'><img src='1.gif'></img></a>\
-        <a id='a2'><img src='1.gif'></img></a>\
-        </html>""";
-
-    final List<?> hits = getByXpath(xml, "(/html/a/img[contains(@src,'gif')])[2]/..");
+  public void ceilingFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p a='2.3'/><p a='1.9'/></root>", "//p[ceiling(@a) = 3]");
     assertEquals(1, hits.size());
-    assertEquals("a2", ((Element) hits.get(0)).getAttribute("id"));
   }
 
   /** @throws Exception in case of problems */
   @Test
-  public void pathWithParentheses() throws Exception {
-    final List<?> hits = getByXpath("<root><child></child></root>", "(/root)/child");
+  public void roundFunction() throws Exception {
+    final List<?> hits =
+        getByXpath("<root><p a='2.7'/><p a='2.3'/></root>", "//p[round(@a) = 3]");
     assertEquals(1, hits.size());
   }
+
+  // -------------------------------------------------------------------------
+  // Multi-node / special results
+  // -------------------------------------------------------------------------
 
   /** @throws Exception in case of problems */
   @Test
@@ -168,13 +503,9 @@ public class XPathGeneralTest extends AbstractXPathTest {
     assertEquals(2, hits.size());
   }
 
-  /** @throws Exception in case of problems */
-  @Test
-  public void evaluateString() throws Exception {
-    final List<?> hits = getByXpath("string(/*)");
-    assertEquals(1, hits.size());
-    assertEquals("", hits.get(0));
-  }
+  // -------------------------------------------------------------------------
+  // Error cases
+  // -------------------------------------------------------------------------
 
   /** @throws Exception in case of problems */
   @Test
