@@ -33,13 +33,6 @@ import org.htmlunit.xpath.xml.dtm.DTMManager;
 public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
   /**
-   * Current iteration location. Usually this is the last location returned (starting point for
-   * the next() search); for single-node iterators it may instead be initialized to point to that
-   * single node.
-   */
-  protected int _currentNode;
-
-  /**
    * Construct a DTMDefaultBaseTraversers object from a DOM node.
    *
    * @param mgr The DTMManager who owns this DTM.
@@ -107,8 +100,33 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     return iterator;
   }
 
+  /**
+   * Abstract superclass defining behaviors shared by all DTMDefault's internal implementations of
+   * DTMAxisIterator. Subclass this (and override, if necessary) to implement the specifics of an
+   * individual axis iterator.
+   *
+   * <p>Currently there isn't a lot here
+   */
+  public abstract static class InternalAxisIteratorBase extends DTMAxisIteratorBase {
+
+    // %REVIEW% We could opt to share _nodeType and setNodeType() as
+    // well, and simply ignore them in iterators which don't use them.
+    // But Scott's worried about the overhead involved in cloning
+    // these, and wants them to have as few fields as possible. Note
+    // that we can't create a TypedInternalAxisIteratorBase because
+    // those are often based on the untyped versions and Java doesn't
+    // support multiple inheritance. <sigh/>
+
+    /**
+     * Current iteration location. Usually this is the last location returned (starting point for
+     * the next() search); for single-node iterators it may instead be initialized to point to that
+     * single node.
+     */
+    protected int _currentNode;
+  } // end of InternalAxisIteratorBase
+
   /** Iterator that returns all immediate children of a given node */
-  public final class ChildrenIterator extends DTMAxisIteratorBase {
+  public final class ChildrenIterator extends InternalAxisIteratorBase {
 
     /** {@inheritDoc} */
     @Override
@@ -142,7 +160,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    * Iterator that returns the parent of a given node. Note that this delivers only a single node;
    * if you want all the ancestors, see AncestorIterator.
    */
-  public final class ParentIterator extends DTMAxisIteratorBase {
+  public final class ParentIterator extends InternalAxisIteratorBase {
 
     /** {@inheritDoc} */
     @Override
@@ -175,7 +193,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   /**
    * Iterator that returns the namespace nodes as defined by the XPath data model for a given node.
    */
-  public class NamespaceIterator extends DTMAxisIteratorBase {
+  public class NamespaceIterator extends InternalAxisIteratorBase {
 
     /** Constructor NamespaceAttributeIterator */
     public NamespaceIterator() {
@@ -213,7 +231,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   } // end of NamespaceIterator
 
   /** Iterator that returns the root node as defined by the XPath data model for a given node. */
-  public class RootIterator extends DTMAxisIteratorBase {
+  public class RootIterator extends InternalAxisIteratorBase {
 
     /** Constructor RootIterator */
     public RootIterator() {
@@ -247,7 +265,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   } // end of RootIterator
 
   /** Iterator that returns all siblings of a given node. */
-  public class FollowingSiblingIterator extends DTMAxisIteratorBase {
+  public class FollowingSiblingIterator extends InternalAxisIteratorBase {
 
     /** {@inheritDoc} */
     @Override
@@ -273,7 +291,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   } // end of FollowingSiblingIterator
 
   /** Iterator that returns attribute nodes (of what nodes?) */
-  public final class AttributeIterator extends DTMAxisIteratorBase {
+  public final class AttributeIterator extends InternalAxisIteratorBase {
 
     // assumes caller will pass element nodes
 
@@ -308,7 +326,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   } // end of AttributeIterator
 
   /** Iterator that returns preceding siblings of a given node */
-  public class PrecedingSiblingIterator extends DTMAxisIteratorBase {
+  public class PrecedingSiblingIterator extends InternalAxisIteratorBase {
 
     /** The node identity of _startNode for this iterator */
     protected int _startNodeID;
@@ -373,7 +391,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    * Iterator that returns preceding nodes of a given node. This includes the node set {root+1,
    * start-1}, but excludes all ancestors, attributes, and namespace nodes.
    */
-  public class PrecedingIterator extends DTMAxisIteratorBase {
+  public class PrecedingIterator extends InternalAxisIteratorBase {
 
     /** The max ancestors, but it can grow... */
     private final int _maxAncestors = 8;
@@ -486,7 +504,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   } // end of PrecedingIterator
 
   /** Iterator that returns following nodes of for a given node. */
-  public class FollowingIterator extends DTMAxisIteratorBase {
+  public class FollowingIterator extends InternalAxisIteratorBase {
     final DTMAxisTraverser m_traverser; // easier for now
 
     public FollowingIterator() {
@@ -525,7 +543,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    * Iterator that returns the ancestors of a given node in document order. (NOTE! This was changed
    * from the XSLTC code!)
    */
-  public class AncestorIterator extends DTMAxisIteratorBase {
+  public class AncestorIterator extends InternalAxisIteratorBase {
     final ArrayList<Integer> m_ancestors = new ArrayList<>();
 
     int m_ancestorsPos;
@@ -613,7 +631,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   } // end of AncestorIterator
 
   /** Iterator that returns the descendants of a given node. */
-  public class DescendantIterator extends DTMAxisIteratorBase {
+  public class DescendantIterator extends InternalAxisIteratorBase {
 
     /** {@inheritDoc} */
     @Override
@@ -696,7 +714,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   } // end of DescendantIterator
 
   /** Class SingletonIterator. */
-  public class SingletonIterator extends DTMAxisIteratorBase {
+  public class SingletonIterator extends InternalAxisIteratorBase {
 
     /** (not sure yet what this is. -sb) (sc & sb remove final to compile in JDK 1.1.8) */
     private final boolean _isConstant;
