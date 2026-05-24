@@ -109,7 +109,7 @@ public class WalkerFactory {
      *
      * @param compiler non-null reference to compiler object that has processed the XPath operations
      *                 into an opcode map.
-     * @param opPos    The position of the operation code for this itterator.
+     * @param opPos    The position of the operation code for this iterator.
      * @return non-null reference to a LocPathIterator or derivative.
      * @throws javax.xml.transform.TransformerException if any
      */

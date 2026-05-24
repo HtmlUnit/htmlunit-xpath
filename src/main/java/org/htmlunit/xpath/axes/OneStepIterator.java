@@ -46,7 +46,7 @@ public class OneStepIterator extends ChildTestIterator {
      *
      * @param compiler A reference to the Compiler that contains the op map.
      * @param opPos    The position within the op map, which contains the location path expression for
-     *                 this itterator.
+     *                 this iterator.
      * @throws javax.xml.transform.TransformerException if any
      */
     OneStepIterator(final Compiler compiler, final int opPos, final int analysis)
@@ -95,7 +95,7 @@ public class OneStepIterator extends ChildTestIterator {
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        // Do not access the location path itterator during this operation!
+        // Do not access the location path iterator during this operation!
 
         final OneStepIterator clone = (OneStepIterator) super.clone();
 

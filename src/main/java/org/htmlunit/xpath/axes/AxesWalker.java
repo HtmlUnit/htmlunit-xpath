@@ -405,7 +405,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
     private transient int m_currentNode = DTM.NULL;
 
     /**
-     * True if an itteration has not begun.
+     * True if an iteration has not begun.
      */
     transient boolean m_isFresh;
 

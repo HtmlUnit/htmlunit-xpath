@@ -48,7 +48,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        // Do not access the location path itterator during this operation!
+        // Do not access the location path iterator during this operation!
 
         final PredicatedNodeTest clone = (PredicatedNodeTest) super.clone();
 
@@ -280,7 +280,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
                     }
 
                     // If there is a proximity index that will not change during the
-                    // course of itteration, then we know there can be no more true
+                    // course of iteration, then we know there can be no more true
                     // occurances of this predicate, so flag that we're done after
                     // this.
                     //

@@ -42,7 +42,7 @@ public class DescendantIterator extends LocPathIterator {
      *
      * @param compiler A reference to the Compiler that contains the op map.
      * @param opPos    The position within the op map, which contains the location path expression for
-     *                 this itterator.
+     *                 this iterator.
      * @throws javax.xml.transform.TransformerException if any
      */
     DescendantIterator(final Compiler compiler, final int opPos, final int analysis)
