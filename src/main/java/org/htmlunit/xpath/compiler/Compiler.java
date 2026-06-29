@@ -129,8 +129,6 @@ public class Compiler extends OpMap {
       case OpCodes.OP_MOD:
         expr = mod(opPos);
         break;
-        // case OpCodes.OP_QUO :
-        // expr = quo(opPos); break;
       case OpCodes.OP_NEG:
         expr = neg(opPos);
         break;
@@ -174,9 +172,6 @@ public class Compiler extends OpMap {
         break;
       case OpCodes.OP_LOCATIONPATHPATTERN:
         expr = locationPathPattern(opPos);
-        break;
-      case OpCodes.OP_QUO:
-        error(XPATHErrorResources.ER_UNKNOWN_OPCODE, new Object[] {"quo"});
         break;
       default:
         error(XPATHErrorResources.ER_UNKNOWN_OPCODE, new Object[] {Integer.toString(getOp(opPos))});

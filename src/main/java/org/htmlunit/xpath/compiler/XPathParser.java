@@ -711,18 +711,6 @@ public class XPathParser {
             m_ops.getOp(addPos + opPlusLeftHandLen + 1) + opPlusLeftHandLen);
         addPos += 2;
       }
-      else if (tokenIs("quo")) {
-        nextToken();
-        insertOp(addPos, 2, OpCodes.OP_QUO);
-
-        final int opPlusLeftHandLen = m_ops.getOp(OpMap.MAPINDEX_LENGTH) - addPos;
-
-        addPos = MultiplicativeExpr(addPos);
-        m_ops.setOp(
-            addPos + OpMap.MAPINDEX_LENGTH,
-            m_ops.getOp(addPos + opPlusLeftHandLen + 1) + opPlusLeftHandLen);
-        addPos += 2;
-      }
     }
 
     return addPos;

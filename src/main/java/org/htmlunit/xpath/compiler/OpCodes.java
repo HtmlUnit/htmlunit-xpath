@@ -139,13 +139,6 @@ public class OpCodes {
   public static final int OP_MOD = 14;
 
   /**
-   * [OP_QUO] [length] {number expression} {number expression}
-   *
-   * <p>returns: XNumber
-   */
-  public static final int OP_QUO = 15;
-
-  /**
    * [OP_NEG] [length] {number expression}
    *
    * <p>returns: XNumber
