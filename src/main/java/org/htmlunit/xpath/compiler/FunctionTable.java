@@ -26,9 +26,6 @@ import org.htmlunit.xpath.functions.Function;
 /** The function table for XPath. */
 public class FunctionTable {
 
-  /** The 'current()' id. */
-  public static final int FUNC_CURRENT = 0;
-
   /** The 'last()' id. */
   public static final int FUNC_LAST = 1;
 
@@ -163,7 +160,6 @@ public class FunctionTable {
   }
 
   static {
-    m_functionID.put(Keywords.FUNC_CURRENT_STRING, FunctionTable.FUNC_CURRENT);
     m_functionID.put(Keywords.FUNC_LAST_STRING, FunctionTable.FUNC_LAST);
     m_functionID.put(Keywords.FUNC_POSITION_STRING, FunctionTable.FUNC_POSITION);
     m_functionID.put(Keywords.FUNC_COUNT_STRING, FunctionTable.FUNC_COUNT);

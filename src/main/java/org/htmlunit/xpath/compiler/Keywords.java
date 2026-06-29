@@ -91,9 +91,6 @@ public class Keywords {
   /** Wildcard element string. */
   private static final String NODETYPE_ANYELEMENT_STRING = "*";
 
-  /** current function string. */
-  public static final String FUNC_CURRENT_STRING = "current";
-
   /** last function string. */
   public static final String FUNC_LAST_STRING = "last";
 
