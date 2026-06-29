@@ -564,6 +564,77 @@ public class XPathGeneralTest extends AbstractXPathTest {
     assertEquals(2, hits.size());
   }
 
+ //-------------------------------------------------------------------------
+ // Decimal number literals
+ // -------------------------------------------------------------------------
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void decimalLiteralInPredicate() throws Exception {
+      // 3.14 must be tokenized as a single numeric token, not split on '.'
+      final List<?> hits =
+              getByXpath("<root><p a='3.14'/><p a='2.0'/></root>",
+                      "//p[@a > 3.0]");
+      assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void leadingDotDecimalLiteral() throws Exception {
+      // .5 — decimal with no leading digit must be tokenized as a single numeric token
+      final List<?> hits =
+              getByXpath("<root><p a='0.3'/><p a='0.7'/></root>",
+                      "//p[@a > .5]");
+      assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void decimalLiteralEquality() throws Exception {
+      // Exact equality with a decimal literal
+      final List<?> hits =
+              getByXpath("<root><p a='1.5'/><p a='2.5'/></root>",
+                      "//p[@a = 1.5]");
+      assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void decimalLiteralInArithmetic() throws Exception {
+      // Decimal used in an arithmetic expression: floor(1.9) = 1
+      final List<?> hits =
+              getByXpath("<root><p a='1.9'/><p a='2.9'/></root>",
+                      "//p[floor(@a) = 1]");
+      assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void decimalLiteralLt() throws Exception {
+      final List<?> hits =
+              getByXpath("<root><p a='0.4'/><p a='0.6'/><p a='0.9'/></root>",
+                      "//p[@a < 0.5]");
+      assertEquals(1, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void decimalLiteralLte() throws Exception {
+      final List<?> hits =
+              getByXpath("<root><p a='0.4'/><p a='0.5'/><p a='0.9'/></root>",
+                      "//p[@a <= 0.5]");
+      assertEquals(2, hits.size());
+  }
+
+  /** @throws Exception in case of problems */
+  @Test
+  public void decimalLiteralGte() throws Exception {
+      final List<?> hits =
+              getByXpath("<root><p a='1.0'/><p a='1.5'/><p a='2.0'/></root>",
+                      "//p[@a >= 1.5]");
+      assertEquals(2, hits.size());
+  }
+
   // -------------------------------------------------------------------------
   // Error cases
   // -------------------------------------------------------------------------

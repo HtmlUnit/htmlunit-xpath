@@ -220,7 +220,7 @@ public class FunctionTable {
       }
       return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].getDeclaredConstructor().newInstance();
     }
-    catch (ReflectiveOperationException ex) {
+    catch (final ReflectiveOperationException ex) {
       throw new TransformerException(ex.getMessage());
     }
   }
