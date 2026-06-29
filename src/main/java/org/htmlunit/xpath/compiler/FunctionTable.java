@@ -17,7 +17,6 @@
  */
 package org.htmlunit.xpath.compiler;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 import javax.xml.transform.TransformerException;
@@ -28,85 +27,88 @@ import org.htmlunit.xpath.functions.Function;
 public class FunctionTable {
 
   /** The 'last()' id. */
-  public static final int FUNC_LAST = 1;
+  public static final int FUNC_LAST = 0;
 
   /** The 'position()' id. */
-  public static final int FUNC_POSITION = 2;
+  public static final int FUNC_POSITION = FUNC_LAST + 1;
 
   /** The 'count()' id. */
-  public static final int FUNC_COUNT = 3;
+  public static final int FUNC_COUNT = FUNC_POSITION + 1;
 
   /** The 'id()' id. */
-  public static final int FUNC_ID = 4;
+  public static final int FUNC_ID = FUNC_COUNT + 1;
 
   /** The 'local-name()' id. */
-  public static final int FUNC_LOCAL_PART = 7;
+  public static final int FUNC_LOCAL_PART = FUNC_ID + 1;
 
   /** The 'namespace-uri()' id. */
-  public static final int FUNC_NAMESPACE = 8;
+  public static final int FUNC_NAMESPACE = FUNC_LOCAL_PART + 1;
 
   /** The 'name()' id. */
-  public static final int FUNC_QNAME = 9;
+  public static final int FUNC_QNAME = FUNC_NAMESPACE + 1;
 
   /** The 'not()' id. */
-  public static final int FUNC_NOT = 11;
+  public static final int FUNC_NOT = FUNC_QNAME + 1;
 
   /** The 'true()' id. */
-  public static final int FUNC_TRUE = 12;
+  public static final int FUNC_TRUE = FUNC_NOT + 1;
 
   /** The 'false()' id. */
-  public static final int FUNC_FALSE = 13;
+  public static final int FUNC_FALSE = FUNC_TRUE + 1;
 
   /** The 'boolean()' id. */
-  public static final int FUNC_BOOLEAN = 14;
+  public static final int FUNC_BOOLEAN = FUNC_FALSE + 1;
 
   /** The 'number()' id. */
-  public static final int FUNC_NUMBER = 15;
+  public static final int FUNC_NUMBER = FUNC_BOOLEAN + 1;
 
   /** The 'floor()' id. */
-  public static final int FUNC_FLOOR = 16;
+  public static final int FUNC_FLOOR = FUNC_NUMBER + 1;
 
   /** The 'ceiling()' id. */
-  public static final int FUNC_CEILING = 17;
+  public static final int FUNC_CEILING = FUNC_FLOOR + 1;
 
   /** The 'round()' id. */
-  public static final int FUNC_ROUND = 18;
+  public static final int FUNC_ROUND = FUNC_CEILING + 1;
 
   /** The 'sum()' id. */
-  public static final int FUNC_SUM = 19;
+  public static final int FUNC_SUM = FUNC_ROUND + 1;
 
   /** The 'string()' id. */
-  public static final int FUNC_STRING = 20;
+  public static final int FUNC_STRING = FUNC_SUM + 1;
 
   /** The 'starts-with()' id. */
-  public static final int FUNC_STARTS_WITH = 21;
+  public static final int FUNC_STARTS_WITH = FUNC_STRING + 1;
 
   /** The 'contains()' id. */
-  public static final int FUNC_CONTAINS = 22;
+  public static final int FUNC_CONTAINS = FUNC_STARTS_WITH + 1;
 
   /** The 'substring-before()' id. */
-  public static final int FUNC_SUBSTRING_BEFORE = 23;
+  public static final int FUNC_SUBSTRING_BEFORE = FUNC_CONTAINS + 1;
 
   /** The 'substring-after()' id. */
-  public static final int FUNC_SUBSTRING_AFTER = 24;
+  public static final int FUNC_SUBSTRING_AFTER = FUNC_SUBSTRING_BEFORE + 1;
 
   /** The 'normalize-space()' id. */
-  public static final int FUNC_NORMALIZE_SPACE = 25;
+  public static final int FUNC_NORMALIZE_SPACE = FUNC_SUBSTRING_AFTER + 1;
 
   /** The 'translate()' id. */
-  public static final int FUNC_TRANSLATE = 26;
+  public static final int FUNC_TRANSLATE = FUNC_NORMALIZE_SPACE + 1;
 
   /** The 'concat()' id. */
-  public static final int FUNC_CONCAT = 27;
+  public static final int FUNC_CONCAT = FUNC_TRANSLATE + 1;
 
   /** The 'substring()' id. */
-  public static final int FUNC_SUBSTRING = 29;
+  public static final int FUNC_SUBSTRING = FUNC_CONCAT + 1;
 
   /** The 'string-length()' id. */
-  public static final int FUNC_STRING_LENGTH = 30;
+  public static final int FUNC_STRING_LENGTH = FUNC_SUBSTRING + 1;
 
   /** The 'lang()' id. */
-  public static final int FUNC_LANG = 32;
+  public static final int FUNC_LANG = FUNC_STRING_LENGTH + 1;
+
+  /** Number of built in functions. Be sure to update this as built-in functions are added. */
+  private static final int NUM_BUILT_IN_FUNCS = FUNC_LANG + 1;
 
   /** The function table. */
   private static final Class<?>[] m_functions;
@@ -119,9 +121,6 @@ public class FunctionTable {
 
   /** Table of function name to function ID associations for customized functions */
   private final HashMap<String, Integer> m_functionID_customer = new HashMap<>();
-
-  /** Number of built in functions. Be sure to update this as built-in functions are added. */
-  private static final int NUM_BUILT_IN_FUNCS = 37;
 
   /** Number of built-in functions that may be added. */
   private static final int NUM_ALLOWABLE_ADDINS = 30;
@@ -142,7 +141,6 @@ public class FunctionTable {
     m_functions[FUNC_TRUE] = org.htmlunit.xpath.functions.FuncTrue.class;
     m_functions[FUNC_FALSE] = org.htmlunit.xpath.functions.FuncFalse.class;
     m_functions[FUNC_BOOLEAN] = org.htmlunit.xpath.functions.FuncBoolean.class;
-    m_functions[FUNC_LANG] = org.htmlunit.xpath.functions.FuncLang.class;
     m_functions[FUNC_NUMBER] = org.htmlunit.xpath.functions.FuncNumber.class;
     m_functions[FUNC_FLOOR] = org.htmlunit.xpath.functions.FuncFloor.class;
     m_functions[FUNC_CEILING] = org.htmlunit.xpath.functions.FuncCeiling.class;
@@ -158,6 +156,7 @@ public class FunctionTable {
     m_functions[FUNC_CONCAT] = org.htmlunit.xpath.functions.FuncConcat.class;
     m_functions[FUNC_SUBSTRING] = org.htmlunit.xpath.functions.FuncSubstring.class;
     m_functions[FUNC_STRING_LENGTH] = org.htmlunit.xpath.functions.FuncStringLength.class;
+    m_functions[FUNC_LANG] = org.htmlunit.xpath.functions.FuncLang.class;
   }
 
   static {
@@ -172,7 +171,6 @@ public class FunctionTable {
     m_functionID.put(Keywords.FUNC_TRUE_STRING, FunctionTable.FUNC_TRUE);
     m_functionID.put(Keywords.FUNC_FALSE_STRING, FunctionTable.FUNC_FALSE);
     m_functionID.put(Keywords.FUNC_BOOLEAN_STRING, FunctionTable.FUNC_BOOLEAN);
-    m_functionID.put(Keywords.FUNC_LANG_STRING, FunctionTable.FUNC_LANG);
     m_functionID.put(Keywords.FUNC_NUMBER_STRING, FunctionTable.FUNC_NUMBER);
     m_functionID.put(Keywords.FUNC_FLOOR_STRING, FunctionTable.FUNC_FLOOR);
     m_functionID.put(Keywords.FUNC_CEILING_STRING, FunctionTable.FUNC_CEILING);
@@ -188,6 +186,7 @@ public class FunctionTable {
     m_functionID.put(Keywords.FUNC_CONCAT_STRING, FunctionTable.FUNC_CONCAT);
     m_functionID.put(Keywords.FUNC_SUBSTRING_STRING, FunctionTable.FUNC_SUBSTRING);
     m_functionID.put(Keywords.FUNC_STRING_LENGTH_STRING, FunctionTable.FUNC_STRING_LENGTH);
+    m_functionID.put(Keywords.FUNC_LANG_STRING, FunctionTable.FUNC_LANG);
   }
 
   public FunctionTable() {
@@ -217,12 +216,11 @@ public class FunctionTable {
   Function getFunction(final int which) throws javax.xml.transform.TransformerException {
     try {
       if (which < NUM_BUILT_IN_FUNCS) {
-          return (Function) m_functions[which].getDeclaredConstructor().newInstance();
+        return (Function) m_functions[which].getDeclaredConstructor().newInstance();
       }
       return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].getDeclaredConstructor().newInstance();
     }
-    catch (IllegalAccessException | InstantiationException
-            | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+    catch (ReflectiveOperationException ex) {
       throw new TransformerException(ex.getMessage());
     }
   }
@@ -238,7 +236,7 @@ public class FunctionTable {
   Object getFunctionID(final String key) {
     Object id = m_functionID_customer.get(key);
     if (null == id) {
-        id = m_functionID.get(key);
+      id = m_functionID.get(key);
     }
     return id;
   }
@@ -283,7 +281,7 @@ public class FunctionTable {
   public boolean functionAvailable(final String methName) {
     Object tblEntry = m_functionID.get(methName);
     if (null != tblEntry) {
-        return true;
+      return true;
     }
 
     tblEntry = m_functionID_customer.get(methName);
