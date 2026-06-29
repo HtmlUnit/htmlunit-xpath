@@ -17,6 +17,7 @@
  */
 package org.htmlunit.xpath.compiler;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 import javax.xml.transform.TransformerException;
@@ -216,11 +217,12 @@ public class FunctionTable {
   Function getFunction(final int which) throws javax.xml.transform.TransformerException {
     try {
       if (which < NUM_BUILT_IN_FUNCS) {
-          return (Function) m_functions[which].newInstance();
+          return (Function) m_functions[which].getDeclaredConstructor().newInstance();
       }
-      return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].newInstance();
+      return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].getDeclaredConstructor().newInstance();
     }
-    catch (IllegalAccessException | InstantiationException ex) {
+    catch (IllegalAccessException | InstantiationException
+            | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
       throw new TransformerException(ex.getMessage());
     }
   }
