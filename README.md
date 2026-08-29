@@ -23,7 +23,7 @@ Starting with version 5.0.0, **JDK 17 or higher is required**.
 If you are still on JDK 8, see [Legacy Support (JDK 8)](#legacy-support-jdk-8) below.
 
 
-### Latest release Version 5.4.0 / August 07, 2026
+### Latest release Version 5.5.0 / August 30, 2026
 
 ### Maven
 
@@ -33,7 +33,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-xpath</artifactId>
-    <version>5.4.0</version>
+    <version>5.5.0</version>
 </dependency>
 ```
 
@@ -42,7 +42,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '5.4.0'
+implementation group: 'org.htmlunit', name: 'htmlunit-xpath', version: '5.5.0'
 ```
 
 
@@ -71,7 +71,7 @@ If you use maven please add:
     <dependency>
         <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit-xpath</artifactId>
-        <version>5.5.0-SNAPSHOT</version>
+        <version>5.6.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype-central snapshot repository to your pom `repositories` section also:
