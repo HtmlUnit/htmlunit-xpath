@@ -19,6 +19,8 @@ package org.htmlunit.xpath.compiler;
 
 import java.util.List;
 
+import javax.xml.transform.TransformerException;
+
 import org.htmlunit.xpath.res.XPATHErrorResources;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
@@ -29,16 +31,16 @@ class Lexer {
   private final Compiler m_compiler;
 
   /** The prefix resolver to map prefixes to namespaces in the XPath. */
-  final PrefixResolver m_namespaceContext;
+  private final PrefixResolver m_namespaceContext;
 
   /** The XPath processor object. */
-  final XPathParser m_processor;
+  private final XPathParser m_processor;
 
   /**
    * This value is added to each element name in the TARGETEXTRA that is a 'target' (right-most
    * top-level element name).
    */
-  static final int TARGETEXTRA = 10000;
+  private static final int TARGETEXTRA = 10000;
 
   /**
    * Ignore this, it is going away. This holds a map to the m_tokenQueue that tells where the
@@ -59,7 +61,6 @@ class Lexer {
    * @param xpathProcessor The parser that is processing strings to opcodes.
    */
   Lexer(final Compiler compiler, final PrefixResolver resolver, final XPathParser xpathProcessor) {
-
     m_compiler = compiler;
     m_namespaceContext = resolver;
     m_processor = xpathProcessor;
@@ -70,10 +71,9 @@ class Lexer {
    *
    * @param pat XSLT Expression.
    * @param targetStrings Vector to hold Strings, may be null.
-   * @throws javax.xml.transform.TransformerException if any
+   * @throws TransformerException if any
    */
-  void tokenize(final String pat, final List<String> targetStrings)
-      throws javax.xml.transform.TransformerException {
+  void tokenize(final String pat, final List<String> targetStrings) throws TransformerException {
 
     m_compiler.m_currentPattern = pat;
     m_patternMapSize = 0;
@@ -464,12 +464,12 @@ class Lexer {
    * @param startSubstring The start of the name string.
    * @param posOfNSSep The position of the namespace seperator (':').
    * @param posOfScan The end of the name index.
-   * @throws javax.xml.transform.TransformerException if any
+   * @throws TransformerException if any
    * @return -1 always.
    */
   private int mapNSTokens(
       final String pat, final int startSubstring, final int posOfNSSep, final int posOfScan)
-      throws javax.xml.transform.TransformerException {
+              throws TransformerException {
 
     String prefix = "";
 

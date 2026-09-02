@@ -54,25 +54,23 @@ public class XPathParser {
   /** The position in the token queue is tracked by m_queueMark. */
   int m_queueMark = 0;
 
-  /** Results from checking FilterExpr syntax */
-  protected static final int FILTER_MATCH_FAILED = 0;
-
-  protected static final int FILTER_MATCH_PRIMARY = 1;
-  protected static final int FILTER_MATCH_PREDICATES = 2;
-
   private enum RELATIVE_PATH_STATUS {
       NOT_PERMITTED,
       PERMITTED,
       REQUIRED
   }
 
+  /** Results from checking FilterExpr syntax */
+  private enum FILTER_MATCH {
+      FAILED,
+      PRIMARY,
+      PREDICATES
+  }
+
   /** The parser constructor. */
   public XPathParser(final ErrorListener errorListener) {
     m_errorListener = errorListener;
   }
-
-  /** The prefix resolver to map prefixes to namespaces in the OpMap. */
-  PrefixResolver m_namespaceContext;
 
   /**
    * Given a string, init an XPath object for selections, in order that a parse doesn't have to be
@@ -88,7 +86,6 @@ public class XPathParser {
       throws javax.xml.transform.TransformerException {
 
     m_ops = compiler;
-    m_namespaceContext = namespaceContext;
     m_functionTable = compiler.getFunctionTable();
 
     final Lexer lexer = new Lexer(compiler, namespaceContext, this);
@@ -158,7 +155,6 @@ public class XPathParser {
       throws javax.xml.transform.TransformerException {
 
     m_ops = compiler;
-    m_namespaceContext = namespaceContext;
     m_functionTable = compiler.getFunctionTable();
 
     final Lexer lexer = new Lexer(compiler, namespaceContext, this);
@@ -330,7 +326,7 @@ public class XPathParser {
    * @param msg An error msgkey that corresponds to one of the constants found in {@link
    *     org.htmlunit.xpath.res.XPATHErrorResources}, which is a key for a format string.
    * @param args An array of arguments represented in the format string, which may be null.
-   * @throws TransformerException if the current ErrorListoner determines to throw an exception.
+   * @throws TransformerException if the current ErrorListener determines to throw an exception.
    */
   void error(final String msg, final Object[] args) throws TransformerException {
 
@@ -756,7 +752,7 @@ public class XPathParser {
   }
 
   /**
-   * StringExpr ::= Expr
+   * BooleanExpr ::= Expr
    *
    * @throws javax.xml.transform.TransformerException in case of error
    */
@@ -839,12 +835,12 @@ public class XPathParser {
 
     final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    final int filterExprMatch = FilterExpr();
+    final FILTER_MATCH filterExprMatch = FilterExpr();
 
-    if (filterExprMatch != FILTER_MATCH_FAILED) {
+    if (filterExprMatch != FILTER_MATCH.FAILED) {
       // If FilterExpr had Predicates, a OP_LOCATIONPATH opcode would already
       // have been inserted.
-      boolean locationPathStarted = filterExprMatch == FILTER_MATCH_PREDICATES;
+      boolean locationPathStarted = filterExprMatch == FILTER_MATCH.PREDICATES;
 
       if (tokenIs('/')) {
         nextToken();
@@ -882,11 +878,11 @@ public class XPathParser {
    *     FilterExpr
    * @throws javax.xml.transform.TransformerException in case of error
    */
-  protected int FilterExpr() throws javax.xml.transform.TransformerException {
+  protected FILTER_MATCH FilterExpr() throws javax.xml.transform.TransformerException {
 
     final int opPos = m_ops.getOp(OpMap.MAPINDEX_LENGTH);
 
-    final int filterMatch;
+    final FILTER_MATCH filterMatch;
 
     if (PrimaryExpr()) {
       if (tokenIs('[')) {
@@ -898,14 +894,14 @@ public class XPathParser {
           Predicate();
         }
 
-        filterMatch = FILTER_MATCH_PREDICATES;
+        filterMatch = FILTER_MATCH.PREDICATES;
       }
       else {
-        filterMatch = FILTER_MATCH_PRIMARY;
+        filterMatch = FILTER_MATCH.PRIMARY;
       }
     }
     else {
-      filterMatch = FILTER_MATCH_FAILED;
+      filterMatch = FILTER_MATCH.FAILED;
     }
 
     return filterMatch;
