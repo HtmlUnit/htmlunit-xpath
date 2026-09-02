@@ -17,84 +17,85 @@
  */
 package org.htmlunit.xpath.compiler;
 
+import java.util.Arrays;
+
 /**
- * Like IntVector, but used only for the OpMap array. Length of array is kept in the m_lengthPos
- * position of the array. Only the required methods are in included here.
+ * High-performance primitive int array vector for OpMap operations.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class OpMapVector {
 
-  /** Size of blocks to allocate */
-  protected final int m_blocksize;
+    private final int blockSize_;
+    private final int lengthPos;
 
-  /** Array of ints */
-  protected int[] m_map; // IntStack is trying to see this directly
+    // Package-private so IntStack can access directly without overhead
+    int[] map;
 
-  /** Position where size of array is kept */
-  protected final int m_lengthPos;
-
-  /** Size of array */
-  protected int m_mapSize;
-
-  /**
-   * Construct a OpMapVector, using the given block size.
-   *
-   * @param blocksize Size of block to allocate
-   */
-  public OpMapVector(final int blocksize, final int increaseSize, final int lengthPos) {
-    m_blocksize = increaseSize;
-    m_mapSize = blocksize;
-    m_lengthPos = lengthPos;
-    m_map = new int[blocksize];
-  }
-
-  /**
-   * Get the nth element.
-   *
-   * @param i index of object to get
-   * @return object at given index
-   */
-  public final int elementAt(final int i) {
-    return m_map[i];
-  }
-
-  /**
-   * Sets the component at the specified index of this vector to be the specified object. The
-   * previous component at that position is discarded.
-   *
-   * <p>The index must be a value greater than or equal to 0 and less than the current size of the
-   * vector.
-   *
-   * @param value object to set
-   * @param index Index of where to set the object
-   */
-  public final void setElementAt(final int value, final int index) {
-    if (index >= m_mapSize) {
-      final int oldSize = m_mapSize;
-
-      m_mapSize += m_blocksize;
-
-      final int[] newMap = new int[m_mapSize];
-
-      System.arraycopy(m_map, 0, newMap, 0, oldSize);
-
-      m_map = newMap;
+    /**
+     * Construct a OpMapVector, using the given block size.
+     *
+     * @param blocksize Size of block to allocate
+     */
+    public OpMapVector(final int initialCapacity, final int incrementSize, final int lengthPos) {
+        this.blockSize_ = incrementSize;
+        this.lengthPos = lengthPos;
+        this.map = new int[initialCapacity];
     }
 
-    m_map[index] = value;
-  }
+    /**
+     * Get the nth element.
+     *
+     * @param i index of object to get
+     * @return object at given index
+     */
+    public final int elementAt(final int i) {
+        return map[i];
+    }
 
-  /*
-   * Reset the array to the supplied size. No checking is done.
-   *
-   * @param size The size to trim to.
-   */
-  public final void setToSize(final int size) {
+    /**
+     * Sets the component at the specified index of this vector to be the specified
+     * object. The previous component at that position is discarded.
+     *
+     * <p>
+     * The index must be a value greater than or equal to 0 and less than the
+     * current size of the vector.
+     *
+     * @param value object to set
+     * @param index Index of where to set the object
+     */
+    public final void setElementAt(final int value, final int index) {
+        if (index >= map.length) {
+            // Calculate growth to ensure index is safely accommodated
+            int newSize = map.length + blockSize_;
+            if (index >= newSize) {
+                newSize = index + blockSize_;
+            }
+            map = Arrays.copyOf(map, newSize);
+        }
+        map[index] = value;
+    }
 
-    final int[] newMap = new int[size];
+    /*
+     * Reset the array to the supplied size. No checking is done.
+     *
+     * @param size The size to trim to.
+     */
+    public final void setToSize(final int size) {
+        final int[] newMap = new int[size];
 
-    System.arraycopy(m_map, 0, newMap, 0, m_map[m_lengthPos]);
+        // Guard against out-of-bounds if map[lengthPos] exceeds the target size or
+        // array bounds
+        final int copyLength = Math.min(size, map[lengthPos]);
+        if (copyLength > 0) {
+            System.arraycopy(map, 0, newMap, 0, copyLength);
+        }
 
-    m_mapSize = size;
-    m_map = newMap;
-  }
+        map = newMap;
+    }
+
+    public int[] getMap() {
+        return map;
+    }
 }

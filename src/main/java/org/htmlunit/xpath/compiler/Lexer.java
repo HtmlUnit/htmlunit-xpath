@@ -75,7 +75,7 @@ class Lexer {
    */
   void tokenize(final String pat, final List<String> targetStrings) throws TransformerException {
 
-    m_compiler.m_currentPattern = pat;
+    m_compiler.currentPattern = pat;
     m_patternMapSize = 0;
 
     // This needs to grow too. Use a conservative estimate that the OpMapVector
@@ -83,7 +83,7 @@ class Lexer {
     // maximum of MAXTOKENQUEUESIZE*5. If the OpMapVector needs to grow, grow
     // it freely (second argument to constructor).
     final int initTokQueueSize = (Math.min(pat.length(), OpMap.MAXTOKENQUEUESIZE)) * 5;
-    m_compiler.m_opMap =
+    m_compiler.opMap =
         new OpMapVector(initTokQueueSize, OpMap.BLOCKTOKENQUEUESIZE * 5, OpMap.MAPINDEX_LENGTH);
 
     final int nChars = pat.length();

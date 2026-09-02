@@ -664,14 +664,14 @@ public class Compiler extends OpMap {
     switch (stepType) {
       case OpCodes.OP_FUNCTION:
         if (DEBUG) {
-          System.out.println("MATCH_FUNCTION: " + m_currentPattern);
+          System.out.println("MATCH_FUNCTION: " + currentPattern);
         }
         argLen = getOp(opPos + OpMap.MAPINDEX_LENGTH);
         pattern = new FunctionPattern(compileFunction(opPos), Axis.PARENT);
         break;
       case OpCodes.FROM_ROOT:
         if (DEBUG) {
-          System.out.println("FROM_ROOT, " + m_currentPattern);
+          System.out.println("FROM_ROOT, " + currentPattern);
         }
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
@@ -682,7 +682,7 @@ public class Compiler extends OpMap {
       case OpCodes.MATCH_ATTRIBUTE:
         if (DEBUG) {
           System.out.println(
-                      "MATCH_ATTRIBUTE: " + getStepLocalName(startOpPos) + ", " + m_currentPattern);
+                      "MATCH_ATTRIBUTE: " + getStepLocalName(startOpPos) + ", " + currentPattern);
         }
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
@@ -696,7 +696,7 @@ public class Compiler extends OpMap {
       case OpCodes.MATCH_ANY_ANCESTOR:
         if (DEBUG) {
           System.out.println(
-              "MATCH_ANY_ANCESTOR: " + getStepLocalName(startOpPos) + ", " + m_currentPattern);
+              "MATCH_ANY_ANCESTOR: " + getStepLocalName(startOpPos) + ", " + currentPattern);
         }
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
@@ -714,7 +714,7 @@ public class Compiler extends OpMap {
               "MATCH_IMMEDIATE_ANCESTOR: "
                   + getStepLocalName(startOpPos)
                   + ", "
-                  + m_currentPattern);
+                  + currentPattern);
         }
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
