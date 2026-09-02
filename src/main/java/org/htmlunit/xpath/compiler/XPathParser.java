@@ -382,7 +382,7 @@ public class XPathParser {
 
     int tok;
 
-    Object id;
+    Integer id;
 
     try {
       // These are nodetests, xpathparser treats them as functions when parsing
@@ -391,7 +391,7 @@ public class XPathParser {
       if (null == id) {
         id = m_functionTable.getFunctionID(key);
       }
-      tok = ((Integer) id).intValue();
+      tok = id.intValue();
     }
     catch (NullPointerException | ClassCastException ignored) {
       tok = -1;
@@ -1241,13 +1241,13 @@ public class XPathParser {
    */
   protected int AxisName() throws javax.xml.transform.TransformerException {
 
-    final Object val = Keywords.getAxisName(m_token);
+    final Integer val = Keywords.getAxisName(m_token);
 
     if (null == val) {
       error(XPATHErrorResources.ER_ILLEGAL_AXIS_NAME, new Object[] {m_token});
     }
 
-    final int axesType = ((Integer) val).intValue();
+    final int axesType = val.intValue();
 
     appendOp(2, axesType);
 
@@ -1263,7 +1263,7 @@ public class XPathParser {
   protected void NodeTest(final int axesType) throws javax.xml.transform.TransformerException {
 
     if (lookahead('(', 1)) {
-      final Object nodeTestOp = Keywords.getNodeType(m_token);
+      final Integer nodeTestOp = Keywords.getNodeType(m_token);
 
       if (null == nodeTestOp) {
         error(XPATHErrorResources.ER_UNKNOWN_NODETYPE, new Object[] {m_token});
@@ -1271,7 +1271,7 @@ public class XPathParser {
       else {
         nextToken();
 
-        final int nt = ((Integer) nodeTestOp).intValue();
+        final int nt = nodeTestOp.intValue();
 
         m_ops.setOp(m_ops.getOp(OpMap.MAPINDEX_LENGTH), nt);
         m_ops.setOp(OpMap.MAPINDEX_LENGTH, m_ops.getOp(OpMap.MAPINDEX_LENGTH) + 1);

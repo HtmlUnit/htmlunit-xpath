@@ -233,8 +233,8 @@ public class FunctionTable {
    *     org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed by an external
    *     module.
    */
-  Object getFunctionID(final String key) {
-    Object id = m_functionID_customer.get(key);
+  Integer getFunctionID(final String key) {
+    Integer id = m_functionID_customer.get(key);
     if (null == id) {
       id = m_functionID.get(key);
     }
