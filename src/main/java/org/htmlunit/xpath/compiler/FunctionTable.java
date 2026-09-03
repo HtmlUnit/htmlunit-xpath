@@ -23,268 +23,281 @@ import javax.xml.transform.TransformerException;
 
 import org.htmlunit.xpath.functions.Function;
 
-/** The function table for XPath. */
+/**
+ * The function table for XPath.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
+ */
 public class FunctionTable {
 
-  /** The 'last()' id. */
-  public static final int FUNC_LAST = 0;
+    /** The 'last()' id. */
+    public static final int FUNC_LAST = 0;
 
-  /** The 'position()' id. */
-  public static final int FUNC_POSITION = FUNC_LAST + 1;
+    /** The 'position()' id. */
+    public static final int FUNC_POSITION = FUNC_LAST + 1;
 
-  /** The 'count()' id. */
-  public static final int FUNC_COUNT = FUNC_POSITION + 1;
+    /** The 'count()' id. */
+    public static final int FUNC_COUNT = FUNC_POSITION + 1;
 
-  /** The 'id()' id. */
-  public static final int FUNC_ID = FUNC_COUNT + 1;
+    /** The 'id()' id. */
+    public static final int FUNC_ID = FUNC_COUNT + 1;
 
-  /** The 'local-name()' id. */
-  public static final int FUNC_LOCAL_PART = FUNC_ID + 1;
+    /** The 'local-name()' id. */
+    public static final int FUNC_LOCAL_PART = FUNC_ID + 1;
 
-  /** The 'namespace-uri()' id. */
-  public static final int FUNC_NAMESPACE = FUNC_LOCAL_PART + 1;
+    /** The 'namespace-uri()' id. */
+    public static final int FUNC_NAMESPACE = FUNC_LOCAL_PART + 1;
 
-  /** The 'name()' id. */
-  public static final int FUNC_QNAME = FUNC_NAMESPACE + 1;
+    /** The 'name()' id. */
+    public static final int FUNC_QNAME = FUNC_NAMESPACE + 1;
 
-  /** The 'not()' id. */
-  public static final int FUNC_NOT = FUNC_QNAME + 1;
+    /** The 'not()' id. */
+    public static final int FUNC_NOT = FUNC_QNAME + 1;
 
-  /** The 'true()' id. */
-  public static final int FUNC_TRUE = FUNC_NOT + 1;
+    /** The 'true()' id. */
+    public static final int FUNC_TRUE = FUNC_NOT + 1;
 
-  /** The 'false()' id. */
-  public static final int FUNC_FALSE = FUNC_TRUE + 1;
+    /** The 'false()' id. */
+    public static final int FUNC_FALSE = FUNC_TRUE + 1;
 
-  /** The 'boolean()' id. */
-  public static final int FUNC_BOOLEAN = FUNC_FALSE + 1;
+    /** The 'boolean()' id. */
+    public static final int FUNC_BOOLEAN = FUNC_FALSE + 1;
 
-  /** The 'number()' id. */
-  public static final int FUNC_NUMBER = FUNC_BOOLEAN + 1;
+    /** The 'number()' id. */
+    public static final int FUNC_NUMBER = FUNC_BOOLEAN + 1;
 
-  /** The 'floor()' id. */
-  public static final int FUNC_FLOOR = FUNC_NUMBER + 1;
+    /** The 'floor()' id. */
+    public static final int FUNC_FLOOR = FUNC_NUMBER + 1;
 
-  /** The 'ceiling()' id. */
-  public static final int FUNC_CEILING = FUNC_FLOOR + 1;
+    /** The 'ceiling()' id. */
+    public static final int FUNC_CEILING = FUNC_FLOOR + 1;
 
-  /** The 'round()' id. */
-  public static final int FUNC_ROUND = FUNC_CEILING + 1;
+    /** The 'round()' id. */
+    public static final int FUNC_ROUND = FUNC_CEILING + 1;
 
-  /** The 'sum()' id. */
-  public static final int FUNC_SUM = FUNC_ROUND + 1;
+    /** The 'sum()' id. */
+    public static final int FUNC_SUM = FUNC_ROUND + 1;
 
-  /** The 'string()' id. */
-  public static final int FUNC_STRING = FUNC_SUM + 1;
+    /** The 'string()' id. */
+    public static final int FUNC_STRING = FUNC_SUM + 1;
 
-  /** The 'starts-with()' id. */
-  public static final int FUNC_STARTS_WITH = FUNC_STRING + 1;
+    /** The 'starts-with()' id. */
+    public static final int FUNC_STARTS_WITH = FUNC_STRING + 1;
 
-  /** The 'contains()' id. */
-  public static final int FUNC_CONTAINS = FUNC_STARTS_WITH + 1;
+    /** The 'contains()' id. */
+    public static final int FUNC_CONTAINS = FUNC_STARTS_WITH + 1;
 
-  /** The 'substring-before()' id. */
-  public static final int FUNC_SUBSTRING_BEFORE = FUNC_CONTAINS + 1;
+    /** The 'substring-before()' id. */
+    public static final int FUNC_SUBSTRING_BEFORE = FUNC_CONTAINS + 1;
 
-  /** The 'substring-after()' id. */
-  public static final int FUNC_SUBSTRING_AFTER = FUNC_SUBSTRING_BEFORE + 1;
+    /** The 'substring-after()' id. */
+    public static final int FUNC_SUBSTRING_AFTER = FUNC_SUBSTRING_BEFORE + 1;
 
-  /** The 'normalize-space()' id. */
-  public static final int FUNC_NORMALIZE_SPACE = FUNC_SUBSTRING_AFTER + 1;
+    /** The 'normalize-space()' id. */
+    public static final int FUNC_NORMALIZE_SPACE = FUNC_SUBSTRING_AFTER + 1;
 
-  /** The 'translate()' id. */
-  public static final int FUNC_TRANSLATE = FUNC_NORMALIZE_SPACE + 1;
+    /** The 'translate()' id. */
+    public static final int FUNC_TRANSLATE = FUNC_NORMALIZE_SPACE + 1;
 
-  /** The 'concat()' id. */
-  public static final int FUNC_CONCAT = FUNC_TRANSLATE + 1;
+    /** The 'concat()' id. */
+    public static final int FUNC_CONCAT = FUNC_TRANSLATE + 1;
 
-  /** The 'substring()' id. */
-  public static final int FUNC_SUBSTRING = FUNC_CONCAT + 1;
+    /** The 'substring()' id. */
+    public static final int FUNC_SUBSTRING = FUNC_CONCAT + 1;
 
-  /** The 'string-length()' id. */
-  public static final int FUNC_STRING_LENGTH = FUNC_SUBSTRING + 1;
+    /** The 'string-length()' id. */
+    public static final int FUNC_STRING_LENGTH = FUNC_SUBSTRING + 1;
 
-  /** The 'lang()' id. */
-  public static final int FUNC_LANG = FUNC_STRING_LENGTH + 1;
+    /** The 'lang()' id. */
+    public static final int FUNC_LANG = FUNC_STRING_LENGTH + 1;
 
-  /** Number of built in functions. Be sure to update this as built-in functions are added. */
-  private static final int NUM_BUILT_IN_FUNCS = FUNC_LANG + 1;
+    /**
+     * Number of built in functions. Be sure to update this as built-in functions
+     * are added.
+     */
+    private static final int NUM_BUILT_IN_FUNCS = FUNC_LANG + 1;
 
-  /** The function table. */
-  private static final Class<?>[] m_functions;
+    /** The function table. */
+    private static final Class<?>[] m_functions;
 
-  /** Table of function name to function ID associations. */
-  private static final HashMap<String, Integer> m_functionID = new HashMap<>();
+    /** Table of function name to function ID associations. */
+    private static final HashMap<String, Integer> m_functionID = new HashMap<>();
 
-  /** The function table contains customized functions */
-  private final Class<?>[] m_functions_customer = new Class[NUM_ALLOWABLE_ADDINS];
+    /** The function table contains customized functions */
+    private final Class<?>[] m_functions_customer = new Class[NUM_ALLOWABLE_ADDINS];
 
-  /** Table of function name to function ID associations for customized functions */
-  private final HashMap<String, Integer> m_functionID_customer = new HashMap<>();
+    /**
+     * Table of function name to function ID associations for customized functions
+     */
+    private final HashMap<String, Integer> m_functionID_customer = new HashMap<>();
 
-  /** Number of built-in functions that may be added. */
-  private static final int NUM_ALLOWABLE_ADDINS = 30;
+    /** Number of built-in functions that may be added. */
+    private static final int NUM_ALLOWABLE_ADDINS = 30;
 
-  /** The index to the next free function index. */
-  private int m_funcNextFreeIndex = NUM_BUILT_IN_FUNCS;
+    /** The index to the next free function index. */
+    private int m_funcNextFreeIndex = NUM_BUILT_IN_FUNCS;
 
-  static {
-    m_functions = new Class[NUM_BUILT_IN_FUNCS];
-    m_functions[FUNC_LAST] = org.htmlunit.xpath.functions.FuncLast.class;
-    m_functions[FUNC_POSITION] = org.htmlunit.xpath.functions.FuncPosition.class;
-    m_functions[FUNC_COUNT] = org.htmlunit.xpath.functions.FuncCount.class;
-    m_functions[FUNC_ID] = org.htmlunit.xpath.functions.FuncId.class;
-    m_functions[FUNC_LOCAL_PART] = org.htmlunit.xpath.functions.FuncLocalPart.class;
-    m_functions[FUNC_NAMESPACE] = org.htmlunit.xpath.functions.FuncNamespace.class;
-    m_functions[FUNC_QNAME] = org.htmlunit.xpath.functions.FuncQname.class;
-    m_functions[FUNC_NOT] = org.htmlunit.xpath.functions.FuncNot.class;
-    m_functions[FUNC_TRUE] = org.htmlunit.xpath.functions.FuncTrue.class;
-    m_functions[FUNC_FALSE] = org.htmlunit.xpath.functions.FuncFalse.class;
-    m_functions[FUNC_BOOLEAN] = org.htmlunit.xpath.functions.FuncBoolean.class;
-    m_functions[FUNC_NUMBER] = org.htmlunit.xpath.functions.FuncNumber.class;
-    m_functions[FUNC_FLOOR] = org.htmlunit.xpath.functions.FuncFloor.class;
-    m_functions[FUNC_CEILING] = org.htmlunit.xpath.functions.FuncCeiling.class;
-    m_functions[FUNC_ROUND] = org.htmlunit.xpath.functions.FuncRound.class;
-    m_functions[FUNC_SUM] = org.htmlunit.xpath.functions.FuncSum.class;
-    m_functions[FUNC_STRING] = org.htmlunit.xpath.functions.FuncString.class;
-    m_functions[FUNC_STARTS_WITH] = org.htmlunit.xpath.functions.FuncStartsWith.class;
-    m_functions[FUNC_CONTAINS] = org.htmlunit.xpath.functions.FuncContains.class;
-    m_functions[FUNC_SUBSTRING_BEFORE] = org.htmlunit.xpath.functions.FuncSubstringBefore.class;
-    m_functions[FUNC_SUBSTRING_AFTER] = org.htmlunit.xpath.functions.FuncSubstringAfter.class;
-    m_functions[FUNC_NORMALIZE_SPACE] = org.htmlunit.xpath.functions.FuncNormalizeSpace.class;
-    m_functions[FUNC_TRANSLATE] = org.htmlunit.xpath.functions.FuncTranslate.class;
-    m_functions[FUNC_CONCAT] = org.htmlunit.xpath.functions.FuncConcat.class;
-    m_functions[FUNC_SUBSTRING] = org.htmlunit.xpath.functions.FuncSubstring.class;
-    m_functions[FUNC_STRING_LENGTH] = org.htmlunit.xpath.functions.FuncStringLength.class;
-    m_functions[FUNC_LANG] = org.htmlunit.xpath.functions.FuncLang.class;
-  }
-
-  static {
-    m_functionID.put(Keywords.FUNC_LAST_STRING, FunctionTable.FUNC_LAST);
-    m_functionID.put(Keywords.FUNC_POSITION_STRING, FunctionTable.FUNC_POSITION);
-    m_functionID.put(Keywords.FUNC_COUNT_STRING, FunctionTable.FUNC_COUNT);
-    m_functionID.put(Keywords.FUNC_ID_STRING, FunctionTable.FUNC_ID);
-    m_functionID.put(Keywords.FUNC_LOCAL_PART_STRING, FunctionTable.FUNC_LOCAL_PART);
-    m_functionID.put(Keywords.FUNC_NAMESPACE_STRING, FunctionTable.FUNC_NAMESPACE);
-    m_functionID.put(Keywords.FUNC_NAME_STRING, FunctionTable.FUNC_QNAME);
-    m_functionID.put(Keywords.FUNC_NOT_STRING, FunctionTable.FUNC_NOT);
-    m_functionID.put(Keywords.FUNC_TRUE_STRING, FunctionTable.FUNC_TRUE);
-    m_functionID.put(Keywords.FUNC_FALSE_STRING, FunctionTable.FUNC_FALSE);
-    m_functionID.put(Keywords.FUNC_BOOLEAN_STRING, FunctionTable.FUNC_BOOLEAN);
-    m_functionID.put(Keywords.FUNC_NUMBER_STRING, FunctionTable.FUNC_NUMBER);
-    m_functionID.put(Keywords.FUNC_FLOOR_STRING, FunctionTable.FUNC_FLOOR);
-    m_functionID.put(Keywords.FUNC_CEILING_STRING, FunctionTable.FUNC_CEILING);
-    m_functionID.put(Keywords.FUNC_ROUND_STRING, FunctionTable.FUNC_ROUND);
-    m_functionID.put(Keywords.FUNC_SUM_STRING, FunctionTable.FUNC_SUM);
-    m_functionID.put(Keywords.FUNC_STRING_STRING, FunctionTable.FUNC_STRING);
-    m_functionID.put(Keywords.FUNC_STARTS_WITH_STRING, FunctionTable.FUNC_STARTS_WITH);
-    m_functionID.put(Keywords.FUNC_CONTAINS_STRING, FunctionTable.FUNC_CONTAINS);
-    m_functionID.put(Keywords.FUNC_SUBSTRING_BEFORE_STRING, FunctionTable.FUNC_SUBSTRING_BEFORE);
-    m_functionID.put(Keywords.FUNC_SUBSTRING_AFTER_STRING, FunctionTable.FUNC_SUBSTRING_AFTER);
-    m_functionID.put(Keywords.FUNC_NORMALIZE_SPACE_STRING, FunctionTable.FUNC_NORMALIZE_SPACE);
-    m_functionID.put(Keywords.FUNC_TRANSLATE_STRING, FunctionTable.FUNC_TRANSLATE);
-    m_functionID.put(Keywords.FUNC_CONCAT_STRING, FunctionTable.FUNC_CONCAT);
-    m_functionID.put(Keywords.FUNC_SUBSTRING_STRING, FunctionTable.FUNC_SUBSTRING);
-    m_functionID.put(Keywords.FUNC_STRING_LENGTH_STRING, FunctionTable.FUNC_STRING_LENGTH);
-    m_functionID.put(Keywords.FUNC_LANG_STRING, FunctionTable.FUNC_LANG);
-  }
-
-  public FunctionTable() {
-  }
-
-  /**
-   * Return the name of the a function in the static table. Needed to avoid making the table
-   * publicly available.
-   */
-  String getFunctionName(final int funcID) {
-    if (funcID < NUM_BUILT_IN_FUNCS) {
-      return m_functions[funcID].getSimpleName();
-    }
-    return m_functions_customer[funcID - NUM_BUILT_IN_FUNCS].getName();
-  }
-
-  /**
-   * Obtain a new Function object from a function ID.
-   *
-   * @param which The function ID, which may correspond to one of the FUNC_XXX values found in
-   *     {@link org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed by an
-   *     external module.
-   * @return a a new Function instance.
-   * @throws javax.xml.transform.TransformerException if ClassNotFoundException,
-   *     IllegalAccessException, or InstantiationException is thrown.
-   */
-  Function getFunction(final int which) throws javax.xml.transform.TransformerException {
-    try {
-      if (which < NUM_BUILT_IN_FUNCS) {
-        return (Function) m_functions[which].getDeclaredConstructor().newInstance();
-      }
-      return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].getDeclaredConstructor().newInstance();
-    }
-    catch (final ReflectiveOperationException ex) {
-      throw new TransformerException(ex.getMessage());
-    }
-  }
-
-  /**
-   * Obtain a function ID from a given function name
-   *
-   * @param key the function name in a java.lang.String format.
-   * @return a function ID, which may correspond to one of the FUNC_XXX values found in {@link
-   *     org.htmlunit.xpath.compiler.FunctionTable}, but may be a value installed by an external
-   *     module.
-   */
-  Integer getFunctionID(final String key) {
-    Integer id = m_functionID_customer.get(key);
-    if (null == id) {
-      id = m_functionID.get(key);
-    }
-    return id;
-  }
-
-  /**
-   * Install a built-in function.
-   *
-   * @param name The unqualified name of the function, must not be null
-   * @param func A Implementation of an XPath Function object.
-   * @return the position of the function in the internal index.
-   */
-  public int installFunction(final String name, final Class<?> func) {
-
-    int funcIndex;
-    final Object funcIndexObj = getFunctionID(name);
-
-    if (null != funcIndexObj) {
-      funcIndex = ((Integer) funcIndexObj).intValue();
-
-      if (funcIndex < NUM_BUILT_IN_FUNCS) {
-        funcIndex = m_funcNextFreeIndex++;
-        m_functionID_customer.put(name, Integer.valueOf(funcIndex));
-      }
-      m_functions_customer[funcIndex - NUM_BUILT_IN_FUNCS] = func;
-    }
-    else {
-      funcIndex = m_funcNextFreeIndex++;
-
-      m_functions_customer[funcIndex - NUM_BUILT_IN_FUNCS] = func;
-
-      m_functionID_customer.put(name, Integer.valueOf(funcIndex));
-    }
-    return funcIndex;
-  }
-
-  /**
-   * Tell if a built-in, non-namespaced function is available.
-   *
-   * @param methName The local name of the function.
-   * @return True if the function can be executed.
-   */
-  public boolean functionAvailable(final String methName) {
-    Object tblEntry = m_functionID.get(methName);
-    if (null != tblEntry) {
-      return true;
+    static {
+        m_functions = new Class[NUM_BUILT_IN_FUNCS];
+        m_functions[FUNC_LAST] = org.htmlunit.xpath.functions.FuncLast.class;
+        m_functions[FUNC_POSITION] = org.htmlunit.xpath.functions.FuncPosition.class;
+        m_functions[FUNC_COUNT] = org.htmlunit.xpath.functions.FuncCount.class;
+        m_functions[FUNC_ID] = org.htmlunit.xpath.functions.FuncId.class;
+        m_functions[FUNC_LOCAL_PART] = org.htmlunit.xpath.functions.FuncLocalPart.class;
+        m_functions[FUNC_NAMESPACE] = org.htmlunit.xpath.functions.FuncNamespace.class;
+        m_functions[FUNC_QNAME] = org.htmlunit.xpath.functions.FuncQname.class;
+        m_functions[FUNC_NOT] = org.htmlunit.xpath.functions.FuncNot.class;
+        m_functions[FUNC_TRUE] = org.htmlunit.xpath.functions.FuncTrue.class;
+        m_functions[FUNC_FALSE] = org.htmlunit.xpath.functions.FuncFalse.class;
+        m_functions[FUNC_BOOLEAN] = org.htmlunit.xpath.functions.FuncBoolean.class;
+        m_functions[FUNC_NUMBER] = org.htmlunit.xpath.functions.FuncNumber.class;
+        m_functions[FUNC_FLOOR] = org.htmlunit.xpath.functions.FuncFloor.class;
+        m_functions[FUNC_CEILING] = org.htmlunit.xpath.functions.FuncCeiling.class;
+        m_functions[FUNC_ROUND] = org.htmlunit.xpath.functions.FuncRound.class;
+        m_functions[FUNC_SUM] = org.htmlunit.xpath.functions.FuncSum.class;
+        m_functions[FUNC_STRING] = org.htmlunit.xpath.functions.FuncString.class;
+        m_functions[FUNC_STARTS_WITH] = org.htmlunit.xpath.functions.FuncStartsWith.class;
+        m_functions[FUNC_CONTAINS] = org.htmlunit.xpath.functions.FuncContains.class;
+        m_functions[FUNC_SUBSTRING_BEFORE] = org.htmlunit.xpath.functions.FuncSubstringBefore.class;
+        m_functions[FUNC_SUBSTRING_AFTER] = org.htmlunit.xpath.functions.FuncSubstringAfter.class;
+        m_functions[FUNC_NORMALIZE_SPACE] = org.htmlunit.xpath.functions.FuncNormalizeSpace.class;
+        m_functions[FUNC_TRANSLATE] = org.htmlunit.xpath.functions.FuncTranslate.class;
+        m_functions[FUNC_CONCAT] = org.htmlunit.xpath.functions.FuncConcat.class;
+        m_functions[FUNC_SUBSTRING] = org.htmlunit.xpath.functions.FuncSubstring.class;
+        m_functions[FUNC_STRING_LENGTH] = org.htmlunit.xpath.functions.FuncStringLength.class;
+        m_functions[FUNC_LANG] = org.htmlunit.xpath.functions.FuncLang.class;
     }
 
-    tblEntry = m_functionID_customer.get(methName);
-    return null != tblEntry;
-  }
+    static {
+        m_functionID.put(Keywords.FUNC_LAST_STRING, FunctionTable.FUNC_LAST);
+        m_functionID.put(Keywords.FUNC_POSITION_STRING, FunctionTable.FUNC_POSITION);
+        m_functionID.put(Keywords.FUNC_COUNT_STRING, FunctionTable.FUNC_COUNT);
+        m_functionID.put(Keywords.FUNC_ID_STRING, FunctionTable.FUNC_ID);
+        m_functionID.put(Keywords.FUNC_LOCAL_PART_STRING, FunctionTable.FUNC_LOCAL_PART);
+        m_functionID.put(Keywords.FUNC_NAMESPACE_STRING, FunctionTable.FUNC_NAMESPACE);
+        m_functionID.put(Keywords.FUNC_NAME_STRING, FunctionTable.FUNC_QNAME);
+        m_functionID.put(Keywords.FUNC_NOT_STRING, FunctionTable.FUNC_NOT);
+        m_functionID.put(Keywords.FUNC_TRUE_STRING, FunctionTable.FUNC_TRUE);
+        m_functionID.put(Keywords.FUNC_FALSE_STRING, FunctionTable.FUNC_FALSE);
+        m_functionID.put(Keywords.FUNC_BOOLEAN_STRING, FunctionTable.FUNC_BOOLEAN);
+        m_functionID.put(Keywords.FUNC_NUMBER_STRING, FunctionTable.FUNC_NUMBER);
+        m_functionID.put(Keywords.FUNC_FLOOR_STRING, FunctionTable.FUNC_FLOOR);
+        m_functionID.put(Keywords.FUNC_CEILING_STRING, FunctionTable.FUNC_CEILING);
+        m_functionID.put(Keywords.FUNC_ROUND_STRING, FunctionTable.FUNC_ROUND);
+        m_functionID.put(Keywords.FUNC_SUM_STRING, FunctionTable.FUNC_SUM);
+        m_functionID.put(Keywords.FUNC_STRING_STRING, FunctionTable.FUNC_STRING);
+        m_functionID.put(Keywords.FUNC_STARTS_WITH_STRING, FunctionTable.FUNC_STARTS_WITH);
+        m_functionID.put(Keywords.FUNC_CONTAINS_STRING, FunctionTable.FUNC_CONTAINS);
+        m_functionID.put(Keywords.FUNC_SUBSTRING_BEFORE_STRING, FunctionTable.FUNC_SUBSTRING_BEFORE);
+        m_functionID.put(Keywords.FUNC_SUBSTRING_AFTER_STRING, FunctionTable.FUNC_SUBSTRING_AFTER);
+        m_functionID.put(Keywords.FUNC_NORMALIZE_SPACE_STRING, FunctionTable.FUNC_NORMALIZE_SPACE);
+        m_functionID.put(Keywords.FUNC_TRANSLATE_STRING, FunctionTable.FUNC_TRANSLATE);
+        m_functionID.put(Keywords.FUNC_CONCAT_STRING, FunctionTable.FUNC_CONCAT);
+        m_functionID.put(Keywords.FUNC_SUBSTRING_STRING, FunctionTable.FUNC_SUBSTRING);
+        m_functionID.put(Keywords.FUNC_STRING_LENGTH_STRING, FunctionTable.FUNC_STRING_LENGTH);
+        m_functionID.put(Keywords.FUNC_LANG_STRING, FunctionTable.FUNC_LANG);
+    }
+
+    public FunctionTable() {
+    }
+
+    /**
+     * Return the name of the a function in the static table. Needed to avoid making
+     * the table publicly available.
+     */
+    String getFunctionName(final int funcID) {
+        if (funcID < NUM_BUILT_IN_FUNCS) {
+            return m_functions[funcID].getSimpleName();
+        }
+        return m_functions_customer[funcID - NUM_BUILT_IN_FUNCS].getName();
+    }
+
+    /**
+     * Obtain a new Function object from a function ID.
+     *
+     * @param which The function ID, which may correspond to one of the FUNC_XXX
+     *              values found in
+     *              {@link org.htmlunit.xpath.compiler.FunctionTable}, but may be a
+     *              value installed by an external module.
+     * @return a a new Function instance.
+     * @throws javax.xml.transform.TransformerException if ClassNotFoundException,
+     *                                                  IllegalAccessException, or
+     *                                                  InstantiationException is
+     *                                                  thrown.
+     */
+    Function getFunction(final int which) throws javax.xml.transform.TransformerException {
+        try {
+            if (which < NUM_BUILT_IN_FUNCS) {
+                return (Function) m_functions[which].getDeclaredConstructor().newInstance();
+            }
+            return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].getDeclaredConstructor().newInstance();
+        }
+        catch (final ReflectiveOperationException ex) {
+            throw new TransformerException(ex.getMessage());
+        }
+    }
+
+    /**
+     * Obtain a function ID from a given function name
+     *
+     * @param key the function name in a java.lang.String format.
+     * @return a function ID, which may correspond to one of the FUNC_XXX values
+     *         found in {@link org.htmlunit.xpath.compiler.FunctionTable}, but may
+     *         be a value installed by an external module.
+     */
+    Integer getFunctionID(final String key) {
+        Integer id = m_functionID_customer.get(key);
+        if (null == id) {
+            id = m_functionID.get(key);
+        }
+        return id;
+    }
+
+    /**
+     * Install a built-in function.
+     *
+     * @param name The unqualified name of the function, must not be null
+     * @param func A Implementation of an XPath Function object.
+     * @return the position of the function in the internal index.
+     */
+    public int installFunction(final String name, final Class<?> func) {
+
+        int funcIndex;
+        final Object funcIndexObj = getFunctionID(name);
+
+        if (null != funcIndexObj) {
+            funcIndex = ((Integer) funcIndexObj).intValue();
+
+            if (funcIndex < NUM_BUILT_IN_FUNCS) {
+                funcIndex = m_funcNextFreeIndex++;
+                m_functionID_customer.put(name, Integer.valueOf(funcIndex));
+            }
+            m_functions_customer[funcIndex - NUM_BUILT_IN_FUNCS] = func;
+        }
+        else {
+            funcIndex = m_funcNextFreeIndex++;
+
+            m_functions_customer[funcIndex - NUM_BUILT_IN_FUNCS] = func;
+
+            m_functionID_customer.put(name, Integer.valueOf(funcIndex));
+        }
+        return funcIndex;
+    }
+
+    /**
+     * Tell if a built-in, non-namespaced function is available.
+     *
+     * @param methName The local name of the function.
+     * @return True if the function can be executed.
+     */
+    public boolean functionAvailable(final String methName) {
+        Object tblEntry = m_functionID.get(methName);
+        if (null != tblEntry) {
+            return true;
+        }
+
+        tblEntry = m_functionID_customer.get(methName);
+        return null != tblEntry;
+    }
 }

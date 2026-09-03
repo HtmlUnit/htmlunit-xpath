@@ -17,18 +17,24 @@
  */
 package org.htmlunit.xpath.compiler;
 
-/** This is used to represent names of nodes that may not be named, like a comment node. */
+/**
+ * This is used to represent names of nodes that may not be named, like a
+ * comment node.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
+ */
 public class PseudoNames {
 
-  /** Pseudo name for a wild card pattern ('*'). */
-  public static final String PSEUDONAME_ANY = "*";
+    /** Pseudo name for a wild card pattern ('*'). */
+    public static final String PSEUDONAME_ANY = "*";
 
-  /** Pseudo name for the root node. */
-  public static final String PSEUDONAME_ROOT = "/";
+    /** Pseudo name for the root node. */
+    public static final String PSEUDONAME_ROOT = "/";
 
-  /** Pseudo name for a text node. */
-  public static final String PSEUDONAME_TEXT = "#text";
+    /** Pseudo name for a text node. */
+    public static final String PSEUDONAME_TEXT = "#text";
 
-  /** Pseudo name for a comment node. */
-  public static final String PSEUDONAME_COMMENT = "#comment";
+    /** Pseudo name for a comment node. */
+    public static final String PSEUDONAME_COMMENT = "#comment";
 }
