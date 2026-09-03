@@ -374,10 +374,10 @@ public class OpMap {
             case 2 -> opMap.elementAt(opPosOfStep + 4);
             case 3 -> opMap.elementAt(opPosOfStep + 5);
             default -> OpCodes.EMPTY; // Should assert error
-            };
+        };
 
         if (index >= 0) {
-            return tokenQueue.get(index).toString();
+            return (String) tokenQueue.get(index);
         }
         else if (OpCodes.ELEMWILDCARD == index) {
             return NodeTest.WILD;
@@ -386,4 +386,5 @@ public class OpMap {
             return null;
         }
     }
+
 }
