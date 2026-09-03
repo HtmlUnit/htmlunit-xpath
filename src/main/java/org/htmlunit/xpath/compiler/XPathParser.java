@@ -186,6 +186,13 @@ public class XPathParser {
     m_ops = compiler;
     m_functionTable = compiler.getFunctionTable();
 
+    // Reset before tokenizing for the same reason as initXPath: Lexer.tokenize()
+    // appends to the existing token queue rather than replacing it, and Literal()
+    // mutates queue slots from String to XString. If this Compiler instance is
+    // reused, those mutations must be cleared before the next tokenize() call or
+    // nextToken() will throw ClassCastException.
+    compiler.reset();
+
     final Lexer lexer = new Lexer(compiler, namespaceContext, this);
 
     lexer.tokenize(expression, null);

@@ -158,9 +158,10 @@ public class OpMap {
      */
     public void reset() {
       tokenQueue.clear();
-      if (opMap != null) {
-          opMap.setToSize(0);
-      }
+      opMap = new OpMapVector(
+              OpMap.MAXTOKENQUEUESIZE * 5,
+              OpMap.BLOCKTOKENQUEUESIZE * 5,
+              OpMap.MAPINDEX_LENGTH);
     }
 
     /**
