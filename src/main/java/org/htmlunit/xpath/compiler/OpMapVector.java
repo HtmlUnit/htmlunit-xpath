@@ -34,9 +34,12 @@ public class OpMapVector {
     int[] map;
 
     /**
-     * Construct a OpMapVector, using the given block size.
+     * Constructs an {@code OpMapVector} with the specified initial capacity, increment size,
+     * and length position.
      *
-     * @param blocksize Size of block to allocate
+     * @param initialCapacity initial size of the vector array
+     * @param incrementSize   amount by which to expand the backing array when full
+     * @param lengthPos       index position in the array where length metadata is stored
      */
     public OpMapVector(final int initialCapacity, final int incrementSize, final int lengthPos) {
         this.blockSize_ = incrementSize;
