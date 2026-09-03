@@ -107,8 +107,7 @@ public class XPathParser {
     compiler.reset();
 
     final Lexer lexer = new Lexer(compiler, namespaceContext, this);
-
-    lexer.tokenize(expression, null);
+    lexer.tokenize(expression);
 
     m_ops.setOp(0, OpCodes.OP_XPATH);
     m_ops.setOp(OpMap.MAPINDEX_LENGTH, 2);
@@ -194,8 +193,7 @@ public class XPathParser {
     compiler.reset();
 
     final Lexer lexer = new Lexer(compiler, namespaceContext, this);
-
-    lexer.tokenize(expression, null);
+    lexer.tokenize(expression);
 
     m_ops.setOp(0, OpCodes.OP_MATCHPATTERN);
     m_ops.setOp(OpMap.MAPINDEX_LENGTH, 2);
