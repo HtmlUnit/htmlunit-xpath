@@ -63,7 +63,6 @@ class Lexer {
     void tokenize(final String pat) throws TransformerException {
 
         m_compiler.currentPattern = pat;
-        m_patternMapSize = 0;
 
         // This needs to grow too. Use a conservative estimate that the OpMapVector
         // needs about five time the length of the input path expression - to a
@@ -76,7 +75,6 @@ class Lexer {
         int startSubstring = -1;
         int posOfNSSep = -1;
         boolean isNum = false;
-        int nesting = 0;
 
         for (int i = 0; i < nChars; i++) {
             char c = pat.charAt(i);
@@ -87,10 +85,11 @@ class Lexer {
                     isNum = false;
 
                     if (-1 != posOfNSSep) {
-                        posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, i);
+                        mapNSTokens(pat, startSubstring, posOfNSSep, i);
+                        posOfNSSep = -1;
                     }
                     else {
-                        addToTokenQueue(pat.substring(startSubstring, i));
+                        m_compiler.getTokenQueue().add(pat.substring(startSubstring, i));
                     }
                 }
 
@@ -101,7 +100,7 @@ class Lexer {
                 }
 
                 if (c == '\"' && i < nChars) {
-                    addToTokenQueue(pat.substring(startSubstring, i + 1));
+                    m_compiler.getTokenQueue().add(pat.substring(startSubstring, i + 1));
                     startSubstring = -1;
                 }
                 else {
@@ -114,10 +113,11 @@ class Lexer {
                     isNum = false;
 
                     if (-1 != posOfNSSep) {
-                        posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, i);
+                        mapNSTokens(pat, startSubstring, posOfNSSep, i);
+                        posOfNSSep = -1;
                     }
                     else {
-                        addToTokenQueue(pat.substring(startSubstring, i));
+                        m_compiler.getTokenQueue().add(pat.substring(startSubstring, i));
                     }
                 }
 
@@ -128,7 +128,7 @@ class Lexer {
                 }
 
                 if (c == '\'' && i < nChars) {
-                    addToTokenQueue(pat.substring(startSubstring, i + 1));
+                    m_compiler.getTokenQueue().add(pat.substring(startSubstring, i + 1));
                     startSubstring = -1;
                 }
                 else {
@@ -144,10 +144,11 @@ class Lexer {
                     isNum = false;
 
                     if (-1 != posOfNSSep) {
-                        posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, i);
+                        mapNSTokens(pat, startSubstring, posOfNSSep, i);
+                        posOfNSSep = -1;
                     }
                     else {
-                        addToTokenQueue(pat.substring(startSubstring, i));
+                        m_compiler.getTokenQueue().add(pat.substring(startSubstring, i));
                     }
 
                     startSubstring = -1;
@@ -185,23 +186,17 @@ class Lexer {
                     isNum = false;
 
                     if (-1 != posOfNSSep) {
-                        posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, i);
+                        mapNSTokens(pat, startSubstring, posOfNSSep, i);
+                        posOfNSSep = -1;
                     }
                     else {
-                        addToTokenQueue(pat.substring(startSubstring, i));
+                        m_compiler.getTokenQueue().add(pat.substring(startSubstring, i));
                     }
 
                     startSubstring = -1;
                 }
 
-                if ((')' == c) || (']' == c)) {
-                    nesting--;
-                }
-                else if (('(' == c) || ('[' == c)) {
-                    nesting++;
-                }
-
-                addToTokenQueue(pat.substring(i, i + 1));
+                m_compiler.getTokenQueue().add(pat.substring(i, i + 1));
                 break;
 
             case ':':
@@ -209,7 +204,7 @@ class Lexer {
                     if (posOfNSSep == (i - 1)) {
                         if (startSubstring != -1) {
                             if (startSubstring < (i - 1)) {
-                                addToTokenQueue(pat.substring(startSubstring, i - 1));
+                                m_compiler.getTokenQueue().add(pat.substring(startSubstring, i - 1));
                             }
                         }
 
@@ -217,7 +212,7 @@ class Lexer {
                         startSubstring = -1;
                         posOfNSSep = -1;
 
-                        addToTokenQueue(pat.substring(i - 1, i + 1));
+                        m_compiler.getTokenQueue().add(pat.substring(i - 1, i + 1));
                         break;
                     }
                     posOfNSSep = i;
@@ -239,10 +234,10 @@ class Lexer {
             isNum = false;
 
             if ((-1 != posOfNSSep) || ((m_namespaceContext != null) && (m_namespaceContext.handlesNullPrefixes()))) {
-                posOfNSSep = mapNSTokens(pat, startSubstring, posOfNSSep, nChars);
+                mapNSTokens(pat, startSubstring, posOfNSSep, nChars);
             }
             else {
-                addToTokenQueue(pat.substring(startSubstring, nChars));
+                m_compiler.getTokenQueue().add(pat.substring(startSubstring, nChars));
             }
         }
 
@@ -260,39 +255,21 @@ class Lexer {
      * @return An opcode value.
      */
     final int getKeywordToken(final String key) {
-        int tok;
-
-        try {
-            final Integer itok = Keywords.getKeyWord(key);
-            tok = (null != itok) ? itok.intValue() : 0;
-        }
-        catch (NullPointerException | ClassCastException npe) {
-            tok = 0;
-        }
-
-        return tok;
+        final Integer itok = Keywords.getKeyWord(key);
+        return (null != itok) ? itok : 0;
     }
 
     /**
-     * Add a token to the token queue.
-     *
-     * @param s The token.
-     */
-    private void addToTokenQueue(final String s) {
-        m_compiler.getTokenQueue().add(s);
-    }
-
-    /**
-     * When a separator token is found, see if there's a element name or the like to map.
+     * When a separator token is found, resolve any namespace prefix and add the
+     * resulting tokens to the token queue.
      *
      * @param pat            The XPath name string.
      * @param startSubstring The start of the name string.
      * @param posOfNSSep     The position of the namespace separator (':').
      * @param posOfScan      The end of the name index.
-     * @throws TransformerException if any
-     * @return -1 always.
+     * @throws TransformerException if the prefix cannot be resolved.
      */
-    private int mapNSTokens(final String pat, final int startSubstring, final int posOfNSSep, final int posOfScan)
+    private void mapNSTokens(final String pat, final int startSubstring, final int posOfNSSep, final int posOfScan)
             throws TransformerException {
 
         String prefix = "";
@@ -300,39 +277,28 @@ class Lexer {
         if ((startSubstring >= 0) && (posOfNSSep >= 0)) {
             prefix = pat.substring(startSubstring, posOfNSSep);
         }
-        String uName;
+
+        final String uName;
 
         if ((null != m_namespaceContext) && !"*".equals(prefix) && !"xmlns".equals(prefix)) {
-            try {
-                if (prefix.length() > 0) {
-                    uName = m_namespaceContext.getNamespaceForPrefix(prefix);
-                }
-                else {
-                    uName = m_namespaceContext.getNamespaceForPrefix(prefix);
-                }
-            }
-            catch (final ClassCastException cce) {
-                uName = m_namespaceContext.getNamespaceForPrefix(prefix);
-            }
+            uName = m_namespaceContext.getNamespaceForPrefix(prefix);
         }
         else {
             uName = prefix;
         }
 
         if ((null != uName) && (uName.length() > 0)) {
-            addToTokenQueue(uName);
-            addToTokenQueue(":");
+            m_compiler.getTokenQueue().add(uName);
+            m_compiler.getTokenQueue().add(":");
 
             final String s = pat.substring(posOfNSSep + 1, posOfScan);
 
             if (s.length() > 0) {
-                addToTokenQueue(s);
+                m_compiler.getTokenQueue().add(s);
             }
         }
         else {
             m_processor.error(XPATHErrorResources.ER_PREFIX_MUST_RESOLVE, new String[] {prefix});
         }
-
-        return -1;
     }
 }
