@@ -95,6 +95,18 @@ public class OpMapVector {
         map = newMap;
     }
 
+    /**
+     * Resets the logical size to zero without releasing the backing array,
+     * preserving its capacity for reuse.
+     *
+     * <p>This is analogous to {@link java.util.ArrayList#clear()} — O(1),
+     * no allocation. The backing array is retained so subsequent
+     * {@link #setElementAt} calls can fill it without triggering growth.
+     */
+    public void clear() {
+        map[lengthPos] = 0;
+    }
+
     public int[] getMap() {
         return map;
     }

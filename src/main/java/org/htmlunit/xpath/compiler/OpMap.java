@@ -99,7 +99,7 @@ public class OpMap {
      * operations codes and indexes into the tokenQueue. I use an array instead of a
      * full parse tree in order to cut down on the number of objects created.
      */
-    OpMapVector opMap = null;
+    OpMapVector opMap = new OpMapVector(MAXTOKENQUEUESIZE * 5, BLOCKTOKENQUEUESIZE * 5, MAPINDEX_LENGTH);
 
     /**
      * Get the underlying OpMapVector.
@@ -158,10 +158,7 @@ public class OpMap {
      */
     public void reset() {
       tokenQueue.clear();
-      opMap = new OpMapVector(
-              OpMap.MAXTOKENQUEUESIZE * 5,
-              OpMap.BLOCKTOKENQUEUESIZE * 5,
-              OpMap.MAPINDEX_LENGTH);
+      opMap.clear();
     }
 
     /**
