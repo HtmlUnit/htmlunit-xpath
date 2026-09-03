@@ -74,7 +74,7 @@ public class OpMap {
      * end of the tokenQueue. The idea is that the queue can be marked and a
      * sequence of tokens can be reused.
      */
-    final List<Object> tokenQueue = new ArrayList<>();
+    final ArrayList<Object> tokenQueue = new ArrayList<>();
 
     /**
      * Get the XPath as a list of tokens.
@@ -127,18 +127,34 @@ public class OpMap {
      */
     public static final int MAPINDEX_LENGTH = 1;
 
-    /** Replace the large arrays with a small array. */
+    /**
+     * Trims both internal structures to their current logical size, releasing
+     * surplus capacity allocated during parsing.
+     *
+     * <p>Called once after a successful parse. The symmetric operation before
+     * a new parse is {@link #reset()}.
+     *
+     * <p>One sentinel zero is written beyond the last op-map position so that
+     * any walker reading one slot past a valid op sequence sees {@code 0}
+     * (ENDOP) rather than stale data. Because {@code new int[]} is
+     * zero-initialised, {@code setToSize(n + 1)} alone provides this sentinel
+     * without any explicit {@code setElementAt} calls.
+     *
+     * <p>No null sentinels are appended to the token queue. Token-queue slots
+     * are accessed by index from op-map entries, never by scanning to a
+     * sentinel, so trailing nulls only inflated {@link #getTokenQueueSize()}
+     * and complicated {@link #reset()}.
+     */
     void shrink() {
         final int n = opMap.elementAt(MAPINDEX_LENGTH);
-        opMap.setToSize(n + 4);
 
-        opMap.setElementAt(0, n);
-        opMap.setElementAt(0, n + 1);
-        opMap.setElementAt(0, n + 2);
+        // Trim the op-map to logical content + 1 sentinel zero.
+        // setToSize copies [0, n) from the old array; the slot at index n
+        // is zero by default in the new array, giving the sentinel for free.
+        opMap.setToSize(n + 1);
 
-        tokenQueue.add(null);
-        tokenQueue.add(null);
-        tokenQueue.add(null);
+        // Trim the token queue to its exact logical size.
+        tokenQueue.trimToSize();
     }
 
     /**

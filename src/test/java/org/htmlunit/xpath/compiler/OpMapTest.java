@@ -18,7 +18,6 @@
 package org.htmlunit.xpath.compiler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.xml.transform.TransformerException;
@@ -79,16 +78,21 @@ public class OpMapTest {
     }
 
     @Test
-    @DisplayName("Shrinking the OpMap trims capacity and pads token queue")
+    @DisplayName("Shrinking the OpMap trims op-map to logical size + 1 sentinel")
     void testShrink() {
-        // Set length at MAPINDEX_LENGTH (1) to 5[cite: 2]
+        // Set logical length at MAPINDEX_LENGTH (1) to 5
         opMap.setOp(OpMap.MAPINDEX_LENGTH, 5);
 
         opMap.shrink();
 
-        assertEquals(9, opMap.getOpMap().getMap().length); // 5 + 4
-        assertEquals(3, opMap.getTokenQueueSize());
-        assertNull(opMap.getTokenQueue().get(0));
+        // op-map trimmed to n+1 = 6: logical content [0,5) plus one sentinel zero
+        assertEquals(6, opMap.getOpMap().getMap().length);
+
+        // sentinel slot is zero (ENDOP) — provided by zero-initialised new int[]
+        assertEquals(0, opMap.getOpMap().elementAt(5));
+
+        // token queue unchanged — no null sentinels appended
+        assertEquals(0, opMap.getTokenQueueSize());
     }
 
     @Test
