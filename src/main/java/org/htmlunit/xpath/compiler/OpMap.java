@@ -129,7 +129,6 @@ public class OpMap {
 
     /** Replace the large arrays with a small array. */
     void shrink() {
-
         final int n = opMap.elementAt(MAPINDEX_LENGTH);
         opMap.setToSize(n + 4);
 
@@ -140,6 +139,28 @@ public class OpMap {
         tokenQueue.add(null);
         tokenQueue.add(null);
         tokenQueue.add(null);
+    }
+
+    /**
+     * Resets this OpMap to a clean initial state so it can be reused for a fresh
+     * parse without constructing a new instance.
+     *
+     * <p>This is the symmetric counterpart to {@link #shrink()}: where
+     * {@code shrink()} releases surplus capacity after a successful parse, {@code reset()}
+     * clears all content before a new one begins.
+     *
+     * <p>Callers must invoke this before calling {@link Lexer#tokenize} a second time
+     * on the same instance. {@code tokenize()} appends to the existing token queue
+     * rather than replacing it, and {@link XPathParser#Literal()} mutates queue
+     * slots from {@code String} to {@code XString}. If those mutations survive into
+     * a subsequent parse, {@link XPathParser#nextToken()} will throw
+     * {@link ClassCastException} when it casts the slot back to {@code String}.
+     */
+    public void reset() {
+      tokenQueue.clear();
+      if (opMap != null) {
+          opMap.setToSize(0);
+      }
     }
 
     /**

@@ -51,6 +51,16 @@ public class XPathParser {
    */
   transient char m_tokenChar = 0;
 
+  /**
+   * Guard flag that prevents unbounded recursion in {@link #initXPath} when a
+   * {@code CONTINUE_AFTER_FATAL_ERROR} is caught and the single-attempt fallback
+   * expression {@code "/.."} itself fails.
+   *
+   * <p>Set to {@code true} before the fallback call and cleared in a
+   * {@code finally} block, so a reused parser instance is always left clean.
+   */
+  private boolean inFallbackXPath;
+
   /** The position in the token queue is tracked by m_queueMark. */
   int m_queueMark = 0;
 
@@ -87,6 +97,14 @@ public class XPathParser {
 
     m_ops = compiler;
     m_functionTable = compiler.getFunctionTable();
+
+    // Reset the compiler state before tokenizing. This is essential when initXPath
+    // is called recursively for the fallback expression "/.." after a
+    // CONTINUE_AFTER_FATAL_ERROR: Lexer.tokenize() appends to the existing token
+    // queue rather than replacing it, and Literal() may have already mutated queue
+    // slots from String to XString. If those slots survive into the fallback parse,
+    // nextToken() will throw ClassCastException when it casts them back to String.
+    compiler.reset();
 
     final Lexer lexer = new Lexer(compiler, namespaceContext, this);
 
@@ -128,10 +146,21 @@ public class XPathParser {
     }
     catch (final org.htmlunit.xpath.XPathProcessorException e) {
       if (CONTINUE_AFTER_FATAL_ERROR.equals(e.getMessage())) {
-        // What I _want_ to do is null out this XPath.
-        // I doubt this has the desired effect, but I'm not sure what else to do.
-        // %REVIEW%!!!
-        initXPath(compiler, "/..", namespaceContext);
+        if (inFallbackXPath) {
+          // The fallback expression "/.." itself failed to parse cleanly.
+          // Do not recurse again — leave the compiler in its current partial
+          // state. The m_inFallbackXPath flag is cleared by the finally block
+          // in the outer invocation.
+          return;
+        }
+        // First failure: attempt the safe fallback expression exactly once.
+        inFallbackXPath = true;
+        try {
+          initXPath(compiler, "/..", namespaceContext);
+        }
+        finally {
+          inFallbackXPath = false;
+        }
       }
       else {
         throw e;
