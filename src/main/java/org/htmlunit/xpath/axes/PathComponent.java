@@ -20,6 +20,9 @@ package org.htmlunit.xpath.axes;
 /**
  * Classes who implement this information provide information needed for static analysis of a path
  * component.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public interface PathComponent {
     /**

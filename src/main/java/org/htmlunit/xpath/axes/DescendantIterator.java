@@ -34,6 +34,9 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
  * patterns.
  *
  * @see org.htmlunit.xpath.axes.LocPathIterator
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class DescendantIterator extends LocPathIterator {
 

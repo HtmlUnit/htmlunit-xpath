@@ -26,6 +26,9 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * Location path iterator that uses Walkers.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class WalkingIterator extends LocPathIterator {
 

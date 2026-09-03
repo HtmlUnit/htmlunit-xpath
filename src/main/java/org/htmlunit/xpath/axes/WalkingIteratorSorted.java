@@ -21,6 +21,9 @@ import org.htmlunit.xpath.compiler.Compiler;
 
 /**
  * This class iterates over set of nodes that needs to be sorted.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class WalkingIteratorSorted extends WalkingIterator {
 

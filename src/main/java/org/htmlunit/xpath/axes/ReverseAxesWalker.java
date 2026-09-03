@@ -25,6 +25,9 @@ import org.htmlunit.xpath.xml.dtm.DTMAxisIterator;
  * Walker for a reverse axes.
  *
  * @see <a href="http://www.w3.org/TR/xpath#predicates">XPath 2.4 Predicates</a>
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class ReverseAxesWalker extends AxesWalker {
 

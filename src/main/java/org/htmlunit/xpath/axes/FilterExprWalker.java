@@ -32,6 +32,9 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
  * Walker for the OP_VARIABLE, or OP_FUNCTION, or OP_GROUP, op codes.
  *
  * @see <a href="http://www.w3.org/TR/xpath#NT-FilterExpr">XPath FilterExpr descriptions</a>
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class FilterExprWalker extends AxesWalker {
 

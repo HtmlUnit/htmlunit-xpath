@@ -25,6 +25,9 @@ import org.htmlunit.xpath.xml.dtm.DTM;
 /**
  * This class implements a general iterator for those LocationSteps with only one step, and perhaps
  * a predicate, that only go forward (i.e. it can not be used with ancestors, preceding, etc.)
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class OneStepIteratorForward extends ChildTestIterator {
 

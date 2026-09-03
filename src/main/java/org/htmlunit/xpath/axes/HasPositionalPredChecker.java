@@ -29,6 +29,11 @@ import org.htmlunit.xpath.operations.Mod;
 import org.htmlunit.xpath.operations.Mult;
 import org.htmlunit.xpath.operations.Plus;
 
+/**
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
+ */
 public class HasPositionalPredChecker extends XPathVisitor {
     private boolean m_hasPositionalPred = false;
     private int m_predDepth = 0;

@@ -28,6 +28,9 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
  * possibly a predicate.
  *
  * @see org.htmlunit.xpath.axes.BasicTestIterator
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class ChildTestIterator extends BasicTestIterator {
     /**

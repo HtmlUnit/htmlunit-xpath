@@ -25,6 +25,9 @@ import org.htmlunit.xpath.xml.dtm.DTM;
  * predicates.
  *
  * @see org.htmlunit.xpath.axes.LocPathIterator
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class SelfIteratorNoPredicate extends LocPathIterator {
 

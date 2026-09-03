@@ -27,6 +27,9 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
 /**
  * Base for iterators that handle predicates. Does the basic next node logic, so all the derived
  * iterator has to do is get the next node.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public abstract class BasicTestIterator extends LocPathIterator {
 

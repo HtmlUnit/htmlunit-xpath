@@ -37,6 +37,9 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
  * This class is both a factory for XPath location path expressions, which are built from the opcode
  * map output, and an analysis engine for the location path expressions in order to provide
  * optimization hints.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class WalkerFactory {
 

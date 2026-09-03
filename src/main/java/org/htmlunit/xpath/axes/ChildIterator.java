@@ -26,6 +26,9 @@ import org.htmlunit.xpath.xml.dtm.DTMFilter;
  * context node.
  *
  * @see org.htmlunit.xpath.axes.LocPathIterator
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class ChildIterator extends LocPathIterator {
 

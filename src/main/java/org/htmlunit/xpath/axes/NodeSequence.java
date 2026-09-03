@@ -29,6 +29,9 @@ import org.htmlunit.xpath.xml.utils.NodeVector;
 /**
  * This class is the dynamic wrapper for a Xalan DTMIterator instance, and provides random access
  * capabilities.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class NodeSequence extends XObject implements DTMIterator, Cloneable, PathComponent {
 

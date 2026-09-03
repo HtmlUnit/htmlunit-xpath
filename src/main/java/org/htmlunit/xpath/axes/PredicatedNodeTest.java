@@ -26,6 +26,11 @@ import org.htmlunit.xpath.patterns.NodeTest;
 import org.htmlunit.xpath.xml.dtm.DTM;
 import org.htmlunit.xpath.xml.dtm.DTMIterator;
 
+/**
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
+ */
 public abstract class PredicatedNodeTest extends NodeTest implements SubContextList {
 
     /**

@@ -40,6 +40,9 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
  *      previousNode() can easily be done, except in the case where the
  *      LocPathIterator is "owned" by a UnionPathIterator, in which case the
  *      UnionPathIterator will cache the nodes.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public abstract class LocPathIterator extends PredicatedNodeTest implements Cloneable, DTMIterator, PathComponent {
 

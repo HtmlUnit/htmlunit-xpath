@@ -31,6 +31,9 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
 
 /**
  * Serves as common interface for axes Walkers, and stores common state variables.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathComponent {
 

@@ -24,6 +24,9 @@ import org.htmlunit.xpath.xml.utils.WrappedRuntimeException;
 
 /**
  * Pool of object of a given type to pick from to help memory usage
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public final class IteratorPool {
 

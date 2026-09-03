@@ -22,6 +22,9 @@ import org.htmlunit.xpath.XPathContext;
 /**
  * A class that implements this interface is a sub context node list, meaning it is a node list for
  * a location path step for a predicate.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public interface SubContextList {
 

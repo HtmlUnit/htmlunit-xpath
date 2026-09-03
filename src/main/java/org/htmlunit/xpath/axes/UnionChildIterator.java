@@ -25,6 +25,9 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
 /**
  * This class defines a simplified type of union iterator that only tests along the child axes. If
  * the conditions are right, it is much faster than using a UnionPathIterator.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class UnionChildIterator extends ChildTestIterator {
 

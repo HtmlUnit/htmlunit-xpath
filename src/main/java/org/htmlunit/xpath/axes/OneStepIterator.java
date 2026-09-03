@@ -28,6 +28,9 @@ import org.htmlunit.xpath.xml.dtm.DTMIterator;
 /**
  * This class implements a general iterator for those LocationSteps with only one step, and perhaps
  * a predicate.
+ *
+ * @author Apache Xalan
+ * @author Ronald Brill
  */
 public class OneStepIterator extends ChildTestIterator {
 
